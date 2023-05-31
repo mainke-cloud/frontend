@@ -81,7 +81,7 @@ export const defaultTheme = {
     },
     divider: 'rgba(224, 224, 224, 1)',
     typography: {
-      fontFamily: ['Poppins', 'sans-serif'].join(','),
+      fontFamily: ['Be Vietnam', 'sans-serif'].join(','),
       fontSize: 14,
       fontWeight: 400,
       h1: {
@@ -145,9 +145,9 @@ export const defaultTheme = {
           root: {
             borderRadius: cardRadius,
             boxShadow: '0px 10px 10px 4px rgba(0, 0, 0, 0.04)',
-            '& .MuiCardContent-root:last-of-type': {
-              paddingBottom: 16,
-            },
+            // '& .MuiCardContent-root:last-of-type': {
+            //   paddingBottom: 16,
+            // },
           },
         },
       },

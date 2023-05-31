@@ -9,9 +9,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { useIntl } from 'react-intl';
 import Divider from '@mui/material/Divider';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
-import { Autocomplete, DatePicker } from '@mui/lab';
+import { Autocomplete } from '@mui/lab';
 import AppTextField from '@crema/components/AppTextField';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import {
@@ -20,6 +20,7 @@ import {
   CardComments,
 } from '@crema/modules/apps/ScrumBoard';
 import { useScrumContext } from '../../../../context/ScrumContextProvider';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const AddCardForm = (props) => {
   const {
@@ -79,7 +80,7 @@ const AddCardForm = (props) => {
           image: authUser.photoURL,
         },
         comment: comment,
-        date: moment().format('ll'),
+        date: dayjs().format('ll'),
       }),
     );
   };

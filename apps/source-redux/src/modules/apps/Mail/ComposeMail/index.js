@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Chip from '@mui/material/Chip';
 import IntlMessages from '@crema/helpers/IntlMessages';
 import { useIntl } from 'react-intl';
@@ -126,7 +126,7 @@ const ComposeMail = (props) => {
             hasAttachments: false,
             isRead: true,
             folderValue: 122,
-            sentOn: moment().format('llll'),
+            sentOn: dayjs().format('llll'),
             messages: [
               {
                 messageId: 1,
