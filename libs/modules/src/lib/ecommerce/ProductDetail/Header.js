@@ -56,7 +56,7 @@ const Header = ({ product }) => {
               color: 'text.secondary',
             }}
           >
-            {product.reviews + ' reviews'}
+            {product.reviews || 0 + ' reviews'}
           </Box>
 
           <Box>

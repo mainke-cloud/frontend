@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import BlogSidebar from './Sidebar';
 import ProductContent from './Content';
 import { Formik, Form } from 'formik';
-import { getStringFromHtml } from '@crema/helpers';
+import { getFormattedDate, getStringFromHtml } from '@crema/helpers';
 import { onCreateProduct, onUpdateProduct } from '../../../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -75,6 +75,7 @@ export const AddEditProduct = ({ selectedProd }) => {
                 reviews: 0,
               })),
               tag: selectedTags,
+              createdAt: getFormattedDate(),
               productInfo,
               productSpec,
             };

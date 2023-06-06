@@ -43,12 +43,12 @@ const StatusToggleButton = ({ selectedTask, onUpdateSelectedTask }) => {
 
   return (
     <>
-      {selectedTask.status === 3 ? (
+      {selectedTask.status === 1003 ? (
         <StatusButton
           variant='contained'
           color='primary'
           startIcon={<StyledDoneIcon />}
-          onClick={() => onChangeTaskStatus(1)}
+          onClick={() => onChangeTaskStatus(1001)}
         >
           <IntlMessages id='todo.completed' />
         </StatusButton>
@@ -57,7 +57,7 @@ const StatusToggleButton = ({ selectedTask, onUpdateSelectedTask }) => {
           variant='outlined'
           color='primary'
           startIcon={<StyledDoneIcon />}
-          onClick={() => onChangeTaskStatus(3)}
+          onClick={() => onChangeTaskStatus(1003)}
         >
           <IntlMessages id='todo.markAsCompleted' />
         </StatusButton>

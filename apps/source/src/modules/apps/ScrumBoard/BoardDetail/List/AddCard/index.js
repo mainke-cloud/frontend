@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import { useInfoViewActionsContext } from '@crema/context/InfoViewContextProvider';
 import { postDataApi, putDataApi } from '@crema/hooks/APIHooks';
 import { CardHeader } from '@crema/modules/apps/ScrumBoard';
-import { getDateObject } from '@crema/helpers';
+import { generateRandomUniqueNumber, getDateObject } from '@crema/helpers';
 
 const validationSchema = yup.object({
   title: yup.string().required(<IntlMessages id='validation.titleRequired' />),
@@ -142,7 +142,7 @@ const AddCard = (props) => {
               });
           } else {
             const newCard = {
-              id: Math.floor(Math.random() * 1000),
+              id: generateRandomUniqueNumber(),
               attachments: attachments,
               checkedList: [],
               comments: comments,

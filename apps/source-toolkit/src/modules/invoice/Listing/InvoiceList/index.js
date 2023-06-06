@@ -29,8 +29,7 @@ const InvoiceList = () => {
   const [checkedInvs, setCheckedInvs] = useState([]);
 
   const onChangeStatus = (invoice, status) => {
-    invoice.folderValue = status;
-    dispatch(onUpdateInvoice(invoice));
+    dispatch(onUpdateInvoice({ ...invoice, folderValue: status }));
   };
   return (
     <>

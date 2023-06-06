@@ -10,7 +10,11 @@ import {
   onCreateContact,
   onUpdateSelectedContact,
 } from '../../../../redux/actions';
-import { getDateObject, getFormattedDate } from '@crema/helpers';
+import {
+  generateRandomUniqueNumber,
+  getDateObject,
+  getFormattedDate,
+} from '@crema/helpers';
 
 const validationSchema = yup.object({
   name: yup.string().required(<IntlMessages id='validation.nameRequired' />),
@@ -103,7 +107,7 @@ const CreateContact = (props) => {
           } else {
             const newContact = {
               ...data,
-              id: Math.floor(Math.random() * 1000),
+              id: generateRandomUniqueNumber(),
               isStarred: false,
               isFrequent: Math.random() > 0.5,
               image: userImage,

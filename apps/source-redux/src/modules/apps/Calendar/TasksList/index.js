@@ -25,6 +25,7 @@ const TasksList = ({ filterData }) => {
   const [isAddTaskOpen, setAddTaskOpen] = React.useState(false);
 
   const getFilterData = () => {
+    console.log('taskList', taskList)
     if (taskList) {
       const data = taskList.filter((task) => {
         let status = true;

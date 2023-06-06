@@ -14,6 +14,7 @@ import ReactQuill from 'react-quill';
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { styled } from '@mui/material/styles';
+import { generateRandomUniqueNumber } from '@crema/helpers';
 
 const ReactQuillWrapper = styled(ReactQuill)(() => {
   return {
@@ -71,11 +72,12 @@ const ForwardMail = ({ onSubmitForwardedMail }) => {
           console.log('data: ', data);
           setSubmitting(true);
           const mail = {
-            messageId: Math.floor(Math.random()) * 1000,
+            messageId: generateRandomUniqueNumber(),
             sender: {
+              id: user.id,
               name: user.displayName ? user.displayName : user.username,
               email: user.email,
-              profilePic: '',
+              profilePic: user.photoURL ? user.photoURL : '',
             },
             to: [
               {

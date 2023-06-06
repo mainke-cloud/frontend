@@ -9,7 +9,11 @@ import { useAuthUser } from '@crema/hooks/AuthHooks';
 import { postDataApi } from '@crema/hooks/APIHooks';
 import { useInfoViewActionsContext } from '@crema/context/InfoViewContextProvider';
 import { useCalendarActionsContext } from '../../context/CalendarContextProvider';
-import { getDateObject, getFormattedDate } from '@crema/helpers';
+import {
+  generateRandomUniqueNumber,
+  getDateObject,
+  getFormattedDate,
+} from '@crema/helpers';
 
 const validationSchema = yup.object({
   title: yup.string().required(<IntlMessages id='validation.titleRequired' />),
@@ -46,7 +50,7 @@ const AddNewTask = ({ isAddTaskOpen, onCloseAddTask, selectedDate }) => {
         onSubmit={(data, { setSubmitting, resetForm }) => {
           setSubmitting(true);
           const newTask = {
-            id: Math.floor(Math.random() * 1000000),
+            id: generateRandomUniqueNumber(),
             isStarred: false,
             hasAttachments: false,
             isRead: true,

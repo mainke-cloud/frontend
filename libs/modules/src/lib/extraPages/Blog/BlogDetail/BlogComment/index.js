@@ -10,6 +10,7 @@ import AppCard from '@crema/components/AppCard';
 import IntlMessages from '@crema/helpers/IntlMessages';
 import { Fonts } from '@crema/constants/AppEnums';
 import { useAuthUser } from '@crema/hooks/AuthHooks';
+import { generateRandomUniqueNumber } from '@crema/helpers';
 
 const validationSchema = yup.object({
   name: yup.string().required(<IntlMessages id='validation.nameRequired' />),
@@ -27,7 +28,7 @@ const BlogComment = ({ comment }) => {
 
   const onCommentSend = (data) => {
     const item = {
-      id: Math.floor(Math.random() * 1000),
+      id: generateRandomUniqueNumber(),
       name: data.name,
       image: user.photoURL,
       duration: dayjs().format('ll'),

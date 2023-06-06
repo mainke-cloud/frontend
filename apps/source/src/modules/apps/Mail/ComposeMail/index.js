@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import AppInfoView from '@crema/components/AppInfoView';
 import { postDataApi } from '@crema/hooks/APIHooks';
 import { useInfoViewActionsContext } from '@crema/context/InfoViewContextProvider';
+import { generateRandomUniqueNumber } from '@crema/helpers';
 
 const ReactQuillWrapper = styled(ReactQuill)(() => {
   return {
@@ -112,7 +113,7 @@ const ComposeMail = (props) => {
         validationSchema={validationSchema}
         onSubmit={(data, { setSubmitting, resetForm }) => {
           const mail = {
-            id: Math.floor(Math.random()) * 1000,
+            id: generateRandomUniqueNumber(),
             isChecked: false,
             isStarred: false,
             label: {
@@ -130,9 +131,10 @@ const ComposeMail = (props) => {
               {
                 messageId: 1,
                 sender: {
+                  id: user.id,
                   name: user.displayName ? user.displayName : user.username,
-                  email: user.username,
-                  profilePic: '',
+                  email: user.email,
+                  profilePic: user.photoURL ? user.photoURL : '',
                 },
                 to: [
                   {
