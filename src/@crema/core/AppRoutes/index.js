@@ -4,33 +4,14 @@ import {Navigate} from 'react-router-dom';
 import {authRouteConfig} from './AuthRoutes';
 import Error403 from '../../modules/errorPages/Error403';
 import {errorPagesConfigs} from './ErrorPagesRoutes';
-import {dashBoardConfigs} from './DashboardsRoutes';
-import {extraPagesConfigs} from './ExtraPagesRoutes';
-import {ecommerceConfig} from './EcommerceRoutes';
-import {userListConfig} from './UserListRoutes';
-import {userPagesConfig} from './UserPagesRoutes';
-import {muiComponentConfigs} from './MUIComponents';
-import {thirdPartyConfigs} from './ThirdPartyRoutes';
-import {appsConfig} from './AppsRoutes';
 import {accountPagesConfigs} from './AccountRoutes';
-import {invoiceConfig} from './InvoiceRoutes';
+import {samplePagesConfigs} from './SamplePage';
 
 export const authorizedStructure = (loginUrl) => {
   return {
     fallbackPath: loginUrl,
     unAuthorizedComponent: <Error403 />,
-    routes: [
-      ...dashBoardConfigs,
-      ...accountPagesConfigs,
-      ...appsConfig,
-      ...thirdPartyConfigs,
-      ...extraPagesConfigs,
-      ...ecommerceConfig,
-      ...muiComponentConfigs,
-      ...userPagesConfig,
-      ...userListConfig,
-      ...invoiceConfig,
-    ],
+    routes: [...accountPagesConfigs, ...samplePagesConfigs],
   };
 };
 
