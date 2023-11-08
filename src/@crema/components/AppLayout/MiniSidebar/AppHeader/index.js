@@ -16,6 +16,7 @@ import AppTooltip from '../../../AppTooltip';
 import PropTypes from 'prop-types';
 import {alpha} from '@mui/material/styles';
 import AppLogo from '../../components/AppLogo';
+import {allowMultiLanguage} from "../../../../constants/AppConst";
 
 const AppHeader = (props) => {
   const {isCollapsed, setCollapsed, toggleNavCollapsed} = props;
@@ -116,7 +117,7 @@ const AppHeader = (props) => {
         </Box>
 
         <Box sx={{ml: 4}}>
-          <AppLngSwitcher iconOnly={true} tooltipPosition='bottom' />
+            {allowMultiLanguage && <AppLngSwitcher iconOnly={true} tooltipPosition='bottom' />}
         </Box>
 
         <Box sx={{ml: 4}}>

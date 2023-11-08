@@ -17,6 +17,7 @@ import AppTooltip from '../../../AppTooltip';
 import {alpha} from '@mui/material/styles';
 import AppLogo from '../../components/AppLogo';
 
+import {allowMultiLanguage} from '@crema/constants/AppConst';
 const AppHeader = ({toggleNavCollapsed}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -96,7 +97,7 @@ const AppHeader = ({toggleNavCollapsed}) => {
         </Box>
 
         <Box sx={{ml: 4}}>
-          <AppLngSwitcher iconOnly={true} tooltipPosition='bottom' />
+            {allowMultiLanguage && <AppLngSwitcher iconOnly={true} tooltipPosition='bottom' />}
         </Box>
 
         <Box sx={{ml: 4}}>
