@@ -1,5 +1,5 @@
 import React from 'react';
-import {BiAlignLeft} from 'react-icons/bi';
+import { BiAlignLeft } from 'react-icons/bi';
 
 const routesConfig = [
   {

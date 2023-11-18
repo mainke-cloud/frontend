@@ -7,8 +7,10 @@ import React, {
 } from 'react';
 import Auth from '@aws-amplify/auth';
 import PropTypes from 'prop-types';
-import {awsConfig} from './aws-exports';
-import {useNavigate} from 'react-router-dom';
+import { awsConfig } from './aws-exports';
+import { useNavigate } from 'react-router-dom';
+import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
+import { setAuthToken } from '../jwt-auth';
 
 const AwsCognitoContext = createContext();
 const AwsCognitoActionsContext = createContext();
@@ -17,13 +19,9 @@ export const useAwsCognito = () => useContext(AwsCognitoContext);
 
 export const useAwsCognitoActions = () => useContext(AwsCognitoActionsContext);
 
-const AwsAuthProvider = ({
-  children,
-  fetchStart,
-  fetchSuccess,
-  showMessage,
-  fetchError,
-}) => {
+const AwsAuthProvider = ({ children }) => {
+  const { fetchStart, fetchSuccess, fetchError, showMessage } =
+    useInfoViewActionsContext();
   const [awsCognitoData, setAwsCognitoData] = useState({
     user: null,
     isAuthenticated: false,
@@ -47,6 +45,7 @@ const AwsAuthProvider = ({
           isLoading: false,
         });
         fetchSuccess();
+        setAuthToken(user?.accessToken);
       })
       .catch(() => {
         fetchSuccess();
@@ -58,11 +57,11 @@ const AwsAuthProvider = ({
       });
   }, [auth]);
 
-  const signIn = async ({email, password}) => {
+  const signIn = async ({ email, password }) => {
     fetchStart();
     try {
       const user = await Auth.signIn(email, password);
-      console.log('user: ', user);
+      setAuthToken(user?.accessToken);
       fetchSuccess();
       setAwsCognitoData({
         user: user,
@@ -78,7 +77,7 @@ const AwsAuthProvider = ({
       fetchError(error.message);
     }
   };
-  const signUpCognitoUser = async ({email, password, name}) => {
+  const signUpCognitoUser = async ({ email, password, name }) => {
     fetchStart();
     try {
       await Auth.signUp({
@@ -92,7 +91,7 @@ const AwsAuthProvider = ({
       showMessage(
         'A code has been sent to your registered email address, Enter the code to complete the signup process!',
       );
-      navigate('/confirm-signup', {state: email});
+      navigate('/confirm-signup', { state: email });
     } catch (error) {
       setAwsCognitoData({
         user: null,
@@ -146,7 +145,7 @@ const AwsAuthProvider = ({
   };
 
   const logout = async () => {
-    setAwsCognitoData({...awsCognitoData, isLoading: true});
+    setAwsCognitoData({ ...awsCognitoData, isLoading: true });
     try {
       await auth.signOut();
       setAwsCognitoData({

@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Form, Formik} from 'formik';
+import React, { useState } from 'react';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import ReactCodeInput from 'react-code-input';
-import {useInfoViewActionsContext} from '@crema/context/AppContextProvider/InfoViewContextProvider';
-import {useIntl} from 'react-intl';
-import {Fonts} from '@crema/constants/AppEnums';
+import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
+import { useIntl } from 'react-intl';
+import { Fonts } from '@crema/constants/AppEnums';
 import PropTypes from 'prop-types';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
 import IntlMessages from '@crema/helpers/IntlMessages';
@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 import AppInfoView from '@crema/components/AppInfoView';
 import AuthWrapper from '../AuthWrapper';
 import AppLogo from '@crema/components/AppLayout/components/AppLogo';
+
 const validationSchema = yup.object({
   newPassword: yup
     .string()
@@ -28,11 +29,11 @@ const ResetPasswordAwsCognito = () => {
 
   const [pin, setPin] = useState('');
 
-  const {messages} = useIntl();
+  const { messages } = useIntl();
 
   return (
     <AuthWrapper>
-      <Box sx={{width: '100%'}}>
+      <Box sx={{ width: '100%' }}>
         <Box
           sx={{
             mb: 5,
@@ -49,7 +50,7 @@ const ResetPasswordAwsCognito = () => {
             mb: 1.5,
             color: (theme) => theme.palette.text.primary,
             fontWeight: Fonts.SEMI_BOLD,
-            fontSize: {xs: 14, xl: 16},
+            fontSize: { xs: 14, xl: 16 },
           }}
         >
           <IntlMessages id='common.resetPassword' />
@@ -63,7 +64,7 @@ const ResetPasswordAwsCognito = () => {
             confirmPassword: '',
           }}
           validationSchema={validationSchema}
-          onSubmit={(data, {setErrors, resetForm, setSubmitting}) => {
+          onSubmit={(data, { setErrors, resetForm, setSubmitting }) => {
             if (pin.length !== 6) {
               infoViewActionsContext.fetchError(
                 messages['validation.pinLength'],
@@ -81,12 +82,12 @@ const ResetPasswordAwsCognito = () => {
             }
           }}
         >
-          {({isSubmitting}) => (
+          {({ isSubmitting }) => (
             <Form noValidate autoComplete='off'>
               <Box
                 sx={{
                   mb: 6,
-                  fontSize: {xs: 16, sm: 18},
+                  fontSize: { xs: 16, sm: 18 },
                 }}
               >
                 <Typography>
@@ -95,7 +96,7 @@ const ResetPasswordAwsCognito = () => {
               </Box>
               <Box
                 sx={{
-                  mb: {xs: 4, lg: 6},
+                  mb: { xs: 4, lg: 6 },
                 }}
               >
                 <ReactCodeInput
@@ -108,7 +109,7 @@ const ResetPasswordAwsCognito = () => {
 
               <Box
                 sx={{
-                  mb: {xs: 4, lg: 6},
+                  mb: { xs: 4, lg: 6 },
                 }}
               >
                 <AppTextField
@@ -124,7 +125,7 @@ const ResetPasswordAwsCognito = () => {
 
               <Box
                 sx={{
-                  mb: {xs: 4, lg: 6},
+                  mb: { xs: 4, lg: 6 },
                 }}
               >
                 <AppTextField

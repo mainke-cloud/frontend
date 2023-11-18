@@ -1,6 +1,7 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import jwtAxios, {setAuthToken} from './index';
+import jwtAxios, { setAuthToken } from './index';
+import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
 
 const JWTAuthContext = createContext();
 const JWTAuthActionsContext = createContext();
@@ -9,12 +10,8 @@ export const useJWTAuth = () => useContext(JWTAuthContext);
 
 export const useJWTAuthActions = () => useContext(JWTAuthActionsContext);
 
-const JWTAuthAuthProvider = ({
-  children,
-  fetchStart,
-  fetchSuccess,
-  fetchError,
-}) => {
+const JWTAuthAuthProvider = ({ children }) => {
+  const { fetchStart, fetchSuccess, fetchError } = useInfoViewActionsContext();
   const [firebaseData, setJWTAuthData] = useState({
     user: null,
     isAuthenticated: false,
@@ -38,7 +35,7 @@ const JWTAuthAuthProvider = ({
       setAuthToken(token);
       jwtAxios
         .get('/auth')
-        .then(({data}) => {
+        .then(({ data }) => {
           fetchSuccess();
           setJWTAuthData({
             user: data,
@@ -59,10 +56,10 @@ const JWTAuthAuthProvider = ({
     getAuthUser();
   }, []);
 
-  const signInUser = async ({email, password}) => {
+  const signInUser = async ({ email, password }) => {
     fetchStart();
     try {
-      const {data} = await jwtAxios.post('auth', {email, password});
+      const { data } = await jwtAxios.post('auth', { email, password });
       localStorage.setItem('token', data.token);
       setAuthToken(data.token);
       const res = await jwtAxios.get('/auth');
@@ -82,10 +79,10 @@ const JWTAuthAuthProvider = ({
     }
   };
 
-  const signUpUser = async ({name, email, password}) => {
+  const signUpUser = async ({ name, email, password }) => {
     fetchStart();
     try {
-      const {data} = await jwtAxios.post('users', {name, email, password});
+      const { data } = await jwtAxios.post('users', { name, email, password });
       localStorage.setItem('token', data.token);
       setAuthToken(data.token);
       const res = await jwtAxios.get('/auth');

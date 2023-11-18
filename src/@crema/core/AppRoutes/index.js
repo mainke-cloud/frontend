@@ -1,11 +1,11 @@
 import React from 'react';
-import {Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-import {authRouteConfig} from './AuthRoutes';
+import { authRouteConfig } from './AuthRoutes';
 import Error403 from '../../../modules/errorPages/Error403';
-import {errorPagesConfigs} from './ErrorPagesRoutes';
-import {accountPagesConfigs} from './AccountRoutes';
-import {samplePagesConfigs} from './SamplePage';
+import { errorPagesConfigs } from './ErrorPagesRoutes';
+import { accountPagesConfigs } from './AccountRoutes';
+import { samplePagesConfigs } from './SamplePage';
 
 export const authorizedStructure = (loginUrl) => {
   return {

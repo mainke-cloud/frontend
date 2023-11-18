@@ -1,17 +1,17 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import {Checkbox} from '@mui/material';
-import {Form, Formik} from 'formik';
+import { Checkbox } from '@mui/material';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 
 import AppInfoView from '@crema/components/AppInfoView';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import IntlMessages from '@crema/helpers/IntlMessages';
-import {useIntl} from 'react-intl';
+import { useIntl } from 'react-intl';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
-import {useAuthMethod} from '@crema/hooks/AuthHooks';
-import {Fonts} from '@crema/constants/AppEnums';
+import { useAuthMethod } from '@crema/hooks/AuthHooks';
+import { Fonts } from '@crema/constants/AppEnums';
 import AuthWrapper from '../AuthWrapper';
 
 const validationSchema = yup.object({
@@ -26,17 +26,17 @@ const validationSchema = yup.object({
 
 const SigninJwtAuth = () => {
   const navigate = useNavigate();
-  const {signInUser} = useAuthMethod();
+  const { signInUser } = useAuthMethod();
   const onGoToForgetPassword = () => {
-    navigate('/forget-password', {tab: 'jwtAuth'});
+    navigate('/forget-password', { tab: 'jwtAuth' });
   };
 
-  const {messages} = useIntl();
+  const { messages } = useIntl();
 
   return (
     <AuthWrapper>
-      <Box sx={{flex: 1, display: 'flex', flexDirection: 'column'}}>
-        <Box sx={{flex: 1, display: 'flex', flexDirection: 'column', mb: 5}}>
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', mb: 5 }}>
           <Formik
             validateOnChange={true}
             initialValues={{
@@ -44,7 +44,7 @@ const SigninJwtAuth = () => {
               password: 'Pass@1!@all',
             }}
             validationSchema={validationSchema}
-            onSubmit={(data, {setSubmitting}) => {
+            onSubmit={(data, { setSubmitting }) => {
               setSubmitting(true);
               signInUser({
                 email: data.email,
@@ -53,9 +53,9 @@ const SigninJwtAuth = () => {
               setSubmitting(false);
             }}
           >
-            {({isSubmitting}) => (
-              <Form style={{textAlign: 'left'}} noValidate autoComplete='off'>
-                <Box sx={{mb: {xs: 5, xl: 8}}}>
+            {({ isSubmitting }) => (
+              <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
+                <Box sx={{ mb: { xs: 5, xl: 8 } }}>
                   <AppTextField
                     placeholder={messages['common.email']}
                     name='email'
@@ -70,7 +70,7 @@ const SigninJwtAuth = () => {
                   />
                 </Box>
 
-                <Box sx={{mb: {xs: 3, xl: 4}}}>
+                <Box sx={{ mb: { xs: 3, xl: 4 } }}>
                   <AppTextField
                     type='password'
                     placeholder={messages['common.password']}
@@ -88,7 +88,7 @@ const SigninJwtAuth = () => {
 
                 <Box
                   sx={{
-                    mb: {xs: 3, xl: 4},
+                    mb: { xs: 3, xl: 4 },
                   }}
                 >
                   <Box
@@ -97,11 +97,12 @@ const SigninJwtAuth = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <Checkbox color='primary' sx={{ml: -3}} />
+                    <Checkbox color='primary' sx={{ ml: -3 }} id='rememberMe' />
                     <Box
+                      aria-labelledby='rememberMe'
                       component='span'
                       sx={{
-                        color: 'grey.500',
+                        color: 'grey.700',
                       }}
                     >
                       <IntlMessages id='common.rememberMe' />
@@ -146,10 +147,10 @@ const SigninJwtAuth = () => {
 
         <Box
           sx={{
-            color: 'grey.500',
+            color: 'grey.700',
           }}
         >
-          <span style={{marginRight: 4}}>
+          <span style={{ marginRight: 4 }}>
             <IntlMessages id='common.dontHaveAccount' />
           </span>
           <Box
