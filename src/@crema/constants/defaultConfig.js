@@ -38,17 +38,17 @@ export const defaultTheme = {
     cardRadius: cardRadius,
     direction: LayoutDirection.LTR, //ltr, rtl
     palette: {
-      mode: process.env.REACT_APP_THEME_MODE,
+      mode: 'light',
       background: {
         paper: '#FFFFFF',
         default: '#F4F7FE',
       },
       primary: {
-        main: process.env.REACT_APP_PRIMARY_COLOR,
+        main: '/sample/page-1',
         contrastText: '#fff',
       },
       secondary: {
-        main: process.env.REACT_APP_SECONDARY_COLOR,
+        main: '#fb4f67',
       },
       success: {
         main: '#11C15B',
@@ -216,9 +216,9 @@ const defaultConfig = {
     colorSet: LightSidebar,
   },
   themeStyle: ThemeStyle.STANDARD,
-  themeMode: process.env.REACT_APP_THEME_MODE,
-  navStyle: process.env.REACT_APP_NAV_STYLE,
-  layoutType: process.env.REACT_APP_LAYOUT_TYPE,
+  themeMode: 'light',
+  navStyle: 'default',
+  layoutType: 'default',
   footerType: FooterType.FLUID,
   headerType: HeaderType.FIXED,
   footer: false,
