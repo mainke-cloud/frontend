@@ -44,7 +44,7 @@ export const defaultTheme = {
         default: '#F4F7FE',
       },
       primary: {
-        main: '/sample/page-1',
+        main: '#fb4f67',
         contrastText: '#fff',
       },
       secondary: {
