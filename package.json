@@ -16,6 +16,8 @@
     "@aws-amplify/auth": "^5.5.4",
     "@babel/runtime": "^7.22.6",
     "@brainhubeu/react-carousel": "^2.0.4",
+    "@coreui/coreui": "^4.3.2",
+    "@coreui/react": "^4.11.1",
     "@date-io/date-fns": "^2.16.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",

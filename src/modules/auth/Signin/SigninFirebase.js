@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +16,11 @@ import { AiOutlineGoogle, AiOutlineTwitter } from 'react-icons/ai';
 import { FaFacebookF } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 import AuthWrapper from '../AuthWrapper';
+import { InputAdornment, TextField, Typography } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import generateCaptcha from './captcha';
+import CachedIcon from '@mui/icons-material/Cached';
 
 const validationSchema = yup.object({
   email: yup
@@ -30,222 +35,219 @@ const validationSchema = yup.object({
 const SigninFirebase = () => {
   const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-
   const onGoToForgetPassword = () => {
     navigate('/forget-password', { tab: 'firebase' });
   };
-
   const { messages } = useIntl();
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+  const [captcha, setCaptcha] = useState(generateCaptcha());
+  const [inputValue, setInputValue] = useState('');
+  const [verification, setVerification] = useState(false);
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const handleSubmit = () => {
+    if (inputValue === captcha) {
+      alert('Captcha input is correct!');
+      setVerification(true);
+    } else {
+      alert('Captcha input is incorrect. Please try again.');
+      setCaptcha(generateCaptcha());
+      setInputValue('');
+    }
+  };
+  const handleReloadCaptcha = () => {
+    setCaptcha(generateCaptcha());
+    setInputValue('');
+    setVerification(false);
+  };
 
   return (
     <AuthWrapper>
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', mb: 5 }}>
-          <Formik
-            validateOnChange={true}
-            initialValues={{
-              email: 'crema.demo@gmail.com',
-              password: 'Pass@1!@all',
-            }}
-            validationSchema={validationSchema}
-            onSubmit={(data, { setSubmitting }) => {
-              setSubmitting(true);
-              logInWithEmailAndPassword(data);
-              setSubmitting(false);
-            }}
-          >
-            {({ isSubmitting }) => (
-              <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
-                <Box sx={{ mb: { xs: 5, xl: 8 } }}>
-                  <AppTextField
-                    placeholder={messages['common.email']}
-                    name='email'
-                    label={<IntlMessages id='common.email' />}
-                    variant='outlined'
-                    sx={{
-                      width: '100%',
-                      '& .MuiInputBase-input': {
-                        fontSize: 14,
-                      },
-                    }}
-                  />
-                </Box>
-
-                <Box sx={{ mb: { xs: 3, xl: 4 } }}>
-                  <AppTextField
-                    type='password'
-                    placeholder={messages['common.password']}
-                    label={<IntlMessages id='common.password' />}
-                    name='password'
-                    variant='outlined'
-                    sx={{
-                      width: '100%',
-                      '& .MuiInputBase-input': {
-                        fontSize: 14,
-                      },
-                    }}
-                  />
-                </Box>
-
-                <Box
+      <Box>
+        <Formik
+          validateOnChange={true}
+          initialValues={{
+            email: 'crema.demo@gmail.com',
+            password: 'Pass@1!@all',
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(data, { setSubmitting }) => {
+            setSubmitting(true);
+            logInWithEmailAndPassword(data);
+            setSubmitting(false);
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
+              <Box sx={{ mb: { xs: 5, xl: 8 } }}>
+                <Typography
+                  variant='h6'
                   sx={{
-                    mb: { xs: 3, xl: 4 },
+                    textAlign: 'start',
+                    color: '#303030',
+                    fontSize: '14px',
                   }}
                 >
-                  <Box
+                  Username
+                </Typography>
+
+                <AppTextField
+                  // placeholder={messages['common.email']}
+                  // label={<IntlMessages id='common.email' />}
+                  name='email'
+                  variant='outlined'
+                  sx={{
+                    width: '100%',
+                    '& .MuiInputBase-input': {
+                      fontSize: 14,
+                    },
+                  }}
+                />
+              </Box>
+
+              <Box sx={{ mb: { xs: 3, xl: 4 } }}>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    textAlign: 'start',
+                    color: '#303030',
+                    fontSize: '14px',
+                  }}
+                >
+                  Password
+                </Typography>
+
+                <AppTextField
+                  type='password'
+                  // placeholder={messages['common.password']}
+                  // label={<IntlMessages id='common.password' />}
+                  name='password'
+                  variant='outlined'
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton onClick={toggleShowPassword} edge='end'>
+                          {showPassword ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInputBase-input': {
+                      fontSize: 14,
+                    },
+                  }}
+                />
+              </Box>
+
+              <Box
+                noValidate
+                autoComplete='off'
+                justifyContent='space-between'
+                display='flex'
+                sx={{
+                  mb: { xs: 3, xl: 4 },
+                }}
+              >
+                <Box border='1px solid grey' borderRadius='10px'>
+                  <TextField
+                    id='outlined-basic'
+                    variant='outlined'
+                    value={captcha}
+                    disabled
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '10px 0px 0px 10px',
+                      },
+                    }}
+                  />
+                  <IconButton
+                    sx={{
+                      padding: '10px',
+                      mx: '10px',
+                      marginTop: '5px',
                     }}
                   >
-                    <Checkbox sx={{ ml: -3 }} id='rememberMe' />
-                    <Box
-                      aria-labelledby='rememberMe'
-                      component='span'
-                      sx={{
-                        color: 'grey.700',
-                      }}
-                    >
-                      <IntlMessages id='common.rememberMe' />
-                    </Box>
-                  </Box>
-                  <Box
-                    component='span'
-                    sx={{
-                      color: (theme) => theme.palette.primary.main,
-                      fontWeight: Fonts.MEDIUM,
-                      cursor: 'pointer',
-                      display: 'block',
-                      textAlign: 'right',
-                    }}
-                    onClick={onGoToForgetPassword}
-                  >
-                    <IntlMessages id='common.forgetPassword' />
-                  </Box>
+                    <CachedIcon
+                      variant='contained'
+                      onClick={handleReloadCaptcha}
+                    />
+                  </IconButton>
                 </Box>
 
-                <div>
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    type='submit'
-                    disabled={isSubmitting}
-                    sx={{
-                      minWidth: 160,
-                      fontWeight: Fonts.REGULAR,
-                      fontSize: 16,
-                      textTransform: 'capitalize',
-                      padding: '4px 16px 8px',
-                    }}
-                  >
-                    <IntlMessages id='common.login' />
-                  </Button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </Box>
+                <TextField
+                  id='filled-basic'
+                  label='Enter Captcha'
+                  variant='outlined'
+                  value={inputValue}
+                  onChange={handleChange}
+                  sx={{ width: '30ch' }}
+                />
+              </Box>
 
-        <Box
+              <Button
+                variant='contained'
+                color='primary'
+                type='submit'
+                disabled={isSubmitting}
+                sx={{
+                  fontWeight: Fonts.REGULAR,
+                  fontSize: 16,
+                  textTransform: 'capitalize',
+                  borderRadius: '20px',
+                  width: '100%',
+                }}
+              >
+                <IntlMessages id='common.login' />
+              </Button>
+
+              <Typography
+                variant='h6'
+                sx={{
+                  textAlign: 'center',
+                  color: '#303030',
+                  fontSize: '14px',
+                  marginTop: '10px',
+                }}
+              >
+                Dengan masuk, Anda menyetujui{' '}
+                <Link
+                  href='/ketentuan-pengguna'
+                  color='primary'
+                  underline='always'
+                >
+                  Ketentuan Pengguna
+                </Link>{' '}
+                kami
+              </Typography>
+            </Form>
+          )}
+        </Formik>
+
+        <Typography
+          variant='h6'
           sx={{
-            color: 'grey.700',
-            mb: { xs: 5, md: 7 },
+            justifyContent: 'flex-start',
+            alignItems: 'flex-end',
+            color: '#A0A4A8',
+            fontSize: '14px',
+            marginTop: '100px',
           }}
         >
-          <span style={{ marginRight: 4 }}>
-            <IntlMessages id='common.dontHaveAccount' />
-          </span>
-          <Box
-            component='span'
-            sx={{
-              fontWeight: Fonts.MEDIUM,
-              '& a': {
-                color: (theme) => theme.palette.primary.main,
-                textDecoration: 'none',
-              },
-            }}
-          >
-            <Link to='/signup'>
-              <IntlMessages id='common.signup' />
-            </Link>
-          </Box>
-        </Box>
-
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: (theme) => theme.palette.background.default,
-            mx: { xs: -5, lg: -10 },
-            mb: { xs: -6, lg: -11 },
-            mt: 'auto',
-            py: 2,
-            px: { xs: 5, lg: 10 },
-          }}
-        >
-          <Box
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          >
-            <IntlMessages id='common.orLoginWith' />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IconButton
-              aria-label='Google'
-              sx={{
-                p: 2,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('google')}
-            >
-              <AiOutlineGoogle />
-            </IconButton>
-            <IconButton
-              aria-label='facebook'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('facebook')}
-            >
-              <FaFacebookF />
-            </IconButton>
-            <IconButton
-              aria-label='github'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('github')}
-            >
-              <BsGithub />
-            </IconButton>
-            <IconButton
-              aria-label='twitter'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('twitter')}
-            >
-              <AiOutlineTwitter />
-            </IconButton>
-          </Box>
-        </Box>
-
-        <AppInfoView />
+          Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+        </Typography>
       </Box>
+
+      <AppInfoView />
     </AuthWrapper>
   );
 };

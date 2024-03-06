@@ -1,93 +1,52 @@
 import React from 'react';
-import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
-import { Fonts } from '@crema/constants/AppEnums';
-import AppLogo from '@crema/components/AppLayout/components/AppLogo';
+import { Stack, Typography } from '@mui/material';
+import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
+import '@coreui/coreui/dist/css/coreui.min.css';
+import '../../styles/carousel.css';
 
 const AuthWrapper = ({ children }) => {
   return (
-    <Box
-      sx={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Card
-        sx={{
-          maxWidth: 900,
-          minHeight: { xs: 320, sm: 450 },
-          width: '100%',
-          overflow: 'hidden',
-          position: 'relative',
-          display: 'flex',
-        }}
-      >
-        <Box
-          sx={{
-            width: { xs: '100%', sm: '50%', lg: '40%' },
-            padding: { xs: 5, lg: 10 },
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <Box sx={{ width: '100%' }}>
-            <Box sx={{ mb: { xs: 6, xl: 8 } }}>
-              <Box
-                sx={{
-                  mb: 5,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <AppLogo />
-              </Box>
-            </Box>
-            {children}
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            width: { xs: '100%', sm: '50%', lg: '60%' },
-            position: 'relative',
-            padding: { xs: 5, lg: 10 },
-            display: { xs: 'none', sm: 'flex' },
-            alignItems: { sm: 'center' },
-            justifyContent: { sm: 'center' },
-            flexDirection: { sm: 'column' },
-            backgroundColor: (theme) => theme.palette.grey[900],
-            color: (theme) => theme.palette.common.white,
-            fontSize: 14,
-          }}
-        >
-          <Box
-            sx={{
-              maxWidth: 320,
-            }}
-          >
-            <Typography
-              component='h2'
-              sx={{
-                fontWeight: Fonts.BOLD,
-                fontSize: 30,
-                mb: 4,
-              }}
-            >
-              Welcome to Crema!
-            </Typography>
-            <Typography>
-              Crema is purely based on Material ui components and follows
-              Material ui guidelines.
+    <Stack direction='row' height='100%'>
+      <Box width='819px'>
+        <CCarousel controls indicators>
+          <CCarouselItem style={{}}>
+            <CImage
+              className='d-block w-100'
+              src='./carousel1.png'
+              alt='slide 1'
+            />
+          </CCarouselItem>
+          <CCarouselItem>
+            <CImage
+              className='d-block w-100'
+              src='./carousel2.png'
+              alt='slide 2'
+            />
+          </CCarouselItem>
+          <CCarouselItem>
+            <CImage
+              className='d-block w-100'
+              src='./carousel2.png'
+              alt='slide 3'
+            />
+          </CCarouselItem>
+        </CCarousel>
+      </Box>
+
+      <Box width='717px' padding='70px'>
+        <Box>
+          <Box>
+            <img src='./logotelkom.png' />
+            <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
+              Masuk NDE Telkom
             </Typography>
           </Box>
+          {children}
         </Box>
-      </Card>
-    </Box>
+      </Box>
+    </Stack>
   );
 };
 
