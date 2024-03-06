@@ -8,8 +8,19 @@ import AppMessages from '../../../../AppMessages';
 import AppNotifications from '../../../../AppNotifications';
 import UserInfo from '../UserInfo';
 import { allowMultiLanguage } from '../../../../../constants/AppConst';
-
+import logo from '../../../../../../assets/icon/logo.svg';
+import AppDashboard from '@crema/components/AppDashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTab } from '../../../../../../redux/actions/tabActon';
 const BucketMinibar = () => {
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
+
+  const handleAddTab = () => {
+    dispatch(addTab(id, tabs));
+  };
+
   return (
     <BucketMinibarWrapper>
       <Box
@@ -28,9 +39,8 @@ const BucketMinibar = () => {
           }}
           aria-label='show 17 new notifications'
         >
-          <img src={'/assets/icon/logo.svg'} alt='logo' />
+          <img src={logo} alt='Logo' />
         </IconButton>
-
         <IconButton
           className='search-icon-btn'
           aria-label='show 17 new notifications'
@@ -40,7 +50,6 @@ const BucketMinibar = () => {
         {allowMultiLanguage && (
           <AppLngSwitcher iconOnly={true} tooltipPosition='right' />
         )}
-
         <AppNotifications
           drawerPosition='left'
           tooltipPosition='right'
@@ -51,6 +60,8 @@ const BucketMinibar = () => {
           tooltipPosition='right'
           sxMessageContentStyle={{ width: 320 }}
         />
+        {/* <AppDashboard tooltipPosition='right' /> */}
+        <AppDashboard onAddTab={handleAddTab} />
       </Box>
       <Box
         sx={{
