@@ -149,7 +149,7 @@ const Page2 = () => {
         />
       </Box>
       <Box sx={{ p: 2, gap: 2 }}>
-        <Box>
+        {/* <Box>
           <Button onClick={handleAddTab} variant='contained'>
             Add Tab
           </Button>
@@ -157,7 +157,7 @@ const Page2 = () => {
           <Button onClick={handleCloseAllTabs} variant='contained'>
             Close All
           </Button>
-        </Box>
+        </Box> */}
         <Box>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Dashboard from '@crema/components/Tabs/Dashboard';
 import fb from '../../assets/icon/home.png';
-import google from '../../assets/icon/home.png';
 const initialState = {
   tabs: [
     {
@@ -8,7 +8,7 @@ const initialState = {
       favicon: fb,
       title: 'Dashboard',
       active: true,
-      content: 'Dashboard content', // Menggunakan string sebagai contoh
+      content: <Dashboard />, // Menggunakan string sebagai contoh
     },
   ],
   idCounter: 1,
@@ -47,5 +47,3 @@ const tabReducer = (state = initialState, action) => {
 };
 
 export default tabReducer;
-
-

@@ -11,14 +11,19 @@ import { allowMultiLanguage } from '../../../../../constants/AppConst';
 import logo from '../../../../../../assets/icon/logo.svg';
 import AppDashboard from '@crema/components/AppDashboard';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../../../../redux/actions/tabActon';
+import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import AppMail from '@crema/components/AppMail';
 const BucketMinibar = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
 
-  const handleAddTab = () => {
-    dispatch(addTab(id, tabs));
+  const handleAddTab = (type) => {
+    dispatch(addTab(id, tabs, type));
+  };
+  const handlePindah = (tabId) => {
+    console.log(tabId);
+    dispatch(activateTab(tabId, tabs));
   };
 
   return (
@@ -60,8 +65,11 @@ const BucketMinibar = () => {
           tooltipPosition='right'
           sxMessageContentStyle={{ width: 320 }}
         />
-        {/* <AppDashboard tooltipPosition='right' /> */}
-        <AppDashboard onAddTab={handleAddTab} />
+        <AppDashboard onMoveTab={() => handlePindah('dashboard')} />
+        <AppMail onAddTab={() => handleAddTab('Folder')} />
+        <AppMail onAddTab={() => handleAddTab('Keamanan')} />
+        <AppMail onAddTab={() => handleAddTab('Bantuan')} />
+        <AppMail onAddTab={() => handleAddTab('Profile')} />
       </Box>
       <Box
         sx={{
