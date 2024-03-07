@@ -39,7 +39,8 @@ const Keamanan = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#C74545',
+        background:
+          'linear-gradient(267.36deg, #C74545 -4.33%, #AA3636 101.59%)',
         height: '281px',
         position: 'relative',
       }}
