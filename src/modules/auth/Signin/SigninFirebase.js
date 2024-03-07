@@ -4,10 +4,8 @@ import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
-import Box from '@mui/material/Box';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
 import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
@@ -16,11 +14,13 @@ import { AiOutlineGoogle, AiOutlineTwitter } from 'react-icons/ai';
 import { FaFacebookF } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 import AuthWrapper from '../AuthWrapper';
-import { InputAdornment, TextField, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
+import Typography from '@mui/material/Typography';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Box, TextField, Button, FormControl } from '@mui/material';
 
 const validationSchema = yup.object({
   email: yup
@@ -39,10 +39,12 @@ const SigninFirebase = () => {
     navigate('/forget-password', { tab: 'firebase' });
   };
   const { messages } = useIntl();
+
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
+
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [inputValue, setInputValue] = useState('');
   const [verification, setVerification] = useState(false);
@@ -83,7 +85,7 @@ const SigninFirebase = () => {
         >
           {({ isSubmitting }) => (
             <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
-              <Box sx={{ mb: { xs: 5, xl: 8 } }}>
+              <Box>
                 <Typography
                   variant='h6'
                   sx={{
@@ -122,9 +124,8 @@ const SigninFirebase = () => {
                 </Typography>
 
                 <AppTextField
-                  type='password'
-                  // placeholder={messages['common.password']}
-                  // label={<IntlMessages id='common.password' />}
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder={messages['common.password']}
                   name='password'
                   variant='outlined'
                   InputProps={{
@@ -240,7 +241,7 @@ const SigninFirebase = () => {
             alignItems: 'flex-end',
             color: '#A0A4A8',
             fontSize: '14px',
-            marginTop: '100px',
+            marginTop: '80px',
           }}
         >
           Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
