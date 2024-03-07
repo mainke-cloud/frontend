@@ -29,7 +29,7 @@ export const addTab = (id, state, type) => {
         content:
           type === 'Folder' ? (
             <Folder />
-          ) : type === 'Keamanan' ? (
+          ) : type === 'FAQ' ? (
             <Keamanan />
           ) : type === 'Bantuan' ? (
             <Bantuan />

@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import Box from '@mui/material/Box';
 
 const Dashboard = () => {
-  return (
-    <div>
-      Dashboard
-    </div>
-  )
-}
+  return <Box>hai</Box>;
+};
 
-export default Dashboard
+export default Dashboard;

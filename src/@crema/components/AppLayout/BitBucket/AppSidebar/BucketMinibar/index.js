@@ -67,7 +67,7 @@ const BucketMinibar = () => {
         />
         <AppDashboard onMoveTab={() => handlePindah('dashboard')} />
         <AppMail onAddTab={() => handleAddTab('Folder')} />
-        <AppMail onAddTab={() => handleAddTab('Keamanan')} />
+        <AppMail onAddTab={() => handleAddTab('FAQ')} />
         <AppMail onAddTab={() => handleAddTab('Bantuan')} />
         <AppMail onAddTab={() => handleAddTab('Profile')} />
       </Box>
