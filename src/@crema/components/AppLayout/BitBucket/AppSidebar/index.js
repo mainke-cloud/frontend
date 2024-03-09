@@ -3,16 +3,28 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
 import MainSidebar from '../../components/MainSidebar';
-import Box from '@mui/material/Box';
-import Hidden from '@mui/material/Hidden';
-import Drawer from '@mui/material/Drawer';
-import VerticalNav from '../../components/VerticalNav';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import BitBucketSidebarWrapper from './BitBucketSidebarWrapper';
 import AppSidebarContainer from './AppSidebarContainer';
 import BucketMinibar from './BucketMinibar';
-import { Typography } from '@mui/material';
+import TodoDisposisi from './TodoDisposisi';
+import LetterDisposisi from './LetterDisposisi';
+import ScannerDisposisi from './ScannerDisposisi';
+import DisposisiSidebar from './DisposisiSidebar';
+
+import {
+  Grid,
+  Typography,
+  ButtonGroup,
+  IconButton,
+  Drawer,
+  Hidden,
+  Box,
+} from '@mui/material';
+
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Plus, Filter, Search } from 'feather-icons-react';
+
 import { Fonts } from '@crema/constants/AppEnums';
 
 const AppSidebar = (props) => {
@@ -26,10 +38,16 @@ const AppSidebar = (props) => {
 
   const sideBarComponent = () => {
     return (
-      <BitBucketSidebarWrapper className='bit-bucket-sidebar'>
+      <BitBucketSidebarWrapper
+        className={`bit-bucket-sidebar ${
+          isCollapsed ? 'bit-bucket-btn-cls' : ''
+        }`}
+      >
         <Box className='bit-bucket-sidebar-fixed'>
           <Box
-            className='bit-bucket-btn'
+            className={`bit-bucket-btn ${
+              isCollapsed ? 'bit-bucket-btn-cls' : ''
+            }`}
             onClick={() => setCollapsed(!isCollapsed)}
           >
             {isCollapsed ? <NavigateNextIcon /> : <NavigateBeforeIcon />}
@@ -37,30 +55,51 @@ const AppSidebar = (props) => {
           <BucketMinibar />
           <AppSidebarContainer className='app-sidebar-container'>
             <MainSidebar>
-              <Box
-                sx={{
-                  py: 4.5,
-                  px: 7.5,
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: 22,
-                    fontWeight: Fonts.MEDIUM,
-                  }}
-                  component='h2'
+              <Box sx={{ py: 2.5, px: 3.5 }}>
+                <Grid
+                  container
+                  alignItems='center'
+                  justifyContent='space-between'
                 >
-                  Crema
-                </Typography>
+                  <Grid item xs={8}>
+                    <Typography
+                      sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
+                      component='h2'
+                    >
+                      Disposisi
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
+                      component='h2'
+                    >
+                      My Disposisi
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <ButtonGroup>
+                      <IconButton>
+                        <Search />
+                      </IconButton>
+                      <IconButton>
+                        <Filter />
+                      </IconButton>
+                      <IconButton>
+                        <Plus />
+                      </IconButton>
+                    </ButtonGroup>
+                  </Grid>
+                </Grid>
               </Box>
               <AppScrollbar
                 sx={{
-                  py: 2,
                   height: 'calc(100vh - 70px) !important',
                 }}
                 scrollToTop={false}
               >
-                <VerticalNav routesConfig={props.routesConfig} />
+                <DisposisiSidebar isCollapsed={isCollapsed} />
+                <TodoDisposisi isCollapsed={isCollapsed} /> 
+                <LetterDisposisi isCollapsed={isCollapsed}/>
+                <ScannerDisposisi isCollapsed={isCollapsed}/>
               </AppScrollbar>
             </MainSidebar>
           </AppSidebarContainer>
