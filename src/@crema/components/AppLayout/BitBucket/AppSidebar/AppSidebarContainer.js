@@ -11,7 +11,7 @@ const AppSidebarContainer = ({ children, ...rest }) => {
         pl: 0,
         py: 0,
         transition: 'all 0.5s ease',
-        width: 256,
+        width: 450,
         borderLeft: `solid 1px ${borderColor}`,
         '& .app-sidebar': {
           position: 'relative',

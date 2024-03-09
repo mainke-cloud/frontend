@@ -2,7 +2,7 @@ import React from 'react';
 import PropsTypes from 'prop-types';
 import { Box } from '@mui/material';
 
-const BitBucketWrapper = ({ children, ...rest }) => {
+const BitBucketWrapper = ({ children, isHover, ...rest }) => {
   return (
     <Box
       sx={{
@@ -10,9 +10,11 @@ const BitBucketWrapper = ({ children, ...rest }) => {
         display: 'flex',
         flexDirection: 'row',
         position: 'relative',
-        backgroundColor: (theme) => theme.palette.background.default,
         paddingTop: { xs: 14, sm: 17.5, lg: 0 },
         '& .mainContent': {
+          backgroundColor: isHover
+            ? 'rgba(0,0,0,0.5)'
+            : (theme) => theme.palette.background.default,
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
@@ -21,12 +23,12 @@ const BitBucketWrapper = ({ children, ...rest }) => {
         },
         '&.bitBucketCollapsed': {
           '& .mainContent': {
-            width: 'calc(100% - 64px)',
+            width: 'calc(100% - 80px)',
           },
           '& .bit-bucket-sidebar': {
-            width: 64,
+            width: 80,
             '& .app-sidebar-container': {
-              width: 8,
+              width: 18,
               borderLeftColor: 'transparent',
             },
           },
@@ -43,4 +45,5 @@ export default BitBucketWrapper;
 
 BitBucketWrapper.propTypes = {
   children: PropsTypes.node,
+  isHover: PropsTypes.bool,
 };
