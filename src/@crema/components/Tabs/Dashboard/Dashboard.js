@@ -10,19 +10,19 @@ import {
   Badge,
 } from '@mui/material';
 
-import person from '../../../../assets/icon/Dashboard_girl.png';
-import Refresh from '../../../../assets/icon/Refresh_icon.png';
-import Write from '../../../../assets/icon/Write_icon.png';
-import More from '../../../../assets/icon/More_icon.png';
-import Disposisi from '../../../../assets/icon/Disposisi_icon.png';
-import Surat_Masuk from '../../../../assets/icon/Surat_Masuk_Icon.png';
-import Perlu_Tindak_Lanjut from '../../../../assets/icon/Perlu_tindak_Lanjut_Icon.png';
-import Sekretaris from '../../../../assets/icon/Sekretaris_Icon.png';
-import Delegasi from '../../../../assets/icon/Delegasi_Icon.png';
-import avatar from '../../../../assets/icon/avatar_placeholder.png';
-import Surat_Internal from '../../../../assets/icon/Surat_Internal_logo.png';
-import Surat_Undangan from '../../../../assets/icon/Surat_Undangan_logo.png';
-import Surat_Eksternal from '../../../../assets/icon/Surat_Eksternal_logo.png';
+import person from '../../../../assets/Dashboard/Dashboard_girl.png';
+import Refresh from '../../../../assets/Dashboard/Refresh_icon.png';
+import Write from '../../../../assets/Dashboard/Write_icon.png';
+import More from '../../../../assets/Dashboard/More_icon.png';
+import Disposisi from '../../../../assets/Dashboard/Disposisi_icon.png';
+import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
+import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
+import Sekretaris from '../../../../assets/Dashboard/Sekretaris_Icon.png';
+import Delegasi from '../../../../assets/Dashboard/Delegasi_Icon.png';
+import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
+import Surat_Internal from '../../../../assets/Dashboard/Surat_Internal_logo.png';
+import Surat_Undangan from '../../../../assets/Dashboard/Surat_Undangan_logo.png';
+import Surat_Eksternal from '../../../../assets/Dashboard/Surat_Eksternal_logo.png';
 
 import TodoList_Dashboard from './TodoList_Dashboard';
 import Mail_Button from './Mail_Button';
@@ -31,7 +31,7 @@ import Mail_Status from './Mail_Status';
 const Dashboard = () => {
   return (
     <>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} sx={{ paddingX: 8, }}>
         <Grid item xs={12}>
           <Stack
             direction='row'
@@ -215,3 +215,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
