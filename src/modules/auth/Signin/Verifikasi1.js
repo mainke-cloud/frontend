@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Verifikasi1 = () => {
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     navigate('/signin/verifikasi2');
   };
 

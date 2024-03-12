@@ -52,10 +52,11 @@ const SigninFirebase = () => {
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     if (inputValue === captcha) {
       alert('Captcha input is correct!');
       setVerification(true);
+      e.preventDefault();
       navigate('/signin/verifikasi1');
     } else {
       alert('Captcha input is incorrect. Please try again.');
