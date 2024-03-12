@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
-import Box from '@mui/material/Box';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
-import { Fonts } from '@crema/constants/AppEnums';
-import { AiOutlineGoogle, AiOutlineTwitter } from 'react-icons/ai';
-import { FaFacebookF } from 'react-icons/fa';
-import { BsGithub } from 'react-icons/bs';
 import AuthWrapper from '../AuthWrapper';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import generateCaptcha from './captcha';
+import CachedIcon from '@mui/icons-material/Cached';
+import Typography from '@mui/material/Typography';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Box, TextField, Button } from '@mui/material';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Verifikasi4 from './Verifikasi4';
+import Verifikasi5 from './Verifikasi5';
+import Verifikasi1 from './Verifikasi1';
+import Verifikasi2 from './Verifikasi2';
+import Verifikasi3 from './Verifikasi3';
 
 const validationSchema = yup.object({
   email: yup
@@ -31,16 +38,55 @@ const SigninFirebase = () => {
   const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
 
-  const onGoToForgetPassword = () => {
-    navigate('/forget-password', { tab: 'firebase' });
-  };
-
   const { messages } = useIntl();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  const [captcha, setCaptcha] = useState(generateCaptcha());
+  const [inputValue, setInputValue] = useState('');
+  const [verification, setVerification] = useState(false);
+  const { pathname } = useLocation();
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const handleSubmit = () => {
+    if (inputValue === captcha) {
+      alert('Captcha input is correct!');
+      setVerification(true);
+      navigate('/signin/verifikasi1');
+    } else {
+      alert('Captcha input is incorrect. Please try again.');
+      setCaptcha(generateCaptcha());
+      setInputValue('');
+    }
+  };
+  const handleReloadCaptcha = () => {
+    setCaptcha(generateCaptcha());
+    setInputValue('');
+    setVerification(false);
+  };
+  console.log(pathname);
   return (
     <AuthWrapper>
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', mb: 5 }}>
+      {pathname === '/signin/verifikasi4' ? (
+        <Verifikasi4 />
+      ) : pathname === '/signin' ? (
+        <Box
+          width='46vw'
+          height='100%'
+          padding={20}
+          gap={63}
+          sx={{ bgcolor: '#FFFFFF' }}
+        >
+          <Box>
+            <img src='/logotelkom.png' />
+            <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
+              Masuk NDE Telkom
+            </Typography>
+          </Box>
           <Formik
             validateOnChange={true}
             initialValues={{
@@ -56,11 +102,22 @@ const SigninFirebase = () => {
           >
             {({ isSubmitting }) => (
               <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
-                <Box sx={{ mb: { xs: 5, xl: 8 } }}>
+                <Box>
+                  <Typography
+                    variant='h6'
+                    sx={{
+                      textAlign: 'start',
+                      color: '#303030',
+                      fontSize: '14px',
+                    }}
+                  >
+                    Username
+                  </Typography>
+
                   <AppTextField
-                    placeholder={messages['common.email']}
+                    placeholder={'Masukan Username'}
+                    // label={<IntlMessages id='common.email' />}
                     name='email'
-                    label={<IntlMessages id='common.email' />}
                     variant='outlined'
                     sx={{
                       width: '100%',
@@ -68,16 +125,58 @@ const SigninFirebase = () => {
                         fontSize: 14,
                       },
                     }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton disabled>
+                            <PersonOutlineOutlinedIcon
+                              sx={{ color: 'black' }}
+                            />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Box>
 
                 <Box sx={{ mb: { xs: 3, xl: 4 } }}>
+                  <Typography
+                    variant='h6'
+                    paddingTop='10px'
+                    sx={{
+                      textAlign: 'start',
+                      color: '#303030',
+                      fontSize: '14px',
+                    }}
+                  >
+                    Password
+                  </Typography>
+
                   <AppTextField
-                    type='password'
-                    placeholder={messages['common.password']}
-                    label={<IntlMessages id='common.password' />}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={'Masukan Password'}
                     name='password'
                     variant='outlined'
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton disabled>
+                            <LockOutlinedIcon sx={{ color: 'black' }} />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton onClick={toggleShowPassword} edge='end'>
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                     sx={{
                       width: '100%',
                       '& .MuiInputBase-input': {
@@ -88,164 +187,113 @@ const SigninFirebase = () => {
                 </Box>
 
                 <Box
+                  noValidate
+                  autoComplete='off'
+                  justifyContent='space-between'
+                  display='flex'
                   sx={{
                     mb: { xs: 3, xl: 4 },
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Checkbox sx={{ ml: -3 }} id='rememberMe' />
-                    <Box
-                      aria-labelledby='rememberMe'
-                      component='span'
+                  <Box border='1px solid grey' borderRadius='10px'>
+                    <TextField
+                      id='outlined-basic'
+                      variant='outlined'
+                      value={captcha}
+                      disabled
                       sx={{
-                        color: 'grey.700',
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: '10px 0px 0px 10px',
+                        },
+                      }}
+                    />
+                    <IconButton
+                      sx={{
+                        padding: '10px',
+                        mx: '10px',
+                        marginTop: '5px',
                       }}
                     >
-                      <IntlMessages id='common.rememberMe' />
-                    </Box>
+                      <CachedIcon
+                        variant='contained'
+                        onClick={handleReloadCaptcha}
+                      />
+                    </IconButton>
                   </Box>
-                  <Box
-                    component='span'
-                    sx={{
-                      color: (theme) => theme.palette.primary.main,
-                      fontWeight: Fonts.MEDIUM,
-                      cursor: 'pointer',
-                      display: 'block',
-                      textAlign: 'right',
-                    }}
-                    onClick={onGoToForgetPassword}
-                  >
-                    <IntlMessages id='common.forgetPassword' />
-                  </Box>
+
+                  <TextField
+                    id='filled-basic'
+                    label='Enter Captcha'
+                    variant='outlined'
+                    value={inputValue}
+                    onChange={handleChange}
+                    sx={{ width: '30ch' }}
+                  />
                 </Box>
 
-                <div>
-                  <Button
-                    variant='contained'
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={handleSubmit}
+                  sx={{
+                    fontWeight: 'regular',
+                    fontSize: 16,
+                    textTransform: 'capitalize',
+                    borderRadius: '20px',
+                    width: '100%',
+                    bgcolor: '#E42313',
+                  }}
+                >
+                  Login
+                </Button>
+
+                <Typography
+                  variant='h6'
+                  sx={{
+                    textAlign: 'center',
+                    color: '#303030',
+                    fontSize: '14px',
+                    marginTop: '10px',
+                  }}
+                >
+                  Dengan masuk, Anda menyetujui{' '}
+                  <Link
+                    href='/ketentuan-pengguna'
                     color='primary'
-                    type='submit'
-                    disabled={isSubmitting}
-                    sx={{
-                      minWidth: 160,
-                      fontWeight: Fonts.REGULAR,
-                      fontSize: 16,
-                      textTransform: 'capitalize',
-                      padding: '4px 16px 8px',
-                    }}
+                    underline='always'
                   >
-                    <IntlMessages id='common.login' />
-                  </Button>
-                </div>
+                    Ketentuan Pengguna
+                  </Link>{' '}
+                  kami
+                </Typography>
               </Form>
             )}
           </Formik>
-        </Box>
 
-        <Box
-          sx={{
-            color: 'grey.700',
-            mb: { xs: 5, md: 7 },
-          }}
-        >
-          <span style={{ marginRight: 4 }}>
-            <IntlMessages id='common.dontHaveAccount' />
-          </span>
-          <Box
-            component='span'
+          <Typography
+            variant='h6'
             sx={{
-              fontWeight: Fonts.MEDIUM,
-              '& a': {
-                color: (theme) => theme.palette.primary.main,
-                textDecoration: 'none',
-              },
+              justifyContent: 'flex-start',
+              alignItems: 'flex-end',
+              color: '#A0A4A8',
+              fontSize: '14px',
+              marginTop: '80px',
             }}
           >
-            <Link to='/signup'>
-              <IntlMessages id='common.signup' />
-            </Link>
-          </Box>
+            Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+          </Typography>
         </Box>
+      ) : pathname === '/signin/verifikasi5' ? (
+        <Verifikasi5 />
+      ) : pathname === '/signin/verifikasi1' ? (
+        <Verifikasi1 />
+      ) : pathname === '/signin/verifikasi2' ? (
+        <Verifikasi2 />
+      ) : pathname === '/signin/verifikasi3' ? (
+        <Verifikasi3 />
+      ) : null}
 
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: (theme) => theme.palette.background.default,
-            mx: { xs: -5, lg: -10 },
-            mb: { xs: -6, lg: -11 },
-            mt: 'auto',
-            py: 2,
-            px: { xs: 5, lg: 10 },
-          }}
-        >
-          <Box
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          >
-            <IntlMessages id='common.orLoginWith' />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IconButton
-              aria-label='Google'
-              sx={{
-                p: 2,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('google')}
-            >
-              <AiOutlineGoogle />
-            </IconButton>
-            <IconButton
-              aria-label='facebook'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('facebook')}
-            >
-              <FaFacebookF />
-            </IconButton>
-            <IconButton
-              aria-label='github'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('github')}
-            >
-              <BsGithub />
-            </IconButton>
-            <IconButton
-              aria-label='twitter'
-              sx={{
-                p: 1.5,
-                '& svg': { fontSize: 20 },
-                color: (theme) => theme.palette.text.secondary,
-              }}
-              onClick={() => logInWithPopup('twitter')}
-            >
-              <AiOutlineTwitter />
-            </IconButton>
-          </Box>
-        </Box>
-
-        <AppInfoView />
-      </Box>
+      <AppInfoView />
     </AuthWrapper>
   );
 };
