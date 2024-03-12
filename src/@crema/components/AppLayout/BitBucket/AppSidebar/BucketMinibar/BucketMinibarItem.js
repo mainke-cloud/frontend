@@ -16,6 +16,7 @@ import securityIcon from '../../../../../../assets/icon/shield.svg';
 import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import userIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
+import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
 
 const iconMap = {
   search: searchIcon,
@@ -42,9 +43,10 @@ const BucketMinibarItem = (props) => {
     more = false,
     subMenu,
     onAddTab,
+    onMoveTab,
   } = props;
+  const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
-
   const handleClick = () => {
     setSubMenu(!isSubMenu);
   };
@@ -62,12 +64,26 @@ const BucketMinibarItem = (props) => {
     }
   };
 
+  const handleMoveTab = (tabId) => {
+    if (onMoveTab) {
+      onMoveTab(tabId);
+    }
+  };
+
   return (
     <>
       <IconButton
         className='menu-icon-btn'
         aria-label='show 17 new notifications'
-        onClick={more ? handleClick : () => handleAddTab()}
+        onClick={
+          more
+            ? handleClick
+            : text === 'Dashboard'
+            ? () => handleMoveTab('dashboard')
+            : text === 'Logout'
+            ? logout
+            : () => handleAddTab()
+        }
       >
         <Box className='icon-btn'>
           <Badge
@@ -117,4 +133,5 @@ BucketMinibarItem.propTypes = {
   onClick: PropTypes.func,
   subMenu: PropTypes.object,
   onAddTab: PropTypes.func,
+  onMoveTab: PropTypes.func,
 };
