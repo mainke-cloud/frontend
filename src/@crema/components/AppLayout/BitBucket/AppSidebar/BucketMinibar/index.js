@@ -7,9 +7,25 @@ import BucketMinibarItem from './BucketMinibarItem';
 import logo1 from '../../../../../../assets/icon/logo1.svg';
 import userProfile from '../../../../../../assets/icon/user-profile.svg';
 import search from '../../../../../../assets/icon/search.svg';
-
+import logo from '../../../../../../assets/icon/logo.svg';
+import AppDashboard from '@crema/components/AppDashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import AppMail from '@crema/components/AppMail';
 const BucketMinibar = (props) => {
   const { isHover, setHover } = props;
+
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
+
+  const handleAddTab = (type) => {
+    dispatch(addTab(id, tabs, type));
+  };
+  const handlePindah = (tabId) => {
+    console.log(tabId);
+    dispatch(activateTab(tabId, tabs));
+  };
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>

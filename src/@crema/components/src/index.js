@@ -52,4 +52,6 @@ export * from '../AppTableContainer';
 export * from '../AppThemeSetting';
 export * from '../AppTooltip';
 export * from '../ChartTooltip';
+export * from '../TabsMui';
+export * from '../AppTabs';
 export * from '../AuthRoutes';
