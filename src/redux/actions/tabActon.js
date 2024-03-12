@@ -9,7 +9,7 @@ import Profile from '@crema/components/Tabs/Profile';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     // Cari tab dengan ID yang sama
-    const isExistingTab = state.some((tab) => tab.id === id);
+    const isExistingTab = state.some((tab) => tab.id === type);
 
     if (!isExistingTab) {
       // Tentukan tab yang akan dijadikan aktif
@@ -23,7 +23,7 @@ export const addTab = (id, state, type) => {
       console.log(Folder);
       // Tambahkan tab baru dengan status aktif
       let tabs = {
-        id: `tab${id + 1}`,
+        id: type,
         title: type,
         favicon: state.length % 2 ? fb : google,
         content:
@@ -44,7 +44,8 @@ export const addTab = (id, state, type) => {
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
       // Jika tab sudah ada, aktifkan tab tersebut
-      dispatch(activateTab(id, state));
+      console.log("elese bang")
+      dispatch(activateTab(type, state));
     }
   };
 };
