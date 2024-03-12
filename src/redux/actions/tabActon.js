@@ -29,9 +29,9 @@ export const addTab = (id, state, type) => {
         content:
           type === 'Folder' ? (
             <Folder />
-          ) : type === 'FAQ' ? (
+          ) : type === 'Keamanan' ? (
             <Keamanan />
-          ) : type === 'Bantuan' ? (
+          ) : type === 'FAQ' ? (
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
