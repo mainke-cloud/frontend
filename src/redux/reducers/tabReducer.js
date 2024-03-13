@@ -8,7 +8,7 @@ const initialState = {
       favicon: fb,
       title: 'Dashboard',
       active: true,
-      content: <Dashboard />, // Menggunakan string sebagai contoh
+      content: <Dashboard />,
     },
   ],
   idCounter: 1,

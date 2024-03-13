@@ -1,7 +1,7 @@
 import { legacy_createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
-import { thunk } from 'redux-thunk'; // Perbaiki impor thunk
+import { thunk } from 'redux-thunk';
 
 const store = legacy_createStore(
   rootReducer,

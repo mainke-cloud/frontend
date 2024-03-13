@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'react-redux'; // Import Provider from react-redux
+import { Provider } from 'react-redux'; 
 import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppContextProvider from '@crema/context/AppContextProvider';
@@ -11,7 +11,7 @@ import AppAuthProvider from '@crema/core/AppAuthProvider';
 import AuthRoutes from '@crema/components/AuthRoutes';
 import AppLayout from '@crema/core/AppLayout';
 import './styles/index.css';
-import store from './redux'; // Import your Redux store
+import store from './redux';
 
 const App = () => (
   <Provider store={store}>
