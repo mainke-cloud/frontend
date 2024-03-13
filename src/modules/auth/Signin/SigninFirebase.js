@@ -15,21 +15,21 @@ import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Stack, Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import PengecekanKeamanan from './PengecekanKeamanan';
-import VerifikasiDuaLangkah from './VerifikasiDuaLangkah';
-import ScanQrCode from './ScanQrCode';
+import Verifikasi4 from './Verifikasi4';
+import Verifikasi5 from './Verifikasi5';
+import Verifikasi1 from './Verifikasi1';
+import Verifikasi2 from './Verifikasi2';
+import Verifikasi3 from './Verifikasi3';
 
 const validationSchema = yup.object({
   email: yup
     .string()
     .email(<IntlMessages id='validation.emailFormat' />)
-    .required(<IntlMessages id='validation.emailRequired' />),
-  password: yup
-    .string()
-    .required(<IntlMessages id='validation.passwordRequired' />),
+    .required(<IntlMessages id='Isi username anda' />),
+  password: yup.string().required(<IntlMessages id='Isi password anda' />),
 });
 
 const SigninFirebase = () => {
@@ -50,10 +50,12 @@ const SigninFirebase = () => {
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     if (inputValue === captcha) {
       alert('Captcha input is correct!');
       setVerification(true);
+      e.preventDefault();
+      navigate('/signin/verifikasi1');
     } else {
       alert('Captcha input is incorrect. Please try again.');
       setCaptcha(generateCaptcha());
@@ -68,10 +70,16 @@ const SigninFirebase = () => {
   console.log(pathname);
   return (
     <AuthWrapper>
-      {pathname === '/signin/pengecekan' ? (
-        <PengecekanKeamanan />
+      {pathname === '/signin/verifikasi4' ? (
+        <Verifikasi4 />
       ) : pathname === '/signin' ? (
-        <Box width='46vw' height='100%' padding={20} gap={63}>
+        <Box
+          width='46vw'
+          height='100%'
+          padding={20}
+          gap={63}
+          sx={{ bgcolor: '#FFFFFF' }}
+        >
           <Box>
             <img src='/logotelkom.png' />
             <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
@@ -107,7 +115,6 @@ const SigninFirebase = () => {
 
                   <AppTextField
                     placeholder={'Masukan Username'}
-                    // label={<IntlMessages id='common.email' />}
                     name='email'
                     variant='outlined'
                     sx={{
@@ -130,10 +137,9 @@ const SigninFirebase = () => {
                   />
                 </Box>
 
-                <Box sx={{ mb: { xs: 3, xl: 4 } }}>
+                <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
                   <Typography
                     variant='h6'
-                    paddingTop='10px'
                     sx={{
                       textAlign: 'start',
                       color: '#303030',
@@ -177,54 +183,62 @@ const SigninFirebase = () => {
                   />
                 </Box>
 
-                <Box
+                <Grid
+                  container
                   noValidate
                   autoComplete='off'
-                  justifyContent='space-between'
-                  display='flex'
                   sx={{
-                    mb: { xs: 3, xl: 4 },
+                    paddingTop: '18px',
                   }}
+                  columnSpacing={4}
                 >
-                  <Box border='1px solid grey' borderRadius='10px'>
+                  <Grid item xs={7}>
                     <TextField
                       id='outlined-basic'
                       variant='outlined'
                       value={captcha}
                       disabled
                       sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: '10px 0px 0px 10px',
-                        },
+                        borderRadius: '10px',
+                        width: '100%',
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <IconButton
+                              edge='end'
+                              sx={{
+                                borderLeft: '1px solid #E0E0E0',
+                                borderRadius: '0',
+                              }}
+                            >
+                              <CachedIcon
+                                variant='contained'
+                                onClick={handleReloadCaptcha}
+                              />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
                       }}
                     />
-                    <IconButton
-                      sx={{
-                        padding: '10px',
-                        mx: '10px',
-                        marginTop: '5px',
-                      }}
-                    >
-                      <CachedIcon
-                        variant='contained'
-                        onClick={handleReloadCaptcha}
-                      />
-                    </IconButton>
-                  </Box>
+                  </Grid>
 
-                  <TextField
-                    id='filled-basic'
-                    label='Enter Captcha'
-                    variant='outlined'
-                    value={inputValue}
-                    onChange={handleChange}
-                    sx={{ width: '30ch' }}
-                  />
-                </Box>
+                  <Grid Grid item xs={5}>
+                    <TextField
+                      id='filled-basic'
+                      placeholder='Ketik Captcha disamping'
+                      variant='outlined'
+                      value={inputValue}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
 
                 <Button
                   variant='contained'
                   color='primary'
+                  onClick={handleSubmit}
                   sx={{
                     fontWeight: 'regular',
                     fontSize: 16,
@@ -232,6 +246,7 @@ const SigninFirebase = () => {
                     borderRadius: '20px',
                     width: '100%',
                     bgcolor: '#E42313',
+                    marginTop: '30px',
                   }}
                 >
                   Login
@@ -243,7 +258,7 @@ const SigninFirebase = () => {
                     textAlign: 'center',
                     color: '#303030',
                     fontSize: '14px',
-                    marginTop: '10px',
+                    marginTop: '18px',
                   }}
                 >
                   Dengan masuk, Anda menyetujui{' '}
@@ -273,10 +288,14 @@ const SigninFirebase = () => {
             Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
           </Typography>
         </Box>
-      ) : pathname === '/signin/verifikasi' ? (
-        <VerifikasiDuaLangkah />
-      ) : pathname === '/signin/scan' ? (
-        <ScanQrCode />
+      ) : pathname === '/signin/verifikasi5' ? (
+        <Verifikasi5 />
+      ) : pathname === '/signin/verifikasi1' ? (
+        <Verifikasi1 />
+      ) : pathname === '/signin/verifikasi2' ? (
+        <Verifikasi2 />
+      ) : pathname === '/signin/verifikasi3' ? (
+        <Verifikasi3 />
       ) : null}
 
       <AppInfoView />

@@ -1,3 +1,5 @@
+import AuthWrapper from 'modules/auth/AuthWrapper';
+import Tes1 from 'modules/auth/Signin/Verifikasi4';
 import React from 'react';
 
 const Signin = React.lazy(() => import('../../../modules/auth/Signin'));
@@ -33,15 +35,23 @@ export const authRouteConfig = [
     element: <ResetPasswordAwsCognito />,
   },
   {
-    path: '/signin/pengecekan',
+    path: '/signin/verifikasi1',
     element: <Signin />,
   },
   {
-    path: '/signin/verifikasi',
+    path: '/signin/verifikasi2',
     element: <Signin />,
   },
   {
-    path: '/signin/scan',
+    path: '/signin/verifikasi3',
+    element: <Signin />,
+  },
+  {
+    path: '/signin/verifikasi4',
+    element: <Signin />,
+  },
+  {
+    path: '/signin/verifikasi5',
     element: <Signin />,
   },
 ];
