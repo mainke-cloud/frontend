@@ -32,4 +32,16 @@ export const authRouteConfig = [
     path: '/reset-password',
     element: <ResetPasswordAwsCognito />,
   },
+  {
+    path: '/signin/pengecekan',
+    element: <Signin />,
+  },
+  {
+    path: '/signin/verifikasi',
+    element: <Signin />,
+  },
+  {
+    path: '/signin/scan',
+    element: <Signin />,
+  },
 ];
