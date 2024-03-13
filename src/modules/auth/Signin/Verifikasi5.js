@@ -72,8 +72,8 @@ const Verifikasi5 = () => {
             </Box>
             <Box
               display='flex'
-              justifyContent='center' // untuk menengahkan secara horizontal
-              alignItems='center' // untuk menengahkan secara vertikal
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 '& > :not(style)': { m: 3 },
               }}
