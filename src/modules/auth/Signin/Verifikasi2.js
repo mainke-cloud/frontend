@@ -59,17 +59,6 @@ const Verifikasi2 = () => {
           gap='10px'
         >
           <Button
-            variant='contained'
-            sx={{
-              width: '12vw',
-              borderRadius: '50px',
-              bgcolor: '#E42313',
-            }}
-          >
-            Ya
-          </Button>
-
-          <Button
             variant='outlined'
             onClick={handleSubmit}
             sx={{
@@ -83,6 +72,17 @@ const Verifikasi2 = () => {
             }}
           >
             Tidak
+          </Button>
+
+          <Button
+            variant='contained'
+            sx={{
+              width: '12vw',
+              borderRadius: '50px',
+              bgcolor: '#E42313',
+            }}
+          >
+            Ya
           </Button>
         </Stack>
       </Paper>

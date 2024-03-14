@@ -17,18 +17,13 @@ const Verifikasi4 = () => {
     <Box
       width='46vw'
       height='100%'
-      gap={63}
       display='grid'
+      alignContent='center'
+      px='3vw'
       sx={{ bgcolor: '#FFFFFF' }}
     >
-      <Box
-        height='100vh'
-        borderRadius={10}
-        border='0px 0px 0.1px 0px'
-        padding={20}
-        marginTop='50px'
-      >
-        <Paper elevation={3} sx={{ width: '100%', height: '75%' }}>
+      <Box>
+        <Paper elevation={3} sx={{ padding: '30px' }}>
           <Box
             sx={{
               display: 'flex',

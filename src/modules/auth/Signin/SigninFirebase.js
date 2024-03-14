@@ -15,9 +15,10 @@ import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Stack, Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 import Verifikasi4 from './Verifikasi4';
 import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
@@ -28,10 +29,24 @@ const validationSchema = yup.object({
   email: yup
     .string()
     .email(<IntlMessages id='validation.emailFormat' />)
-    .required(<IntlMessages id='validation.emailRequired' />),
-  password: yup
-    .string()
-    .required(<IntlMessages id='validation.passwordRequired' />),
+    .required(
+      <>
+        <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
+        <IntlMessages id='Ussername Anda' style={{ marginTop: '25px' }} />
+      </>,
+    ),
+  password: yup.string().required(
+    <>
+      <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
+      <IntlMessages id='Isi Password anda' style={{ marginTop: '20px' }} />
+    </>,
+  ),
+  captcha: yup.string().required(
+    <>
+      <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
+      <IntlMessages id='Isi captcha anda' style={{ marginTop: '20px' }} />
+    </>,
+  ),
 });
 
 const SigninFirebase = () => {
@@ -76,7 +91,7 @@ const SigninFirebase = () => {
         <Verifikasi4 />
       ) : pathname === '/signin' ? (
         <Box
-          width='46vw'
+          width='48vw'
           height='100%'
           padding={20}
           gap={63}
@@ -93,6 +108,7 @@ const SigninFirebase = () => {
             initialValues={{
               email: 'crema.demo@gmail.com',
               password: 'Pass@1!@all',
+              captcha: '',
             }}
             validationSchema={validationSchema}
             onSubmit={(data, { setSubmitting }) => {
@@ -117,7 +133,6 @@ const SigninFirebase = () => {
 
                   <AppTextField
                     placeholder={'Masukan Username'}
-                    // label={<IntlMessages id='common.email' />}
                     name='email'
                     variant='outlined'
                     sx={{
@@ -140,10 +155,9 @@ const SigninFirebase = () => {
                   />
                 </Box>
 
-                <Box sx={{ mb: { xs: 3, xl: 4 } }}>
+                <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
                   <Typography
                     variant='h6'
-                    paddingTop='10px'
                     sx={{
                       textAlign: 'start',
                       color: '#303030',
@@ -187,50 +201,58 @@ const SigninFirebase = () => {
                   />
                 </Box>
 
-                <Box
+                <Grid
+                  container
                   noValidate
                   autoComplete='off'
-                  justifyContent='space-between'
-                  display='flex'
                   sx={{
-                    mb: { xs: 3, xl: 4 },
+                    paddingTop: '18px',
                   }}
+                  columnSpacing={4}
                 >
-                  <Box border='1px solid grey' borderRadius='10px'>
+                  <Grid item xs={7}>
                     <TextField
                       id='outlined-basic'
                       variant='outlined'
                       value={captcha}
                       disabled
                       sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: '10px 0px 0px 10px',
-                        },
+                        borderRadius: '10px',
+                        width: '100%',
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <IconButton
+                              edge='end'
+                              sx={{
+                                borderLeft: '1px solid #E0E0E0',
+                                borderRadius: '0',
+                              }}
+                            >
+                              <CachedIcon
+                                variant='contained'
+                                onClick={handleReloadCaptcha}
+                              />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
                       }}
                     />
-                    <IconButton
-                      sx={{
-                        padding: '10px',
-                        mx: '10px',
-                        marginTop: '5px',
-                      }}
-                    >
-                      <CachedIcon
-                        variant='contained'
-                        onClick={handleReloadCaptcha}
-                      />
-                    </IconButton>
-                  </Box>
+                  </Grid>
 
-                  <TextField
-                    id='filled-basic'
-                    label='Enter Captcha'
-                    variant='outlined'
-                    value={inputValue}
-                    onChange={handleChange}
-                    sx={{ width: '30ch' }}
-                  />
-                </Box>
+                  <Grid Grid item xs={5}>
+                    <AppTextField
+                      id='filled-basic'
+                      placeholder='Ketik Captcha disamping'
+                      name='captcha'
+                      variant='outlined'
+                      value={inputValue}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
 
                 <Button
                   variant='contained'
@@ -243,6 +265,7 @@ const SigninFirebase = () => {
                     borderRadius: '20px',
                     width: '100%',
                     bgcolor: '#E42313',
+                    marginTop: '30px',
                   }}
                 >
                   Login
@@ -254,7 +277,7 @@ const SigninFirebase = () => {
                     textAlign: 'center',
                     color: '#303030',
                     fontSize: '14px',
-                    marginTop: '10px',
+                    marginTop: '18px',
                   }}
                 >
                   Dengan masuk, Anda menyetujui{' '}

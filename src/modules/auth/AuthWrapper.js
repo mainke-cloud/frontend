@@ -13,7 +13,7 @@ const AuthWrapper = ({ children }) => {
         overflow: 'hidden',
       }}
     >
-      <Box style={{ width: '54vw', height: '100vh' }}>
+      <Box>
         <Corousel />
       </Box>
       <Box>{children}</Box>

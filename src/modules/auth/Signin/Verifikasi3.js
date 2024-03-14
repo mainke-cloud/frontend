@@ -9,33 +9,42 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useNavigate } from 'react-router-dom';
 
 const Verifikasi3 = () => {
+  const [values, setValues] = useState(Array(6).fill(''));
+  const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
+
+  const handleInputChange = (index, event) => {
+    const { value } = event.target;
+    const newValues = [...values];
+    newValues[index] = value.slice(0, 1);
+    setValues(newValues);
+    if (value.length === 1) {
+      if (index < refs.length - 1) {
+        refs[index + 1].current.focus();
+      }
+    }
+  };
+
+  const handleBackspace = (index, event) => {
+    if (event.key === 'Backspace') {
+      const newValues = [...values];
+      newValues[index] = '';
+      setValues(newValues);
+      if (index > 0) {
+        refs[index - 1].current.focus();
+      }
+    }
+  };
+
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/signin/verifikasi4');
-  };
-  const handleChange = (event, index) => {
-    const inputValue = event.target.value;
-    if (inputValue.length > 1) {
-      event.preventDefault();
-      const newValue = inputValue.slice(0, 1);
-      event.target.value = newValue;
-    }
-
-    if (index < 5) {
-      const nextInput = document.querySelector(
-        `input[name="digit${index + 1}"]`,
-      );
-      if (nextInput) {
-        nextInput.focus();
-      }
-    }
   };
 
   return (
@@ -87,8 +96,8 @@ const Verifikasi3 = () => {
 
           <Box
             display='flex'
-            justifyContent='center' // untuk menengahkan secara horizontal
-            alignItems='center' // untuk menengahkan secara vertikal
+            justifyContent='center'
+            alignItems='center'
             sx={{
               '& > :not(style)': { m: 3 },
             }}
@@ -102,9 +111,27 @@ const Verifikasi3 = () => {
               noValidate
               autoComplete='off'
             >
-              <TextField variant='outlined' />
-              <TextField variant='outlined' />
-              <TextField variant='outlined' />
+              <TextField
+                variant='outlined'
+                inputRef={refs[0]}
+                onChange={(e) => handleInputChange(0, e)}
+                onKeyDown={(e) => handleBackspace(0, e)}
+                value={values[0]}
+              />
+              <TextField
+                variant='outlined'
+                inputRef={refs[1]}
+                onChange={(e) => handleInputChange(1, e)}
+                onKeyDown={(e) => handleBackspace(1, e)}
+                value={values[1]}
+              />
+              <TextField
+                variant='outlined'
+                inputRef={refs[2]}
+                onChange={(e) => handleInputChange(2, e)}
+                onKeyDown={(e) => handleBackspace(2, e)}
+                value={values[2]}
+              />
             </Box>
             <Box
               component='form'
@@ -114,9 +141,27 @@ const Verifikasi3 = () => {
               noValidate
               autoComplete='off'
             >
-              <TextField variant='outlined' />
-              <TextField variant='outlined' />
-              <TextField variant='outlined' />
+              <TextField
+                variant='outlined'
+                inputRef={refs[3]}
+                onChange={(e) => handleInputChange(3, e)}
+                onKeyDown={(e) => handleBackspace(3, e)}
+                value={values[3]}
+              />
+              <TextField
+                variant='outlined'
+                inputRef={refs[4]}
+                onChange={(e) => handleInputChange(4, e)}
+                onKeyDown={(e) => handleBackspace(4, e)}
+                value={values[4]}
+              />
+              <TextField
+                variant='outlined'
+                inputRef={refs[5]}
+                onChange={(e) => handleInputChange(5, e)}
+                onKeyDown={(e) => handleBackspace(5, e)}
+                value={values[5]}
+              />
             </Box>
           </Box>
 
@@ -127,11 +172,16 @@ const Verifikasi3 = () => {
               marginTop: '50px',
               width: '20vw',
               borderRadius: '20px',
-              color: '#8C8F93',
+              color: values.every((value) => value.length === 1)
+                ? 'white'
+                : '#8C8F93',
               border: '1px solid #8C8F93',
               '&:hover': {
                 border: '1px solid #8C8F93',
               },
+              backgroundColor: values.every((value) => value.length === 1)
+                ? 'red'
+                : null,
             }}
           >
             Aktivasi
