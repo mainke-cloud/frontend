@@ -1,0 +1,52 @@
+import React from "react";
+import { Grid, Box, Avatar, Badge, Stack, Typography } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types'; // Import PropTypes
+
+const StyledBadgeDelegasi = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      backgroundColor: '#FFB068',
+      color: 'white',
+    },
+  }));
+
+const Delegasi = ({ Profile, JobDesk, ID }) => {
+    return(
+        <Grid container>
+            <Grid item xs={3}>
+                <StyledBadgeDelegasi
+                    overlap='circular'
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    badgeContent="D"
+                >
+                    <Avatar src={Profile} sx={{border: 2, borderColor: '#FFB068', width: 46, height: 46}} />
+                </StyledBadgeDelegasi>
+                </Grid>
+            <Grid item xs={6}>
+                <Stack direction='column' spacing={2}>
+                    <Typography variant='h3'>{JobDesk}</Typography>
+                    <Box
+                        sx={{
+                          backgroundColor: '#A3E6CD',
+                          height: '22px',
+                          weight: '44px',
+                        }}
+                    >
+                        <Typography sx={{ height: '22px', weight: '44px' }}>
+                            Aktif Sampai 22 sep{' '}
+                        </Typography>
+                    </Box>
+                    <Typography>{ID}</Typography>
+                </Stack>               
+            </Grid>
+        </Grid>
+    )
+};
+
+Delegasi.propTypes = {
+    Profile: PropTypes.string.isRequired,
+    JobDesk: PropTypes.string.isRequired,
+    ID: PropTypes.string.isRequired,
+  };
+
+export default Delegasi;

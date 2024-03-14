@@ -6,7 +6,7 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
   return (
     <Box
       sx={{
-        width: 520,
+        width: 600,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
