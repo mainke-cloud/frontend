@@ -44,7 +44,7 @@ export const addTab = (id, state, type) => {
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
       // Jika tab sudah ada, aktifkan tab tersebut
-      console.log("elese bang")
+      console.log('elese bang');
       dispatch(activateTab(type, state));
     }
   };
@@ -61,14 +61,48 @@ export const activateTab = (tabId, state) => {
   };
 };
 
+// export const closeTab = (tabId, state) => {
+//   return (dispatch) => {
+//     if (tabId === 'dashboard') {
+//       return;
+//     }
+//     const tabs = state.filter((tab) => tab.id !== tabId);
+//     dispatch({ type: 'CLOSE_TAB', payload: tabs });
+//     dispatch(activateTab('dashboard', tabs));
+//   };
+// };
+
 export const closeTab = (tabId, state) => {
   return (dispatch) => {
     if (tabId === 'dashboard') {
       return;
     }
+
+    const tabIndex = state.findIndex((tab) => tab.id === tabId);
+    let newActiveTabIndex;
+
+    if (tabIndex > 0) {
+      // Jika ada tab sebelumnya, pilih tab tersebut
+      newActiveTabIndex = tabIndex - 1;
+    } else if (tabIndex === 0 && state.length > 1) {
+      // Jika tab yang ditutup adalah tab pertama dan ada tab lainnya,
+      // pilih tab berikutnya
+      newActiveTabIndex = 1;
+    } else {
+      // Jika tab yang ditutup adalah satu-satunya tab,
+      // atau jika tidak ada tab sebelumnya, langsung arahkan ke dashboard
+      newActiveTabIndex = 'dashboard';
+    }
+
     const tabs = state.filter((tab) => tab.id !== tabId);
     dispatch({ type: 'CLOSE_TAB', payload: tabs });
-    dispatch(activateTab('dashboard', tabs));
+
+    // Aktifkan tab yang sesuai dengan indeks yang ditentukan
+    const newActiveTabId =
+      newActiveTabIndex !== 'dashboard'
+        ? tabs[newActiveTabIndex].id
+        : 'dashboard';
+    dispatch(activateTab(newActiveTabId, tabs));
   };
 };
 
