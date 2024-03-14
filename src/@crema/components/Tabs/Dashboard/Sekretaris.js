@@ -1,7 +1,8 @@
 import React from "react";
-import { Grid, Stack, Typography, Box, Button, Badge, Avatar } from "@mui/material";
+import { Grid, Stack, Typography, Box, Button, Badge, Avatar, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types'; // Import PropTypes
+import AppCard2 from "@crema/components/AppCard/AppCard2";
 
 const StyledBadgeSekretaris = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -12,7 +13,7 @@ const StyledBadgeSekretaris = styled(Badge)(({ theme }) => ({
 
 const Sekretaris = ({ Profile, JobDesk, ID }) => {
     return(
-        <Grid container>
+        <Grid container sx={{margin: 3}}>
             <Grid item xs={3}>
                 <StyledBadgeSekretaris
                     overlap='circular'
@@ -32,20 +33,22 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                               weight: '44px',
                             }}
                         >
-                            <Typography sx={{ height: '22px', weight: '44px' }}>
+                            <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
                                 Aktif
                             </Typography>
                         </Box>
                         <Typography>{ID}</Typography>
-                        <Button
-                            variant='contained'
-                            disableElevation
-                            sx={{ backgroundColor: '#FFEFD2', color: 'black' }}
-                        >
-                            <Typography>Atur Keaktifan</Typography>
-                        </Button>
                 </Stack>
             </Grid>
+            <Grid item xs={11}>
+                <AppCard2
+                    sx={{ backgroundColor: '#FFEFD2', color: 'black', padding: 2 }}
+
+                >
+                    <Typography>Atur Keaktifan</Typography>
+                </AppCard2>
+            </Grid>
+            <Divider variant="middle" sx={{ mb: 4 }} />
         </Grid>
     )
 }

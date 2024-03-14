@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Avatar, Badge, Stack, Typography } from "@mui/material";
+import { Grid, Box, Avatar, Badge, Stack, Typography, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types'; // Import PropTypes
 
@@ -12,7 +12,7 @@ const StyledBadgeDelegasi = styled(Badge)(({ theme }) => ({
 
 const Delegasi = ({ Profile, JobDesk, ID }) => {
     return(
-        <Grid container>
+        <Grid container sx={{margin: 3}}>
             <Grid item xs={3}>
                 <StyledBadgeDelegasi
                     overlap='circular'
@@ -32,13 +32,14 @@ const Delegasi = ({ Profile, JobDesk, ID }) => {
                           weight: '44px',
                         }}
                     >
-                        <Typography sx={{ height: '22px', weight: '44px' }}>
+                        <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
                             Aktif Sampai 22 sep{' '}
                         </Typography>
                     </Box>
                     <Typography>{ID}</Typography>
                 </Stack>               
             </Grid>
+            <Divider variant="middle" sx={{ mb: 4 }} />
         </Grid>
     )
 };

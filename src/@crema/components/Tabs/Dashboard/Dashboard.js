@@ -5,6 +5,7 @@ import {
   Grid,
   Typography,
   IconButton,
+  Paper,
 } from '@mui/material';
 
 import person from '../../../../assets/Dashboard/Dashboard_girl.png';
@@ -27,37 +28,42 @@ import Mail_Button from './Mail_Button';
 import Delegasi from './Delegasi';
 import AppCard from '@crema/components/AppCard';
 import Sekretaris from './Sekretaris';
+import AppCard2 from '@crema/components/AppCard/AppCard2';
 
 const Dashboard = () => {
   return (
     <>
-      <Grid container spacing={4} sx={{ paddingX: 8, }}>
-        <Grid item xs={12}>
-          <Stack
-            direction='row'
-            alignItems='center'
-            justifyContent='flex-start'
-            spacing={3}
-          >
-            <Stack direction='column' spacing={3}>
-              <Typography variant='h1'>
-                Hello User T0001, Welcome back
-              </Typography>
-              {/* input time and date here */}
-              <Typography variant='body1'>
-                11.20 AM Senin, 26 Februari 2024
-              </Typography>
+      <Paper elevation={0}>
+        <Grid container spacing={4} sx={{ paddingX: 8, }}>
+          <Grid item xs={11}>
+            <Stack
+              direction='row'
+              alignItems='center'
+              justifyContent='flex-start'
+              spacing={3}
+            >
+              <Stack direction='column' spacing={3}>
+                <Typography variant='h1'>
+                  Hello User T0001, Welcome back
+                </Typography>
+                {/* input time and date here */}
+                <Typography variant='body1'>
+                  11.20 AM Senin, 26 Februari 2024
+                </Typography>
+              </Stack>
+              <img
+                src={person}
+                style={{ height: '90px', paddingRight: '60px' }}
+              />
             </Stack>
-            <img
-              src={person}
-              style={{ height: '90px', paddingRight: '60px' }}
-            />
-            <IconButton>
-              <img src={Refresh} />
-            </IconButton>
-          </Stack>
+          </Grid>
+          <Grid item xs={1} alignItems="center" justifyContent="flex-end">
+              <IconButton>
+                <img src={Refresh} />
+              </IconButton>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
       <Grid container columnSpacing={5} height={'100vh'} padding={3}>
         <Grid item xs={9}>
           <Stack direction="column" spacing={5}>
@@ -112,6 +118,7 @@ const Dashboard = () => {
               direction={'row'} 
               alignItems={'center'} 
               justifyContent={'space-between'}
+              spacing={3}
             >
               <Mail_Status
                 image={Disposisi}
@@ -142,10 +149,10 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={3} height={'100%'}>
           <Stack direction='column' spacing={5}>
-            <AppCard sx={{ height: '50%'}}>
+            <AppCard2 sx={{ height: '50%'}}>
 
-              <Box sx={{ backgroundColor: '#DFE4F7', borderRadius: 2 }}>
-                <Stack direction='row' spacing={2} sx={{ margin: 3 }}>
+              <Box sx={{ backgroundColor: '#DFE4F7', borderTopLeftRadius: 2, borderTopRightRadius: 2 }}>
+                <Stack direction='row' spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
                   <img src={Sekretaris_Icon} />
                   <Typography sx={{ color: '#2952CC' }}>Sekretaris</Typography>
                 </Stack>
@@ -157,10 +164,10 @@ const Dashboard = () => {
                 ID="Taufik Sulaeman/8900002/ARMS"
               />
             
-            </AppCard>
-            <AppCard sx={{ height: '50%', pt: 0 }}>
-              <Box sx={{ backgroundColor: '#F9E5CF', borderTopLeftRadius: 2, borderTopRightRadius: 2 }}>
-                <Stack direction='row' spacing={2} sx={{ margin: 3 }}>
+            </AppCard2>
+              <AppCard2 sx={{ height: '50%'}} >
+              <Box sx={{ backgroundColor: '#F9E5CF', borderTopLeftRadius: 2, borderTopRightRadius: 2, marginTop: 0}}>
+                <Stack direction='row' spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
                   <img src={Delegasi_Icon} />
                   <Typography sx={{ color: '#C45900' }}>Delegasi</Typography>
                 </Stack>                
@@ -172,7 +179,7 @@ const Dashboard = () => {
                   ID='Taufik Sulaeman/8900002/ARMS'
                 />
             
-            </AppCard>
+            </AppCard2>
           </Stack>
         </Grid>
       </Grid>
