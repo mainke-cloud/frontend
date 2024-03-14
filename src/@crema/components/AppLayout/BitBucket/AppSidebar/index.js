@@ -27,6 +27,8 @@ import { Plus, Filter, Search } from 'feather-icons-react';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 const AppSidebar = (props) => {
   const {
     isCollapsed,
@@ -37,6 +39,23 @@ const AppSidebar = (props) => {
     setHover,
     // routesConfig,
   } = props;
+
+  const sidebar = useSelector((state) => state.sidebar.selectedSidebarName);
+
+  const sideBarDisposisi = () => {
+    switch (sidebar) {
+      case 'Disposisi':
+        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+      case 'Todo':
+        return <TodoDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Disposisi Saya':
+        return <LetterDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Scanner':
+        return <ScannerDisposisi isCollapsed={props.isCollapsed} />;
+      default:
+        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+    }
+  };
 
   const sideBarComponent = () => {
     return (
@@ -98,10 +117,11 @@ const AppSidebar = (props) => {
                 }}
                 scrollToTop={false}
               >
-                <DisposisiSidebar isCollapsed={isCollapsed} />
+                {sideBarDisposisi()}
+                {/* <DisposisiSidebar isCollapsed={isCollapsed} />
                 <TodoDisposisi isCollapsed={isCollapsed} /> 
                 <LetterDisposisi isCollapsed={isCollapsed}/>
-                <ScannerDisposisi isCollapsed={isCollapsed}/>
+                <ScannerDisposisi isCollapsed={isCollapsed}/> */}
               </AppScrollbar>
             </MainSidebar>
           </AppSidebarContainer>
