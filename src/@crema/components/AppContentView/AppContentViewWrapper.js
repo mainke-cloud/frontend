@@ -10,7 +10,7 @@ const AppContentViewWrapper = ({ children, ...rest }) => {
         flexDirection: 'column',
         flex: 1,
         height: '100%',
-        maxWidth: { xl: 1650 },
+        // maxWidth: { xl: 1650 },
         mx: { xl: 'auto' },
         width: { xl: '100%' },
       }}
