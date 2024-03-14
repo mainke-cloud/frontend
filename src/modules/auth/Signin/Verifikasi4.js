@@ -5,6 +5,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 
 const Verifikasi4 = () => {
   const navigate = useNavigate();
@@ -32,15 +33,8 @@ const Verifikasi4 = () => {
               },
             }}
           >
-            <IconButton
-              sx={{
-                padding: '10px',
-                mx: '10px',
-                marginTop: '5px',
-              }}
-            >
-              <ArrowBackIosIcon variant='contained' />
-            </IconButton>
+            <ArrowBackButton path='/signin/verifikasi3' />
+
             <Typography
               variant='h4'
               pt='10px'

@@ -9,7 +9,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 
 const Verifikasi2 = () => {
   const navigate = useNavigate();
@@ -28,9 +29,7 @@ const Verifikasi2 = () => {
     >
       <Paper elevation={3} sx={{ padding: '30px' }}>
         <Stack direction='row' alignItems='center'>
-          <IconButton>
-            <ArrowBackIosNewIcon />
-          </IconButton>
+          <ArrowBackButton path='/signin/verifikasi1' />
 
           <Typography variant='h1' paddingLeft='30px'>
             VERIFIKASI 2 LANGKAH

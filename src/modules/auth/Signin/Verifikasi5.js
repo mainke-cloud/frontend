@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, TextField, Button, Typography, Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -6,6 +6,31 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 
 const Verifikasi5 = () => {
+  const [values, setValues] = useState(Array(6).fill(''));
+  const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
+
+  const handleInputChange = (index, event) => {
+    const { value } = event.target;
+    const newValues = [...values];
+    newValues[index] = value.slice(0, 1);
+    setValues(newValues);
+    if (value.length === 1) {
+      if (index < refs.length - 1) {
+        refs[index + 1].current.focus();
+      }
+    }
+  };
+
+  const handleBackspace = (index, event) => {
+    if (event.key === 'Backspace') {
+      const newValues = [...values];
+      newValues[index] = '';
+      setValues(newValues);
+      if (index > 0) {
+        refs[index - 1].current.focus();
+      }
+    }
+  };
   return (
     <Box width='46vw' height='100%' display='grid' bgcolor='#FFFFFF'>
       <Box
@@ -87,9 +112,27 @@ const Verifikasi5 = () => {
                 noValidate
                 autoComplete='off'
               >
-                <TextField variant='outlined' />
-                <TextField variant='outlined' />
-                <TextField variant='outlined' />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[0]}
+                  onChange={(e) => handleInputChange(0, e)}
+                  onKeyDown={(e) => handleBackspace(0, e)}
+                  value={values[0]}
+                />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[1]}
+                  onChange={(e) => handleInputChange(1, e)}
+                  onKeyDown={(e) => handleBackspace(1, e)}
+                  value={values[1]}
+                />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[2]}
+                  onChange={(e) => handleInputChange(2, e)}
+                  onKeyDown={(e) => handleBackspace(2, e)}
+                  value={values[2]}
+                />
               </Box>
               <Box
                 component='form'
@@ -99,9 +142,27 @@ const Verifikasi5 = () => {
                 noValidate
                 autoComplete='off'
               >
-                <TextField variant='outlined' />
-                <TextField variant='outlined' />
-                <TextField variant='outlined' />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[3]}
+                  onChange={(e) => handleInputChange(3, e)}
+                  onKeyDown={(e) => handleBackspace(3, e)}
+                  value={values[3]}
+                />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[4]}
+                  onChange={(e) => handleInputChange(4, e)}
+                  onKeyDown={(e) => handleBackspace(4, e)}
+                  value={values[4]}
+                />
+                <TextField
+                  variant='outlined'
+                  inputRef={refs[5]}
+                  onChange={(e) => handleInputChange(5, e)}
+                  onKeyDown={(e) => handleBackspace(5, e)}
+                  value={values[5]}
+                />
               </Box>
             </Box>
           </Box>
@@ -111,15 +172,15 @@ const Verifikasi5 = () => {
               justifyContent='space-between'
               alignItems='flex-end'
             >
-              <Typography
-                variant='h6'
+              <Button
+                variant='text'
                 sx={{
                   color: '#151718',
                   fontSize: '14px',
                 }}
               >
                 Kirim ulang kode
-              </Typography>
+              </Button>
 
               <Button
                 variant='contained'

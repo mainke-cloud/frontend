@@ -4,7 +4,7 @@ import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Box } from '@mui/material';
 
-const Corousel = () => {
+const Carousel = () => {
   return (
     <Box>
       <Box style={{ width: '54vw', height: '100vh' }}>
@@ -36,4 +36,4 @@ const Corousel = () => {
   );
 };
 
-export default Corousel;
+export default Carousel;
