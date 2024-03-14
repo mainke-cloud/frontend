@@ -18,6 +18,7 @@ const BitBucket = ({ routes, routesConfig }) => {
   const [isCollapsed, setCollapsed] = useState(false);
   const [isNavCollapsed, setNavCollapsed] = useState(false);
   const { layoutType } = useLayoutContext();
+  const [isHover, setHover] = useState(false);
 
   const toggleNavCollapsed = () => {
     setNavCollapsed(!isNavCollapsed);
@@ -35,8 +36,9 @@ const BitBucket = ({ routes, routesConfig }) => {
     >
       <BitBucketWrapper
         className={clsx('bitBucketWrapper', {
-          bitBucketCollapsed: isCollapsed,
+          'bitBucketCollapsed': isCollapsed,
         })}
+        isHover={isHover}
       >
         <Hidden lgUp>
           <AppHeader toggleNavCollapsed={toggleNavCollapsed} />
@@ -47,6 +49,8 @@ const BitBucket = ({ routes, routesConfig }) => {
           setCollapsed={setCollapsed}
           isNavCollapsed={isNavCollapsed}
           toggleNavCollapsed={toggleNavCollapsed}
+          isHover={isHover}
+          setHover={setHover}
         />
         <Box className='mainContent'>
           <AppContentView routes={routes} />

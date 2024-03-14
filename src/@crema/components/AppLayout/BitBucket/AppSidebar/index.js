@@ -31,9 +31,11 @@ const AppSidebar = (props) => {
   const {
     isCollapsed,
     setCollapsed,
-    // routesConfig,
     isNavCollapsed,
     toggleNavCollapsed,
+    isHover,
+    setHover,
+    // routesConfig,
   } = props;
 
   const sideBarComponent = () => {
@@ -52,7 +54,7 @@ const AppSidebar = (props) => {
           >
             {isCollapsed ? <NavigateNextIcon /> : <NavigateBeforeIcon />}
           </Box>
-          <BucketMinibar />
+          <BucketMinibar isHover={isHover} setHover={setHover} />
           <AppSidebarContainer className='app-sidebar-container'>
             <MainSidebar>
               <Box sx={{ py: 2.5, px: 3.5 }}>
@@ -139,7 +141,9 @@ AppSidebar.propTypes = {
   variant: PropTypes.string,
   isCollapsed: PropTypes.bool,
   setCollapsed: PropTypes.func,
-  toggleNavCollapsed: PropTypes.func,
   isNavCollapsed: PropTypes.bool,
+  toggleNavCollapsed: PropTypes.func,
+  isHover: PropTypes.bool,
+  setHover: PropTypes.func,
   routesConfig: PropTypes.array,
 };
