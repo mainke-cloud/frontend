@@ -217,7 +217,7 @@ const defaultConfig = {
   },
   themeStyle: ThemeStyle.STANDARD,
   themeMode: 'light',
-  navStyle: 'default',
+  navStyle: 'bit_bucket',
   layoutType: 'default',
   footerType: FooterType.FLUID,
   headerType: HeaderType.FIXED,
