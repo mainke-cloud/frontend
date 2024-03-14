@@ -29,7 +29,7 @@ const BitBucketWrapper = ({ children, isHover, ...rest }) => {
             width: 93,
             '& .app-sidebar-container': {
               width: 18,
-              borderLeftColor: 'transparent',
+              borderLeftColor: 'white',
             },
           },
         },
