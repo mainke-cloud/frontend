@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { useThemeContext } from '@crema/context/AppContextProvider/ThemeContextProvider';
 import { alpha } from '@mui/material/styles';
 import { ReactComponent as Logo } from '../../../../../assets/icon/logo.svg';
@@ -22,19 +22,24 @@ const AppLogo = () => {
         },
       }}
       className='app-logo'
+      
     >
+      <Stack>
+        <h1>Hello User T0001, <span>Welcome back</span></h1>
+        <Typography marginTop={2} variant='h5'>11:20 AM Senin, 26 Februari 2024</Typography>
+      </Stack>
       <Logo fill={theme.palette.primary.main} />
-      <Box
+      {/* <Box
         sx={{
-          mt: 1,
+            mt: 1,
           display: { xs: 'none', md: 'block' },
           '& svg': {
-            height: { xs: 25, sm: 30 },
+              height: { xs: 25, sm: 30 },
           },
         }}
       >
         <LogoText fill={alpha(theme.palette.text.primary, 0.8)} />
-      </Box>
+      </Box> */}
     </Box>
   );
 };
