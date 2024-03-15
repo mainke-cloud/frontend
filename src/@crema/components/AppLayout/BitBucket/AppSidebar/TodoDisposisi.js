@@ -21,6 +21,7 @@ import {
   Tooltip,
   Icon,
 } from '@mui/material';
+import { Fonts } from '@crema/constants/AppEnums';
 
 import { MessageCircle, Mail } from 'feather-icons-react';
 
@@ -301,7 +302,7 @@ export default function TodoRendah({ isCollapsed }) {
                       >
                         <CardContent>
                           <Grid container>
-                            <Grid item xs={2} container>
+                            <Grid item xs={2}>
                               <ListItemAvatar>
                                 <Avatar
                                   alt={`Avatar ${listIndex}`}
@@ -354,8 +355,12 @@ export default function TodoRendah({ isCollapsed }) {
                                       item.status,
                                     )[1],
                                     color: getStatusColor(item.status)[0],
-                                    padding: 1,
+                                    width: 53,
+                                    height: 20,
                                     borderRadius: 1,
+                                    fontSize: '12px',
+                                    lineHeight: '18px',
+                                    textAlign: 'center'
                                   }}
                                 >
                                   {item.status}

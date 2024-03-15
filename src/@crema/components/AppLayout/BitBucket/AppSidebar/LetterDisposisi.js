@@ -403,16 +403,22 @@ export default function LetterDisposisi({ isCollapsed }) {
                                     {item.secondary}
                                   </Typography>
                                 </Grid>
-                                <Button
+                                <Box
                                   sx={{
                                     backgroundColor: getStatusColor(
                                       item.status,
                                     )[1],
                                     color: getStatusColor(item.status)[0],
+                                    width: 55,
+                                    height: 25,
+                                    borderRadius: 1,
+                                    fontSize: '12px',
+                                    lineHeight: '22px',
+                                    textAlign: 'center'
                                   }}
                                 >
                                   {item.status}
-                                </Button>
+                                </Box>
                                 <ListItemIcon
                                   sx={{
                                     marginLeft: 'auto',

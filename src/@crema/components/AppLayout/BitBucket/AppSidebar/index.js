@@ -52,7 +52,19 @@ const AppSidebar = (props) => {
             }`}
             onClick={() => setCollapsed(!isCollapsed)}
           >
-            {isCollapsed ? <NavigateNextIcon /> : <NavigateBeforeIcon />}
+            {isCollapsed ? (
+              <React.Fragment>
+                <NavigateNextIcon />
+                <Typography
+                  variant='h6'
+                  sx={{ writingMode: 'vertical-lr', textOrientation: 'mixed', transform: 'rotate(180deg)' }}
+                >
+                  Lihat Disposisi
+                </Typography>
+              </React.Fragment>
+            ) : (
+              <NavigateBeforeIcon />
+            )}
           </Box>
           <BucketMinibar isHover={isHover} setHover={setHover} />
           <AppSidebarContainer className='app-sidebar-container'>
@@ -63,7 +75,7 @@ const AppSidebar = (props) => {
                   alignItems='center'
                   justifyContent='space-between'
                 >
-                  <Grid item xs={8}>
+                  <Grid item xs={7}>
                     <Typography
                       sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
                       component='h2'
@@ -77,7 +89,7 @@ const AppSidebar = (props) => {
                       My Disposisi
                     </Typography>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={5}>
                     <ButtonGroup>
                       <IconButton>
                         <Search />
@@ -99,9 +111,9 @@ const AppSidebar = (props) => {
                 scrollToTop={false}
               >
                 <DisposisiSidebar isCollapsed={isCollapsed} />
-                <TodoDisposisi isCollapsed={isCollapsed} /> 
-                <LetterDisposisi isCollapsed={isCollapsed}/>
-                <ScannerDisposisi isCollapsed={isCollapsed}/>
+                <TodoDisposisi isCollapsed={isCollapsed} />
+                <LetterDisposisi isCollapsed={isCollapsed} />
+                <ScannerDisposisi isCollapsed={isCollapsed} />
               </AppScrollbar>
             </MainSidebar>
           </AppSidebarContainer>
