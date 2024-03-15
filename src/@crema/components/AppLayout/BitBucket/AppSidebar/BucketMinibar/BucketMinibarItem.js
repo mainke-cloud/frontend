@@ -17,6 +17,8 @@ import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import userIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
 import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
+import { useDispatch } from 'react-redux';
 
 const iconMap = {
   search: searchIcon,
@@ -45,6 +47,7 @@ const BucketMinibarItem = (props) => {
     onAddTab,
     onMoveTab,
   } = props;
+  const dispatch = useDispatch();
   const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
   const handleClick = () => {
@@ -68,6 +71,10 @@ const BucketMinibarItem = (props) => {
     if (onMoveTab) {
       onMoveTab(tabId);
     }
+  };
+
+  const handleSidebar = (name) => {
+    dispatch(setSidebarName(name));
   };
 
   return (
@@ -106,7 +113,11 @@ const BucketMinibarItem = (props) => {
           <Box className='submenu-icon-btn' onClick={handleClick}>
             {subMenu &&
               subMenu.map((item, index) => (
-                <IconButton key={index} className='submenu-item'>
+                <IconButton
+                  key={index}
+                  className='submenu-item'
+                  onClick={() => handleSidebar(item.name)}
+                >
                   <img
                     src={dot}
                     alt='dot'
