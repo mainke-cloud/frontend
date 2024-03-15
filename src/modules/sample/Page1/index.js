@@ -40,7 +40,7 @@ const Page1 = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{ pl: 2 }}>
         <Tabs
           darkMode={false}
           onTabClose={handleTabClose}
@@ -48,10 +48,6 @@ const Page1 = () => {
           onTabActive={handleTabActive}
           tabs={tabs}
         />
-      </Box>
-      <Box 
-      sx={{ pl: 4 , gap: 2 }}
-      >
         <Box>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>

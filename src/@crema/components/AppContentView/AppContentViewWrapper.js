@@ -10,9 +10,11 @@ const AppContentViewWrapper = ({ children, ...rest }) => {
         flexDirection: 'column',
         flex: 1,
         height: '100%',
-        // maxWidth: { xl: 1650 },
+        maxWidth: { xl: 1650 },
         mx: { xl: 'auto' },
         width: { xl: '100%' },
+        backgroundColor: 'white',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
       }}
       {...rest}
     >
