@@ -374,7 +374,7 @@ const Page1 = () => {
         </Stack>
     </Paper>
 
-);
+
 };
 
 export default Page1;
