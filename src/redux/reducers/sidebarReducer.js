@@ -1,5 +1,5 @@
 const initialState = {
-    sidebarNames: ['Disposisi', 'Todo', 'Disposisi Saya'],
+    sidebarNames: ['Disposisi', 'Todo', 'Log Scan Surat', 'Surat Masuk'],
     selectedSidebarName: '' // Menambahkan properti baru untuk menyimpan nama sidebar yang dipilih
 };
 

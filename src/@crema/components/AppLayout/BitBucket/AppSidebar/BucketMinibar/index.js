@@ -10,6 +10,7 @@ import search from '../../../../../../assets/icon/search.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
 import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 
 const BucketMinibar = (props) => {
   const { isHover, setHover } = props;
@@ -24,6 +25,9 @@ const BucketMinibar = (props) => {
     console.log(tabId);
     dispatch(activateTab(tabId, tabs));
   };
+  const handleChangeSidebar = (name) => {
+    dispatch(setSidebarName(name));
+  }
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>
@@ -84,7 +88,6 @@ const BucketMinibar = (props) => {
             <BucketMinibarItem badge={0} icon='search' />
           )}
         </Box>
-
         <BucketMinibarMenu isHover={isHover} title='Menu'>
           <BucketMinibarItem
             isHover={isHover}
@@ -98,6 +101,7 @@ const BucketMinibar = (props) => {
             badge={10}
             icon='inbox'
             text='Surat Masuk'
+            onClick={()=>handleChangeSidebar("Surat Masuk")}
           />
           <BucketMinibarItem
             isHover={isHover}
