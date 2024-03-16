@@ -101,7 +101,7 @@ const BucketMinibar = (props) => {
             badge={10}
             icon='inbox'
             text='Surat Masuk'
-            onClick={()=>handleChangeSidebar("Surat Masuk")}
+            onAddTab={()=>handleChangeSidebar("Surat Masuk")}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -120,6 +120,7 @@ const BucketMinibar = (props) => {
             badge={12}
             icon='mail'
             text='Surat Keluar'
+            onAddTab={()=>handleChangeSidebar("Surat Keluar")}
           />
           <BucketMinibarItem
             isHover={isHover}

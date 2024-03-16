@@ -10,15 +10,12 @@ import {
   AccordionDetails,
   Typography,
   List,
-  Checkbox,
   ListItemAvatar,
   Avatar,
   Card,
   CardContent,
   Divider,
-  Chip,
   Grid,
-  ListItemIcon,
   Button,
   Box,
   ButtonGroup,
@@ -60,11 +57,10 @@ const AccordionSummarys = styled((props) => (
 }));
 
 const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function TodoRendah({ isCollapsed }) {
+export default function TodoDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -266,19 +262,16 @@ export default function TodoRendah({ isCollapsed }) {
               sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
               component='h2'
             >
-              My Disposisi
+              Todo
             </Typography>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <ButtonGroup>
               <IconButton>
                 <Search />
               </IconButton>
               <IconButton>
                 <Filter />
-              </IconButton>
-              <IconButton>
-                <Plus />
               </IconButton>
             </ButtonGroup>
           </Grid>
@@ -413,6 +406,6 @@ export default function TodoRendah({ isCollapsed }) {
   );
 }
 
-TodoRendah.propTypes = {
+TodoDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };

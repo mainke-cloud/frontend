@@ -63,7 +63,7 @@ const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function DisposisiSidebar({ isCollapsed }) {
+export default function MyDisposisiSidebar({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -265,7 +265,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
               sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
               component='h2'
             >
-              Disposisi / Respons
+              My Disposisi
             </Typography>
           </Grid>
           <Grid item xs={5}>
@@ -432,6 +432,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
   );
 }
 
-DisposisiSidebar.propTypes = {
+MyDisposisiSidebar.propTypes = {
   isCollapsed: PropTypes.bool,
 };

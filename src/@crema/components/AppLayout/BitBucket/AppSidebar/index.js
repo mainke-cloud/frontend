@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import BitBucketSidebarWrapper from './BitBucketSidebarWrapper';
 import AppSidebarContainer from './AppSidebarContainer';
 import BucketMinibar from './BucketMinibar';
-import TodoDisposisi from './TodoDisposisi';
-import LetterDisposisi from './LetterDisposisi';
-import ScannerDisposisi from './ScannerDisposisi';
 import DisposisiSidebar from './DisposisiSidebar';
+import MyDisposisiSidebar from './MyDisposisiSidebar';
+import TodoDisposisi from './TodoDisposisi';
+import LetterInDisposisi from './LetterInDisposisi';
+import LetterOutDisposisi from './LetterOutDisposisi';
+import ScannerDrafDisposisi from './ScannerDrafDisposisi';
+import ScannerLogScanDisposisi from './ScannerLogScanDisposisi';
 
 import { Typography, Drawer, Hidden, Box } from '@mui/material';
 
@@ -31,14 +34,20 @@ const AppSidebar = (props) => {
 
   const sideBarDisposisi = () => {
     switch (sidebar) {
+      case 'Surat Masuk':
+        return <LetterInDisposisi isCollapsed={props.isCollapsed} />;
       case 'Disposisi':
         return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+      case 'Disposisi Saya':
+        return <MyDisposisiSidebar isCollapsed={props.isCollapsed} />;
       case 'Todo':
         return <TodoDisposisi isCollapsed={props.isCollapsed} />;
-      case 'Surat Masuk':
-        return <LetterDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Surat Keluar':
+        return <LetterOutDisposisi isCollapsed={props.isCollapsed} />;
       case 'Log Scan Surat':
-        return <ScannerDisposisi isCollapsed={props.isCollapsed} />;
+        return <ScannerLogScanDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Draft Scan Surat':
+        return <ScannerDrafDisposisi isCollapsed={props.isCollapsed} />;
       default:
         return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
     }

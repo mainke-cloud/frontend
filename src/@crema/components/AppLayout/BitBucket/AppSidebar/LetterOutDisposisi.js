@@ -9,15 +9,12 @@ import {
   AccordionDetails,
   Typography,
   List,
-  Checkbox,
   ListItemAvatar,
   Avatar,
   Card,
   CardContent,
   Divider,
-  Chip,
   Grid,
-  ListItemIcon,
   Button,
   Box,
   ButtonGroup,
@@ -30,14 +27,7 @@ import { Fonts } from '@crema/constants/AppEnums';
 
 import { Mail, Plus, Filter, Search } from 'feather-icons-react';
 
-import {
-  Star,
-  StarBorder,
-  ArrowForwardIosSharp,
-  ErrorOutline,
-} from '@mui/icons-material';
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -67,11 +57,10 @@ const AccordionSummarys = styled((props) => (
 }));
 
 const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function LetterDisposisi({ isCollapsed }) {
+export default function LetterOutDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -241,43 +230,6 @@ export default function LetterDisposisi({ isCollapsed }) {
     },
   ];
 
-  const [readCount, setReadCount] = React.useState(0);
-  const [unreadCount, setUnreadCount] = React.useState(0);
-  const [disposisiCount, setDisposisiCount] = React.useState(0);
-
-  React.useEffect(() => {
-    const readList1 = listData1.filter((item) => item.status === 'read');
-    const unreadList1 = listData1.filter((item) => item.status === 'unread');
-    const disposisiList1 = listData1.filter(
-      (item) => item.status === 'disposisi',
-    );
-    setReadCount(readList1.length);
-    setUnreadCount(unreadList1.length);
-    setDisposisiCount(disposisiList1.length);
-  }, [listData1]);
-
-  React.useEffect(() => {
-    const readList2 = listData2.filter((item) => item.status === 'read');
-    const unreadList2 = listData2.filter((item) => item.status === 'unread');
-    const disposisiList2 = listData2.filter(
-      (item) => item.status === 'disposisi',
-    );
-    setReadCount(readList2.length);
-    setUnreadCount(unreadList2.length);
-    setDisposisiCount(disposisiList2.length);
-  }, [listData2]);
-
-  React.useEffect(() => {
-    const readList3 = listData3.filter((item) => item.status === 'read');
-    const unreadList3 = listData3.filter((item) => item.status === 'unread');
-    const disposisiList3 = listData3.filter(
-      (item) => item.status === 'disposisi',
-    );
-    setReadCount(readList3.length);
-    setUnreadCount(unreadList3.length);
-    setDisposisiCount(disposisiList3.length);
-  }, [listData3]);
-
   const getStatusColor = (status) => {
     switch (status) {
       case 'Selesai':
@@ -304,13 +256,13 @@ export default function LetterDisposisi({ isCollapsed }) {
               sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
               component='h2'
             >
-              Disposisi
+              Surat Keluar
             </Typography>
             <Typography
               sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
               component='h2'
             >
-              My Disposisi
+              Perlu Tindak Lanjut
             </Typography>
           </Grid>
           <Grid item xs={5}>
@@ -342,36 +294,9 @@ export default function LetterDisposisi({ isCollapsed }) {
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={4}
-                      container
-                      justifyContent='start'
-                      alignItems='center'
-                    >
-                      <Typography>
-                        Agustus-2021({getTotalCount(listData)})
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={8} container justifyContent='flex-end'>
-                      <Chip
-                        label={`Read (${readCount})`}
-                        size='small'
-                        sx={{ margin: 1, backgroundColor: '#F9E4E4' }}
-                      />
-                      <Chip
-                        label={`Unread (${unreadCount})`}
-                        size='small'
-                        sx={{ margin: 1, backgroundColor: '#FFB020' }}
-                      />
-                      <Chip
-                        label={`Disposisi (${disposisiCount})`}
-                        size='small'
-                        sx={{ margin: 1, backgroundColor: '#DCF2EA' }}
-                      />
-                    </Grid>
-                  </Grid>
+                  <Typography>
+                    Agustus-2021({getTotalCount(listData)})
+                  </Typography>
                 </AccordionSummarys>
                 <AccordionDetail>
                   <List>
@@ -455,22 +380,17 @@ export default function LetterDisposisi({ isCollapsed }) {
                                     >
                                       {item.status}
                                     </Box>
-                                    <ListItemIcon
+
+                                    <Box
                                       sx={{
                                         marginLeft: 'auto',
                                         display: 'flex',
                                         flexDirection: 'row',
+                                        paddingTop: 2.4,
                                       }}
                                     >
-                                      <Checkbox
-                                        {...label}
-                                        icon={<StarBorder />}
-                                        checkedIcon={<Star />}
-                                      />
-                                      <Box sx={{ paddingTop: 2.4 }}>
-                                        <Mail />
-                                      </Box>
-                                    </ListItemIcon>
+                                      <Mail />
+                                    </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -491,6 +411,6 @@ export default function LetterDisposisi({ isCollapsed }) {
   );
 }
 
-LetterDisposisi.propTypes = {
+LetterOutDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };

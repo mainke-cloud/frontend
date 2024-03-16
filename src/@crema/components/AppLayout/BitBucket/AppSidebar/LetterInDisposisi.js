@@ -9,26 +9,30 @@ import {
   AccordionDetails,
   Typography,
   List,
-  Checkbox,
   ListItemAvatar,
   Avatar,
   Card,
   CardContent,
   Divider,
-  Chip,
   Grid,
-  ListItemIcon,
   Button,
   Box,
   ButtonGroup,
   IconButton,
+  Tooltip,
+  Icon,
 } from '@mui/material';
-
-import { Plus, Filter, Search } from 'feather-icons-react';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { ArrowForwardIosSharp } from '@mui/icons-material';
+import { Mail, Plus, Filter, Search } from 'feather-icons-react';
+
+import {
+  ArrowForwardIosSharp,
+  ErrorOutline,
+  Cached,
+  Shortcut,
+} from '@mui/icons-material';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -58,11 +62,10 @@ const AccordionSummarys = styled((props) => (
 }));
 
 const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function ScannerDisposisi({ isCollapsed }) {
+export default function LetterInDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -71,6 +74,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -79,6 +83,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -87,6 +92,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -95,6 +101,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -103,6 +110,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -111,6 +119,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -119,6 +128,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -127,6 +137,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -135,6 +146,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Sekretaris',
     },
   ];
   const listData2 = [
@@ -145,6 +157,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -153,6 +166,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -161,6 +175,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -169,6 +184,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -177,6 +193,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -185,6 +202,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Sekretaris',
     },
   ];
   const listData3 = [
@@ -195,6 +213,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -203,6 +222,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -211,8 +231,22 @@ export default function ScannerDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      status: 'Read',
     },
   ];
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Sekretaris':
+        return '#BF2600';
+      case 'Read':
+        return '#FFB020';
+      case 'Unread':
+        return '#8C8F93';
+      default:
+        return 'lightgrey';
+    }
+  };
 
   const getTotalCount = (listData) => {
     return listData.length;
@@ -225,15 +259,9 @@ export default function ScannerDisposisi({ isCollapsed }) {
           <Grid item xs={7}>
             <Typography
               sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
-              component='h2'
+              component='h1'
             >
-              Disposisi
-            </Typography>
-            <Typography
-              sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
-              component='h2'
-            >
-              My Disposisi
+              Surat Masuk
             </Typography>
           </Grid>
           <Grid item xs={5}>
@@ -265,19 +293,9 @@ export default function ScannerDisposisi({ isCollapsed }) {
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={4}
-                      container
-                      justifyContent='start'
-                      alignItems='center'
-                    >
-                      <Typography>
-                        Agustus-2021({getTotalCount(listData)})
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  <Typography>
+                    Agustus-2021({getTotalCount(listData)})
+                  </Typography>
                 </AccordionSummarys>
                 <AccordionDetail>
                   <List>
@@ -286,7 +304,9 @@ export default function ScannerDisposisi({ isCollapsed }) {
                         <Card
                           sx={{
                             position: 'relative',
-                            borderLeft: '6px solid silver',
+                            borderLeft: `6px solid ${getStatusColor(
+                              item.status,
+                            )}`,
                             borderRadius: 0,
                           }}
                         >
@@ -295,7 +315,7 @@ export default function ScannerDisposisi({ isCollapsed }) {
                           >
                             <CardContent>
                               <Grid container>
-                                <Grid item xs={2}>
+                                <Grid item xs={2} container>
                                   <ListItemAvatar>
                                     <Avatar
                                       alt={`Avatar ${listIndex}`}
@@ -303,6 +323,16 @@ export default function ScannerDisposisi({ isCollapsed }) {
                                       sx={{ width: 56, height: 56 }}
                                     />
                                   </ListItemAvatar>
+                                  {item.status === 'Sekretaris' && (
+                                    <Tooltip title='Danger'>
+                                      <Icon
+                                        color='error'
+                                        sx={{ marginLeft: 4, marginTop: 1 }}
+                                      >
+                                        <ErrorOutline />
+                                      </Icon>
+                                    </Tooltip>
+                                  )}
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
@@ -310,6 +340,13 @@ export default function ScannerDisposisi({ isCollapsed }) {
                                       <Typography
                                         variant='body1'
                                         color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                       >
                                         {item.primary}
                                       </Typography>
@@ -318,13 +355,27 @@ export default function ScannerDisposisi({ isCollapsed }) {
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                       >
                                         {item.date}
                                       </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                       <Typography
-                                        sx={{ display: 'inline' }}
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                          display: 'inline',
+                                        }}
                                         component='span'
                                         variant='body2'
                                         color='text.primary'
@@ -332,6 +383,48 @@ export default function ScannerDisposisi({ isCollapsed }) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
+                                    <Button
+                                      sx={{
+                                        padding: 0,
+                                        margin: 0,
+                                        textAlign: 'left',
+                                      }}
+                                    >
+                                      <Cached />
+                                      <Typography
+                                        sx={{
+                                          fontSize: 12,
+                                        }}
+                                      >
+                                        ({item.messageCount})
+                                      </Typography>
+                                    </Button>
+                                    <Button
+                                      sx={{
+                                        padding: 0,
+                                        margin: 0,
+                                        textAlign: 'left',
+                                      }}
+                                    >
+                                      <Shortcut />
+                                      <Typography
+                                        sx={{
+                                          fontSize: 12,
+                                        }}
+                                      >
+                                        ({item.messageCount})
+                                      </Typography>
+                                    </Button>
+                                    <Box
+                                      sx={{
+                                        marginLeft: 'auto',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        paddingTop: 2.4,
+                                      }}
+                                    >
+                                      <Mail />
+                                    </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -352,6 +445,6 @@ export default function ScannerDisposisi({ isCollapsed }) {
   );
 }
 
-ScannerDisposisi.propTypes = {
+LetterInDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };

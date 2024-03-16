@@ -21,16 +21,11 @@ import {
   IconButton,
 } from '@mui/material';
 
-import { Fonts } from '@crema/constants/AppEnums';
-
 import { Plus, Filter, Search } from 'feather-icons-react';
 
-import {
-  ArrowForwardIosSharp,
-  Cached,
-  DraftsOutlined,
-  MailOutline,
-} from '@mui/icons-material';
+import { Fonts } from '@crema/constants/AppEnums';
+
+import { ArrowForwardIosSharp } from '@mui/icons-material';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -63,7 +58,7 @@ const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function DisposisiSidebar({ isCollapsed }) {
+export default function ScannerDrafDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -72,7 +67,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -81,7 +75,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -90,7 +83,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -99,7 +91,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -108,7 +99,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -117,7 +107,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -126,7 +115,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -135,7 +123,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -144,7 +131,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
     },
   ];
   const listData2 = [
@@ -155,7 +141,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -164,7 +149,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -173,7 +157,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -182,7 +165,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -191,7 +173,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -200,7 +181,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
     },
   ];
   const listData3 = [
@@ -211,7 +191,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -220,7 +199,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -229,22 +207,8 @@ export default function DisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'unread',
     },
   ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'read':
-        return '#B1B5BA';
-      case 'unread':
-        return '#FFB020';
-      case 'disposisi':
-        return '#9DB5FF';
-      default:
-        return 'lightgrey';
-    }
-  };
 
   const getTotalCount = (listData) => {
     return listData.length;
@@ -259,13 +223,13 @@ export default function DisposisiSidebar({ isCollapsed }) {
               sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
               component='h2'
             >
-              Disposisi
+              Scanner
             </Typography>
             <Typography
               sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
               component='h2'
             >
-              Disposisi / Respons
+              Draf Scan Surat
             </Typography>
           </Grid>
           <Grid item xs={5}>
@@ -297,9 +261,19 @@ export default function DisposisiSidebar({ isCollapsed }) {
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Typography>
-                    Agustus-2021({getTotalCount(listData)})
-                  </Typography>
+                  <Grid container>
+                    <Grid
+                      item
+                      xs={4}
+                      container
+                      justifyContent='start'
+                      alignItems='center'
+                    >
+                      <Typography>
+                        Agustus-2021({getTotalCount(listData)})
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </AccordionSummarys>
                 <AccordionDetail>
                   <List>
@@ -308,9 +282,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                         <Card
                           sx={{
                             position: 'relative',
-                            borderLeft: `6px solid ${getStatusColor(
-                              item.status,
-                            )}`,
+                            borderLeft: '6px solid silver',
                             borderRadius: 0,
                           }}
                         >
@@ -319,7 +291,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                           >
                             <CardContent>
                               <Grid container>
-                                <Grid item xs={2} container>
+                                <Grid item xs={2}>
                                   <ListItemAvatar>
                                     <Avatar
                                       alt={`Avatar ${listIndex}`}
@@ -334,13 +306,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
                                       <Typography
                                         variant='body1'
                                         color='text.primary'
-                                        sx={{
-                                          fontWeight:
-                                            item.status === 'unread' ||
-                                            item.status === 'disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
                                       >
                                         {item.primary}
                                       </Typography>
@@ -349,27 +314,13 @@ export default function DisposisiSidebar({ isCollapsed }) {
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
-                                        sx={{
-                                          fontWeight:
-                                            item.status === 'unread' ||
-                                            item.status === 'disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
                                       >
                                         {item.date}
                                       </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                       <Typography
-                                        sx={{
-                                          display: 'inline',
-                                          fontWeight:
-                                            item.status === 'unread' ||
-                                            item.status === 'disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
+                                        sx={{ display: 'inline' }}
                                         component='span'
                                         variant='body2'
                                         color='text.primary'
@@ -377,41 +328,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <Button
-                                      sx={{
-                                        padding: 0,
-                                        margin: 0,
-                                        textAlign: 'left',
-                                      }}
-                                    >
-                                      <Cached />
-                                      <Typography
-                                        sx={{
-                                          fontSize: 12,
-                                          fontWeight:
-                                            item.status === 'unread' ||
-                                            item.status === 'disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
-                                      >
-                                        ({item.messageCount})
-                                      </Typography>
-                                    </Button>
-                                    <Box
-                                      sx={{
-                                        marginLeft: 'auto',
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        paddingTop: 2.4,
-                                      }}
-                                    >
-                                      {item.status === 'read' ? (
-                                        <DraftsOutlined />
-                                      ) : (
-                                        <MailOutline />
-                                      )}
-                                    </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -432,6 +348,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
   );
 }
 
-DisposisiSidebar.propTypes = {
+ScannerDrafDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };
