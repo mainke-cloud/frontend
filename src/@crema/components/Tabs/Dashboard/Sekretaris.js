@@ -40,13 +40,23 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         <Typography>{ID}</Typography>
                 </Stack>
             </Grid>
-            <Grid item xs={11}>
-                <AppCard2
-                    sx={{ backgroundColor: '#FFEFD2', color: 'black', padding: 2 }}
-
+            <Grid item xs={11} sx={{marginTop: 2}}>
+                <Box 
+                    alignItems="center" 
+                    justifyContent="center"
+                    sx={{ 
+                        backgroundColor: '#FFEFD2', 
+                        color: 'black', 
+                        padding: 2, 
+                        width: '100%', 
+                        maxWidth: 335, 
+                        '@media (min-width: 600px)': { 
+                            width: 'auto',
+                        }
+                    }}
                 >
-                    <Typography>Atur Keaktifan</Typography>
-                </AppCard2>
+                     <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
+                </Box>
             </Grid>
             <Divider variant="middle" sx={{ mb: 4 }} />
         </Grid>
