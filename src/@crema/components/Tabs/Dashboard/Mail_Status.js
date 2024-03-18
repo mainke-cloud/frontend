@@ -2,10 +2,26 @@ import React from 'react';
 import { Box, Grid, Paper, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types'; // Import PropTypes
 import AppCard from '@crema/components/AppCard';
+import { useState } from 'react';
+
 const Mail_Status = ({ image, text, boxColor, counter }) => {
+  const [Link, setLink] = useState();
+
+  const handleClick = () => {
+      setLink(!Link);
+  };
   return (
     <>
-      <AppCard  sx={{ height: 90, width: 299 }}>
+      <AppCard  
+      sx={{ 
+        height: 90, 
+        width: 299, 
+        cursor: 'pointer', 
+        '&:hover': {
+          backgroundColor: '#D9DDE3',
+        } 
+      }} 
+      onClick={handleClick} >
         <Grid container alignItems="center" justifyContent="center">
           <Grid item xs={3}>
             <img src={image} style={{ marginRight: '8px' }} />

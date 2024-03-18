@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Stack, Typography, Box, Button, Badge, Avatar, Divider } from "@mui/material";
+import { Grid, Stack, Typography, Box, Badge, Avatar, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types'; // Import PropTypes
-import AppCard2 from "@crema/components/AppCard/AppCard2";
+import { useState } from "react";
 
 const StyledBadgeSekretaris = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -12,6 +12,11 @@ const StyledBadgeSekretaris = styled(Badge)(({ theme }) => ({
   }));
 
 const Sekretaris = ({ Profile, JobDesk, ID }) => {
+    const [isActive, setIsActive] = useState(true);
+
+    const handleClick = () => {
+        setIsActive(!isActive);
+    };
     return(
         <Grid container sx={{margin: 3}}>
             <Grid item xs={3}>
@@ -28,14 +33,14 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                     <Typography variant='h3'>{JobDesk}</Typography>
                         <Box
                             sx={{
-                              backgroundColor: '#A3E6CD',
+                              backgroundColor: isActive ? '#A3E6CD' : '#D8DAE5',
                               height: '22px',
-                              width: '50px',
+                              width: isActive ? '50px' : '80px',
                               borderRadius: 2,
                             }}
                         >
                             <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
-                                Aktif
+                                {isActive ? 'Aktif' : 'Non Aktif'}
                             </Typography>
                         </Box>
                         <Typography>{ID}</Typography>
@@ -52,10 +57,15 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         width: '100%', 
                         maxWidth: 335, 
                         borderRadius: 2,
+                        cursor: 'pointer',
                         '@media (min-width: 600px)': { 
                             width: 'auto',
-                        }
+                        },
+                        '&:hover': {
+                            backgroundColor: '#FFDFA6', // Change background color on hover
+                          }
                     }}
+                    onClick={handleClick} 
                 >
                      <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
                 </Box>

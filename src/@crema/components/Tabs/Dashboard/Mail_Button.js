@@ -2,9 +2,24 @@ import React from 'react';
 import { Grid, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types'; // Import PropTypes
 import AppCard from '@crema/components/AppCard';
-const Mail_Button = ({ bgColor, textColor, text, subText, image }) => {
+import { useState } from 'react';
+
+const Mail_Button = ({ bgColor, bgHover, textColor, text, subText, image }) => {
+  const [Link, setLink] = useState();
+
+  const handleClick = () => {
+      setLink(!Link);
+  };
   return (
-    <AppCard sx={{ backgroundColor: bgColor }}>
+    <AppCard 
+    sx={{ 
+      backgroundColor: bgColor, 
+      cursor: 'pointer',
+      '&:hover': {
+        backgroundColor: bgHover,
+      } 
+    }} 
+    onClick={handleClick} >
       <Grid container >
           <Grid item xs={3}>
             <img src={image} style={{ marginRight: '8px' }} />
@@ -25,6 +40,7 @@ const Mail_Button = ({ bgColor, textColor, text, subText, image }) => {
 };
 Mail_Button.propTypes = {
   bgColor: PropTypes.string.isRequired,
+  bgHover: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   subText: PropTypes.string.isRequired,

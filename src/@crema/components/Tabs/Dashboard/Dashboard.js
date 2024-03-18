@@ -30,7 +30,21 @@ import Delegasi from './Delegasi';
 import Sekretaris from './Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 
+import { useState } from 'react';
+
 const Dashboard = () => {
+  const [AddSekretaris, setAddSekretaris] = useState(false);
+
+  const handleClickSekretaris = () => {
+    setAddSekretaris(!AddSekretaris);
+  };
+
+  const [AddDelegasi, setAddDelegasi] = useState(false);
+
+  const handleClickDelegasi = () => {
+    setAddDelegasi(!AddDelegasi);
+  };
+
   return (
     <>
       <Paper elevation={0}>
@@ -59,7 +73,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={1} alignItems="center" justifyContent="center">
               <IconButton  sx={{ backgroundColor: '#2E3032', width: 40, height: 40, marginTop: 5 }}>
-                <img src={Refresh} />
+                <img style={{height: 16, width: 16}} src={Refresh} />
               </IconButton>
           </Grid>
         </Grid>
@@ -75,6 +89,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#F9E4E4'
+                  bgHover='#FF7452'
                   textColor='#E42313'
                   text='Buat Surat Internal'
                   subText='Info'
@@ -85,6 +100,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#F9E5CF'
+                  bgHover='#FFD079'
                   textColor='#C45900'
                   text='Buat Surat External'
                   subText='Info'
@@ -95,6 +111,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#DFE4F7'
+                  bgHover='#9DB5FF'
                   textColor='#4D6FD4'
                   text='Buat Surat Undangan'
                   subText='Info'
@@ -103,11 +120,11 @@ const Dashboard = () => {
               </Stack>
 
               <Stack spacing={2}>
-                <IconButton sx={{ backgroundColor: 'grey', width: 28, height: 28 }}>
+                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
                   <img src={Write} />
                 </IconButton>
 
-                <IconButton sx={{ backgroundColor: 'grey', width: 28, height: 28 }}>
+                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
                   <img src={More} />
                 </IconButton>
               </Stack>
@@ -157,12 +174,18 @@ const Dashboard = () => {
                     <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
                     <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                   </Stack>
-                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }}>
+                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={handleClickSekretaris}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>
               </Box>
-
+              {/* {AddSekretaris && (
+                <Sekretaris 
+                  Profile={avatar} 
+                  JobDesk="Manager development" 
+                  ID="Taufik Sulaeman/ 8900002/ ARMS"
+                />
+              )} */}
               <Sekretaris 
                 Profile={avatar} 
                 JobDesk="Manager development" 
@@ -183,7 +206,7 @@ const Dashboard = () => {
                     <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
                     <Typography sx={{ color: '#C45900', fontSize: '16px' }}>Delegasi</Typography>
                   </Stack>
-                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }}>
+                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }} onClick={handleClickDelegasi}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>                
