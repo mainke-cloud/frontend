@@ -12,6 +12,7 @@ import person from '../../../../assets/Dashboard/Dashboard_girl.png';
 import Refresh from '../../../../assets/Dashboard/Refresh_icon.png';
 import Write from '../../../../assets/Dashboard/Write_icon.png';
 import More from '../../../../assets/Dashboard/More_icon.png';
+import Plus from '../../../../assets/Dashboard/Plus_icon.png'
 import Disposisi from '../../../../assets/Dashboard/Disposisi_icon.png';
 import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
 import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
@@ -57,8 +58,8 @@ const Dashboard = () => {
               />
             </Stack>
           </Grid>
-          <Grid item xs={1} alignItems="center" justifyContent="flex-end">
-              <IconButton>
+          <Grid item xs={1} alignItems="center" justifyContent="center">
+              <IconButton  sx={{ backgroundColor: '#2E3032', width: 40, height: 40, marginTop: 5 }}>
                 <img src={Refresh} />
               </IconButton>
           </Grid>
@@ -152,31 +153,41 @@ const Dashboard = () => {
             <AppCard2 sx={{ height: '50%'}}>
 
               <Box sx={{ backgroundColor: '#DFE4F7', borderTopLeftRadius: 2, borderTopRightRadius: 2 }}>
-                <Stack direction='row' spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
-                  <img src={Sekretaris_Icon} />
-                  <Typography sx={{ color: '#2952CC' }}>Sekretaris</Typography>
+                <Stack direction='row' alignItems="center"   justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
+                    <Typography sx={{ color: '#2952CC' }}>Sekretaris</Typography>
+                  </Stack>
+                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }}>
+                    <img src={Plus} />
+                  </IconButton>
                 </Stack>
               </Box>
 
               <Sekretaris 
                 Profile={avatar} 
                 JobDesk="Manager development" 
-                ID="Taufik Sulaeman/8900002/ARMS"
+                ID="Taufik Sulaeman/ 8900002/ ARMS"
               />
             
             </AppCard2>
               <AppCard2 sx={{ height: '50%'}} >
               <Box sx={{ backgroundColor: '#F9E5CF', borderTopLeftRadius: 2, borderTopRightRadius: 2, marginTop: 0}}>
-                <Stack direction='row' spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
-                  <img src={Delegasi_Icon} />
-                  <Typography sx={{ color: '#C45900' }}>Delegasi</Typography>
+                <Stack direction='row' alignItems="center"  justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
+                    <Typography sx={{ color: '#C45900' }}>Delegasi</Typography>
+                  </Stack>
+                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }}>
+                    <img src={Plus} />
+                  </IconButton>
                 </Stack>                
               </Box>
 
                 <Delegasi 
                   Profile={avatar} 
                   JobDesk='Manager development' 
-                  ID='Taufik Sulaeman/8900002/ARMS'
+                  ID='Taufik Sulaeman/ 8900002/ ARMS'
                 />
             
             </AppCard2>

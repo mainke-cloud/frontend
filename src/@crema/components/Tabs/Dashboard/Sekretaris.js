@@ -31,6 +31,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                               backgroundColor: '#A3E6CD',
                               height: '22px',
                               width: '50px',
+                              borderRadius: 2,
                             }}
                         >
                             <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
@@ -50,6 +51,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         padding: 2, 
                         width: '100%', 
                         maxWidth: 335, 
+                        borderRadius: 2,
                         '@media (min-width: 600px)': { 
                             width: 'auto',
                         }
