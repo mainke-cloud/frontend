@@ -72,6 +72,7 @@ const SigninFirebase = () => {
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
       if (values.captchaValue === captcha) {
+        // logInWithEmailAndPassword(values);
         alert('Captcha input is correct!');
         setVerification(true);
         navigate('/signin/verifikasi1');
