@@ -27,7 +27,6 @@ import TodoList_Dashboard from './TodoList_Dashboard';
 import Mail_Status from './Mail_Status';
 import Mail_Button from './Mail_Button';
 import Delegasi from './Delegasi';
-import AppCard from '@crema/components/AppCard';
 import Sekretaris from './Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 
@@ -143,7 +142,7 @@ const Dashboard = () => {
               />
             </Stack>
 
-            <TodoList_Dashboard />
+            <TodoList_Dashboard/>
 
           </Stack>
 
@@ -156,13 +155,19 @@ const Dashboard = () => {
                 <Stack direction='row' alignItems="center"   justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
                   <Stack direction="row" alignItems="center" spacing={2}>
                     <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
-                    <Typography sx={{ color: '#2952CC' }}>Sekretaris</Typography>
+                    <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                   </Stack>
                   <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>
               </Box>
+
+              <Sekretaris 
+                Profile={avatar} 
+                JobDesk="Manager development" 
+                ID="Taufik Sulaeman/ 8900002/ ARMS"
+              />
 
               <Sekretaris 
                 Profile={avatar} 
@@ -176,13 +181,19 @@ const Dashboard = () => {
                 <Stack direction='row' alignItems="center"  justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
                   <Stack direction="row" alignItems="center" spacing={2}>
                     <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
-                    <Typography sx={{ color: '#C45900' }}>Delegasi</Typography>
+                    <Typography sx={{ color: '#C45900', fontSize: '16px' }}>Delegasi</Typography>
                   </Stack>
                   <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>                
               </Box>
+
+                <Delegasi 
+                  Profile={avatar} 
+                  JobDesk='Manager development' 
+                  ID='Taufik Sulaeman/ 8900002/ ARMS'
+                />
 
                 <Delegasi 
                   Profile={avatar} 
