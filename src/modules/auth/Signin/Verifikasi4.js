@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
+import SuccessImage from '../../../assets/LoginPage/berhasil.png';
 
 const Verifikasi4 = () => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const Verifikasi4 = () => {
             alignItems='center'
             spacing={3}
           >
-            <img src='/berhasil.png' />
+            <img src={SuccessImage} />
             <Typography
               variant='h5'
               sx={{

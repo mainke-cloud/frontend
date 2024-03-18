@@ -11,6 +11,7 @@ import React from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
+import TwoFactorImage from '../../../assets/LoginPage/twofactor.png';
 
 const Verifikasi2 = () => {
   const navigate = useNavigate();
@@ -44,7 +45,8 @@ const Verifikasi2 = () => {
             textAlign: 'center',
           }}
         >
-          <img src='/two factor.png' alt='gambar verifikasi 2 langkah' />
+          <img src={TwoFactorImage} alt='gambar verifikasi 2 langkah' />
+
           <Typography variant='h4' paddingTop='30px'>
             Apakah anda sudah memiliki aplikasi TGPortal di perangkat anda ?
           </Typography>

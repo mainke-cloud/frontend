@@ -24,6 +24,7 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
+import TelkomLogo from '../../../assets/LoginPage/telkomlogo.png';
 
 const validationSchema = yup.object({
   email: yup
@@ -103,7 +104,7 @@ const SigninFirebase = () => {
           sx={{ bgcolor: '#FFFFFF' }}
         >
           <Box>
-            <img src='/logotelkom.png' />
+            <img src={TelkomLogo} />
             <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
               Masuk NDE Telkom
             </Typography>
