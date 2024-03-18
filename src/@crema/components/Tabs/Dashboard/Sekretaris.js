@@ -23,14 +23,14 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                     <Avatar src={Profile} sx={{border: 2, borderColor: '#0F6EB5', width: 46, height: 46}}/>
                 </StyledBadgeSekretaris>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
                 <Stack direction='column' spacing={2}>
                     <Typography variant='h3'>{JobDesk}</Typography>
                         <Box
                             sx={{
                               backgroundColor: '#A3E6CD',
                               height: '22px',
-                              weight: '44px',
+                              width: '50px',
                             }}
                         >
                             <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
