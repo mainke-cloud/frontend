@@ -89,7 +89,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#F9E4E4'
-                  bgHover='#FF7452'
+                  bgHover='#F4CACA'
                   textColor='#E42313'
                   text='Buat Surat Internal'
                   subText='Info'
@@ -100,7 +100,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#F9E5CF'
-                  bgHover='#FFD079'
+                  bgHover='#FFDFA6'
                   textColor='#C45900'
                   text='Buat Surat External'
                   subText='Info'
@@ -111,7 +111,7 @@ const Dashboard = () => {
               <Stack flex={1}>
                 <Mail_Button
                   bgColor='#DFE4F7'
-                  bgHover='#9DB5FF'
+                  bgHover='#D6E0FF'
                   textColor='#4D6FD4'
                   text='Buat Surat Undangan'
                   subText='Info'
