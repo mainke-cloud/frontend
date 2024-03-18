@@ -22,6 +22,7 @@ import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
 import Surat_Internal from '../../../../assets/Dashboard/Surat_Internal_logo.png';
 import Surat_Undangan from '../../../../assets/Dashboard/Surat_Undangan_logo.png';
 import Surat_Eksternal from '../../../../assets/Dashboard/Surat_Eksternal_logo.png';
+import Surat_Delegasi from '../../../../assets/Dashboard/Surat_Delegasi_logo.png';
 
 import TodoList_Dashboard from './TodoList_Dashboard';
 import Mail_Status from './Mail_Status';
@@ -78,9 +79,8 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Paper>
-      <Grid container columnSpacing={5} height={'100vh'} padding={3}>
-        <Grid item xs={9}>
-          <Stack direction="column" spacing={5}>
+      <Grid container columnSpacing={5} padding={3}>
+        <Grid item xs={12} >
             <Stack 
               direction={{ xs: 'column', md: 'row' }} 
               spacing={5} 
@@ -119,7 +119,18 @@ const Dashboard = () => {
                 />
               </Stack>
 
-              <Stack spacing={2}>
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#DCF2EA'
+                  bgHover='#A3E6CD'
+                  textColor='#429777'
+                  text='Buat Surat Delegasi'
+                  subText='Info'
+                  image={Surat_Delegasi}
+                />
+              </Stack>
+
+              {/* <Stack spacing={2}>
                 <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
                   <img src={Write} />
                 </IconButton>
@@ -127,10 +138,14 @@ const Dashboard = () => {
                 <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
                   <img src={More} />
                 </IconButton>
-              </Stack>
+              </Stack> */}
 
             </Stack>
-
+        </Grid>
+      </Grid>
+      <Grid container columnSpacing={5} height={'100vh'} padding={3}>
+        <Grid item xs={9}>
+          <Stack direction="column" spacing={5}>
             <Stack
               direction={'row'} 
               alignItems={'center'} 
@@ -161,9 +176,9 @@ const Dashboard = () => {
 
             <TodoList_Dashboard/>
 
-          </Stack>
+          </Stack>     
+        </Grid>  
 
-        </Grid>
         <Grid item xs={3} height={'100%'}>
           <Stack direction='column' spacing={5}>
             <AppCard2 sx={{ height: '50%'}}>

@@ -22,7 +22,7 @@ const Mail_Button = ({ bgColor, bgHover, textColor, text, subText, image }) => {
     onClick={handleClick} >
       <Grid container >
           <Grid item xs={3}>
-            <img src={image} style={{ marginRight: '8px' }} />
+            <img src={image} style={{ marginRight: '8px', width: 45, heigh: 45 }} />
           </Grid>
           <Grid item xs={9}>
             <Stack alignItems='flex-start'>

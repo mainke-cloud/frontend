@@ -33,7 +33,7 @@ const Delegasi = ({ Profile, JobDesk, ID }) => {
                           borderRadius: 2,
                         }}
                     >
-                        <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
+                        <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2, color: '#317159' }}>
                             Aktif Sampai 22 sep{' '}
                         </Typography>
                     </Box>
