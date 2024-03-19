@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {   Box,
   Stack, 
   Grid,
@@ -13,18 +13,46 @@ import {   Box,
  } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
 import ViewList from './ViewList';
+import TableList from './TableList';
 import AppCard from '@crema/components/AppCard';
 import SearchIcon from '@mui/icons-material/Search';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import {Filter} from 'feather-icons-react';
+// import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { setTodoListName } from '../../../../redux/actions/todoListAction.js';
 
-const TodoList_Dashboard = () => {
+const TodoList_Dashboard = (props) => {
+  // const { isCollapsed, setCollapsed } = props;
 
-  const [view, setView] = React.useState('');
+  // const selectedTodoListName = useSelector((state) => state.todoList.selectedTodoListName);
+  // const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setView(event.target.value);
+  // const SelectList = () => {
+  //   switch (selectedTodoListName) {
+  //     case 'View List':
+  //       return <ViewList isCollapsed={props.isCollapsed} />;
+  //     case 'Table List':
+  //       return <TableList isCollapsed={props.isCollapsed} />;
+  //     default:
+  //       return <ViewList isCollapsed={props.isCollapsed} />;
+  //   }
+  // };
+
+  const { isCollapsed, setCollapsed } = props;
+  const [selectedView, setSelectedView] = useState('List');
+
+  const handleViewChange = (event) => {
+    setSelectedView(event.target.value);
   };
+
+  // const [view, setView] = React.useState('');
+
+  // const handleChange = (event) => {
+  //   const selectedValue = event.target.value;
+  //   setView(selectedValue);
+  //   dispatch(setTodoListName(selectedValue));
+  // };
 
     return (
       <AppCard sx={{ height: '500px'}}>
@@ -53,25 +81,26 @@ const TodoList_Dashboard = () => {
           <Grid item xs={4}>
             <Stack direction="row" spacing={2} alignItems="center">
             <FormControl sx={{ m: 1, minWidth: 70 }}>
-              <Select
-                defaultValue="List"
-                value={view}
-                onChange={handleChange}
-                displayEmpty
-                startAdornment={
-                  <InputAdornment position="start">
-                    <FormatListBulletedIcon fontSize='small' />
-                  </InputAdornment>
-                }
-                sx={{height:"25px", fontSize:'11px'}}
-              >
-                <MenuItem value="List" >List View</MenuItem>
-                <MenuItem value="Table">Table View</MenuItem>
-              </Select>
-            </FormControl>
-              <Box sx={{borderRadius: 2, border: '0.5px solid grey'}}>
-                <FilterAltOutlinedIcon fontSize='small' />
-              </Box>
+                <Select
+                  value={selectedView}
+                  onChange={handleViewChange}
+                  displayEmpty
+                  startAdornment={<InputAdornment position="start"><FormatListBulletedIcon fontSize='small' /></InputAdornment>}
+                  sx={{ height: "25px", fontSize: '11px' }}>
+                  <MenuItem value="List">List View</MenuItem>
+                  <MenuItem value="Table">Table View</MenuItem>
+                </Select>
+              </FormControl>
+                <Box sx={{
+                  borderRadius: 2,
+                  border: '0.5px solid grey',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding:"2.5px",
+                }}>
+                  <Filter size={20}/>
+                </Box>
               <Box sx={{ width:'40%', height:"25px", display: 'flex', border: '0.5px solid grey', borderRadius: 2 }}>
                 <InputBase
                   placeholder='Search'
@@ -132,9 +161,11 @@ const TodoList_Dashboard = () => {
           Didisposisikan
         </Box>
       </Stack>
+      {selectedView === 'List' ? <ViewList isCollapsed={isCollapsed} /> : <TableList isCollapsed={isCollapsed} />}
       
       {/* <ViewList/> */}
-      <ViewList/>
+      {/* <TableList/> */}
+      {/* {SelectList()} */}
       
       <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Pagination count={10} shape="rounded" />
@@ -144,5 +175,10 @@ const TodoList_Dashboard = () => {
     </AppCard>
     )
 }
+
+TodoList_Dashboard.propTypes = {
+  isCollapsed: PropTypes.bool,
+  setCollapsed: PropTypes.func,
+};
 
 export default TodoList_Dashboard;
