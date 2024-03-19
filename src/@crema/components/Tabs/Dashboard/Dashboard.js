@@ -117,14 +117,15 @@ const Dashboard = () => {
                 />
               </Stack>
 
-              <Stack spacing={2}>
-                <IconButton sx={{ backgroundColor: 'grey', width: 28, height: 28 }}>
-                  <img src={Write} />
-                </IconButton>
-
-                <IconButton sx={{ backgroundColor: 'grey', width: 28, height: 28 }}>
-                  <img src={More} />
-                </IconButton>
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#DCF2EA'
+                  bgHover='#A3E6CD'
+                  textColor='#429777'
+                  text='Buat Surat Delegasi'
+                  subText='Info'
+                  image={Surat_Delegasi}
+                />
               </Stack>
 
             </Stack>
