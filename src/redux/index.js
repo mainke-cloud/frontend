@@ -5,8 +5,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = legacy_createStore(
   rootReducer,
-  // applyMiddleware(thunk),
-  composeWithDevTools(applyMiddleware(thunk)),
+  applyMiddleware(thunk),
+  // composeWithDevTools(applyMiddleware(thunk)),
 );
 
 export default store;
