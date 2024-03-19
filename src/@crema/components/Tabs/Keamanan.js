@@ -23,55 +23,10 @@ const Keamanan = () => {
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };
-  const [lampiranData, setLampiranData] = useState([]);
-  const getdatalampiran = async () => {
-    console.log('tot');
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/lampiran/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch lampiran data');
-      }
-      const responseData = await response.json();
-      console.log('get succesfull', responseData);
-      return responseData; // Kembalikan data yang diperoleh dari respons
-    } catch (error) {
-      console.error('Error:', error.message);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getdatalampiran();
-        setLampiranData(data);
-      } catch (error) {
-        console.error('Error fetching lampiran data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  console.log(lampiranData);
+ 
   return (
     <>
-      <Box>
-        {lampiranData.map((item, index) => (
-          <div key={index}>
-            <p>ID: {item.id}</p>
-            <p>Nama Lampiran: {item.nama_lampiran}</p>
-            <p>File: <a href={item.file} target="_blank" rel="noreferrer">{item.file}</a></p>
-            <hr />
-          </div>
-        ))}
-      </Box>
-      {/* <Box
+      <Box
         sx={{
           background:
             'linear-gradient(267.36deg, #C74545 -4.33%, #AA3636 101.59%)',
@@ -276,7 +231,7 @@ const Keamanan = () => {
             </Accordion>
           </Box>
         </Box>
-      </Box> */}
+      </Box>
     </>
   );
 };
