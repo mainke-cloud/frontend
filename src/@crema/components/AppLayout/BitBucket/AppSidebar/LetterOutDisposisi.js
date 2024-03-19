@@ -21,6 +21,7 @@ import {
   IconButton,
   Tooltip,
   Icon,
+  Stack,
 } from '@mui/material';
 
 import { Fonts } from '@crema/constants/AppEnums';
@@ -315,26 +316,25 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                           >
                             <CardContent>
-                              <Grid container>
-                                <Grid item xs={2} container>
-                                  <ListItemAvatar>
-                                    <Avatar
-                                      alt={`Avatar ${listIndex}`}
-                                      src={item.avatarSrc}
-                                      sx={{ width: 56, height: 56 }}
-                                    />
-                                  </ListItemAvatar>
-                                  {(item.status === 'Diproses' ||
-                                    item.status === 'Batal') && (
-                                    <Tooltip title='Danger'>
-                                      <Icon
-                                        color='error'
-                                        sx={{ marginLeft: 4, marginTop: 1 }}
-                                      >
-                                        <ErrorOutline />
-                                      </Icon>
-                                    </Tooltip>
-                                  )}
+                              <Grid container spacing={2}>
+                                <Grid item xs={2}>
+                                  <Stack alignItems='center' spacing={4}>
+                                    <ListItemAvatar>
+                                      <Avatar
+                                        alt={`Avatar ${listIndex}`}
+                                        src={item.avatarSrc}
+                                        sx={{ width: 56, height: 56 }}
+                                      />
+                                    </ListItemAvatar>
+                                    {(item.status === 'Diproses' ||
+                                      item.status === 'Batal') && (
+                                      <Tooltip title='Danger'>
+                                        <Icon color='error'>
+                                          <ErrorOutline />
+                                        </Icon>
+                                      </Tooltip>
+                                    )}
+                                  </Stack>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
@@ -380,7 +380,6 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                                     >
                                       {item.status}
                                     </Box>
-
                                     <Box
                                       sx={{
                                         marginLeft: 'auto',

@@ -21,7 +21,7 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
         },
         '& .bit-bucket-btn': {
           position: 'absolute',
-          top: 18,
+          top: 20,
           width: 30,
           height: 30,
           right: '26px',

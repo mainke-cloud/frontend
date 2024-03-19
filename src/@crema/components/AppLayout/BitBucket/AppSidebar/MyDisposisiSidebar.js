@@ -19,6 +19,9 @@ import {
   Box,
   ButtonGroup,
   IconButton,
+  Stack,
+  Tooltip,
+  Icon,
 } from '@mui/material';
 
 import { Fonts } from '@crema/constants/AppEnums';
@@ -26,6 +29,7 @@ import { Fonts } from '@crema/constants/AppEnums';
 import { Plus, Filter, Search } from 'feather-icons-react';
 
 import {
+  ErrorOutline,
   ArrowForwardIosSharp,
   Cached,
   DraftsOutlined,
@@ -72,7 +76,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
+      priority: 'tinggi',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -81,7 +86,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -90,7 +96,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'disposisi',
+      priority: 'rendah',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -99,7 +106,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'disposisi',
+      priority: 'tinggi',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -108,7 +116,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'tinggi',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -117,7 +126,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
+      priority: 'sedang',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -126,7 +136,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
+      priority: 'sedang',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -135,7 +146,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'sedang',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -144,7 +156,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
+      priority: 'tinggi',
+      status: 'Read',
     },
   ];
   const listData2 = [
@@ -155,7 +168,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'unread',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -164,7 +178,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -173,7 +188,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'disposisi',
+      priority: 'sedang',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -182,7 +198,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'disposisi',
+      priority: 'sedang',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -191,7 +208,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'tinggi',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -200,7 +218,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'read',
+      priority: 'tinggi',
+      status: 'Read',
     },
   ];
   const listData3 = [
@@ -211,7 +230,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'read',
+      priority: 'tinggi',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -220,7 +240,8 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'unread',
+      priority: 'rendah',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -229,17 +250,20 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'unread',
+      priority: 'sedang',
+      status: 'Unread',
     },
   ];
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'read':
-        return '#B1B5BA';
-      case 'unread':
+      case 'Sekretaris':
+        return '#BF2600';
+      case 'Read':
         return '#FFB020';
-      case 'disposisi':
+      case 'Unread':
+        return '#8C8F93';
+      case 'Disposisi':
         return '#9DB5FF';
       default:
         return 'lightgrey';
@@ -318,15 +342,24 @@ export default function MyDisposisiSidebar({ isCollapsed }) {
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                           >
                             <CardContent>
-                              <Grid container>
-                                <Grid item xs={2} container>
-                                  <ListItemAvatar>
-                                    <Avatar
-                                      alt={`Avatar ${listIndex}`}
-                                      src={item.avatarSrc}
-                                      sx={{ width: 56, height: 56 }}
-                                    />
-                                  </ListItemAvatar>
+                              <Grid container spacing={2}>
+                                <Grid item xs={2}>
+                                  <Stack alignItems='center' spacing={4}>
+                                    <ListItemAvatar>
+                                      <Avatar
+                                        alt={`Avatar ${listIndex}`}
+                                        src={item.avatarSrc}
+                                        sx={{ width: 56, height: 56 }}
+                                      />
+                                    </ListItemAvatar>
+                                    {item.priority === 'tinggi' && (
+                                      <Tooltip title='Prioritas'>
+                                        <Icon color='error'>
+                                          <ErrorOutline />
+                                        </Icon>
+                                      </Tooltip>
+                                    )}
+                                  </Stack>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>

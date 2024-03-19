@@ -21,6 +21,7 @@ import {
   IconButton,
   Tooltip,
   Icon,
+  Stack,
 } from '@mui/material';
 
 import { Fonts } from '@crema/constants/AppEnums';
@@ -74,7 +75,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Sekretaris',
+      priority: 'tinggi',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -83,7 +85,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -92,7 +95,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Unread',
+      priority: 'rendah',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -101,7 +105,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Unread',
+      priority: 'tinggi',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -110,7 +115,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'tinggi',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -119,7 +125,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Sekretaris',
+      priority: 'sedang',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -128,7 +135,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Sekretaris',
+      priority: 'sedang',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -137,7 +145,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'sedang',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -146,7 +155,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Sekretaris',
+      priority: 'tinggi',
+      status: 'Read',
     },
   ];
   const listData2 = [
@@ -157,7 +167,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Read',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -166,7 +177,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'rendah',
+      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -175,7 +187,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Unread',
+      priority: 'sedang',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -184,7 +197,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Unread',
+      priority: 'sedang',
+      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -193,7 +207,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'tinggi',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -202,7 +217,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Sekretaris',
+      priority: 'tinggi',
+      status: 'Read',
     },
   ];
   const listData3 = [
@@ -213,7 +229,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      status: 'Sekretaris',
+      priority: 'tinggi',
+      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -222,7 +239,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      status: 'Read',
+      priority: 'rendah',
+      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -231,7 +249,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      status: 'Read',
+      priority: 'sedang',
+      status: 'Unread',
     },
   ];
 
@@ -243,6 +262,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
         return '#FFB020';
       case 'Unread':
         return '#8C8F93';
+      case 'Disposisi':
+        return '#9DB5FF';
       default:
         return 'lightgrey';
     }
@@ -314,25 +335,24 @@ export default function LetterInDisposisi({ isCollapsed }) {
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                           >
                             <CardContent>
-                              <Grid container>
-                                <Grid item xs={2} container>
-                                  <ListItemAvatar>
-                                    <Avatar
-                                      alt={`Avatar ${listIndex}`}
-                                      src={item.avatarSrc}
-                                      sx={{ width: 56, height: 56 }}
-                                    />
-                                  </ListItemAvatar>
-                                  {item.status === 'Sekretaris' && (
-                                    <Tooltip title='Danger'>
-                                      <Icon
-                                        color='error'
-                                        sx={{ marginLeft: 4, marginTop: 1 }}
-                                      >
-                                        <ErrorOutline />
-                                      </Icon>
-                                    </Tooltip>
-                                  )}
+                              <Grid container spacing={2}>
+                                <Grid item xs={2}>
+                                  <Stack alignItems='center' spacing={4}>
+                                    <ListItemAvatar>
+                                      <Avatar
+                                        alt={`Avatar ${listIndex}`}
+                                        src={item.avatarSrc}
+                                        sx={{ width: 56, height: 56 }}
+                                      />
+                                    </ListItemAvatar>
+                                    {item.priority === 'tinggi' && (
+                                      <Tooltip title='Prioritas'>
+                                        <Icon color='error'>
+                                          <ErrorOutline />
+                                        </Icon>
+                                      </Tooltip>
+                                    )}
+                                  </Stack>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
