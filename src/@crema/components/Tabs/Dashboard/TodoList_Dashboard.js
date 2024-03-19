@@ -1,190 +1,184 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {   Box,
-  Container,
   Stack, 
   Grid,
-  Button,
-  ButtonGroup,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Divider,
-  Avatar,
-  AvatarGroup,
   Typography,
-  Paper,
-  InputLabel,
-  NativeSelect,
   FormControl,
   IconButton,
-  Badge } from '@mui/material';
+  Select,
+  MenuItem,
+  InputAdornment,
+  InputBase,
+  Pagination
+ } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
-import CachedIcon from '@mui/icons-material/Cached';
-import DoneIcon from '@mui/icons-material/Done';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ViewList from './ViewList';
+import TableList from './TableList';
+import AppCard from '@crema/components/AppCard';
+import SearchIcon from '@mui/icons-material/Search';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import {Filter} from 'feather-icons-react';
+// import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { setTodoListName } from '../../../../redux/actions/todoListAction.js';
 
-const TodoList_Dashboard = () => {
+const TodoList_Dashboard = (props) => {
+  // const { isCollapsed, setCollapsed } = props;
+
+  // const selectedTodoListName = useSelector((state) => state.todoList.selectedTodoListName);
+  // const dispatch = useDispatch();
+
+  // const SelectList = () => {
+  //   switch (selectedTodoListName) {
+  //     case 'View List':
+  //       return <ViewList isCollapsed={props.isCollapsed} />;
+  //     case 'Table List':
+  //       return <TableList isCollapsed={props.isCollapsed} />;
+  //     default:
+  //       return <ViewList isCollapsed={props.isCollapsed} />;
+  //   }
+  // };
+
+  const { isCollapsed, setCollapsed } = props;
+  const [selectedView, setSelectedView] = useState('List');
+
+  const handleViewChange = (event) => {
+    setSelectedView(event.target.value);
+  };
+
+  // const [view, setView] = React.useState('');
+
+  // const handleChange = (event) => {
+  //   const selectedValue = event.target.value;
+  //   setView(selectedValue);
+  //   dispatch(setTodoListName(selectedValue));
+  // };
+
     return (
-        <Paper sx={{ overflow: 'hidden', width:'70%', margin: '20px', padding: '20px'}}>
-        <Grid container 
-            direction="row" 
-            justifyContent="space-between" 
-            alignItems="flex-end"
-            spacing={2}
-            padding={2}
-            >
-              <Stack direction="row" spacing={2}>
-                <Typography style={{fontWeight:Fonts.BOLD, fontSize:'15px'}}>Berikut adalah list to-do hari ini:</Typography>
-                <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#FFBDAD", color:"#E42313"}}>20</Button>
-              </Stack>
-
-              <Stack direction="row" spacing={2}>
-                <Typography >Test</Typography>
-                <Typography >Test</Typography>
-                <Typography >Test</Typography>
-              </Stack>
+      <AppCard sx={{ height: '500px'}}>
+      <Stack height={'100%'} width={'100%'} position={'relative'}>
+      
+      <Grid container 
+        direction="row" 
+        >
+          <Grid item xs={8}>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography style={{fontWeight:Fonts.BOLD, fontSize:'16px'}}>Berikut adalah list to-do hari ini:</Typography>
+              <Box
+                sx={{
+                  color:'#FFFFFF', backgroundColor:"#474D66",
+                  width: 33,
+                  height: 18,
+                  borderRadius: 3,
+                  fontSize: '11px',
+                  lineHeight: '16px',
+                  textAlign: 'center'}}>
+                20
+              </Box>
+            </Stack>
+          </Grid>
+          
+          <Grid item xs={4}>
+            <Stack direction="row" spacing={2} alignItems="center">
+            <FormControl sx={{ m: 1, minWidth: 70 }}>
+                <Select
+                  value={selectedView}
+                  onChange={handleViewChange}
+                  displayEmpty
+                  startAdornment={<InputAdornment position="start"><FormatListBulletedIcon fontSize='small' /></InputAdornment>}
+                  sx={{ height: "25px", fontSize: '11px' }}>
+                  <MenuItem value="List">List View</MenuItem>
+                  <MenuItem value="Table">Table View</MenuItem>
+                </Select>
+              </FormControl>
+                <Box sx={{
+                  borderRadius: 2,
+                  border: '0.5px solid grey',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding:"2.5px",
+                }}>
+                  <Filter size={20}/>
+                </Box>
+              <Box sx={{ width:'40%', height:"25px", display: 'flex', border: '0.5px solid grey', borderRadius: 2 }}>
+                <InputBase
+                  placeholder='Search'
+                  sx={{padding:'10px'}}
+                />
+                <IconButton alignItems="center" aria-label="search">
+                  <SearchIcon fontSize='small' />
+                </IconButton>
+              </Box>
+            </Stack>
+          </Grid>
         </Grid>
-
-        <Stack direction="row" spacing={1}>
-          <Typography style={{fontSize:"15px"}}>Urgensi : </Typography>
-          <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#FFBDAD", color:"#E42313"}}>Tinggi</Button>
-          <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#FFEFD2", color:"#FFB020"}}>Sedang</Button>
-          <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#D6E0FF", color:"#3366FF"}}>Rendah</Button>
-          <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#DCF2EA", color:"#429777"}}>Didisposisikan</Button>
-        </Stack>
-
-        <Box>
-          <FormControl sx={{marginLeft:"20px", width:'70%'}}>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            </InputLabel>
-            <NativeSelect
-              defaultValue={30}
-              inputProps={{
-                name: 'age',
-                id: 'uncontrolled-native',
-              }}
-            >
-              <option value={10}>June - 2021</option>
-              <option value={20}>September - 2021</option>
-              <option value={30}>August - 2021</option>
-            </NativeSelect>
-          </FormControl>
-
-          {/* LIST */}
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem alignItems="flex-start" >
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <Stack spacing={1}>
-                <Grid 
-                container 
-                direction="row" 
-                justifyContent="space-between" 
-                alignItems="flex-end">
-                    <Stack direction="row" spacing={1}>
-                      <Typography style={{fontWeight:Fonts.BOLD, fontSize:"15px"}}>Komisaris</Typography>
-                      <CachedIcon style={{fontSize:"20px"}}/>
-                      <Typography style={{fontSize:"12px", color:"#5C5E61"}}>2</Typography>
-                      <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#FFEFD2", color:"#FFB020"}}>Sedang</Button>
-                    </Stack>
-                    <Typography style={{fontSize:"12px"}}>10.30 . 22 Sep</Typography>
-                </Grid>
-                <Typography style={{fontSize: "13px"}} color="#5C5E61">
-                  Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center
-                </Typography>
-                  <Grid 
-                  container 
-                  direction="row" 
-                  justifyContent="space-between" 
-                  alignItems="flex-end">
-                    <Stack direction="row">
-                    <Typography
-                      sx={{ 
-                      display: 'inline', 
-                      fontSize: "11px"}}
-                      component="span"
-                      color="text.primary"
-                    >
-                      Didisposisikan kepada 50 orang lain
-                    </Typography>
-                    <AvatarGroup max={4}>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 15, height: 15}} />
-                      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 15, height: 15}}/>
-                      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" sx={{ width: 15, height: 15}}/>
-                    </AvatarGroup>
-                    </Stack>
-                    <Button variant="contained" disableElevation style={{fontSize: "11px", backgroundColor:"#DCF2EA", color:"#429777"}}>Tandai Selesai <DoneIcon style={{fontSize:"small"}} /></Button>
-                  </Grid>
-              </Stack>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            
-            {/* LIST KEDUA */}
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <Stack spacing={1}>
-                <Grid 
-                container 
-                direction="row" 
-                justifyContent="space-between" 
-                alignItems="flex-end">
-                    <Stack direction="row" spacing={1}>
-                      <Typography style={{fontWeight:Fonts.BOLD, fontSize:"15px"}}>Komisaris</Typography>
-                      <CachedIcon style={{fontSize:"20px"}}/>
-                      <Typography style={{fontSize:"12px", color:"#5C5E61"}}>2</Typography>
-                      <Button variant="contained" disableElevation style={{fontSize: "10px", backgroundColor:"#FFBDAD", color:"#E42313"}}>Tinggi</Button>
-                    </Stack>
-                    <Typography style={{fontSize:"12px"}}>10.30 . 22 Sep</Typography>
-                </Grid>
-                <Typography style={{fontSize: "13px"}} color="#5C5E61">
-                  Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center
-                </Typography>
-                  <Grid 
-                  container 
-                  direction="row" 
-                  justifyContent="space-between" 
-                  alignItems="flex-end">
-                    <Stack direction="row">
-                    <Typography
-                      sx={{ 
-                      display: 'inline', 
-                      fontSize: "11px"}}
-                      component="span"
-                      color="text.primary"
-                    >
-                      Didisposisikan kepada 50 orang lain
-                    </Typography>
-                    <AvatarGroup max={4}>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 15, height: 15}} />
-                      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 15, height: 15}}/>
-                      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" sx={{ width: 15, height: 15}}/>
-                    </AvatarGroup>
-                    </Stack>
-                    <Button variant="contained" disableElevation style={{fontSize: "11px", backgroundColor:"#DCF2EA", color:"#429777"}}>Tandai Selesai <DoneIcon style={{fontSize:"small"}}/></Button>
-                  </Grid>
-              </Stack>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-
-          </List>
-          <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <ButtonGroup variant="Text" aria-label="Basic button group">
-              <Button><ArrowBackIosIcon style={{fontSize:"small"}}/></Button>
-              <Button>1</Button>
-              <Button>2</Button>
-              <Button>...</Button>
-              <Button>99</Button>
-              <Button><ArrowForwardIosIcon style={{fontSize:"small"}}/></Button>
-              <Button>Page : 1</Button>
-            </ButtonGroup>
-          </Container>
+      
+      <Stack direction="row" spacing={1} alignItems="center" marginY="10px">
+        <Typography style={{fontSize:"15px"}}>Urgensi : </Typography>
+        <Box
+          sx={{
+            backgroundColor:"#FFBDAD", color:"#E42313",
+            width: 53,
+            height: 20,
+            borderRadius: 1,
+            fontSize: '11px',
+            lineHeight: '18px',
+            textAlign: 'center'}}>
+          Tinggi
         </Box>
-      </Paper>
+        <Box
+          sx={{
+            backgroundColor:"#FFEFD2", color:"#FFB020",
+            width: 57,
+            height: 20,
+            borderRadius: 1,
+            fontSize: '11px',
+            lineHeight: '18px',
+            textAlign: 'center'}}>
+          Sedang
+        </Box>
+        <Box
+          sx={{
+            backgroundColor:"#D6E0FF", color:"#3366FF",
+            width: 55,
+            height: 20,
+            borderRadius: 1,
+            fontSize: '11px',
+            lineHeight: '18px',
+            textAlign: 'center'}}>
+          Rendah
+        </Box>
+        <Box
+          sx={{
+            backgroundColor:"#DCF2EA", color:"#429777",
+            width: 93,
+            height: 20,
+            borderRadius: 1,
+            fontSize: '11px',
+            lineHeight: '18px',
+            textAlign: 'center'}}>
+          Didisposisikan
+        </Box>
+      </Stack>
+      {selectedView === 'List' ? <ViewList isCollapsed={isCollapsed} /> : <TableList isCollapsed={isCollapsed} />}
+      
+      {/* <ViewList/> */}
+      {/* <TableList/> */}
+      {/* {SelectList()} */}
+      
+      <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Pagination count={10} shape="rounded" />
+        <Typography>Page: 1</Typography>
+      </Stack>
+      </Stack>
+    </AppCard>
     )
 }
+
+TodoList_Dashboard.propTypes = {
+  isCollapsed: PropTypes.bool,
+  setCollapsed: PropTypes.func,
+};
 
 export default TodoList_Dashboard;
