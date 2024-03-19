@@ -3,98 +3,154 @@ import {
   Box,
   Stack,
   Grid,
-  Button,
-  Avatar,
   Typography,
   IconButton,
-  Badge,
+  Paper,
 } from '@mui/material';
 
 import person from '../../../../assets/Dashboard/Dashboard_girl.png';
 import Refresh from '../../../../assets/Dashboard/Refresh_icon.png';
 import Write from '../../../../assets/Dashboard/Write_icon.png';
 import More from '../../../../assets/Dashboard/More_icon.png';
+import Plus from '../../../../assets/Dashboard/Plus_icon.png'
 import Disposisi from '../../../../assets/Dashboard/Disposisi_icon.png';
 import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
 import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
-import Sekretaris from '../../../../assets/Dashboard/Sekretaris_Icon.png';
-import Delegasi from '../../../../assets/Dashboard/Delegasi_Icon.png';
+import Sekretaris_Icon from '../../../../assets/Dashboard/Sekretaris_Icon.png';
+import Delegasi_Icon from '../../../../assets/Dashboard/Delegasi_Icon.png';
 import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
 import Surat_Internal from '../../../../assets/Dashboard/Surat_Internal_logo.png';
 import Surat_Undangan from '../../../../assets/Dashboard/Surat_Undangan_logo.png';
 import Surat_Eksternal from '../../../../assets/Dashboard/Surat_Eksternal_logo.png';
+import Surat_Delegasi from '../../../../assets/Dashboard/Surat_Delegasi_logo.png';
 
 import TodoList_Dashboard from './TodoList_Dashboard';
-import Mail_Button from './Mail_Button';
 import Mail_Status from './Mail_Status';
+import Mail_Button from './Mail_Button';
+import Delegasi from './Delegasi';
+import Sekretaris from './Sekretaris';
+import AppCard2 from '@crema/components/AppCard/AppCard2';
+
+import { useState } from 'react';
 
 const Dashboard = () => {
+  const [AddSekretaris, setAddSekretaris] = useState(false);
+
+  const handleClickSekretaris = () => {
+    setAddSekretaris(!AddSekretaris);
+  };
+
+  const [AddDelegasi, setAddDelegasi] = useState(false);
+
+  const handleClickDelegasi = () => {
+    setAddDelegasi(!AddDelegasi);
+  };
+
   return (
     <>
-      <Grid container spacing={4} sx={{ paddingX: 8, }}>
-        <Grid item xs={12}>
-          <Stack
-            direction='row'
-            alignItems='center'
-            justifyContent='flex-start'
-            spacing={3}
-          >
-            <Stack direction='column' spacing={3}>
-              <Typography variant='h1'>
-                Hello User T0001, Welcome back
-              </Typography>
-              {/* input time and date here */}
-              <Typography variant='body1'>
-                11.20 AM Senin, 26 Februari 2024
-              </Typography>
-            </Stack>
-            <img
-              src={person}
-              style={{ height: '90px', paddingRight: '60px' }}
-            />
-            <IconButton>
-              <img src={Refresh} />
-            </IconButton>
-          </Stack>
-        </Grid>
-        <Grid item xs={9}>
-          <Stack direction='column' spacing={4}>
-            <Stack direction='row' spacing={5}>
-              <Mail_Button
-                bgColor='#F9E4E4'
-                textColor='#E42313'
-                text='Buat Surat Internal'
-                subText='Info'
-                image={Surat_Internal}
-              />
-
-              <Mail_Button
-                bgColor='#F9E5CF'
-                textColor='#C45900'
-                text='Buat Surat External'
-                subText='Info'
-                image={Surat_Eksternal}
-              />
-
-              <Mail_Button
-                bgColor='#DFE4F7'
-                textColor='#4D6FD4'
-                text='Buat Surat Undangan'
-                subText='Info'
-                image={Surat_Undangan}
-              />
-              <IconButton>
-                <img src={Write} />
-              </IconButton>
-              <IconButton>
-                <img src={More} />
-              </IconButton>
-            </Stack>
+      <Paper elevation={0}>
+        <Grid container spacing={4} sx={{ paddingX: 8, }}>
+          <Grid item xs={11}>
             <Stack
               direction='row'
               alignItems='center'
               justifyContent='flex-start'
-              spacing={25}
+              spacing={3}
+            >
+              <Stack direction='column' spacing={3}>
+                <Typography variant='h1'>
+                  Hello User T0001, Welcome back
+                </Typography>
+                {/* input time and date here */}
+                <Typography variant='body1'>
+                  11.20 AM Senin, 26 Februari 2024
+                </Typography>
+              </Stack>
+              <img
+                src={person}
+                style={{ height: '90px', paddingRight: '60px' }}
+              />
+            </Stack>
+          </Grid>
+          <Grid item xs={1} alignItems="center" justifyContent="center">
+              <IconButton  sx={{ backgroundColor: '#2E3032', width: 40, height: 40, marginTop: 5 }}>
+                <img style={{height: 16, width: 16}} src={Refresh} />
+              </IconButton>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Grid container columnSpacing={5} padding={3}>
+        <Grid item xs={12} >
+            <Stack 
+              direction={{ xs: 'column', md: 'row' }} 
+              spacing={5} 
+              alignItems={'center'}>
+
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#F9E4E4'
+                  bgHover='#F4CACA'
+                  textColor='#E42313'
+                  text='Buat Surat Internal'
+                  subText='Info'
+                  image={Surat_Internal}
+                />
+              </Stack>
+
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#F9E5CF'
+                  bgHover='#FFDFA6'
+                  textColor='#C45900'
+                  text='Buat Surat External'
+                  subText='Info'
+                  image={Surat_Eksternal}
+                />
+              </Stack>
+
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#DFE4F7'
+                  bgHover='#D6E0FF'
+                  textColor='#4D6FD4'
+                  text='Buat Surat Undangan'
+                  subText='Info'
+                  image={Surat_Undangan}
+                />
+              </Stack>
+
+              <Stack flex={1}>
+                <Mail_Button
+                  bgColor='#DCF2EA'
+                  bgHover='#A3E6CD'
+                  textColor='#429777'
+                  text='Buat Surat Delegasi'
+                  subText='Info'
+                  image={Surat_Delegasi}
+                />
+              </Stack>
+
+              {/* <Stack spacing={2}>
+                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
+                  <img src={Write} />
+                </IconButton>
+
+                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
+                  <img src={More} />
+                </IconButton>
+              </Stack> */}
+
+            </Stack>
+        </Grid>
+      </Grid>
+      <Grid container columnSpacing={5} height={'100vh'} padding={3}>
+        <Grid item xs={9}>
+          <Stack direction="column" spacing={5}>
+            <Stack
+              direction={'row'} 
+              alignItems={'center'} 
+              justifyContent={'space-between'}
+              spacing={3}
             >
               <Mail_Status
                 image={Disposisi}
@@ -118,95 +174,72 @@ const Dashboard = () => {
               />
             </Stack>
 
-            <TodoList_Dashboard />
-          </Stack>
-        </Grid>
-        <Grid item xs={3}>
+            <TodoList_Dashboard/>
+
+          </Stack>     
+        </Grid>  
+
+        <Grid item xs={3} height={'100%'}>
           <Stack direction='column' spacing={5}>
-            {/* Replace with reusable components */}
-            <Box sx={{ backgroundColor: '#DFE4F7', borderRadius: 2 }}>
-              <Stack direction='row' spacing={2} sx={{ margin: 3 }}>
-                <img src={Sekretaris} />
-                <Typography sx={{ color: '#2952CC' }}>Sekretaris</Typography>
-              </Stack>
-              <Box sx={{ backgroundColor: 'white' }}>
-                <Stack
-                  direction='row'
-                  spacing={3}
-                  alignItems='flex-start'
-                  justifyContent='flex-start'
-                >
-                  <Badge
-                    overlap='circular'
-                    color='primary'
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    badgeContent={2}
-                  >
-                    <Avatar src={avatar} />
-                  </Badge>
-                  <Stack direction='column' spacing={2}>
-                    <Typography variant='h3'>Manager development</Typography>
-                    <Box
-                      sx={{
-                        backgroundColor: '#A3E6CD',
-                        height: '22px',
-                        weight: '44px',
-                      }}
-                    >
-                      <Typography sx={{ height: '22px', weight: '44px' }}>
-                        Aktif
-                      </Typography>
-                    </Box>
-                    <Typography>Taufik Sulaeman/8900002/ARMS</Typography>
-                    <Button
-                      variant='contained'
-                      disableElevation
-                      sx={{ backgroundColor: '#FFEFD2', color: 'black' }}
-                    >
-                      <Typography>Atur Keaktifan</Typography>
-                    </Button>
+            <AppCard2 sx={{ height: '50%'}}>
+
+              <Box sx={{ backgroundColor: '#DFE4F7', borderTopLeftRadius: 2, borderTopRightRadius: 2 }}>
+                <Stack direction='row' alignItems="center"   justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
+                    <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                   </Stack>
+                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={handleClickSekretaris}>
+                    <img src={Plus} />
+                  </IconButton>
                 </Stack>
               </Box>
-            </Box>
-            <Box sx={{ backgroundColor: '#F9E5CF', borderRadius: 2 }}>
-              <Stack direction='row' spacing={2} sx={{ margin: 3 }}>
-                <img src={Delegasi} />
-                <Typography sx={{ color: '#C45900' }}>Delegasi</Typography>
-              </Stack>
-              <Box sx={{ backgroundColor: 'white' }}>
-                <Stack
-                  direction='row'
-                  spacing={3}
-                  alignItems='flex-start'
-                  justifyContent='flex-start'
-                >
-                  <Badge
-                    overlap='circular'
-                    color='primary'
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    badgeContent={2}
-                  >
-                    <Avatar src={avatar} />
-                  </Badge>
-                  <Stack direction='column' spacing={2}>
-                    <Typography variant='h3'>Manager development</Typography>
-                    <Box
-                      sx={{
-                        backgroundColor: '#A3E6CD',
-                        height: '22px',
-                        weight: '44px',
-                      }}
-                    >
-                      <Typography sx={{ height: '22px', weight: '44px' }}>
-                        Aktif Sampai 22 sep{' '}
-                      </Typography>
-                    </Box>
-                    <Typography>Taufik Sulaeman/8900002/ARMS</Typography>
+              {/* {AddSekretaris && (
+                <Sekretaris 
+                  Profile={avatar} 
+                  JobDesk="Manager development" 
+                  ID="Taufik Sulaeman/ 8900002/ ARMS"
+                />
+              )} */}
+              <Sekretaris 
+                Profile={avatar} 
+                JobDesk="Manager development" 
+                ID="Taufik Sulaeman/ 8900002/ ARMS"
+              />
+
+              <Sekretaris 
+                Profile={avatar} 
+                JobDesk="Manager development" 
+                ID="Taufik Sulaeman/ 8900002/ ARMS"
+              />
+            
+            </AppCard2>
+              <AppCard2 sx={{ height: '50%'}} >
+              <Box sx={{ backgroundColor: '#F9E5CF', borderTopLeftRadius: 2, borderTopRightRadius: 2, marginTop: 0}}>
+                <Stack direction='row' alignItems="center"  justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
+                    <Typography sx={{ color: '#C45900', fontSize: '16px' }}>Delegasi</Typography>
                   </Stack>
-                </Stack>
+                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }} onClick={handleClickDelegasi}>
+                    <img src={Plus} />
+                  </IconButton>
+                </Stack>                
               </Box>
-            </Box>
+
+                <Delegasi 
+                  Profile={avatar} 
+                  JobDesk='Manager development' 
+                  ID='Taufik Sulaeman/ 8900002/ ARMS'
+                />
+
+                <Delegasi 
+                  Profile={avatar} 
+                  JobDesk='Manager development' 
+                  ID='Taufik Sulaeman/ 8900002/ ARMS'
+                />
+            
+            </AppCard2>
           </Stack>
         </Grid>
       </Grid>
