@@ -164,7 +164,7 @@ const Dashboard = () => {
           </Stack>
 
         </Grid>
-        <Grid item xs={3} height={'100%'}>
+        {/* <Grid item xs={3} height={'100%'}>
           <Stack direction='column' spacing={5}>
             <AppCard2 sx={{ height: '50%'}}>
 
@@ -198,7 +198,7 @@ const Dashboard = () => {
             
             </AppCard2>
           </Stack>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
