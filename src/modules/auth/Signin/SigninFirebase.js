@@ -75,7 +75,7 @@ const SigninFirebase = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataform),
+        // body: JSON.stringify(dataform),
       });
 
       if (!response.ok) {
@@ -98,12 +98,12 @@ const SigninFirebase = () => {
             password: 'Pass@1!@all',
           }}
           validationSchema={validationSchema}
-          // onSubmit={(values) => handleSubmitbang()}
-          // onSubmit={(data, { setSubmitting }) => {
-          //   setSubmitting(true);
-          //   logInWithEmailAndPassword(data);
-          //   setSubmitting(false);
-          // }}
+          // onSubmit={(values) => handleSubmitbang(values)}
+          onSubmit={(data, { setSubmitting }) => {
+            setSubmitting(true);
+            logInWithEmailAndPassword(data);
+            setSubmitting(false);
+          }}
         >
           {({ isSubmitting }) => (
             <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
