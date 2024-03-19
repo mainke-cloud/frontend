@@ -67,6 +67,27 @@ const SigninFirebase = () => {
     setVerification(false);
   };
 
+  const handleSubmitbang = async (dataform) => {
+    console.log(dataform);
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/auth/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataform),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+      const responseData = await response.json();
+      console.log('Login successful:', responseData);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
   return (
     <AuthWrapper>
       <Box>
@@ -77,11 +98,12 @@ const SigninFirebase = () => {
             password: 'Pass@1!@all',
           }}
           validationSchema={validationSchema}
-          onSubmit={(data, { setSubmitting }) => {
-            setSubmitting(true);
-            logInWithEmailAndPassword(data);
-            setSubmitting(false);
-          }}
+          // onSubmit={(values) => handleSubmitbang()}
+          // onSubmit={(data, { setSubmitting }) => {
+          //   setSubmitting(true);
+          //   logInWithEmailAndPassword(data);
+          //   setSubmitting(false);
+          // }}
         >
           {({ isSubmitting }) => (
             <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
