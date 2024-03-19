@@ -11,6 +11,8 @@ const AppContentViewWrapper = ({ children, ...rest }) => {
         flex: 1,
         height: '100%',
         width: { xl: '100%' },
+        backgroundColor: 'white',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
       }}
       {...rest}
     >
