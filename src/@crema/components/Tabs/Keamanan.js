@@ -19,7 +19,7 @@ import Button from '@mui/material/Button';
 
 const Keamanan = () => {
   const [expanded, setExpanded] = React.useState(false);
-  const [isActive, setActive] = React.useState(true);
+  // const [isActive, setActive] = React.useState(true);
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };
@@ -175,7 +175,8 @@ const Keamanan = () => {
                   <img src={MonitorImage} width={'45px'} />
                   <Stack>
                     <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
-                      MAC {isActive && '- Active'}
+                      MAC {'- Active'}
+                      {/* MAC {isActive && '- Active'} */}
                     </Typography>
                     <Typography>
                       Google Chrome - 36.69.140.210, 36.91.231.14,

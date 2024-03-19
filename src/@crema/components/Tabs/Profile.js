@@ -7,17 +7,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ProfileIcon from '../../../assets/icon/ProfileIcon.png';
 import KontakIcon from '../../../assets/icon/KontakIcon.png';
 import KerjaIcon from '../../../assets/icon/KerjaIcon.png';
 import { Box, Grid, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import AProfile from '../../../assets/vector/Avatar.png';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#EEF0F7',
     color: '#262829',
@@ -49,7 +47,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({}));
+const StyledTableRow = styled(TableRow)(() => ({}));
 
 const diri = [
   {

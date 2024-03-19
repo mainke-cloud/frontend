@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
 import AppTextField from '@crema/components/AppFormComponents/AppTextField';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import { Fonts } from '@crema/constants/AppEnums';
-import { AiOutlineGoogle, AiOutlineTwitter } from 'react-icons/ai';
-import { FaFacebookF } from 'react-icons/fa';
-import { BsGithub } from 'react-icons/bs';
 import AuthWrapper from '../AuthWrapper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -20,7 +16,7 @@ import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box, TextField, Button, FormControl } from '@mui/material';
+import { Box, TextField, Button } from '@mui/material';
 
 const validationSchema = yup.object({
   email: yup
@@ -33,11 +29,12 @@ const validationSchema = yup.object({
 });
 
 const SigninFirebase = () => {
-  const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
-  const navigate = useNavigate();
-  const onGoToForgetPassword = () => {
-    navigate('/forget-password', { tab: 'firebase' });
-  };
+  const { logInWithEmailAndPassword } = useAuthMethod();
+  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
+  // const navigate = useNavigate();
+  // const onGoToForgetPassword = () => {
+  //   navigate('/forget-password', { tab: 'firebase' });
+  // };
   const { messages } = useIntl();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,24 +44,24 @@ const SigninFirebase = () => {
 
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [inputValue, setInputValue] = useState('');
-  const [verification, setVerification] = useState(false);
+  // const [verification, setVerification] = useState(false);
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleSubmit = () => {
-    if (inputValue === captcha) {
-      alert('Captcha input is correct!');
-      setVerification(true);
-    } else {
-      alert('Captcha input is incorrect. Please try again.');
-      setCaptcha(generateCaptcha());
-      setInputValue('');
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (inputValue === captcha) {
+  //     alert('Captcha input is correct!');
+  //     setVerification(true);
+  //   } else {
+  //     alert('Captcha input is incorrect. Please try again.');
+  //     setCaptcha(generateCaptcha());
+  //     setInputValue('');
+  //   }
+  // };
   const handleReloadCaptcha = () => {
     setCaptcha(generateCaptcha());
     setInputValue('');
-    setVerification(false);
+    // setVerification(false);
   };
 
   return (

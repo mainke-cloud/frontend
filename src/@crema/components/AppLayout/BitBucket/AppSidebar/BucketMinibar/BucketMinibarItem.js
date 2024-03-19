@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Typography, Box, Collapse, Badge } from '@mui/material';
 import FeatherIcon from 'feather-icons-react';
+import { useDispatch } from 'react-redux';
 
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import dot from '../../../../../../assets/icon/sub-menu-item.svg';
 import searchIcon from '../../../../../../assets/icon/search.svg';
 import homeIcon from '../../../../../../assets/icon/home.svg';
@@ -46,6 +48,7 @@ const BucketMinibarItem = (props) => {
     onAddTab,
     onMoveTab,
   } = props;
+  const dispatch = useDispatch();
   const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
   const handleClick = () => {
@@ -68,6 +71,10 @@ const BucketMinibarItem = (props) => {
     if (onMoveTab) {
       onMoveTab(tabId);
     }
+  };
+
+  const handleSidebar = (name) => {
+    dispatch(setSidebarName(name));
   };
 
   return (
@@ -108,7 +115,11 @@ const BucketMinibarItem = (props) => {
           <Box className='submenu-icon-btn' onClick={handleClick}>
             {subMenu &&
               subMenu.map((item, index) => (
-                <IconButton key={index} className='submenu-item'>
+                <IconButton
+                  key={index}
+                  className='submenu-item'
+                  onClick={() => handleSidebar(item.name)}
+                >
                   <img
                     src={dot}
                     alt='dot'

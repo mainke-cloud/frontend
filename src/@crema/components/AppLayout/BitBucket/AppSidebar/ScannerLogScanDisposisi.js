@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
-
 import MainSidebar from '../../components/MainSidebar';
 import {
   styled,
@@ -20,15 +19,13 @@ import {
   Box,
   ButtonGroup,
   IconButton,
-  Tooltip,
-  Icon,
-  Stack,
 } from '@mui/material';
+
+import { Plus, Filter, Search } from 'feather-icons-react';
+
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { Filter, Search } from 'feather-icons-react';
-
-import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
+import { ArrowForwardIosSharp } from '@mui/icons-material';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -61,7 +58,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function TodoDisposisi({ isCollapsed }) {
+export default function ScannerLogScanDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -70,8 +67,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -80,8 +75,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -90,8 +83,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'rendah',
-      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -100,8 +91,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -110,8 +99,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
-      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -120,8 +107,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -130,8 +115,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
-      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -140,8 +123,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'sedang',
-      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -150,8 +131,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
-      status: 'Read',
     },
   ];
   const listData2 = [
@@ -162,8 +141,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -172,8 +149,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -182,8 +157,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -192,8 +165,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
-      status: 'Disposisi',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -202,8 +173,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
-      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -212,8 +181,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
-      status: 'Read',
     },
   ];
   const listData3 = [
@@ -224,8 +191,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Read',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -234,8 +199,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Unread',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -244,38 +207,8 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Unread',
     },
   ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Sekretaris':
-        return '#BF2600';
-      case 'Read':
-        return '#FFB020';
-      case 'Unread':
-        return '#8C8F93';
-      case 'Disposisi':
-        return '#9DB5FF';
-      default:
-        return 'lightgrey';
-    }
-  };
-
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'Tinggi':
-        return ['#E42313', '#FFBDAD'];
-      case 'Sedang':
-        return ['#FFB020', '#FFEFD2'];
-      case 'Rendah':
-        return ['#3366FF', '#D6E0FF'];
-      default:
-        return ['lightgrey', 'lightgrey'];
-    }
-  };
 
   const getTotalCount = (listData) => {
     return listData.length;
@@ -290,22 +223,25 @@ export default function TodoDisposisi({ isCollapsed }) {
               sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
               component='h2'
             >
-              Disposisi
+              Scanner
             </Typography>
             <Typography
               sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
               component='h2'
             >
-              Todo
+              Log Scan Surat
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <ButtonGroup>
               <IconButton>
                 <Search />
               </IconButton>
               <IconButton>
                 <Filter />
+              </IconButton>
+              <IconButton>
+                <Plus />
               </IconButton>
             </ButtonGroup>
           </Grid>
@@ -346,9 +282,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                         <Card
                           sx={{
                             position: 'relative',
-                            borderLeft: `6px solid ${getStatusColor(
-                              item.status,
-                            )}`,
+                            borderLeft: '6px solid silver',
                             borderRadius: 0,
                           }}
                         >
@@ -356,24 +290,15 @@ export default function TodoDisposisi({ isCollapsed }) {
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                           >
                             <CardContent>
-                              <Grid container spacing={2}>
+                              <Grid container>
                                 <Grid item xs={2}>
-                                  <Stack alignItems='center' spacing={4}>
-                                    <ListItemAvatar>
-                                      <Avatar
-                                        alt={`Avatar ${listIndex}`}
-                                        src={item.avatarSrc}
-                                        sx={{ width: 56, height: 56 }}
-                                      />
-                                    </ListItemAvatar>
-                                    {item.priority === 'Tinggi' && (
-                                      <Tooltip title='Prioritas'>
-                                        <Icon color='error'>
-                                          <ErrorOutline />
-                                        </Icon>
-                                      </Tooltip>
-                                    )}
-                                  </Stack>
+                                  <ListItemAvatar>
+                                    <Avatar
+                                      alt={`Avatar ${listIndex}`}
+                                      src={item.avatarSrc}
+                                      sx={{ width: 56, height: 56 }}
+                                    />
+                                  </ListItemAvatar>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
@@ -403,24 +328,6 @@ export default function TodoDisposisi({ isCollapsed }) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <Box
-                                      sx={{
-                                        backgroundColor: getPriorityColor(
-                                          item.priority,
-                                        )[1],
-                                        color: getPriorityColor(
-                                          item.priority,
-                                        )[0],
-                                        width: 53,
-                                        height: 20,
-                                        borderRadius: 1,
-                                        fontSize: '12px',
-                                        lineHeight: '18px',
-                                        textAlign: 'center',
-                                      }}
-                                    >
-                                      {item.priority}
-                                    </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -441,6 +348,6 @@ export default function TodoDisposisi({ isCollapsed }) {
   );
 }
 
-TodoDisposisi.propTypes = {
+ScannerLogScanDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };

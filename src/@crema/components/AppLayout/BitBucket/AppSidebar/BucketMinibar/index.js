@@ -4,6 +4,7 @@ import { Box, InputBase, Typography, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import BucketMinibarWrapper from './BucketMinibarWrapper';
 import BucketMinibarMenu from './BucketMinibarMenu';
 import BucketMinibarItem from './BucketMinibarItem';
@@ -24,6 +25,9 @@ const BucketMinibar = (props) => {
     console.log(tabId);
     dispatch(activateTab(tabId, tabs));
   };
+  const handleChangeSidebar = (name) => {
+    dispatch(setSidebarName(name));
+  }
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>
@@ -84,7 +88,6 @@ const BucketMinibar = (props) => {
             <BucketMinibarItem badge={0} icon='search' />
           )}
         </Box>
-
         <BucketMinibarMenu isHover={isHover} title='Menu'>
           <BucketMinibarItem
             isHover={isHover}
@@ -98,6 +101,7 @@ const BucketMinibar = (props) => {
             badge={10}
             icon='inbox'
             text='Surat Masuk'
+            onAddTab={()=>handleChangeSidebar("Surat Masuk")}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -116,6 +120,7 @@ const BucketMinibar = (props) => {
             badge={12}
             icon='mail'
             text='Surat Keluar'
+            onAddTab={()=>handleChangeSidebar("Surat Keluar")}
           />
           <BucketMinibarItem
             isHover={isHover}

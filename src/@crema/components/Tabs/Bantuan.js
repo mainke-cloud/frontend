@@ -3,15 +3,11 @@ import Box from '@mui/material/Box';
 import BingungImage from '../../../assets/FAQ/bingung.png';
 import KacaImage from '../../../assets/FAQ/kaca.png';
 import { Typography } from '@mui/material';
-import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import BuatSuratInternalImage from '../../../assets/FAQ/buatsurat.png';
 import DisposisiImage from '../../../assets/FAQ/disposisi.png';
 import AddressBookImage from '../../../assets/FAQ/addressbook.png';
@@ -22,13 +18,13 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Fade from '@mui/material/Fade';
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: 'center',
+//   color: theme.palette.text.secondary,
+// }));
 
 const Bantuan = () => {
   const [expanded, setExpanded] = React.useState(false);

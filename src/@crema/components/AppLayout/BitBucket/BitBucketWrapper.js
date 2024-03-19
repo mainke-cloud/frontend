@@ -24,10 +24,10 @@ const BitBucketWrapper = ({ children, ...rest }) => {
             width: 'calc(100% - 80px)',
           },
           '& .bit-bucket-sidebar': {
-            width: 80,
+            width: 95,
             '& .app-sidebar-container': {
               width: 18,
-              borderLeftColor: 'transparent',
+              borderLeftColor: 'white',
             },
           },
         },

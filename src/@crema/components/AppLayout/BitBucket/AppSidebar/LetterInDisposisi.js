@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
-
 import MainSidebar from '../../components/MainSidebar';
 import {
   styled,
@@ -24,11 +23,17 @@ import {
   Icon,
   Stack,
 } from '@mui/material';
+
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { Filter, Search } from 'feather-icons-react';
+import { Mail, Plus, Filter, Search } from 'feather-icons-react';
 
-import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
+import {
+  ArrowForwardIosSharp,
+  ErrorOutline,
+  Cached,
+  Shortcut,
+} from '@mui/icons-material';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -61,7 +66,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function TodoDisposisi({ isCollapsed }) {
+export default function LetterInDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -264,19 +269,6 @@ export default function TodoDisposisi({ isCollapsed }) {
     }
   };
 
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'Tinggi':
-        return ['#E42313', '#FFBDAD'];
-      case 'Sedang':
-        return ['#FFB020', '#FFEFD2'];
-      case 'Rendah':
-        return ['#3366FF', '#D6E0FF'];
-      default:
-        return ['lightgrey', 'lightgrey'];
-    }
-  };
-
   const getTotalCount = (listData) => {
     return listData.length;
   };
@@ -288,24 +280,21 @@ export default function TodoDisposisi({ isCollapsed }) {
           <Grid item xs={7}>
             <Typography
               sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
-              component='h2'
+              component='h1'
             >
-              Disposisi
-            </Typography>
-            <Typography
-              sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
-              component='h2'
-            >
-              Todo
+              Surat Masuk
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <ButtonGroup>
               <IconButton>
                 <Search />
               </IconButton>
               <IconButton>
                 <Filter />
+              </IconButton>
+              <IconButton>
+                <Plus />
               </IconButton>
             </ButtonGroup>
           </Grid>
@@ -325,19 +314,9 @@ export default function TodoDisposisi({ isCollapsed }) {
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={4}
-                      container
-                      justifyContent='start'
-                      alignItems='center'
-                    >
-                      <Typography>
-                        Agustus-2021({getTotalCount(listData)})
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  <Typography>
+                    Agustus-2021({getTotalCount(listData)})
+                  </Typography>
                 </AccordionSummarys>
                 <AccordionDetail>
                   <List>
@@ -366,7 +345,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                                         sx={{ width: 56, height: 56 }}
                                       />
                                     </ListItemAvatar>
-                                    {item.priority === 'Tinggi' && (
+                                    {item.priority === 'tinggi' && (
                                       <Tooltip title='Prioritas'>
                                         <Icon color='error'>
                                           <ErrorOutline />
@@ -381,6 +360,13 @@ export default function TodoDisposisi({ isCollapsed }) {
                                       <Typography
                                         variant='body1'
                                         color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                       >
                                         {item.primary}
                                       </Typography>
@@ -389,13 +375,27 @@ export default function TodoDisposisi({ isCollapsed }) {
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                       >
                                         {item.date}
                                       </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                       <Typography
-                                        sx={{ display: 'inline' }}
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Read' ||
+                                            item.status === 'Sekretaris'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                          display: 'inline',
+                                        }}
                                         component='span'
                                         variant='body2'
                                         color='text.primary'
@@ -403,23 +403,47 @@ export default function TodoDisposisi({ isCollapsed }) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <Box
+                                    <Button
                                       sx={{
-                                        backgroundColor: getPriorityColor(
-                                          item.priority,
-                                        )[1],
-                                        color: getPriorityColor(
-                                          item.priority,
-                                        )[0],
-                                        width: 53,
-                                        height: 20,
-                                        borderRadius: 1,
-                                        fontSize: '12px',
-                                        lineHeight: '18px',
-                                        textAlign: 'center',
+                                        padding: 0,
+                                        margin: 0,
+                                        textAlign: 'left',
                                       }}
                                     >
-                                      {item.priority}
+                                      <Cached />
+                                      <Typography
+                                        sx={{
+                                          fontSize: 12,
+                                        }}
+                                      >
+                                        ({item.messageCount})
+                                      </Typography>
+                                    </Button>
+                                    <Button
+                                      sx={{
+                                        padding: 0,
+                                        margin: 0,
+                                        textAlign: 'left',
+                                      }}
+                                    >
+                                      <Shortcut />
+                                      <Typography
+                                        sx={{
+                                          fontSize: 12,
+                                        }}
+                                      >
+                                        ({item.messageCount})
+                                      </Typography>
+                                    </Button>
+                                    <Box
+                                      sx={{
+                                        marginLeft: 'auto',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        paddingTop: 2.4,
+                                      }}
+                                    >
+                                      <Mail />
                                     </Box>
                                   </Grid>
                                 </Grid>
@@ -441,6 +465,6 @@ export default function TodoDisposisi({ isCollapsed }) {
   );
 }
 
-TodoDisposisi.propTypes = {
+LetterInDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };
