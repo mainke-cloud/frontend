@@ -1,6 +1,6 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
   return (
