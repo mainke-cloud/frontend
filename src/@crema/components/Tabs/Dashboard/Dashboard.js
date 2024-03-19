@@ -130,16 +130,6 @@ const Dashboard = () => {
                 />
               </Stack>
 
-              {/* <Stack spacing={2}>
-                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
-                  <img src={Write} />
-                </IconButton>
-
-                <IconButton sx={{ backgroundColor: '#7C8B9D', width: 28, height: 28 }}>
-                  <img src={More} />
-                </IconButton>
-              </Stack> */}
-
             </Stack>
         </Grid>
       </Grid>
