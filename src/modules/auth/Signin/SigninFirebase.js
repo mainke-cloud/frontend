@@ -24,7 +24,12 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
-import TelkomLogo from '../../../assets/LoginPage/telkomlogo.png';
+import axios from 'axios';
+import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
+
+const isCaptchaValid = (captchaValue, captcha) => {
+  return captchaValue === captcha;
+};
 
 const validationSchema = yup.object({
   email: yup
@@ -33,19 +38,13 @@ const validationSchema = yup.object({
     .required(
       <>
         <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-        <IntlMessages id='Isi username Anda' style={{ marginTop: '25px' }} />
+        <IntlMessages id='Ussername Anda' style={{ marginTop: '25px' }} />
       </>,
     ),
   password: yup.string().required(
     <>
       <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-      <IntlMessages id='Isi password anda' style={{ marginTop: '20px' }} />
-    </>,
-  ),
-  captchaValue: yup.string().required(
-    <>
-      <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-      <IntlMessages id='Isi captcha' style={{ marginTop: '20px' }} />
+      <IntlMessages id='Isi Password anda' style={{ marginTop: '20px' }} />
     </>,
   ),
 });
@@ -56,7 +55,6 @@ const SigninFirebase = () => {
   const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
-  const [verification, setVerification] = useState(false);
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
@@ -65,22 +63,49 @@ const SigninFirebase = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'crema.demo@gmail.com',
-      password: 'Pass@1!@all',
-      captchaValue: '',
+      email: '',
+      password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      if (values.captchaValue === captcha) {
-        // logInWithEmailAndPassword(values);
-        alert('Captcha input is correct!');
-        setVerification(true);
-        navigate('/signin/verifikasi1');
-      } else {
+    onSubmit: async (values, { setSubmitting }) => {
+      if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
+        return;
       }
-      setSubmitting(false);
+
+      try {
+        const response = await fetch(
+          'https://e8f51b43-1a6e-423f-8541-a8b8d1c516f3.mock.pstmn.io/api/auth/login/',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error('Login failed');
+        }
+
+        const responseData = await response.json();
+        console.log(responseData);
+
+        if (responseData) {
+          alert('Login berhasil!');
+          navigate('/signin/verifikasi1');
+        } else {
+          alert('Username atau password salah. Silakan coba lagi.');
+          setCaptcha(generateCaptcha());
+        }
+      } catch (error) {
+        console.error('Terjadi kesalahan saat login:', error.message);
+        alert('Terjadi kesalahan saat login. Silakan coba lagi.');
+      }
+
+      // setSubmitting(false);
     },
   });
 
@@ -97,19 +122,20 @@ const SigninFirebase = () => {
       {pathname === '/signin/verifikasi4' ? (
         <Verifikasi4 />
       ) : pathname === '/signin' ? (
-        <Box
-          width='48vw'
+        <Stack
+          spacing={10}
+          width='46vw'
           height='100%'
           padding={20}
-          gap={63}
           sx={{ bgcolor: '#FFFFFF' }}
         >
-          <Box>
-            <img src={TelkomLogo} />
-            <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
-              Masuk NDE Telkom
-            </Typography>
-          </Box>
+          <img
+            src={CoofisLogo}
+            style={{ height: '118.47px', width: '118.47px' }}
+          />
+
+          <Typography variant='h1'>Masuk NDE Telkom</Typography>
+
           <form onSubmit={formik.handleSubmit}>
             <Box>
               <Typography
@@ -119,6 +145,7 @@ const SigninFirebase = () => {
                 Username
               </Typography>
               <TextField
+                sx={{ marginTop: '8px' }}
                 placeholder={'Masukan Username'}
                 name='email'
                 variant='outlined'
@@ -138,7 +165,7 @@ const SigninFirebase = () => {
                 </Typography>
               )}
             </Box>
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
+            <Box marginTop={'18px'}>
               <Typography
                 variant='h6'
                 sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
@@ -146,6 +173,7 @@ const SigninFirebase = () => {
                 Password
               </Typography>
               <TextField
+                sx={{ marginTop: '8px' }}
                 type={showPassword ? 'text' : 'password'}
                 placeholder={'Masukan Password'}
                 name='password'
@@ -177,25 +205,26 @@ const SigninFirebase = () => {
                 </Typography>
               )}
             </Box>
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Captcha
-              </Typography>
+            <Box sx={{ marginTop: '18px' }}>
               <Grid container noValidate autoComplete='off' columnSpacing={4}>
                 <Grid item xs={7}>
                   <TextField
+                    fullWidth
                     id='outlined-basic'
                     name='captcha'
                     variant='outlined'
                     value={captcha}
                     disabled
-                    fullWidth
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
+                          <Box
+                            border={'1px solid #E0E0E0'}
+                            height={'33px'}
+                            sx={{
+                              marginRight: '10px',
+                            }}
+                          ></Box>
                           <IconButton onClick={handleReloadCaptcha}>
                             <CachedIcon />
                           </IconButton>
@@ -233,18 +262,18 @@ const SigninFirebase = () => {
                 fontWeight: 'regular',
                 fontSize: 16,
                 textTransform: 'capitalize',
-                borderRadius: '20px',
+                borderRadius: '10px',
                 width: '100%',
                 bgcolor: '#E42313',
-                marginTop: '30px',
+                marginTop: '18px',
+                height: '48px',
               }}
             >
-              Login
+              Masuk
             </Button>
             <Typography
               variant='h6'
               sx={{
-                textAlign: 'center',
                 color: '#303030',
                 fontSize: '14px',
                 marginTop: '18px',
@@ -258,7 +287,7 @@ const SigninFirebase = () => {
               >
                 Ketentuan Pengguna
               </Link>{' '}
-              kami
+              kami.
             </Typography>
           </form>
           <Typography
@@ -271,9 +300,9 @@ const SigninFirebase = () => {
               marginTop: '80px',
             }}
           >
-            Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+            PT ARM Solusi | version 1.0
           </Typography>
-        </Box>
+        </Stack>
       ) : pathname === '/signin/verifikasi5' ? (
         <Verifikasi5 />
       ) : pathname === '/signin/verifikasi1' ? (
