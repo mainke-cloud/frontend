@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Typography, Box, Collapse, Badge } from '@mui/material';
 import FeatherIcon from 'feather-icons-react';
-import { useDispatch } from 'react-redux';
-
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import dot from '../../../../../../assets/icon/sub-menu-item.svg';
@@ -20,8 +18,6 @@ import securityIcon from '../../../../../../assets/icon/shield.svg';
 import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
-import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
-import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
 
