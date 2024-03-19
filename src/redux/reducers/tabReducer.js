@@ -26,6 +26,20 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
+    case 'UPDATE_TAB':{
+      const updatedTabs = state.tabs.map(tab => {
+        if (tab.id === action.payload.title) {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      console.log(action.payload);
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
     case 'CLOSE_TAB':
       return {
         ...state,

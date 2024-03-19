@@ -5,6 +5,8 @@ import Folder from '@crema/components/Tabs/Folder';
 import Keamanan from '@crema/components/Tabs/Keamanan';
 import Bantuan from '@crema/components/Tabs/Bantuan';
 import Profile from '@crema/components/Tabs/Profile';
+import Todo from '@crema/components/Tabs/Todo/Todo';
+import DetailTodo from '@crema/components/Tabs/Todo/DetailTodo';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -35,6 +37,8 @@ export const addTab = (id, state, type) => {
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
+          ) : type === 'Todo' ? (
+            <Todo />
           ) : (
             ''
           ),
@@ -50,13 +54,56 @@ export const addTab = (id, state, type) => {
   };
 };
 
+export const childTab = (id, state, type, data) => {
+  return (dispatch) => {
+    const isExistingTab = state.find((tab) => tab.id === type);
+    if (isExistingTab) {
+      const updateTab = {
+        ...isExistingTab,
+        id:id,
+        content:
+           type === 'Todo' ? (
+            <DetailTodo props={data} />
+          ) : (
+            ''
+          ),
+      }
+      console.log(updateTab);
+      dispatch({ type: 'UPDATE_TAB', payload: updateTab });
+    } else {
+    const exChildTab = state.find((tab) => tab.id === id);
+    if(exChildTab){
+      dispatch(activateTab(id, state));
+    }else{
+      const activeTab = state.find((tab) => tab.active);
+
+      if (activeTab) {
+        activeTab.active = false;
+      }
+      let tabs = {
+        id: id,
+        title: type,
+        favicon: state.length % 2 ? fb : google,
+        content:
+           type === 'Todo' ? (
+            <DetailTodo props={data} />
+          ) : (
+            ''
+          ),
+        active: true,
+      };
+      dispatch({ type: 'ADD_TAB', payload: tabs });
+    }
+    }
+  }
+}
+
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
     const updatedTabs = state.map((tab) => ({
       ...tab,
-      active: tab.id === tabId,
+      active: tab.id.toString() === tabId.toString() ,
     }));
-    console.log(updatedTabs);
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
   };
 };
@@ -66,7 +113,7 @@ export const closeTab = (tabId, state) => {
     if (tabId === 'dashboard') {
       return;
     }
-    const tabs = state.filter((tab) => tab.id !== tabId);
+    const tabs = state.filter((tab) => tab.id.toString() !== tabId.toString());
     dispatch({ type: 'CLOSE_TAB', payload: tabs });
     dispatch(activateTab('dashboard', tabs));
   };

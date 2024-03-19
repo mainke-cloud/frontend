@@ -20,6 +20,10 @@ import securityIcon from '../../../../../../assets/icon/shield.svg';
 import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
+import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
 
 const iconMap = {
   search: searchIcon,
@@ -49,6 +53,8 @@ const BucketMinibarItem = (props) => {
     onMoveTab,
   } = props;
   const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
   const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
   const handleClick = () => {
@@ -75,6 +81,9 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
+    if(name==='Todo'){
+      dispatch(addTab(id, tabs, name));
+    }
   };
 
   return (
