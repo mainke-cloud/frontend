@@ -30,8 +30,12 @@ import {
   ArrowForwardIosSharp,
   ErrorOutline,
 } from '@mui/icons-material';
+import Todo from '@crema/components/Tabs/Todo/Todo';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+import { useDispatch, useSelector } from 'react-redux';
+import { childTab } from '../../../../../redux/actions/tabActon';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -68,6 +72,7 @@ const AccordionDetail = styled(AccordionDetails)(({ theme }) => ({
 export default function TodoRendah({ isCollapsed }) {
   const listData1 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -77,6 +82,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Tinggi',
     },
     {
+      id: 2,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -86,6 +92,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Sedang',
     },
     {
+      id: 3,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -95,6 +102,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Rendah',
     },
     {
+      id: 4,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -104,6 +112,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Rendah',
     },
     {
+      id: 5,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -113,6 +122,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Sedang',
     },
     {
+      id: 6,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -122,6 +132,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Tinggi',
     },
     {
+      id: 7,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -131,6 +142,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Tinggi',
     },
     {
+      id: 8,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -140,6 +152,7 @@ export default function TodoRendah({ isCollapsed }) {
       status: 'Sedang',
     },
     {
+      id: 9,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -258,6 +271,13 @@ export default function TodoRendah({ isCollapsed }) {
     setExpanded(newExpanded ? panel : false);
   };
 
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+
+  const handleTodo = (item) => {
+    dispatch(childTab(item.id, tabs, 'Todo', item));
+  };
+
   return (
     <>
       {!isCollapsed && (
@@ -298,6 +318,7 @@ export default function TodoRendah({ isCollapsed }) {
                           }`,
                           borderRadius: 0,
                         }}
+                        onClick={() => handleTodo(item)}
                       >
                         <CardContent>
                           <Grid container>
