@@ -18,42 +18,15 @@ import AppCard from '@crema/components/AppCard';
 import SearchIcon from '@mui/icons-material/Search';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import {Filter} from 'feather-icons-react';
-// import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { setTodoListName } from '../../../../redux/actions/todoListAction.js';
 
 const TodoList_Dashboard = (props) => {
-  // const { isCollapsed, setCollapsed } = props;
-
-  // const selectedTodoListName = useSelector((state) => state.todoList.selectedTodoListName);
-  // const dispatch = useDispatch();
-
-  // const SelectList = () => {
-  //   switch (selectedTodoListName) {
-  //     case 'View List':
-  //       return <ViewList isCollapsed={props.isCollapsed} />;
-  //     case 'Table List':
-  //       return <TableList isCollapsed={props.isCollapsed} />;
-  //     default:
-  //       return <ViewList isCollapsed={props.isCollapsed} />;
-  //   }
-  // };
-
   const { isCollapsed, setCollapsed } = props;
   const [selectedView, setSelectedView] = useState('List');
 
   const handleViewChange = (event) => {
     setSelectedView(event.target.value);
   };
-
-  // const [view, setView] = React.useState('');
-
-  // const handleChange = (event) => {
-  //   const selectedValue = event.target.value;
-  //   setView(selectedValue);
-  //   dispatch(setTodoListName(selectedValue));
-  // };
-
     return (
       <AppCard sx={{ height: '500px'}}>
       <Stack height={'100%'} width={'100%'} position={'relative'}>
@@ -161,12 +134,7 @@ const TodoList_Dashboard = (props) => {
           Didisposisikan
         </Box>
       </Stack>
-      {selectedView === 'List' ? <ViewList isCollapsed={isCollapsed} /> : <TableList isCollapsed={isCollapsed} />}
-      
-      {/* <ViewList/> */}
-      {/* <TableList/> */}
-      {/* {SelectList()} */}
-      
+      {selectedView === 'List' ? <ViewList isCollapsed={isCollapsed} /> : <TableList isCollapsed={isCollapsed} />}  
       <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Pagination count={10} shape="rounded" />
         <Typography>Page: 1</Typography>

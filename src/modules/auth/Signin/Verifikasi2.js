@@ -2,22 +2,23 @@ import {
   Box,
   Button,
   Divider,
-  IconButton,
   Paper,
   Stack,
   Typography,
 } from '@mui/material';
 import React from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import TwoFactorImage from '../../../assets/LoginPage/twofactor.png';
 
 const Verifikasi2 = () => {
+  const location = useLocation();
+  const values = location.state && location.state.values;
+  console.log(values)
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi3');
+    navigate('/signin/verifikasi3', { state: { values } });
   };
   return (
     <Box

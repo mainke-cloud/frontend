@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useIntl } from 'react-intl';
+// import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
-import AppTextField from '@crema/components/AppFormComponents/AppTextField';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
-import { useAuthMethod } from '@crema/hooks/AuthHooks';
+// import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import AuthWrapper from '../AuthWrapper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -24,7 +23,6 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
-import axios from 'axios';
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
 
 const isCaptchaValid = (captchaValue, captcha) => {
@@ -50,9 +48,9 @@ const validationSchema = yup.object({
 });
 
 const SigninFirebase = () => {
-  const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
+  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-  const { messages } = useIntl();
+  // const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
   const toggleShowPassword = () => {
@@ -67,7 +65,9 @@ const SigninFirebase = () => {
       password: 'Pass@1!@all',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, 
+      // { setSubmitting }
+      ) => {
       if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
@@ -95,8 +95,8 @@ const SigninFirebase = () => {
 
         if (responseData) {
           alert('Login berhasil!');
-          // navigate('/signin/verifikasi1');
-          logInWithEmailAndPassword(values);
+          navigate('/signin/verifikasi1', { state: { values } });
+          // logInWithEmailAndPassword(values);
         } else {
           alert('Username atau password salah. Silakan coba lagi.');
           setCaptcha(generateCaptcha());

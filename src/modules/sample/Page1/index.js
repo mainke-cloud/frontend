@@ -9,7 +9,7 @@ import {
 } from '../../../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
-import '../Page2/cobain.css';
+import '../Page1/tab.css';
 
 const Page1 = () => {
   const dispatch = useDispatch();
@@ -27,15 +27,6 @@ const Page1 = () => {
   const handleTabActive = (tabId) => {
     dispatch(activateTab(tabId, tabs));
   };
-
-  // const handleAddTab = () => {
-  //   dispatch(addTab(id, tabs));
-  // };
-
-  // const handleCloseAllTabs = () => {
-  //   dispatch(closeAllTabs());
-  // };
-
   return (
     <>
       <Box sx={{ pl: 2 }}>

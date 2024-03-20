@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Box, Avatar, Badge, Stack, Typography, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 
-const StyledBadgeDelegasi = styled(Badge)(({ theme }) => ({
+const StyledBadgeDelegasi = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#FFB068',
       color: 'white',

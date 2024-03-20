@@ -1,13 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { Box, TextField, Button, Typography, Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
+import { 
+  // useNavigate, 
+  useLocation } from 'react-router-dom';
+import { useAuthMethod } from '@crema/hooks/AuthHooks';
 
 const Verifikasi5 = () => {
   const [values, setValues] = useState(Array(6).fill(''));
   const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
+  const { logInWithEmailAndPassword, 
+    // logInWithPopup
+   } = useAuthMethod();
 
   const handleInputChange = (index, event) => {
     const { value } = event.target;
@@ -30,6 +35,17 @@ const Verifikasi5 = () => {
         refs[index - 1].current.focus();
       }
     }
+  };
+  const location = useLocation();
+  const valuess = location.state && location.state.values;
+  console.log(valuess);
+
+  const handleKonfirmasi = () => {
+    console.log('gimank');
+    const { email, password } = valuess;
+    const valuessss = { email, password };
+    console.log(valuessss);
+    logInWithEmailAndPassword(valuessss);
   };
   return (
     <Box width='46vw' height='100%' display='grid' bgcolor='#FFFFFF'>
@@ -183,6 +199,7 @@ const Verifikasi5 = () => {
               </Button>
 
               <Button
+                onClick={() => handleKonfirmasi()}
                 variant='contained'
                 color='primary'
                 sx={{

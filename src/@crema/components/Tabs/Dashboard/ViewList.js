@@ -15,13 +15,12 @@ import {
   AvatarGroup,
     } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import AtributeList from './AtributeList';
 import PropTypes from 'prop-types';
 import { Fonts } from '@crema/constants/AppEnums';
 import CachedIcon from '@mui/icons-material/Cached';
 import DoneIcon from '@mui/icons-material/Done';
 
-const ViewList = ({isCollapsed}) => {
+const ViewList = () => {
 
   const listData = [
     {
@@ -40,14 +39,6 @@ const ViewList = ({isCollapsed}) => {
       date: '10 September 2024',
       status: 'Tinggi',
     },
-    // {
-    //   avatarSrc: '/static/images/avatar/1.jpg',
-    //   primary: 'Sekretaris',
-    //   secondary:
-    //     "Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center",
-    //   date: '13 Oktober 2024',
-    //   status: 'Sedang',
-    // },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Bisnis Development',
@@ -81,25 +72,6 @@ const ViewList = ({isCollapsed}) => {
                 August - 2021
               </AccordionSummary>
               <AccordionDetails>
-                {/* <List>
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp"sx={{ bgcolor: "#E42313" }}>KW</Avatar>
-                    </ListItemAvatar>
-                      <AtributeList/>
-                  </ListItem>
-                  <Divider component="li" />
-              
-                  {/* LIST KEDUA *
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp"sx={{ bgcolor: "#E42313" }}>KW</Avatar>
-                    </ListItemAvatar>
-                      <AtributeList/>
-                  </ListItem>
-                  <Divider component="li" />
-                </List> */}
-
                   <List>
                     {listData.map((item, index) => (
                       <React.Fragment key={index}>
@@ -107,8 +79,6 @@ const ViewList = ({isCollapsed}) => {
                           <ListItemAvatar>
                             <Avatar alt="Remy Sharp" sx={{ bgcolor: getStatusColor(item.status)[0] }}>{item.primary.substring(0, 2)}</Avatar>
                           </ListItemAvatar>
-                          {/* <AtributeList {...item} /> */}
-
                           <Grid container direction="row"  >
                             <Grid item xs={10}>
                                 <Stack direction="row" spacing={1} alignItems="center">

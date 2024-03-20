@@ -16,9 +16,7 @@ import PhotoFilterOutlinedIcon from '@mui/icons-material/PhotoFilterOutlined';
 import { Fonts } from '@crema/constants/AppEnums';
 import PropTypes from 'prop-types';
 
-
-
-export default function TableList({isCollapsed}) {
+export default function TableList() {
     const listData = [
         {
           avatarSrc: '/static/images/avatar/1.jpg',

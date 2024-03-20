@@ -110,35 +110,10 @@ const FirebaseAuthProvider = ({ children }) => {
 
   const logInWithEmailAndPassword = async ({ email, password }) => {
     fetchStart();
-    // try {
-    //   // const { user } = await signInWithEmailAndPassword(auth, email, password);
-    //   const { user } = await signInWithEmailAndPassword(auth, email, password);
-    //   setFirebaseData({ user, isAuthenticated: true, isLoading: false });
-    //   setAuthToken(user?.accessToken);
-    //   fetchSuccess();
-    // } catch (error) {
-    //   setFirebaseData({
-    //     ...firebaseData,
-    //     isAuthenticated: false,
-    //     isLoading: false,
-    //   });
-    //   fetchError(error.message);
-    // }
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/auth/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }), // Mengirim email dan password ke API
-      });
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-      const responseData = await response.json();
-      const { user, accessToken } = responseData;
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
       setFirebaseData({ user, isAuthenticated: true, isLoading: false });
-      setAuthToken(accessToken);
+      setAuthToken(user?.accessToken);
       fetchSuccess();
     } catch (error) {
       setFirebaseData({
@@ -148,6 +123,30 @@ const FirebaseAuthProvider = ({ children }) => {
       });
       fetchError(error.message);
     }
+    // try {
+    //   const response = await fetch('http://127.0.0.1:8000/api/auth/login/', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ email, password }),
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error('Login failed');
+    //   }
+    //   const responseData = await response.json();
+    //   const { user, accessToken } = responseData;
+    //   setFirebaseData({ user, isAuthenticated: true, isLoading: false });
+    //   setAuthToken(accessToken);
+    //   fetchSuccess();
+    // } catch (error) {
+    //   setFirebaseData({
+    //     ...firebaseData,
+    //     isAuthenticated: false,
+    //     isLoading: false,
+    //   });
+    //   fetchError(error.message);
+    // }
   };
   const registerUserWithEmailAndPassword = async ({
     name,

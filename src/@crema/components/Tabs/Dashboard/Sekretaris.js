@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types'; // Import PropTypes
 import { useState } from "react";
 
-const StyledBadgeSekretaris = styled(Badge)(({ theme }) => ({
+const StyledBadgeSekretaris = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#0F6EB5',
       color: 'white',
@@ -62,7 +62,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                             width: 'auto',
                         },
                         '&:hover': {
-                            backgroundColor: '#FFDFA6', // Change background color on hover
+                            backgroundColor: '#FFDFA6',
                           }
                     }}
                     onClick={handleClick} 
