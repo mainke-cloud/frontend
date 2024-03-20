@@ -14,7 +14,6 @@ import TwoFactorImage from '../../../assets/LoginPage/twofactor.png';
 const Verifikasi2 = () => {
   const location = useLocation();
   const values = location.state && location.state.values;
-  console.log(values)
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

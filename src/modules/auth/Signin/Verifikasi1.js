@@ -14,7 +14,6 @@ const Verifikasi1 = () => {
 
   const location = useLocation();
   const values = location.state && location.state.values;
-  console.log(values)
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

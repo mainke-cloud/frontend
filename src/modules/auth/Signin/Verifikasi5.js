@@ -38,13 +38,10 @@ const Verifikasi5 = () => {
   };
   const location = useLocation();
   const valuess = location.state && location.state.values;
-  console.log(valuess);
 
   const handleKonfirmasi = () => {
-    console.log('gimank');
     const { email, password } = valuess;
     const valuessss = { email, password };
-    console.log(valuessss);
     logInWithEmailAndPassword(valuessss);
   };
   return (

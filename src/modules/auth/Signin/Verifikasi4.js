@@ -9,7 +9,6 @@ import SuccessImage from '../../../assets/LoginPage/berhasil.png';
 const Verifikasi4 = () => {
   const location = useLocation();
   const values = location.state && location.state.valuess;
-  console.log(values);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

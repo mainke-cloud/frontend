@@ -43,7 +43,6 @@ const Verifikasi3 = () => {
   };
   const location = useLocation();
   const valuess = location.state && location.state.values;
-  console.log(valuess);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
