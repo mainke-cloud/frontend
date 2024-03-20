@@ -23,11 +23,6 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
-import axios from 'axios';
-
-const isCaptchaValid = (captchaValue, captcha) => {
-  return captchaValue === captcha;
-};
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
 
 const isCaptchaValid = (captchaValue, captcha) => {
@@ -55,7 +50,6 @@ const validationSchema = yup.object({
 const SigninFirebase = () => {
   // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-  const { messages } = useIntl();
   // const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
@@ -67,65 +61,13 @@ const SigninFirebase = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      console.log(values);
-      if (!isCaptchaValid(values.captchaValue, captcha)) {
-        alert('Captcha input is incorrect. Please try again.');
-        setCaptcha(generateCaptcha());
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          'https://e8f51b43-1a6e-423f-8541-a8b8d1c516f3.mock.pstmn.io/api/auth/login/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-          },
-        );
-
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-
-        const responseData = await response.json();
-        console.log(responseData);
-
-        if (responseData) {
-          alert('Login berhasil!');
-          navigate('/signin/verifikasi1');
-        } else {
-          alert('Username atau password salah. Silakan coba lagi.');
-          setCaptcha(generateCaptcha());
-        }
-      } catch (error) {
-        console.error('Terjadi kesalahan saat login:', error.message);
-        alert('Terjadi kesalahan saat login. Silakan coba lagi.');
-      }
-
-      // setSubmitting(false);
-    },
-  });
-
-  const [captcha, setCaptcha] = useState('');
-
-  const formik = useFormik({
-    initialValues: {
       email: 'crema.demo@gmail.com',
       password: 'Pass@1!@all',
     },
     validationSchema: validationSchema,
-    onSubmit: async (
-      values,
+    onSubmit: async (values, 
       // { setSubmitting }
-    ) => {
+      ) => {
       if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
@@ -188,162 +130,6 @@ const SigninFirebase = () => {
           padding={20}
           sx={{ bgcolor: '#FFFFFF' }}
         >
-          <Box>
-            <img src='/logotelkom.png' />
-            <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
-              Masuk NDE Telkom
-            </Typography>
-          </Box>
-          <form onSubmit={formik.handleSubmit}>
-            <Box>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Username
-              </Typography>
-              <TextField
-                placeholder={'Masukan Username'}
-                name='email'
-                variant='outlined'
-                fullWidth
-                {...formik.getFieldProps('email')}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <PersonOutlineOutlinedIcon sx={{ color: 'black' }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.touched.email && formik.errors.email && (
-                <Typography variant='body2' color='error'>
-                  {formik.errors.email}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Password
-              </Typography>
-              <TextField
-                type={showPassword ? 'text' : 'password'}
-                placeholder={'Masukan Password'}
-                name='password'
-                variant='outlined'
-                fullWidth
-                {...formik.getFieldProps('password')}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <LockOutlinedIcon sx={{ color: 'black' }} />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton onClick={toggleShowPassword} edge='end'>
-                        {showPassword ? (
-                          <VisibilityIcon />
-                        ) : (
-                          <VisibilityOffIcon />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.touched.password && formik.errors.password && (
-                <Typography variant='body2' color='error'>
-                  {formik.errors.password}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Captcha
-              </Typography>
-              <Grid container noValidate autoComplete='off' columnSpacing={4}>
-                <Grid item xs={7}>
-                  <TextField
-                    id='outlined-basic'
-                    name='captcha'
-                    variant='outlined'
-                    value={captcha}
-                    disabled
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          <IconButton onClick={handleReloadCaptcha}>
-                            <CachedIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={5}>
-                  <TextField
-                    id='filled-basic'
-                    placeholder='Ketik Captcha disamping'
-                    name='captchaValue'
-                    variant='outlined'
-                    onChange={formik.handleChange}
-                    fullWidth
-                    value={formik.values.captchaValue}
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.captchaValue &&
-                      Boolean(formik.errors.captchaValue)
-                    }
-                    helperText={
-                      formik.touched.captchaValue && formik.errors.captchaValue
-                    }
-                  />
-                </Grid>
-              </Grid>
-            </Box>
-            <Button
-              variant='contained'
-              color='primary'
-              type='submit'
-              sx={{
-                fontWeight: 'regular',
-                fontSize: 16,
-                textTransform: 'capitalize',
-                borderRadius: '20px',
-                width: '100%',
-                bgcolor: '#E42313',
-                marginTop: '30px',
-              }}
-            >
-              Login
-            </Button>
-            <Typography
-              variant='h6'
-              sx={{
-                textAlign: 'center',
-                color: '#303030',
-                fontSize: '14px',
-                marginTop: '18px',
-              }}
-            >
-              Dengan masuk, Anda menyetujui{' '}
-              <Link
-                href='/ketentuan-pengguna'
-                color='primary'
-                underline='always'
-              >
-                Ketentuan Pengguna
-              </Link>{' '}
-              kami
-            </Typography>
-          </form>
           <img
             src={CoofisLogo}
             style={{ height: '118.47px', width: '118.47px' }}
