@@ -23,11 +23,7 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
-<<<<<<< HEAD
-import axios from 'axios';
-=======
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
 
 const isCaptchaValid = (captchaValue, captcha) => {
   return captchaValue === captcha;
@@ -54,11 +50,7 @@ const validationSchema = yup.object({
 const SigninFirebase = () => {
   // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const { messages } = useIntl();
-=======
   // const { messages } = useIntl();
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
   const toggleShowPassword = () => {
@@ -69,14 +61,6 @@ const SigninFirebase = () => {
 
   const formik = useFormik({
     initialValues: {
-<<<<<<< HEAD
-      email: '',
-      password: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      console.log(values);
-=======
       email: 'crema.demo@gmail.com',
       password: 'Pass@1!@all',
     },
@@ -84,7 +68,6 @@ const SigninFirebase = () => {
     onSubmit: async (values, 
       // { setSubmitting }
       ) => {
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
       if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
@@ -112,12 +95,8 @@ const SigninFirebase = () => {
 
         if (responseData) {
           alert('Login berhasil!');
-<<<<<<< HEAD
-          navigate('/signin/verifikasi1');
-=======
           navigate('/signin/verifikasi1', { state: { values } });
           // logInWithEmailAndPassword(values);
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
         } else {
           alert('Username atau password salah. Silakan coba lagi.');
           setCaptcha(generateCaptcha());
@@ -151,14 +130,6 @@ const SigninFirebase = () => {
           padding={20}
           sx={{ bgcolor: '#FFFFFF' }}
         >
-<<<<<<< HEAD
-          <Box>
-            <img src='/logotelkom.png' />
-            <Typography variant='h1' paddingBottom='40px' paddingTop='30px'>
-              Masuk NDE Telkom
-            </Typography>
-          </Box>
-=======
           <img
             src={CoofisLogo}
             style={{ height: '118.47px', width: '118.47px' }}
@@ -166,7 +137,6 @@ const SigninFirebase = () => {
 
           <Typography variant='h1'>Masuk NDE Telkom</Typography>
 
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
           <form onSubmit={formik.handleSubmit}>
             <Box>
               <Typography
@@ -176,10 +146,7 @@ const SigninFirebase = () => {
                 Username
               </Typography>
               <TextField
-<<<<<<< HEAD
-=======
                 sx={{ marginTop: '8px' }}
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
                 placeholder={'Masukan Username'}
                 name='email'
                 variant='outlined'
@@ -199,11 +166,7 @@ const SigninFirebase = () => {
                 </Typography>
               )}
             </Box>
-<<<<<<< HEAD
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-=======
             <Box marginTop={'18px'}>
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
               <Typography
                 variant='h6'
                 sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
@@ -211,10 +174,7 @@ const SigninFirebase = () => {
                 Password
               </Typography>
               <TextField
-<<<<<<< HEAD
-=======
                 sx={{ marginTop: '8px' }}
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
                 type={showPassword ? 'text' : 'password'}
                 placeholder={'Masukan Password'}
                 name='password'
@@ -246,24 +206,11 @@ const SigninFirebase = () => {
                 </Typography>
               )}
             </Box>
-<<<<<<< HEAD
-            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Captcha
-              </Typography>
-              <Grid container noValidate autoComplete='off' columnSpacing={4}>
-                <Grid item xs={7}>
-                  <TextField
-=======
             <Box sx={{ marginTop: '18px' }}>
               <Grid container noValidate autoComplete='off' columnSpacing={4}>
                 <Grid item xs={7}>
                   <TextField
                     fullWidth
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
                     id='outlined-basic'
                     name='captcha'
                     variant='outlined'
@@ -272,8 +219,6 @@ const SigninFirebase = () => {
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
-<<<<<<< HEAD
-=======
                           <Box
                             border={'1px solid #E0E0E0'}
                             height={'33px'}
@@ -281,7 +226,6 @@ const SigninFirebase = () => {
                               marginRight: '10px',
                             }}
                           ></Box>
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
                           <IconButton onClick={handleReloadCaptcha}>
                             <CachedIcon />
                           </IconButton>
@@ -319,15 +263,6 @@ const SigninFirebase = () => {
                 fontWeight: 'regular',
                 fontSize: 16,
                 textTransform: 'capitalize',
-<<<<<<< HEAD
-                borderRadius: '20px',
-                width: '100%',
-                bgcolor: '#E42313',
-                marginTop: '30px',
-              }}
-            >
-              Login
-=======
                 borderRadius: '10px',
                 width: '100%',
                 bgcolor: '#E42313',
@@ -336,15 +271,10 @@ const SigninFirebase = () => {
               }}
             >
               Masuk
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
             </Button>
             <Typography
               variant='h6'
               sx={{
-<<<<<<< HEAD
-                textAlign: 'center',
-=======
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
                 color: '#303030',
                 fontSize: '14px',
                 marginTop: '18px',
@@ -358,11 +288,7 @@ const SigninFirebase = () => {
               >
                 Ketentuan Pengguna
               </Link>{' '}
-<<<<<<< HEAD
-              kami
-=======
               kami.
->>>>>>> f79b18fbff1b2ee793d5317a95cdef4217149b6f
             </Typography>
           </form>
           <Typography
