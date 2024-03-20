@@ -28,7 +28,18 @@ import { Fonts } from '@crema/constants/AppEnums';
 
 import { Filter, Search } from 'feather-icons-react';
 
-import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
+import {
+  Star,
+  StarBorder,
+  ArrowForwardIosSharp,
+  ErrorOutline,
+} from '@mui/icons-material';
+import Todo from '@crema/components/Tabs/Todo/Todo';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+import { useDispatch, useSelector } from 'react-redux';
+import { childTab } from '../../../../../redux/actions/tabActon';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -64,6 +75,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
 export default function TodoDisposisi({ isCollapsed }) {
   const listData1 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -74,6 +86,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 2,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -84,6 +97,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 3,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -94,6 +108,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 4,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -104,6 +119,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 5,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -114,6 +130,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 6,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -124,6 +141,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 7,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -134,6 +152,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 8,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -144,6 +163,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 9,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -281,99 +301,116 @@ export default function TodoDisposisi({ isCollapsed }) {
     return listData.length;
   };
 
+  const [expanded, setExpanded] = React.useState(null);
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+
+  const handleTodo = (item) => {
+    dispatch(childTab(item.id, tabs, 'Todo', item));
+  };
+
   return (
-    <MainSidebar>
-      <Box sx={{ py: 2.5, px: 3.5 }}>
-        <Grid container alignItems='center' justifyContent='space-between'>
-          <Grid item xs={7}>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
-              component='h2'
-            >
-              Disposisi
-            </Typography>
-            <Typography
-              sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
-              component='h2'
-            >
-              Todo
-            </Typography>
+    <>
+      <MainSidebar>
+        <Box sx={{ py: 2.5, px: 3.5 }}>
+          <Grid container alignItems='center' justifyContent='space-between'>
+            <Grid item xs={7}>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
+                component='h2'
+              >
+                Disposisi
+              </Typography>
+              <Typography
+                sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
+                component='h2'
+              >
+                Todo
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <ButtonGroup>
+                <IconButton>
+                  <Search />
+                </IconButton>
+                <IconButton>
+                  <Filter />
+                </IconButton>
+              </ButtonGroup>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <ButtonGroup>
-              <IconButton>
-                <Search />
-              </IconButton>
-              <IconButton>
-                <Filter />
-              </IconButton>
-            </ButtonGroup>
-          </Grid>
-        </Grid>
-      </Box>
-      <AppScrollbar
-        sx={{
-          height: 'calc(100vh - 70px) !important',
-        }}
-        scrollToTop={false}
-      >
-        {!isCollapsed && (
-          <div>
-            {[listData1, listData2, listData3].map((listData, index) => (
-              <Accordions key={index}>
-                <AccordionSummarys
-                  aria-controls={`panel${index + 1}d-content`}
-                  id={`panel${index + 1}d-header`}
+        </Box>
+        <AppScrollbar
+          sx={{
+            height: 'calc(100vh - 70px) !important',
+          }}
+          scrollToTop={false}
+        >
+          {!isCollapsed && (
+            <div>
+              {[listData1, listData2, listData3].map((listData, index) => (
+                <Accordions
+                  key={index}
+                  expanded={expanded === `panel${index + 1}`}
+                  onChange={handleChange(`panel${index + 1}`)}
                 >
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={4}
-                      container
-                      justifyContent='start'
-                      alignItems='center'
-                    >
-                      <Typography>
-                        Agustus-2021({getTotalCount(listData)})
-                      </Typography>
+                  <AccordionSummarys
+                    aria-controls={`panel${index + 1}d-content`}
+                    id={`panel${index + 1}d-header`}
+                  >
+                    <Grid container>
+                      <Grid
+                        item
+                        xs={4}
+                        container
+                        justifyContent='start'
+                        alignItems='center'
+                      >
+                        <Typography>
+                          Agustus-2021({getTotalCount(listData)})
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </AccordionSummarys>
-                <AccordionDetail>
-                  <List>
-                    {listData.map((item, listIndex) => (
-                      <React.Fragment key={listIndex}>
-                        <Card
-                          sx={{
-                            position: 'relative',
-                            borderLeft: `6px solid ${getStatusColor(
-                              item.status,
-                            )}`,
-                            borderRadius: 0,
-                          }}
-                        >
-                          <Button
-                            sx={{ padding: 0, margin: 0, textAlign: 'left' }}
+                  </AccordionSummarys>
+                  <AccordionDetail>
+                    <List>
+                      {listData.map((item, listIndex) => (
+                        <React.Fragment key={listIndex}>
+                          <Card
+                            sx={{
+                              position: 'relative',
+                              borderLeft: `6px solid ${
+                                getStatusColor(item.status)[0]
+                              }`,
+                              borderRadius: 0,
+                            }}
+                            onClick={() => handleTodo(item)}
                           >
                             <CardContent>
-                              <Grid container spacing={2}>
-                                <Grid item xs={2}>
-                                  <Stack alignItems='center' spacing={4}>
-                                    <ListItemAvatar>
-                                      <Avatar
-                                        alt={`Avatar ${listIndex}`}
-                                        src={item.avatarSrc}
-                                        sx={{ width: 56, height: 56 }}
-                                      />
-                                    </ListItemAvatar>
-                                    {item.priority === 'Tinggi' && (
-                                      <Tooltip title='Prioritas'>
-                                        <Icon color='error'>
-                                          <ErrorOutline />
-                                        </Icon>
-                                      </Tooltip>
-                                    )}
-                                  </Stack>
+                              <Grid container>
+                                <Grid item xs={2} container>
+                                  <ListItemAvatar>
+                                    <Avatar
+                                      alt={`Avatar ${listIndex}`}
+                                      src={item.avatarSrc}
+                                      sx={{ width: 56, height: 56 }}
+                                    />
+                                  </ListItemAvatar>
+                                  {item.status === 'Tinggi' && (
+                                    <Tooltip title='Danger'>
+                                      <Icon
+                                        color='error'
+                                        sx={{ marginLeft: 4, marginTop: 1 }}
+                                      >
+                                        <ErrorOutline />
+                                      </Icon>
+                                    </Tooltip>
+                                  )}
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
@@ -385,7 +422,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                                         {item.primary}
                                       </Typography>
                                     </Grid>
-                                    <Grid item xs={4} textAlign='right'>
+                                    <Grid item xs={4}>
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
@@ -405,39 +442,33 @@ export default function TodoDisposisi({ isCollapsed }) {
                                     </Grid>
                                     <Box
                                       sx={{
-                                        backgroundColor: getPriorityColor(
-                                          item.priority,
+                                        backgroundColor: getStatusColor(
+                                          item.status,
                                         )[1],
-                                        color: getPriorityColor(
-                                          item.priority,
-                                        )[0],
-                                        width: 53,
-                                        height: 20,
+                                        color: getStatusColor(item.status)[0],
+                                        padding: 1,
                                         borderRadius: 1,
-                                        fontSize: '12px',
-                                        lineHeight: '18px',
-                                        textAlign: 'center',
                                       }}
                                     >
-                                      {item.priority}
+                                      {item.status}
                                     </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
                             </CardContent>
-                          </Button>
-                        </Card>
-                        {listIndex < listData.length - 1 && <Divider />}
-                      </React.Fragment>
-                    ))}
-                  </List>
-                </AccordionDetail>
-              </Accordions>
-            ))}
-          </div>
-        )}
-      </AppScrollbar>
-    </MainSidebar>
+                          </Card>
+                          {listIndex < listData.length - 1 && <Divider />}
+                        </React.Fragment>
+                      ))}
+                    </List>
+                  </AccordionDetail>
+                </Accordions>
+              ))}
+            </div>
+          )}
+        </AppScrollbar>
+      </MainSidebar>
+    </>
   );
 }
 

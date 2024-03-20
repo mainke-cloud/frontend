@@ -5,7 +5,6 @@ import KacaImage from '../../../assets/FAQ/kaca.png';
 import { Typography } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SearchIcon from '@mui/icons-material/Search';
-import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import BuatSuratInternalImage from '../../../assets/FAQ/buatsurat.png';
@@ -18,13 +17,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Fade from '@mui/material/Fade';
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-// }));
 
 const Bantuan = () => {
   const [expanded, setExpanded] = React.useState(false);
@@ -99,269 +91,218 @@ const Bantuan = () => {
             />
           </Box>
         </Box>
-        <Container
-          maxWidth='xl'
-          sx={{ display: 'flex', justifyContent: 'center' }}
-        >
+        <Box sx={{ paddingX: 8, position: 'relative' }}>
           <Box
             sx={{
+              display: 'flex',
+              justifyContent: 'center',
               bgcolor: '#FFFFFF',
-              pb: 5,
-              width: '97%',
-              mt: 8,
               borderRadius: 2,
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+              mt: 8,
+              mb: 8,
             }}
           >
-            <Typography
-              sx={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 600,
-                mt: 3,
-              }}
-            >
-              Kategori Pertanyaan
-            </Typography>
-            <Box
-              sx={{
-                pr: 5,
-                pl: 5,
-                mt: 5, // Mengatur margin-top menjadi auto agar konten mengisi sisa ruang di bawah
-                flexGrow: 1, // Mengatur agar konten mengisi sisa ruang secara dinamis
-              }}
-            >
-              <Grid container spacing={5}>
-                <Grid item xs={2.4}>
-                  <Box
-                    sx={{
-                      border: '1px solid #CCCCCC', // warna border abu
-                      borderRadius: 3,
-                      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                      height: '78px',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box sx={{ pl: 2 }}>
-                      <Stack
-                        direction={'row'}
-                        sx={{ alignItems: 'center', gap: 4, p: 1 }}
-                      >
-                        <img src={BuatSuratInternalImage} width={'45px'} />
-                        <Typography
-                          sx={{
-                            fontSize: '16px',
-                            fontWeight: '700',
-                            color: 'black',
-                            width: '120px',
-                            textAlign: 'start',
-                          }}
+            <Box sx={{ mb: 8 }}>
+              <Typography
+                sx={{
+                  textAlign: 'center',
+                  fontSize: '20px',
+                  fontWeight: 600,
+                  mt: 3,
+                }}
+              >
+                Kategori Pertanyaan
+              </Typography>
+              <Box
+                sx={{
+                  pr: 5,
+                  pl: 5,
+                  mt: 5,
+                  flexGrow: 1,
+                }}
+              >
+                <Grid container spacing={5}>
+                  <Grid item xs={2.4}>
+                    <Box
+                      sx={{
+                        border: '1px solid #CCCCCC',
+                        borderRadius: 3,
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        height: '78px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box sx={{ pl: 2 }}>
+                        <Stack
+                          direction={'row'}
+                          sx={{ alignItems: 'center', gap: 4, p: 1 }}
                         >
-                          Buat Surat Internal
-                        </Typography>
-                      </Stack>
+                          <img src={BuatSuratInternalImage} width={'45px'} />
+                          <Typography
+                            sx={{
+                              fontSize: '16px',
+                              fontWeight: '700',
+                              color: 'black',
+                              width: '120px',
+                              textAlign: 'start',
+                            }}
+                          >
+                            Buat Surat Internal
+                          </Typography>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid>
-                <Grid item xs={2.4}>
-                  <Box
-                    sx={{
-                      border: '1px solid #CCCCCC', // warna border abu
-                      borderRadius: 3,
-                      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                      height: '78px',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box sx={{ pl: 2 }}>
-                      <Stack
-                        direction={'row'}
-                        sx={{ alignItems: 'center', gap: 4, p: 1 }}
-                      >
-                        <img src={DisposisiImage} width={'45px'} />
-                        <Typography
-                          sx={{
-                            fontSize: '16px',
-                            fontWeight: '700',
-                            color: 'black',
-                            width: '120px',
-                            textAlign: 'start',
-                          }}
+                  </Grid>
+                  <Grid item xs={2.4}>
+                    <Box
+                      sx={{
+                        border: '1px solid #CCCCCC', // warna border abu
+                        borderRadius: 3,
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        height: '78px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box sx={{ pl: 2 }}>
+                        <Stack
+                          direction={'row'}
+                          sx={{ alignItems: 'center', gap: 4, p: 1 }}
                         >
-                          Disposisi
-                        </Typography>
-                      </Stack>
+                          <img src={DisposisiImage} width={'45px'} />
+                          <Typography
+                            sx={{
+                              fontSize: '16px',
+                              fontWeight: '700',
+                              color: 'black',
+                              width: '120px',
+                              textAlign: 'start',
+                            }}
+                          >
+                            Disposisi
+                          </Typography>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid>
-                <Grid item xs={2.4}>
-                  <Box
-                    sx={{
-                      border: '1px solid #CCCCCC', // warna border abu
-                      borderRadius: 3,
-                      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                      height: '78px',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box sx={{ pl: 2 }}>
-                      <Stack
-                        direction={'row'}
-                        sx={{ alignItems: 'center', gap: 4, p: 1 }}
-                      >
-                        <img src={AddressBookImage} width={'45px'} />
-                        <Typography
-                          sx={{
-                            fontSize: '16px',
-                            fontWeight: '700',
-                            color: 'black',
-                            width: '120px',
-                            textAlign: 'start',
-                          }}
+                  </Grid>
+                  <Grid item xs={2.4}>
+                    <Box
+                      sx={{
+                        border: '1px solid #CCCCCC', // warna border abu
+                        borderRadius: 3,
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        height: '78px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box sx={{ pl: 2 }}>
+                        <Stack
+                          direction={'row'}
+                          sx={{ alignItems: 'center', gap: 4, p: 1 }}
                         >
-                          Address Book
-                        </Typography>
-                      </Stack>
+                          <img src={AddressBookImage} width={'45px'} />
+                          <Typography
+                            sx={{
+                              fontSize: '16px',
+                              fontWeight: '700',
+                              color: 'black',
+                              width: '120px',
+                              textAlign: 'start',
+                            }}
+                          >
+                            Address Book
+                          </Typography>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid>
-                <Grid item xs={2.4}>
-                  <Box
-                    sx={{
-                      border: '1px solid #CCCCCC', // warna border abu
-                      borderRadius: 3,
-                      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                      height: '78px',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box sx={{ pl: 2 }}>
-                      <Stack
-                        direction={'row'}
-                        sx={{ alignItems: 'center', gap: 4, p: 1 }}
-                      >
-                        <img src={SuratMasukImage} width={'45px'} />
-                        <Typography
-                          sx={{
-                            fontSize: '16px',
-                            fontWeight: '700',
-                            color: 'black',
-                            width: '120px',
-                            textAlign: 'start',
-                          }}
+                  </Grid>
+                  <Grid item xs={2.4}>
+                    <Box
+                      sx={{
+                        border: '1px solid #CCCCCC', // warna border abu
+                        borderRadius: 3,
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        height: '78px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box sx={{ pl: 2 }}>
+                        <Stack
+                          direction={'row'}
+                          sx={{ alignItems: 'center', gap: 4, p: 1 }}
                         >
-                          Surat Masuk
-                        </Typography>
-                      </Stack>
+                          <img src={SuratMasukImage} width={'45px'} />
+                          <Typography
+                            sx={{
+                              fontSize: '16px',
+                              fontWeight: '700',
+                              color: 'black',
+                              width: '120px',
+                              textAlign: 'start',
+                            }}
+                          >
+                            Surat Masuk
+                          </Typography>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid>
-                <Grid item xs={2.4}>
-                  <Box
-                    sx={{
-                      border: '1px solid #CCCCCC', // warna border abu
-                      borderRadius: 3,
-                      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                      height: '78px',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box sx={{ pl: 2 }}>
-                      <Stack
-                        direction={'row'}
-                        sx={{ alignItems: 'center', gap: 4, p: 1 }}
-                      >
-                        <img src={SuratKeluarImage} width={'45px'} />
-                        <Typography
-                          sx={{
-                            fontSize: '16px',
-                            fontWeight: '700',
-                            color: 'black',
-                            width: '120px',
-                            textAlign: 'start',
-                          }}
+                  </Grid>
+                  <Grid item xs={2.4}>
+                    <Box
+                      sx={{
+                        border: '1px solid #CCCCCC', // warna border abu
+                        borderRadius: 3,
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        height: '78px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box sx={{ pl: 2 }}>
+                        <Stack
+                          direction={'row'}
+                          sx={{ alignItems: 'center', gap: 4, p: 1 }}
                         >
-                          Surat Keluar
-                        </Typography>
-                      </Stack>
+                          <img src={SuratKeluarImage} width={'45px'} />
+                          <Typography
+                            sx={{
+                              fontSize: '16px',
+                              fontWeight: '700',
+                              color: 'black',
+                              width: '120px',
+                              textAlign: 'start',
+                            }}
+                          >
+                            Surat Keluar
+                          </Typography>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </Box>
             </Box>
           </Box>
-        </Container>
-        <Container maxWidth='xl' sx={{ display: 'flex', mt: 5 }}>
+          <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
+            Paling Sering Ditanyakan
+          </Typography>
           <Box
             sx={{
               mt: 8,
-              pl: 5,
             }}
           >
-            <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
-              Paling Sering Ditanyakan
-            </Typography>
-          </Box>
-        </Container>
-        <Container maxWidth='xl'>
-          <Box
-            sx={{
-              pb: 3,
-              mt: 8,
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: '20px',
-                fontWeight: 600,
-                mt: 3,
-                pr: 5,
-                pl: 5,
-              }}
-            >
-              {/* <Accordion
-              expanded={expanded}
-              onChange={handleExpansion}
-              slots={{ transition: Fade }}
-              slotProps={{ transition: { timeout: 400 } }}
-              sx={{
-                '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                '& .MuiAccordionDetails-root': {
-                  display: expanded ? 'block' : 'none',
-                },
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls='panel1-content'
-                id='panel1-header'
-              >
-                <Typography>Custom transition using Fade</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion> */}
-              {/* <Accordion
+            <Accordion
               expanded={expanded}
               onChange={handleExpansion}
               slots={{ transition: Fade }}
               slotProps={{ transition: { timeout: 400 } }}
               sx={{
                 p: 3,
-                '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                '& .MuiAccordionDetails-root': {
-                  display: expanded ? 'block' : 'none',
-                },
+                mb: 8,
               }}
             >
               <AccordionSummary
@@ -375,131 +316,87 @@ const Bantuan = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
                 </Typography>
               </AccordionDetails>
-            </Accordion> */}
-              <Accordion
-                expanded={expanded}
-                onChange={handleExpansion}
-                slots={{ transition: Fade }}
-                slotProps={{ transition: { timeout: 400 } }}
-                sx={{
-                  p: 3,
-                  mb: 8,
-                  // '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                  // '& .MuiAccordionDetails-root': {
-                  //   display: expanded ? 'block' : 'none',
-                  // },
-                }}
+            </Accordion>
+            <Accordion
+              sx={{
+                p: 3,
+                mb: 8,
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel1-content'
+                id='panel2-header'
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1-content'
-                  id='panel1-header'
-                >
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-                    Dimana saya dapat menemukan menu Template Surat ?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                sx={{
-                  p: 3,
-                  mb: 8,
-                  // '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                  // '& .MuiAccordionDetails-root': {
-                  //   display: expanded ? 'block' : 'none',
-                  // },
-                }}
+                <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+                  Dimana saya dapat menemukan menu Template Surat ?
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{
+                p: 3,
+                mb: 8,
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel1-content'
+                id='panel3-header'
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1-content'
-                  id='panel2-header'
-                >
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-                    Dimana saya dapat menemukan menu Template Surat ?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                sx={{
-                  p: 3,
-                  mb: 8,
-                  // '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                  // '& .MuiAccordionDetails-root': {
-                  //   display: expanded ? 'block' : 'none',
-                  // },
-                }}
+                <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+                  Dimana saya dapat menemukan menu Template Surat ?
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{
+                p: 3,
+                mb: 8,
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel1-content'
+                id='panel4-header'
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1-content'
-                  id='panel3-header'
-                >
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-                    Dimana saya dapat menemukan menu Template Surat ?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                sx={{
-                  p: 3,
-                  mb: 8,
-                  // '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-                  // '& .MuiAccordionDetails-root': {
-                  //   display: expanded ? 'block' : 'none',
-                  // },
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1-content'
-                  id='panel4-header'
-                >
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-                    Dimana saya dapat menemukan menu Template Surat ?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </Typography>
+                <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+                  Dimana saya dapat menemukan menu Template Surat ?
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           </Box>
-        </Container>
+        </Box>
       </Box>
     </Box>
   );

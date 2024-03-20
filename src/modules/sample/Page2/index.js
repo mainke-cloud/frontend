@@ -7,7 +7,7 @@ import {
 } from '../../../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
-import '../Page2/cobain.css';
+import '../Page1/tab.css';
 
 const Page2 = () => {
   const dispatch = useDispatch();

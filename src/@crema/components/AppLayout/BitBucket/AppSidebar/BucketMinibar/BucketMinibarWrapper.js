@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { alpha, Box } from '@mui/material';
-// import { ThemeMode } from '@crema/constants/AppEnums';
-// import { useSidebarContext } from '@crema/context/AppContextProvider/SidebarContextProvider';
+import { ThemeMode } from '@crema/constants/AppEnums';
+import { useSidebarContext } from '@crema/context/AppContextProvider/SidebarContextProvider';
 
 const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
-  // const { sidebarBgColor, mode, sidebarTextColor } = useSidebarContext();
+  const { sidebarBgColor, mode } = useSidebarContext();
 
   return (
     <Box
@@ -16,8 +16,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         width: isHover ? 280 : 80,
         height: 'auto',
         maxHeight: '100vh',
-        backgroundColor: '#fff',
-        // backgroundColor: sidebarBgColor,
+        backgroundColor: sidebarBgColor,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -35,11 +34,10 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           zIndex: 1,
           width: '100%',
           height: '100%',
-          backgroundColor: '#fff',
-          // backgroundColor: (theme) =>
-          //   mode === ThemeMode.LIGHT
-          //     ? alpha(theme.palette.common.white, 0.05)
-          //     : alpha(theme.palette.common.black, 0.05),
+          backgroundColor: (theme) =>
+            mode === ThemeMode.LIGHT
+              ? alpha(theme.palette.common.white, 0.05)
+              : alpha(theme.palette.common.black, 0.05),
         },
         '& > *': {
           position: 'relative',
@@ -76,20 +74,13 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         },
         '& .menu-icon-btn': {
           backgroundColor: '#fff',
-          // color: isHover ? 'red' : '#fff',
-          // color: sidebarTextColor,
-          color: '#4B4747',
+          color: (theme) => theme.palette.coofis.tertiary[30],
           width: '100%',
           border: '0 none',
           borderRadius: 0,
           padding: '4px 11px',
           '&:hover': {
-            backgroundColor: '#F4F4F4',
-            color: '#E42313',
-            borderColor: (theme) => alpha(theme.palette.text.secondary, 0.25),
-            // color: (theme) => theme.palette.text.primary,
-            // backgroundColor: (theme) =>
-            // alpha(theme.palette.background.default, 0.9),
+            color: (theme) => theme.palette.coofis.primary.main,
           },
         },
         '& .icon-btn': {
@@ -97,7 +88,6 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           display: 'flex',
           justifyContent: isHover ? 'start' : 'center',
           alignItems: 'center',
-          // backgroundColor: 'blue',
           gap: '12px',
         },
         '& .icon-img': {
@@ -106,11 +96,17 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          // backgroundColor: 'blue',
-          '& img': {
-            // width: '20px',
-            // backgroundColor: 'red',
-          }
+          '& .MuiBadge-badge': {
+            minWidth: '10px',
+            minHeight: '10px',
+            width: 'auto',
+            height: 'auto',
+            borderRadius: '50%',
+            fontSize: '8px',
+            padding: '2px',
+            position: 'absolute',
+            right: 0,
+          },
         },
         '& .menu-text': {
           fontWeight: '700',
@@ -122,10 +118,6 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           height: 'auto',
           paddingBottom: 1.5,
           textAlign: isHover ? 'none' : 'center',
-          '& img': {
-            // width: '20px',
-            // backgroundColor: 'red',
-          },
         },
         '& .menu-item-boundary': {
           backgroundColor: '#fff',
@@ -140,16 +132,17 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           flexDirection: 'column',
         },
         '& .submenu-item': {
+          color: (theme) => theme.palette.coofis.tertiary[30],
           width: '100%',
           display: 'flex',
           justifyContent: 'start',
           alignItems: 'center',
           borderRadius: 0,
-          padding: '11px 24px',
-          gap: '12px',
+          padding: '11px 24px 11px 28px',
+          gap: '26px',
           '&:hover': {
-            backgroundColor: '#F4F4F4',
-            color: '#E42313',
+            backgroundColor: 'transparent',
+            color: (theme) => theme.palette.coofis.primary.main,
           },
         },
         '& .submenu-text': {
