@@ -41,7 +41,7 @@ const SigninAwsCognito = () => {
   return (
     <AuthWrapper>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', mb: 5 }}>
           <Formik
             validateOnChange={true}
             initialValues={{
