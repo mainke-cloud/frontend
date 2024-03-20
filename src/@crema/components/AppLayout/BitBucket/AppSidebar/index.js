@@ -1,68 +1,93 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import AppScrollbar from '../../../AppScrollbar';
-import MainSidebar from '../../components/MainSidebar';
-import Box from '@mui/material/Box';
-import Hidden from '@mui/material/Hidden';
-import Drawer from '@mui/material/Drawer';
-import VerticalNav from '../../components/VerticalNav';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import BitBucketSidebarWrapper from './BitBucketSidebarWrapper';
 import AppSidebarContainer from './AppSidebarContainer';
 import BucketMinibar from './BucketMinibar';
-import { Typography } from '@mui/material';
-import { Fonts } from '@crema/constants/AppEnums';
+import DisposisiSidebar from './DisposisiSidebar';
+import MyDisposisiSidebar from './MyDisposisiSidebar';
+import TodoDisposisi from './TodoDisposisi';
+import LetterInDisposisi from './LetterInDisposisi';
+import LetterOutDisposisi from './LetterOutDisposisi';
+import ScannerDrafDisposisi from './ScannerDrafDisposisi';
+import ScannerLogScanDisposisi from './ScannerLogScanDisposisi';
+
+import { Typography, Drawer, Hidden, Box } from '@mui/material';
+
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
+import { useSelector } from 'react-redux';
 
 const AppSidebar = (props) => {
   const {
     isCollapsed,
     setCollapsed,
-    // routesConfig,
     isNavCollapsed,
     toggleNavCollapsed,
+    isHover,
+    setHover,
+    // routesConfig,
   } = props;
+
+  const sidebar = useSelector((state) => state.sidebar.selectedSidebarName);
+
+  const sideBarDisposisi = () => {
+    switch (sidebar) {
+      case 'Surat Masuk':
+        return <LetterInDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Disposisi':
+        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+      case 'Disposisi Saya':
+        return <MyDisposisiSidebar isCollapsed={props.isCollapsed} />;
+      case 'Todo':
+        return <TodoDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Surat Keluar':
+        return <LetterOutDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Log Scan Surat':
+        return <ScannerLogScanDisposisi isCollapsed={props.isCollapsed} />;
+      case 'Draft Scan Surat':
+        return <ScannerDrafDisposisi isCollapsed={props.isCollapsed} />;
+      default:
+        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+    }
+  };
 
   const sideBarComponent = () => {
     return (
-      <BitBucketSidebarWrapper className='bit-bucket-sidebar'>
+      <BitBucketSidebarWrapper
+        className={`bit-bucket-sidebar ${
+          isCollapsed ? 'bit-bucket-btn-cls' : ''
+        }`}
+      >
         <Box className='bit-bucket-sidebar-fixed'>
           <Box
-            className='bit-bucket-btn'
+            className={`bit-bucket-btn ${
+              isCollapsed ? 'bit-bucket-btn-cls' : ''
+            }`}
             onClick={() => setCollapsed(!isCollapsed)}
           >
-            {isCollapsed ? <NavigateNextIcon /> : <NavigateBeforeIcon />}
-          </Box>
-          <BucketMinibar />
-          <AppSidebarContainer className='app-sidebar-container'>
-            <MainSidebar>
-              <Box
-                sx={{
-                  py: 4.5,
-                  px: 7.5,
-                }}
-              >
+            {isCollapsed ? (
+              <React.Fragment>
+                <NavigateNextIcon />
                 <Typography
+                  variant='h6'
                   sx={{
-                    fontSize: 22,
-                    fontWeight: Fonts.MEDIUM,
+                    writingMode: 'vertical-lr',
+                    textOrientation: 'mixed',
+                    transform: 'rotate(180deg)',
                   }}
-                  component='h2'
                 >
-                  Crema
+                  Lihat Disposisi
                 </Typography>
-              </Box>
-              <AppScrollbar
-                sx={{
-                  py: 2,
-                  height: 'calc(100vh - 70px) !important',
-                }}
-                scrollToTop={false}
-              >
-                <VerticalNav routesConfig={props.routesConfig} />
-              </AppScrollbar>
-            </MainSidebar>
+              </React.Fragment>
+            ) : (
+              <NavigateBeforeIcon />
+            )}
+          </Box>
+          <BucketMinibar isHover={isHover} setHover={setHover} />
+          <AppSidebarContainer className='app-sidebar-container'>
+            {sideBarDisposisi()}
           </AppSidebarContainer>
         </Box>
       </BitBucketSidebarWrapper>
@@ -100,7 +125,9 @@ AppSidebar.propTypes = {
   variant: PropTypes.string,
   isCollapsed: PropTypes.bool,
   setCollapsed: PropTypes.func,
-  toggleNavCollapsed: PropTypes.func,
   isNavCollapsed: PropTypes.bool,
+  toggleNavCollapsed: PropTypes.func,
+  isHover: PropTypes.bool,
+  setHover: PropTypes.func,
   routesConfig: PropTypes.array,
 };

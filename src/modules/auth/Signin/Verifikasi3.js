@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Divider,
-  Grid,
   IconButton,
   Paper,
   Stack,
@@ -10,9 +9,11 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
+import QrImage from '../../../assets/LoginPage/qrcode.png';
+import { useLocation } from 'react-router-dom';
 
 const Verifikasi3 = () => {
   const [values, setValues] = useState(Array(6).fill(''));
@@ -40,12 +41,15 @@ const Verifikasi3 = () => {
       }
     }
   };
-
+  const location = useLocation();
+  const valuess = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi4');
+    navigate('/signin/verifikasi4', { state: { valuess } });
   };
+
+  const allValuesFilled = values.every((value) => value.length === 1);
 
   return (
     <Box
@@ -58,9 +62,7 @@ const Verifikasi3 = () => {
     >
       <Paper elevation={3} sx={{ padding: '30px' }}>
         <Stack direction='row' alignItems='center'>
-          <IconButton>
-            <ArrowBackIosNewIcon />
-          </IconButton>
+          <ArrowBackButton path='/signin/verifikasi2' />
 
           <Typography variant='h1' paddingLeft='30px'>
             VERIFIKASI 2 LANGKAH
@@ -74,7 +76,7 @@ const Verifikasi3 = () => {
             Buka Aplikasi TGPortal pada ponsel anda lalu scan kode QR berikut
           </Typography>
 
-          <img src='/qrcode.png' alt='gambar qr' />
+          <img src={QrImage} alt='gambar qr' />
 
           <Typography variant='body1' pt='10px'>
             Atau masuk dengan kode manual
@@ -166,6 +168,7 @@ const Verifikasi3 = () => {
           </Box>
 
           <Button
+            disabled={!allValuesFilled}
             variant='outlined'
             onClick={handleSubmit}
             sx={{
@@ -175,13 +178,13 @@ const Verifikasi3 = () => {
               color: values.every((value) => value.length === 1)
                 ? 'white'
                 : '#8C8F93',
-              border: '1px solid #8C8F93',
-              '&:hover': {
-                border: '1px solid #8C8F93',
-              },
               backgroundColor: values.every((value) => value.length === 1)
                 ? 'red'
                 : null,
+              '&:hover': {
+                color: '#F0F0F0',
+                bgcolor: '#B22222',
+              },
             }}
           >
             Aktivasi

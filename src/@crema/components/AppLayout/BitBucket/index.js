@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import AppSidebar from './AppSidebar';
-import AppThemeSetting from '../../AppThemeSetting';
-import AppHeader from './AppHeader';
+import PropsTypes from 'prop-types';
 import clsx from 'clsx';
 import Hidden from '@mui/material/Hidden';
 import Box from '@mui/material/Box';
-import BitBucketWrapper from './BitBucketWrapper';
+import { useLocation } from 'react-router-dom';
+
 import { LayoutType } from '@crema/constants/AppEnums';
 import { useLayoutContext } from '@crema/context/AppContextProvider/LayoutContextProvider';
-import BitBucketContainer from './BitBucketContainer';
+import AppSidebar from './AppSidebar';
+import AppThemeSetting from '../../AppThemeSetting';
+import AppHeader from './AppHeader';
 import AppContentView from '../../AppContentView';
-import { useLocation } from 'react-router-dom';
-import PropsTypes from 'prop-types';
+import BitBucketWrapper from './BitBucketWrapper';
+import BitBucketContainer from './BitBucketContainer';
+import Overlay from './Overlay';
 
 const BitBucket = ({ routes, routesConfig }) => {
   const { pathname } = useLocation();
   const [isCollapsed, setCollapsed] = useState(false);
   const [isNavCollapsed, setNavCollapsed] = useState(false);
   const { layoutType } = useLayoutContext();
+  const [isHover, setHover] = useState(false);
 
   const toggleNavCollapsed = () => {
     setNavCollapsed(!isNavCollapsed);
@@ -27,33 +30,41 @@ const BitBucket = ({ routes, routesConfig }) => {
   }, [pathname]);
 
   return (
-    <BitBucketContainer
-      className={clsx({
-        boxedLayout: layoutType === LayoutType.BOXED,
-        framedLayout: layoutType === LayoutType.FRAMED,
-      })}
-    >
-      <BitBucketWrapper
-        className={clsx('bitBucketWrapper', {
-          bitBucketCollapsed: isCollapsed,
+    <>
+      {isHover &&
+        <Overlay />
+      }
+      <BitBucketContainer
+        className={clsx({
+          boxedLayout: layoutType === LayoutType.BOXED,
+          framedLayout: layoutType === LayoutType.FRAMED,
         })}
       >
-        <Hidden lgUp>
-          <AppHeader toggleNavCollapsed={toggleNavCollapsed} />
-        </Hidden>
-        <AppSidebar
-          routesConfig={routesConfig}
-          isCollapsed={isCollapsed}
-          setCollapsed={setCollapsed}
-          isNavCollapsed={isNavCollapsed}
-          toggleNavCollapsed={toggleNavCollapsed}
-        />
-        <Box className='mainContent'>
-          <AppContentView routes={routes} />
-        </Box>
-        <AppThemeSetting />
-      </BitBucketWrapper>
-    </BitBucketContainer>
+        <BitBucketWrapper
+          className={clsx('bitBucketWrapper', {
+            'bitBucketCollapsed': isCollapsed,
+          })}
+          isHover={isHover}
+        >
+          <Hidden lgUp>
+            <AppHeader toggleNavCollapsed={toggleNavCollapsed} />
+          </Hidden>
+          <AppSidebar
+            routesConfig={routesConfig}
+            isCollapsed={isCollapsed}
+            setCollapsed={setCollapsed}
+            isNavCollapsed={isNavCollapsed}
+            toggleNavCollapsed={toggleNavCollapsed}
+            isHover={isHover}
+            setHover={setHover}
+          />
+          <Box className='mainContent'>
+            <AppContentView routes={routes} />
+          </Box>
+          <AppThemeSetting />
+        </BitBucketWrapper>
+      </BitBucketContainer>
+    </>
   );
 };
 

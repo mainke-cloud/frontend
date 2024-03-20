@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import '../../styles/carousel.css';
-import Corousel from './Signin/Corousel';
+import Carousel from '@crema/components/Carousel/Carousel';
 const AuthWrapper = ({ children }) => {
   return (
     <Box
@@ -14,7 +14,7 @@ const AuthWrapper = ({ children }) => {
       }}
     >
       <Box>
-        <Corousel />
+        <Carousel />
       </Box>
       <Box>{children}</Box>
     </Box>

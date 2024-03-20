@@ -10,9 +10,9 @@ const BitBucketWrapper = ({ children, ...rest }) => {
         display: 'flex',
         flexDirection: 'row',
         position: 'relative',
-        backgroundColor: (theme) => theme.palette.background.default,
         paddingTop: { xs: 14, sm: 17.5, lg: 0 },
         '& .mainContent': {
+          backgroundColor: (theme) => theme.palette.background.default,
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
@@ -21,13 +21,13 @@ const BitBucketWrapper = ({ children, ...rest }) => {
         },
         '&.bitBucketCollapsed': {
           '& .mainContent': {
-            width: 'calc(100% - 64px)',
+            width: 'calc(100% - 80px)',
           },
           '& .bit-bucket-sidebar': {
-            width: 64,
+            width: 95,
             '& .app-sidebar-container': {
-              width: 8,
-              borderLeftColor: 'transparent',
+              width: 18,
+              borderLeftColor: 'white',
             },
           },
         },

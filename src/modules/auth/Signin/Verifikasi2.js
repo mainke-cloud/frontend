@@ -2,20 +2,22 @@ import {
   Box,
   Button,
   Divider,
-  IconButton,
   Paper,
   Stack,
   Typography,
 } from '@mui/material';
 import React from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
+import TwoFactorImage from '../../../assets/LoginPage/twofactor.png';
 
 const Verifikasi2 = () => {
+  const location = useLocation();
+  const values = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi3');
+    navigate('/signin/verifikasi3', { state: { values } });
   };
   return (
     <Box
@@ -28,9 +30,7 @@ const Verifikasi2 = () => {
     >
       <Paper elevation={3} sx={{ padding: '30px' }}>
         <Stack direction='row' alignItems='center'>
-          <IconButton>
-            <ArrowBackIosNewIcon />
-          </IconButton>
+          <ArrowBackButton path='/signin/verifikasi1' />
 
           <Typography variant='h1' paddingLeft='30px'>
             VERIFIKASI 2 LANGKAH
@@ -45,7 +45,8 @@ const Verifikasi2 = () => {
             textAlign: 'center',
           }}
         >
-          <img src='/two factor.png' alt='gambar verifikasi 2 langkah' />
+          <img src={TwoFactorImage} alt='gambar verifikasi 2 langkah' />
+
           <Typography variant='h4' paddingTop='30px'>
             Apakah anda sudah memiliki aplikasi TGPortal di perangkat anda ?
           </Typography>
