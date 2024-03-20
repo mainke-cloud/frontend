@@ -63,8 +63,8 @@ const SigninFirebase = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'crema.demo@gmail.com',
-      password: 'Pass@1!@all',
+      email: '',
+      password: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -95,8 +95,8 @@ const SigninFirebase = () => {
 
         if (responseData) {
           alert('Login berhasil!');
-          // navigate('/signin/verifikasi1');
-          logInWithEmailAndPassword(values);
+          navigate('/signin/verifikasi1');
+          // logInWithEmailAndPassword(values);
         } else {
           alert('Username atau password salah. Silakan coba lagi.');
           setCaptcha(generateCaptcha());
