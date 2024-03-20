@@ -7,7 +7,7 @@ import { Box } from '@mui/material';
 const Corousel = () => {
   return (
     <Box>
-      <Box style={{ width: '52vw', height: '100vh' }}>
+      <Box style={{ width: '54vw', height: '100vh' }}>
         <CCarousel controls indicators>
           <CCarouselItem>
             <CImage

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -24,6 +24,11 @@ import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
+import axios from 'axios';
+
+const isCaptchaValid = (captchaValue, captcha) => {
+  return captchaValue === captcha;
+};
 
 const validationSchema = yup.object({
   email: yup
@@ -41,50 +46,77 @@ const validationSchema = yup.object({
       <IntlMessages id='Isi Password anda' style={{ marginTop: '20px' }} />
     </>,
   ),
-  captcha: yup.string().required(
-    <>
-      <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-      <IntlMessages id='Isi captcha anda' style={{ marginTop: '20px' }} />
-    </>,
-  ),
 });
 
 const SigninFirebase = () => {
   const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-
   const { messages } = useIntl();
-
   const [showPassword, setShowPassword] = useState(false);
+  const { pathname } = useLocation();
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const [captcha, setCaptcha] = useState(generateCaptcha());
-  const [inputValue, setInputValue] = useState('');
-  const [verification, setVerification] = useState(false);
-  const { pathname } = useLocation();
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
-  const handleSubmit = (e) => {
-    if (inputValue === captcha) {
-      alert('Captcha input is correct!');
-      setVerification(true);
-      e.preventDefault();
-      navigate('/signin/verifikasi1');
-    } else {
-      alert('Captcha input is incorrect. Please try again.');
-      setCaptcha(generateCaptcha());
-      setInputValue('');
-    }
-  };
+  const [captcha, setCaptcha] = useState('');
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      console.log(values);
+      if (!isCaptchaValid(values.captchaValue, captcha)) {
+        alert('Captcha input is incorrect. Please try again.');
+        setCaptcha(generateCaptcha());
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          'https://e8f51b43-1a6e-423f-8541-a8b8d1c516f3.mock.pstmn.io/api/auth/login/',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error('Login failed');
+        }
+
+        const responseData = await response.json();
+        console.log(responseData);
+
+        if (responseData) {
+          alert('Login berhasil!');
+          navigate('/signin/verifikasi1');
+        } else {
+          alert('Username atau password salah. Silakan coba lagi.');
+          setCaptcha(generateCaptcha());
+        }
+      } catch (error) {
+        console.error('Terjadi kesalahan saat login:', error.message);
+        alert('Terjadi kesalahan saat login. Silakan coba lagi.');
+      }
+
+      // setSubmitting(false);
+    },
+  });
+
   const handleReloadCaptcha = () => {
     setCaptcha(generateCaptcha());
-    setInputValue('');
-    setVerification(false);
   };
-  console.log(pathname);
+
+  useEffect(() => {
+    setCaptcha(generateCaptcha());
+  }, []);
+
   return (
     <AuthWrapper>
       {pathname === '/signin/verifikasi4' ? (
@@ -103,197 +135,156 @@ const SigninFirebase = () => {
               Masuk NDE Telkom
             </Typography>
           </Box>
-          <Formik
-            validateOnChange={true}
-            initialValues={{
-              email: 'crema.demo@gmail.com',
-              password: 'Pass@1!@all',
-              captcha: '',
-            }}
-            validationSchema={validationSchema}
-            onSubmit={(data, { setSubmitting }) => {
-              setSubmitting(true);
-              logInWithEmailAndPassword(data);
-              setSubmitting(false);
-            }}
-          >
-            {({ isSubmitting }) => (
-              <Form style={{ textAlign: 'left' }} noValidate autoComplete='off'>
-                <Box>
-                  <Typography
-                    variant='h6'
-                    sx={{
-                      textAlign: 'start',
-                      color: '#303030',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Username
-                  </Typography>
-
-                  <AppTextField
-                    placeholder={'Masukan Username'}
-                    name='email'
+          <form onSubmit={formik.handleSubmit}>
+            <Box>
+              <Typography
+                variant='h6'
+                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
+              >
+                Username
+              </Typography>
+              <TextField
+                placeholder={'Masukan Username'}
+                name='email'
+                variant='outlined'
+                fullWidth
+                {...formik.getFieldProps('email')}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <PersonOutlineOutlinedIcon sx={{ color: 'black' }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              {formik.touched.email && formik.errors.email && (
+                <Typography variant='body2' color='error'>
+                  {formik.errors.email}
+                </Typography>
+              )}
+            </Box>
+            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
+              <Typography
+                variant='h6'
+                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
+              >
+                Password
+              </Typography>
+              <TextField
+                type={showPassword ? 'text' : 'password'}
+                placeholder={'Masukan Password'}
+                name='password'
+                variant='outlined'
+                fullWidth
+                {...formik.getFieldProps('password')}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <LockOutlinedIcon sx={{ color: 'black' }} />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton onClick={toggleShowPassword} edge='end'>
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              {formik.touched.password && formik.errors.password && (
+                <Typography variant='body2' color='error'>
+                  {formik.errors.password}
+                </Typography>
+              )}
+            </Box>
+            <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
+              <Typography
+                variant='h6'
+                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
+              >
+                Captcha
+              </Typography>
+              <Grid container noValidate autoComplete='off' columnSpacing={4}>
+                <Grid item xs={7}>
+                  <TextField
+                    id='outlined-basic'
+                    name='captcha'
                     variant='outlined'
-                    sx={{
-                      width: '100%',
-                      '& .MuiInputBase-input': {
-                        fontSize: 14,
-                      },
-                    }}
+                    value={captcha}
+                    disabled
                     InputProps={{
-                      startAdornment: (
-                        <InputAdornment position='start'>
-                          <IconButton disabled>
-                            <PersonOutlineOutlinedIcon
-                              sx={{ color: 'black' }}
-                            />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Box>
-
-                <Box sx={{ mb: { xs: 3, xl: 4 }, marginTop: '18px' }}>
-                  <Typography
-                    variant='h6'
-                    sx={{
-                      textAlign: 'start',
-                      color: '#303030',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Password
-                  </Typography>
-
-                  <AppTextField
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder={'Masukan Password'}
-                    name='password'
-                    variant='outlined'
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position='start'>
-                          <IconButton disabled>
-                            <LockOutlinedIcon sx={{ color: 'black' }} />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
                       endAdornment: (
                         <InputAdornment position='end'>
-                          <IconButton onClick={toggleShowPassword} edge='end'>
-                            {showPassword ? (
-                              <VisibilityIcon />
-                            ) : (
-                              <VisibilityOffIcon />
-                            )}
+                          <IconButton onClick={handleReloadCaptcha}>
+                            <CachedIcon />
                           </IconButton>
                         </InputAdornment>
                       ),
                     }}
-                    sx={{
-                      width: '100%',
-                      '& .MuiInputBase-input': {
-                        fontSize: 14,
-                      },
-                    }}
                   />
-                </Box>
-
-                <Grid
-                  container
-                  noValidate
-                  autoComplete='off'
-                  sx={{
-                    paddingTop: '18px',
-                  }}
-                  columnSpacing={4}
-                >
-                  <Grid item xs={7}>
-                    <TextField
-                      id='outlined-basic'
-                      variant='outlined'
-                      value={captcha}
-                      disabled
-                      sx={{
-                        borderRadius: '10px',
-                        width: '100%',
-                      }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position='end'>
-                            <IconButton
-                              edge='end'
-                              sx={{
-                                borderLeft: '1px solid #E0E0E0',
-                                borderRadius: '0',
-                              }}
-                            >
-                              <CachedIcon
-                                variant='contained'
-                                onClick={handleReloadCaptcha}
-                              />
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-
-                  <Grid Grid item xs={5}>
-                    <AppTextField
-                      id='filled-basic'
-                      placeholder='Ketik Captcha disamping'
-                      name='captcha'
-                      variant='outlined'
-                      value={inputValue}
-                      onChange={handleChange}
-                      fullWidth
-                    />
-                  </Grid>
                 </Grid>
-
-                <Button
-                  variant='contained'
-                  color='primary'
-                  onClick={handleSubmit}
-                  sx={{
-                    fontWeight: 'regular',
-                    fontSize: 16,
-                    textTransform: 'capitalize',
-                    borderRadius: '20px',
-                    width: '100%',
-                    bgcolor: '#E42313',
-                    marginTop: '30px',
-                  }}
-                >
-                  Login
-                </Button>
-
-                <Typography
-                  variant='h6'
-                  sx={{
-                    textAlign: 'center',
-                    color: '#303030',
-                    fontSize: '14px',
-                    marginTop: '18px',
-                  }}
-                >
-                  Dengan masuk, Anda menyetujui{' '}
-                  <Link
-                    href='/ketentuan-pengguna'
-                    color='primary'
-                    underline='always'
-                  >
-                    Ketentuan Pengguna
-                  </Link>{' '}
-                  kami
-                </Typography>
-              </Form>
-            )}
-          </Formik>
-
+                <Grid item xs={5}>
+                  <TextField
+                    id='filled-basic'
+                    placeholder='Ketik Captcha disamping'
+                    name='captchaValue'
+                    variant='outlined'
+                    onChange={formik.handleChange}
+                    fullWidth
+                    value={formik.values.captchaValue}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.captchaValue &&
+                      Boolean(formik.errors.captchaValue)
+                    }
+                    helperText={
+                      formik.touched.captchaValue && formik.errors.captchaValue
+                    }
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+            <Button
+              variant='contained'
+              color='primary'
+              type='submit'
+              sx={{
+                fontWeight: 'regular',
+                fontSize: 16,
+                textTransform: 'capitalize',
+                borderRadius: '20px',
+                width: '100%',
+                bgcolor: '#E42313',
+                marginTop: '30px',
+              }}
+            >
+              Login
+            </Button>
+            <Typography
+              variant='h6'
+              sx={{
+                textAlign: 'center',
+                color: '#303030',
+                fontSize: '14px',
+                marginTop: '18px',
+              }}
+            >
+              Dengan masuk, Anda menyetujui{' '}
+              <Link
+                href='/ketentuan-pengguna'
+                color='primary'
+                underline='always'
+              >
+                Ketentuan Pengguna
+              </Link>{' '}
+              kami
+            </Typography>
+          </form>
           <Typography
             variant='h6'
             sx={{
@@ -316,7 +307,6 @@ const SigninFirebase = () => {
       ) : pathname === '/signin/verifikasi3' ? (
         <Verifikasi3 />
       ) : null}
-
       <AppInfoView />
     </AuthWrapper>
   );
