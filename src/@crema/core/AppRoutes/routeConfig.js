@@ -24,6 +24,14 @@ const routesConfig = [
         icon: <BiAlignLeft />,
         url: '/sample/page-2',
       },
+      {
+        id: 'dashboard',
+        title: 'Dashboard',
+        messageId: 'sidebar.sample.Dashboard',
+        type: 'item',
+        icon: <BiAlignLeft />,
+        url: '/Page/Dashboard',
+      },
     ],
   },
 ];

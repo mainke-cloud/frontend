@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Typography, Box, Collapse, Badge } from '@mui/material';
 import FeatherIcon from 'feather-icons-react';
+import { useAuthMethod } from '@crema/hooks/AuthHooks';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import dot from '../../../../../../assets/icon/sub-menu-item.svg';
 import searchIcon from '../../../../../../assets/icon/search.svg';
 import homeIcon from '../../../../../../assets/icon/home.svg';
@@ -14,9 +16,10 @@ import settingsIcon from '../../../../../../assets/icon/settings.svg';
 import scanIcon from '../../../../../../assets/icon/scan.svg';
 import securityIcon from '../../../../../../assets/icon/shield.svg';
 import helpIcon from '../../../../../../assets/icon/help-circle.svg';
-import userIcon from '../../../../../../assets/icon/user.svg';
+import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
-import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
 
 const iconMap = {
   search: searchIcon,
@@ -30,7 +33,7 @@ const iconMap = {
   scan: scanIcon,
   security: securityIcon,
   help: helpIcon,
-  user: userIcon,
+  profile: profileIcon,
   logout: logoutIcon,
 };
 
@@ -45,6 +48,9 @@ const BucketMinibarItem = (props) => {
     onAddTab,
     onMoveTab,
   } = props;
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
   const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
   const handleClick = () => {
@@ -58,7 +64,6 @@ const BucketMinibarItem = (props) => {
   }, [isHover]);
 
   const handleAddTab = () => {
-    console.log('gimank');
     if (onAddTab) {
       onAddTab();
     }
@@ -67,6 +72,13 @@ const BucketMinibarItem = (props) => {
   const handleMoveTab = (tabId) => {
     if (onMoveTab) {
       onMoveTab(tabId);
+    }
+  };
+
+  const handleSidebar = (name) => {
+    dispatch(setSidebarName(name));
+    if(name==='Todo'){
+      dispatch(addTab(id, tabs, name));
     }
   };
 
@@ -86,14 +98,16 @@ const BucketMinibarItem = (props) => {
         }
       >
         <Box className='icon-btn'>
-          <Badge
-            color='primary'
-            badgeContent={badge}
-            max={999}
-            variant={isHover ? 'standard' : 'dot'}
-          >
-            <img src={iconMap[icon]} alt={icon} />
-          </Badge>
+          <Box className='icon-img'>
+            <Badge
+              color='primary'
+              badgeContent={badge}
+              max={999}
+              variant={isHover ? 'standard' : 'dot'}
+            >
+              <img src={iconMap[icon]} alt={icon} />
+            </Badge>
+          </Box>
           {isHover && <Typography className='menu-text'>{text}</Typography>}
         </Box>
         {more && isHover && (
@@ -106,7 +120,11 @@ const BucketMinibarItem = (props) => {
           <Box className='submenu-icon-btn' onClick={handleClick}>
             {subMenu &&
               subMenu.map((item, index) => (
-                <IconButton key={index} className='submenu-item'>
+                <IconButton
+                  key={index}
+                  className='submenu-item'
+                  onClick={() => handleSidebar(item.name)}
+                >
                   <img
                     src={dot}
                     alt='dot'

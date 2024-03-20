@@ -1,34 +1,18 @@
 import React, { useRef, useState } from 'react';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Stack,
-  Modal,
-} from '@mui/material';
+import { Box, TextField, Button, Typography, Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '39vw',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 7,
-};
+import { 
+  // useNavigate, 
+  useLocation } from 'react-router-dom';
+import { useAuthMethod } from '@crema/hooks/AuthHooks';
 
 const Verifikasi5 = () => {
   const [values, setValues] = useState(Array(6).fill(''));
   const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { logInWithEmailAndPassword, 
+    // logInWithPopup
+   } = useAuthMethod();
 
   const handleInputChange = (index, event) => {
     const { value } = event.target;
@@ -52,7 +36,14 @@ const Verifikasi5 = () => {
       }
     }
   };
+  const location = useLocation();
+  const valuess = location.state && location.state.values;
 
+  const handleKonfirmasi = () => {
+    const { email, password } = valuess;
+    const valuessss = { email, password };
+    logInWithEmailAndPassword(valuessss);
+  };
   return (
     <Box width='46vw' height='100%' display='grid' bgcolor='#FFFFFF'>
       <Box
@@ -205,9 +196,9 @@ const Verifikasi5 = () => {
               </Button>
 
               <Button
+                onClick={() => handleKonfirmasi()}
                 variant='contained'
                 color='primary'
-                onClick={handleOpen}
                 sx={{
                   fontWeight: 'regular',
                   fontSize: 16,
@@ -221,59 +212,6 @@ const Verifikasi5 = () => {
               >
                 Konfirmasi
               </Button>
-
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby='modal-modal-title'
-                aria-describedby='modal-modal-description'
-              >
-                <Stack sx={style} spacing={'20px'} borderRadius={'4px'}>
-                  <Typography variant='h1'>Percaya browser ini?</Typography>
-                  <Typography variant='body1' marginTop={'10px'}>
-                    Jika Anda memilih untuk mempercayai browser ini, Anda tidak
-                    akan dimintai kode verifikasi saat anda masuk kembali.
-                  </Typography>
-                  <Typography variant='body1' color={'red'} marginTop={'8px'}>
-                    Untuk perangkat publik, kami sangat menyarankan untuk tidak
-                    mempercayai browser ini.
-                  </Typography>
-
-                  <Stack
-                    direction={'row'}
-                    justifyContent={'center'}
-                    spacing={5}
-                  >
-                    <Stack flex={1}>
-                      <Button
-                        variant='contained'
-                        size='large'
-                        sx={{
-                          bgcolor: '#8C8F93',
-                          '&:hover': {
-                            bgcolor: '#8C8F93',
-                          },
-                        }}
-                      >
-                        <Typography fontSize={'large'}>
-                          Jangan Percaya
-                        </Typography>
-                      </Button>
-                    </Stack>
-                    <Stack flex={1}>
-                      <Button
-                        variant='contained'
-                        size='large'
-                        sx={{
-                          bgcolor: '#E42313',
-                        }}
-                      >
-                        <Typography fontSize={'large'}>Percayai</Typography>
-                      </Button>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Modal>
             </Stack>
           </Box>
         </Paper>

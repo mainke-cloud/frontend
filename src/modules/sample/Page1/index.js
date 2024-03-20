@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addTab,
   activateTab,
   closeTab,
-  closeAllTabs,
   reorderTab,
+  // addTab,
+  // closeAllTabs,
 } from '../../../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
-import Button from '@mui/material/Button';
-import AppDashboard from '@crema/components/AppDashboard';
-import '../Page2/cobain.css';
+import '../Page1/tab.css';
 
 const Page1 = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
-  const id = useSelector((state) => state.tab.idCounter);
+  // const id = useSelector((state) => state.tab.idCounter);
 
   const handleTabClose = (tabId) => {
     dispatch(closeTab(tabId, tabs));
@@ -29,18 +27,9 @@ const Page1 = () => {
   const handleTabActive = (tabId) => {
     dispatch(activateTab(tabId, tabs));
   };
-
-  const handleAddTab = () => {
-    dispatch(addTab(id, tabs));
-  };
-
-  const handleCloseAllTabs = () => {
-    dispatch(closeAllTabs());
-  };
-
   return (
     <>
-      <Box>
+      <Box sx={{ pl: 2 }}>
         <Tabs
           darkMode={false}
           onTabClose={handleTabClose}
@@ -48,10 +37,6 @@ const Page1 = () => {
           onTabActive={handleTabActive}
           tabs={tabs}
         />
-      </Box>
-      <Box 
-      sx={{ pl: 4 , gap: 2 }}
-      >
         <Box>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>

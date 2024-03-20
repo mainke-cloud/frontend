@@ -1,12 +1,12 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
   return (
     <Box
       sx={{
-        width: 520,
+        width: 600,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -22,7 +22,9 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
         '& .bit-bucket-btn': {
           position: 'absolute',
           top: 20,
-          right: '-4px',
+          width: 30,
+          height: 30,
+          right: '26px',
           borderRadius: '50%',
           backgroundColor: (theme) => theme.palette.primary.main,
           color: (theme) => theme.palette.primary.contrastText,
@@ -32,14 +34,16 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
           transition: 'max-height 0.8s ease',
           '& svg': {
             display: 'block',
+            margin: 'auto', 
+            marginTop: 'calc(50% - 12px)', 
           },
         },
         '& .bit-bucket-btn-cls': {
-          width: 18,
+          width: 20,
           height: 140,
           top: 0,
           right: 0,
-          paddingTop: 6,
+          paddingTop: 4,
           borderRadius: 0,
           borderBottomRightRadius: 3,
           transition: 'max-height 0.8s ease',

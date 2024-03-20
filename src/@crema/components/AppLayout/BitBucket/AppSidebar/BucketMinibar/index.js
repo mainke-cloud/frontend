@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, InputBase, Typography, IconButton } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import BucketMinibarWrapper from './BucketMinibarWrapper';
 import BucketMinibarMenu from './BucketMinibarMenu';
 import BucketMinibarItem from './BucketMinibarItem';
 import logo1 from '../../../../../../assets/icon/logo1.svg';
 import userProfile from '../../../../../../assets/icon/user-profile.svg';
 import search from '../../../../../../assets/icon/search.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
-import { useAuthMethod, useAuthUser } from '@crema/hooks/AuthHooks';
 
 const BucketMinibar = (props) => {
   const { isHover, setHover } = props;
@@ -24,6 +25,9 @@ const BucketMinibar = (props) => {
     console.log(tabId);
     dispatch(activateTab(tabId, tabs));
   };
+  const handleChangeSidebar = (name) => {
+    dispatch(setSidebarName(name));
+  }
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>
@@ -84,7 +88,6 @@ const BucketMinibar = (props) => {
             <BucketMinibarItem badge={0} icon='search' />
           )}
         </Box>
-
         <BucketMinibarMenu isHover={isHover} title='Menu'>
           <BucketMinibarItem
             isHover={isHover}
@@ -98,6 +101,7 @@ const BucketMinibar = (props) => {
             badge={10}
             icon='inbox'
             text='Surat Masuk'
+            onAddTab={()=>handleChangeSidebar("Surat Masuk")}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -116,6 +120,7 @@ const BucketMinibar = (props) => {
             badge={12}
             icon='mail'
             text='Surat Keluar'
+            onAddTab={()=>handleChangeSidebar("Surat Keluar")}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -128,15 +133,15 @@ const BucketMinibar = (props) => {
             isHover={isHover}
             badge={0}
             icon='archive'
-            text='Archive'
+            text='Arsip'
             more={true}
             subMenu={[
               { name: 'Surat Masuk' },
               { name: 'Surat Keluar' },
-              { name: 'Surat Tertunda' },
+              { name: 'Surat Dibatalkan' },
               { name: 'Disposisi' },
               { name: 'Disposisi Saya' },
-              { name: 'Todo' },
+              { name: 'To Do' },
             ]}
           />
           <BucketMinibarItem
@@ -166,21 +171,21 @@ const BucketMinibar = (props) => {
             isHover={isHover}
             badge={0}
             icon='security'
-            text='Security'
+            text='Keamanan'
             onAddTab={() => handleAddTab('Keamanan')}
           />
           <BucketMinibarItem
             isHover={isHover}
             badge={0}
             icon='help'
-            text='Help'
+            text='Bantuan'
             onAddTab={() => handleAddTab('FAQ')}
           />
           <BucketMinibarItem
             isHover={isHover}
             badge={0}
-            icon='user'
-            text='Profile'
+            icon='profile'
+            text='Profil'
             onAddTab={() => handleAddTab('Profile')}
           />
           <BucketMinibarItem

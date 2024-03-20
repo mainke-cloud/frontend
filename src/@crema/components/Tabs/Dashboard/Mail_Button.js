@@ -1,27 +1,46 @@
 import React from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types'; // Import PropTypes
-const Mail_Button = ({ bgColor, textColor, text, subText, image }) => {
+import AppCard from '@crema/components/AppCard';
+import { useState } from 'react';
+
+const Mail_Button = ({ bgColor, bgHover, textColor, text, subText, image }) => {
+  const [Link, setLink] = useState();
+
+  const handleClick = () => {
+      setLink(!Link);
+  };
   return (
-    <Button
-      variant='contained'
-      disableElevation
-      sx={{ backgroundColor: bgColor, padding: '10px' }}
-    >
-      <img src={image} style={{ marginRight: '8px' }} />
-      <Stack alignItems='flex-start'>
-        <Typography variant='h3' sx={{ color: textColor }}>
-          {text}
-        </Typography>
-        <Typography variant='body1' sx={{ color: textColor }}>
-          {subText}
-        </Typography>
-      </Stack>
-    </Button>
+    <AppCard 
+    sx={{ 
+      backgroundColor: bgColor, 
+      cursor: 'pointer',
+      '&:hover': {
+        backgroundColor: bgHover,
+      } 
+    }} 
+    onClick={handleClick} >
+      <Grid container >
+          <Grid item xs={3}>
+            <img src={image} style={{ marginRight: '8px', width: 45, heigh: 45 }} />
+          </Grid>
+          <Grid item xs={9}>
+            <Stack alignItems='flex-start'>
+              <Typography variant='h3' sx={{ color: textColor }}>
+                {text}
+              </Typography>
+              <Typography variant='body1' sx={{ color: textColor }}>
+                {subText}
+              </Typography>
+            </Stack>                  
+          </Grid>
+      </Grid>
+    </AppCard>
   );
 };
 Mail_Button.propTypes = {
   bgColor: PropTypes.string.isRequired,
+  bgHover: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   subText: PropTypes.string.isRequired,

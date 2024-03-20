@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Divider,
-  Grid,
   IconButton,
   Paper,
   Stack,
@@ -10,11 +9,11 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import QrImage from '../../../assets/LoginPage/qrcode.png';
+import { useLocation } from 'react-router-dom';
 
 const Verifikasi3 = () => {
   const [values, setValues] = useState(Array(6).fill(''));
@@ -42,11 +41,12 @@ const Verifikasi3 = () => {
       }
     }
   };
-
+  const location = useLocation();
+  const valuess = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi4');
+    navigate('/signin/verifikasi4', { state: { valuess } });
   };
 
   const allValuesFilled = values.every((value) => value.length === 1);
