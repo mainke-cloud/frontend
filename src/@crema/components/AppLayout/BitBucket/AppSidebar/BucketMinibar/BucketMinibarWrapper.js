@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { alpha, Box } from '@mui/material';
-import { useSidebarContext } from '@crema/context/AppContextProvider/SidebarContextProvider';
-import { ThemeMode } from '@crema/constants/AppEnums';
+// import { ThemeMode } from '@crema/constants/AppEnums';
+// import { useSidebarContext } from '@crema/context/AppContextProvider/SidebarContextProvider';
 
 const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
-  const { sidebarBgColor, mode, sidebarTextColor } = useSidebarContext();
+  // const { sidebarBgColor, mode, sidebarTextColor } = useSidebarContext();
 
   return (
     <Box
@@ -16,7 +16,8 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         width: isHover ? 280 : 80,
         height: 'auto',
         maxHeight: '100vh',
-        backgroundColor: sidebarBgColor,
+        backgroundColor: '#fff',
+        // backgroundColor: sidebarBgColor,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -34,10 +35,11 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           zIndex: 1,
           width: '100%',
           height: '100%',
-          backgroundColor: (theme) =>
-            mode === ThemeMode.LIGHT
-              ? alpha(theme.palette.common.white, 0.05)
-              : alpha(theme.palette.common.black, 0.05),
+          backgroundColor: '#fff',
+          // backgroundColor: (theme) =>
+          //   mode === ThemeMode.LIGHT
+          //     ? alpha(theme.palette.common.white, 0.05)
+          //     : alpha(theme.palette.common.black, 0.05),
         },
         '& > *': {
           position: 'relative',
@@ -51,7 +53,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           gap: '14px',
         },
         '& .user-profile': {
-          backgroundColor: (theme) => theme.palette.background.paper,
+          backgroundColor: '#fff',
           border: '1px solid #D1D9E2',
           borderRadius: '5px',
           display: 'flex',
@@ -59,7 +61,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           gap: '12px',
         },
         '& .search': {
-          backgroundColor: (theme) => theme.palette.background.paper,
+          backgroundColor: '#fff',
           display: 'flex',
           justifyContent: 'space-between',
           border: '1px solid #D9DDE3',
@@ -73,28 +75,44 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           },
         },
         '& .menu-icon-btn': {
+          backgroundColor: '#fff',
+          // color: isHover ? 'red' : '#fff',
+          // color: sidebarTextColor,
+          color: '#4B4747',
           width: '100%',
-          backgroundColor: (theme) => theme.palette.background.paper,
-          color: sidebarTextColor,
           border: '0 none',
           borderRadius: 0,
-          mt: '4px',
-          padding: '11px',
-          '&:hover, &:focus': {
-            color: (theme) => theme.palette.text.primary,
-            backgroundColor: (theme) =>
-            alpha(theme.palette.background.default, 0.9),
+          padding: '4px 11px',
+          '&:hover': {
+            backgroundColor: '#F4F4F4',
+            color: '#E42313',
             borderColor: (theme) => alpha(theme.palette.text.secondary, 0.25),
+            // color: (theme) => theme.palette.text.primary,
+            // backgroundColor: (theme) =>
+            // alpha(theme.palette.background.default, 0.9),
           },
         },
         '& .icon-btn': {
           width: '100%',
           display: 'flex',
           justifyContent: isHover ? 'start' : 'center',
+          alignItems: 'center',
+          // backgroundColor: 'blue',
           gap: '12px',
         },
+        '& .icon-img': {
+          width: '40px',
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          // backgroundColor: 'blue',
+          '& img': {
+            // width: '20px',
+            // backgroundColor: 'red',
+          }
+        },
         '& .menu-text': {
-          color: '#4B4747',
           fontWeight: '700',
           fontSize: '14px',
           lineHeight: '21px',
@@ -105,11 +123,12 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           paddingBottom: 1.5,
           textAlign: isHover ? 'none' : 'center',
           '& img': {
-            width: '20px',
+            // width: '20px',
+            // backgroundColor: 'red',
           },
         },
         '& .menu-item-boundary': {
-          backgroundColor: (theme) => theme.palette.background.paper,
+          backgroundColor: '#fff',
           fontWeight: '400',
           fontSize: '16px',
           lineHeight: '24px',
@@ -128,9 +147,12 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           borderRadius: 0,
           padding: '11px 24px',
           gap: '12px',
+          '&:hover': {
+            backgroundColor: '#F4F4F4',
+            color: '#E42313',
+          },
         },
         '& .submenu-text': {
-          color:'#4B4747',
           fontWeight:'700',
           fontSize:'14px',
           lineHeight:'21px',
