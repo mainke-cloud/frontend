@@ -14,7 +14,7 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
     <>
       <AppCard  
       sx={{ 
-        height: 90, 
+        height: 80, 
         width: 299, 
         cursor: 'pointer', 
         '&:hover': {
@@ -24,7 +24,7 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
       onClick={handleClick} >
         <Grid container alignItems="center" justifyContent="center">
           <Grid item xs={3}>
-            <img src={image} style={{ marginRight: '8px' }} />
+            <img src={image} style={{ marginRight: '8px', height: 45, width: 45 }} />
           </Grid>
           <Grid item xs={9}>
             <Stack spacing={1}>

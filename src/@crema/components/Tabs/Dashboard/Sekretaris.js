@@ -35,11 +35,15 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                             sx={{
                               backgroundColor: isActive ? '#A3E6CD' : '#D8DAE5',
                               height: '22px',
-                              width: isActive ? '50px' : '80px',
+                              width: isActive ? '48px' : '77px',
                               borderRadius: 2,
                             }}
                         >
-                            <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2, color: '#317159' }}>
+                            <Typography 
+                                sx={{ 
+                                    height: '22px',  
+                                    marginLeft: 2, 
+                                    color: '#317159' }}>
                                 {isActive ? 'Aktif' : 'Non Aktif'}
                             </Typography>
                         </Box>

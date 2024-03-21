@@ -8,14 +8,12 @@ import {
   Paper,
 } from '@mui/material';
 
-import person from '../../../../assets/Dashboard/Dashboard_girl.png';
+import person from '../../../../assets/Dashboard/Dashboard_Girl.png';
 import Refresh from '../../../../assets/Dashboard/Refresh_icon.png';
-import Write from '../../../../assets/Dashboard/Write_icon.png';
-import More from '../../../../assets/Dashboard/More_icon.png';
 import Plus from '../../../../assets/Dashboard/Plus_icon.png'
 import Disposisi from '../../../../assets/Dashboard/Disposisi_icon.png';
-import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
-import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
+import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_icon.png';
+import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_Tindak_Lanjut_icon.png';
 import Sekretaris_Icon from '../../../../assets/Dashboard/Sekretaris_Icon.png';
 import Delegasi_Icon from '../../../../assets/Dashboard/Delegasi_Icon.png';
 import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
@@ -32,6 +30,7 @@ import Sekretaris from './Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 
 import { useState } from 'react';
+import AppScrollbar from '@crema/components/AppScrollbar';
 
 const Dashboard = () => {
   const [AddSekretaris, setAddSekretaris] = useState(false);
@@ -73,8 +72,17 @@ const Dashboard = () => {
             </Stack>
           </Grid>
           <Grid item xs={1} alignItems="center" justifyContent="center">
-              <IconButton  sx={{ backgroundColor: '#2E3032', width: 40, height: 40, marginTop: 5 }}>
-                <img style={{height: 16, width: 16}} src={Refresh} />
+              <IconButton  
+                sx={{ 
+                  backgroundColor: '#2E3032', 
+                  width: 40, 
+                  height: 40, 
+                  marginTop: 5,
+                  '&:hover': {
+                    backgroundColor: '#5C5E61' // Adjust the opacity level as needed
+                  }
+                }}>
+                <img style={{height: 20, width: 20}} src={Refresh} />
               </IconButton>
           </Grid>
         </Grid>
@@ -173,7 +181,7 @@ const Dashboard = () => {
 
         <Grid item xs={3} height={'100%'}>
           <Stack direction='column' spacing={5}>
-            <AppCard2 sx={{ height: '50%'}}>
+            <AppCard2 sx={{ height: '290px' }}>
 
               <Box sx={{ backgroundColor: '#DFE4F7', borderTopLeftRadius: 2, borderTopRightRadius: 2 }}>
                 <Stack direction='row' alignItems="center"   justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding:2 }}>
@@ -193,20 +201,33 @@ const Dashboard = () => {
                   ID="Taufik Sulaeman/ 8900002/ ARMS"
                 />
               )} */}
-              <Sekretaris 
-                Profile={avatar} 
-                JobDesk="Manager development" 
-                ID="Taufik Sulaeman/ 8900002/ ARMS"
-              />
+              <AppScrollbar>
+                <Box
+                  sx={{
+                    height: '216px',
+                    overflowY: 'auto',
+                    paddingBottom: '10px',  
+                    overflowX: 'hidden'
+                  }}
+                >
+                  <Sekretaris 
+                    Profile={avatar} 
+                    JobDesk="Manager development" 
+                    ID="Taufik Sulaeman/ 8900002/ ARMS"
+                  />
 
-              <Sekretaris 
-                Profile={avatar} 
-                JobDesk="Manager development" 
-                ID="Taufik Sulaeman/ 8900002/ ARMS"
-              />
+                  <Sekretaris 
+                    Profile={avatar} 
+                    JobDesk="Manager development" 
+                    ID="Taufik Sulaeman/ 8900002/ ARMS"
+                  />
+                </Box>
+              </AppScrollbar>
+              
             
             </AppCard2>
-              <AppCard2 sx={{ height: '50%'}} >
+
+            <AppCard2 sx={{ height: '290px'}} >
               <Box sx={{ backgroundColor: '#F9E5CF', borderTopLeftRadius: 2, borderTopRightRadius: 2, marginTop: 0}}>
                 <Stack direction='row' alignItems="center"  justifyContent="space-between" spacing={2} sx={{ marginBottom: 3, marginLeft: 2, padding: 2 }}>
                   <Stack direction="row" alignItems="center" spacing={2}>
@@ -219,6 +240,15 @@ const Dashboard = () => {
                 </Stack>                
               </Box>
 
+              <AppScrollbar>
+                <Box
+                  sx={{
+                    height: '216px',
+                    overflowY: 'auto',
+                    paddingBottom: '10px',
+                    overflowX: 'hidden'
+                  }}
+                >
                 <Delegasi 
                   Profile={avatar} 
                   JobDesk='Manager development' 
@@ -230,7 +260,9 @@ const Dashboard = () => {
                   JobDesk='Manager development' 
                   ID='Taufik Sulaeman/ 8900002/ ARMS'
                 />
-            
+                </Box>
+              </AppScrollbar>         
+              
             </AppCard2>
           </Stack>
         </Grid>
