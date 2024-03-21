@@ -47,7 +47,7 @@ const Dashboard = () => {
   const [isCollapsed, setCollapsed] = useState(false);
   return (
     <>
-      <Paper elevation={0}>
+      <Paper elevation={0} sx={{marginBottom: 5}}>
         <Grid container spacing={4} sx={{ paddingX: 8, }}>
           <Grid item xs={11}>
             <Stack
@@ -57,9 +57,14 @@ const Dashboard = () => {
               spacing={3}
             >
               <Stack direction='column' spacing={3}>
-                <Typography variant='h1'>
-                  Hello User T0001, Welcome back
-                </Typography>
+                <Stack direction="row" spacing={1}>
+                  <Typography variant='h1'>
+                    Selamat Datang Kembali,
+                  </Typography>
+                  <Typography variant='h1'>
+                    User T0001
+                  </Typography>
+                </Stack>
                 {/* input time and date here */}
                 <Typography variant='body1'>
                   11.20 AM Senin, 26 Februari 2024
@@ -86,61 +91,62 @@ const Dashboard = () => {
               </IconButton>
           </Grid>
         </Grid>
-      </Paper>
-      <Grid container columnSpacing={5} padding={3}>
-        <Grid item xs={12} >
-            <Stack 
-              direction={{ xs: 'column', md: 'row' }} 
-              spacing={5} 
-              alignItems={'center'}>
+        <Grid container columnSpacing={5} padding={3}>
+          <Grid item xs={12} >
+              <Stack 
+                direction={{ xs: 'column', md: 'row' }} 
+                spacing={5} 
+                alignItems={'center'}>
 
-              <Stack flex={1}>
-                <Mail_Button
-                  bgColor='#F9E4E4'
-                  bgHover='#F4CACA'
-                  textColor='#E42313'
-                  text='Buat Surat Internal'
-                  subText='Info'
-                  image={Surat_Internal}
-                />
+                <Stack flex={1}>
+                  <Mail_Button
+                    bgColor='#F9E4E4'
+                    bgHover='#F4CACA'
+                    textColor='#E42313'
+                    text='Buat Surat Internal'
+                    subText='Info'
+                    image={Surat_Internal}
+                  />
+                </Stack>
+
+                <Stack flex={1}>
+                  <Mail_Button
+                    bgColor='#F9E5CF'
+                    bgHover='#FFDFA6'
+                    textColor='#C45900'
+                    text='Buat Surat External'
+                    subText='Info'
+                    image={Surat_Eksternal}
+                  />
+                </Stack>
+
+                <Stack flex={1}>
+                  <Mail_Button
+                    bgColor='#DFE4F7'
+                    bgHover='#D6E0FF'
+                    textColor='#4D6FD4'
+                    text='Buat Surat Undangan'
+                    subText='Info'
+                    image={Surat_Undangan}
+                  />
+                </Stack>
+
+                <Stack flex={1}>
+                  <Mail_Button
+                    bgColor='#DCF2EA'
+                    bgHover='#A3E6CD'
+                    textColor='#429777'
+                    text='Buat Surat Delegasi'
+                    subText='Info'
+                    image={Surat_Delegasi}
+                  />
+                </Stack>
+
               </Stack>
-
-              <Stack flex={1}>
-                <Mail_Button
-                  bgColor='#F9E5CF'
-                  bgHover='#FFDFA6'
-                  textColor='#C45900'
-                  text='Buat Surat External'
-                  subText='Info'
-                  image={Surat_Eksternal}
-                />
-              </Stack>
-
-              <Stack flex={1}>
-                <Mail_Button
-                  bgColor='#DFE4F7'
-                  bgHover='#D6E0FF'
-                  textColor='#4D6FD4'
-                  text='Buat Surat Undangan'
-                  subText='Info'
-                  image={Surat_Undangan}
-                />
-              </Stack>
-
-              <Stack flex={1}>
-                <Mail_Button
-                  bgColor='#DCF2EA'
-                  bgHover='#A3E6CD'
-                  textColor='#429777'
-                  text='Buat Surat Delegasi'
-                  subText='Info'
-                  image={Surat_Delegasi}
-                />
-              </Stack>
-
-            </Stack>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
+
       <Grid container columnSpacing={5} height={'100vh'} padding={3}>
         <Grid item xs={9}>
           <Stack direction="column" spacing={5}>
