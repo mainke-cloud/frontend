@@ -65,9 +65,10 @@ const SigninFirebase = () => {
       password: 'Pass@1!@all',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, 
+    onSubmit: async (
+      values,
       // { setSubmitting }
-      ) => {
+    ) => {
       if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
@@ -123,187 +124,211 @@ const SigninFirebase = () => {
       {pathname === '/signin/verifikasi4' ? (
         <Verifikasi4 />
       ) : pathname === '/signin' ? (
-        <Stack
-          spacing={10}
-          width='46vw'
-          height='100%'
-          padding={20}
-          sx={{ bgcolor: '#FFFFFF' }}
+        <Box
+          width='50vw'
+          height='95%'
+          sx={{
+            bgcolor: '#FFFFFF',
+            borderRadius: '16px', // Menambahkan border radius 16px
+            border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+          }}
         >
-          <img
-            src={CoofisLogo}
-            style={{ height: '118.47px', width: '118.47px' }}
-          />
+          <Box px='116px' py='45px'>
+            <img
+              src={CoofisLogo}
+              style={{ height: '80px', width: '118.47px' }}
+            />
 
-          <Typography variant='h1'>Masuk NDE Telkom</Typography>
-
-          <form onSubmit={formik.handleSubmit}>
-            <Box>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Username
-              </Typography>
-              <TextField
-                sx={{ marginTop: '8px' }}
-                placeholder={'Masukan Username'}
-                name='email'
-                variant='outlined'
-                fullWidth
-                {...formik.getFieldProps('email')}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <PersonOutlineOutlinedIcon sx={{ color: 'black' }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.touched.email && formik.errors.email && (
-                <Typography variant='body2' color='error'>
-                  {formik.errors.email}
-                </Typography>
-              )}
-            </Box>
-            <Box marginTop={'18px'}>
-              <Typography
-                variant='h6'
-                sx={{ textAlign: 'start', color: '#303030', fontSize: '14px' }}
-              >
-                Password
-              </Typography>
-              <TextField
-                sx={{ marginTop: '8px' }}
-                type={showPassword ? 'text' : 'password'}
-                placeholder={'Masukan Password'}
-                name='password'
-                variant='outlined'
-                fullWidth
-                {...formik.getFieldProps('password')}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <LockOutlinedIcon sx={{ color: 'black' }} />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton onClick={toggleShowPassword} edge='end'>
-                        {showPassword ? (
-                          <VisibilityIcon />
-                        ) : (
-                          <VisibilityOffIcon />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.touched.password && formik.errors.password && (
-                <Typography variant='body2' color='error'>
-                  {formik.errors.password}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={{ marginTop: '18px' }}>
-              <Grid container noValidate autoComplete='off' columnSpacing={4}>
-                <Grid item xs={7}>
-                  <TextField
-                    fullWidth
-                    id='outlined-basic'
-                    name='captcha'
-                    variant='outlined'
-                    value={captcha}
-                    disabled
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          <Box
-                            border={'1px solid #E0E0E0'}
-                            height={'33px'}
-                            sx={{
-                              marginRight: '10px',
-                            }}
-                          ></Box>
-                          <IconButton onClick={handleReloadCaptcha}>
-                            <CachedIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={5}>
-                  <TextField
-                    id='filled-basic'
-                    placeholder='Ketik Captcha disamping'
-                    name='captchaValue'
-                    variant='outlined'
-                    onChange={formik.handleChange}
-                    fullWidth
-                    value={formik.values.captchaValue}
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.captchaValue &&
-                      Boolean(formik.errors.captchaValue)
-                    }
-                    helperText={
-                      formik.touched.captchaValue && formik.errors.captchaValue
-                    }
-                  />
-                </Grid>
-              </Grid>
-            </Box>
-            <Button
-              variant='contained'
-              color='primary'
-              type='submit'
-              sx={{
-                fontWeight: 'regular',
-                fontSize: 16,
-                textTransform: 'capitalize',
-                borderRadius: '10px',
-                width: '100%',
-                bgcolor: '#E42313',
-                marginTop: '18px',
-                height: '48px',
-              }}
+            <Typography
+              pt='24px'
+              variant='h1'
+              style={{ fontSize: '24px', fontWeight: 700 }}
             >
-              Masuk
-            </Button>
+              Masuk NDE Telkom
+            </Typography>
+
+            <form onSubmit={formik.handleSubmit}>
+              <Box>
+                <Typography
+                  pt='24px'
+                  variant='h6'
+                  sx={{
+                    textAlign: 'start',
+                    color: '#303030',
+                    fontSize: '14px',
+                  }}
+                >
+                  Username
+                </Typography>
+                <TextField
+                  sx={{ marginTop: '8px' }}
+                  placeholder={'Masukan Username'}
+                  name='email'
+                  variant='outlined'
+                  fullWidth
+                  {...formik.getFieldProps('email')}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <PersonOutlineOutlinedIcon sx={{ color: 'black' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <Typography variant='body2' color='error'>
+                    {formik.errors.email}
+                  </Typography>
+                )}
+              </Box>
+              <Box marginTop={'18px'}>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    textAlign: 'start',
+                    color: '#303030',
+                    fontSize: '14px',
+                  }}
+                >
+                  Password
+                </Typography>
+                <TextField
+                  sx={{ marginTop: '8px' }}
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder={'Masukan Password'}
+                  name='password'
+                  variant='outlined'
+                  fullWidth
+                  {...formik.getFieldProps('password')}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <LockOutlinedIcon sx={{ color: 'black' }} />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton onClick={toggleShowPassword} edge='end'>
+                          {showPassword ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <Typography variant='body2' color='error'>
+                    {formik.errors.password}
+                  </Typography>
+                )}
+              </Box>
+              <Box sx={{ marginTop: '18px' }}>
+                <Grid container noValidate autoComplete='off' columnSpacing={4}>
+                  <Grid item xs={7}>
+                    <TextField
+                      fullWidth
+                      id='outlined-basic'
+                      name='captcha'
+                      variant='outlined'
+                      value={captcha}
+                      multiline
+                      rows={2}
+                      disabled
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <Box
+                              border={'1px solid #E0E0E0'}
+                              height={'33px'}
+                              sx={{
+                                marginRight: '10px',
+                              }}
+                            ></Box>
+                            <IconButton onClick={handleReloadCaptcha}>
+                              <CachedIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      id='filled-basic'
+                      placeholder='Ketik Captcha disamping'
+                      name='captchaValue'
+                      variant='outlined'
+                      multiline
+                      rows={2}
+                      onChange={formik.handleChange}
+                      fullWidth
+                      value={formik.values.captchaValue}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.captchaValue &&
+                        Boolean(formik.errors.captchaValue)
+                      }
+                      helperText={
+                        formik.touched.captchaValue &&
+                        formik.errors.captchaValue
+                      }
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+              <Button
+                variant='contained'
+                color='primary'
+                type='submit'
+                sx={{
+                  fontWeight: 'regular',
+                  fontSize: 16,
+                  textTransform: 'capitalize',
+                  borderRadius: '10px',
+                  width: '100%',
+                  bgcolor: '#E42313',
+                  marginTop: '18px',
+                  height: '55px',
+                }}
+              >
+                Masuk
+              </Button>
+              <Typography
+                variant='h6'
+                sx={{
+                  color: '#303030',
+                  fontSize: '14px',
+                  marginTop: '18px',
+                }}
+              >
+                Dengan masuk, Anda menyetujui{' '}
+                <Link
+                  href='/ketentuan-pengguna'
+                  color='primary'
+                  underline='always'
+                >
+                  Ketentuan Pengguna
+                </Link>{' '}
+                kami.
+              </Typography>
+            </form>
             <Typography
               variant='h6'
               sx={{
-                color: '#303030',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-end',
+                color: '#A0A4A8',
                 fontSize: '14px',
-                marginTop: '18px',
+                marginTop: '60px',
               }}
             >
-              Dengan masuk, Anda menyetujui{' '}
-              <Link
-                href='/ketentuan-pengguna'
-                color='primary'
-                underline='always'
-              >
-                Ketentuan Pengguna
-              </Link>{' '}
-              kami.
+              PT ARM Solusi | version 1.0
             </Typography>
-          </form>
-          <Typography
-            variant='h6'
-            sx={{
-              justifyContent: 'flex-start',
-              alignItems: 'flex-end',
-              color: '#A0A4A8',
-              fontSize: '14px',
-              marginTop: '80px',
-            }}
-          >
-            PT ARM Solusi | version 1.0
-          </Typography>
-        </Stack>
+          </Box>
+        </Box>
       ) : pathname === '/signin/verifikasi5' ? (
         <Verifikasi5 />
       ) : pathname === '/signin/verifikasi1' ? (

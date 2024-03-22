@@ -1,15 +1,9 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import React from 'react';
+import { Box, Button, Divider, Paper, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
-import TwoFactorImage from '../../../assets/LoginPage/twofactor.png';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 const Verifikasi2 = () => {
   const location = useLocation();
@@ -19,85 +13,112 @@ const Verifikasi2 = () => {
     e.preventDefault();
     navigate('/signin/verifikasi3', { state: { values } });
   };
+
+  const kodeTelpon = [
+    { label: +62 },
+    { label: +2 },
+    { label: +3 },
+    { label: +4 },
+    { label: +5 },
+  ];
+  const [selectedOption, setSelectedOption] = useState(kodeTelpon[0]);
+
+  const handleChange = (event, newValue) => {
+    setSelectedOption(newValue);
+  };
   return (
     <Box
-      width='46vw'
-      height='100%'
-      display='grid'
-      alignContent='center'
-      px='3vw'
-      sx={{ bgcolor: '#FFFFFF' }}
+      width='50vw'
+      height='95%'
+      sx={{
+        bgcolor: '#FFFFFF',
+        borderRadius: '16px', // Menambahkan border radius 16px
+        border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+      }}
     >
-      <Paper elevation={3} sx={{ padding: '30px' }}>
+      <Box mt='162px' px='105px'>
         <Stack direction='row' alignItems='center'>
-          <ArrowBackButton path='/signin/verifikasi1' />
-
-          <Typography variant='h1' paddingLeft='30px'>
-            VERIFIKASI 2 LANGKAH
+          <Box pt='10px'>
+            <ArrowBackButton path='/signin/verifikasi1' />
+          </Box>
+          <Typography
+            variant='h1'
+            sx={{
+              color: '#151718',
+              fontSize: '36px',
+              fontWeight: 700,
+            }}
+          >
+            Dua Langkah Verifikasi
           </Typography>
         </Stack>
 
-        <Divider sx={{ bgcolor: 'black' }} />
-
         <Box
           sx={{
-            paddingTop: '20px',
-            textAlign: 'center',
+            textAlign: 'Left',
           }}
         >
-          <img src={TwoFactorImage} alt='gambar verifikasi 2 langkah' />
-
-          <Typography variant='h4' paddingTop='30px'>
-            Apakah anda sudah memiliki aplikasi TGPortal di perangkat anda ?
+          <Typography
+            variant='h4'
+            sx={{
+              color: '#474D66',
+              fontSize: '16px',
+              fontWeight: 400,
+            }}
+          >
+            Masukan nomor telepon yang anda percayai. Kami akan mengirim 6-digit
+            kode keamanan untuk mengkonfirmasi nomor telepon anda melalui SMS.
           </Typography>
+        </Box>
+        <Box px='95px'>
+          <Typography variant='h6' paddingTop='32px'>
+            Nomer Telepon
+          </Typography>
+          <Stack direction='row' gap='16px' pt='8px'>
+            <Autocomplete
+              disablePortal
+              id='combo-box-demo'
+              options={kodeTelpon}
+              value={selectedOption}
+              onChange={handleChange}
+              sx={{ width: '73px', height: '40px' }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <TextField variant='outlined' style={{ width: '270px' }} />
+          </Stack>
         </Box>
 
         <Stack
           direction='row'
-          paddingTop='70px'
-          paddingBottom='20px'
+          paddingTop='32px'
           justifyContent='center'
           gap='10px'
         >
           <Button
-            variant='outlined'
+            variant='contained'
             onClick={handleSubmit}
             sx={{
-              width: '12vw',
-              borderRadius: '50px',
-              color: '#4D6FD4',
-              border: '1px solid #4D6FD4',
-              '&:hover': {
-                border: '1px solid #4D6FD4',
-              },
-            }}
-          >
-            Tidak
-          </Button>
-
-          <Button
-            variant='contained'
-            sx={{
-              width: '12vw',
-              borderRadius: '50px',
+              width: '360px',
+              height: '48px',
+              borderRadius: '8px',
               bgcolor: '#E42313',
             }}
           >
-            Ya
+            Kirim Kode
           </Button>
         </Stack>
-      </Paper>
 
-      <Typography
-        variant='h6'
-        sx={{
-          color: '#A0A4A8',
-          fontSize: '14px',
-          paddingTop: '50px',
-        }}
-      >
-        Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
-      </Typography>
+        <Typography
+          variant='h6'
+          sx={{
+            color: '#A0A4A8',
+            fontSize: '14px',
+            paddingTop: '113px',
+          }}
+        >
+          Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+        </Typography>
+      </Box>
     </Box>
   );
 };
