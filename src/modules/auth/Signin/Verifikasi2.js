@@ -32,8 +32,8 @@ const Verifikasi2 = () => {
       height='95%'
       sx={{
         bgcolor: '#FFFFFF',
-        borderRadius: '16px', // Menambahkan border radius 16px
-        border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+        borderRadius: '16px',
+        border: '1px solid #D8D8D8',
       }}
     >
       <Box mt='162px' px='105px'>
@@ -47,6 +47,7 @@ const Verifikasi2 = () => {
               color: '#151718',
               fontSize: '36px',
               fontWeight: 700,
+              paddingLeft: '16px',
             }}
           >
             Dua Langkah Verifikasi
@@ -56,6 +57,7 @@ const Verifikasi2 = () => {
         <Box
           sx={{
             textAlign: 'Left',
+            paddingTop: '16px',
           }}
         >
           <Typography
@@ -71,7 +73,14 @@ const Verifikasi2 = () => {
           </Typography>
         </Box>
         <Box px='95px'>
-          <Typography variant='h6' paddingTop='32px'>
+          <Typography
+            paddingTop='32px'
+            sx={{
+              fontSize: '14px',
+              fontWeight: 700,
+              lineHeight: '20px',
+            }}
+          >
             Nomer Telepon
           </Typography>
           <Stack direction='row' gap='16px' pt='8px'>
@@ -113,10 +122,10 @@ const Verifikasi2 = () => {
           sx={{
             color: '#A0A4A8',
             fontSize: '14px',
-            paddingTop: '113px',
+            marginTop: '60px',
           }}
         >
-          Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+          Ⓒ PT ARM Solusi | version 1.0
         </Typography>
       </Box>
     </Box>

@@ -18,8 +18,8 @@ const Verifikasi1 = () => {
       height='95%'
       sx={{
         bgcolor: '#FFFFFF',
-        borderRadius: '16px', // Menambahkan border radius 16px
-        border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+        borderRadius: '16px',
+        border: '1px solid #D8D8D8',
       }}
     >
       <Box pt='40px' px='86px'>
@@ -31,16 +31,14 @@ const Verifikasi1 = () => {
           Pengecekan Keamanan
         </Typography>
 
-        <Typography
-          variant='h1'
-          paddingTop='14px'
-          style={{ fontSize: '18px', fontWeight: 500 }}
-        >
+        <Stack direction='row' paddingTop='14px' alignItems='center'>
           <IconButton disabled>
             <InfoOutlinedIcon sx={{ color: '#FFB020' }} />
           </IconButton>
-          Dua Langkah Verifikasimu Belum Aktif
-        </Typography>
+          <Typography variant='h1' sx={{ fontSize: '18px', fontWeight: 500 }}>
+            Dua Langkah Verifikasimu Belum Aktif
+          </Typography>
+        </Stack>
 
         <Typography
           variant='h6'
@@ -55,8 +53,8 @@ const Verifikasi1 = () => {
           mt='32px'
           sx={{
             bgcolor: '#FFFFFF',
-            borderRadius: '16px', // Menambahkan border radius 16px
-            border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+            borderRadius: '16px',
+            border: '1px solid #D8D8D8',
             backgroundColor: '#F7F8F9',
           }}
         >
@@ -95,10 +93,10 @@ const Verifikasi1 = () => {
               height: '48px',
               width: '12vw',
               borderRadius: '8px',
-              color: '#4D6FD4',
-              border: '1px solid #4D6FD4',
+              color: '#474D66',
+              border: '1px solid #C8CCD2',
               '&:hover': {
-                border: '1px solid #4D6FD4',
+                border: '1px solid #C8CCD2',
               },
             }}
           >
@@ -123,10 +121,10 @@ const Verifikasi1 = () => {
           sx={{
             color: '#A0A4A8',
             fontSize: '14px',
-            paddingTop: '60px',
+            marginTop: '60px',
           }}
         >
-          Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
+          Ⓒ PT ARM Solusi | version 1.0
         </Typography>
       </Box>
     </Box>

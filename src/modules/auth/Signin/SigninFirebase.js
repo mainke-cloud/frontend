@@ -92,7 +92,7 @@ const SigninFirebase = () => {
         }
 
         const responseData = await response.json();
-        console.log(responseData);
+        // console.log(responseData);
 
         if (responseData) {
           alert('Login berhasil!');
@@ -136,7 +136,8 @@ const SigninFirebase = () => {
           <Box px='116px' py='45px'>
             <img
               src={CoofisLogo}
-              style={{ height: '80px', width: '118.47px' }}
+              style={{ maxHeight: '80px' }}
+              alt='Coofis Logo'
             />
 
             <Typography
@@ -234,15 +235,13 @@ const SigninFirebase = () => {
                       name='captcha'
                       variant='outlined'
                       value={captcha}
-                      multiline
-                      rows={2}
                       disabled
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>
                             <Box
                               border={'1px solid #E0E0E0'}
-                              height={'33px'}
+                              height={'50px'}
                               sx={{
                                 marginRight: '10px',
                               }}
@@ -253,6 +252,12 @@ const SigninFirebase = () => {
                           </InputAdornment>
                         ),
                       }}
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          textAlign: 'center',
+                          height: '30px',
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={5}>
@@ -261,8 +266,6 @@ const SigninFirebase = () => {
                       placeholder='Ketik Captcha disamping'
                       name='captchaValue'
                       variant='outlined'
-                      multiline
-                      rows={2}
                       onChange={formik.handleChange}
                       fullWidth
                       value={formik.values.captchaValue}
@@ -275,10 +278,17 @@ const SigninFirebase = () => {
                         formik.touched.captchaValue &&
                         formik.errors.captchaValue
                       }
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          textAlign: 'center',
+                          height: '30px',
+                        },
+                      }}
                     />
                   </Grid>
                 </Grid>
               </Box>
+
               <Button
                 variant='contained'
                 color='primary'
@@ -315,17 +325,16 @@ const SigninFirebase = () => {
                 kami.
               </Typography>
             </form>
+
             <Typography
               variant='h6'
               sx={{
-                justifyContent: 'flex-start',
-                alignItems: 'flex-end',
                 color: '#A0A4A8',
                 fontSize: '14px',
                 marginTop: '60px',
               }}
             >
-              PT ARM Solusi | version 1.0
+              Ⓒ PT ARM Solusi | version 1.0
             </Typography>
           </Box>
         </Box>

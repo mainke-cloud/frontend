@@ -1,21 +1,32 @@
 import {
   Box,
   Button,
-  Divider,
-  IconButton,
-  Paper,
+  Modal,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
-import QrImage from '../../../assets/LoginPage/qrcode.png';
 import { useLocation } from 'react-router-dom';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '34vw',
+  bgcolor: 'background.paper',
+  p: '20px',
+  borderRadius: '4px',
+};
+
 const Verifikasi3 = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [values, setValues] = useState(Array(6).fill(''));
   const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
 
@@ -53,55 +64,49 @@ const Verifikasi3 = () => {
 
   return (
     <Box
-      width='46vw'
-      height='100%'
+      width='50vw'
+      height='95%'
       display='grid'
       alignContent='center'
-      px='3vw'
-      sx={{ bgcolor: '#FFFFFF' }}
+      sx={{
+        bgcolor: '#FFFFFF',
+        borderRadius: '16px',
+        border: '1px solid #D8D8D8',
+      }}
     >
-      <Paper elevation={3} sx={{ padding: '30px' }}>
+      <Box mx='120px'>
         <Stack direction='row' alignItems='center'>
-          <ArrowBackButton path='/signin/verifikasi2' />
-
-          <Typography variant='h1' paddingLeft='30px'>
-            VERIFIKASI 2 LANGKAH
+          <Box pt='10px'>
+            <ArrowBackButton path='/signin/verifikasi2' />
+          </Box>
+          <Typography
+            variant='h1'
+            sx={{
+              color: '#151718',
+              fontSize: '36px',
+              fontWeight: 700,
+              paddingLeft: '16px',
+            }}
+          >
+            Dua Langkah Verifikasi
           </Typography>
         </Stack>
 
-        <Divider sx={{ bgcolor: 'black' }} />
+        <Typography paddingTop='16px' fontSize='16px' fontWeight='400'>
+          Kode verifikasi 6-digit telah dikirim ke nomor telepon Anda yang
+          diakhiri dengan **********33
+        </Typography>
 
-        <Box display='grid' justifyItems='center'>
-          <Typography variant='h5' paddingTop='20px' paddingBottom='20px'>
-            Buka Aplikasi TGPortal pada ponsel anda lalu scan kode QR berikut
+        <Stack marginTop='32px' mx='50px'>
+          <Typography fontSize='14px' fontWeight=' 700'>
+            Masukan Kode Verifikasi
           </Typography>
-
-          <img src={QrImage} alt='gambar qr' />
-
-          <Typography variant='body1' pt='10px'>
-            Atau masuk dengan kode manual
-          </Typography>
-
-          <Stack direction='row' paddingTop='20px' alignItems='center'>
-            <Typography variant='h3'>
-              88D120AA2E37F3A857FCD9643B20CA3C
-            </Typography>
-
-            <IconButton>
-              <ContentCopyIcon />
-            </IconButton>
-          </Stack>
-
-          <Typography variant='h5' py='20px'>
-            Masukkan kode 6 digit dari TGPass Autentikator di bawah ini.
-          </Typography>
-
           <Box
             display='flex'
             justifyContent='center'
             alignItems='center'
             sx={{
-              '& > :not(style)': { m: 3 },
+              '& > :not(style)': { m: 2 },
             }}
           >
             <Box
@@ -167,19 +172,31 @@ const Verifikasi3 = () => {
             </Box>
           </Box>
 
+          <Link
+            style={{
+              fontSize: '14px',
+              fontWeight: '400px',
+              textDecoration: 'none',
+              marginTop: '30px',
+            }}
+          >
+            Kirim Ulang Kode
+          </Link>
+
           <Button
             disabled={!allValuesFilled}
             variant='outlined'
-            onClick={handleSubmit}
+            onClick={handleOpen}
+            fullWidth
             sx={{
-              marginTop: '50px',
-              width: '20vw',
-              borderRadius: '20px',
+              height: '48px',
+              marginTop: '23px',
+              borderRadius: '8px',
               color: values.every((value) => value.length === 1)
                 ? 'white'
                 : '#8C8F93',
               backgroundColor: values.every((value) => value.length === 1)
-                ? 'red'
+                ? '#E42313'
                 : null,
               '&:hover': {
                 color: '#F0F0F0',
@@ -187,21 +204,94 @@ const Verifikasi3 = () => {
               },
             }}
           >
-            Aktivasi
+            Verifikasi
           </Button>
-        </Box>
-      </Paper>
+        </Stack>
 
-      <Typography
-        variant='h6'
-        sx={{
-          color: '#A0A4A8',
-          fontSize: '14px',
-          paddingTop: '50px',
-        }}
-      >
-        Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
-      </Typography>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
+        >
+          <Box sx={style}>
+            <Typography
+              sx={{
+                fontSize: '18px',
+                fontWeight: 700,
+                lineHeight: '28px',
+              }}
+            >
+              Percayai browser ini?
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '14px',
+                fontWeight: 400,
+                lineHeight: '21px',
+                paddingTop: '10px',
+              }}
+            >
+              Jika Anda memilih untuk mempercayai browser ini, Anda tidak akan
+              dimintai kode verifikasi saat anda masuk kembali.
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '12px',
+                fontWeight: 400,
+                lineHeight: '18px',
+                color: '#DE1B1B',
+                paddingTop: '8px',
+              }}
+            >
+              Untuk perangkat publik, kami sangat menyarankan untuk tidak
+              mempercayai browser ini.
+            </Typography>
+            <Stack direction='row' paddingTop='20px' px='30px' spacing={5}>
+              <Stack flex={1}>
+                <Button
+                  variant='contained'
+                  sx={{
+                    height: '48px',
+                    bgcolor: '#8C8F93',
+                    '&:hover': {
+                      bgcolor: '#656565',
+                    },
+                  }}
+                >
+                  Jangan Percaya
+                </Button>
+              </Stack>
+              <Stack flex={1}>
+                <Button
+                  variant='contained'
+                  onClick={handleSubmit}
+                  sx={{
+                    height: '48px',
+                    bgcolor: '#E42313',
+                    '&:hover': {
+                      bgcolor: '#B22222',
+                    },
+                  }}
+                >
+                  Percayai
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+        </Modal>
+
+        <Typography
+          variant='h6'
+          sx={{
+            color: '#A0A4A8',
+            fontSize: '14px',
+            marginTop: '60px',
+          }}
+        >
+          Ⓒ PT ARM Solusi | version 1.0
+        </Typography>
+      </Box>
     </Box>
   );
 };
