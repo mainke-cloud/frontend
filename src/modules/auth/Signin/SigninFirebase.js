@@ -19,7 +19,6 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 import Verifikasi4 from './Verifikasi4';
-import Verifikasi5 from './Verifikasi5';
 import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
@@ -384,8 +383,6 @@ const SigninFirebase = () => {
             </Typography>
           </Box>
         </Box>
-      ) : pathname === '/signin/verifikasi5' ? (
-        <Verifikasi5 />
       ) : pathname === '/signin/verifikasi1' ? (
         <Verifikasi1 />
       ) : pathname === '/signin/verifikasi2' ? (
