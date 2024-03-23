@@ -14,7 +14,7 @@ import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box, TextField, Button, Grid } from '@mui/material';
+import { Box, TextField, Button, Grid, Modal } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
@@ -24,6 +24,7 @@ import Verifikasi1 from './Verifikasi1';
 import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
+import ChecklistImage from '../../../assets/LoginPage/check.png';
 
 const isCaptchaValid = (captchaValue, captcha) => {
   return captchaValue === captcha;
@@ -47,7 +48,23 @@ const validationSchema = yup.object({
   ),
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '25vw',
+  bgcolor: 'background.paper',
+  p: '20px',
+  borderRadius: '4px',
+  textAlign: 'center',
+};
+
 const SigninFirebase = () => {
+  const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
   // const { messages } = useIntl();
@@ -75,6 +92,12 @@ const SigninFirebase = () => {
         return;
       }
 
+      setOpen(true);
+
+      // setTimeout(() => {
+      //   setOpen(false);
+      // }, 3000);
+
       try {
         const response = await fetch(
           'https://e8f51b43-1a6e-423f-8541-a8b8d1c516f3.mock.pstmn.io/api/auth/login/',
@@ -95,8 +118,8 @@ const SigninFirebase = () => {
         // console.log(responseData);
 
         if (responseData) {
-          alert('Login berhasil!');
           navigate('/signin/verifikasi1', { state: { values } });
+          // alert('Login berhasil!');
           // logInWithEmailAndPassword(values);
         } else {
           alert('Username atau password salah. Silakan coba lagi.');
@@ -325,6 +348,29 @@ const SigninFirebase = () => {
                 kami.
               </Typography>
             </form>
+
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
+            >
+              <Box sx={style}>
+                <img
+                  src={ChecklistImage}
+                  alt='ceklis'
+                  style={{ maxHeight: '70px' }}
+                />
+                <Typography
+                  variant='h1'
+                  fontSize='30px'
+                  fontWeight={600}
+                  paddingTop='16px'
+                >
+                  Berhasil Masuk
+                </Typography>
+              </Box>
+            </Modal>
 
             <Typography
               variant='h6'
