@@ -30,7 +30,7 @@ import { ClockIcon } from '@mui/x-date-pickers';
 
 const DetailTodo = ({ props }) => {
   const [value, setValue] = React.useState('1');
-console.log(props);
+  console.log(props);
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -57,7 +57,7 @@ console.log(props);
     },
   }));
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  const StyledTableCell = styled(TableCell)(() => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',
       color: '#262829',
@@ -196,24 +196,28 @@ console.log(props);
                       </Stack>
                       <StyledBox sx={{ paddingX: '4px', paddingY: '8px' }}>
                         <Stack direction='row' columnGap='8px'>
-                            <label style={{ display: 'flex', alignItems: 'center' }}>
-      <input
-        type='checkbox'
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-        style={{ display: 'none' }} // Sembunyikan input checkbox bawaan
-      />
-      <span
-        style={{
-          width: '20px',
-          height: '20px',
-          backgroundColor: isChecked ? '#34C759' : 'transparent',
-          border: '1px solid #000',
-          display: 'inline-block',
-          marginRight: '5px',
-        }}
-      />
-    </label>
+                          <label
+                            style={{ display: 'flex', alignItems: 'center' }}
+                          >
+                            <input
+                              type='checkbox'
+                              checked={isChecked}
+                              onChange={handleCheckboxChange}
+                              style={{ display: 'none' }} // Sembunyikan input checkbox bawaan
+                            />
+                            <span
+                              style={{
+                                width: '20px',
+                                height: '20px',
+                                backgroundColor: isChecked
+                                  ? '#34C759'
+                                  : 'transparent',
+                                border: '1px solid #000',
+                                display: 'inline-block',
+                                marginRight: '5px',
+                              }}
+                            />
+                          </label>
                           <ClockIcon sx={{ color: '#34C759' }} />
                           <Typography fontSize='16px'>{props.date}</Typography>
                           <Typography
@@ -391,8 +395,12 @@ console.log(props);
                             alignItems='start'
                             columnGap='4px'
                           >
-                            <Typography fontSize='16px' fontWeight='700'>Yani Dama Putera</Typography>
-                            <Typography fontSize='12px' color='#8C8F93'>7200004</Typography>
+                            <Typography fontSize='16px' fontWeight='700'>
+                              Yani Dama Putera
+                            </Typography>
+                            <Typography fontSize='12px' color='#8C8F93'>
+                              7200004
+                            </Typography>
                           </Stack>
                           <Typography fontSize='12px' color='#8C8F93'>
                             6 Oktober 2021 - 10:09
@@ -426,8 +434,7 @@ console.log(props);
 };
 
 DetailTodo.propTypes = {
-  props: PropTypes.shape({
-  }),
+  props: PropTypes.shape({}),
   avatarSrc: PropTypes.string,
   date: PropTypes.string,
   status: PropTypes.string,

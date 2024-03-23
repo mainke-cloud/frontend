@@ -3,7 +3,7 @@ import { alpha, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
 
-const AccountTabsWrapper = ({ children }) => {
+const AccountTabsWrapper = () => {
   return (
     <Box
       sx={{
@@ -67,7 +67,7 @@ const AccountTabsWrapper = ({ children }) => {
         },
       }}
     >
-      <Outlet/>
+      <Outlet />
     </Box>
   );
 };

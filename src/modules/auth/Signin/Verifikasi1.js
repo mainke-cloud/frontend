@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useNavigate, useLocation } from 'react-router-dom';

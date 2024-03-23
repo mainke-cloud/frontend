@@ -16,27 +16,17 @@ import {
   CardContent,
   Divider,
   Grid,
-  Button,
   Box,
   ButtonGroup,
   IconButton,
   Tooltip,
   Icon,
-  Stack,
 } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { Filter, Search } from 'feather-icons-react';
 
-import {
-  Star,
-  StarBorder,
-  ArrowForwardIosSharp,
-  ErrorOutline,
-} from '@mui/icons-material';
-import Todo from '@crema/components/Tabs/Todo/Todo';
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../../../redux/actions/tabActon';
@@ -281,19 +271,6 @@ export default function TodoDisposisi({ isCollapsed }) {
         return '#9DB5FF';
       default:
         return 'lightgrey';
-    }
-  };
-
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'Tinggi':
-        return ['#E42313', '#FFBDAD'];
-      case 'Sedang':
-        return ['#FFB020', '#FFEFD2'];
-      case 'Rendah':
-        return ['#3366FF', '#D6E0FF'];
-      default:
-        return ['lightgrey', 'lightgrey'];
     }
   };
 

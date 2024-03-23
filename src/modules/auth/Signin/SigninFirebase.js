@@ -14,7 +14,7 @@ import generateCaptcha from './captcha';
 import CachedIcon from '@mui/icons-material/Cached';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box, TextField, Button, Stack, Grid } from '@mui/material';
+import { Box, TextField, Button, Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
@@ -129,8 +129,8 @@ const SigninFirebase = () => {
           height='95%'
           sx={{
             bgcolor: '#FFFFFF',
-            borderRadius: '16px', // Menambahkan border radius 16px
-            border: '1px solid #D8D8D8', // Menambahkan border 1px solid black
+            borderRadius: '16px',
+            border: '1px solid #D8D8D8',
           }}
         >
           <Box px='116px' py='45px'>

@@ -19,7 +19,7 @@ import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import { addTab } from '../../../../../../redux/actions/tabActon';
 
 const iconMap = {
   search: searchIcon,
@@ -77,7 +77,7 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
-    if(name==='Todo'){
+    if (name === 'Todo') {
       dispatch(addTab(id, tabs, name));
     }
   };
