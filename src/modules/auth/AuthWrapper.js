@@ -11,12 +11,12 @@ const AuthWrapper = ({ children }) => {
         height: '100vh',
         display: 'flex',
         overflow: 'hidden',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#F6F7FC',
       }}
     >
-      <Box>
-        <Carousel />
-      </Box>
-      <Box>{children}</Box>
+      {children}
     </Box>
   );
 };
