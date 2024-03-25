@@ -21,10 +21,10 @@ const Mail_Button = ({ bgColor, bgHover, textColor, text, image }) => {
     }} 
     onClick={handleClick} >
       <Grid container  alignItems="center" justifyContent="center">
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <img src={image} style={{ width: 45, height: 45 }} />
           </Grid>
-          <Grid item xs={10} alignItems="center" justifyContent="center">
+          <Grid item xs={9} alignItems="center" justifyContent="center">
               <Typography variant='h3' sx={{ color: textColor }}>
                 {text}
               </Typography>                  

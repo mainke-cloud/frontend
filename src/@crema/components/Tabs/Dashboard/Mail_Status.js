@@ -14,8 +14,8 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
     <>
       <AppCard  
       sx={{ 
-        height: 80, 
-        width: 299, 
+        // height: 80, 
+        // width: 375, 
         cursor: 'pointer', 
         '&:hover': {
           backgroundColor: '#D9DDE3',

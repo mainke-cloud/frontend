@@ -6,7 +6,7 @@ const Add_Sekretaris = () => {
     return (
         <>
             <Grid container sx={{padding: 3}}>
-                <Grid item xs={12} sx={{margin: 5, padding: 2, marginBottom: 2}}>
+                <Grid item xs={12} sx={{margin: 5, paddingX: 2, marginBottom: 2}}>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">
                         <Typography variant="h2">Sekretaris Saya</Typography>
                         <Stack direction="row" alignItems="center" spacing={2}>
