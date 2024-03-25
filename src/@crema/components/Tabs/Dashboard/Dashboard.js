@@ -46,7 +46,7 @@ const Dashboard = () => {
   const [isCollapsed, setCollapsed] = useState(false);
   return (
     <>
-      <Box sx={{backgroundColor: '#D9DDE3'}}>
+      <Box sx={{backgroundColor: '#F2F4F6'}}>
         <Paper elevation={0} sx={{marginBottom: 5}}>
           <Grid container spacing={4} sx={{ paddingX: 8 }}>
             <Grid item xs={11}>
