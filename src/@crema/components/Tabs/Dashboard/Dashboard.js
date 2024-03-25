@@ -31,24 +31,23 @@ import AppCard2 from '@crema/components/AppCard/AppCard2';
 
 import { useState } from 'react';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTab } from '../../../../redux/actions/tabActon';
 
 const Dashboard = () => {
-  const [AddSekretaris, setAddSekretaris] = useState(false);
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
 
-  const handleClickSekretaris = () => {
-    setAddSekretaris(!AddSekretaris);
+  const handleAddTab = (type) => {
+    dispatch(addTab(id, tabs, type));
   };
 
-  const [AddDelegasi, setAddDelegasi] = useState(false);
-
-  const handleClickDelegasi = () => {
-    setAddDelegasi(!AddDelegasi);
-  };
   const [isCollapsed, setCollapsed] = useState(false);
   return (
     <>
       <Paper elevation={0} sx={{marginBottom: 5}}>
-        <Grid container spacing={4} sx={{ paddingX: 8, }}>
+        <Grid container spacing={4} sx={{ paddingX: 8 }}>
           <Grid item xs={11}>
             <Stack
               direction='row'
@@ -84,7 +83,7 @@ const Dashboard = () => {
                   height: 40, 
                   marginTop: 5,
                   '&:hover': {
-                    backgroundColor: '#5C5E61' // Adjust the opacity level as needed
+                    backgroundColor: '#5C5E61'
                   }
                 }}>
                 <img style={{height: 20, width: 20}} src={Refresh} />
@@ -104,7 +103,6 @@ const Dashboard = () => {
                     bgHover='#F4CACA'
                     textColor='#E42313'
                     text='Buat Surat Internal'
-                    subText='Info'
                     image={Surat_Internal}
                   />
                 </Stack>
@@ -115,7 +113,6 @@ const Dashboard = () => {
                     bgHover='#FFDFA6'
                     textColor='#C45900'
                     text='Buat Surat External'
-                    subText='Info'
                     image={Surat_Eksternal}
                   />
                 </Stack>
@@ -126,7 +123,6 @@ const Dashboard = () => {
                     bgHover='#D6E0FF'
                     textColor='#4D6FD4'
                     text='Buat Surat Undangan'
-                    subText='Info'
                     image={Surat_Undangan}
                   />
                 </Stack>
@@ -137,7 +133,6 @@ const Dashboard = () => {
                     bgHover='#A3E6CD'
                     textColor='#429777'
                     text='Buat Surat Delegasi'
-                    subText='Info'
                     image={Surat_Delegasi}
                   />
                 </Stack>
@@ -195,18 +190,12 @@ const Dashboard = () => {
                     <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
                     <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                   </Stack>
-                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={handleClickSekretaris}>
+                  <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={() => handleAddTab("Add_Sekretaris")}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>
               </Box>
-              {/* {AddSekretaris && (
-                <Sekretaris 
-                  Profile={avatar} 
-                  JobDesk="Manager development" 
-                  ID="Taufik Sulaeman/ 8900002/ ARMS"
-                />
-              )} */}
+
               <AppScrollbar>
                 <Box
                   sx={{
@@ -240,7 +229,7 @@ const Dashboard = () => {
                     <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
                     <Typography sx={{ color: '#C45900', fontSize: '16px' }}>Delegasi</Typography>
                   </Stack>
-                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }} onClick={handleClickDelegasi}>
+                  <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }} onClick={() => handleAddTab("Add_Delegasi")}>
                     <img src={Plus} />
                   </IconButton>
                 </Stack>                

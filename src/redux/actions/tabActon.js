@@ -7,6 +7,8 @@ import Bantuan from '@crema/components/Tabs/Bantuan';
 import Profile from '@crema/components/Tabs/Profile';
 import Todo from '@crema/components/Tabs/Todo/Todo';
 import DetailTodo from '@crema/components/Tabs/Todo/DetailTodo';
+import Add_Delegasi from '@crema/components/Tabs/Add_Delegasi';
+import Add_Sekretaris from '@crema/components/Tabs/Add_Sekretaris';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -39,6 +41,10 @@ export const addTab = (id, state, type) => {
             <Profile />
           ) : type === 'Todo' ? (
             <Todo />
+          ) : type === 'Add_Sekretaris' ?(
+            <Add_Sekretaris />
+          ) : type === 'Add_Delegasi' ? (
+            <Add_Delegasi />
           ) : (
             ''
           ),
