@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Paper, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types'; // Import PropTypes
 import AppCard from '@crema/components/AppCard';
 import { useState } from 'react';
@@ -13,9 +13,7 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
   return (
     <>
       <AppCard  
-      sx={{ 
-        // height: 80, 
-        // width: 375, 
+      sx={{  
         cursor: 'pointer', 
         '&:hover': {
           backgroundColor: '#D9DDE3',

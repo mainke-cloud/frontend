@@ -46,7 +46,7 @@ const Dashboard = () => {
   const [isCollapsed, setCollapsed] = useState(false);
   return (
     <>
-      <Box sx={{backgroundColor: '#F2F4F6'}}>
+      <Box sx={{backgroundColor: '#D9DDE3'}}>
         <Paper elevation={0} sx={{marginBottom: 5}}>
           <Grid container spacing={4} sx={{ paddingX: 8 }}>
             <Grid item xs={11}>
@@ -198,7 +198,7 @@ const Dashboard = () => {
                       <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                     </Stack>
                     <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={() => handleAddTab("Add_Sekretaris")}>
-                      <img src={Plus} />
+                      <img src={Plus} style={{width: 'Auto', Height: 20}}/>
                     </IconButton>
                   </Stack>
                 </Box>
