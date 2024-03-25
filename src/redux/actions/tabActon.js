@@ -57,6 +57,7 @@ export const addTab = (id, state, type) => {
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
     const isExistingTab = state.find((tab) => tab.id === type);
+    console.log(isExistingTab);
     if (isExistingTab) {
       const updateTab = {
         ...isExistingTab,
