@@ -1,11 +1,11 @@
 import React from 'react';
 import Dashboard from '@crema/components/Tabs/Dashboard/Dashboard';
-import fb from '../../assets/icon/home.png';
+import homeIcon from '../../assets/icon/home.svg';
 const initialState = {
   tabs: [
     {
       id: 'dashboard',
-      favicon: fb,
+      favicon: homeIcon,
       title: 'Dashboard',
       active: true,
       content: <Dashboard />,

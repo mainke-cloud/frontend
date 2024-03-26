@@ -138,10 +138,14 @@
   justify-content: center;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 16px;
-  width: 16px;
+  height: auto;
+  width: auto;
+  min-height: 16px;
+  min-width: 16px;
   background-size: 16px;
   margin-left: 4px;
+  background-repeat: no-repeat;
+  object-fit: cover;
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-favicon {
   margin-left: 0;

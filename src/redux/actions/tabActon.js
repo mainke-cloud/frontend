@@ -1,5 +1,4 @@
 import React from 'react';
-import fb from '../../assets/icon/home.png';
 import google from '../../assets/icon/home.png';
 import Folder from '@crema/components/Tabs/Folder';
 import Keamanan from '@crema/components/Tabs/Keamanan';
@@ -8,7 +7,17 @@ import Profile from '@crema/components/Tabs/Profile';
 import Todo from '@crema/components/Tabs/Todo/Todo';
 import DetailTodo from '@crema/components/Tabs/Todo/DetailTodo';
 import Disposisi from '@crema/components/Tabs/Disposisi/Disposisi';
-
+import inboxIcon from '../../assets/icon/inbox.svg';
+import disposisiIcon from '../../assets/icon/disposisi.svg';
+import mailIcon from '../../assets/icon/mail.svg';
+import folderIcon from '../../assets/icon/folder.svg';
+import archiveIcon from '../../assets/icon/archive.svg';
+import settingsIcon from '../../assets/icon/settings.svg';
+import scanIcon from '../../assets/icon/scan.svg';
+import securityIcon from '../../assets/icon/shield.svg';
+import helpIcon from '../../assets/icon/help-circle.svg';
+import profileIcon from '../../assets/icon/user.svg';
+import logoutIcon from '../../assets/icon/log-out.svg';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -21,22 +30,22 @@ export const addTab = (id, state, type) => {
         activeTab.active = false;
       }
       let tabs = {
-        id:
-          type === 'Folder'
-            ? 'folder'
-            : type === 'Keamanan'
-            ? 'keamanan'
-            : type === 'FAQ'
-            ? 'faq'
-            : type === 'Profile'
-            ? 'profile'
-            : type === 'Todo'
-            ? 'todo'
-            : type === 'Disposisi'
-            ? 'disposisi'
-            : '',
+        id: type.toLowerCase(),
         title: type,
-        favicon: state.length % 2 ? fb : google,
+        favicon:
+          type === 'Folder'
+            ? folderIcon
+            : type === 'Keamanan'
+            ? securityIcon
+            : type === 'FAQ'
+            ? helpIcon
+            : type === 'Profile'
+            ? profileIcon
+            : type === 'Disposisi'
+            ? disposisiIcon
+            : type === 'Todo'
+            ? disposisiIcon
+            : '',
         content:
           type === 'Folder' ? (
             <Folder />
@@ -60,7 +69,6 @@ export const addTab = (id, state, type) => {
       const isExistingTab = state.some(
         (tab) => tab.id.toLowerCase() === type.toLowerCase(),
       );
-      // const isExistingTab = state.some((tab) => tab.title === type && tab.title === type );
       if (isExistingTab) {
         dispatch(activateTab(type.toLowerCase(), state));
       } else {
@@ -120,7 +128,7 @@ export const childTab = (id, state, type, data) => {
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
           title: type,
-          favicon: state.length % 2 ? fb : google,
+          favicon: inboxIcon,
           content:
             type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
           active: true,
