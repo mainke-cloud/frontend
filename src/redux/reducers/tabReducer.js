@@ -12,6 +12,7 @@ const initialState = {
     },
   ],
   idCounter: 1,
+  cek: 0,
 };
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,7 +27,7 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-    case 'UPDATE_TAB': {
+    case 'UPDATE_TAB_TODO': {
       console.log('masuk reducer todo');
       const updatedTabs = state.tabs.map((tab) => {
         if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
@@ -41,25 +42,26 @@ const tabReducer = (state = initialState, action) => {
         tabs: updatedTabs,
       };
     }
-    // case 'UPDATE_TAB_DISPOSISI': {
-    //   console.log('masuk reducer disposisi');
-    //   const updatedTabs = state.tabs.map((tab) => {
-    //     if (tab.id === 'disposisi' ) {
-    //       return action.payload;
-    //     } else {
-    //       return tab;
-    //     }
-    //   });
-    //   console.log(updatedTabs);
-    //   return {
-    //     ...state,
-    //     tabs: updatedTabs,
-    //   };
-    // }
+    case 'UPDATE_TAB_DISPOSISI': {
+      console.log('masuk reducer disposisi');
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'disposisi' ) {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      console.log(updatedTabs);
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
     case 'CLOSE_TAB':
       return {
         ...state,
         tabs: action.payload,
+        idCounter: state.idCounter - 1,
       };
     case 'REORDER_TAB':
       return {

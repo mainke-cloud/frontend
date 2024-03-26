@@ -11,22 +11,15 @@ import Disposisi from '@crema/components/Tabs/Disposisi/Disposisi';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
-    // Cari tab dengan ID yang sama
     const isExistingTab = state.some(
-      (tab) => tab.id.toLowerCase() === type.toLowerCase(),
+      (tab) =>
+        tab.id.toLowerCase() === type.toLowerCase() || tab.title === type,
     );
-
     if (!isExistingTab) {
-      // Tentukan tab yang akan dijadikan aktif
       const activeTab = state.find((tab) => tab.active);
-
-      // Jika ada tab yang sedang aktif, nonaktifkan tab tersebut
       if (activeTab) {
         activeTab.active = false;
       }
-
-      console.log(Folder);
-      // Tambahkan tab baru dengan status aktif
       let tabs = {
         id:
           type === 'Folder'
@@ -62,12 +55,17 @@ export const addTab = (id, state, type) => {
           ),
         active: true,
       };
-
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
-      // Jika tab sudah ada, aktifkan tab tersebut
-      console.log('elese bang');
-      dispatch(activateTab(type.toLowerCase(), state));
+      const isExistingTab = state.some(
+        (tab) => tab.id.toLowerCase() === type.toLowerCase(),
+      );
+      // const isExistingTab = state.some((tab) => tab.title === type && tab.title === type );
+      if (isExistingTab) {
+        dispatch(activateTab(type.toLowerCase(), state));
+      } else {
+        return;
+      }
     }
   };
 };
@@ -76,12 +74,15 @@ export const childTab = (id, state, type, data) => {
   return (dispatch) => {
     console.log(state);
     const isExistingTab = state.find(
-      (tab) => tab.id === 'todo' && type === "Todo" || tab.id === 'disposisi' && type === "Disposisi"  ,
+      (tab) =>
+        (tab.id === 'todo' && type === 'Todo') ||
+        (tab.id === 'disposisi' && type === 'Disposisi'),
     );
     if (isExistingTab) {
+      console.log('masuk if');
       const updateTab = {
         ...isExistingTab,
-        id: ` ${isExistingTab.id}${id}`,
+        id: `${isExistingTab.id}${id}`,
         content:
           type === 'Todo' ? (
             <DetailTodo props={data} />
@@ -93,26 +94,35 @@ export const childTab = (id, state, type, data) => {
       };
       console.log(data);
       console.log(updateTab);
-      // if (type === 'Todo') {
-      //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      // } else if (type === 'Disposisi') {
-        dispatch({ type: 'UPDATE_TAB', payload: updateTab });
-      // }
+      if (type === 'Todo') {
+        console.log('masuk if');
+        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
+      } else if (type === 'Disposisi') {
+        console.log('masuk else if');
+        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      }
     } else {
-      const exChildTab = state.find((tab) => tab.id === id);
+      console.log(type.toLowerCase());
+      const exChildTab = state.find(
+        (tab) => tab.id === `${type.toLowerCase()}${id}`,
+      );
+      console.log(exChildTab);
       if (exChildTab) {
-        dispatch(activateTab(id, state));
+        console.log('masuk if');
+        dispatch(activateTab(`${type.toLowerCase()}${id}`, state));
       } else {
+        console.log('masuk else');
         const activeTab = state.find((tab) => tab.active);
 
         if (activeTab) {
           activeTab.active = false;
         }
         let tabs = {
-          id: ` todo${id}`,
+          id: `${type.toLowerCase()}${id}`,
           title: type,
           favicon: state.length % 2 ? fb : google,
-          content: type === 'Todo' ? <DetailTodo props={data} /> : '',
+          content:
+            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });
