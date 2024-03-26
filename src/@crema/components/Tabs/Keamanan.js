@@ -19,7 +19,7 @@ import { Fragment, useRef, useState, useEffect } from 'react';
 
 const Keamanan = () => {
   const [expanded, setExpanded] = React.useState(false);
-  // const [isActive, setActive] = React.useState(true);
+  const [isActive, setActive] = React.useState(true);
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };

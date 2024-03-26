@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { useIntl } from 'react-intl';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
@@ -72,10 +68,7 @@ const SigninFirebase = () => {
   // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
   // const { messages } = useIntl();
-  const navigate = useNavigate();
-  // const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
-  const { pathname } = useLocation();
   const { pathname } = useLocation();
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);

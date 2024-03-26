@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
-
 import MainSidebar from '../../components/MainSidebar';
 import {
   styled,
@@ -35,9 +34,6 @@ import {
 import Todo from '@crema/components/Tabs/Todo/Todo';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-import { useDispatch, useSelector } from 'react-redux';
-import { childTab } from '../../../../../redux/actions/tabActon';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../../../redux/actions/tabActon';

@@ -97,15 +97,15 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           alignItems: 'center',
           justifyContent: 'center',
           '& .MuiBadge-badge': {
-            minWidth: '10px',
-            minHeight: '10px',
             width: 'auto',
             height: 'auto',
+            minWidth: '12px',
+            minHeight: '10px',
             borderRadius: '50%',
             fontSize: '8px',
             padding: '2px',
             position: 'absolute',
-            right: 0,
+            right: 2,
           },
         },
         '& .menu-text': {

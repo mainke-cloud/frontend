@@ -2,7 +2,6 @@ import React from 'react';
 import { alpha, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
 
 const AccountTabsWrapper = () => {
   return (

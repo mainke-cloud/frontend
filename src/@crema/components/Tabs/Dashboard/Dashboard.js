@@ -9,24 +9,16 @@ import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
 import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
 import Sekretaris_Icon from '../../../../assets/Dashboard/Sekretaris_Icon.png';
 import Delegasi_Icon from '../../../../assets/Dashboard/Delegasi_Icon.png';
-import Sekretaris_Icon from '../../../../assets/Dashboard/Sekretaris_Icon.png';
-import Delegasi_Icon from '../../../../assets/Dashboard/Delegasi_Icon.png';
 import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
 import Surat_Internal from '../../../../assets/Dashboard/Surat_Internal_logo.png';
 import Surat_Undangan from '../../../../assets/Dashboard/Surat_Undangan_logo.png';
 import Surat_Eksternal from '../../../../assets/Dashboard/Surat_Eksternal_logo.png';
 import Surat_Delegasi from '../../../../assets/Dashboard/Surat_Delegasi_logo.png';
-import Surat_Delegasi from '../../../../assets/Dashboard/Surat_Delegasi_logo.png';
+
 
 import TodoList_Dashboard from './TodoList_Dashboard';
 import Mail_Status from './Mail_Status';
-import Mail_Status from './Mail_Status';
 import Mail_Button from './Mail_Button';
-import Delegasi from './Delegasi';
-import Sekretaris from './Sekretaris';
-import AppCard2 from '@crema/components/AppCard/AppCard2';
-
-import { useState } from 'react';
 import Delegasi from './Delegasi';
 import Sekretaris from './Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
@@ -46,18 +38,10 @@ const Dashboard = () => {
     setAddDelegasi(!AddDelegasi);
   };
   const [isCollapsed, setCollapsed] = useState(false);
-  const [AddSekretaris, setAddSekretaris] = useState(false);
 
-  const handleClickSekretaris = () => {
-    setAddSekretaris(!AddSekretaris);
-  };
 
-  const [AddDelegasi, setAddDelegasi] = useState(false);
 
-  const handleClickDelegasi = () => {
-    setAddDelegasi(!AddDelegasi);
-  };
-  const [isCollapsed, setCollapsed] = useState(false);
+
   return (
     <>
       <Paper elevation={0}>
