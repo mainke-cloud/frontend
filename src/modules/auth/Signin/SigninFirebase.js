@@ -93,9 +93,9 @@ const SigninFirebase = () => {
 
       setOpen(true);
 
-      // setTimeout(() => {
-      //   setOpen(false);
-      // }, 3000);
+      setTimeout(() => {
+        setOpen(false);
+      }, 3000);
 
       try {
         const response = await fetch(
