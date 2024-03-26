@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Disposisi = () => {
-  return (
-    <div>
-      okeoeoekoekoek
-    </div>
-  )
-}
+  return <div>Anda belum memilih disposisi </div>;
+};
 
-export default Disposisi
+export default Disposisi;
