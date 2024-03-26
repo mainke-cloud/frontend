@@ -37,7 +37,6 @@ const Dashboard = () => {
     dispatch(addTab(id, tabs, type));
   };
 
-  const [isCollapsed, setCollapsed] = useState(false);
 
 
 
@@ -178,9 +177,7 @@ const Dashboard = () => {
                 </Stack>
               </Stack>
 
-              <TodoList_Dashboard 
-              isCollapsed={isCollapsed}
-              setCollapsed={setCollapsed}/>
+            <TodoList_Dashboard />
 
             </Stack>     
           </Grid>  
