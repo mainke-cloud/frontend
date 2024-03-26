@@ -4,9 +4,6 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import AppCard from '@crema/components/AppCard';
 import { useState } from 'react';
 
-import AppCard from '@crema/components/AppCard';
-import { useState } from 'react';
-
 const Mail_Status = ({ image, text, boxColor, counter }) => {
   const [Link, setLink] = useState();
 

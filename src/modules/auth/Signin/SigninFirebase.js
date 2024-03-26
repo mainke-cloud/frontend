@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { useIntl } from 'react-intl';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
-// import { useAuthMethod } from '@crema/hooks/AuthHooks';
-// import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import AuthWrapper from '../AuthWrapper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -66,15 +59,9 @@ const style = {
 
 const SigninFirebase = () => {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-  // const { messages } = useIntl();
-  // const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
-  const { pathname } = useLocation();
   const { pathname } = useLocation();
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
