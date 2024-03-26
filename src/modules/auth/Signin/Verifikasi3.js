@@ -124,6 +124,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(0, e)}
                 onKeyDown={(e) => handleBackspace(0, e)}
                 value={values[0]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
               <TextField
                 variant='outlined'
@@ -131,6 +136,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(1, e)}
                 onKeyDown={(e) => handleBackspace(1, e)}
                 value={values[1]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
               <TextField
                 variant='outlined'
@@ -138,6 +148,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(2, e)}
                 onKeyDown={(e) => handleBackspace(2, e)}
                 value={values[2]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
             </Box>
             <Box
@@ -154,6 +169,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(3, e)}
                 onKeyDown={(e) => handleBackspace(3, e)}
                 value={values[3]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
               <TextField
                 variant='outlined'
@@ -161,6 +181,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(4, e)}
                 onKeyDown={(e) => handleBackspace(4, e)}
                 value={values[4]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
               <TextField
                 variant='outlined'
@@ -168,6 +193,11 @@ const Verifikasi3 = () => {
                 onChange={(e) => handleInputChange(5, e)}
                 onKeyDown={(e) => handleBackspace(5, e)}
                 value={values[5]}
+                sx={{
+                  '& .MuiInputBase-input': {
+                    textAlign: 'center',
+                  },
+                }}
               />
             </Box>
           </Box>
