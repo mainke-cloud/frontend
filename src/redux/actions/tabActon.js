@@ -1,5 +1,4 @@
 import React from 'react';
-import google from '../../assets/icon/home.png';
 import Folder from '@crema/components/Tabs/Folder';
 import Keamanan from '@crema/components/Tabs/Keamanan';
 import Bantuan from '@crema/components/Tabs/Bantuan';
@@ -9,15 +8,10 @@ import DetailTodo from '@crema/components/Tabs/Todo/DetailTodo';
 import Disposisi from '@crema/components/Tabs/Disposisi/Disposisi';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
-import mailIcon from '../../assets/icon/mail.svg';
 import folderIcon from '../../assets/icon/folder.svg';
-import archiveIcon from '../../assets/icon/archive.svg';
-import settingsIcon from '../../assets/icon/settings.svg';
-import scanIcon from '../../assets/icon/scan.svg';
 import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
-import logoutIcon from '../../assets/icon/log-out.svg';
 import Add_Delegasi from '@crema/components/Tabs/Add_Delegasi';
 import Add_Sekretaris from '@crema/components/Tabs/Add_Sekretaris';
 export const addTab = (id, state, type) => {

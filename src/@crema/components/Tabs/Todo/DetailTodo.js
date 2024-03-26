@@ -51,7 +51,7 @@ const DetailTodo = ({ props }) => {
     lineHeight: '20px',
   });
 
-  const StyledBadge = styled(Badge)(({ theme }) => ({
+  const StyledBadge = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#0F6EB5',
       color: 'white',
@@ -61,7 +61,7 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const StyledStatus = styled(Typography)(({ theme }) => ({
+  const StyledStatus = styled(Typography)(() => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
@@ -72,7 +72,7 @@ const DetailTodo = ({ props }) => {
     borderRadius: '5px',
   }));
 
-  const StyledKomentar = styled(Typography)(({ theme }) => ({
+  const StyledKomentar = styled(Typography)(() => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
