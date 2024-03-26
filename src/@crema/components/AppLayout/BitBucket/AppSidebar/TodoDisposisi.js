@@ -437,9 +437,6 @@ export default function TodoDisposisi({ isCollapsed }) {
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                             onClick={() => handleTodo(item)}
                           >
-                            <Button
-                            sx={{ padding: 0, margin: 0, textAlign: 'left' }}
-                          >
                             <CardContent>
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
