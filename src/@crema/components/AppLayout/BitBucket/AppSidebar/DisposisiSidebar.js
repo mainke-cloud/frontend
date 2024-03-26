@@ -9,7 +9,6 @@ import {
   AccordionDetails,
   Typography,
   List,
-  ListItemAvatar,
   Avatar,
   Card,
   CardContent,
@@ -19,29 +18,36 @@ import {
   Box,
   ButtonGroup,
   IconButton,
-  Tooltip,
-  Icon,
   Stack,
   TextField,
   Popover,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
+  Tooltip,
+  Badge,
 } from '@mui/material';
+
+import SuratIn from '../../../../../assets/icon/Surat_Internal.svg';
+import SuratEx from '../../../../../assets/icon/Surat_Eksternal.svg';
+import SuratUndang from '../../../../../assets/icon/Surat_Undangan.svg';
+import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { Plus, Filter, Search } from 'feather-icons-react';
+import {
+  Plus,
+  Filter,
+  Search,
+  AlertCircle,
+} from 'feather-icons-react';
 
 import {
-  ErrorOutline,
   ArrowForwardIosSharp,
   Cached,
   DraftsOutlined,
   MailOutline,
   Close,
 } from '@mui/icons-material';
+
+import FilterPopover from './IconButton/FilterPopover';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -283,8 +289,8 @@ export default function DisposisiSidebar({ isCollapsed }) {
 
   const [searchForm, setsearchForm] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState('');
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [openAdd, setOpenAdd] = React.useState(null);
+  const [openFilter, setOpenFilter] = React.useState(null);
 
   const handleSearchClick = () => {
     setsearchForm(true);
@@ -300,22 +306,23 @@ export default function DisposisiSidebar({ isCollapsed }) {
   };
 
   const handleAddClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setOpenAdd(event.currentTarget);
   };
 
-  const handleClosePopover = () => {
-    setAnchorEl(null);
+  const handleCloseAdd = () => {
+    setOpenAdd(null);
   };
 
-  const handleFilterClick = () => {
-    setOpenDialog(true);
+  const handleFilterClick = (event) => {
+    setOpenFilter(event.currentTarget);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
+  const handleCloseFilter = () => {
+    setOpenFilter(null);
   };
 
-  const open = Boolean(anchorEl);
+  const open_add = Boolean(openAdd);
+  const open_filter = Boolean(openFilter);
   const id = open ? 'simple-popover' : undefined;
 
   return (
@@ -324,7 +331,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
         {searchForm ? (
           <TextField
             variant='outlined'
-            fullWidth
+            size='small'
             placeholder='Search'
             value={searchInput}
             onChange={handleSearchInput}
@@ -369,31 +376,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                 <IconButton onClick={handleFilterClick}>
                   <Filter />
                 </IconButton>
-                <Dialog open={openDialog} onClose={handleCloseDialog}>
-                  <DialogTitle>Filter</DialogTitle>
-                  <DialogContent>
-                    <TextField
-                      label='Start Date'
-                      type='date'
-                      fullWidth
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    <TextField
-                      label='End Date'
-                      type='date'
-                      fullWidth
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseDialog}>Cancel</Button>
-                    <Button onClick={handleCloseDialog}>Apply</Button>
-                  </DialogActions>
-                </Dialog>
+                <FilterPopover open={open_filter} onClose={handleCloseFilter} />
                 <IconButton
                   aria-describedby={id}
                   variant='contained'
@@ -403,23 +386,68 @@ export default function DisposisiSidebar({ isCollapsed }) {
                 </IconButton>
                 <Popover
                   id={id}
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handleClosePopover}
+                  open={open_add}
+                  anchorEl={openAdd}
+                  onClose={handleCloseAdd}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'right',
+                    horizontal: 'center',
                   }}
                   transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'center',
                   }}
                 >
-                  <Box sx={{ p: 2 }}>
+                  <Box>
                     <ButtonGroup orientation='vertical'>
-                      <Button>Option 1</Button>
-                      <Button>Option 2</Button>
-                      <Button>Option 3</Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratIn} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Internal
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratEx} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Eksternal
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratUndang} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Undangan
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratDelegasi} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Delegasi
+                      </Button>
                     </ButtonGroup>
                   </Box>
                 </Popover>
@@ -446,7 +474,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                     Agustus-2021({getTotalCount(listData)})
                   </Typography>
                 </AccordionSummarys>
-                <AccordionDetail>
+                <AccordionDetail sx={{ padding: 0 }}>
                   <List>
                     {listData.map((item, listIndex) => (
                       <React.Fragment key={listIndex}>
@@ -465,19 +493,17 @@ export default function DisposisiSidebar({ isCollapsed }) {
                             <CardContent>
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
-                                  <Stack alignItems='center' spacing={4}>
-                                    <ListItemAvatar>
-                                      <Avatar
-                                        alt={`Avatar ${listIndex}`}
-                                        src={item.avatarSrc}
-                                        sx={{ width: 56, height: 56 }}
-                                      />
-                                    </ListItemAvatar>
+                                  <Stack alignItems='center'>
+                                    <Avatar
+                                      alt={`Avatar ${listIndex}`}
+                                      src={item.avatarSrc}
+                                      sx={{ width: 56, height: 56 }}
+                                    />
                                     {item.priority === 'tinggi' && (
-                                      <Tooltip title='Prioritas'>
-                                        <Icon color='error'>
-                                          <ErrorOutline />
-                                        </Icon>
+                                      <Tooltip title='Tinggi'>
+                                        <IconButton color='error'>
+                                          <AlertCircle />
+                                        </IconButton>
                                       </Tooltip>
                                     )}
                                   </Stack>
@@ -485,19 +511,21 @@ export default function DisposisiSidebar({ isCollapsed }) {
                                 <Grid item xs={10}>
                                   <Grid container>
                                     <Grid item xs={8}>
-                                      <Typography
-                                        variant='body1'
-                                        color='text.primary'
-                                        sx={{
-                                          fontWeight:
-                                            item.status === 'Unread' ||
-                                            item.status === 'Disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
-                                      >
-                                        {item.primary}
-                                      </Typography>
+                                      <Badge badgeContent={3} color='primary'>
+                                        <Typography
+                                          variant='body1'
+                                          color='text.primary'
+                                          sx={{
+                                            fontWeight:
+                                              item.status === 'Unread' ||
+                                              item.status === 'Disposisi'
+                                                ? Fonts.BOLD
+                                                : Fonts.LIGHT,
+                                          }}
+                                        >
+                                          {item.primary}
+                                        </Typography>
+                                      </Badge>
                                     </Grid>
                                     <Grid item xs={4} textAlign='right'>
                                       <Typography
@@ -557,7 +585,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
                                         marginLeft: 'auto',
                                         display: 'flex',
                                         flexDirection: 'row',
-                                        paddingTop: 2.4,
                                       }}
                                     >
                                       {item.status === 'Read' ? (
