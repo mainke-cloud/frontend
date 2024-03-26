@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
+
 import MainSidebar from '../../components/MainSidebar';
 import {
   styled,
@@ -15,11 +16,13 @@ import {
   CardContent,
   Divider,
   Grid,
+  Button,
   Box,
   ButtonGroup,
   IconButton,
   Tooltip,
   Icon,
+  Stack,
 } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
 
@@ -281,6 +284,19 @@ export default function TodoDisposisi({ isCollapsed }) {
     }
   };
 
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case 'Tinggi':
+        return ['#E42313', '#FFBDAD'];
+      case 'Sedang':
+        return ['#FFB020', '#FFEFD2'];
+      case 'Rendah':
+        return ['#3366FF', '#D6E0FF'];
+      default:
+        return 'lightgrey';
+    }
+  };
+
   const getTotalCount = (listData) => {
     return listData.length;
   };
@@ -375,6 +391,9 @@ export default function TodoDisposisi({ isCollapsed }) {
                             }}
                             onClick={() => handleTodo(item)}
                           >
+                            <Button
+                            sx={{ padding: 0, margin: 0, textAlign: 'left' }}
+                          >
                             <CardContent>
                               <Grid container>
                                 <Grid item xs={2} container>
@@ -440,6 +459,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                                 </Grid>
                               </Grid>
                             </CardContent>
+                          </Button>
                           </Card>
                           {listIndex < listData.length - 1 && <Divider />}
                         </React.Fragment>

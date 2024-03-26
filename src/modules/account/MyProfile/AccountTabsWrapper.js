@@ -67,7 +67,7 @@ const AccountTabsWrapper = () => {
         },
       }}
     >
-      <Outlet />
+      <Outlet/>
     </Box>
   );
 };

@@ -16,7 +16,8 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         width: isHover ? 280 : 80,
         height: 'auto',
         maxHeight: '100vh',
-        backgroundColor: sidebarBgColor,
+        backgroundColor: '#fff',
+        // backgroundColor: sidebarBgColor,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -34,10 +35,11 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           zIndex: 1,
           width: '100%',
           height: '100%',
-          backgroundColor: (theme) =>
-            mode === ThemeMode.LIGHT
-              ? alpha(theme.palette.common.white, 0.05)
-              : alpha(theme.palette.common.black, 0.05),
+          backgroundColor: '#fff',
+          // backgroundColor: (theme) =>
+          //   mode === ThemeMode.LIGHT
+          //     ? alpha(theme.palette.common.white, 0.05)
+          //     : alpha(theme.palette.common.black, 0.05),
         },
         '& > *': {
           position: 'relative',
@@ -52,6 +54,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         },
         '& .user-profile': {
           backgroundColor: '#fff',
+          backgroundColor: '#fff',
           border: '1px solid #D1D9E2',
           borderRadius: '5px',
           display: 'flex',
@@ -59,6 +62,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           gap: '12px',
         },
         '& .search': {
+          backgroundColor: '#fff',
           backgroundColor: '#fff',
           display: 'flex',
           justifyContent: 'space-between',
@@ -120,6 +124,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           textAlign: isHover ? 'none' : 'center',
         },
         '& .menu-item-boundary': {
+          backgroundColor: '#fff',
           backgroundColor: '#fff',
           fontWeight: '400',
           fontSize: '16px',
