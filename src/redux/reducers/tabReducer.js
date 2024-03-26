@@ -26,20 +26,36 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-    case 'UPDATE_TAB':{
-      const updatedTabs = state.tabs.map(tab => {
-        if (tab.id === action.payload.title) {
+    case 'UPDATE_TAB': {
+      console.log('masuk reducer todo');
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
           return action.payload;
         } else {
           return tab;
         }
       });
-      console.log(action.payload);
+      console.log(updatedTabs);
       return {
         ...state,
         tabs: updatedTabs,
       };
     }
+    // case 'UPDATE_TAB_DISPOSISI': {
+    //   console.log('masuk reducer disposisi');
+    //   const updatedTabs = state.tabs.map((tab) => {
+    //     if (tab.id === 'disposisi' ) {
+    //       return action.payload;
+    //     } else {
+    //       return tab;
+    //     }
+    //   });
+    //   console.log(updatedTabs);
+    //   return {
+    //     ...state,
+    //     tabs: updatedTabs,
+    //   };
+    // }
     case 'CLOSE_TAB':
       return {
         ...state,

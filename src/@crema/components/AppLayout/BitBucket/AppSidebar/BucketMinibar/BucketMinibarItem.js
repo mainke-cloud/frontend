@@ -79,6 +79,8 @@ const BucketMinibarItem = (props) => {
     dispatch(setSidebarName(name));
     if(name==='Todo'){
       dispatch(addTab(id, tabs, name));
+    } else if (name==='Disposisi'){
+      dispatch(addTab(id, tabs, name));
     }
   };
 

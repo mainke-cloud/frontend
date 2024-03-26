@@ -33,7 +33,8 @@ import {
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { Plus, Filter, Search } from 'feather-icons-react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { childTab } from '../../../../../redux/actions/tabActon';
 import {
   ErrorOutline,
   ArrowForwardIosSharp,
@@ -77,6 +78,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
 export default function DisposisiSidebar({ isCollapsed }) {
   const listData1 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -87,6 +89,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 2,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -97,6 +100,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 3,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -107,6 +111,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 4,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -117,6 +122,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 5,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -127,6 +133,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 6,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -137,6 +144,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 7,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -147,6 +155,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 8,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -157,6 +166,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 9,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -169,6 +179,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
   ];
   const listData2 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -179,6 +190,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 2,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -189,6 +201,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 3,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -199,6 +212,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 4,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -209,6 +223,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -219,6 +234,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -231,6 +247,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
   ];
   const listData3 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -241,6 +258,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -251,6 +269,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -317,7 +336,12 @@ export default function DisposisiSidebar({ isCollapsed }) {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
 
+  const handleTodo = (item) => {
+    dispatch(childTab(item.id, tabs, 'Disposisi', item));
+  };
   return (
     <MainSidebar>
       <Box sx={{ py: 2.5, px: 3.5 }}>
@@ -458,6 +482,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                             )}`,
                             borderRadius: 0,
                           }}
+                          onClick={() => handleTodo(item)}
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}

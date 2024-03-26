@@ -197,6 +197,9 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+.chrome-tabs .chrome-tab:first-child .chrome-tab-close {
+  display: none;
+}
 .chrome-tabs .chrome-tab .chrome-tab-close {
   flex-grow: 0;
   flex-shrink: 0;
@@ -209,6 +212,7 @@
   background-repeat: no-repeat;
   background-size: 8px 8px;
 }
+
 @media (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:hover {
     background-color: #e8eaed;
