@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Stack, Grid, Typography, IconButton, Paper } from '@mui/material';
 
-import person from '../../../../assets/Dashboard/Dashboard_Girl.png';
+import person from '../../../../assets/Dashboard/Dashboard_girl.png';
 import Refresh from '../../../../assets/Dashboard/Refresh_icon.png';
 import Plus from '../../../../assets/Dashboard/Plus_icon.png'
 import Disposisi from '../../../../assets/Dashboard/Disposisi_icon.png';
-import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_icon.png';
-import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_Tindak_Lanjut_icon.png';
+import Surat_Masuk from '../../../../assets/Dashboard/Surat_Masuk_Icon.png';
+import Perlu_Tindak_Lanjut from '../../../../assets/Dashboard/Perlu_tindak_Lanjut_Icon.png';
 import Sekretaris_Icon from '../../../../assets/Dashboard/Sekretaris_Icon.png';
 import Delegasi_Icon from '../../../../assets/Dashboard/Delegasi_Icon.png';
 import avatar from '../../../../assets/Dashboard/avatar_placeholder.png';
