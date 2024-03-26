@@ -34,13 +34,13 @@ const validationSchema = yup.object({
     .required(
       <>
         <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-        <IntlMessages id='Ussername Anda' style={{ marginTop: '25px' }} />
+        <IntlMessages id='Isi username anda' style={{ marginTop: '25px' }} />
       </>,
     ),
   password: yup.string().required(
     <>
       <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-      <IntlMessages id='Isi Password anda' style={{ marginTop: '20px' }} />
+      <IntlMessages id='Isi password anda' style={{ marginTop: '20px' }} />
     </>,
   ),
 });
