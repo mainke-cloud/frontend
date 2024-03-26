@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import { Typography, Avatar, AvatarGroup, Box } from '@mui/material';
+import { Typography, Avatar, AvatarGroup, Box, Pagination } from '@mui/material';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import PhotoFilterOutlinedIcon from '@mui/icons-material/PhotoFilterOutlined';
@@ -65,7 +65,8 @@ export default function TableList() {
         }
       };
   return (
-    <TableContainer component={Paper}>
+    <>
+    <TableContainer>
       <Table sx={{ minWidth: 550 }}>
         <TableHead>
           <TableRow>
@@ -124,11 +125,11 @@ export default function TableList() {
                     </Box>
               </TableCell>
               <TableCell ><Typography sx={{ fontSize:"12px"}}>{Data.date}</Typography></TableCell>
-              <TableCell >
+              <TableCell align='center'>
               <AvatarGroup max={4}>
-                <Avatar alt="Remy Sharp" sx={{ width: 20, height: 20,  bgcolor: "#E42313", fontSize:"7px"}} >KW</Avatar>
-                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 20, height: 20}}/>
-                <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" sx={{ width: 20, height: 20}}/>
+                <Avatar  sx={{ width: 20, height: 20,  bgcolor: "#E42313", fontSize:"7px"}} >KW</Avatar>
+                <Avatar  src="/static/images/avatar/2.jpg" sx={{ width: 20, height: 20}}/>
+                <Avatar  src="/static/images/avatar/5.jpg" sx={{ width: 20, height: 20}}/>
                </AvatarGroup>
               </TableCell>
             </TableRow>
@@ -136,6 +137,11 @@ export default function TableList() {
         </TableBody>
       </Table>
     </TableContainer>
+      <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
+        <Pagination count={10} shape="rounded" />
+        <Typography>Page: 1</Typography>
+      </Stack>
+    </>
   );
 }
 

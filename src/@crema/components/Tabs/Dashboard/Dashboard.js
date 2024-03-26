@@ -45,7 +45,6 @@ const Dashboard = () => {
   const handleClickDelegasi = () => {
     setAddDelegasi(!AddDelegasi);
   };
-  const [isCollapsed, setCollapsed] = useState(false);
   return (
     <>
       <Paper elevation={0}>
@@ -164,9 +163,7 @@ const Dashboard = () => {
               />
             </Stack>
 
-            <TodoList_Dashboard 
-            isCollapsed={isCollapsed}
-            setCollapsed={setCollapsed}/>
+            <TodoList_Dashboard />
 
           </Stack>     
         </Grid>  
