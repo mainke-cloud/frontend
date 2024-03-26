@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
-
 import MainSidebar from '../../components/MainSidebar';
 import {
   styled,
@@ -20,23 +19,18 @@ import {
   Box,
   ButtonGroup,
   IconButton,
-  Tooltip,
-  Icon,
   Stack,
+  TextField,
+  Tooltip,
 } from '@mui/material';
+
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { Filter, Search } from 'feather-icons-react';
+import { Filter, Search, AlertCircle } from 'feather-icons-react';
 
-import {
-  Star,
-  StarBorder,
-  ArrowForwardIosSharp,
-  ErrorOutline,
-} from '@mui/icons-material';
-import Todo from '@crema/components/Tabs/Todo/Todo';
+import { ArrowForwardIosSharp, Close } from '@mui/icons-material';
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import FilterPopover from './IconButton/FilterPopover';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../../../redux/actions/tabActon';
@@ -82,7 +76,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Read',
     },
     {
@@ -93,7 +87,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
+      priority: 'Rendah',
       status: 'Sekretaris',
     },
     {
@@ -104,7 +98,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'rendah',
+      priority: 'Rendah',
       status: 'Disposisi',
     },
     {
@@ -115,7 +109,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Disposisi',
     },
     {
@@ -126,7 +120,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Unread',
     },
     {
@@ -137,7 +131,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Read',
     },
     {
@@ -148,7 +142,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Read',
     },
     {
@@ -159,7 +153,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Unread',
     },
     {
@@ -170,7 +164,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Read',
     },
   ];
@@ -182,7 +176,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'rendah',
+      priority: 'Rendah',
       status: 'Sekretaris',
     },
     {
@@ -192,7 +186,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
+      priority: 'Rendah',
       status: 'Sekretaris',
     },
     {
@@ -202,7 +196,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Disposisi',
     },
     {
@@ -212,7 +206,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Disposisi',
     },
     {
@@ -222,7 +216,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Unread',
     },
     {
@@ -232,7 +226,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Read',
     },
   ];
@@ -244,7 +238,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
+      priority: 'Tinggi',
       status: 'Read',
     },
     {
@@ -254,7 +248,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
+      priority: 'Rendah',
       status: 'Unread',
     },
     {
@@ -264,7 +258,7 @@ export default function TodoDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
+      priority: 'Sedang',
       status: 'Unread',
     },
   ];
@@ -301,11 +295,11 @@ export default function TodoDisposisi({ isCollapsed }) {
     return listData.length;
   };
 
-  const [expanded, setExpanded] = React.useState(null);
+  // const [expanded, setExpanded] = React.useState(null);
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
+  // const handleChange = (panel) => (event, newExpanded) => {
+  //   setExpanded(newExpanded ? panel : false);
+  // };
 
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
@@ -314,12 +308,63 @@ export default function TodoDisposisi({ isCollapsed }) {
     dispatch(childTab(item.id, tabs, 'Todo', item));
   };
 
+  const [searchForm, setsearchForm] = React.useState(false);
+  const [searchInput, setSearchInput] = React.useState('');
+  const [openFilter, setOpenFilter] = React.useState(null);
+
+  const handleSearchClick = () => {
+    setsearchForm(true);
+  };
+
+  const handleCloseSearch = () => {
+    setsearchForm(false);
+    setSearchInput('');
+  };
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleFilterClick = (event) => {
+    setOpenFilter(event.currentTarget);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(null);
+  };
+
+  const open_filter = Boolean(openFilter);
+
   return (
-    <>
-      <MainSidebar>
-        <Box sx={{ py: 2.5, px: 3.5 }}>
+    <MainSidebar>
+      <Box sx={{ py: 2.5, px: 3.5 }}>
+        {searchForm ? (
+          <TextField
+            variant='outlined'
+            size='small'
+            placeholder='Search'
+            value={searchInput}
+            onChange={handleSearchInput}
+            InputProps={{
+              startAdornment: (
+                <IconButton onClick={handleSearchClick} edge='start'>
+                  <Search />
+                </IconButton>
+              ),
+              endAdornment: (
+                <IconButton onClick={handleCloseSearch} edge='end'>
+                  <Close />
+                </IconButton>
+              ),
+            }}
+            InputLabelProps={{
+              shrink: false,
+            }}
+            sx={{ width: '88%' }}
+          />
+        ) : (
           <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs={7}>
+            <Grid item xs={8}>
               <Typography
                 sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
                 component='h2'
@@ -335,85 +380,85 @@ export default function TodoDisposisi({ isCollapsed }) {
             </Grid>
             <Grid item xs={4}>
               <ButtonGroup>
-                <IconButton>
+                <IconButton onClick={handleSearchClick}>
                   <Search />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={handleFilterClick}>
                   <Filter />
                 </IconButton>
+                <FilterPopover open={open_filter} onClose={handleCloseFilter} />
               </ButtonGroup>
             </Grid>
           </Grid>
-        </Box>
-        <AppScrollbar
-          sx={{
-            height: 'calc(100vh - 70px) !important',
-          }}
-          scrollToTop={false}
-        >
-          {!isCollapsed && (
-            <div>
-              {[listData1, listData2, listData3].map((listData, index) => (
-                <Accordions
-                  key={index}
-                  expanded={expanded === `panel${index + 1}`}
-                  onChange={handleChange(`panel${index + 1}`)}
+        )}
+      </Box>
+      <AppScrollbar
+        sx={{
+          height: 'calc(100vh - 70px) !important',
+        }}
+        scrollToTop={false}
+      >
+        {!isCollapsed && (
+          <div>
+            {[listData1, listData2, listData3].map((listData, index) => (
+              <Accordions key={index}>
+                <AccordionSummarys
+                  aria-controls={`panel${index + 1}d-content`}
+                  id={`panel${index + 1}d-header`}
                 >
-                  <AccordionSummarys
-                    aria-controls={`panel${index + 1}d-content`}
-                    id={`panel${index + 1}d-header`}
-                  >
-                    <Grid container>
-                      <Grid
-                        item
-                        xs={4}
-                        container
-                        justifyContent='start'
-                        alignItems='center'
-                      >
-                        <Typography>
-                          Agustus-2021({getTotalCount(listData)})
-                        </Typography>
-                      </Grid>
+                  <Grid container>
+                    <Grid
+                      item
+                      xs={4}
+                      container
+                      justifyContent='start'
+                      alignItems='center'
+                    >
+                      <Typography>
+                        Agustus-2021({getTotalCount(listData)})
+                      </Typography>
                     </Grid>
-                  </AccordionSummarys>
-                  <AccordionDetail>
-                    <List>
-                      {listData.map((item, listIndex) => (
-                        <React.Fragment key={listIndex}>
-                          <Card
-                            sx={{
-                              position: 'relative',
-                              borderLeft: `6px solid ${
-                                getStatusColor(item.status)[0]
-                              }`,
-                              borderRadius: 0,
-                            }}
+                  </Grid>
+                </AccordionSummarys>
+                <AccordionDetail sx={{ padding: 0 }}>
+                  <List>
+                    {listData.map((item, listIndex) => (
+                      <React.Fragment key={listIndex}>
+                        <Card
+                          sx={{
+                            position: 'relative',
+                            borderLeft: `6px solid ${getStatusColor(
+                              item.status,
+                            )}`,
+                            borderRadius: 0,
+                          }}
+                        >
+                          <Button
+                            sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                             onClick={() => handleTodo(item)}
                           >
                             <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                           >
                             <CardContent>
-                              <Grid container>
-                                <Grid item xs={2} container>
-                                  <ListItemAvatar>
-                                    <Avatar
-                                      alt={`Avatar ${listIndex}`}
-                                      src={item.avatarSrc}
-                                      sx={{ width: 56, height: 56 }}
-                                    />
-                                  </ListItemAvatar>
-                                  {item.status === 'Tinggi' && (
-                                    <Tooltip title='Danger'>
-                                      <Icon
-                                        color='error'
-                                        sx={{ marginLeft: 4, marginTop: 1 }}
-                                      >
-                                        <ErrorOutline />
-                                      </Icon>
-                                    </Tooltip>
-                                  )}
+                              <Grid container spacing={2}>
+                                <Grid item xs={2}>
+                                  <Stack alignItems='center'>
+                                    <ListItemAvatar>
+                                      <Avatar
+                                        alt={`Avatar ${listIndex}`}
+                                        src={item.avatarSrc}
+                                        sx={{ width: 56, height: 56 }}
+                                      />
+                                    </ListItemAvatar>
+                                    {item.priority === 'Tinggi' && (
+                                      <Tooltip title='Prioritas'>
+                                        <IconButton color='error'>
+                                          <AlertCircle />
+                                        </IconButton>
+                                      </Tooltip>
+                                    )}
+                                  </Stack>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
@@ -425,7 +470,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                                         {item.primary}
                                       </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={4} textAlign='right'>
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
@@ -445,34 +490,39 @@ export default function TodoDisposisi({ isCollapsed }) {
                                     </Grid>
                                     <Box
                                       sx={{
-                                        backgroundColor: getStatusColor(
-                                          item.status,
+                                        backgroundColor: getPriorityColor(
+                                          item.priority,
                                         )[1],
-                                        color: getStatusColor(item.status)[0],
-                                        padding: 1,
+                                        color: getPriorityColor(
+                                          item.priority,
+                                        )[0],
+                                        width: 53,
+                                        height: 20,
                                         borderRadius: 1,
+                                        fontSize: '12px',
+                                        lineHeight: '18px',
+                                        textAlign: 'center',
                                       }}
                                     >
-                                      {item.status}
+                                      {item.priority}
                                     </Box>
                                   </Grid>
                                 </Grid>
                               </Grid>
                             </CardContent>
                           </Button>
-                          </Card>
-                          {listIndex < listData.length - 1 && <Divider />}
-                        </React.Fragment>
-                      ))}
-                    </List>
-                  </AccordionDetail>
-                </Accordions>
-              ))}
-            </div>
-          )}
-        </AppScrollbar>
-      </MainSidebar>
-    </>
+                        </Card>
+                        {listIndex < listData.length - 1 && <Divider />}
+                      </React.Fragment>
+                    ))}
+                  </List>
+                </AccordionDetail>
+              </Accordions>
+            ))}
+          </div>
+        )}
+      </AppScrollbar>
+    </MainSidebar>
   );
 }
 
