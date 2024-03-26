@@ -99,7 +99,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           '& .MuiBadge-badge': {
             width: 'auto',
             height: 'auto',
-            minWidth: '12px',
+            minWidth: '10px',
             minHeight: '10px',
             borderRadius: '50%',
             fontSize: '8px',
