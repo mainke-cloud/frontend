@@ -192,7 +192,17 @@ const Dashboard = () => {
                       <img style={{height: 16, width: 16}} src={Sekretaris_Icon} />
                       <Typography sx={{ color: '#2952CC', fontSize: '16px' }}>Sekretaris</Typography>
                     </Stack>
-                    <IconButton sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }} onClick={() => handleAddTab("Add_Sekretaris")}>
+                    <IconButton 
+                      sx={{ 
+                        backgroundColor: '#3366FF', 
+                        width: 28, 
+                        height: 28, 
+                        '&:hover': {
+                          backgroundColor: '#4671f2'
+                        } 
+                      }} 
+                      onClick={() => handleAddTab("Add_Sekretaris")}
+                    >
                       <img src={Plus} style={{width: 'Auto', Height: 20}}/>
                     </IconButton>
                   </Stack>
@@ -231,7 +241,18 @@ const Dashboard = () => {
                       <img style={{height: 16, width: 16}}  src={Delegasi_Icon} />
                       <Typography sx={{ color: '#C45900', fontSize: '16px' }}>Delegasi</Typography>
                     </Stack>
-                    <IconButton sx={{ backgroundColor: '#C45900', width: 28, height: 28, marginRight: 150 }} onClick={() => handleAddTab("Add_Delegasi")}>
+                    <IconButton 
+                      sx={{ 
+                        backgroundColor: '#C45900', 
+                        width: 28, 
+                        height: 28, 
+                        marginRight: 150, 
+                        '&:hover': {
+                          backgroundColor: '#db6b0d'
+                        } 
+                      }} 
+                      onClick={() => handleAddTab("Add_Delegasi")}
+                    >
                       <img src={Plus} />
                     </IconButton>
                   </Stack>                
