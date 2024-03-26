@@ -18,6 +18,8 @@ import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import logoutIcon from '../../assets/icon/log-out.svg';
+import Add_Delegasi from '@crema/components/Tabs/Add_Delegasi';
+import Add_Sekretaris from '@crema/components/Tabs/Add_Sekretaris';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
