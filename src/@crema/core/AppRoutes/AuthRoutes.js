@@ -1,3 +1,5 @@
+import AuthWrapper from 'modules/auth/AuthWrapper';
+import Tes1 from 'modules/auth/Signin/Verifikasi4';
 import React from 'react';
 
 const Signin = React.lazy(() => import('../../../modules/auth/Signin'));
