@@ -4,7 +4,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 12px;
-  height: 43px;
+  height: 42px;
   padding: 8px 3px 4px 3px;
   background: #2e3032;
   border-radius: 5px 5px 0 0;
@@ -138,10 +138,14 @@
   justify-content: center;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 16px;
-  width: 16px;
+  height: auto;
+  width: auto;
+  min-height: 16px;
+  min-width: 16px;
   background-size: 16px;
   margin-left: 4px;
+  background-repeat: no-repeat;
+  object-fit: cover;
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-favicon {
   margin-left: 0;
@@ -197,6 +201,9 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+.chrome-tabs .chrome-tab:first-child .chrome-tab-close {
+  display: none;
+}
 .chrome-tabs .chrome-tab .chrome-tab-close {
   flex-grow: 0;
   flex-shrink: 0;
@@ -209,6 +216,7 @@
   background-repeat: no-repeat;
   background-size: 8px 8px;
 }
+
 @media (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:hover {
     background-color: #e8eaed;

@@ -4,16 +4,16 @@ import clsx from 'clsx';
 import Hidden from '@mui/material/Hidden';
 import Box from '@mui/material/Box';
 import { useLocation } from 'react-router-dom';
-
 import { LayoutType } from '@crema/constants/AppEnums';
 import { useLayoutContext } from '@crema/context/AppContextProvider/LayoutContextProvider';
 import AppSidebar from './AppSidebar';
-import AppThemeSetting from '../../AppThemeSetting';
 import AppHeader from './AppHeader';
 import AppContentView from '../../AppContentView';
 import BitBucketWrapper from './BitBucketWrapper';
 import BitBucketContainer from './BitBucketContainer';
 import Overlay from './Overlay';
+// import AppThemeSetting from '../../AppThemeSetting';
+
 
 const BitBucket = ({ routes, routesConfig }) => {
   const { pathname } = useLocation();
@@ -61,7 +61,7 @@ const BitBucket = ({ routes, routesConfig }) => {
           <Box className='mainContent'>
             <AppContentView routes={routes} />
           </Box>
-          <AppThemeSetting />
+          {/* <AppThemeSetting /> */}
         </BitBucketWrapper>
       </BitBucketContainer>
     </>

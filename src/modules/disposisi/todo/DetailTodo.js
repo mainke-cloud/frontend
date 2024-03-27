@@ -23,7 +23,7 @@ import TabList from '@mui/lab/TabList';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import AProfile from '../../../../assets/vector/Avatar.png';
+import AProfile from '../../../assets/vector/Avatar.png';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -51,7 +51,7 @@ const DetailTodo = ({ props }) => {
     lineHeight: '20px',
   });
 
-  const StyledBadge = styled(Badge)(({ theme }) => ({
+  const StyledBadge = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#0F6EB5',
       color: 'white',
@@ -61,7 +61,7 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const StyledStatus = styled(Typography)(({ theme }) => ({
+  const StyledStatus = styled(Typography)(() => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
@@ -72,7 +72,7 @@ const DetailTodo = ({ props }) => {
     borderRadius: '5px',
   }));
 
-  const StyledKomentar = styled(Typography)(({ theme }) => ({
+  const StyledKomentar = styled(Typography)(() => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
@@ -106,7 +106,7 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  const StyledTableCell = styled(TableCell)(() => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',
       color: '#262829',
@@ -180,11 +180,11 @@ const DetailTodo = ({ props }) => {
  
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case 'tinggi':
+      case 'Tinggi':
         return ['#E42313', '#FFBDAD'];
-      case 'sedang':
+      case 'Sedang':
         return ['#FFB020', '#FFEFD2'];
-      case 'rendah':
+      case 'Rendah':
         return ['#3366FF', '#D6E0FF'];
       default:
         return ['#C8CCD2', '#C8CCD2'];

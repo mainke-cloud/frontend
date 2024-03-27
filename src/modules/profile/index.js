@@ -7,13 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ProfileIcon from '../../../assets/icon/ProfileIcon.png';
-import KontakIcon from '../../../assets/icon/KontakIcon.png';
-import KerjaIcon from '../../../assets/icon/KerjaIcon.png';
 import { Box, Grid, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import AProfile from '../../../assets/vector/Avatar.png';
+import AProfile from '../../assets/vector/Avatar.png';
 
 import { User, Briefcase, Phone } from 'feather-icons-react';
 

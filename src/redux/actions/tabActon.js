@@ -1,33 +1,47 @@
 import React from 'react';
-import fb from '../../assets/icon/home.png';
-import google from '../../assets/icon/home.png';
-import Folder from '@crema/components/Tabs/Folder';
-import Keamanan from '@crema/components/Tabs/Keamanan';
-import Bantuan from '@crema/components/Tabs/Bantuan';
-import Profile from '@crema/components/Tabs/Profile';
-import Todo from '@crema/components/Tabs/Todo/Todo';
-import DetailTodo from '@crema/components/Tabs/Todo/DetailTodo';
-
+import Folder from 'modules/folder';
+import Keamanan from 'modules/keamanan';
+import Bantuan from 'modules/bantuan';
+import Profile from 'modules/profile';
+import Todo from 'modules/disposisi/todo/Todo';
+import DetailTodo from 'modules/disposisi/todo/DetailTodo';
+import Disposisi from 'modules/disposisi';
+import inboxIcon from '../../assets/icon/inbox.svg';
+import disposisiIcon from '../../assets/icon/disposisi.svg';
+import folderIcon from '../../assets/icon/folder.svg';
+import securityIcon from '../../assets/icon/shield.svg';
+import helpIcon from '../../assets/icon/help-circle.svg';
+import profileIcon from '../../assets/icon/user.svg';
+import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
+import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
-    // Cari tab dengan ID yang sama
-    const isExistingTab = state.some((tab) => tab.id === type);
-
+    const isExistingTab = state.some(
+      (tab) =>
+        tab.id.toLowerCase() === type.toLowerCase() || tab.title === type,
+    );
     if (!isExistingTab) {
-      // Tentukan tab yang akan dijadikan aktif
       const activeTab = state.find((tab) => tab.active);
-
-      // Jika ada tab yang sedang aktif, nonaktifkan tab tersebut
       if (activeTab) {
         activeTab.active = false;
       }
-
-      console.log(Folder);
-      // Tambahkan tab baru dengan status aktif
       let tabs = {
-        id: type,
+        id: type.toLowerCase(),
         title: type,
-        favicon: state.length % 2 ? fb : google,
+        favicon:
+          type === 'Folder'
+            ? folderIcon
+            : type === 'Keamanan'
+            ? securityIcon
+            : type === 'FAQ'
+            ? helpIcon
+            : type === 'Profile'
+            ? profileIcon
+            : type === 'Disposisi'
+            ? disposisiIcon
+            : type === 'Todo'
+            ? disposisiIcon
+            : '',
         content:
           type === 'Folder' ? (
             <Folder />
@@ -37,88 +51,93 @@ export const addTab = (id, state, type) => {
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
+          ) : type === 'Disposisi' ? (
+            <Disposisi />
           ) : type === 'Todo' ? (
             <Todo />
+          ) : type === 'Add_Sekretaris' ?(
+            <Add_Sekretaris />
+          ) : type === 'Add_Delegasi' ? (
+            <Add_Delegasi />
           ) : (
             ''
           ),
         active: true,
       };
-
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
-      // Jika tab sudah ada, aktifkan tab tersebut
-      console.log('elese bang');
-      dispatch(activateTab(type, state));
+      const isExistingTab = state.some(
+        (tab) => tab.id.toLowerCase() === type.toLowerCase(),
+      );
+      if (isExistingTab) {
+        dispatch(activateTab(type.toLowerCase(), state));
+      } else {
+        return;
+      }
     }
   };
 };
 
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
-    const isExistingTab = state.find((tab) => tab.id === type);
-    console.log(isExistingTab);
+    const isExistingTab = state.find(
+      (tab) =>
+        (tab.id === 'todo' && type === 'Todo') ||
+        (tab.id === 'disposisi' && type === 'Disposisi'),
+    );
     if (isExistingTab) {
       const updateTab = {
         ...isExistingTab,
-        id:id,
+        id: `${isExistingTab.id}${id}`,
         content:
-           type === 'Todo' ? (
+          type === 'Todo' ? (
             <DetailTodo props={data} />
+          ) : type === 'Disposisi' ? (
+            <div>oke</div>
           ) : (
             ''
           ),
-      }
-      console.log(updateTab);
-      dispatch({ type: 'UPDATE_TAB', payload: updateTab });
-    } else {
-    const exChildTab = state.find((tab) => tab.id === id);
-    if(exChildTab){
-      dispatch(activateTab(id, state));
-    }else{
-      const activeTab = state.find((tab) => tab.active);
-
-      if (activeTab) {
-        activeTab.active = false;
-      }
-      let tabs = {
-        id: id,
-        title: type,
-        favicon: state.length % 2 ? fb : google,
-        content:
-           type === 'Todo' ? (
-            <DetailTodo props={data} />
-          ) : (
-            ''
-          ),
-        active: true,
       };
-      dispatch({ type: 'ADD_TAB', payload: tabs });
+      if (type === 'Todo') {
+        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
+      } else if (type === 'Disposisi') {
+        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      }
+    } else {
+      const exChildTab = state.find(
+        (tab) => tab.id === `${type.toLowerCase()}${id}`,
+      );
+      if (exChildTab) {
+        dispatch(activateTab(`${type.toLowerCase()}${id}`, state));
+      } else {
+        const activeTab = state.find((tab) => tab.active);
+
+        if (activeTab) {
+          activeTab.active = false;
+        }
+        let tabs = {
+          id: `${type.toLowerCase()}${id}`,
+          title: type,
+          favicon: inboxIcon,
+          content:
+            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+          active: true,
+        };
+        dispatch({ type: 'ADD_TAB', payload: tabs });
+      }
     }
-    }
-  }
-}
+  };
+};
 
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
     const updatedTabs = state.map((tab) => ({
       ...tab,
-      active: tab.id.toString() === tabId.toString() ,
+      active: tab.id === tabId,
     }));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
   };
 };
-
-// export const closeTab = (tabId, state) => {
-//   return (dispatch) => {
-//     if (tabId === 'dashboard') {
-//       return;
-//     }
-//     const tabs = state.filter((tab) => tab.id !== tabId);
-//     dispatch({ type: 'CLOSE_TAB', payload: tabs });
-//     dispatch(activateTab('dashboard', tabs));
-//   };
-// };
 
 export const closeTab = (tabId, state) => {
   return (dispatch) => {
@@ -126,26 +145,21 @@ export const closeTab = (tabId, state) => {
       return;
     }
 
-    const tabIndex = state.findIndex((tab) => tab.id === tabId);
+    const tabIndex = state.findIndex(
+      (tab) => tab.id.toString() === tabId.toString(),
+    );
     let newActiveTabIndex;
 
     if (tabIndex > 0) {
-      // Jika ada tab sebelumnya, pilih tab tersebut
       newActiveTabIndex = tabIndex - 1;
     } else if (tabIndex === 0 && state.length > 1) {
-      // Jika tab yang ditutup adalah tab pertama dan ada tab lainnya,
-      // pilih tab berikutnya
       newActiveTabIndex = 1;
     } else {
-      // Jika tab yang ditutup adalah satu-satunya tab,
-      // atau jika tidak ada tab sebelumnya, langsung arahkan ke dashboard
       newActiveTabIndex = 'dashboard';
     }
 
     const tabs = state.filter((tab) => tab.id !== tabId);
     dispatch({ type: 'CLOSE_TAB', payload: tabs });
-
-    // Aktifkan tab yang sesuai dengan indeks yang ditentukan
     const newActiveTabId =
       newActiveTabIndex !== 'dashboard'
         ? tabs[newActiveTabIndex].id
@@ -162,7 +176,6 @@ export const closeAllTabs = () => {
 };
 
 export const reorderTab = (tabId, fromIndex, toIndex, state) => {
-  console.log(state);
   return (dispatch) => {
     let movedTab = state[fromIndex];
     let remainingTabs = state.filter((_, index) => index !== fromIndex);

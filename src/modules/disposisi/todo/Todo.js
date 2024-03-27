@@ -1,5 +1,5 @@
 import React from 'react';
-import noTodo from '../../../../assets/Todo/noTodo.svg';
+import noTodo from '../../../assets/Todo/noTodo.svg';
 import { Stack, Typography } from '@mui/material';
 
 const Todo = () => {
