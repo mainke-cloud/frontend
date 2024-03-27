@@ -346,7 +346,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Disposisi', item));
   };
   return (
@@ -510,7 +510,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                             )}`,
                             borderRadius: 0,
                           }}
-                          onClick={() => handleTodo(item)}
+                          onClick={() => handleTab(item)}
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}

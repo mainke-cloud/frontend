@@ -29,6 +29,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 import { MessageSquare, File, X, Send, Clock } from 'feather-icons-react';
+import HeaderDetail from '@crema/components/HeaderDetail';
 
 const DetailTodo = ({ props }) => {
   const [value, setValue] = React.useState('1');
@@ -204,27 +205,9 @@ const DetailTodo = ({ props }) => {
   };
   return (
     <Box backgroundColor='#F7F8F9'>
-      <Stack
-        direction='row'
-        justifyContent='space-between'
-        alignItems='center'
-        sx={{ paddingX: 8, paddingTop: 12, paddingBottom: 4 }}
-      >
-        <Typography fontSize='20px' fontWeight='700'>
-          Detail Todo
-        </Typography>
-        <Stack direction='row' columnGap='24px'>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
-            <Send style={{ width: '28px', height: '28px' }} />
-          </Box>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
-            <X style={{ width: '28px', height: '28px' }} />
-          </Box>
-        </Stack>
-      </Stack>
-      <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
+      <HeaderDetail nama='Detail Todo'/>
       <Box sx={{ padding: 8 }}>
-        <Box backgroundColor='#FFFFFF' sx={{ padding: 8 }}>
+        <Box backgroundColor='#FFFFFF' sx={{ padding: 8, borderRadius:'10px' }}>
           <Grid container>
             <Grid item xs={8}>
               <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -740,4 +723,5 @@ DetailTodo.propTypes = {
   priority: PropTypes.string,
   primary: PropTypes.string,
 };
+
 export default DetailTodo;
