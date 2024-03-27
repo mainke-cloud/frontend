@@ -22,6 +22,8 @@ import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../../../redux/actions/tabActon';
+import { backgroundDark } from '@crema/constants/defaultConfig';
+import { Height } from '@mui/icons-material';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -169,7 +171,7 @@ const Dashboard = () => {
 
           <Grid item xs={3} height={'100%'}>
             <Stack direction='column' spacing={5}>
-              <AppCard2 sx={{ height: '289px' }}>
+              <AppCard2 sx={{ height: '289px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#DFE4F7',
@@ -194,23 +196,34 @@ const Dashboard = () => {
                       </Typography>
                     </Stack>
                     <IconButton
-                      sx={{ backgroundColor: '#3366FF', width: 28, height: 28 }}
+                      sx={{
+                        backgroundColor: '#3366FF',
+                        width: 28,
+                        height: 28,
+                      }}
                       onClick={() => handleAddTab('Add_Sekretaris')}
                     >
                       <img src={Plus} style={{ width: 'Auto', Height: 20 }} />
                     </IconButton>
                   </Stack>
                 </Box>
-
                 <AppScrollbar>
                   <Box
                     sx={{
-                      height: '216px',
-                      overflowY: 'auto',
-                      paddingBottom: '10px',
                       overflowX: 'hidden',
                     }}
                   >
+                    <Sekretaris
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
+
+                    <Sekretaris
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
                     <Sekretaris
                       Profile={avatar}
                       JobDesk='Manager development'
@@ -226,7 +239,7 @@ const Dashboard = () => {
                 </AppScrollbar>
               </AppCard2>
 
-              <AppCard2 sx={{ height: '289px' }}>
+              <AppCard2 sx={{ height: '289px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#F9E5CF',
@@ -264,16 +277,23 @@ const Dashboard = () => {
                     </IconButton>
                   </Stack>
                 </Box>
-
                 <AppScrollbar>
                   <Box
                     sx={{
-                      height: '216px',
-                      overflowY: 'auto',
-                      paddingBottom: '10px',
                       overflowX: 'hidden',
                     }}
                   >
+                    <Delegasi
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
+
+                    <Delegasi
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
                     <Delegasi
                       Profile={avatar}
                       JobDesk='Manager development'
