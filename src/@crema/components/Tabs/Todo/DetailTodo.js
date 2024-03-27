@@ -180,11 +180,11 @@ const DetailTodo = ({ props }) => {
  
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case 'tinggi':
+      case 'Tinggi':
         return ['#E42313', '#FFBDAD'];
-      case 'sedang':
+      case 'Sedang':
         return ['#FFB020', '#FFEFD2'];
-      case 'rendah':
+      case 'Rendah':
         return ['#3366FF', '#D6E0FF'];
       default:
         return ['#C8CCD2', '#C8CCD2'];
