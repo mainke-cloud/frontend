@@ -28,7 +28,6 @@ const tabReducer = (state = initialState, action) => {
         tabs: action.payload,
       };
     case 'UPDATE_TAB_TODO': {
-      console.log('masuk reducer todo');
       const updatedTabs = state.tabs.map((tab) => {
         if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
           return action.payload;
@@ -36,14 +35,12 @@ const tabReducer = (state = initialState, action) => {
           return tab;
         }
       });
-      console.log(updatedTabs);
       return {
         ...state,
         tabs: updatedTabs,
       };
     }
     case 'UPDATE_TAB_DISPOSISI': {
-      console.log('masuk reducer disposisi');
       const updatedTabs = state.tabs.map((tab) => {
         if (tab.id === 'disposisi' ) {
           return action.payload;
@@ -51,7 +48,6 @@ const tabReducer = (state = initialState, action) => {
           return tab;
         }
       });
-      console.log(updatedTabs);
       return {
         ...state,
         tabs: updatedTabs,

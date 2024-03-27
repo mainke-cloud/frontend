@@ -4,13 +4,14 @@ import { authRouteConfig } from './AuthRoutes';
 import Error403 from '../../../modules/errorPages/Error403';
 import { errorPagesConfigs } from './ErrorPagesRoutes';
 import { accountPagesConfigs } from './AccountRoutes';
-import { samplePagesConfigs } from './SamplePage';
+// import { samplePagesConfigs } from './SamplePage';
+import { coofisPagesConfigs } from './CoofisPage';
 
 export const authorizedStructure = (loginUrl) => {
   return {
     fallbackPath: loginUrl,
     unAuthorizedComponent: <Error403 />,
-    routes: [...accountPagesConfigs, ...samplePagesConfigs],
+    routes: [...accountPagesConfigs, ...coofisPagesConfigs],
   };
 };
 

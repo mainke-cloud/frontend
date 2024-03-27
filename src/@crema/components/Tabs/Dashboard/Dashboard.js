@@ -22,8 +22,6 @@ import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../../../redux/actions/tabActon';
-import { backgroundDark } from '@crema/constants/defaultConfig';
-import { Height } from '@mui/icons-material';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -130,7 +128,7 @@ const Dashboard = () => {
           </Grid>
         </Paper>
 
-        <Grid container columnSpacing={5} height={'100vh'} padding={3}>
+        <Grid container columnSpacing={5} minHeight={'100vh'} padding={3}>
           <Grid item xs={9}>
             <Stack direction='column' spacing={5}>
               <Stack
@@ -168,10 +166,9 @@ const Dashboard = () => {
               <TodoList_Dashboard />
             </Stack>
           </Grid>
-
           <Grid item xs={3} height={'100%'}>
             <Stack direction='column' spacing={5}>
-              <AppCard2 sx={{ height: '289px', pb: 17 }}>
+              <AppCard2 sx={{ height: '339px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#DFE4F7',
@@ -238,8 +235,7 @@ const Dashboard = () => {
                   </Box>
                 </AppScrollbar>
               </AppCard2>
-
-              <AppCard2 sx={{ height: '289px', pb: 17 }}>
+              <AppCard2 sx={{ height: '339px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#F9E5CF',

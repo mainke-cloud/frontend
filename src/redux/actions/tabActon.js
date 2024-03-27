@@ -80,14 +80,12 @@ export const addTab = (id, state, type) => {
 
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
-    console.log(state);
     const isExistingTab = state.find(
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi'),
     );
     if (isExistingTab) {
-      console.log('masuk if');
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -100,26 +98,18 @@ export const childTab = (id, state, type, data) => {
             ''
           ),
       };
-      console.log(data);
-      console.log(updateTab);
       if (type === 'Todo') {
-        console.log('masuk if');
         dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
       } else if (type === 'Disposisi') {
-        console.log('masuk else if');
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
     } else {
-      console.log(type.toLowerCase());
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
       );
-      console.log(exChildTab);
       if (exChildTab) {
-        console.log('masuk if');
         dispatch(activateTab(`${type.toLowerCase()}${id}`, state));
       } else {
-        console.log('masuk else');
         const activeTab = state.find((tab) => tab.active);
 
         if (activeTab) {
@@ -170,8 +160,6 @@ export const closeTab = (tabId, state) => {
 
     const tabs = state.filter((tab) => tab.id !== tabId);
     dispatch({ type: 'CLOSE_TAB', payload: tabs });
-
-    // Aktifkan tab yang sesuai dengan indeks yang ditentukan
     const newActiveTabId =
       newActiveTabIndex !== 'dashboard'
         ? tabs[newActiveTabIndex].id
@@ -188,7 +176,6 @@ export const closeAllTabs = () => {
 };
 
 export const reorderTab = (tabId, fromIndex, toIndex, state) => {
-  console.log(state);
   return (dispatch) => {
     let movedTab = state[fromIndex];
     let remainingTabs = state.filter((_, index) => index !== fromIndex);
