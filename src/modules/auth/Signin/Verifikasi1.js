@@ -2,6 +2,7 @@ import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useNavigate, useLocation } from 'react-router-dom';
+import FooterAuth from './FooterAuth';
 
 const Verifikasi1 = () => {
   const location = useLocation();
@@ -116,16 +117,8 @@ const Verifikasi1 = () => {
             Aktifkan
           </Button>
         </Stack>
-        <Typography
-          variant='h6'
-          sx={{
-            color: '#A0A4A8',
-            fontSize: '14px',
-            marginTop: '60px',
-          }}
-        >
-          Ⓒ PT ARM Solusi | version 1.0
-        </Typography>
+
+        <FooterAuth />
       </Box>
     </Box>
   );

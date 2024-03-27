@@ -10,6 +10,7 @@ import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import { useLocation } from 'react-router-dom';
+import FooterAuth from './FooterAuth';
 
 const style = {
   position: 'absolute',
@@ -311,16 +312,7 @@ const Verifikasi3 = () => {
           </Box>
         </Modal>
 
-        <Typography
-          variant='h6'
-          sx={{
-            color: '#A0A4A8',
-            fontSize: '14px',
-            marginTop: '60px',
-          }}
-        >
-          Ⓒ PT ARM Solusi | version 1.0
-        </Typography>
+        <FooterAuth />
       </Box>
     </Box>
   );
