@@ -3,6 +3,7 @@ import { Box, Button, Typography, Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import SuccessImage from '../../../assets/LoginPage/berhasil.png';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
+import FooterAuth from './FooterAuth';
 
 const Verifikasi4 = () => {
   const location = useLocation();
@@ -86,16 +87,7 @@ const Verifikasi4 = () => {
           </Box>
         </Stack>
 
-        <Typography
-          variant='h6'
-          sx={{
-            color: '#A0A4A8',
-            fontSize: '14px',
-            marginTop: '60px',
-          }}
-        >
-          Ⓒ PT ARM Solusi | version 1.0
-        </Typography>
+        <FooterAuth />
       </Box>
     </Box>
   );
