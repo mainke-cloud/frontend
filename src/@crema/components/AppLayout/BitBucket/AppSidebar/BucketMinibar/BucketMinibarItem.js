@@ -77,10 +77,14 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
-    
-    if(name==='Todo'){
+
+    if (name === 'Todo') {
       dispatch(addTab(id, tabs, name));
-    } else if (name==='Disposisi'){
+    } else if (name === 'Disposisi') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Perlu Tindak Lanjut') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Lacak Proses') {
       dispatch(addTab(id, tabs, name));
     }
   };
@@ -131,7 +135,7 @@ const BucketMinibarItem = (props) => {
                   <img
                     src={dot}
                     alt='dot'
-                    style={{ width: '10px', height: '10px'}}
+                    style={{ width: '10px', height: '10px' }}
                   />
                   <Typography className='submenu-text'>{item.name}</Typography>
                 </IconButton>

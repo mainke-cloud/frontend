@@ -170,6 +170,7 @@ export const defaultTheme = {
       },
       body2: {
         fontSize: 12,
+        fontWeight: 600,
       },
     },
     components: {

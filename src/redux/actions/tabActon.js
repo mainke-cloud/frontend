@@ -14,6 +14,7 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import BelumPilih from 'modules/suratKeluar/perluTindakLanjuti/BelumPilih';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -55,10 +56,14 @@ export const addTab = (id, state, type) => {
             <Disposisi />
           ) : type === 'Todo' ? (
             <Todo />
-          ) : type === 'Add_Sekretaris' ?(
+          ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
+          ) : type === 'Perlu Tindak Lanjut' ? (
+            <BelumPilih />
+          ) : type === 'Lacak Proses' ? (
+            <BelumPilih />
           ) : (
             ''
           ),

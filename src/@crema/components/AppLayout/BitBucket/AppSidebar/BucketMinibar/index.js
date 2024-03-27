@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, InputBase, Typography, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
 import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import BucketMinibarWrapper from './BucketMinibarWrapper';
@@ -26,7 +25,7 @@ const BucketMinibar = (props) => {
   };
   const handleChangeSidebar = (name) => {
     dispatch(setSidebarName(name));
-  }
+  };
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>
@@ -93,14 +92,14 @@ const BucketMinibar = (props) => {
             badge={0}
             icon='home'
             text='Dashboard'
-            onMoveTab={()=>handlePindah("dashboard")}
+            onMoveTab={() => handlePindah('dashboard')}
           />
           <BucketMinibarItem
             isHover={isHover}
             badge={10}
             icon='inbox'
             text='Surat Masuk'
-            onAddTab={()=>handleChangeSidebar("Surat Masuk")}
+            onAddTab={() => handleChangeSidebar('Surat Masuk')}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -116,10 +115,18 @@ const BucketMinibar = (props) => {
           />
           <BucketMinibarItem
             isHover={isHover}
-            badge={12}
+            badge={20}
             icon='mail'
             text='Surat Keluar'
-            onAddTab={()=>handleChangeSidebar("Surat Keluar")}
+            more={true}
+            subMenu={[
+              { name: 'Perlu Tindak Lanjut' },
+              { name: 'Lacak Proses' },
+              { name: 'Pemohon' },
+              { name: 'Komposer' },
+              { name: 'Draft' },
+              { name: 'Template' },
+            ]}
           />
           <BucketMinibarItem
             isHover={isHover}
