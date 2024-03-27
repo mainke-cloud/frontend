@@ -16,7 +16,7 @@ import AppScrollbar from '@crema/components/AppScrollbar';
 
 const TodoList_Dashboard = () => {
   return (
-    <AppCard sx={{ height: '570px' }}>
+    <AppCard sx={{ height: '500px' }}>
       <Stack height={'100%'} width={'100%'} position={'relative'}>
         <Box
           sx={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }}
