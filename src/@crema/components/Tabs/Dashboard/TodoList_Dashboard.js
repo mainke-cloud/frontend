@@ -1,41 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Stack,
   Grid,
   Typography,
-  FormControl,
   IconButton,
-  Select,
-  MenuItem,
-  InputAdornment,
   InputBase,
-  Pagination,
 } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
 import ViewList from './ViewList';
-import TableList from './TableList';
 import AppCard from '@crema/components/AppCard';
 import SearchIcon from '@mui/icons-material/Search';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Filter } from 'feather-icons-react';
-import PropTypes from 'prop-types';
 import AppScrollbar from '@crema/components/AppScrollbar';
 
-const TodoList_Dashboard = (props) => {
-  const { isCollapsed, setCollapsed } = props;
-  const [selectedView, setSelectedView] = useState('List');
-
-  const handleViewChange = (event) => {
-    setSelectedView(event.target.value);
-  };
+const TodoList_Dashboard = () => {
   return (
-    <AppCard sx={{ height: '500px' }}>
-      <AppScrollbar>
-        <Stack
-        height={'100%'}
-        width={'100%'}
-        position={'relative'}
+    <AppCard sx={{ height: '570px' }}>
+      <Stack height={'100%'} width={'100%'} position={'relative'}>
+        <Box
+          sx={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }}
         >
           <Grid container direction='row'>
             <Grid item xs={8}>
@@ -64,25 +48,9 @@ const TodoList_Dashboard = (props) => {
 
             <Grid item xs={4}>
               <Stack direction='row' spacing={2} alignItems='center'>
-                <FormControl sx={{ m: 1, minWidth: 70 }}>
-                  <Select
-                    value={selectedView}
-                    onChange={handleViewChange}
-                    displayEmpty
-                    startAdornment={
-                      <InputAdornment position='start'>
-                        <FormatListBulletedIcon fontSize='small' />
-                      </InputAdornment>
-                    }
-                    sx={{ height: '25px', fontSize: '11px' }}
-                  >
-                    <MenuItem value='List'>List View</MenuItem>
-                    <MenuItem value='Table'>Table View</MenuItem>
-                  </Select>
-                </FormControl>
                 <Box
                   sx={{
-                    borderRadius: 2,
+                    borderRadius: 1,
                     border: '0.5px solid grey',
                     display: 'flex',
                     alignItems: 'center',
@@ -90,25 +58,26 @@ const TodoList_Dashboard = (props) => {
                     padding: '2.5px',
                   }}
                 >
-                  <Filter size={20} />
+                  <Filter size={19} />
                 </Box>
                 <Box
                   sx={{
-                    width: '40%',
+                    width: '75%',
                     height: '25px',
                     display: 'flex',
                     border: '0.5px solid grey',
-                    borderRadius: 2,
+                    borderRadius: 1,
                   }}
                 >
                   <InputBase placeholder='Search' sx={{ padding: '10px' }} />
-                  <IconButton alignItems='center' aria-label='search'>
+                  <IconButton aria-label='search'>
                     <SearchIcon fontSize='small' />
                   </IconButton>
                 </Box>
               </Stack>
             </Grid>
           </Grid>
+
           <Stack direction='row' spacing={1} alignItems='center' marginY='10px'>
             <Typography style={{ fontSize: '15px' }}>Urgensi : </Typography>
             <Box
@@ -153,47 +122,18 @@ const TodoList_Dashboard = (props) => {
             >
               Rendah
             </Box>
-            <Box
-              sx={{
-                backgroundColor: '#DCF2EA',
-                color: '#429777',
-                width: 93,
-                height: 20,
-                borderRadius: 1,
-                fontSize: '11px',
-                lineHeight: '18px',
-                textAlign: 'center',
-              }}
-            >
-              Didisposisikan
-            </Box>
           </Stack>
-          {selectedView === 'List' ? (
-            <ViewList isCollapsed={isCollapsed} />
-          ) : (
-            <TableList isCollapsed={isCollapsed} />
-          )}
-          <Stack
-            direction='row'
-            spacing={2}
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+
+          <AppScrollbar
+            sx={{ maxHeight: 'calc(100% - 60px) !important', overflow: 'auto' }}
+            scrollToTop={false}
           >
-            <Pagination count={10} shape='rounded' />
-            <Typography>Page: 1</Typography>
-          </Stack>
-        </Stack>
-      </AppScrollbar>
+            <ViewList />
+          </AppScrollbar>
+        </Box>
+      </Stack>
     </AppCard>
   );
-};
-
-TodoList_Dashboard.propTypes = {
-  isCollapsed: PropTypes.bool,
-  setCollapsed: PropTypes.func,
 };
 
 export default TodoList_Dashboard;
