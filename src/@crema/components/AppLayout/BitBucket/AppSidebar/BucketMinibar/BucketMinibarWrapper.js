@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { alpha, Box } from '@mui/material';
-import { ThemeMode } from '@crema/constants/AppEnums';
-import { useSidebarContext } from '@crema/context/AppContextProvider/SidebarContextProvider';
+import { Box } from '@mui/material';
 
 const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
-  const { sidebarBgColor, mode } = useSidebarContext();
 
   return (
     <Box
@@ -16,7 +13,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
         width: isHover ? 280 : 80,
         height: 'auto',
         maxHeight: '100vh',
-        backgroundColor: sidebarBgColor,
+        backgroundColor: '#fff',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -34,10 +31,11 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           zIndex: 1,
           width: '100%',
           height: '100%',
-          backgroundColor: (theme) =>
-            mode === ThemeMode.LIGHT
-              ? alpha(theme.palette.common.white, 0.05)
-              : alpha(theme.palette.common.black, 0.05),
+          backgroundColor: '#fff',
+          // backgroundColor: (theme) =>
+          //   mode === ThemeMode.LIGHT
+          //     ? alpha(theme.palette.common.white, 0.05)
+          //     : alpha(theme.palette.common.black, 0.05),
         },
         '& > *': {
           position: 'relative',
@@ -99,7 +97,7 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           '& .MuiBadge-badge': {
             width: 'auto',
             height: 'auto',
-            minWidth: '12px',
+            minWidth: '10px',
             minHeight: '10px',
             borderRadius: '50%',
             fontSize: '8px',

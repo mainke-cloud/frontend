@@ -6,7 +6,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { Typography, Avatar, AvatarGroup, Box, Pagination } from '@mui/material';

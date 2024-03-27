@@ -12,7 +12,7 @@ const Todo = () => {
         height: '90vh'
       }}
     >
-      <img src={noTodo} alt='user-profile' />
+      <img src={noTodo} alt='belum memilih' />
       <Typography fontWeight={'700'} >Anda belum memilih</Typography>
     </Stack>
   );

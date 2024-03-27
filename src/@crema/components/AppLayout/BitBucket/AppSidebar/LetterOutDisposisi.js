@@ -20,15 +20,27 @@ import {
   ButtonGroup,
   IconButton,
   Tooltip,
-  Icon,
   Stack,
+  TextField,
+  Popover,
+  Badge,
 } from '@mui/material';
+
+import SuratIn from '../../../../../assets/icon/Surat_Internal.svg';
+import SuratEx from '../../../../../assets/icon/Surat_Eksternal.svg';
+import SuratUndang from '../../../../../assets/icon/Surat_Undangan.svg';
+import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import { Mail, Plus, Filter, Search } from 'feather-icons-react';
+import { Plus, Filter, Search, AlertCircle, Mail } from 'feather-icons-react';
 
-import { ArrowForwardIosSharp, ErrorOutline } from '@mui/icons-material';
+import {
+  ArrowForwardIosSharp,
+  Close,
+} from '@mui/icons-material';
+
+import FilterPopover from './IconButton/FilterPopover';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -248,38 +260,174 @@ export default function LetterOutDisposisi({ isCollapsed }) {
     return listData.length;
   };
 
+  const [searchForm, setsearchForm] = React.useState(false);
+  const [searchInput, setSearchInput] = React.useState('');
+  const [openAdd, setOpenAdd] = React.useState(null);
+  const [openFilter, setOpenFilter] = React.useState(null);
+
+  const handleSearchClick = () => {
+    setsearchForm(true);
+  };
+
+  const handleCloseSearch = () => {
+    setsearchForm(false);
+    setSearchInput('');
+  };
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleAddClick = (event) => {
+    setOpenAdd(event.currentTarget);
+  };
+
+  const handleCloseAdd = () => {
+    setOpenAdd(null);
+  };
+
+  const handleFilterClick = (event) => {
+    setOpenFilter(event.currentTarget);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(null);
+  };
+
+  const open_add = Boolean(openAdd);
+  const open_filter = Boolean(openFilter);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
     <MainSidebar>
       <Box sx={{ py: 2.5, px: 3.5 }}>
-        <Grid container alignItems='center' justifyContent='space-between'>
-          <Grid item xs={7}>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
-              component='h2'
-            >
-              Surat Keluar
-            </Typography>
-            <Typography
-              sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
-              component='h2'
-            >
-              Perlu Tindak Lanjut
-            </Typography>
+        {searchForm ? (
+          <TextField
+            variant='outlined'
+            size='small'
+            placeholder='Search'
+            value={searchInput}
+            onChange={handleSearchInput}
+            InputProps={{
+              startAdornment: (
+                <IconButton onClick={handleSearchClick} edge='start'>
+                  <Search />
+                </IconButton>
+              ),
+              endAdornment: (
+                <IconButton onClick={handleCloseSearch} edge='end'>
+                  <Close />
+                </IconButton>
+              ),
+            }}
+            InputLabelProps={{
+              shrink: false,
+            }}
+            sx={{ width: '88%' }}
+          />
+        ) : (
+          <Grid container alignItems='center' justifyContent='space-between'>
+            <Grid item xs={7}>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
+                component='h2'
+              >
+                Surat Keluar
+              </Typography>
+              <Typography
+                sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
+                component='h2'
+              >
+                Perlu Tindak Lanjut
+              </Typography>
+            </Grid>
+            <Grid item xs={5}>
+              <ButtonGroup>
+                <IconButton onClick={handleSearchClick}>
+                  <Search />
+                </IconButton>
+                <IconButton onClick={handleFilterClick}>
+                  <Filter />
+                </IconButton>
+                <FilterPopover open={open_filter} onClose={handleCloseFilter} />
+                <IconButton
+                  aria-describedby={id}
+                  variant='contained'
+                  onClick={handleAddClick}
+                >
+                  <Plus />
+                </IconButton>
+                <Popover
+                  id={id}
+                  open={open_add}
+                  anchorEl={openAdd}
+                  onClose={handleCloseAdd}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                >
+                  <Box>
+                    <ButtonGroup orientation='vertical'>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratIn} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Internal
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratEx} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Eksternal
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratUndang} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Undangan
+                      </Button>
+                      <Button
+                        // onClick={}
+                        startIcon={<img src={SuratDelegasi} />}
+                        sx={{
+                          border: 'none',
+                          '&:hover': {
+                            border: 'none',
+                          },
+                        }}
+                      >
+                        Surat Delegasi
+                      </Button>
+                    </ButtonGroup>
+                  </Box>
+                </Popover>
+              </ButtonGroup>
+            </Grid>
           </Grid>
-          <Grid item xs={5}>
-            <ButtonGroup>
-              <IconButton>
-                <Search />
-              </IconButton>
-              <IconButton>
-                <Filter />
-              </IconButton>
-              <IconButton>
-                <Plus />
-              </IconButton>
-            </ButtonGroup>
-          </Grid>
-        </Grid>
+        )}
       </Box>
       <AppScrollbar
         sx={{
@@ -299,7 +447,7 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                     Agustus-2021({getTotalCount(listData)})
                   </Typography>
                 </AccordionSummarys>
-                <AccordionDetail>
+                <AccordionDetail sx={{ padding: 0 }}>
                   <List>
                     {listData.map((item, listIndex) => (
                       <React.Fragment key={listIndex}>
@@ -329,9 +477,9 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                                     {(item.status === 'Diproses' ||
                                       item.status === 'Batal') && (
                                       <Tooltip title='Danger'>
-                                        <Icon color='error'>
-                                          <ErrorOutline />
-                                        </Icon>
+                                        <IconButton color='error'>
+                                          <AlertCircle />
+                                        </IconButton>
                                       </Tooltip>
                                     )}
                                   </Stack>
@@ -339,24 +487,47 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                                 <Grid item xs={10}>
                                   <Grid container>
                                     <Grid item xs={8}>
-                                      <Typography
-                                        variant='body1'
-                                        color='text.primary'
-                                      >
-                                        {item.primary}
-                                      </Typography>
+                                      <Badge badgeContent={3} color='primary'>
+                                        <Typography
+                                          variant='body1'
+                                          color='text.primary'
+                                          sx={{
+                                            fontWeight:
+                                              item.status === 'Unread' ||
+                                              item.status === 'Disposisi'
+                                                ? Fonts.BOLD
+                                                : Fonts.LIGHT,
+                                          }}
+                                        >
+                                          {item.primary}
+                                        </Typography>
+                                      </Badge>
                                     </Grid>
                                     <Grid item xs={4} textAlign='right'>
                                       <Typography
                                         variant='body2'
                                         color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                       >
                                         {item.date}
                                       </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                       <Typography
-                                        sx={{ display: 'inline' }}
+                                        sx={{
+                                          display: 'inline',
+                                          fontWeight:
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
                                         component='span'
                                         variant='body2'
                                         color='text.primary'
@@ -385,7 +556,6 @@ export default function LetterOutDisposisi({ isCollapsed }) {
                                         marginLeft: 'auto',
                                         display: 'flex',
                                         flexDirection: 'row',
-                                        paddingTop: 2.4,
                                       }}
                                     >
                                       <Mail />

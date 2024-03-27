@@ -1,17 +1,18 @@
 import React from 'react';
 import Dashboard from '@crema/components/Tabs/Dashboard/Dashboard';
-import fb from '../../assets/icon/home.png';
+import homeIcon from '../../assets/icon/home.svg';
 const initialState = {
   tabs: [
     {
       id: 'dashboard',
-      favicon: fb,
+      favicon: homeIcon,
       title: 'Dashboard',
       active: true,
       content: <Dashboard />,
     },
   ],
   idCounter: 1,
+  cek: 0,
 };
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,15 +27,27 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-    case 'UPDATE_TAB':{
-      const updatedTabs = state.tabs.map(tab => {
-        if (tab.id === action.payload.title) {
+    case 'UPDATE_TAB_TODO': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
           return action.payload;
         } else {
           return tab;
         }
       });
-      console.log(action.payload);
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
+    case 'UPDATE_TAB_DISPOSISI': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'disposisi' ) {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
       return {
         ...state,
         tabs: updatedTabs,
@@ -44,6 +57,7 @@ const tabReducer = (state = initialState, action) => {
       return {
         ...state,
         tabs: action.payload,
+        idCounter: state.idCounter - 1,
       };
     case 'REORDER_TAB':
       return {
