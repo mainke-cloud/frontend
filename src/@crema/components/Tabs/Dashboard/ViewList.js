@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   List,
   ListItem,
@@ -196,13 +196,19 @@ const ViewList = () => {
   const getStatusMark = (mark) => {
     switch (mark) {
       case 'Sudah Dibaca':
-        return ['#5C5E61', '#C8CCD2'];
+        return ['#5C5E61', '#C8CCD2']; //color, bgColor
       case 'Tandai Selesai':
         return ['#429777', '#DCF2EA'];
       default:
         return ['lightgrey', 'lightgrey'];
     }
   };
+
+  const [isActive, setIsActive] = useState(true);
+
+    const handleClick = () => {
+        setIsActive(!isActive);
+    };
 
   return (
     <>
@@ -338,6 +344,8 @@ const ViewList = () => {
                               </Typography>
                               <Box
                                 sx={{
+                                  // backgroundColor: isActive ? '#C8CCD2' : '#DCF2EA',
+                                  // color: isActive ? '#5C5E61' : '#429777',
                                   backgroundColor: getStatusMark(item.mark)[1],
                                   color: getStatusMark(item.mark)[0],
                                   width: 112,
@@ -348,9 +356,15 @@ const ViewList = () => {
                                   textAlign: 'center',
                                   cursor: 'pointer',
                                 }}
+                                onClick={handleClick}
                               >
                                 <Typography style={{ fontSize: '12px' }}>
-                                  {item.mark}{' '}
+                                  {item.mark}
+                                  {/* {isActive ? 'Sudah Dibaca' : 'Tandai Selesai'}{' '} */}
+                                  {/* {isActive
+                                    ? item.mark === 'Sudah Dibaca'
+                                      : 'Tandai Selesai'
+                                      }{' '} */}
                                   <DoneIcon style={{ fontSize: 'small' }} />
                                 </Typography>
                               </Box>
