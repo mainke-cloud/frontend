@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from '@crema/components/Tabs/Dashboard/Dashboard';
+import Dashboard from 'modules/dashboard';
 import homeIcon from '../../assets/icon/home.svg';
 const initialState = {
   tabs: [

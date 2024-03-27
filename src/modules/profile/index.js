@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import { Box, Grid, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import AProfile from '../../../assets/vector/Avatar.png';
+import AProfile from '../../assets/vector/Avatar.png';
 
 import { User, Briefcase, Phone } from 'feather-icons-react';
 
