@@ -16,7 +16,7 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
       sx={{  
         cursor: 'pointer', 
         '&:hover': {
-          backgroundColor: '#e3e4e6',
+          backgroundColor: '#D9DDE3',
         } 
       }} 
       onClick={handleClick} >

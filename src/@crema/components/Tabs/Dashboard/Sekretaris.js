@@ -59,7 +59,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         color: 'black', 
                         padding: 2, 
                         width: '100%', 
-                        maxWidth: 500, 
+                        maxWidth: 335, 
                         borderRadius: 2,
                         cursor: 'pointer',
                         '@media (min-width: 600px)': { 

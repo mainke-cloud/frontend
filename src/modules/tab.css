@@ -138,10 +138,14 @@
   justify-content: center;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 16px;
-  width: 16px;
+  height: auto;
+  width: auto;
+  min-height: 16px;
+  min-width: 16px;
   background-size: 16px;
   margin-left: 4px;
+  background-repeat: no-repeat;
+  object-fit: cover;
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-favicon {
   margin-left: 0;
@@ -197,6 +201,9 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+.chrome-tabs .chrome-tab:first-child .chrome-tab-close {
+  display: none;
+}
 .chrome-tabs .chrome-tab .chrome-tab-close {
   flex-grow: 0;
   flex-shrink: 0;
@@ -209,6 +216,7 @@
   background-repeat: no-repeat;
   background-size: 8px 8px;
 }
+
 @media (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:hover {
     background-color: #e8eaed;

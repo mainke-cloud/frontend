@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import FooterAuth from './FooterAuth';
 
 const Verifikasi2 = () => {
   const location = useLocation();
@@ -117,16 +118,7 @@ const Verifikasi2 = () => {
           </Button>
         </Stack>
 
-        <Typography
-          variant='h6'
-          sx={{
-            color: '#A0A4A8',
-            fontSize: '14px',
-            marginTop: '60px',
-          }}
-        >
-          Ⓒ PT ARM Solusi | version 1.0
-        </Typography>
+        <FooterAuth />
       </Box>
     </Box>
   );

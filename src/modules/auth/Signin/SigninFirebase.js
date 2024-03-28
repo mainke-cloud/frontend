@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { useIntl } from 'react-intl';
 import IntlMessages from '@crema/helpers/IntlMessages';
 import IconButton from '@mui/material/IconButton';
 import AppInfoView from '@crema/components/AppInfoView';
-// import { useAuthMethod } from '@crema/hooks/AuthHooks';
-// import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import AuthWrapper from '../AuthWrapper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -37,13 +34,13 @@ const validationSchema = yup.object({
     .required(
       <>
         <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-        <IntlMessages id='Ussername Anda' style={{ marginTop: '25px' }} />
+        <IntlMessages id='Isi username anda' style={{ marginTop: '25px' }} />
       </>,
     ),
   password: yup.string().required(
     <>
       <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-      <IntlMessages id='Isi Password anda' style={{ marginTop: '20px' }} />
+      <IntlMessages id='Isi password anda' style={{ marginTop: '20px' }} />
     </>,
   ),
 });
@@ -62,12 +59,8 @@ const style = {
 
 const SigninFirebase = () => {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
-  // const { messages } = useIntl();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
   const toggleShowPassword = () => {

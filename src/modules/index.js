@@ -4,12 +4,13 @@ import {
   activateTab,
   closeTab,
   reorderTab,
-} from '../../../redux/actions/tabActon';
+
+} from '../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
-import '../Page1/tab.css';
+import './tab.css';
 
-const Page2 = () => {
+const Page = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   // const id = useSelector((state) => state.tab.idCounter);
@@ -25,10 +26,9 @@ const Page2 = () => {
   const handleTabActive = (tabId) => {
     dispatch(activateTab(tabId, tabs));
   };
-
   return (
     <>
-      <Box>
+      <Box sx={{ pl: 2 }}>
         <Tabs
           darkMode={false}
           onTabClose={handleTabClose}
@@ -36,12 +36,10 @@ const Page2 = () => {
           onTabActive={handleTabActive}
           tabs={tabs}
         />
-      </Box>
-      <Box>
         <Box>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>
   );
 };
 
-export default Page2;
+export default Page;
