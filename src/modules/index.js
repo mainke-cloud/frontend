@@ -5,10 +5,10 @@ import {
   closeTab,
   reorderTab,
 
-} from '../../../redux/actions/tabActon';
+} from '../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
-import '../Page/tab.css';
+import './tab.css';
 
 const Page = () => {
   const dispatch = useDispatch();

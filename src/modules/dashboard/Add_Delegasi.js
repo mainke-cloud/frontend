@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import Add from '../../../assets/Dashboard/Plus_icon.png'
+import Add from '../../assets/Dashboard/Plus_icon.png'
 
 const Add_Delegasi = () => {
     return (

@@ -36,7 +36,6 @@ const Mail_Button = ({ bgColor, bgHover, textColor, text, image }) => {
 Mail_Button.propTypes = {
   bgColor: PropTypes.string.isRequired,
   bgHover: PropTypes.string.isRequired,
-  bgHover: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

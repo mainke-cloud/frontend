@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import Add from '../../../assets/Dashboard/Plus_icon.png'
-import Filter from '../../../assets/Dashboard/Filter_icon.png'
-import Warning from '../../../assets/Dashboard/Warning_icon_blue.png'
+import Add from '../../assets/Dashboard/Plus_icon.png'
+import Filter from '../../assets/Dashboard/Filter_icon.png'
+import Warning from '../../assets/Dashboard/Warning_icon_blue.png'
 
 const Add_Sekretaris = () => {
     return (
