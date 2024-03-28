@@ -17,6 +17,7 @@ import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
+import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -47,6 +48,8 @@ export const addTab = (id, state, type) => {
             ? disposisiIcon
             : type === 'Log Scan Surat'
             ? scanIcon
+            : type === 'Buat Scan Surat'
+            ? scanIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -61,12 +64,14 @@ export const addTab = (id, state, type) => {
             <Disposisi />
           ) : type === 'Todo' ? (
             <Todo />
-          ) : type === 'Add_Sekretaris' ?(
+          ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
           ) : type === 'Log Scan Surat' ? (
             <ScanSurat />
+          ) : type === 'Buat Scan Surat' ? (
+            <BuatScanSurat />
           ) : (
             ''
           ),
@@ -91,7 +96,7 @@ export const childTab = (id, state, type, data) => {
     const isExistingTab = state.find(
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi')||
+        (tab.id === 'disposisi' && type === 'Disposisi') ||
         (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
     if (isExistingTab) {
@@ -133,7 +138,7 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+            type === 'Todo' ? <DetailTodo props={data} /> : type === 'Log Scan Surat' ? <DetailScanSurat props={data} /> : <div>{id}</div>,
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });

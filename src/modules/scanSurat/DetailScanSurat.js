@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Grid, Stack, Tab, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HeaderDetail from '@crema/components/HeaderDetail';
@@ -7,6 +8,7 @@ import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import AppScrollbar from '@crema/components/AppScrollbar';
 
+import { Menu, Grid as IconGrid } from 'feather-icons-react';
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: '100px',
@@ -70,6 +72,7 @@ const pekerjaan = [
     name: 'Tembusan',
   },
 ];
+
 const pekerjaan2 = [
   {
     name: 'Lampiran',
@@ -85,7 +88,7 @@ const pekerjaan2 = [
   },
 ];
 
-const DetailScanSurat = () => {
+const DetailScanSurat = ({props}) => {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -93,7 +96,7 @@ const DetailScanSurat = () => {
   };
 
   return (
-    <Box backgroundColor='#F7F8F9'>
+    <Box backgroundColor='#F7F8F9' minHeight='100vh' >
       <HeaderDetail nama='Detail Scan Surat' />
       <Box sx={{ padding: 8 }}>
         <Box
@@ -187,13 +190,15 @@ const DetailScanSurat = () => {
             >
               <Box paddingX='16px' paddingY='24px' borderRadius='10px' border='1px solid #E0E0E0'>
                 <Stack direction='row' justifyContent='space-between' paddingBottom='16px'>
-                <Typography>
+                <Typography fontSize='16px' fontWeight='700'>
                   Lampiran
                 </Typography>
-                <Stack>
-                <Typography>
+                <Stack direction='row' columnGap='24px'>
+                <Typography color='#0F6EB5'>
                   see more
                 </Typography>
+                <Menu/>
+                <IconGrid/>
                 </Stack>
                 </Stack>
                 <AppScrollbar
@@ -213,6 +218,10 @@ const DetailScanSurat = () => {
       </Box>
     </Box>
   );
+};
+
+DetailScanSurat.propTypes = {
+  props: PropTypes.shape({}),
 };
 
 export default DetailScanSurat;

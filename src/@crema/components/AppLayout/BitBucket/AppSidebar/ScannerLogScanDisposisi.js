@@ -28,7 +28,7 @@ import { Fonts } from '@crema/constants/AppEnums';
 import { ArrowForwardIosSharp } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { addTab, childTab } from '../../../../../redux/actions/tabActon';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -237,9 +237,14 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
 
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
 
   const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Log Scan Surat', item));
+  };
+
+  const handleAddTab = (name) => {
+    dispatch(addTab(id, tabs, name));
   };
 
   return (
@@ -268,7 +273,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
               <IconButton>
                 <Filter />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={()=>handleAddTab('Buat Scan Surat')}>
                 <Plus />
               </IconButton>
             </ButtonGroup>

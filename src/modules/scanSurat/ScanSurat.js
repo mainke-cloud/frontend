@@ -9,14 +9,14 @@ const ScanSurat = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '90vh'
+        height: '100vh'
       }}
       rowGap={'12px'}
     >
       <img src={kosong} alt='belum memilih' />
       <Typography fontSize={'16px'} fontWeight={'600'} >Tidak ada yang dipilih</Typography>
     </Stack>
-  )
-}
+  );
+};
 
-export default ScanSurat
+export default ScanSurat;
