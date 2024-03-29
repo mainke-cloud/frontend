@@ -1,17 +1,10 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useNavigate, useLocation } from 'react-router-dom';
+import FooterAuth from './FooterAuth';
 
 const Verifikasi1 = () => {
-
   const location = useLocation();
   const values = location.state && location.state.values;
   const navigate = useNavigate();
@@ -22,56 +15,89 @@ const Verifikasi1 = () => {
 
   return (
     <Box
-      width='46vw'
-      height='100%'
-      display='grid'
-      alignContent='center'
-      px='3vw'
-      sx={{ bgcolor: '#FFFFFF' }}
+      width='50vw'
+      height='95%'
+      sx={{
+        bgcolor: '#FFFFFF',
+        borderRadius: '16px',
+        border: '1px solid #D8D8D8',
+      }}
     >
-      <Paper elevation={3} sx={{ padding: '30px' }}>
-        <Typography variant='h1'>Pengecekan Keamanan</Typography>
+      <Box pt='40px' px='86px'>
+        <Typography
+          variant='h1'
+          pt='24px'
+          style={{ fontSize: '36px', fontWeight: 700 }}
+        >
+          Pengecekan Keamanan
+        </Typography>
 
-        <Typography variant='h1' paddingTop='50px'>
+        <Stack direction='row' paddingTop='14px' alignItems='center'>
           <IconButton disabled>
             <InfoOutlinedIcon sx={{ color: '#FFB020' }} />
           </IconButton>
-          Dua Langkah Verifikasimu Belum Aktif
-        </Typography>
+          <Typography variant='h1' sx={{ fontSize: '18px', fontWeight: 500 }}>
+            Dua Langkah Verifikasimu Belum Aktif
+          </Typography>
+        </Stack>
 
-        <Typography variant='body1' paddingTop='15px'>
+        <Typography
+          variant='h6'
+          paddingTop='16px'
+          style={{ fontSize: '16px', fontWeight: 500, color: '#8C8F93' }}
+        >
           Aktivasi dua langkah verifikasi untuk proteksi lebih aman terhadap
           akunmu !
         </Typography>
+        <Box
+          width='38vw'
+          mt='32px'
+          sx={{
+            bgcolor: '#FFFFFF',
+            borderRadius: '16px',
+            border: '1px solid #D8D8D8',
+            backgroundColor: '#F7F8F9',
+          }}
+        >
+          <Typography
+            variant='h5'
+            paddingTop='27px'
+            px='24px'
+            style={{ fontSize: '18px', fontWeight: 700, color: '#474D663' }}
+          >
+            Apa itu Dua Langkah Verifikasi dan mengapa anda memerlukannya?
+          </Typography>
 
-        <Typography variant='h4' paddingTop='70px'>
-          Apa itu Dua Langkah Verifikasi dan mengapa anda memerlukannya?
-        </Typography>
-
-        <Typography variant='body1'>
-          Dua Langkah Verifikasi adalah langkah tambahan keamanan saat login.
-          Setelah memasukkan kata sandi, Anda perlu melakukan tindakan tambahan,
-          seperti memasukkan kode yang dikirimkan ke ponsel Anda. Ini menjaga
-          akun Anda lebih aman karena mempersulit akses bagi orang yang tidak
-          sah.
-        </Typography>
-
+          <Typography
+            variant='h5'
+            paddingTop='16px'
+            px='24px'
+            pb='22px'
+            style={{ fontSize: '16px', fontWeight: 400, color: '#8C8F93' }}
+          >
+            Dua Langkah Verifikasi adalah langkah tambahan keamanan saat login.
+            Setelah memasukkan kata sandi, Anda perlu melakukan tindakan
+            tambahan, seperti memasukkan kode yang dikirimkan ke ponsel Anda.
+            Ini menjaga akun Anda lebih aman karena mempersulit akses bagi orang
+            yang tidak sah.
+          </Typography>
+        </Box>
         <Stack
           direction='row'
-          paddingTop='70px'
-          paddingBottom='20px'
+          paddingTop='32px'
           justifyContent='center'
-          gap='10px'
+          gap='16px'
         >
           <Button
             variant='outlined'
             sx={{
+              height: '48px',
               width: '12vw',
-              borderRadius: '50px',
-              color: '#4D6FD4',
-              border: '1px solid #4D6FD4',
+              borderRadius: '8px',
+              color: '#474D66',
+              border: '1px solid #C8CCD2',
               '&:hover': {
-                border: '1px solid #4D6FD4',
+                border: '1px solid #C8CCD2',
               },
             }}
           >
@@ -82,26 +108,18 @@ const Verifikasi1 = () => {
             variant='contained'
             onClick={handleSubmit}
             sx={{
+              height: '48px',
               width: '12vw',
-              borderRadius: '50px',
+              borderRadius: '8px',
               bgcolor: '#E42313',
             }}
           >
             Aktifkan
           </Button>
         </Stack>
-      </Paper>
 
-      <Typography
-        variant='h6'
-        sx={{
-          color: '#A0A4A8',
-          fontSize: '14px',
-          paddingTop: '50px',
-        }}
-      >
-        Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
-      </Typography>
+        <FooterAuth />
+      </Box>
     </Box>
   );
 };
