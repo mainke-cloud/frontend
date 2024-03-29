@@ -1,18 +1,16 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import FooterAuth from './FooterAuth';
 
 const Verifikasi2 = () => {
-  const location = useLocation();
-  const values = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi3', { state: { values } });
+    navigate('/signin/verifikasi3');
   };
 
   const kodeTelpon = [
