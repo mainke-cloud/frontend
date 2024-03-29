@@ -1,5 +1,5 @@
 import React from 'react';
-import noTodo from '../../../../assets/Todo/noTodo.svg';
+import noTodo from '../../../assets/Todo/noTodo.svg';
 import { Stack, Typography } from '@mui/material';
 
 const Todo = () => {
@@ -12,7 +12,7 @@ const Todo = () => {
         height: '90vh'
       }}
     >
-      <img src={noTodo} alt='user-profile' />
+      <img src={noTodo} alt='belum memilih' />
       <Typography fontWeight={'700'} >Anda belum memilih</Typography>
     </Stack>
   );

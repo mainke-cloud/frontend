@@ -22,7 +22,6 @@ const BucketMinibar = (props) => {
     dispatch(addTab(id, tabs, type));
   };
   const handlePindah = (tabId) => {
-    console.log(tabId);
     dispatch(activateTab(tabId, tabs));
   };
   const handleChangeSidebar = (name) => {
