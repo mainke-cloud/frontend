@@ -15,6 +15,8 @@ import HeaderDetail from '@crema/components/HeaderDetail';
 import LabelInput from '@crema/components/LabelInput';
 
 import UploadFile from '../../assets/icon/uploadfile.svg';
+import PdfVector from '../../assets/vector/PdfVector.svg';
+import AppScrollbar from '@crema/components/AppScrollbar';
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: '100px',
@@ -68,14 +70,25 @@ const Buttons = styled(Button)({
 
 const BuatScanSurat = () => {
   const [value, setValue] = React.useState('1');
+  const [file, setFile] = React.useState([]);
 
   const handleValue = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleFileSelected = (event) => {
-    const file = event.target.files;
-    console.log('File yang dipilih:', file);
+    const files = event.target.files;
+    setFile([...file, ...files]);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    setFile([...file, ...files]);
   };
 
   return (
@@ -167,15 +180,28 @@ const BuatScanSurat = () => {
               <Grid container columnSpacing={4}>
                 <Grid item xs={8}>
                   <LabelInput name='Lampiran' important />
-                  <Box
-                    display='flex'
-                    justifyContent='center'
-                    alignItems='center'
-                    height='330px'
-                    border='1px dashed #B1B5BA'
-                    borderRadius='10px'
+                  <AppScrollbar
+                  sx={{
+                    height:'330px',
+                    width:'100%',
+                    position:'relative',
+                    border:'1px dashed #B1B5BA',
+                    borderRadius:'10px',
+                    overflowY:'auto',
+                  }}
+                    scrollToTop={false}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
                   >
-                    <Stack rowGap='8px'>
+                    <Stack
+                      rowGap='8px'
+                      justifyContent='center'
+                      alignItems='center'
+                      position='absolute'
+                      top='50%'
+                      left='50%'
+                      sx={{transform:'translate(-50%, -50%)'}}
+                    >
                       <img
                         src={UploadFile}
                         alt='Upload File'
@@ -201,7 +227,29 @@ const BuatScanSurat = () => {
                         </Typography>
                       </Stack>
                     </Stack>
-                  </Box>
+                    <Stack direction='row' flexWrap='wrap'>
+                      {file.map((file, index) => (
+                        <Stack key={index} margin='16px' alignItems='center' rowGap='8px' width='100px'>
+                          <img
+                            src={PdfVector}
+                            alt='Pdf File'
+                            style={{ height: '75px', width:'fit-content' }}
+                          />
+                          <Typography fontSize='12px' sx={{maxWidth: '100px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                            {file.name}
+                          </Typography>
+                          <Stack direction='row' justifyContent='space-between' width='-webkit-fill-available' paddingX='4px'>
+                          <Typography  fontSize='8px'>
+                            {file.size} bytes
+                          </Typography>
+                          <Typography fontSize='8px'>
+                            Edit
+                          </Typography>
+                          </Stack>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </AppScrollbar>
                 </Grid>
                 <Grid item xs={4}>
                   <Box
@@ -235,9 +283,7 @@ const BuatScanSurat = () => {
                 justifyContent='center'
                 columnGap='16px'
               >
-                <Buttons variant='contained'>
-                  Kembali
-                </Buttons>
+                <Buttons variant='contained'>Kembali</Buttons>
                 <Buttons variant='contained'>Kirim</Buttons>
               </Stack>
             </TabPanel>
