@@ -27,22 +27,9 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-    case 'UPDATE_TAB_TODO': {
-      const updatedTabs = state.tabs.map((tab) => {
-        if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
-          return action.payload;
-        } else {
-          return tab;
-        }
-      });
-      return {
-        ...state,
-        tabs: updatedTabs,
-      };
-    }
     case 'UPDATE_TAB_DISPOSISI': {
       const updatedTabs = state.tabs.map((tab) => {
-        if (tab.id === 'disposisi' ) {
+        if (tab.id === 'todo' && tab.title === action.payload.title || tab.id === 'disposisi' && tab.title === action.payload.title ) {
           return action.payload;
         } else {
           return tab;

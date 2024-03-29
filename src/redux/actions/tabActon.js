@@ -5,7 +5,8 @@ import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import Disposisi from 'modules/disposisi';
+import NoDisposisi from 'modules/disposisi/respons/Default';
+import Disposisi from 'modules/disposisi/respons/DisposisiRespons';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -52,7 +53,7 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <Disposisi />
+            <NoDisposisi />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ?(
@@ -93,16 +94,12 @@ export const childTab = (id, state, type, data) => {
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
-            <div>oke</div>
+            <Disposisi props={data} />
           ) : (
             ''
           ),
       };
-      if (type === 'Todo') {
-        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      } else if (type === 'Disposisi') {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      }
+      dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -120,7 +117,11 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+            type === 'Todo' ?
+            <DetailTodo props={data} />
+            : type === 'Disposisi' ?
+            <Disposisi props={data} />
+            : <div>{id}</div>,
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });

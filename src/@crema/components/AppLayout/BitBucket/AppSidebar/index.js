@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import BitBucketSidebarWrapper from './BitBucketSidebarWrapper';
 import AppSidebarContainer from './AppSidebarContainer';
 import BucketMinibar from './BucketMinibar';
-import DisposisiSidebar from './DisposisiSidebar';
-import MyDisposisiSidebar from './MyDisposisiSidebar';
-import TodoDisposisi from './TodoDisposisi';
-import LetterInDisposisi from './LetterInDisposisi';
-import LetterOutDisposisi from './LetterOutDisposisi';
-import ScannerDrafDisposisi from './ScannerDrafDisposisi';
-import ScannerLogScanDisposisi from './ScannerLogScanDisposisi';
+import DisposisiSidebar from './Disposisi/Respon';
+import MyDisposisiSidebar from './Disposisi/DisposisiSaya';
+import TodoDisposisi from './Disposisi/Todo';
+import LetterInDisposisi from './Surat/LetterInDisposisi';
+import LetterOutDisposisi from './Surat/LetterOutDisposisi';
+import ScannerDrafDisposisi from './ScanSurat/ScannerDrafDisposisi';
+import ScannerLogScanDisposisi from './ScanSurat/ScannerLogScanDisposisi';
 
 import { Typography, Drawer, Hidden, Box } from '@mui/material';
 
