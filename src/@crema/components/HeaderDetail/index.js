@@ -1,10 +1,22 @@
 import React from 'react'
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  closeTab,
+} from '../../../redux/actions/tabActon';
 
-import { X, Send } from 'feather-icons-react';
+import { X, Send, Save } from 'feather-icons-react';
 
-const HeaderDetail = ({nama}) => {
+const HeaderDetail = ({nama, send, save}) => {
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const tab = tabs.find((tab) => tab.active);
+
+  const handleTabClose = () => {
+    dispatch(closeTab(tab.id, tabs));
+  };
+
   return (
     <>
     <Stack
@@ -17,12 +29,19 @@ const HeaderDetail = ({nama}) => {
           {nama}
         </Typography>
         <Stack direction='row' columnGap='24px'>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
+        {save && (
+          <IconButton sx={{border:'1px solid #B1B5BA', borderRadius:'3px' }}>
+            <Save style={{ width: '28px', height: '28px' }} />
+          </IconButton>
+        )}
+        {send && (
+          <IconButton sx={{border:'1px solid #B1B5BA', borderRadius:'3px' }}>
             <Send style={{ width: '28px', height: '28px' }} />
-          </Box>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
+          </IconButton>
+        )}
+          <IconButton sx={{border:'1px solid #B1B5BA', borderRadius:'3px' }} onClick={()=>handleTabClose()}>
             <X style={{ width: '28px', height: '28px' }} />
-          </Box>
+          </IconButton>
         </Stack>
       </Stack>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
@@ -32,6 +51,8 @@ const HeaderDetail = ({nama}) => {
 
   HeaderDetail.propTypes = {
     nama: PropTypes.string,
+    save: PropTypes.bool,
+    send: PropTypes.bool,
   };
 
 export default HeaderDetail

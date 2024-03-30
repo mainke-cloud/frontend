@@ -50,6 +50,8 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Buat Scan Surat'
             ? scanIcon
+            : type === 'Draft Scan Surat'
+            ? scanIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -72,6 +74,8 @@ export const addTab = (id, state, type) => {
             <ScanSurat />
           ) : type === 'Buat Scan Surat' ? (
             <BuatScanSurat />
+          ) : type === 'Draft Scan Surat' ? (
+            <ScanSurat />
           ) : (
             ''
           ),
