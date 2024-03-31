@@ -22,17 +22,18 @@ const Delegasi = ({ Profile, JobDesk, ID }) => {
                     <Avatar src={Profile} sx={{border: 2, borderColor: '#FFB068', width: 46, height: 46}} />
                 </StyledBadgeDelegasi>
                 </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={7}>
                 <Stack direction='column' spacing={2}>
                     <Typography variant='h3'>{JobDesk}</Typography>
                     <Box
                         sx={{
                           backgroundColor: '#A3E6CD',
                           height: '22px',
-                          weight: '44px',
+                          width: '150px',
+                          borderRadius: 2,
                         }}
                     >
-                        <Typography sx={{ height: '22px', weight: '44px', marginLeft: 2 }}>
+                        <Typography sx={{ height: '18px', marginLeft: 2, color: '#317159' }}>
                             Aktif Sampai 22 sep{' '}
                         </Typography>
                     </Box>

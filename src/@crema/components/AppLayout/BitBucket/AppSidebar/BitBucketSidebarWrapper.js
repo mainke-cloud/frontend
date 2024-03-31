@@ -6,7 +6,7 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
   return (
     <Box
       sx={{
-        width: 600,
+        width: 515,
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -21,10 +21,10 @@ const BitBucketSidebarWrapper = ({ children, isCollapsed, ...rest }) => {
         },
         '& .bit-bucket-btn': {
           position: 'absolute',
-          top: 20,
+          top: 18,
           width: 30,
           height: 30,
-          right: '26px',
+          right: '10px',
           borderRadius: '50%',
           backgroundColor: (theme) => theme.palette.primary.main,
           color: (theme) => theme.palette.primary.contrastText,

@@ -7,25 +7,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ProfileIcon from '../../../assets/icon/ProfileIcon.png';
-import KontakIcon from '../../../assets/icon/KontakIcon.png';
-import KerjaIcon from '../../../assets/icon/KerjaIcon.png';
 import { Box, Grid, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
-import AProfile from '../../../assets/vector/Avatar.png';
+import AProfile from '../../assets/vector/Avatar.png';
+
+import { User, Briefcase, Phone } from 'feather-icons-react';
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#EEF0F7',
     color: '#262829',
     fontSize: 16,
-    fontFamily: 'Poppins',
     fontWeight: 'bold',
     borderBottom: 'none',
   },
   [`&.${tableCellClasses.body}`]: {
-    fontFamily: 'Poppins',
     color: '#25282B',
     borderBottom: 'none',
   },
@@ -99,13 +96,12 @@ const Profile = () => {
         sx={{
           background:
             'linear-gradient(267.36deg, #C74545 -4.33%, #AA3636 101.59%)',
-          paddingTop: 18,
+          paddingY: '42px',
           paddingX: 8,
-          paddingBottom: 3,
           position: 'relative',
         }}
       >
-        <svg
+        {/* <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 1440 320'
           style={{
@@ -122,7 +118,7 @@ const Profile = () => {
             fillOpacity='10%'
             d='M0,128L30,128C60,128,120,128,180,117.3C240,107,300,85,360,96C420,107,480,149,540,186.7C600,224,660,256,720,245.3C780,235,840,181,900,154.7C960,128,1020,128,1080,128C1140,128,1200,128,1260,133.3C1320,139,1380,149,1410,154.7L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z'
           ></path>
-        </svg>
+        </svg> */}
         <Box
           sx={{
             backgroundColor: '#ffffff',
@@ -174,7 +170,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <img src={ProfileIcon} alt='Profile' className='icon' />
+                  <User/>
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -201,7 +197,7 @@ const Profile = () => {
                   Informasi Kontak
                 </StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <img src={KontakIcon} alt='Kontak' className='icon' />
+                  <Phone/>
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -229,7 +225,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <img src={KerjaIcon} alt='Kerja' className='icon' />
+                  <Briefcase/>
                 </StyledTableCell>
               </TableHead>
               <TableBody>

@@ -2,11 +2,11 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import ShieldImage from '../../../assets/Keamanan/tameng.svg';
-import Shield2Image from '../../../assets/icon/shield.svg';
-import KeamananImage from '../../../assets/Keamanan/keamanan.png';
-import MonitorImage from '../../../assets/Keamanan/monitor.svg';
-import TrashIcon from '../../../assets/Keamanan/trash.svg';
+import ShieldImage from '../../assets/Keamanan/tameng.svg';
+import Shield2Image from '../../assets/icon/shield.svg';
+import KeamananImage from '../../assets/Keamanan/keamanan.png';
+import MonitorImage from '../../assets/Keamanan/monitor.svg';
+import TrashIcon from '../../assets/Keamanan/trash.svg';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -18,7 +18,10 @@ import Button from '@mui/material/Button';
 
 const Keamanan = () => {
   const [expanded, setExpanded] = React.useState(false);
-  const [isActive] = React.useState(true);
+  const [
+    isActive,
+    // setActive
+  ] = React.useState(true);
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };
