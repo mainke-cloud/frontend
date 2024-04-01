@@ -9,7 +9,7 @@ const Todo = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '90vh'
+        height: '100vh'
       }}
     >
       <img src={noTodo} alt='belum memilih' />

@@ -20,6 +20,10 @@ export const addTab = (id, state, type) => {
       (tab) =>
         tab.id.toLowerCase() === type.toLowerCase() || tab.title === type,
     );
+    const isExistingTab = state.some(
+      (tab) =>
+        tab.id.toLowerCase() === type.toLowerCase() || tab.title === type,
+    );
     if (!isExistingTab) {
       const activeTab = state.find((tab) => tab.active);
       if (activeTab) {
@@ -53,6 +57,8 @@ export const addTab = (id, state, type) => {
             <Profile />
           ) : type === 'Disposisi' ? (
             <Disposisi />
+          ) : type === 'Disposisi' ? (
+            <Disposisi />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ?(
@@ -66,6 +72,14 @@ export const addTab = (id, state, type) => {
       };
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
+      const isExistingTab = state.some(
+        (tab) => tab.id.toLowerCase() === type.toLowerCase(),
+      );
+      if (isExistingTab) {
+        dispatch(activateTab(type.toLowerCase(), state));
+      } else {
+        return;
+      }
       const isExistingTab = state.some(
         (tab) => tab.id.toLowerCase() === type.toLowerCase(),
       );
@@ -89,7 +103,9 @@ export const childTab = (id, state, type, data) => {
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
+        id: `${isExistingTab.id}${id}`,
         content:
+          type === 'Todo' ? (
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
@@ -104,6 +120,13 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
     } else {
+      const exChildTab = state.find(
+        (tab) => tab.id === `${type.toLowerCase()}${id}`,
+      );
+      if (exChildTab) {
+        dispatch(activateTab(`${type.toLowerCase()}${id}`, state));
+      } else {
+        const activeTab = state.find((tab) => tab.active);
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
       );
@@ -128,11 +151,14 @@ export const childTab = (id, state, type, data) => {
     }
   };
 };
+  };
+};
 
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
     const updatedTabs = state.map((tab) => ({
       ...tab,
+      active: tab.id === tabId,
       active: tab.id === tabId,
     }));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
@@ -159,7 +185,27 @@ export const closeTab = (tabId, state) => {
     }
 
     const tabs = state.filter((tab) => tab.id !== tabId);
+
+    const tabIndex = state.findIndex(
+      (tab) => tab.id.toString() === tabId.toString(),
+    );
+    let newActiveTabIndex;
+
+    if (tabIndex > 0) {
+      newActiveTabIndex = tabIndex - 1;
+    } else if (tabIndex === 0 && state.length > 1) {
+      newActiveTabIndex = 1;
+    } else {
+      newActiveTabIndex = 'dashboard';
+    }
+
+    const tabs = state.filter((tab) => tab.id !== tabId);
     dispatch({ type: 'CLOSE_TAB', payload: tabs });
+    const newActiveTabId =
+      newActiveTabIndex !== 'dashboard'
+        ? tabs[newActiveTabIndex].id
+        : 'dashboard';
+    dispatch(activateTab(newActiveTabId, tabs));
     const newActiveTabId =
       newActiveTabIndex !== 'dashboard'
         ? tabs[newActiveTabIndex].id

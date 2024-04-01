@@ -1,10 +1,13 @@
 import React from 'react';
 import Dashboard from 'modules/dashboard';
 import homeIcon from '../../assets/icon/home.svg';
+import Dashboard from 'modules/dashboard';
+import homeIcon from '../../assets/icon/home.svg';
 const initialState = {
   tabs: [
     {
       id: 'dashboard',
+      favicon: homeIcon,
       favicon: homeIcon,
       title: 'Dashboard',
       active: true,
@@ -12,6 +15,7 @@ const initialState = {
     },
   ],
   idCounter: 1,
+  cek: 0,
   cek: 0,
 };
 const tabReducer = (state = initialState, action) => {
@@ -57,6 +61,7 @@ const tabReducer = (state = initialState, action) => {
       return {
         ...state,
         tabs: action.payload,
+        idCounter: state.idCounter - 1,
         idCounter: state.idCounter - 1,
       };
     case 'REORDER_TAB':
