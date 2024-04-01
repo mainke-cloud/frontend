@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
 import MainSidebar from '../../components/MainSidebar';
+import ComposeMail from '../../../AppAddress'
 import {
   styled,
   Accordion,
@@ -310,6 +311,15 @@ export default function DisposisiSidebar({ isCollapsed }) {
   const [searchInput, setSearchInput] = React.useState('');
   const [openAdd, setOpenAdd] = React.useState(null);
   const [openFilter, setOpenFilter] = React.useState(null);
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
 
   const handleSearchClick = () => {
     setsearchForm(true);
@@ -425,7 +435,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                   <Box>
                     <ButtonGroup orientation='vertical'>
                       <Button
-                        // onClick={}
+                        onClick={onOpenComposeMail}
                         startIcon={<img src={SuratIn} />}
                         sx={{
                           border: 'none',
@@ -634,6 +644,10 @@ export default function DisposisiSidebar({ isCollapsed }) {
           </div>
         )}
       </AppScrollbar>
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
     </MainSidebar>
   );
 }
