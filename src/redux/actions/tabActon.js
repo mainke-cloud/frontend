@@ -6,14 +6,18 @@ import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
 import Disposisi from 'modules/disposisi';
+import ScanSurat from 'modules/scanSurat/ScanSurat';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
 import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
+import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
+import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import Surat_Internal from 'modules/buatSurat/SuratInternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
@@ -45,7 +49,14 @@ export const addTab = (id, state, type) => {
             ? disposisiIcon
             : type === 'Todo'
             ? disposisiIcon
+            : type === 'Log Scan Surat'
+            ? scanIcon
+            : type === 'Buat Scan Surat'
+            ? scanIcon
+            : type === 'Draft Scan Surat'
+            ? scanIcon
             : '',
+
         content:
           type === 'Folder' ? (
             <Folder />
@@ -69,6 +80,16 @@ export const addTab = (id, state, type) => {
             <Surat_Undangan />
           ) : type === 'Buat Surat Delegasi' ? (
             <Surat_Delegasi />
+          ) : type === 'Add_Sekretaris' ? (
+            <Add_Sekretaris />
+          ) : type === 'Add_Delegasi' ? (
+            <Add_Delegasi />
+          ) : type === 'Log Scan Surat' ? (
+            <ScanSurat />
+          ) : type === 'Buat Scan Surat' ? (
+            <BuatScanSurat />
+          ) : type === 'Draft Scan Surat' ? (
+            <ScanSurat />
           ) : (
             ''
           ),
@@ -93,7 +114,8 @@ export const childTab = (id, state, type, data) => {
     const isExistingTab = state.find(
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi'),
+        (tab.id === 'disposisi' && type === 'Disposisi') ||
+        (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
     if (isExistingTab) {
       const updateTab = {
@@ -104,6 +126,8 @@ export const childTab = (id, state, type, data) => {
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
             <div>oke</div>
+          ) : type === 'Log Scan Surat' ? (
+            <DetailScanSurat props={data} />
           ) : (
             ''
           ),
@@ -112,6 +136,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
       } else if (type === 'Disposisi') {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      } else if (type === 'Log Scan Surat') {
+        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
       }
     } else {
       const exChildTab = state.find(
@@ -130,7 +156,13 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+            type === 'Todo' ? (
+              <DetailTodo props={data} />
+            ) : type === 'Log Scan Surat' ? (
+              <DetailScanSurat props={data} />
+            ) : (
+              <div>{id}</div>
+            ),
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });
