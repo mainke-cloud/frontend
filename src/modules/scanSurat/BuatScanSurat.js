@@ -1,12 +1,5 @@
-import React from 'react';
-import {
-  Box,
-  Stack,
-  Grid,
-  TextField,
-  Typography,
-  Button,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import HeaderDetail from '@crema/components/HeaderDetail';
@@ -45,21 +38,44 @@ const Buttons = styled(Button)({
 });
 
 const BuatScanSurat = () => {
-  const [file, setFile] = React.useState([]);
+  const [file, setFile] = useState([]);
+  const [upload, setUpload] = useState(true);
+
+  const getTotalSize = (files) => {
+    let totalSize = 0;
+    files.forEach((file) => {
+      totalSize += file.size;
+    });
+    return (totalSize / (1024 * 1024)).toFixed(2);
+  };
+
+  const TotalSize = getTotalSize(file);
+
+  const bytesConvert = (bytes) => {
+    const mb = bytes / (1024 * 1024);
+    if (mb < 1) {
+      return (bytes / 1024).toFixed(2) + ' Kb';
+    } else {
+      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
+    }
+  };
 
   const handleFileSelected = (event) => {
     const files = event.target.files;
     setFile([...file, ...files]);
+    setUpload(false);
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
+    setUpload(true);
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     setFile([...file, ...files]);
+    setUpload(false);
   };
 
   const ScanSurat = () => {
@@ -141,6 +157,7 @@ const BuatScanSurat = () => {
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
+              {upload && (
               <Stack
                 rowGap='8px'
                 justifyContent='center'
@@ -173,43 +190,45 @@ const BuatScanSurat = () => {
                   </Typography>
                 </Stack>
               </Stack>
-              <Stack direction='row' flexWrap='wrap'>
+              )}
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+              >
                 {file.map((file, index) => (
-                  <Stack
-                    key={index}
-                    margin='16px'
-                    alignItems='center'
-                    rowGap='8px'
-                    width='100px'
-                  >
-                    <img
-                      src={PdfVector}
-                      alt='Pdf File'
-                      style={{ height: '75px', width: 'fit-content' }}
-                    />
-                    <Typography
-                      fontSize='12px'
-                      sx={{
-                        maxWidth: '100px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {file.name}
-                    </Typography>
-                    <Stack
-                      direction='row'
-                      justifyContent='space-between'
-                      width='-webkit-fill-available'
-                      paddingX='4px'
-                    >
-                      <Typography fontSize='8px'>{file.size} bytes</Typography>
-                      <Typography fontSize='8px'>Edit</Typography>
+                  <Grid item xs={2} sm={4} md={4} key={index}>
+                    <Stack margin='16px' alignItems='center' rowGap='8px'>
+                      <img
+                        src={PdfVector}
+                        alt='Pdf File'
+                        style={{ height: '75px', width: 'fit-content' }}
+                      />
+                      <Typography
+                        fontSize='12px'
+                        sx={{
+                          maxWidth: '100px',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {file.name}
+                      </Typography>
+                      <Stack
+                        direction='row'
+                        justifyContent='center'
+                        columnGap='16px'
+                      >
+                        <Typography fontSize='8px'>
+                          {bytesConvert(file.size)}
+                        </Typography>
+                        <Typography fontSize='8px'>Edit</Typography>
+                      </Stack>
                     </Stack>
-                  </Stack>
+                  </Grid>
                 ))}
-              </Stack>
+              </Grid>
             </AppScrollbar>
           </Grid>
           <Grid item xs={4}>
@@ -236,6 +255,14 @@ const BuatScanSurat = () => {
                 MB.
               </Typography>
             </Stack>
+            {TotalSize > 25 && (
+              <Stack paddingTop='16px'>
+                <Typography fontWeight='700'>Perhatian :</Typography>
+                <Typography fontSize='12px'>
+                  Besar Ukuran Surat & Lampiran yang dipilih melebihi batas
+                </Typography>
+              </Stack>
+            )}
           </Grid>
         </Grid>
         <Stack

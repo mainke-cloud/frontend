@@ -7,6 +7,7 @@ import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import AppScrollbar from '@crema/components/AppScrollbar';
 
+import PdfVector from '../../assets/vector/PdfVector.svg';
 import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
 
@@ -66,6 +67,17 @@ const pekerjaan2 = [
 ];
 
 const DetailScanSurat = ({ props }) => {
+  const files = props.file;
+  console.log(files)
+  const bytesConvert = (bytes) => {
+    const mb = bytes / (1024 * 1024);
+    if (mb < 1) {
+      return (bytes / 1024).toFixed(2) + ' Kb';
+    } else {
+      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
+    }
+  };
+
   const DetailScan = () => {
     return (
       <Grid
@@ -165,7 +177,44 @@ const DetailScanSurat = ({ props }) => {
             border: '1px solid #E0E0E0',
           }}
           scrollToTop={false}
-        ></AppScrollbar>
+        ><Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {files.map((file, index) => (
+<Grid item xs={2} sm={4} md={4} key={index}>
+<Stack
+              margin='16px'
+              alignItems='center'
+              rowGap='8px'
+            >
+              <img
+                src={PdfVector}
+                alt='Pdf File'
+                style={{ height: '75px', width: 'fit-content' }}
+              />
+              <Typography
+                fontSize='12px'
+                sx={{
+                  maxWidth: '100px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {file.name}
+              </Typography>
+              <Stack
+                direction='row'
+                justifyContent='center'
+                columnGap='16px'
+              >
+                <Typography fontSize='8px'>
+                  {bytesConvert(file.size)}
+                </Typography>
+                <Typography fontSize='8px'>Edit</Typography>
+              </Stack>
+              </Stack>
+</Grid>
+))}
+</Grid></AppScrollbar>
       </Box>
     );
   };
@@ -192,6 +241,12 @@ const DetailScanSurat = ({ props }) => {
 
 DetailScanSurat.propTypes = {
   props: PropTypes.shape({}),
+  file: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired
+    })
+  ).isRequired
 };
 
 export default DetailScanSurat;

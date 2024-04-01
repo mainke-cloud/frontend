@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Tab } from '@mui/material';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
@@ -30,7 +30,7 @@ import TabList from '@mui/lab/TabList';
   }));
 
 const MiniTab = ({tabs}) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
