@@ -1,110 +1,93 @@
 import React from 'react';
 import { Box, Button, Typography, Stack } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import { useNavigate, useLocation } from 'react-router-dom';
-import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
+import { useLocation } from 'react-router-dom';
 import SuccessImage from '../../../assets/LoginPage/berhasil.png';
+import { useAuthMethod } from '@crema/hooks/AuthHooks';
+import FooterAuth from './FooterAuth';
 
 const Verifikasi4 = () => {
   const location = useLocation();
   const values = location.state && location.state.valuess;
-  const navigate = useNavigate();
+
+  const {
+    logInWithEmailAndPassword,
+    // logInWithPopup
+  } = useAuthMethod();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi5', { state: { values } });
+    const { email, password } = values;
+    const valuessss = { email, password };
+    logInWithEmailAndPassword(valuessss);
   };
 
   return (
     <Box
-      width='46vw'
-      height='100%'
+      width='50vw'
+      height='95%'
       display='grid'
       alignContent='center'
-      px='3vw'
-      sx={{ bgcolor: '#FFFFFF' }}
+      sx={{
+        bgcolor: '#FFFFFF',
+        borderRadius: '16px',
+        border: '1px solid #D8D8D8',
+      }}
     >
-      <Box>
-        <Paper elevation={3} sx={{ padding: '30px' }}>
-          <Box
+      <Box mx='120px'>
+        <Typography
+          sx={{
+            color: '#151718',
+            fontSize: '36px',
+            fontWeight: 700,
+          }}
+        >
+          Dua Langkah Verifikasi
+        </Typography>
+
+        <Stack
+          paddingTop='32px'
+          justifyContent='center'
+          alignItems='center'
+          spacing={3}
+        >
+          <img
+            src={SuccessImage}
+            style={{
+              maxHeight: '201px',
+            }}
+            alt='image success'
+          />
+
+          <Typography
+            paddingTop='32px'
             sx={{
-              display: 'flex',
-              '& > :not(style)': {
-                m: 2,
-              },
+              color: '#474D66',
+              fontSize: '18px',
+              fontWeight: 700,
+              lineHeight: '28px',
+              textAlign: 'center',
+              px: '90px',
             }}
           >
-            <ArrowBackButton path='/signin/verifikasi3' />
-
-            <Typography
-              variant='h4'
-              pt='10px'
-              sx={{
-                color: '#151718',
-                fontSize: '20px',
-                marginTop: '80px',
-              }}
-            >
-              VERIFIKASI 2 LANGKAH
-            </Typography>
-          </Box>
-          <Box ml={3} mr={3}>
-            <Divider
-              orientation='Horizontal'
-              style={{
-                height: 2,
-                backgroundColor: '#5C5E61',
-              }}
-            />
-          </Box>
-          <Stack
-            marginTop='20px'
-            justifyContent='center'
-            alignItems='center'
-            spacing={3}
-          >
-            <img src={SuccessImage} />
-            <Typography
-              variant='h5'
-              sx={{
-                color: '#151718',
-                fontSize: '18px',
-              }}
-            >
-              Selamat Anda berhasil Mengaktifkan Verifikasi 2 Langkah{' '}
-            </Typography>
-          </Stack>
-          <Box marginTop='27px' textAlign='center'>
+            Selamat Anda berhasil Mengaktifkan Dua Langkah Verifikasi
+          </Typography>
+          <Box paddingTop='32px'>
             <Button
               variant='contained'
-              color='primary'
               onClick={handleSubmit}
               sx={{
-                fontWeight: 'regular',
-                fontSize: 14,
-                textTransform: 'capitalize',
-                borderRadius: 25,
-                padding: '4px 16px',
-                gap: 8,
-                width: '50%',
+                borderRadius: '8px',
+                height: '48px',
+                width: '17vw',
                 bgcolor: '#E42313',
               }}
             >
               Lanjut Ke Dashboard
             </Button>
           </Box>
-        </Paper>
-        <Typography
-          variant='h6'
-          sx={{
-            justifyContent: 'flex-start',
-            color: '#A0A4A8',
-            fontSize: '14px',
-            mt: '55px',
-          }}
-        >
-          Ⓒ PT. Telkom Indonesia Tbk. | version 1.0
-        </Typography>
+        </Stack>
+
+        <FooterAuth />
       </Box>
     </Box>
   );

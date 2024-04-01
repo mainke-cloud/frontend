@@ -287,7 +287,7 @@ export default function TodoDisposisi({ isCollapsed }) {
       case 'Rendah':
         return ['#3366FF', '#D6E0FF'];
       default:
-        return ['lightgrey', 'lightgrey'];
+        return 'lightgrey';
     }
   };
 
