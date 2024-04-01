@@ -4,8 +4,6 @@ import { IconButton, Typography, Box, Collapse, Badge } from '@mui/material';
 import FeatherIcon from 'feather-icons-react';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
-import { useAuthMethod } from '@crema/hooks/AuthHooks';
-import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import dot from '../../../../../../assets/icon/sub-menu-item.svg';
 import searchIcon from '../../../../../../assets/icon/search.svg';
 import homeIcon from '../../../../../../assets/icon/home.svg';
@@ -19,10 +17,8 @@ import scanIcon from '../../../../../../assets/icon/scan.svg';
 import securityIcon from '../../../../../../assets/icon/shield.svg';
 import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import profileIcon from '../../../../../../assets/icon/user.svg';
-import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../../../../redux/actions/tabActon';
 import { addTab } from '../../../../../../redux/actions/tabActon';
 
 const iconMap = {
@@ -37,7 +33,6 @@ const iconMap = {
   scan: scanIcon,
   security: securityIcon,
   help: helpIcon,
-  profile: profileIcon,
   profile: profileIcon,
   logout: logoutIcon,
 };
@@ -82,12 +77,8 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
+    dispatch(addTab(id, tabs, name));
     
-    if(name==='Todo'){
-      dispatch(addTab(id, tabs, name));
-    } else if (name==='Disposisi'){
-      dispatch(addTab(id, tabs, name));
-    }
   };
 
   return (
@@ -106,16 +97,6 @@ const BucketMinibarItem = (props) => {
         }
       >
         <Box className='icon-btn'>
-          <Box className='icon-img'>
-            <Badge
-              color='primary'
-              badgeContent={badge}
-              max={999}
-              variant={isHover ? 'standard' : 'dot'}
-            >
-              <img src={iconMap[icon]} alt={icon} />
-            </Badge>
-          </Box>
           <Box className='icon-img'>
             <Badge
               color='primary'
@@ -146,7 +127,6 @@ const BucketMinibarItem = (props) => {
                   <img
                     src={dot}
                     alt='dot'
-                    style={{ width: '10px', height: '10px'}}
                     style={{ width: '10px', height: '10px'}}
                   />
                   <Typography className='submenu-text'>{item.name}</Typography>
