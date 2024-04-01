@@ -35,21 +35,21 @@ const AppSidebar = (props) => {
   const sideBarDisposisi = () => {
     switch (sidebar) {
       case 'Surat Masuk':
-        return <LetterInDisposisi isCollapsed={props.isCollapsed} />;
+        return <LetterInDisposisi isCollapsed={isCollapsed} />;
       case 'Disposisi':
-        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <DisposisiSidebar isCollapsed={isCollapsed} />;
       case 'Disposisi Saya':
-        return <MyDisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <MyDisposisiSidebar isCollapsed={isCollapsed} />;
       case 'Todo':
-        return <TodoDisposisi isCollapsed={props.isCollapsed} />;
+        return <TodoDisposisi isCollapsed={isCollapsed} />;
       case 'Surat Keluar':
-        return <LetterOutDisposisi isCollapsed={props.isCollapsed} />;
+        return <LetterOutDisposisi isCollapsed={isCollapsed} />;
       case 'Log Scan Surat':
-        return <ScannerLogScanDisposisi isCollapsed={props.isCollapsed} />;
+        return <ScannerLogScanDisposisi isCollapsed={isCollapsed} />;
       case 'Draft Scan Surat':
-        return <ScannerDrafDisposisi isCollapsed={props.isCollapsed} />;
+        return <ScannerDrafDisposisi isCollapsed={isCollapsed} />;
       default:
-        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <DisposisiSidebar isCollapsed={isCollapsed} />;
     }
   };
 

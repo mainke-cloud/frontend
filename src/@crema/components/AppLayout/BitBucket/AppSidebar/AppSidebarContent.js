@@ -64,7 +64,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function DisposisiSidebar(props) {
+export default function AppSidebarContent(props) {
   const { isCollapsed, data, tab, subTab, isAdd, isStatus } = props;
 
   const getStatusColor = (status) => {
@@ -224,7 +224,7 @@ export default function DisposisiSidebar(props) {
   );
 }
 
-DisposisiSidebar.propTypes = {
+AppSidebarContent.propTypes = {
   isCollapsed: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.array),
   tab: PropTypes.string,

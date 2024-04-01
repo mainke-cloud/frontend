@@ -6,7 +6,7 @@ import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
 import NoDisposisi from 'modules/disposisi/respons/Default';
-import Disposisi from 'modules/disposisi/respons/DisposisiRespons';
+import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -15,6 +15,7 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -54,6 +55,8 @@ export const addTab = (id, state, type) => {
             <Profile />
           ) : type === 'Disposisi' ? (
             <NoDisposisi />
+          ) : type === 'BuatDisposisi' ? (
+            <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ?(
