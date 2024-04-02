@@ -19,7 +19,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import { useSelector } from 'react-redux';
 import PerluTindakLanjutSuratKeluar from './PerluTindakLanjutSuratKeluar';
-import LacakProsesSuratKeluar from './LacakProsesSuratKeluar';
+import LacakProsesSuratKeluar from './Surat/LacakProsesSuratKeluar';
 
 const AppSidebar = (props) => {
   const {
@@ -44,12 +44,14 @@ const AppSidebar = (props) => {
         return <MyDisposisiSidebar isCollapsed={isCollapsed} />;
       case 'Todo':
         return <TodoDisposisi isCollapsed={isCollapsed} />;
-      case 'Surat Keluar':
-        return <LetterOutDisposisi isCollapsed={isCollapsed} />;
       case 'Log Scan Surat':
         return <ScannerLogScanDisposisi isCollapsed={isCollapsed} />;
       case 'Draft Scan Surat':
         return <ScannerDrafDisposisi isCollapsed={isCollapsed} />;
+      case 'Perlu Tindak Lanjut':
+        return <LetterOutDisposisi isCollapsed={isCollapsed} />;
+      case 'Lacak Proses':
+        return <LacakProsesSuratKeluar isCollapsed={isCollapsed} />;
       default:
         return <DisposisiSidebar isCollapsed={isCollapsed} />;
     }

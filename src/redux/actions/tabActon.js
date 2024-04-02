@@ -45,6 +45,8 @@ export const addTab = (id, state, type) => {
             ? disposisiIcon
             : type === 'Todo'
             ? disposisiIcon
+            : type === 'Perlu Tindak Lanjut'
+            ? inboxIcon
             : '',
         content:
           type === 'Folder' ? (

@@ -31,9 +31,9 @@ import menuIcon from '../../../assets/icon/menu.svg';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import { MessageSquare, File, X, Send, Clock } from 'feather-icons-react';
-import { position } from 'stylis';
-import Cobaindropzone from './cobaindropzone';
+import { MessageSquare, File, X, Edit, Printer } from 'feather-icons-react';
+import HeaderBar from '../../../@crema/components/Tabs/Disposisi/HeaderBar';
+import HeaderIconButton from '../../../@crema/components/Tabs/Disposisi/HeaderIconButton';
 import DropZone from '../../../@crema/components/Tabs/SuratKeluar/DropZone';
 const PerluTindakLanjut = ({ props }) => {
   const [value, setValue] = React.useState('1');
@@ -64,28 +64,6 @@ const PerluTindakLanjut = ({ props }) => {
     '&.angka': {
       backgroundColor: '#000000',
     },
-  }));
-
-  const StyledStatus = styled(Typography)(() => ({
-    fontSize: '10px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    paddingTop: '2px',
-    paddingBottom: '2px',
-    backgroundColor: isChecked ? '#34C759' : '#C8CCD2',
-    color: 'white',
-    borderRadius: '5px',
-  }));
-
-  const StyledKomentar = styled(Typography)(() => ({
-    fontSize: '10px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    paddingTop: '2px',
-    paddingBottom: '2px',
-    backgroundColor: '#34C759',
-    color: 'white',
-    borderRadius: '5px',
   }));
 
   const StyledTab = styled(Tab)(({ theme }) => ({
@@ -241,24 +219,17 @@ const PerluTindakLanjut = ({ props }) => {
   const data = props;
   return (
     <Box backgroundColor='#F7F8F9'>
-      <Stack
-        direction='row'
-        justifyContent='space-between'
-        alignItems='center'
-        sx={{ paddingX: 8, paddingTop: 12, paddingBottom: 4 }}
-      >
-        <Typography fontSize='20px' fontWeight='700'>
-          Detail Surat Perlu Tindak Lanjut {data.id}
-        </Typography>
-        <Stack direction='row' columnGap='24px'>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
-            <Send style={{ width: '28px', height: '28px' }} />
-          </Box>
-          <Box border='1px solid #B1B5BA' borderRadius='3px' padding='8px'>
-            <X style={{ width: '28px', height: '28px' }} />
-          </Box>
-        </Stack>
-      </Stack>
+      <HeaderBar title='Detail Surat Perlu Tindak Lanjut'>
+        <HeaderIconButton>
+          <Edit />
+        </HeaderIconButton>
+        <HeaderIconButton>
+          <Printer />
+        </HeaderIconButton>
+        <HeaderIconButton>
+          <X />
+        </HeaderIconButton>
+      </HeaderBar>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
       <Box sx={{ padding: 8 }}>
         <Box backgroundColor='#FFFFFF' sx={{ padding: 8 }}>
@@ -599,7 +570,11 @@ const PerluTindakLanjut = ({ props }) => {
                         </AppScrollbar>
                       </Stack>
                       <Stack rowGap='10px'>
-                        <Stack direction='row' justifyContent='space-between' sx={{ mt:5}}>
+                        <Stack
+                          direction='row'
+                          justifyContent='space-between'
+                          sx={{ mt: 5 }}
+                        >
                           <Judul>Lampiran</Judul>
                           <Stack direction='row'>
                             <Judul>

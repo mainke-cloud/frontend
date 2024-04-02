@@ -93,6 +93,8 @@ export default function AppSidebarContent(props) {
       dispatch(childTab(item.id, tabs, 'Disposisi', item))
     ) : isStatus === 'todo' ? (
       dispatch(childTab(item.id, tabs, 'Todo', item))
+    ) : isStatus === 'surat' ? (
+      dispatch(childTab(item.id, tabs, 'Perlu Tindak Lanjut', item))
     ) : null}
   };
 
@@ -155,7 +157,7 @@ export default function AppSidebarContent(props) {
                                 <Grid item xs={10}>
                                   <Grid container>
                                     <Grid item xs={8}>
-                                      <Badge badgeContent={3} color='primary'>
+                                      <Badge badgeContent={item.messageCount} color='primary'>
                                         <Typography
                                           variant='body1'
                                           color='text.primary'

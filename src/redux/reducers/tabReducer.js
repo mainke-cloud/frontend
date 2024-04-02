@@ -31,8 +31,9 @@ const tabReducer = (state = initialState, action) => {
       const updatedTabs = state.tabs.map((tab) => {
         if (
           (tab.id === 'todo' && tab.title === action.payload.title) ||
-          (tab.id === 'disposisi' && tab.title === action.payload.title) || 
-          (tab.id === 'perlu tindak lanjut' && tab.title === action.payload.title),
+          (tab.id === 'disposisi' && tab.title === action.payload.title) ||
+          (tab.id === 'perlu tindak lanjut' &&
+            tab.title === action.payload.title)
         ) {
           return action.payload;
         } else {
