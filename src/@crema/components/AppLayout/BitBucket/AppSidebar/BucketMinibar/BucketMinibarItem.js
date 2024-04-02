@@ -110,7 +110,6 @@ const BucketMinibarItem = (props) => {
               color='primary'
               badgeContent={badge}
               max={999}
-              variant={isHover ? 'standard' : 'dot'}
             >
               <img src={iconMap[icon]} alt={icon} />
             </Badge>

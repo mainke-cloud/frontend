@@ -5,7 +5,8 @@ import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import Disposisi from 'modules/disposisi';
+import NoDisposisi from 'modules/disposisi/respons/Default';
+import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -14,6 +15,7 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import BelumPilih from 'modules/suratKeluar/perluTindakLanjut/BelumPilih';
 import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
 export const addTab = (id, state, type) => {
@@ -54,7 +56,9 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <Disposisi />
+            <NoDisposisi />
+          ) : type === 'BuatDisposisi' ? (
+            <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ? (
@@ -100,20 +104,14 @@ export const childTab = (id, state, type, data) => {
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
-            <div>oke</div>
+            <Disposisi props={data} />
           ) : type === 'Perlu Tindak Lanjut' ? (
             <PerluTindakLanjut props={data} />
           ) : (
             ''
           ),
       };
-      if (type === 'Todo') {
-        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      } else if (type === 'Disposisi') {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      } else if (type === 'Perlu Tindak Lanjut') {
-        dispatch({ type: 'UPDATE_TAB_PERLUTINDAKLANJUT', payload: updateTab });
-      }
+      dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -133,10 +131,10 @@ export const childTab = (id, state, type, data) => {
           content:
             type === 'Todo' ? (
               <DetailTodo props={data} />
+            ) : type === 'Disposisi' ? (
+              <Disposisi props={data} />
             ) : type === 'Perlu Tindak Lanjut' ? (
               <PerluTindakLanjut props={data} />
-            ) : type === 'Disposisi' ? (
-              <div>{id}</div>
             ) : (
               ''
             ),
