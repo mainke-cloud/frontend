@@ -12,19 +12,6 @@ const Verifikasi2 = () => {
     e.preventDefault();
     navigate('/signin/verifikasi3');
   };
-
-  const kodeTelpon = [
-    { label: +62 },
-    { label: +2 },
-    { label: +3 },
-    { label: +4 },
-    { label: +5 },
-  ];
-  const [selectedOption, setSelectedOption] = useState(kodeTelpon[0]);
-
-  const handleChange = (event, newValue) => {
-    setSelectedOption(newValue);
-  };
   return (
     <Box
       width='50vw'

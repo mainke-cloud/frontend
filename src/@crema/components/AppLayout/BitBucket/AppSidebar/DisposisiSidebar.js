@@ -32,12 +32,7 @@ import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import {
-  Plus,
-  Filter,
-  Search,
-  AlertCircle,
-} from 'feather-icons-react';
+import { Plus, Filter, Search, AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../../../redux/actions/tabActon';
 import {
@@ -346,7 +341,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Disposisi', item));
   };
   return (
@@ -510,7 +505,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                             )}`,
                             borderRadius: 0,
                           }}
-                          onClick={() => handleTodo(item)}
+                          onClick={() => handleTab(item)}
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
