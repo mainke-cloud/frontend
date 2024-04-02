@@ -32,13 +32,7 @@ import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import {
-  Plus,
-  Filter,
-  Search,
-  AlertCircle,
-  Mail,
-} from 'feather-icons-react';
+import { Plus, Filter, Search, AlertCircle, Mail } from 'feather-icons-react';
 
 import {
   ArrowForwardIosSharp,
@@ -48,6 +42,8 @@ import {
 } from '@mui/icons-material';
 
 import FilterPopover from './IconButton/FilterPopover';
+import { useDispatch, useSelector } from 'react-redux';
+import { childTab } from '../../../../../redux/actions/tabActon';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -83,6 +79,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
 export default function LetterInDisposisi({ isCollapsed }) {
   const listData1 = [
     {
+      id: 1,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -93,6 +90,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 2,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -103,6 +101,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 3,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -113,6 +112,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 4,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -123,6 +123,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 5,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -133,6 +134,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 6,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -143,6 +145,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 7,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -153,6 +156,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 8,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -163,6 +167,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 9,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -175,6 +180,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
   ];
   const listData2 = [
     {
+      id: 10,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -185,6 +191,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 11,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -195,6 +202,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Sekretaris',
     },
     {
+      id: 12,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -205,6 +213,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 13,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -215,6 +224,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Disposisi',
     },
     {
+      id: 14,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -225,6 +235,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 15,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -237,6 +248,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
   ];
   const listData3 = [
     {
+      id: 15,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -247,6 +259,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Read',
     },
     {
+      id: 16,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -257,6 +270,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
       status: 'Unread',
     },
     {
+      id: 17,
       avatarSrc: '/static/images/avatar/1.jpg',
       primary: 'Brunch this weekend?',
       secondary:
@@ -325,6 +339,13 @@ export default function LetterInDisposisi({ isCollapsed }) {
   const open_filter = Boolean(openFilter);
   const id = open ? 'simple-popover' : undefined;
 
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+
+  const handleTodo = (item) => {
+    dispatch(childTab(item.id, tabs, 'Surat Masuk', item));
+  };
+
   return (
     <MainSidebar>
       <Box sx={{ py: 2.5, px: 3.5 }}>
@@ -361,7 +382,6 @@ export default function LetterInDisposisi({ isCollapsed }) {
               >
                 Surat Masuk
               </Typography>
-              
             </Grid>
             <Grid item xs={5}>
               <ButtonGroup>
@@ -484,16 +504,17 @@ export default function LetterInDisposisi({ isCollapsed }) {
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
+                            onClick={() => handleTodo(item)}
                           >
                             <CardContent>
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
                                   <Stack alignItems='center' spacing={4}>
-                                      <Avatar
-                                        alt={`Avatar ${listIndex}`}
-                                        src={item.avatarSrc}
-                                        sx={{ width: 56, height: 56 }}
-                                      />
+                                    <Avatar
+                                      alt={`Avatar ${listIndex}`}
+                                      src={item.avatarSrc}
+                                      sx={{ width: 56, height: 56 }}
+                                    />
                                     {item.priority === 'tinggi' && (
                                       <Tooltip title='Tinggi'>
                                         <IconButton color='error'>

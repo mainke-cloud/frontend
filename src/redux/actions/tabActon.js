@@ -14,6 +14,7 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import SuratMasuk from 'modules/suratMasuk';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -37,6 +38,8 @@ export const addTab = (id, state, type) => {
             ? helpIcon
             : type === 'Profile'
             ? profileIcon
+            : type === 'Surat Masuk'
+            ? inboxIcon
             : type === 'Disposisi'
             ? disposisiIcon
             : type === 'Todo'
@@ -53,9 +56,11 @@ export const addTab = (id, state, type) => {
             <Profile />
           ) : type === 'Disposisi' ? (
             <Disposisi />
+          ) : type === 'Surat Masuk' ? (
+            <SuratMasuk />
           ) : type === 'Todo' ? (
             <Todo />
-          ) : type === 'Add_Sekretaris' ?(
+          ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
@@ -81,9 +86,7 @@ export const addTab = (id, state, type) => {
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
     const isExistingTab = state.find(
-      (tab) =>
-        (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi'),
+      (tab) => tab.id === 'disposisi' && type === 'Disposisi',
     );
     if (isExistingTab) {
       const updateTab = {
@@ -93,6 +96,8 @@ export const childTab = (id, state, type, data) => {
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
+            <div>oke</div>
+          ) : type === 'Surat Masuk' ? (
             <div>oke</div>
           ) : (
             ''
@@ -120,7 +125,13 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+            type === 'Todo' ? (
+              <DetailTodo props={data} />
+            ) : type === 'Surat Masuk' ? (
+              <SuratMasuk props={data} />
+            ) : (
+              <div>{id}</div>
+            ),
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });
