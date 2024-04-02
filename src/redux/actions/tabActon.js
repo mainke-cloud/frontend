@@ -14,7 +14,8 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
-import BelumPilih from 'modules/suratKeluar/perluTindakLanjuti/BelumPilih';
+import BelumPilih from 'modules/suratKeluar/perluTindakLanjut/BelumPilih';
+import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -88,7 +89,8 @@ export const childTab = (id, state, type, data) => {
     const isExistingTab = state.find(
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi'),
+        (tab.id === 'disposisi' && type === 'Disposisi') ||
+        (tab.id === 'perlu tindak lanjut' && type === 'Perlu Tindak Lanjut'),
     );
     if (isExistingTab) {
       const updateTab = {
@@ -99,6 +101,8 @@ export const childTab = (id, state, type, data) => {
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
             <div>oke</div>
+          ) : type === 'Perlu Tindak Lanjut' ? (
+            <PerluTindakLanjut props={data} />
           ) : (
             ''
           ),
@@ -107,6 +111,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
       } else if (type === 'Disposisi') {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      } else if (type === 'Perlu Tindak Lanjut') {
+        dispatch({ type: 'UPDATE_TAB_PERLUTINDAKLANJUT', payload: updateTab });
       }
     } else {
       const exChildTab = state.find(
@@ -125,7 +131,15 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : <div>{id}</div>,
+            type === 'Todo' ? (
+              <DetailTodo props={data} />
+            ) : type === 'Perlu Tindak Lanjut' ? (
+              <PerluTindakLanjut props={data} />
+            ) : type === 'Disposisi' ? (
+              <div>{id}</div>
+            ) : (
+              ''
+            ),
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });

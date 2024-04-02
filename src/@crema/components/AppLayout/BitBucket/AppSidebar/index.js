@@ -35,7 +35,6 @@ const AppSidebar = (props) => {
   const sidebar = useSelector((state) => state.sidebar.selectedSidebarName);
 
   const sideBarDisposisi = () => {
-    console.log(sidebar);
     switch (sidebar) {
       case 'Surat Masuk':
         return <LetterInDisposisi isCollapsed={props.isCollapsed} />;
@@ -47,8 +46,6 @@ const AppSidebar = (props) => {
         return <TodoDisposisi isCollapsed={props.isCollapsed} />;
       case 'Perlu Tindak Lanjut':
         return <PerluTindakLanjutSuratKeluar isCollapsed={props.isCollapsed} />;
-      case 'Surat Keluar':
-        return <LetterOutDisposisi isCollapsed={props.isCollapsed} />;
       case 'Log Scan Surat':
         return <ScannerLogScanDisposisi isCollapsed={props.isCollapsed} />;
       case 'Draft Scan Surat':

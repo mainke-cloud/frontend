@@ -426,8 +426,8 @@ export default function PerluTindakLanjutSuratKeluar({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
-    dispatch(childTab(item.id, tabs, 'Todo', item));
+  const handlePerluTindakLanjut = (item) => {
+    dispatch(childTab(item.id, tabs, 'Perlu Tindak Lanjut', item));
   };
 
   const [searchForm, setsearchForm] = React.useState(false);
@@ -557,7 +557,7 @@ export default function PerluTindakLanjutSuratKeluar({ isCollapsed }) {
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
-                            onClick={() => handleTodo(item)}
+                            onClick={() => handlePerluTindakLanjut(item)}
                           >
                             <CardContent>
                               <Grid container spacing={2}>
