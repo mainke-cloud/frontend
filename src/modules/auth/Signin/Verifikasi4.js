@@ -78,9 +78,6 @@ const Verifikasi4 = () => {
                 borderRadius: '8px',
                 height: '48px',
                 width: '17vw',
-                borderRadius: '8px',
-                height: '48px',
-                width: '17vw',
                 bgcolor: '#E42313',
               }}
             >

@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -11,6 +11,19 @@ const Verifikasi2 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/signin/verifikasi3');
+  };
+
+  const kodeTelpon = [
+    { label: +62 },
+    { label: +2 },
+    { label: +3 },
+    { label: +4 },
+    { label: +5 },
+  ];
+  const [selectedOption, setSelectedOption] = useState(kodeTelpon[0]);
+
+  const handleChange = (event, newValue) => {
+    setSelectedOption(newValue);
   };
   return (
     <Box

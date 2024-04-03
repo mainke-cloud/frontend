@@ -18,7 +18,7 @@ import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
-import SuratMasuk from 'modules/suratMasuk';
+import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -50,7 +50,7 @@ export const addTab = (id, state, type) => {
             : type === 'Log Scan Surat'
             ? scanIcon
             : type === 'Buat Scan Surat'
-            ? scanIcon
+            ? inboxIcon
             : type === 'Surat Masuk'
             ? inboxIcon
             : type === 'Draft Scan Surat'
@@ -66,7 +66,7 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <Disposisi />
+            <Todo />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk />
           ) : type === 'Todo' ? (
@@ -106,6 +106,7 @@ export const childTab = (id, state, type, data) => {
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi') ||
+        (tab.id === 'suratMasuk' && type === 'Surat Masuk') ||
         (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
     if (isExistingTab) {

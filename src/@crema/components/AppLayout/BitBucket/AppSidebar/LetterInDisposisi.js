@@ -343,6 +343,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
   const tabs = useSelector((state) => state.tab.tabs);
 
   const handleTodo = (item) => {
+    console.log('ini');
     dispatch(childTab(item.id, tabs, 'Surat Masuk', item));
   };
 
