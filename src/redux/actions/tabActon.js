@@ -68,7 +68,7 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <NoTodo />
+            <NoDisposisi />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk />
           ) : type === 'BuatDisposisi' ? (
