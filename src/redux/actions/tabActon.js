@@ -14,6 +14,7 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import SearchTab from 'modules/search/index';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -59,7 +60,10 @@ export const addTab = (id, state, type) => {
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
-          ) : (
+          ) : type === 'SearchTab' ? (
+            <SearchTab />
+          )
+          : (
             ''
           ),
         active: true,

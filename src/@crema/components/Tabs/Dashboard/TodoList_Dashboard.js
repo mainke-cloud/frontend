@@ -13,8 +13,18 @@ import AppCard from '@crema/components/AppCard';
 import SearchIcon from '@mui/icons-material/Search';
 import { Filter } from 'feather-icons-react';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTab } from '../../../../redux/actions/tabActon';
 
 const TodoList_Dashboard = () => {
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
+
+  const handleAddTab = (type) => {
+    dispatch(addTab(id, tabs, type));
+  };
+
   return (
     <AppCard sx={{ height: '600px' }}>
       <Stack height={'100%'} width={'100%'} position={'relative'}>
@@ -57,6 +67,7 @@ const TodoList_Dashboard = () => {
                     justifyContent: 'center',
                     padding: '2.5px',
                   }}
+                  onClick={() => handleAddTab('SearchTab')}
                 >
                   <Filter size={19} />
                 </Box>

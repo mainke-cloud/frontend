@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PropTypes from 'prop-types';
 import { Fonts } from '@crema/constants/AppEnums';
 import DoneIcon from '@mui/icons-material/Done';
-import { AlertCircle, RefreshCw } from 'feather-icons-react';
+import { AlertCircle, Repeat } from 'feather-icons-react';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 
@@ -256,7 +256,7 @@ const ViewList = () => {
                               >
                                 {item.primary}
                               </Typography>
-                              <RefreshCw size={12} color='red' />
+                              <Repeat size={12} color='red' />
                               <Typography
                                 style={{ fontSize: '12px', color: '#5C5E61' }}
                               >
