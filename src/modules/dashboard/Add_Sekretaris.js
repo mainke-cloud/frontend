@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, Stack, Typography, Switch, FormControlLabel, Checkbox, IconButton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { useState } from "react";
 
 import Add from '../../assets/Dashboard/Plus_icon.png'
 import Filter from '../../assets/Dashboard/Filter_icon.png'
@@ -66,9 +67,15 @@ const IOSSwitch = styled((props) => (
   }));
 
 const Add_Sekretaris = () => {
+    const [isActive, setIsActive] = useState(true);
+
+    const handleClick = () => {
+        setIsActive(!isActive);
+    };
+
     return (
-        <>
-            <Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}} >
+        <> {isActive ? 
+            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}} >
                 <Stack spacing={5}>
                     <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
                         <Grid container sx={{padding: 5}}>
@@ -82,7 +89,7 @@ const Add_Sekretaris = () => {
                                                 <img src={Filter} style={{height: 20, width: 20}}/>
                                             </Stack>
                                         </Box>
-                                        <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }}>
+                                        <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
                                                 <Typography sx={{color: '#FFFFFF'}}>Tambah Sekretaris Baru</Typography>
                                                 <img src={Add} style={{width: 20, height: 20}}/>
@@ -143,8 +150,8 @@ const Add_Sekretaris = () => {
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', padding: 1}}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <img src={Avatar_Blank} style={{width: 48, height: 48}}/>
-                                                    <Typography variant="h3" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Delegasi Baru</Typography>
-                                                    <IconButton>
+                                                    <Typography variant="h4" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Sekretaris Baru</Typography>
+                                                    <IconButton onClick={handleClick}>
                                                         <img src={Add_Grey} style={{width: 20, height: 20}}/>
                                                     </IconButton>
                                                 </Stack>
@@ -209,7 +216,7 @@ const Add_Sekretaris = () => {
                                         label="Rhs"
                                         labelPlacement="End"
                                     />
-                                   <FormControlLabel
+                                <FormControlLabel
                                         value="end"
                                         control={<Checkbox />}
                                         label="Rhs Prib"
@@ -242,7 +249,107 @@ const Add_Sekretaris = () => {
                         </Stack>
                     </Box>
                 </Stack>
-            </Box>
+            </Box>) : 
+            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}}>
+                <Stack spacing={5}>
+                    <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                        <Grid container  sx={{padding: 5}}>
+                            <Stack direction='row' justifyContent='center' alignItems='center' spacing={5} sx={{marginBottom: 5}}>
+                                <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, width: 100, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
+                                    <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Kembali</Typography>
+                                </Box>
+                                <Typography variant="h2">Tambah Sekretaris</Typography>
+                            </Stack>
+                        </Grid>
+                        <Grid container spacing={4} sx={{padding: 5}}>
+                            <Grid item xs={2} >
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 5 }}>
+                                    <img src={Profile} style={{width: 187, height: 187, marginLeft: 'auto', marginRight: 'auto'}}/>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Stack>
+                                    <Typography variant="h2">Nama :</Typography>
+                                    <Typography sx={{marginBottom: 7, fontSize: '16px'}}>Salies Apriliyanto</Typography>
+                                    <Typography variant="h2">Jabatan :</Typography>
+                                    <Typography sx={{marginBottom: 7, fontSize: '16px'}}>xxxxxxxxxxxxxxxxxxxx</Typography>
+                                    <Typography variant="h2">No :</Typography>
+                                    <Typography sx={{fontSize: '16px'}}>xxxxxxxxxxx</Typography>
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={3}>
+                                    <Stack spacing={2}>
+                                        <Typography variant="h4">Status :</Typography>
+                                        <FormControlLabel
+                                            control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                                            label="Aktif"
+                                        />                                    
+                                        <Typography variant="h4">Sifat :</Typography>
+                                        <FormControlLabel
+                                            control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                                            label="Personal Assistant"
+                                        />
+                                        <Typography variant="h4">Hak Sekretaris :</Typography>
+                                        <Stack direction='row'>
+                                        <FormControlLabel
+                                            value="end"
+                                            control={<Checkbox />}
+                                            label="Biasa"
+                                            labelPlacement="End"
+                                        />
+                                        <FormControlLabel
+                                            value="end"
+                                            control={<Checkbox />}
+                                            label="Rhs"
+                                            labelPlacement="End"
+                                        />
+                                    <FormControlLabel
+                                            value="end"
+                                            control={<Checkbox />}
+                                            label="Rhs Prib"
+                                            labelPlacement="End"
+                                        />
+                                        </Stack>
+                                    </Stack>
+                                </Grid>                     
+                        </Grid>
+                        <Grid container sx={{padding: 5}}>
+                            <Grid item xs={2}>
+
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box sx={{backgroundColor: '#E42313', width: 247.5, padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
+                                    <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                        <Typography sx={{color: '#FFFFFF'}}>Tambahkan Sebagai Delegasi</Typography>
+                                        <img src={Add} style={{width: 20, height: 20}}/>
+                                    </Stack>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    <Box sx={{backgroundColor: '#EBF0FF', borderRadius: 1, padding: 4, paddingY: 7, border: '2px solid #9DB5FF'}}>
+                        <Stack spacing={2}>
+                            <Stack direction="row" spacing={3}>
+                                <Typography variant="h4" sx={{color: '#2952CC'}}>
+                                    Catatan Penting
+                                </Typography>
+                                <img src={Warning} style={{width: 24, height: 24}}/>
+                            </Stack>
+                            <Typography sx={{color: '#2952CC'}}>
+                                Personal Assistant adalah fitur yang mengubah role sekretaris antara lain :
+                            </Typography>
+                            <Stack>
+                                <Typography sx={{color: '#2952CC'}}>
+                                    1.Sekretaris tidak akan terlibat dalam pembuatan surat, tetapi dapat tracking surat melalui menu tracking
+                                </Typography>
+                                <Typography sx={{color: '#2952CC'}}>
+                                    2.Sekretaris dan Pejabat yang mengaktifkan sekretaris akan menerima surat masuk
+                                </Typography>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Stack>
+            </Box>)}            
         </>
     )
 }

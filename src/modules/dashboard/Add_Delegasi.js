@@ -3,6 +3,7 @@ import { Box, Grid, Stack, Typography, TextField, IconButton } from "@mui/materi
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { useState } from "react";
 
 import Add from '../../assets/Dashboard/Plus_icon.png'
 import Warning from '../../assets/Dashboard/Warning_icon_blue.png'
@@ -13,20 +14,27 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
 
+
 const Add_Delegasi = () => {
     const [dateFrom, setDateFrom] = React.useState(null);
     const [dateTo, setDateTo] = React.useState(null);
 
+    const [isActive, setIsActive] = useState(true);
+
+    const handleClick = () => {
+        setIsActive(!isActive);
+    };
+
     return (
-        <>
-            <Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}}>
+        <> {isActive ? 
+            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}} >
                 <Stack spacing={5}>
                     <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
                         <Grid container sx={{padding: 5}} >
                             <Grid item xs={12} sx={{margin: 5, paddingX: 2, marginBottom: 10}}>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <Typography variant="h2">Delegasi Saya</Typography>
-                                    <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }}>
+                                    <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
                                         <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
                                             <Typography sx={{color: '#FFFFFF'}}>Tambah Delegasi Baru</Typography>
                                             <img src={Add} style={{width: 20, height: 20}}/>
@@ -86,8 +94,8 @@ const Add_Delegasi = () => {
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', padding: 1}}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <img src={Avatar_Blank} style={{width: 48, height: 48}}/>
-                                                    <Typography variant="h3" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Delegasi Baru</Typography>
-                                                    <IconButton>
+                                                    <Typography variant="h4" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Delegasi Baru</Typography>
+                                                    <IconButton onClick={handleClick}>
                                                         <img src={Add_Grey} style={{width: 20, height: 20}}/>
                                                     </IconButton>
                                                 </Stack>
@@ -174,7 +182,77 @@ const Add_Delegasi = () => {
                         </Stack>
                     </Box>
                 </Stack>
-            </Box>
+            </Box>) : 
+            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}}>
+                <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                    <Grid container  sx={{padding: 5}}>
+                        <Stack direction='row' justifyContent='center' alignItems='center' spacing={5} sx={{marginBottom: 5}}>
+                            <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, width: 100, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
+                                <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Kembali</Typography>
+                            </Box>
+                            <Typography variant="h2">Tambah Delegasi</Typography>
+                        </Stack>
+                    </Grid>
+                    <Grid container spacing={4} sx={{padding: 5}}>
+                        <Grid item xs={2} >
+                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 5 }}>
+                                <img src={Profile} style={{width: 187, height: 187, marginLeft: 'auto', marginRight: 'auto'}}/>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Stack>
+                                <Typography variant="h2">Nama :</Typography>
+                                <Typography sx={{marginBottom: 7, fontSize: '16px'}}>Salies Apriliyanto</Typography>
+                                <Typography variant="h2">Jabatan :</Typography>
+                                <Typography sx={{marginBottom: 7, fontSize: '16px'}}>xxxxxxxxxxxxxxxxxxxx</Typography>
+                                <Typography variant="h2">No :</Typography>
+                                <Typography sx={{fontSize: '16px'}}>xxxxxxxxxxx</Typography>
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Stack spacing={2}>
+                                <Typography variant="h4">Tanggal Aktif</Typography>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        value={dateFrom}
+                                        onChange={(dateFrom) => {
+                                        setDateFrom(dateFrom);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <Typography variant="h4" sx={{marginTop: 7}}>Tanggal Berakhir</Typography>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        value={dateTo}
+                                        onChange={(dateTo) => {
+                                        setDateTo(dateTo);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Stack>
+                        </Grid>                      
+                    </Grid>
+                    <Grid container sx={{padding: 5}}>
+                        <Grid item xs={2}>
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Stack spacing={2}>
+                                <Typography variant="h2">Alasan:</Typography>
+                                <TextField variant="outlined" sx={{width: '100%', height: 88}}/>
+                                <Box sx={{backgroundColor: '#E42313', width: 247.5, padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
+                                    <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                        <Typography sx={{color: '#FFFFFF'}}>Tambahkan Sebagai Delegasi</Typography>
+                                        <img src={Add} style={{width: 20, height: 20}}/>
+                                    </Stack>
+                                </Box>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Box>)}
         </>
     )
 }
