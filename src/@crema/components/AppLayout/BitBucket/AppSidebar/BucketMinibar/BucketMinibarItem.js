@@ -78,7 +78,6 @@ const BucketMinibarItem = (props) => {
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
     dispatch(addTab(id, tabs, name));
-    
   };
 
   return (

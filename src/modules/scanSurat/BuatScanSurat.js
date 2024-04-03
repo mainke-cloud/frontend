@@ -68,7 +68,6 @@ const BuatScanSurat = () => {
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    setUpload(true);
   };
 
   const handleDrop = (event) => {
@@ -158,38 +157,40 @@ const BuatScanSurat = () => {
               onDrop={handleDrop}
             >
               {upload && (
-              <Stack
-                rowGap='8px'
-                justifyContent='center'
-                alignItems='center'
-                position='absolute'
-                top='50%'
-                left='50%'
-                sx={{ transform: 'translate(-50%, -50%)' }}
-              >
-                <img
-                  src={UploadFile}
-                  alt='Upload File'
-                  style={{ height: '54px' }}
-                />
-                <Stack direction='row' columnGap='4px'>
-                  <Typography fontSize='18px'>Tarik File atau </Typography>
-                  <Typography
-                    fontSize='18px'
-                    fontWeight='700'
-                    color='#E42313'
-                    component='label'
-                    sx={{ cursor: 'pointer' }}
+                <>
+                  <Stack
+                    rowGap='8px'
+                    justifyContent='center'
+                    alignItems='center'
+                    position='absolute'
+                    top='50%'
+                    left='50%'
+                    sx={{ transform: 'translate(-50%, -50%)' }}
                   >
-                    Cari
-                    <VisuallyHiddenInput
-                      type='file'
-                      multiple
-                      onChange={handleFileSelected}
+                    <img
+                      src={UploadFile}
+                      alt='Upload File'
+                      style={{ height: '54px' }}
                     />
-                  </Typography>
-                </Stack>
-              </Stack>
+                    <Stack direction='row' columnGap='4px'>
+                      <Typography fontSize='18px'>Tarik File atau </Typography>
+                      <Typography
+                        fontSize='18px'
+                        fontWeight='700'
+                        color='#E42313'
+                        component='label'
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        Cari
+                        <VisuallyHiddenInput
+                          type='file'
+                          multiple
+                          onChange={handleFileSelected}
+                        />
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                </>
               )}
               <Grid
                 container
@@ -229,6 +230,28 @@ const BuatScanSurat = () => {
                   </Grid>
                 ))}
               </Grid>
+              {!upload && (
+                <Box
+                  position='sticky'
+                  bottom={0}
+                  right={0}
+                  display='flex'
+                  justifyContent='end'
+                >
+                  <Buttons
+                    variant='contained'
+                    component='label'
+                    sx={{ margin: '16px', borderRadius: '50px' }}
+                  >
+                    Tambah File Lagi
+                    <VisuallyHiddenInput
+                      type='file'
+                      multiple
+                      onChange={handleFileSelected}
+                    />
+                  </Buttons>
+                </Box>
+              )}
             </AppScrollbar>
           </Grid>
           <Grid item xs={4}>

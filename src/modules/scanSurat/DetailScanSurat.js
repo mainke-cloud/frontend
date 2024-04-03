@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
@@ -32,6 +32,13 @@ const StyledTableCell = styled(TableCell)(() => ({
     fontSize: 16,
   },
 }));
+
+const StyledBox = styled(Box)({
+  backgroundColor: '#ffffff',
+  border: '1px solid #d8d8d8',
+  borderRadius: '10px',
+  padding: '16px',
+});
 
 const pekerjaan = [
   {
@@ -68,7 +75,17 @@ const pekerjaan2 = [
 
 const DetailScanSurat = ({ props }) => {
   const files = props.file;
-  console.log(files)
+
+  const [listType, setListType] = useState(0);
+
+  const handleDetailList = () => {
+    setListType(1);
+  };
+
+  const handleImageList = () => {
+    setListType(0);
+  };
+
   const bytesConvert = (bytes) => {
     const mb = bytes / (1024 * 1024);
     if (mb < 1) {
@@ -159,15 +176,20 @@ const DetailScanSurat = ({ props }) => {
         <Stack
           direction='row'
           justifyContent='space-between'
+          alignItems='center'
           paddingBottom='16px'
         >
           <Typography fontSize='16px' fontWeight='700'>
             Lampiran
           </Typography>
-          <Stack direction='row' columnGap='24px'>
+          <Stack direction='row' columnGap='24px' alignItems='center'>
             <Typography color='#0F6EB5'>see more</Typography>
-            <Menu />
-            <IconGrid />
+            <IconButton onClick={handleDetailList}>
+              <Menu />
+            </IconButton>
+            <IconButton onClick={handleImageList}>
+              <IconGrid />
+            </IconButton>
           </Stack>
         </Stack>
         <AppScrollbar
@@ -177,44 +199,76 @@ const DetailScanSurat = ({ props }) => {
             border: '1px solid #E0E0E0',
           }}
           scrollToTop={false}
-        ><Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {files.map((file, index) => (
-<Grid item xs={2} sm={4} md={4} key={index}>
-<Stack
-              margin='16px'
-              alignItems='center'
-              rowGap='8px'
+        >
+          {listType == 0 ? (
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              <img
-                src={PdfVector}
-                alt='Pdf File'
-                style={{ height: '75px', width: 'fit-content' }}
-              />
-              <Typography
-                fontSize='12px'
-                sx={{
-                  maxWidth: '100px',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {file.name}
-              </Typography>
-              <Stack
-                direction='row'
-                justifyContent='center'
-                columnGap='16px'
-              >
-                <Typography fontSize='8px'>
-                  {bytesConvert(file.size)}
-                </Typography>
-                <Typography fontSize='8px'>Edit</Typography>
-              </Stack>
-              </Stack>
-</Grid>
-))}
-</Grid></AppScrollbar>
+              {files.map((file, index) => (
+                <Grid item xs={2} sm={4} md={4} key={index}>
+                  <Stack margin='16px' alignItems='center' rowGap='8px'>
+                    <img
+                      src={PdfVector}
+                      alt='Pdf File'
+                      style={{ height: '75px', width: 'fit-content' }}
+                    />
+                    <Typography
+                      fontSize='12px'
+                      sx={{
+                        maxWidth: '100px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {file.name}
+                    </Typography>
+                    <Stack
+                      direction='row'
+                      justifyContent='center'
+                      columnGap='16px'
+                    >
+                      <Typography fontSize='8px'>
+                        {bytesConvert(file.size)}
+                      </Typography>
+                      <Typography fontSize='8px'>Edit</Typography>
+                    </Stack>
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <Stack>
+              {files.map((file, index) => (
+                <StyledBox key={index} sx={{ border: 'none' }}>
+                <Stack direction='row' columnGap='12px' alignItems='center'>
+                  <img
+                      src={PdfVector}
+                      alt='Pdf File'
+                      style={{ height: '30px', width: 'fit-content' }}
+                    />
+                  <Stack>
+                    <Typography fontSize='14px'>
+                    {file.name}
+                    </Typography>
+                    <Stack
+                      direction='row'
+                      columnGap='16px'
+                    >
+                      <Typography fontSize='10px'>
+                        {bytesConvert(file.size)}
+                      </Typography>
+                      <Typography fontSize='10px'>Edit</Typography>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </StyledBox>
+              ))}
+            </Stack>
+          )}
+        </AppScrollbar>
       </Box>
     );
   };
@@ -244,9 +298,9 @@ DetailScanSurat.propTypes = {
   file: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      size: PropTypes.number.isRequired
-    })
-  ).isRequired
+      size: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default DetailScanSurat;
