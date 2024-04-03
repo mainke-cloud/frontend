@@ -5,7 +5,8 @@ import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import Disposisi from 'modules/disposisi';
+import NoDisposisi from 'modules/disposisi/respons/Default';
+import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import ScanSurat from 'modules/scanSurat/ScanSurat';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
@@ -16,6 +17,7 @@ import profileIcon from '../../assets/icon/user.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
@@ -66,9 +68,11 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <Todo />
+            <NoTodo />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk />
+          ) : type === 'BuatDisposisi' ? (
+            <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ? (
@@ -117,7 +121,7 @@ export const childTab = (id, state, type, data) => {
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
-            <div>oke</div>
+            <Disposisi props={data} />
           ) : type === 'Surat Masuk' ? (
             <div>oke</div>
           ) : type === 'Log Scan Surat' ? (
@@ -156,6 +160,8 @@ export const childTab = (id, state, type, data) => {
               <SuratMasuk props={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
+            ) : type === 'Disposisi' ? (
+              <Disposisi props={data} />
             ) : (
               <div>{id}</div>
             ),
