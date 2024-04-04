@@ -8,8 +8,8 @@ import TabList from '@mui/lab/TabList';
 
   const StyledTab = styled(Tab)(({ theme }) => ({
     borderRadius: '100px',
-    backgroundColor: '#ffffff',
-    color: '#5C5E61',
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.coofis.tertiary[70],
     indicatorColor: 'none',
     fontSize: '12px',
     textTransform: 'none',
@@ -20,8 +20,8 @@ import TabList from '@mui/lab/TabList';
       display: 'none',
     },
     '&.Mui-selected': {
-      backgroundColor: '#E42313',
-      color: '#ffffff',
+      backgroundColor: theme.palette.coofis.primary.main,
+      color: theme.palette.background.paper,
       fontWeight: theme.typography.fontWeightMedium,
     },
     '&.Mui-focusVisible': {

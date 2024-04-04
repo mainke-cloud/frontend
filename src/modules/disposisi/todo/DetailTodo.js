@@ -34,12 +34,12 @@ const DetailTodo = ({ props }) => {
     import.meta.url,
   ).toString();
 
-  const StyledBox = styled(Box)({
-    backgroundColor: '#ffffff',
+  const StyledBox = styled(Box)(({theme})=>({
+    backgroundColor: theme.palette.background.paper,
     border: '1px solid #d8d8d8',
     borderRadius: '10px',
     padding: '16px',
-  });
+  }));
 
   const Judul = styled(Typography)({
     fontSize: '14px',
@@ -47,9 +47,9 @@ const DetailTodo = ({ props }) => {
     lineHeight: '20px',
   });
 
-  const StyledBadge = styled(Badge)(() => ({
+  const StyledBadge = styled(Badge)(({theme}) => ({
     '& .MuiBadge-badge': {
-      backgroundColor: '#0F6EB5',
+      backgroundColor: theme.palette.coofis.secondary.border,
       color: 'white',
     },
     '&.angka': {
@@ -57,38 +57,38 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const StyledStatus = styled(Typography)(() => ({
+  const StyledStatus = styled(Typography)(({theme}) => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
     paddingTop: '2px',
     paddingBottom: '2px',
-    backgroundColor: isChecked ? '#34C759' : '#C8CCD2',
+    backgroundColor: isChecked ? theme.palette.success.main : theme.palette.coofis.tertiary[40],
     color: 'white',
     borderRadius: '5px',
   }));
 
-  const StyledKomentar = styled(Typography)(() => ({
+  const StyledKomentar = styled(Typography)(({theme}) => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
     paddingTop: '2px',
     paddingBottom: '2px',
-    backgroundColor: '#34C759',
+    backgroundColor: theme.palette.success.main,
     color: 'white',
     borderRadius: '5px',
   }));
 
-  const StyledTableCell = styled(TableCell)(() => ({
+  const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',
-      color: '#262829',
+      color: theme.palette.coofis.tertiary[90],
       fontSize: 16,
       fontWeight: 'bold',
       borderBottom: 'none',
     },
     [`&.${tableCellClasses.body}`]: {
-      color: '#25282B',
+      color: theme.palette.coofis.tertiary[90],
       borderBottom: 'none',
     },
     '&.small': {
@@ -101,9 +101,9 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const KirimButton = styled(Button)({
+  const KirimButton = styled(Button)(({theme})=>({
     borderRadius: '25px',
-    backgroundColor: '#4B4747',
+    backgroundColor: theme.palette.coofis.tertiary[30],
     color: 'white',
     fontSize: '12px',
     boxShadow: 'none',
@@ -112,11 +112,11 @@ const DetailTodo = ({ props }) => {
     border: '1px solid',
     lineHeight: 1.5,
     '&:hover': {
-      backgroundColor: '#E42313',
-      borderColor: '#E42313',
+      backgroundColor: theme.palette.coofis.primary.main,
+      borderColor: theme.palette.coofis.primary.main,
       boxShadow: 'none',
     },
-  });
+  }));
 
   const pekerjaan = [
     {
@@ -154,13 +154,13 @@ const DetailTodo = ({ props }) => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'Tinggi':
-        return ['#E42313', '#FFBDAD'];
+        return [(theme) => theme.palette.coofis.primary.main, (theme) => theme.palette.coofis.primary.bg3];
       case 'Sedang':
-        return ['#FFB020', '#FFEFD2'];
+        return [(theme) => theme.palette.coofis.warning.main, (theme) => theme.palette.coofis.warning.bg1];
       case 'Rendah':
-        return ['#3366FF', '#D6E0FF'];
+        return [(theme) => theme.palette.coofis.secondary.main, (theme) => theme.palette.coofis.success.bg2];
       default:
-        return ['#C8CCD2', '#C8CCD2'];
+        return [(theme) => theme.palette.coofis.tertiary[40], (theme) => theme.palette.coofis.tertiary[40]];
     }
   };
 
@@ -194,7 +194,7 @@ const DetailTodo = ({ props }) => {
                 <Avatar
                   sx={{
                     border: 2,
-                    borderColor: '#0F6EB5',
+                    borderColor: (theme) => theme.palette.coofis.secondary.border,
                     width: 46,
                     height: 46,
                   }}
@@ -270,7 +270,7 @@ const DetailTodo = ({ props }) => {
             <Judul>Diteruskan Dari</Judul>
             <Divider
               sx={{
-                borderColor: '#B1B5BA',
+                borderColor: (theme) => theme.palette.coofis.tertiary[50],
                 borderBottomWidth: '2px',
               }}
             />
@@ -283,7 +283,7 @@ const DetailTodo = ({ props }) => {
             <Judul>Diteruskan Kepada</Judul>
             <Divider
               sx={{
-                borderColor: '#B1B5BA',
+                borderColor: (theme) => theme.palette.coofis.tertiary[50],
                 borderBottomWidth: '2px',
               }}
             />
@@ -318,7 +318,7 @@ const DetailTodo = ({ props }) => {
             <Judul>Petunjuk/Catatan</Judul>
             <Divider
               sx={{
-                borderColor: '#B1B5BA',
+                borderColor: (theme) => theme.palette.coofis.tertiary[50],
                 borderBottomWidth: '2px',
               }}
             />
@@ -371,11 +371,11 @@ const DetailTodo = ({ props }) => {
   };
 
   return (
-    <Box backgroundColor='#F7F8F9'>
+    <Box backgroundColor={(theme) => theme.palette.coofis.tertiary.bg}>
       <HeaderDetail nama='Detail Todo' send />
       <Box sx={{ padding: 8 }}>
         <Box
-          backgroundColor='#FFFFFF'
+          backgroundColor={(theme)=> theme.palette.background.paper}
           sx={{ padding: 8, borderRadius: '10px' }}
         >
           <Grid container>
@@ -393,7 +393,7 @@ const DetailTodo = ({ props }) => {
               <Box
                 sx={{
                   marginTop: '50px',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: (theme) => theme.palette.background.paper,
                   border: '1px solid #d8d8d8',
                   borderRadius: '10px',
                   paddingY: '16px',
@@ -401,10 +401,10 @@ const DetailTodo = ({ props }) => {
               >
                 <Stack rowGap='10px'>
                   <Typography fontSize='16px' fontWeight='700' paddingX='18px'>
-                    Komentar <span style={{ color: '#E42313' }}>*</span>
+                    Komentar <span style={{ color: (theme) => theme.palette.coofis.primary.main }}>*</span>
                   </Typography>
                   <Divider
-                    sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }}
+                    sx={{ borderColor: (theme) => theme.palette.coofis.tertiary[50], borderBottomWidth: '2px' }}
                   />
                   <AppScrollbar
                     sx={{
@@ -522,7 +522,7 @@ const DetailTodo = ({ props }) => {
                             paddingX='8px'
                             marginTop='8px'
                             paddingY='12px'
-                            backgroundColor='#F7F8F9'
+                            backgroundColor={(theme)=>theme.palette.coofis.tertiary.bg}
                             border='1px solid #B1B5BA'
                             borderRadius='4px'
                           >
@@ -640,7 +640,7 @@ const DetailTodo = ({ props }) => {
                   </AppScrollbar>
                 </Stack>
                 <Divider
-                  sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }}
+                  sx={{ borderColor: (theme) => theme.palette.coofis.tertiary[50], borderBottomWidth: '2px' }}
                 />
                 <Stack
                   direction='row'

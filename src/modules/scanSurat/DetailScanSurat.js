@@ -11,16 +11,9 @@ import PdfVector from '../../assets/vector/PdfVector.svg';
 import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
 
-const StyledTableCell = styled(TableCell)(() => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#EEF0F7',
-    color: '#262829',
-    fontSize: 16,
-    fontWeight: 'bold',
-    borderBottom: 'none',
-  },
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
-    color: '#25282B',
+    color: theme.palette.coofis.tertiary[90],
     borderBottom: 'none',
   },
   '&.small': {
@@ -33,12 +26,12 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
-const StyledBox = styled(Box)({
-  backgroundColor: '#ffffff',
+const StyledBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
   border: '1px solid #d8d8d8',
   borderRadius: '10px',
   padding: '16px',
-});
+}));
 
 const pekerjaan = [
   {
@@ -207,7 +200,19 @@ const DetailScanSurat = ({ props }) => {
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
               {files.map((file, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
+                <Grid
+                  item
+                  xs={2}
+                  sm={4}
+                  md={4}
+                  key={index}
+                  sx={{
+                    transition: 'background-color 0.3s ease',
+                    '&:hover': {
+                      backgroundColor: (theme) => theme.palette.gray[300],
+                    },
+                  }}
+                >
                   <Stack margin='16px' alignItems='center' rowGap='8px'>
                     <img
                       src={PdfVector}
@@ -242,29 +247,33 @@ const DetailScanSurat = ({ props }) => {
           ) : (
             <Stack>
               {files.map((file, index) => (
-                <StyledBox key={index} sx={{ border: 'none' }}>
-                <Stack direction='row' columnGap='12px' alignItems='center'>
-                  <img
+                <StyledBox
+                  key={index}
+                  sx={{
+                    border: 'none',
+                    transition: 'background-color 0.3s ease',
+                    '&:hover': {
+                      backgroundColor: (theme) => theme.palette.gray[300],
+                    },
+                  }}
+                >
+                  <Stack direction='row' columnGap='12px' alignItems='center'>
+                    <img
                       src={PdfVector}
                       alt='Pdf File'
                       style={{ height: '30px', width: 'fit-content' }}
                     />
-                  <Stack>
-                    <Typography fontSize='14px'>
-                    {file.name}
-                    </Typography>
-                    <Stack
-                      direction='row'
-                      columnGap='16px'
-                    >
-                      <Typography fontSize='10px'>
-                        {bytesConvert(file.size)}
-                      </Typography>
-                      <Typography fontSize='10px'>Edit</Typography>
+                    <Stack>
+                      <Typography fontSize='14px'>{file.name}</Typography>
+                      <Stack direction='row' columnGap='16px'>
+                        <Typography fontSize='10px'>
+                          {bytesConvert(file.size)}
+                        </Typography>
+                        <Typography fontSize='10px'>Edit</Typography>
+                      </Stack>
                     </Stack>
                   </Stack>
-                </Stack>
-              </StyledBox>
+                </StyledBox>
               ))}
             </Stack>
           )}
@@ -274,11 +283,14 @@ const DetailScanSurat = ({ props }) => {
   };
 
   return (
-    <Box backgroundColor='#F7F8F9' minHeight='100vh'>
+    <Box
+      backgroundColor={(theme) => theme.palette.coofis.tertiary.bg}
+      minHeight='100vh'
+    >
       <HeaderDetail nama='Detail Scan Surat' />
       <Box sx={{ padding: 8 }}>
         <Box
-          backgroundColor='#FFFFFF'
+          backgroundColor={(theme) => theme.palette.background.paper}
           sx={{ padding: 8, borderRadius: '10px' }}
         >
           <MiniTab

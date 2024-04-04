@@ -22,20 +22,20 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const Buttons = styled(Button)({
+const Buttons = styled(Button)(({ theme }) => ({
   borderRadius: '8px',
-  backgroundColor: '#E42313',
+  backgroundColor: theme.palette.coofis.primary.main,
   fontSize: '14px',
   boxShadow: 'none',
   padding: '8px 16px',
   minWidth: '90px',
   lineHeight: 1.5,
   '&:hover': {
-    backgroundColor: '#E42313',
-    borderColor: '#E42313',
+    backgroundColor: theme.palette.coofis.primary.main,
+    borderColor: theme.palette.coofis.primary.main,
     boxShadow: 'none',
   },
-});
+}));
 
 const BuatScanSurat = () => {
   const [file, setFile] = useState([]);
@@ -302,11 +302,11 @@ const BuatScanSurat = () => {
   };
 
   return (
-    <Box backgroundColor='#F7F8F9' minHeight='100vh'>
+    <Box backgroundColor={(theme)=>theme.palette.coofis.tertiary.bg} minHeight='100vh'>
       <HeaderDetail nama='Buat Scan Surat' send save />
       <Box sx={{ padding: 8 }}>
         <Box
-          backgroundColor='#FFFFFF'
+          backgroundColor={(theme)=>theme.palette.background.paper}
           sx={{ padding: 8, borderRadius: '10px' }}
         >
           <MiniTab
