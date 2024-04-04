@@ -143,6 +143,7 @@ const BuatScanSurat = () => {
         <Grid container columnSpacing={4}>
           <Grid item xs={8}>
             <LabelInput name='Lampiran' important />
+            <Box position='relative'>
             <AppScrollbar
               sx={{
                 height: '330px',
@@ -198,7 +199,12 @@ const BuatScanSurat = () => {
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
                 {file.map((file, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                  <Grid item xs={2} sm={4} md={4} key={index} sx={{
+                    transition: 'background-color 0.3s ease',
+                    '&:hover': {
+                      backgroundColor: (theme) => theme.palette.gray[300],
+                    },
+                  }}>
                     <Stack margin='16px' alignItems='center' rowGap='8px'>
                       <img
                         src={PdfVector}
@@ -230,13 +236,15 @@ const BuatScanSurat = () => {
                   </Grid>
                 ))}
               </Grid>
+            </AppScrollbar>
               {!upload && (
                 <Box
-                  position='sticky'
-                  bottom={0}
-                  right={0}
-                  display='flex'
-                  justifyContent='end'
+                position='absolute'
+                bottom='0'
+                width='100%'
+                zIndex='1'
+                justifyContent='end'
+                display='flex'
                 >
                   <Buttons
                     variant='contained'
@@ -252,7 +260,7 @@ const BuatScanSurat = () => {
                   </Buttons>
                 </Box>
               )}
-            </AppScrollbar>
+            </Box>
           </Grid>
           <Grid item xs={4}>
             <Box
