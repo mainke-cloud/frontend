@@ -21,6 +21,7 @@ import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import Surat_Internal from 'modules/buatSurat/SuratInternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
+import iconSurat from '../../assets/icon/mail.svg';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -55,6 +56,12 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Draft Scan Surat'
             ? scanIcon
+            : type === 'Buat Surat Internal'
+            ? iconSurat
+            : type === 'Buat Surat Undangan'
+            ? iconSurat
+            : type === 'Buat Surat Delegasi'
+            ? iconSurat
             : '',
 
         content:
