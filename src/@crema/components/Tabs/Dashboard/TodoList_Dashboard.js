@@ -67,7 +67,7 @@ const TodoList_Dashboard = () => {
                     justifyContent: 'center',
                     padding: '2.5px',
                   }}
-                  onClick={() => handleAddTab('SearchTab')}
+                  onClick={() => handleAddTab('Search')}
                 >
                   <Filter size={19} />
                 </Box>

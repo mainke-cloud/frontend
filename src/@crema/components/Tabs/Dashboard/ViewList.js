@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   List,
   ListItem,
@@ -33,6 +33,7 @@ const ViewList = () => {
       date: '20 September 2024',
       status: 'Sedang',
       mark: 'Tandai Selesai',
+      alert:'True',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -42,6 +43,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -51,6 +53,7 @@ const ViewList = () => {
       date: '11 Januari 2024',
       status: 'Rendah',
       mark: 'Tandai Selesai',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -60,6 +63,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'True',
     },
   ];
 
@@ -72,6 +76,7 @@ const ViewList = () => {
       date: '20 September 2024',
       status: 'Sedang',
       mark: 'Tandai Selesai',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -81,6 +86,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -90,6 +96,7 @@ const ViewList = () => {
       date: '11 Januari 2024',
       status: 'Rendah',
       mark: 'Tandai Selesai',
+      alert:'True',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -99,6 +106,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'True',
     },
   ];
 
@@ -111,6 +119,7 @@ const ViewList = () => {
       date: '20 September 2024',
       status: 'Sedang',
       mark: 'Tandai Selesai',
+      alert:'True',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -120,6 +129,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'True',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -129,6 +139,7 @@ const ViewList = () => {
       date: '11 Januari 2024',
       status: 'Rendah',
       mark: 'Tandai Selesai',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -138,6 +149,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'True',
     },
   ];
 
@@ -150,6 +162,7 @@ const ViewList = () => {
       date: '20 September 2024',
       status: 'Sedang',
       mark: 'Tandai Selesai',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -159,6 +172,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'False',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -168,6 +182,7 @@ const ViewList = () => {
       date: '11 Januari 2024',
       status: 'Rendah',
       mark: 'Tandai Selesai',
+      alert:'True',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -177,6 +192,7 @@ const ViewList = () => {
       date: '10 September 2024',
       status: 'Tinggi',
       mark: 'Sudah Dibaca',
+      alert:'False',
     },
   ];
 
@@ -206,9 +222,9 @@ const ViewList = () => {
 
   const [isActive, setIsActive] = useState(true);
 
-    const handleClick = () => {
-        setIsActive(!isActive);
-    };
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
 
   return (
     <>
@@ -237,7 +253,12 @@ const ViewList = () => {
                               {item.primary.substring(0, 2)}
                             </Avatar>
                             <Box sx={{ alignItems: 'center' }}>
-                              <AlertCircle size={15} color='red' />
+                              {/* <AlertCircle size={15} color='red' /> */}
+                              {item.alert === 'True' ? (
+                                  <AlertCircle size={15} color='red' />
+                                ):(
+                                  <Box></Box>
+                                )}
                             </Box>
                           </Stack>
                         </ListItemAvatar>
@@ -280,8 +301,14 @@ const ViewList = () => {
                               </Box>
                             </Stack>
                             <Typography
-                              style={{ fontSize: '13px' }}
-                              color='#5C5E61'
+                              sx={{
+                                fontSize: '13px',
+                                fontWeight:
+                                  item.mark === 'Tandai Selesai'
+                                    ? Fonts.BOLD
+                                    : Fonts.LIGHT,
+                                marginTop: 2,
+                              }}
                             >
                               {item.secondary}
                             </Typography>
@@ -295,6 +322,10 @@ const ViewList = () => {
                                 sx={{
                                   display: 'inline',
                                   fontSize: '11px',
+                                  fontWeight:
+                                  item.mark === 'Tandai Selesai'
+                                    ? Fonts.BOLD
+                                    : Fonts.LIGHT,
                                 }}
                                 component='span'
                                 color='text.primary'
@@ -328,7 +359,12 @@ const ViewList = () => {
                           </Grid>
                           <Grid item xs={2}>
                             <Stack spacing={9}>
-                              <Typography style={{ fontSize: '13px', marginRight:"10px"}}>
+                              <Typography
+                                style={{
+                                  fontSize: '13px',
+                                  marginRight: '10px',
+                                }}
+                              >
                                 10.30 . 22 Sep
                                 {item.mark === 'Tandai Selesai' ? (
                                   <MailOutlineIcon

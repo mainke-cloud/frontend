@@ -12,6 +12,7 @@ import folderIcon from '../../assets/icon/folder.svg';
 import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
+import searchIcon from '../../assets/icon/search.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import SearchTab from 'modules/search/index';
@@ -42,6 +43,8 @@ export const addTab = (id, state, type) => {
             ? disposisiIcon
             : type === 'Todo'
             ? disposisiIcon
+            : type === 'Search'
+            ? searchIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -60,7 +63,7 @@ export const addTab = (id, state, type) => {
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
-          ) : type === 'SearchTab' ? (
+          ) : type === 'Search' ? (
             <SearchTab />
           )
           : (
