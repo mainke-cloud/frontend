@@ -26,7 +26,7 @@ const BucketMinibar = (props) => {
   };
   const handleChangeSidebar = (name) => {
     dispatch(setSidebarName(name));
-  }
+  };
 
   return (
     <BucketMinibarWrapper isHover={isHover} setHover={setHover}>
@@ -93,14 +93,17 @@ const BucketMinibar = (props) => {
             badge={0}
             icon='home'
             text='Dashboard'
-            onMoveTab={()=>handlePindah("dashboard")}
+            onMoveTab={() => handlePindah('dashboard')}
           />
           <BucketMinibarItem
             isHover={isHover}
             badge={10}
             icon='inbox'
             text='Surat Masuk'
-            onAddTab={()=>handleChangeSidebar("Surat Masuk")}
+            onAddTab={() => {
+              handleChangeSidebar('Surat Masuk');
+              handleAddTab('Surat Masuk');
+            }}
           />
           <BucketMinibarItem
             isHover={isHover}
@@ -119,7 +122,7 @@ const BucketMinibar = (props) => {
             badge={12}
             icon='mail'
             text='Surat Keluar'
-            onAddTab={()=>handleChangeSidebar("Surat Keluar")}
+            onAddTab={() => handleChangeSidebar('Surat Keluar')}
           />
           <BucketMinibarItem
             isHover={isHover}

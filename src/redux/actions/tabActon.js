@@ -17,6 +17,7 @@ import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
+import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import NoDisposisi from 'modules/disposisi/respons/Default';
@@ -24,6 +25,9 @@ import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 
 import SearchTab from 'modules/search/index';
+import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
+import SuratKosong from 'modules/suratMasuk/content/suratKosong';
+
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -54,7 +58,9 @@ export const addTab = (id, state, type) => {
             : type === 'Log Scan Surat'
             ? scanIcon
             : type === 'Buat Scan Surat'
-            ? scanIcon
+            ? inboxIcon
+            : type === 'Surat Masuk'
+            ? inboxIcon
             : type === 'Draft Scan Surat'
             ? scanIcon
             : type === 'Buka Surat'
@@ -73,6 +79,11 @@ export const addTab = (id, state, type) => {
             <Profile />
           ) : type === 'Disposisi' ? (
             <NoDisposisi />
+          ) : type === 'BuatDisposisi' ? (
+            <BuatSurat />
+            <Disposisi />
+          ) : type === 'Surat Masuk' ? (
+            <SuratKosong />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
           ) : type === 'Todo' ? (
@@ -117,8 +128,10 @@ export const childTab = (id, state, type, data) => {
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi') ||
+        (tab.id === 'surat masuk' && type === 'Surat Masuk') ||
         (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
+    console.log(state);
     if (isExistingTab) {
       const updateTab = {
         ...isExistingTab,
@@ -126,10 +139,15 @@ export const childTab = (id, state, type, data) => {
         content:
           type === 'Todo' ? (
             <DetailTodo props={data} />
-          ) : type === 'Log Scan Surat' ? (
-            <DetailScanSurat props={data} />
           ) : type === 'Disposisi' ? (
             <Disposisi props={data} />
+          ) : type === 'Surat Masuk' ? (
+            <SuratMasuk props={data} />
+          ) : type === 'Log Scan Surat' ? (
+            <DetailScanSurat props={data} />
+=========
+            <Disposisi props={data} />
+>>>>>>>>> Temporary merge branch 2
           ) : (
             ''
           ),
@@ -140,6 +158,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       } else if (type === 'Log Scan Surat') {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      } else if (type === 'Surat Masuk') {
+        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
       }
     } else {
       const exChildTab = state.find(
@@ -158,13 +178,17 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ?
-            <DetailTodo props={data} />
-            : type === 'Disposisi' ?
-            <Disposisi props={data} />
-            : type === 'Log Scan Surat' ? 
-            <DetailScanSurat props={data} />
-            : <div>{id}</div>,
+            type === 'Todo' ? (
+              <DetailTodo props={data} />
+            ) : type === 'Surat Masuk' ? (
+              <SuratMasuk props={data} />
+            ) : type === 'Log Scan Surat' ? (
+              <DetailScanSurat props={data} />
+            ) : type === 'Disposisi' ? (
+              <Disposisi props={data} />
+            ) : (
+              <div>{id}</div>
+            ),
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });

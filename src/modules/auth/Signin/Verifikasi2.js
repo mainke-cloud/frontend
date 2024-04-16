@@ -7,12 +7,10 @@ import TextField from '@mui/material/TextField';
 import FooterAuth from './FooterAuth';
 
 const Verifikasi2 = () => {
-  const location = useLocation();
-  const values = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi3', { state: { values } });
+    navigate('/signin/verifikasi3');
   };
 
   const kodeTelpon = [

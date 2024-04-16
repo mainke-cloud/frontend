@@ -3,29 +3,25 @@ import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
 import MainSidebar from '../../components/MainSidebar';
 import {
-    styled,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Typography,
-    List,
-    Avatar,
-    Card,
-    CardContent,
-    Divider,
-    Grid,
-    Button,
-    IconButton,
-    Stack,
-    Tooltip,
-    Badge,
+  styled,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  List,
+  Avatar,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Button,
+  IconButton,
+  Stack,
+  Tooltip,
+  Badge,
 } from '@mui/material';
-import {
-    ArrowForwardIosSharp,
-} from '@mui/icons-material';
-import {
-    AlertCircle,
-} from 'feather-icons-react';
+import { ArrowForwardIosSharp } from '@mui/icons-material';
+import { AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { childTab } from '../../../../../redux/actions/tabActon';
@@ -47,8 +43,8 @@ const StyledAccordion = styled((props) => (
 
 const AccordionSummarys = styled((props) => (
   <AccordionSummary
-      expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
-      {...props}
+    expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
+    {...props}
   />
 ))(({ theme }) => ({
   flexDirection: 'row-reverse',
@@ -85,17 +81,21 @@ export default function AppSidebarContent(props) {
   const getTotalCount = (listData) => {
     return listData.length;
   };
-  
+
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const handleButton = (item) => {
-    {isStatus === 'disposisi' ? (
-      dispatch(childTab(item.id, tabs, 'Disposisi', item))
-    ) : isStatus === 'todo' ? (
-      dispatch(childTab(item.id, tabs, 'Todo', item))
+    {
+      isStatus === 'disposisi'
+        ? dispatch(childTab(item.id, tabs, 'Disposisi', item))
+        : isStatus === 'todo'
+        ? dispatch(childTab(item.id, tabs, 'Todo', item))
     ) : isStatus === 'scanner' ? (
       dispatch(childTab(item.id, tabs, 'Log Scan Surat', item))
-    ) : null}
+        : isStatus === 'suratMasuk'
+        ? dispatch(childTab(item.id, tabs, 'Surat Masuk', item))
+        : null;
+    }
   };
 
   return (
@@ -131,7 +131,7 @@ export default function AppSidebarContent(props) {
                             )}`,
                             borderRadius: 0,
                           }}
-                          >
+                        >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
                             onClick={() => handleButton(item)}
@@ -205,7 +205,10 @@ export default function AppSidebarContent(props) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <AppSidebarFooter isStatus={isStatus} item={item} />
+                                    <AppSidebarFooter
+                                      isStatus={isStatus}
+                                      item={item}
+                                    />
                                   </Grid>
                                 </Grid>
                               </Grid>

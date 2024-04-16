@@ -4,21 +4,20 @@ import { useLocation } from 'react-router-dom';
 import SuccessImage from '../../../assets/LoginPage/berhasil.png';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import FooterAuth from './FooterAuth';
+import { useSelector } from 'react-redux';
 
 const Verifikasi4 = () => {
-  const location = useLocation();
-  const values = location.state && location.state.valuess;
-
-  const {
-    logInWithEmailAndPassword,
-    // logInWithPopup
-  } = useAuthMethod();
+  const userData = useSelector((state) => state.auth.userData);
+  //const tabs = useSelector((state) => state.tab.tabs);
+  console.log(userData);
+  const { logInWithEmailAndPassword } = useAuthMethod();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = values;
-    const valuessss = { email, password };
-    logInWithEmailAndPassword(valuessss);
+    // const { email, password } = userData;
+    // const valuessss = userData();
+    // console.log(valuessss);
+    logInWithEmailAndPassword(userData);
   };
 
   return (

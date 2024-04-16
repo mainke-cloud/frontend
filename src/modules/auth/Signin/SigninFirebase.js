@@ -22,6 +22,9 @@ import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
 import ChecklistImage from '../../../assets/LoginPage/check.png';
+import FooterAuth from './FooterAuth';
+import { useDispatch } from 'react-redux';
+import { authLogin } from '../../../redux/actions/loginAction';
 
 const isCaptchaValid = (captchaValue, captcha) => {
   return captchaValue === captcha;
@@ -58,8 +61,12 @@ const style = {
 };
 
 const SigninFirebase = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();
@@ -79,6 +86,8 @@ const SigninFirebase = () => {
       values,
       // { setSubmitting }
     ) => {
+      const { email, password } = values;
+
       if (!isCaptchaValid(values.captchaValue, captcha)) {
         alert('Captcha input is incorrect. Please try again.');
         setCaptcha(generateCaptcha());
@@ -111,7 +120,8 @@ const SigninFirebase = () => {
         // console.log(responseData);
 
         if (responseData) {
-          navigate('/signin/verifikasi1', { state: { values } });
+          navigate('/signin/verifikasi1');
+          dispatch(authLogin({ email, password }));
           // alert('Login berhasil!');
           // logInWithEmailAndPassword(values);
         } else {
