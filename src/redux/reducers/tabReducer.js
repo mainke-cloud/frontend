@@ -72,6 +72,20 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
+
+    case 'UPDATE_TAB_SURATMASUK': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'surat masuk') {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
     default:
       return state;
   }

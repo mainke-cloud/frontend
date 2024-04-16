@@ -342,7 +342,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleDo = (item) => {
     console.log('ini');
     dispatch(childTab(item.id, tabs, 'Surat Masuk', item));
   };
@@ -381,7 +381,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
                 sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
                 component='h2'
               >
-                Surat Masuk
+                Surat Cinta
               </Typography>
             </Grid>
             <Grid item xs={5}>
@@ -505,7 +505,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
-                            onClick={() => handleTodo(item)}
+                            onClick={() => handleDo(item)}
                           >
                             <CardContent>
                               <Grid container spacing={2}>

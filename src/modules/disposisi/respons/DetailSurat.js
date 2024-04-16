@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import {
-    Tab,
-    Box,
-} from '@mui/material';
+import { Tab, Box } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import {
-    pdfjs,
-    // Document,
-    // Page,
+  pdfjs,
+  // Document,
+  // Page,
 } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -31,127 +28,115 @@ import { pekerjaan } from '../../../@crema/services/dummy/content/dataPekerjaan'
 import { log } from '../../../@crema/services/dummy/content/dataLog';
 
 const DetailSurat = () => {
-    const [value, setValue] = useState('1');
+  const [value, setValue] = useState('1');
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-        'pdfjs-dist/build/pdf.worker.min.js',
-        import.meta.url,
-    ).toString();
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.js',
+    import.meta.url,
+  ).toString();
 
-    const dispatch = useDispatch();
-    const tabs = useSelector((state) => state.tab.tabs);
-    const tabId = useSelector((state) => state.tab.idCounter);
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const tabId = useSelector((state) => state.tab.idCounter);
 
-    const handleClick = (name) => {
-      dispatch(addTab(tabId, tabs, name));
-    }
+  const handleClick = (name) => {
+    dispatch(addTab(tabId, tabs, name));
+  };
 
   return (
     <>
-        <DisposisiWrapper>
-            <HeaderBar title='Detail Surat'>
-                <HeaderIconButton>
-                    <Save />
-                </HeaderIconButton>
-                <HeaderIconButton method={() => handleClick('BuatDisposisi')}>
-                    <Send />
-                </HeaderIconButton>
-                <HeaderIconButton>
-                    <Clipboard />
-                </HeaderIconButton>
-                <HeaderIconButton>
-                    <Globe />
-                </HeaderIconButton>
-                <HeaderIconButton>
-                    <X />
-                </HeaderIconButton>
-            </HeaderBar>
+      <DisposisiWrapper>
+        <HeaderBar title='Detail Surat'>
+          <HeaderIconButton>
+            <Save />
+          </HeaderIconButton>
+          <HeaderIconButton method={() => handleClick('BuatDisposisi')}>
+            <Send />
+          </HeaderIconButton>
+          <HeaderIconButton>
+            <Clipboard />
+          </HeaderIconButton>
+          <HeaderIconButton>
+            <Globe />
+          </HeaderIconButton>
+          <HeaderIconButton>
+            <X />
+          </HeaderIconButton>
+        </HeaderBar>
 
-            <CustomDivider />
+        <CustomDivider />
 
-            <Box sx={{ padding: 8 }}>
-                <Box className='disposisi-content-body'>
-                    <TabContext value={value}>
-                        <Box className='content-tabs'>
-                            <TabList
-                                onChange={handleChange}
-                                indicatorColor='none'
-                                sx={{minHeight:0}}
-                            >
-                                <Tab
-                                    className='content-styled-tab'
-                                    label='Alamat Disposisi'
-                                    value='1'
-                                />
-                                <Tab
-                                    className='content-styled-tab'
-                                    label='Agenda Surat Masuk'
-                                    value='2'
-                                />
-                                <Tab
-                                    className='content-styled-tab'
-                                    label='Log Disposisi'
-                                    value='3'
-                                />
-                                <Tab
-                                    className='content-styled-tab'
-                                    label='Lainnya'
-                                    value='4'
-                                />
-                            </TabList>
-                        </Box>
-                        <TabPanel
-                            className='content-styled-panel'
-                            value='1'
-                        >
-                            <TabAlamatDisposisi data={diteruskan} />
-                        </TabPanel>
-                        <TabPanel
-                            className='content-styled-panel'
-                            value='2'
-                        >
-                            <TabAgenda data={pekerjaan}/>
-                        </TabPanel>
-                        <TabPanel
-                            className='content-styled-panel'
-                            value='3'
-                        >
-                            <TabLog data={log} />
-                        </TabPanel>
-                        <TabPanel
-                            className='content-styled-panel'
-                            value='4'
-                        >
-                            <TabLainnya />
-                        </TabPanel>
-                    </TabContext>
+        <Box sx={{ padding: 8 }}>
+          <Box className='disposisi-content-body'>
+            <TabContext value={value}>
+              <Box className='content-tabs'>
+                <TabList
+                  onChange={handleChange}
+                  indicatorColor='none'
+                  sx={{ minHeight: 0 }}
+                >
+                  <Tab
+                    className='content-styled-tab'
+                    label='Alamat Disposisi'
+                    value='1'
+                  />
+                  <Tab
+                    className='content-styled-tab'
+                    label='Agenda Surat Masuk'
+                    value='2'
+                  />
+                  <Tab
+                    className='content-styled-tab'
+                    label='Log Disposisi'
+                    value='3'
+                  />
+                  <Tab
+                    className='content-styled-tab'
+                    label='Lainnya'
+                    value='4'
+                  />
+                </TabList>
+              </Box>
+              <TabPanel className='content-styled-panel' value='1'>
+                <TabAlamatDisposisi data={diteruskan} />
+              </TabPanel>
+              <TabPanel className='content-styled-panel' value='2'>
+                <TabAgenda data={pekerjaan} />
+              </TabPanel>
+              <TabPanel className='content-styled-panel' value='3'>
+                <TabLog data={log} />
+              </TabPanel>
+              <TabPanel className='content-styled-panel' value='4'>
+                <TabLainnya />
+              </TabPanel>
+            </TabContext>
 
-                    <Box
-                        sx={{
-                            minHeight: '100px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            border: '1px solid #D8D8D8',
-                            marginRight:'12px',
-                        }}
-                    >
-                        {/* <Document
+            <Box
+              sx={{
+                minHeight: '100px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                border: '1px solid #D8D8D8',
+                marginRight: '12px',
+              }}
+            >
+              {/* <Document
                             width={'fit-content'}
                             file={require('./Preview Surat.pdf')}
                         >
                             <Page pageNumber={1} />
                         </Document> */}
-                    </Box>
-                </Box>
             </Box>
-        </DisposisiWrapper>
+          </Box>
+        </Box>
+      </DisposisiWrapper>
     </>
-  )
-}
+  );
+};
 
-export default DetailSurat
+export default DetailSurat;

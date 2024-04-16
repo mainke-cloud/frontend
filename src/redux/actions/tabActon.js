@@ -21,6 +21,7 @@ import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
+import SuratKosong from 'modules/suratMasuk/content/suratKosong';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -68,9 +69,9 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <NoDisposisi />
+            <Disposisi />
           ) : type === 'Surat Masuk' ? (
-            <SuratMasuk />
+            <SuratKosong />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
           ) : type === 'Todo' ? (
@@ -110,9 +111,10 @@ export const childTab = (id, state, type, data) => {
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi') ||
-        (tab.id === 'suratMasuk' && type === 'Surat Masuk') ||
+        (tab.id === 'surat masuk' && type === 'Surat Masuk') ||
         (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
+    console.log(state);
     if (isExistingTab) {
       const updateTab = {
         ...isExistingTab,
@@ -123,7 +125,7 @@ export const childTab = (id, state, type, data) => {
           ) : type === 'Disposisi' ? (
             <Disposisi props={data} />
           ) : type === 'Surat Masuk' ? (
-            <div>oke</div>
+            <SuratMasuk props={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
           ) : (
@@ -136,6 +138,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       } else if (type === 'Log Scan Surat') {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      } else if (type === 'Surat Masuk') {
+        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
       }
     } else {
       const exChildTab = state.find(
