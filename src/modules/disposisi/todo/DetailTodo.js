@@ -170,7 +170,7 @@ const DetailTodo = ({ props }) => {
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
-  
+
   const AlamatDisposisi = () => {
     return (
       <Stack rowGap='10px'>

@@ -37,13 +37,13 @@ import {
   Filter,
   Search,
   AlertCircle,
-  Mail,
 } from 'feather-icons-react';
 
 import {
   ArrowForwardIosSharp,
   Cached,
-  Shortcut,
+  DraftsOutlined,
+  MailOutline,
   Close,
 } from '@mui/icons-material';
 
@@ -80,7 +80,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function LetterInDisposisi({ isCollapsed }) {
+export default function MyDisposisiSidebar({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -359,9 +359,14 @@ export default function LetterInDisposisi({ isCollapsed }) {
                 sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
                 component='h2'
               >
-                Surat Masuk
+                Disposisi
               </Typography>
-              
+              <Typography
+                sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
+                component='h2'
+              >
+                Disposisi Saya
+              </Typography>
             </Grid>
             <Grid item xs={5}>
               <ButtonGroup>
@@ -488,12 +493,12 @@ export default function LetterInDisposisi({ isCollapsed }) {
                             <CardContent>
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
-                                  <Stack alignItems='center' spacing={4}>
-                                      <Avatar
-                                        alt={`Avatar ${listIndex}`}
-                                        src={item.avatarSrc}
-                                        sx={{ width: 56, height: 56 }}
-                                      />
+                                  <Stack alignItems='center'>
+                                    <Avatar
+                                      alt={`Avatar ${listIndex}`}
+                                      src={item.avatarSrc}
+                                      sx={{ width: 56, height: 56 }}
+                                    />
                                     {item.priority === 'tinggi' && (
                                       <Tooltip title='Tinggi'>
                                         <IconButton color='error'>
@@ -528,8 +533,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                         color='text.primary'
                                         sx={{
                                           fontWeight:
-                                            item.status === 'Read' ||
-                                            item.status === 'Sekretaris'
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
                                         }}
@@ -540,12 +545,12 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                     <Grid item xs={12}>
                                       <Typography
                                         sx={{
+                                          display: 'inline',
                                           fontWeight:
-                                            item.status === 'Read' ||
-                                            item.status === 'Sekretaris'
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
-                                          display: 'inline',
                                         }}
                                         component='span'
                                         variant='body2'
@@ -565,22 +570,11 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                       <Typography
                                         sx={{
                                           fontSize: 12,
-                                        }}
-                                      >
-                                        ({item.messageCount})
-                                      </Typography>
-                                    </Button>
-                                    <Button
-                                      sx={{
-                                        padding: 0,
-                                        margin: 0,
-                                        textAlign: 'left',
-                                      }}
-                                    >
-                                      <Shortcut />
-                                      <Typography
-                                        sx={{
-                                          fontSize: 12,
+                                          fontWeight:
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
                                         }}
                                       >
                                         ({item.messageCount})
@@ -591,10 +585,13 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                         marginLeft: 'auto',
                                         display: 'flex',
                                         flexDirection: 'row',
-                                        paddingTop: 2.4,
                                       }}
                                     >
-                                      <Mail />
+                                      {item.status === 'Read' ? (
+                                        <DraftsOutlined />
+                                      ) : (
+                                        <MailOutline />
+                                      )}
                                     </Box>
                                   </Grid>
                                 </Grid>
@@ -616,6 +613,6 @@ export default function LetterInDisposisi({ isCollapsed }) {
   );
 }
 
-LetterInDisposisi.propTypes = {
+MyDisposisiSidebar.propTypes = {
   isCollapsed: PropTypes.bool,
 };

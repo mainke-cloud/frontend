@@ -62,10 +62,7 @@ const style = {
 const SigninFirebase = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // const { logInWithEmailAndPassword, logInWithPopup } = useAuthMethod();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { pathname } = useLocation();

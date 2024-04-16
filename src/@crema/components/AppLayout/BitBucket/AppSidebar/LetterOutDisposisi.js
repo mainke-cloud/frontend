@@ -9,6 +9,7 @@ import {
   AccordionDetails,
   Typography,
   List,
+  ListItemAvatar,
   Avatar,
   Card,
   CardContent,
@@ -18,10 +19,10 @@ import {
   Box,
   ButtonGroup,
   IconButton,
+  Tooltip,
   Stack,
   TextField,
   Popover,
-  Tooltip,
   Badge,
 } from '@mui/material';
 
@@ -32,18 +33,10 @@ import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import {
-  Plus,
-  Filter,
-  Search,
-  AlertCircle,
-  Mail,
-} from 'feather-icons-react';
+import { Plus, Filter, Search, AlertCircle, Mail } from 'feather-icons-react';
 
 import {
   ArrowForwardIosSharp,
-  Cached,
-  Shortcut,
   Close,
 } from '@mui/icons-material';
 
@@ -80,7 +73,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function LetterInDisposisi({ isCollapsed }) {
+export default function LetterOutDisposisi({ isCollapsed }) {
   const listData1 = [
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -89,8 +82,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Read',
+      status: 'Selesai',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -99,8 +91,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -109,8 +100,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'rendah',
-      status: 'Disposisi',
+      status: 'Batal',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -119,8 +109,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Disposisi',
+      status: 'Batal',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -129,8 +118,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
-      status: 'Unread',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -139,8 +127,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Read',
+      status: 'Selesai',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -149,8 +136,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
-      status: 'Read',
+      status: 'Selesai',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -159,8 +145,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'sedang',
-      status: 'Unread',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -169,8 +154,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
-      status: 'Read',
+      status: 'Selesai',
     },
   ];
   const listData2 = [
@@ -181,8 +165,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -191,8 +174,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Sekretaris',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -201,8 +183,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Disposisi',
+      status: 'Batal',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -211,8 +192,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'sedang',
-      status: 'Disposisi',
+      status: 'Batal',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -221,8 +201,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'tinggi',
-      status: 'Unread',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -231,8 +210,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'tinggi',
-      status: 'Read',
+      status: 'Selesai',
     },
   ];
   const listData3 = [
@@ -243,8 +221,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
-      priority: 'tinggi',
-      status: 'Read',
+      status: 'Selesai',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -253,8 +230,7 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
-      priority: 'rendah',
-      status: 'Unread',
+      status: 'Diproses',
     },
     {
       avatarSrc: '/static/images/avatar/1.jpg',
@@ -263,23 +239,20 @@ export default function LetterInDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
-      priority: 'sedang',
-      status: 'Unread',
+      status: 'Diproses',
     },
   ];
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Sekretaris':
-        return '#BF2600';
-      case 'Read':
-        return '#FFB020';
-      case 'Unread':
-        return '#8C8F93';
-      case 'Disposisi':
-        return '#9DB5FF';
+      case 'Selesai':
+        return ['#429777', '#DCF2EA'];
+      case 'Diproses':
+        return ['#FFB020', '#FFEFD2'];
+      case 'Batal':
+        return ['#C40D0E', '#F9E4E4'];
       default:
-        return 'lightgrey';
+        return ['lightgrey', 'lightgrey'];
     }
   };
 
@@ -359,9 +332,14 @@ export default function LetterInDisposisi({ isCollapsed }) {
                 sx={{ fontSize: 18, fontWeight: Fonts.BOLD }}
                 component='h2'
               >
-                Surat Masuk
+                Surat Keluar
               </Typography>
-              
+              <Typography
+                sx={{ fontSize: 12, fontWeight: Fonts.LIGHT }}
+                component='h2'
+              >
+                Perlu Tindak Lanjut
+              </Typography>
             </Grid>
             <Grid item xs={5}>
               <ButtonGroup>
@@ -476,9 +454,9 @@ export default function LetterInDisposisi({ isCollapsed }) {
                         <Card
                           sx={{
                             position: 'relative',
-                            borderLeft: `6px solid ${getStatusColor(
-                              item.status,
-                            )}`,
+                            borderLeft: `6px solid ${
+                              getStatusColor(item.status)[0]
+                            }`,
                             borderRadius: 0,
                           }}
                         >
@@ -489,13 +467,16 @@ export default function LetterInDisposisi({ isCollapsed }) {
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
                                   <Stack alignItems='center' spacing={4}>
+                                    <ListItemAvatar>
                                       <Avatar
                                         alt={`Avatar ${listIndex}`}
                                         src={item.avatarSrc}
                                         sx={{ width: 56, height: 56 }}
                                       />
-                                    {item.priority === 'tinggi' && (
-                                      <Tooltip title='Tinggi'>
+                                    </ListItemAvatar>
+                                    {(item.status === 'Diproses' ||
+                                      item.status === 'Batal') && (
+                                      <Tooltip title='Danger'>
                                         <IconButton color='error'>
                                           <AlertCircle />
                                         </IconButton>
@@ -528,8 +509,8 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                         color='text.primary'
                                         sx={{
                                           fontWeight:
-                                            item.status === 'Read' ||
-                                            item.status === 'Sekretaris'
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
                                         }}
@@ -540,12 +521,12 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                     <Grid item xs={12}>
                                       <Typography
                                         sx={{
+                                          display: 'inline',
                                           fontWeight:
-                                            item.status === 'Read' ||
-                                            item.status === 'Sekretaris'
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
-                                          display: 'inline',
                                         }}
                                         component='span'
                                         variant='body2'
@@ -554,44 +535,27 @@ export default function LetterInDisposisi({ isCollapsed }) {
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <Button
+                                    <Box
                                       sx={{
-                                        padding: 0,
-                                        margin: 0,
-                                        textAlign: 'left',
+                                        backgroundColor: getStatusColor(
+                                          item.status,
+                                        )[1],
+                                        color: getStatusColor(item.status)[0],
+                                        width: 55,
+                                        height: 25,
+                                        borderRadius: 1,
+                                        fontSize: '12px',
+                                        lineHeight: '22px',
+                                        textAlign: 'center',
                                       }}
                                     >
-                                      <Cached />
-                                      <Typography
-                                        sx={{
-                                          fontSize: 12,
-                                        }}
-                                      >
-                                        ({item.messageCount})
-                                      </Typography>
-                                    </Button>
-                                    <Button
-                                      sx={{
-                                        padding: 0,
-                                        margin: 0,
-                                        textAlign: 'left',
-                                      }}
-                                    >
-                                      <Shortcut />
-                                      <Typography
-                                        sx={{
-                                          fontSize: 12,
-                                        }}
-                                      >
-                                        ({item.messageCount})
-                                      </Typography>
-                                    </Button>
+                                      {item.status}
+                                    </Box>
                                     <Box
                                       sx={{
                                         marginLeft: 'auto',
                                         display: 'flex',
                                         flexDirection: 'row',
-                                        paddingTop: 2.4,
                                       }}
                                     >
                                       <Mail />
@@ -616,6 +580,6 @@ export default function LetterInDisposisi({ isCollapsed }) {
   );
 }
 
-LetterInDisposisi.propTypes = {
+LetterOutDisposisi.propTypes = {
   isCollapsed: PropTypes.bool,
 };

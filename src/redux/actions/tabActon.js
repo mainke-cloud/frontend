@@ -19,6 +19,10 @@ import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
+import Surat_Internal from 'modules/buatSurat/SuratInternal';
+import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
+import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
+import iconSurat from '../../assets/icon/mail.svg';
 import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
@@ -61,11 +65,18 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Draft Scan Surat'
             ? scanIcon
+            : type === 'Buat Surat Internal'
+            ? iconSurat
+            : type === 'Buat Surat Undangan'
+            ? iconSurat
+            : type === 'Buat Surat Delegasi'
+            ? iconSurat
             : type === 'Buka Surat'
             ? scanIcon
             : type === 'Search'
             ? searchIcon
             : '',
+
         content:
           type === 'Folder' ? (
             <Folder />
@@ -86,6 +97,16 @@ export const addTab = (id, state, type) => {
             <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
+          ) : type === 'Add_Sekretaris' ? (
+            <Add_Sekretaris />
+          ) : type === 'Add_Delegasi' ? (
+            <Add_Delegasi />
+          ) : type === 'Buat Surat Internal' ? (
+            <Surat_Internal />
+          ) : type === 'Buat Surat Undangan' ? (
+            <Surat_Undangan />
+          ) : type === 'Buat Surat Delegasi' ? (
+            <Surat_Delegasi />
           ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
@@ -173,15 +194,21 @@ export const childTab = (id, state, type, data) => {
           favicon: inboxIcon,
           content:
             type === 'Todo' ? (
+              (
               <DetailTodo props={data} />
             ) : type === 'Surat Masuk' ? (
               <SuratMasuk props={data} />
+            )
             ) : type === 'Log Scan Surat' ? (
+              (
               <DetailScanSurat props={data} />
+            )
             ) : type === 'Disposisi' ? (
               <Disposisi props={data} />
             ) : (
+              (
               <div>{id}</div>
+            )
             ),
           active: true,
         };
