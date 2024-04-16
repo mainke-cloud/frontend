@@ -6,7 +6,9 @@ import { Cached } from '@mui/icons-material';
 import { Fonts } from '@crema/constants/AppEnums';
 import mailIcon from '../../../../../assets/icon/mail-unread.svg';
 import mailReadIcon from '../../../../../assets/icon/mail-read.svg';
+import { Mail } from 'feather-icons-react';
 
+import { Shortcut } from '@mui/icons-material';
 const AppSidebarFooter = (props) => {
   const { isStatus, item } = props;
 
@@ -70,6 +72,51 @@ const AppSidebarFooter = (props) => {
               src={item.status === 'Read' ? mailReadIcon : mailIcon}
               alt='Mail Icon'
             />
+          </Box>
+        </>
+      ) : isStatus === 'surat masuk' ? (
+        <>
+          <Button
+            sx={{
+              padding: 0,
+              margin: 0,
+              textAlign: 'left',
+            }}
+          >
+            <Cached />
+            <Typography
+              sx={{
+                fontSize: 12,
+              }}
+            >
+              ({item.messageCount})
+            </Typography>
+          </Button>
+          <Button
+            sx={{
+              padding: 0,
+              margin: 0,
+              textAlign: 'left',
+            }}
+          >
+            <Shortcut />
+            <Typography
+              sx={{
+                fontSize: 12,
+              }}
+            >
+              ({item.messageCount})
+            </Typography>
+          </Button>
+          <Box
+            sx={{
+              marginLeft: 'auto',
+              display: 'flex',
+              flexDirection: 'row',
+              paddingTop: 2.4,
+            }}
+          >
+            <Mail />
           </Box>
         </>
       ) : isStatus === 'todo' ? (

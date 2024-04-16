@@ -113,7 +113,7 @@ export const addTab = (id, state, type) => {
             <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
-          ) : type === 'Add_Sekretaris' ?  (
+          ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
@@ -168,20 +168,35 @@ export const addTab = (id, state, type) => {
 
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
-    const isExistingTab = state.find(
-      (tab) =>
-        (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi') ||
-        (tab.id === 'perlu tindak lanjut' && type === 'Perlu Tindak Lanjut') ||
-        (tab.id === 'lacak proses' && type === 'Lacak Proses') ||
-        (tab.id === 'draft' && type === 'Draft') ||
-        (tab.id === 'komposer' && type === 'Komposer') ||
-        (tab.id === 'template' && type === 'Template') || 
-        (tab.id === 'surat masuk' && type === 'Surat Masuk') ||
-        (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
-    );
-    console.log(state);
+    const isExistingTab = state.find((tab) => {
+      console.log(tab.id);
+      switch (type) {
+        case 'Todo':
+          return tab.id === 'todo';
+        case 'Disposisi':
+          return tab.id === 'disposisi';
+        case 'Perlu Tindak Lanjut':
+          return tab.id === 'perlu tindak lanjut';
+        case 'Lacak Proses':
+          return tab.id === 'lacak proses';
+        case 'Draft':
+          return tab.id === 'draft';
+        case 'Komposer':
+          return tab.id === 'komposer';
+        case 'Template':
+          return tab.id === 'template';
+        case 'Surat Masuk':
+          return tab.id === 'surat masuk';
+        case 'Log Scan Surat':
+          return tab.id === 'log scan surat';
+        default:
+          return false;
+      }
+    });
+
+    console.log(type);
     if (isExistingTab) {
+      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -208,15 +223,17 @@ export const childTab = (id, state, type, data) => {
             ''
           ),
       };
-      if (type === 'Todo') {
-        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      } else if (type === 'Disposisi') {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      } else if (type === 'Log Scan Surat') {
-        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      } else if (type === 'Surat Masuk') {
+      if (type === 'Surat Masuk') {
         dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
+      } else {
+        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
+      // if (type === 'Todo') {
+      //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
+      // } else if (type === 'Disposisi') {
+      // } else if (type === 'Log Scan Surat') {
+      //   dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      // } else
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,

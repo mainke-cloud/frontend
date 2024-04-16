@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppSidebarContent from '../AppSidebarContent';
-import {
-  listData1,
-  listData2,
-  listData3,
-} from '../../../../../services/dummy/sidebar/listDataSurat';
+import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataDisposisi';
 
 const LetterInDisposisi = (props) => {
   const { isCollapsed } = props;
@@ -18,7 +14,7 @@ const LetterInDisposisi = (props) => {
       tab='Surat Masuk'
       subTab=''
       isAdd={true}
-      isStatus='suratMasuk'
+      isStatus='surat masuk'
     />
   );
 };
