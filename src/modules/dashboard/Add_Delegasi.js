@@ -61,7 +61,7 @@ const Add_Delegasi = () => {
                                                     <Typography>Salies Apriliyanto</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA'}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
                                                         <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
@@ -76,7 +76,7 @@ const Add_Delegasi = () => {
                                                     <Typography>Salies Apriliyanto</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA'}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
                                                         <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginRight: 5}}>
