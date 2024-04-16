@@ -22,6 +22,7 @@ import NotFoundIcon from '../../assets/icon/not_found.svg';
 import searchIcon from '../../assets/icon/search.svg';
 import NosearchIcon from '../../assets/icon/NoSearch.svg';
 import NofoundIcon from '../../assets/icon/NotFound.svg';
+import FilterPopover from './IconButton/FilterPopover';
 
 function SearchPage() {
   const StyledTab = styled(Tab)(({ theme }) => ({
@@ -48,17 +49,32 @@ function SearchPage() {
   }));
 
   const [value, setValue] = React.useState(null);
+  const [openFilter, setOpenFilter] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const handleInputChange = (event) => {
-    if (event.target.value !== '') {
-      setValue('1'); // Set value to the default tab when input is not empty
-    } else {
-      setValue(null); // Set value back to null if input is empty
-    }
+    setValue(event.target.value !== '' ? '1' : null);
   };
+
+  // const handleFilterClick = (event) => {
+  //   setOpenFilter(event.currentTarget);
+  // };
+
+  // const handleCloseFilter = () => {
+  //   setOpenFilter(null);
+  // };
+  // const open_filter = Boolean(openFilter);
+
+  const handleFilterClick = () => {
+    setOpenFilter(!openFilter); // Toggle nilai openFilter
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
+  };
+
   return (
     <>
       <TabContext value={value}>
@@ -144,8 +160,11 @@ function SearchPage() {
                   borderRadius: '100px',
                   lineHeight: '28px',
                 }}
+                onClick={handleFilterClick}
               >
-                Filter <Filter size={16} />
+                Filter 
+                <Filter size={16} />
+                <FilterPopover open={openFilter} onClose={handleCloseFilter} />
               </Box>
             </Grid>
             <TableList />
