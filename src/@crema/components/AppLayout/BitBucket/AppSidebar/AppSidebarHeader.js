@@ -36,6 +36,7 @@ const AppSidebarHeader = (props) => {
   const idtab = useSelector((state) => state.tab.idCounter);
 
   const handleAddTab = (name) => {
+    console.log(name)
     dispatch(addTab(idtab, tabs, name));
   };
   

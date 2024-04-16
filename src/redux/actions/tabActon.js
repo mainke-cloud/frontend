@@ -194,21 +194,15 @@ export const childTab = (id, state, type, data) => {
           favicon: inboxIcon,
           content:
             type === 'Todo' ? (
-              (
               <DetailTodo props={data} />
             ) : type === 'Surat Masuk' ? (
               <SuratMasuk props={data} />
-            )
             ) : type === 'Log Scan Surat' ? (
-              (
               <DetailScanSurat props={data} />
-            )
             ) : type === 'Disposisi' ? (
               <Disposisi props={data} />
             ) : (
-              (
               <div>{id}</div>
-            )
             ),
           active: true,
         };
