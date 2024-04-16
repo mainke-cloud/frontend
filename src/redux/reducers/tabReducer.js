@@ -47,7 +47,12 @@ const tabReducer = (state = initialState, action) => {
       const updatedTabs = state.tabs.map((tab) => {
         if (
           (tab.id === 'todo' && tab.title === action.payload.title) ||
-          (tab.id === 'disposisi'&& tab.title === action.payload.title)
+          (tab.id === 'disposisi' && tab.title === action.payload.title) ||
+          (tab.id === 'perlu tindak lanjut' && tab.title === action.payload.title) ||
+          (tab.id === 'draft' && tab.title === action.payload.title) ||
+          (tab.id === 'lacak proses' && tab.title === action.payload.title) ||
+          (tab.id === 'komposer' && tab.title === action.payload.title) ||
+          (tab.id === 'template' && tab.title === action.payload.title)
         ) {
           return action.payload;
         } else {

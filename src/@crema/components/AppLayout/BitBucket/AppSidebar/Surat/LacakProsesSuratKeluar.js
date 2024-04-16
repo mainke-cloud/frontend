@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AppSidebarContent from '../AppSidebarContent';
 import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataSurat';
 
-const LetterInDisposisi = (props) => {
+const LacakProsesSuratKeluar = (props) => {
     const {isCollapsed} = props;
     const listData = [listData1, listData2, listData3];
 
@@ -12,15 +12,15 @@ const LetterInDisposisi = (props) => {
             isCollapsed={isCollapsed}
             data={listData}
             tab='Surat Keluar'
-            subTab='Perlu Tindak Lanjut'
+            subTab='Pelacakan Surat'
             isAdd={true}
-            isStatus='perlu tindak lanjut'
+            isStatus='lacak proses'
         />
   )
 }
 
-export default LetterInDisposisi;
+export default LacakProsesSuratKeluar;
 
-LetterInDisposisi.propTypes = {
+LacakProsesSuratKeluar.propTypes = {
     isCollapsed: PropTypes.bool,
 }

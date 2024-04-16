@@ -3,6 +3,7 @@ import userReducer from './userReducer';
 import tabReducer from './tabReducer';
 import sidebarReducer from './sidebarReducer';
 import todoListReducer from './todoListReducer';
+import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 export default combineReducers({
   user: userReducer,
@@ -10,4 +11,5 @@ export default combineReducers({
   tab: tabReducer,
   sidebar: sidebarReducer,
   todolist: todoListReducer,
+  surat: suratReducer,
 });

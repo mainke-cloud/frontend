@@ -1,0 +1,101 @@
+import React from 'react';
+import { Box, Typography, Divider, Stack } from '@mui/material';
+import PropTypes from 'prop-types';
+const PdfCardEdit = ({
+  jabatan,
+  nama,
+  divisi,
+  nik,
+  kodeDepartemen,
+  departemen,
+  kantorKota,
+}) => {
+  return (
+    <Box
+      sx={{
+        border: '1px solid #D8D8D8',
+        maxHeight: '1509px',
+        maxWidth: '1121px',
+        padding: '20px',
+      }}
+    >
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Nomor:
+      </Typography>
+      <br />
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Jakarta, 29 Juli 2023
+      </Typography>
+      <br />
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Kepada:
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Dari:
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Lampiran:
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Hal:
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2 }}>
+        Tanggal:
+      </Typography>
+      <br />
+      <br />
+      <Stack direction='row' spacing={2}>
+        <Typography variant='body2'>Isi Surat:</Typography>
+        <Typography variant='body2'>[Konten Surat]</Typography>
+      </Stack>
+      <br />
+      <Typography
+        variant='subtitle1'
+        sx={{ paddingLeft: '75%', mb: 2, pr: 15 }}
+      >
+        {jabatan}
+      </Typography>
+      <br />
+      <br />
+      <br />
+      <Typography
+        variant='subtitle1'
+        sx={{
+          paddingLeft: '75%',
+          fontWeight: 'bold',
+          textDecoration: 'underline',
+        }}
+      >
+        {nama}
+      </Typography>
+      <Typography
+        variant='subtitle1'
+        sx={{
+          paddingLeft: '75%',
+          mb: 2,
+          fontWeight: 'bold',
+          pr: 25,
+        }}
+      >
+        {nik}
+      </Typography>
+      <br />
+      <Typography
+        variant='subtitle1'
+        sx={{ mb: 2, fontWeight: 'bold', textDecoration: 'underline' }}
+      >
+        Tembusan
+      </Typography>
+    </Box>
+  );
+};
+PdfCardEdit.propTypes = {
+  jabatan: PropTypes.string.isRequired,
+  nama: PropTypes.string.isRequired,
+  divisi: PropTypes.string.isRequired,
+  nik: PropTypes.string.isRequired,
+  kodeDepartemen: PropTypes.string.isRequired,
+  departemen: PropTypes.string.isRequired,
+  kantorKota: PropTypes.string.isRequired,
+};
+export default PdfCardEdit;

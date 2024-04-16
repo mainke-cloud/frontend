@@ -26,6 +26,12 @@ import iconSurat from '../../assets/icon/mail.svg';
 import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
+import BelumPilih from 'modules/suratKeluar/BelumPilih';
+import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
+import Draft from 'modules/suratKeluar/draft/Draft';
+import LacakProses from 'modules/suratKeluar/lacakProses/LacakProses';
+import Komposer from 'modules/suratKeluar/komposer/Komposer';
+import Template from 'modules/suratKeluar/template/Template';
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 import SuratKosong from 'modules/suratMasuk/content/suratKosong';
@@ -75,6 +81,16 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Search'
             ? searchIcon
+            : type === 'Perlu Tindak Lanjut'
+            ? inboxIcon
+            : type === 'Lacak Proses'
+            ? inboxIcon
+            : type === 'Draft'
+            ? inboxIcon
+            : type === 'Komposer'
+            ? inboxIcon
+            : type === 'Template'
+            ? inboxIcon
             : '',
 
         content:
@@ -97,7 +113,7 @@ export const addTab = (id, state, type) => {
             <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
-          ) : type === 'Add_Sekretaris' ? (
+          ) : type === 'Add_Sekretaris' ?  (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
@@ -121,6 +137,16 @@ export const addTab = (id, state, type) => {
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
+          ) : type === 'Perlu Tindak Lanjut' ? (
+            <BelumPilih />
+          ) : type === 'Lacak Proses' ? (
+            <BelumPilih />
+          ) : type === 'Draft' ? (
+            <BelumPilih />
+          ) : type === 'Komposer' ? (
+            <BelumPilih />
+          ) : type === 'Template' ? (
+            <BelumPilih />
           ) : (
             ''
           ),
@@ -146,6 +172,11 @@ export const childTab = (id, state, type, data) => {
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi') ||
+        (tab.id === 'perlu tindak lanjut' && type === 'Perlu Tindak Lanjut') ||
+        (tab.id === 'lacak proses' && type === 'Lacak Proses') ||
+        (tab.id === 'draft' && type === 'Draft') ||
+        (tab.id === 'komposer' && type === 'Komposer') ||
+        (tab.id === 'template' && type === 'Template') || 
         (tab.id === 'surat masuk' && type === 'Surat Masuk') ||
         (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
     );
@@ -159,6 +190,16 @@ export const childTab = (id, state, type, data) => {
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
             <Disposisi props={data} />
+          ) : type === 'Perlu Tindak Lanjut' ? (
+            <PerluTindakLanjut props={data} />
+          ) : type === 'Draft' ? (
+            <Draft props={data} />
+          ) : type === 'Lacak Proses' ? (
+            <LacakProses props={data} />
+          ) : type === 'Komposer' ? (
+            <Komposer props={data} />
+          ) : type === 'Template' ? (
+            <Template props={data} />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk props={data} />
           ) : type === 'Log Scan Surat' ? (
@@ -195,14 +236,24 @@ export const childTab = (id, state, type, data) => {
           content:
             type === 'Todo' ? (
               <DetailTodo props={data} />
+            ) : type === 'Disposisi' ? (
+              <Disposisi props={data} />
+            ) : type === 'Perlu Tindak Lanjut' ? (
+              <PerluTindakLanjut props={data} />
+            ) : type === 'Draft' ? (
+              <Draft props={data} />
+            ) : type === 'Lacak Proses' ? (
+              <LacakProses props={data} />
+            ) : type === 'Komposer' ? (
+              <Komposer props={data} />
+            ) : type === 'Template' ? (
+              <Template props={data} />
             ) : type === 'Surat Masuk' ? (
               <SuratMasuk props={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
-            ) : type === 'Disposisi' ? (
-              <Disposisi props={data} />
             ) : (
-              <div>{id}</div>
+              ''
             ),
           active: true,
         };

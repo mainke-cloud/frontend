@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppSidebarContent from '../AppSidebarContent';
-import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataSurat';
+import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataTemplate';
 
-const LetterInDisposisi = (props) => {
+const Template = (props) => {
     const {isCollapsed} = props;
     const listData = [listData1, listData2, listData3];
 
@@ -12,15 +12,15 @@ const LetterInDisposisi = (props) => {
             isCollapsed={isCollapsed}
             data={listData}
             tab='Surat Keluar'
-            subTab='Perlu Tindak Lanjut'
+            subTab='Template Surat'
             isAdd={true}
-            isStatus='perlu tindak lanjut'
+            isStatus='template'
         />
   )
 }
 
-export default LetterInDisposisi;
+export default Template;
 
-LetterInDisposisi.propTypes = {
+Template.propTypes = {
     isCollapsed: PropTypes.bool,
 }

@@ -19,7 +19,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '09:00, 23 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Sekretaris',
     },
     {
@@ -96,7 +96,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '15:45, 24 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Read',
     },
   ];
@@ -109,7 +109,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '10:30, 22 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Read',
     },
     {
@@ -120,7 +120,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '09:00, 23 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Sekretaris',
     },
     {
@@ -142,7 +142,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '10:30, 22 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Disposisi',
     },
     {
@@ -153,7 +153,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '09:00, 23 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Unread',
     },
     {
@@ -197,7 +197,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '15:45, 24 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Read',
     },
   ];
@@ -210,7 +210,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '10:30, 22 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Read',
     },
     {
@@ -221,7 +221,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '09:00, 23 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Sekretaris',
     },
     {
@@ -243,7 +243,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '10:30, 22 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Disposisi',
     },
     {
@@ -254,7 +254,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '09:00, 23 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Unread',
     },
     {
@@ -298,7 +298,7 @@
         'Undangan Workshop Pemahaman ISO90012015 Layanan Contact  Center',
       messageCount: 0,
       date: '15:45, 24 Sep',
-      priority: 'Dibatalkan',
+      priority: 'Kembali Ke Komposer',
       status: 'Read',
     },
   ];

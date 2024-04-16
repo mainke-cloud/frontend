@@ -77,7 +77,22 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
-    dispatch(addTab(id, tabs, name));
+
+    if (name === 'Todo') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Disposisi') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Perlu Tindak Lanjut') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Lacak Proses') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Draft') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Komposer') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Template') {
+      dispatch(addTab(id, tabs, name));
+    }
   };
 
   return (
@@ -97,11 +112,7 @@ const BucketMinibarItem = (props) => {
       >
         <Box className='icon-btn'>
           <Box className='icon-img'>
-            <Badge
-              color='primary'
-              badgeContent={badge}
-              max={999}
-            >
+            <Badge color='primary' badgeContent={badge} max={999}>
               <img src={iconMap[icon]} alt={icon} />
             </Badge>
           </Box>

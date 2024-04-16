@@ -62,7 +62,6 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
 
 export default function AppSidebarContent(props) {
   const { isCollapsed, data, tab, subTab, isAdd, isStatus } = props;
-
   const getStatusColor = (status) => {
     switch (status) {
       case 'Sekretaris':
@@ -90,6 +89,16 @@ export default function AppSidebarContent(props) {
         ? dispatch(childTab(item.id, tabs, 'Disposisi', item))
         : isStatus === 'todo'
         ? dispatch(childTab(item.id, tabs, 'Todo', item))
+        : isStatus === 'perlu tindak lanjut'
+        ? dispatch(childTab(item.id, tabs, 'Perlu Tindak Lanjut', item))
+        : isStatus === 'lacak proses'
+        ? dispatch(childTab(item.id, tabs, 'Lacak Proses', item))
+        : isStatus === 'draft'
+        ? dispatch(childTab(item.id, tabs, 'Draft', item))
+        : isStatus === 'komposer'
+        ? dispatch(childTab(item.id, tabs, 'Komposer', item))
+        : isStatus === 'template'
+        ? dispatch(childTab(item.id, tabs, 'Template', item))
         : isStatus === 'scanner'
         ? dispatch(childTab(item.id, tabs, 'Log Scan Surat', item))
         : isStatus === 'suratMasuk'
@@ -157,7 +166,10 @@ export default function AppSidebarContent(props) {
                                 <Grid item xs={10}>
                                   <Grid container>
                                     <Grid item xs={8}>
-                                      <Badge badgeContent={3} color='primary'>
+                                      <Badge
+                                        badgeContent={item.messageCount}
+                                        color='primary'
+                                      >
                                         <Typography
                                           variant='body1'
                                           color='text.primary'
