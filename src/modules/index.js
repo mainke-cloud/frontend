@@ -1,6 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateTab, closeTab, reorderTab } from '../redux/actions/tabActon';
+import {
+  activateTab,
+  closeTab,
+  reorderTab,
+
+} from '../redux/actions/tabActon';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
 import './tab.css';

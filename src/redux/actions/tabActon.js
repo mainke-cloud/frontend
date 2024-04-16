@@ -5,7 +5,6 @@ import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
 import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import Disposisi from 'modules/disposisi';
 import ScanSurat from 'modules/scanSurat/ScanSurat';
 import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
@@ -19,6 +18,9 @@ import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
+import NoDisposisi from 'modules/disposisi/respons/Default';
+import Disposisi from 'modules/disposisi/respons/DetailSurat';
+import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -66,7 +68,9 @@ export const addTab = (id, state, type) => {
           ) : type === 'Profile' ? (
             <Profile />
           ) : type === 'Disposisi' ? (
-            <Disposisi />
+            <NoDisposisi />
+          ) : type === 'BuatDisposisi' ? (
+            <BuatSurat />
           ) : type === 'Todo' ? (
             <Todo />
           ) : type === 'Add_Sekretaris' ? (
@@ -115,10 +119,10 @@ export const childTab = (id, state, type, data) => {
         content:
           type === 'Todo' ? (
             <DetailTodo props={data} />
-          ) : type === 'Disposisi' ? (
-            <div>oke</div>
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
+          ) : type === 'Disposisi' ? (
+            <Disposisi props={data} />
           ) : (
             ''
           ),
@@ -147,7 +151,13 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ? <DetailTodo props={data} /> : type === 'Log Scan Surat' ? <DetailScanSurat props={data} /> : <div>{id}</div>,
+            type === 'Todo' ?
+            <DetailTodo props={data} />
+            : type === 'Disposisi' ?
+            <Disposisi props={data} />
+            : type === 'Log Scan Surat' ? 
+            <DetailScanSurat props={data} />
+            : <div>{id}</div>,
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });
