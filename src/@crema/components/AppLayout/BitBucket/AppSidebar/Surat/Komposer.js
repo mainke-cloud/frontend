@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppSidebarContent from '../AppSidebarContent';
-import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataSurat';
+import { listData1, listData2, listData3 } from '../../../../../services/dummy/sidebar/listDataKomposer';
 
-const LacakProsesSuratKeluar = (props) => {
+const Komposer = (props) => {
     const {isCollapsed} = props;
     const listData = [listData1, listData2, listData3];
 
@@ -12,15 +12,15 @@ const LacakProsesSuratKeluar = (props) => {
             isCollapsed={isCollapsed}
             data={listData}
             tab='Surat Keluar'
-            subTab='Pelacakan Surat'
+            subTab='Composer'
             isAdd={true}
-            isStatus='lacak proses'
+            isStatus='komposer'
         />
   )
 }
 
-export default LacakProsesSuratKeluar;
+export default Komposer;
 
-LacakProsesSuratKeluar.propTypes = {
+Komposer.propTypes = {
     isCollapsed: PropTypes.bool,
 }

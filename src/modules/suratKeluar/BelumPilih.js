@@ -1,5 +1,5 @@
 import React from 'react';
-import noPtl from '../../../assets/SuratKeluar/noPtl.svg';
+import noPtl from '../../assets/SuratKeluar/noPtl.svg';
 import { Stack, Typography } from '@mui/material';
 
 const BelumPilih = () => {

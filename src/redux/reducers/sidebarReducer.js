@@ -9,6 +9,9 @@ const initialState = {
     'Draft Scan Surat',
     'Perlu Tindak Lanjut',
     'Lacak Proses',
+    'Draft',
+    'Komposer',
+    'Template',
   ],
   selectedSidebarName: '', // Menambahkan properti baru untuk menyimpan nama sidebar yang dipilih
 };

@@ -16,8 +16,12 @@ import profileIcon from '../../assets/icon/user.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
-import BelumPilih from 'modules/suratKeluar/perluTindakLanjut/BelumPilih';
+import BelumPilih from 'modules/suratKeluar/BelumPilih';
 import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
+import Draft from 'modules/suratKeluar/draft/Draft';
+import LacakProses from 'modules/suratKeluar/lacakProses/LacakProses';
+import Komposer from 'modules/suratKeluar/komposer/Komposer';
+import Template from 'modules/suratKeluar/template/Template';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -47,6 +51,14 @@ export const addTab = (id, state, type) => {
             ? disposisiIcon
             : type === 'Perlu Tindak Lanjut'
             ? inboxIcon
+            : type === 'Lacak Proses'
+            ? inboxIcon
+            : type === 'Draft'
+            ? inboxIcon
+            : type === 'Komposer'
+            ? inboxIcon
+            : type === 'Template'
+            ? inboxIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -70,6 +82,12 @@ export const addTab = (id, state, type) => {
           ) : type === 'Perlu Tindak Lanjut' ? (
             <BelumPilih />
           ) : type === 'Lacak Proses' ? (
+            <BelumPilih />
+          ) : type === 'Draft' ? (
+            <BelumPilih />
+          ) : type === 'Komposer' ? (
+            <BelumPilih />
+          ) : type === 'Template' ? (
             <BelumPilih />
           ) : (
             ''
@@ -96,7 +114,11 @@ export const childTab = (id, state, type, data) => {
       (tab) =>
         (tab.id === 'todo' && type === 'Todo') ||
         (tab.id === 'disposisi' && type === 'Disposisi') ||
-        (tab.id === 'perlu tindak lanjut' && type === 'Perlu Tindak Lanjut'),
+        (tab.id === 'perlu tindak lanjut' && type === 'Perlu Tindak Lanjut') ||
+        (tab.id === 'lacak proses' && type === 'Lacak Proses') ||
+        (tab.id === 'draft' && type === 'Draft') ||
+        (tab.id === 'komposer' && type === 'Komposer') ||
+        (tab.id === 'template' && type === 'Template'),
     );
     if (isExistingTab) {
       const updateTab = {
@@ -109,6 +131,14 @@ export const childTab = (id, state, type, data) => {
             <Disposisi props={data} />
           ) : type === 'Perlu Tindak Lanjut' ? (
             <PerluTindakLanjut props={data} />
+          ) : type === 'Draft' ? (
+            <Draft props={data} />
+          ) : type === 'Lacak Proses' ? (
+            <LacakProses props={data} />
+          ) : type === 'Komposer' ? (
+            <Komposer props={data} />
+          ) : type === 'Template' ? (
+            <Template props={data} />
           ) : (
             ''
           ),
@@ -137,6 +167,14 @@ export const childTab = (id, state, type, data) => {
               <Disposisi props={data} />
             ) : type === 'Perlu Tindak Lanjut' ? (
               <PerluTindakLanjut props={data} />
+            ) : type === 'Draft' ? (
+              <Draft props={data} />
+            ) : type === 'Lacak Proses' ? (
+              <LacakProses props={data} />
+            ) : type === 'Komposer' ? (
+              <Komposer props={data} />
+            ) : type === 'Template' ? (
+              <Template props={data} />
             ) : (
               ''
             ),

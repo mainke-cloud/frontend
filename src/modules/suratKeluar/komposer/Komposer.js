@@ -35,7 +35,8 @@ import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/T
 import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import AlertDialog from '@crema/components/Tabs/SuratKeluar/ModalAlert';
-const PerluTindakLanjut = ({ props }) => {
+import TabContentMailAgenda from '@crema/components/Tabs/SuratKeluar/TabContentMailAgenda';
+const Komposer = ({ props }) => {
   const [value, setValue] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -80,7 +81,7 @@ const PerluTindakLanjut = ({ props }) => {
 
   return (
     <Box backgroundColor='#F7F8F9'>
-      <HeaderBar title='Detail Surat Perlu Tindak Lanjut'>
+      <HeaderBar title='Detail Komposer'>
         {isEdit ? (
           <>
             <HeaderIconButton>
@@ -142,6 +143,7 @@ const PerluTindakLanjut = ({ props }) => {
                       indicatorColor='none'
                       sx={{ minHeight: 0 }}
                     >
+                      <StyledTab label='Mail Agenda' value='6' />
                       <StyledTab label='Info' value='1' />
                       <StyledTab label='Penerima' value='2' />
                       <StyledTab label='Pengirim' value='3' />
@@ -191,6 +193,12 @@ const PerluTindakLanjut = ({ props }) => {
                   >
                     {isEdit ? <TabContentEditLainnya /> : <TabContentLainnya />}
                   </TabPanel>
+                  <TabPanel
+                    value='6'
+                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
+                  >
+                    {isEdit ? '' : <TabContentMailAgenda />}
+                  </TabPanel>
                 </TabContext>
               </Box>
             </Grid>
@@ -223,11 +231,11 @@ const PerluTindakLanjut = ({ props }) => {
   );
 };
 
-PerluTindakLanjut.propTypes = {
+Komposer.propTypes = {
   props: PropTypes.shape({}),
   avatarSrc: PropTypes.string,
   date: PropTypes.string,
   priority: PropTypes.string,
   primary: PropTypes.string,
 };
-export default PerluTindakLanjut;
+export default Komposer;

@@ -14,7 +14,7 @@ const LetterInDisposisi = (props) => {
             tab='Surat Keluar'
             subTab='Perlu Tindak Lanjut'
             isAdd={true}
-            isStatus='surat'
+            isStatus='perlu tindak lanjut'
         />
   )
 }

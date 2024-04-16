@@ -20,6 +20,9 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useSelector } from 'react-redux';
 import PerluTindakLanjutSuratKeluar from './PerluTindakLanjutSuratKeluar';
 import LacakProsesSuratKeluar from './Surat/LacakProsesSuratKeluar';
+import Draft from './Surat/Draft';
+import Komposer from './Surat/Komposer';
+import Template from './Surat/Template';
 
 const AppSidebar = (props) => {
   const {
@@ -52,6 +55,12 @@ const AppSidebar = (props) => {
         return <LetterOutDisposisi isCollapsed={isCollapsed} />;
       case 'Lacak Proses':
         return <LacakProsesSuratKeluar isCollapsed={isCollapsed} />;
+      case 'Draft':
+        return <Draft isCollapsed={isCollapsed} />;
+      case 'Komposer':
+        return <Komposer isCollapsed={isCollapsed} />;
+      case 'Template':
+        return <Template isCollapsed={isCollapsed} />;
       default:
         return <DisposisiSidebar isCollapsed={isCollapsed} />;
     }

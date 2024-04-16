@@ -35,7 +35,7 @@ import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/T
 import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import AlertDialog from '@crema/components/Tabs/SuratKeluar/ModalAlert';
-const PerluTindakLanjut = ({ props }) => {
+const Draft = ({ props }) => {
   const [value, setValue] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -80,7 +80,7 @@ const PerluTindakLanjut = ({ props }) => {
 
   return (
     <Box backgroundColor='#F7F8F9'>
-      <HeaderBar title='Detail Surat Perlu Tindak Lanjut'>
+      <HeaderBar title='Detail Draft'>
         {isEdit ? (
           <>
             <HeaderIconButton>
@@ -223,11 +223,11 @@ const PerluTindakLanjut = ({ props }) => {
   );
 };
 
-PerluTindakLanjut.propTypes = {
+Draft.propTypes = {
   props: PropTypes.shape({}),
   avatarSrc: PropTypes.string,
   date: PropTypes.string,
   priority: PropTypes.string,
   primary: PropTypes.string,
 };
-export default PerluTindakLanjut;
+export default Draft;

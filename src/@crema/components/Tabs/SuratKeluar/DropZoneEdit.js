@@ -5,17 +5,12 @@ import { Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-const DropZone = () => {
+const DropZoneEdit = () => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
-  const [isInputActive, setIsInputActive] = useState(true);
+  const [isInputActive, setIsInputActive] = useState(false);
   const [selectedFileIndex, setSelectedFileIndex] = useState(null);
-  const filesdummy = [
-    { name: 'file1file3.pdf', size: 87654 },
-    { name: 'file2file2.pdf', size: 87654 },
-    { name: 'file3fil2.pdf', size: 87654 },
-    { name: 'file4.pdf', size: 87654 },
-  ];
+
   const onDrop = useCallback((acceptedFiles) => {
     const pdfFiles = acceptedFiles.filter(
       (file) => file.type === 'application/pdf',
@@ -30,12 +25,20 @@ const DropZone = () => {
     }
   }, []);
 
+  const handleEdit = (index) => {
+    setSelectedFileIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setFiles((prevFiles) => prevFiles.filter((file, i) => i !== index));
+    setSelectedFileIndex(null);
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: true,
-    disabled: !isInputActive,
   });
-
+  console.log(files);
   return (
     <Stack
       {...getRootProps()}
@@ -56,7 +59,7 @@ const DropZone = () => {
       {isInputActive && (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container columns={12} spacing={5}>
-            {filesdummy.map((file, index) => (
+            {files.map((file, index) => (
               <Grid item xs={6} sm={6} md={4} lg={3} key={index} sx={{}}>
                 <Stack
                   sx={{
@@ -96,8 +99,15 @@ const DropZone = () => {
                   <Typography fontSize='12px'>
                     {(file.size / (1024 * 1024)).toFixed(2)} MB
                   </Typography>
-                  <Typography fontSize='9px'>Edit</Typography>
-                  <Typography fontSize='9px'>Hapus</Typography>
+                  <Typography fontSize='9px' onClick={() => handleEdit(index)}>
+                    Edit
+                  </Typography>
+                  <Typography
+                    fontSize='9px'
+                    onClick={() => handleDelete(index)}
+                  >
+                    Hapus
+                  </Typography>
                 </Stack>
               </Grid>
             ))}
@@ -108,4 +118,4 @@ const DropZone = () => {
   );
 };
 
-export default DropZone;
+export default DropZoneEdit;

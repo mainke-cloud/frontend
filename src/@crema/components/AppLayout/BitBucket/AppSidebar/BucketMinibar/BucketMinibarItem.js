@@ -86,6 +86,12 @@ const BucketMinibarItem = (props) => {
       dispatch(addTab(id, tabs, name));
     } else if (name === 'Lacak Proses') {
       dispatch(addTab(id, tabs, name));
+    } else if (name === 'Draft') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Komposer') {
+      dispatch(addTab(id, tabs, name));
+    } else if (name === 'Template') {
+      dispatch(addTab(id, tabs, name));
     }
   };
 
@@ -106,11 +112,7 @@ const BucketMinibarItem = (props) => {
       >
         <Box className='icon-btn'>
           <Box className='icon-img'>
-            <Badge
-              color='primary'
-              badgeContent={badge}
-              max={999}
-            >
+            <Badge color='primary' badgeContent={badge} max={999}>
               <img src={iconMap[icon]} alt={icon} />
             </Badge>
           </Box>
