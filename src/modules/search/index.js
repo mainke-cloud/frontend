@@ -9,16 +9,12 @@ import {
   Tab,
 } from '@mui/material';
 import { Fonts } from '@crema/constants/AppEnums';
-import SearchIcon from '@mui/icons-material/Search';
 import TableList from './TableList';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import { Filter } from 'feather-icons-react';
 import { styled } from '@mui/material/styles';
-import SearchPageIcon from '../../assets/icon/searchStart.svg';
-import CirclePageIcon from '../../assets/icon/circle.svg';
-import NotFoundIcon from '../../assets/icon/not_found.svg';
 import searchIcon from '../../assets/icon/search.svg';
 import NosearchIcon from '../../assets/icon/NoSearch.svg';
 import NofoundIcon from '../../assets/icon/NotFound.svg';

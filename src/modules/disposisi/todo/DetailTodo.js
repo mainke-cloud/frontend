@@ -78,7 +78,6 @@ const DetailTodo = ({ props }) => {
     color: 'white',
     borderRadius: '5px',
   }));
-
   const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',

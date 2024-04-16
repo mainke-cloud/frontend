@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Grid, Stack, Typography } from '@mui/material';
-import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import { Table, TableBody, TableContainer} from '@mui/material';
 import CustomRow from '@crema/components/Tabs/Disposisi/TabPanel/CustomRow';
 import PropsTypes from 'prop-types';
 

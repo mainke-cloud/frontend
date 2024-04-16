@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Button, Typography, Stack } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 import SuccessImage from '../../../assets/LoginPage/berhasil.png';
 import { useAuthMethod } from '@crema/hooks/AuthHooks';
 import FooterAuth from './FooterAuth';

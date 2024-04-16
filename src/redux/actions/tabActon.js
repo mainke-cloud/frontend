@@ -17,13 +17,11 @@ import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
-import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
-
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 import SuratKosong from 'modules/suratMasuk/content/suratKosong';
@@ -81,8 +79,8 @@ export const addTab = (id, state, type) => {
             <NoDisposisi />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-            <Disposisi />
-          ) : type === 'Surat Masuk' ? (
+          ) : // <Disposisi />
+          type === 'Surat Masuk' ? (
             <SuratKosong />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
@@ -102,8 +100,7 @@ export const addTab = (id, state, type) => {
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
-          )
-          : (
+          ) : (
             ''
           ),
         active: true,
@@ -145,9 +142,6 @@ export const childTab = (id, state, type, data) => {
             <SuratMasuk props={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
-=========
-            <Disposisi props={data} />
->>>>>>>>> Temporary merge branch 2
           ) : (
             ''
           ),

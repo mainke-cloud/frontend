@@ -22,7 +22,6 @@ import Verifikasi2 from './Verifikasi2';
 import Verifikasi3 from './Verifikasi3';
 import CoofisLogo from '../../../assets/LoginPage/coofislogo.png';
 import ChecklistImage from '../../../assets/LoginPage/check.png';
-import FooterAuth from './FooterAuth';
 import { useDispatch } from 'react-redux';
 import { authLogin } from '../../../redux/actions/loginAction';
 

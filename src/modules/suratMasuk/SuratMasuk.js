@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import HeaderDetail from '@crema/components/HeaderDetail';
-import { Box, Tab, Grid } from '@mui/material';
+import { Box, Tab } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';

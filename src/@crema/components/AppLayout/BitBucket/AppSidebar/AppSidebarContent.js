@@ -90,8 +90,8 @@ export default function AppSidebarContent(props) {
         ? dispatch(childTab(item.id, tabs, 'Disposisi', item))
         : isStatus === 'todo'
         ? dispatch(childTab(item.id, tabs, 'Todo', item))
-    ) : isStatus === 'scanner' ? (
-      dispatch(childTab(item.id, tabs, 'Log Scan Surat', item))
+        : isStatus === 'scanner'
+        ? dispatch(childTab(item.id, tabs, 'Log Scan Surat', item))
         : isStatus === 'suratMasuk'
         ? dispatch(childTab(item.id, tabs, 'Surat Masuk', item))
         : null;
