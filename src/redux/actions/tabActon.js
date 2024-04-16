@@ -13,6 +13,7 @@ import folderIcon from '../../assets/icon/folder.svg';
 import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
+import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
@@ -22,6 +23,7 @@ import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 
+import SearchTab from 'modules/search/index';
 export const addTab = (id, state, type) => {
   return (dispatch) => {
     const isExistingTab = state.some(
@@ -57,6 +59,8 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Buka Surat'
             ? scanIcon
+            : type === 'Search'
+            ? searchIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -85,7 +89,10 @@ export const addTab = (id, state, type) => {
             <ScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
-          ) : (
+          ) : type === 'Search' ? (
+            <SearchTab />
+          )
+          : (
             ''
           ),
         active: true,
