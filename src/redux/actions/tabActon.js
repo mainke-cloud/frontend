@@ -169,7 +169,6 @@ export const addTab = (id, state, type) => {
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
     const isExistingTab = state.find((tab) => {
-      console.log(tab.id);
       switch (type) {
         case 'Todo':
           return tab.id === 'todo';
@@ -193,10 +192,7 @@ export const childTab = (id, state, type, data) => {
           return false;
       }
     });
-
-    console.log(type);
     if (isExistingTab) {
-      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
