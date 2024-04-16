@@ -11,6 +11,10 @@ import PdfVector from '../../assets/vector/PdfVector.svg';
 import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
 
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addTab } from '../../redux/actions/tabActon';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     color: theme.palette.coofis.tertiary[90],
@@ -70,6 +74,9 @@ const DetailScanSurat = ({ props }) => {
   const files = props.file;
 
   const [listType, setListType] = useState(0);
+  const dispatch = useDispatch();
+  const tabs = useSelector((state) => state.tab.tabs);
+  const id = useSelector((state) => state.tab.idCounter);
 
   const handleDetailList = () => {
     setListType(1);
@@ -87,6 +94,10 @@ const DetailScanSurat = ({ props }) => {
       return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
     }
   };
+
+  const handleOpenFile = () => {
+    dispatch(addTab(id, tabs, 'Buka Surat'));
+  }
 
   const DetailScan = () => {
     return (
@@ -212,6 +223,7 @@ const DetailScanSurat = ({ props }) => {
                       backgroundColor: (theme) => theme.palette.gray[300],
                     },
                   }}
+                  onClick={()=>handleOpenFile()}
                 >
                   <Stack margin='16px' alignItems='center' rowGap='8px'>
                     <img
@@ -257,7 +269,7 @@ const DetailScanSurat = ({ props }) => {
                     },
                   }}
                 >
-                  <Stack direction='row' columnGap='12px' alignItems='center'>
+                  <Stack direction='row' columnGap='12px' alignItems='center' onClick={()=>handleOpenFile()}>
                     <img
                       src={PdfVector}
                       alt='Pdf File'

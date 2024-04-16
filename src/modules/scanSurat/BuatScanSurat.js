@@ -77,6 +77,43 @@ const BuatScanSurat = () => {
     setUpload(false);
   };
 
+  const handleDeleteFile = (index) => {
+    const newFiles = [...file];
+    newFiles.splice(index, 1);
+    setFile(newFiles);
+    if (newFiles.length == 0) {
+      setUpload(true);
+    }
+  };
+
+  const [formData, setFormData] = useState({
+    tanggalSurat: null,
+    prioritasSurat: '',
+    sifatSurat: '',
+    dari: '',
+    kepada: '',
+    tembusan: '',
+    noSurat: '',
+    lampiran: '',
+    klasifikasiMasalah: '',
+    subjek: '',
+    keterangan: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleTanggal = (date) => {
+    setFormData({
+      ...formData,
+      tanggalSurat:date
+    })
+  }
   const ScanSurat = () => {
     return (
       <>
@@ -85,40 +122,100 @@ const BuatScanSurat = () => {
             <Stack rowGap='24px'>
               <Grid item xs={6}>
                 <Stack rowGap='24px'>
-                  <LabelInput type='tanggal' name='Tanggal Surat' />
+                  <LabelInput
+                    type='tanggal'
+                    name='tanggalSurat'
+                    label='Tanggal Surat'
+                    value={formData.tanggalSurat}
+                    onChange={handleTanggal}
+                  />
+
                   <LabelInput
                     type='select'
-                    name='Prioritas Surat'
+                    name='prioritasSurat'
+                    label='Prioritas Surat'
                     item={[
                       { value: 'normal', label: 'Normal' },
                       { value: 'segera', label: 'Segera' },
                     ]}
+                    value={formData.prioritasSurat}
+                    onChange={handleInputChange}
                   />
                   <LabelInput
                     type='select'
-                    name='Sifat Surat'
+                    name='sifatSurat'
+                    label='Sifat Surat'
                     item={[
                       { value: 'biasa', label: 'Biasa' },
                       { value: 'rhs', label: 'RHS' },
                       { value: 'rhs-prib', label: 'RHS-PRIB' },
                     ]}
+                    value={formData.sifatSurat}
+                    onChange={handleInputChange}
                   />
                 </Stack>
               </Grid>
-              <LabelInput type='input' name='Dari' important />
-              <LabelInput type='textfield' name='Kepada' important under />
-              <LabelInput type='textfield' name='Tembusan' under />
-              <LabelInput type='input' name='No Surat' important />
-              <Grid item xs={6}>
-                <LabelInput type='input' name='Lampiran' />
-              </Grid>
               <LabelInput
                 type='input'
-                name='Klasifikasi Masalah'
+                name='dari'
+                label='Dari'
+                important
+                value={formData.dari}
+                onChange={handleInputChange}
+              />
+              <LabelInput
+                type='textfield'
+                name='kepada'
+                label='Kepada'
                 important
                 under
+                value={formData.kepada}
+                onChange={handleInputChange}
               />
-              <LabelInput type='input' name='Subjek' important />
+              <LabelInput
+                type='textfield'
+                name='tembusan'
+                label='Tembusan'
+                under
+                value={formData.tembusan}
+                onChange={handleInputChange}
+              />
+              <LabelInput
+                type='input'
+                name='noSurat'
+                label='No Surat'
+                important
+                value={formData.noSurat}
+                onChange={handleInputChange}
+              />
+
+              <Grid item xs={6}>
+                <LabelInput
+                  type='input'
+                  name='lampiran'
+                  label='Lampiran'
+                  value={formData.lampiran}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+
+              <LabelInput
+                type='input'
+                name='klasifikasiMasalah'
+                label='Klasifikasi Masalah'
+                important
+                under
+                value={formData.klasifikasiMasalah}
+                onChange={handleInputChange}
+              />
+              <LabelInput
+                type='input'
+                name='subjek'
+                label='Subjek'
+                important
+                value={formData.subjek}
+                onChange={handleInputChange}
+              />
             </Stack>
           </Grid>
         </Grid>
@@ -142,109 +239,124 @@ const BuatScanSurat = () => {
       <>
         <Grid container columnSpacing={4}>
           <Grid item xs={8}>
-            <LabelInput name='Lampiran' important />
+            <LabelInput label='Lampiran' important />
             <Box position='relative'>
-            <AppScrollbar
-              sx={{
-                height: '330px',
-                width: '100%',
-                position: 'relative',
-                border: '1px dashed #B1B5BA',
-                borderRadius: '10px',
-                overflowY: 'auto',
-              }}
-              scrollToTop={false}
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-            >
-              {upload && (
-                <>
-                  <Stack
-                    rowGap='8px'
-                    justifyContent='center'
-                    alignItems='center'
-                    position='absolute'
-                    top='50%'
-                    left='50%'
-                    sx={{ transform: 'translate(-50%, -50%)' }}
-                  >
-                    <img
-                      src={UploadFile}
-                      alt='Upload File'
-                      style={{ height: '54px' }}
-                    />
-                    <Stack direction='row' columnGap='4px'>
-                      <Typography fontSize='18px'>Tarik File atau </Typography>
-                      <Typography
-                        fontSize='18px'
-                        fontWeight='700'
-                        color='#E42313'
-                        component='label'
-                        sx={{ cursor: 'pointer' }}
-                      >
-                        Cari
-                        <VisuallyHiddenInput
-                          type='file'
-                          multiple
-                          onChange={handleFileSelected}
-                        />
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </>
-              )}
-              <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
+              <AppScrollbar
+                sx={{
+                  height: '330px',
+                  width: '100%',
+                  position: 'relative',
+                  border: '1px dashed #B1B5BA',
+                  borderRadius: '10px',
+                  overflowY: 'auto',
+                }}
+                scrollToTop={false}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
               >
-                {file.map((file, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index} sx={{
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: (theme) => theme.palette.gray[300],
-                    },
-                  }}>
-                    <Stack margin='16px' alignItems='center' rowGap='8px'>
+                {upload && (
+                  <>
+                    <Stack
+                      rowGap='8px'
+                      justifyContent='center'
+                      alignItems='center'
+                      position='absolute'
+                      top='50%'
+                      left='50%'
+                      sx={{ transform: 'translate(-50%, -50%)' }}
+                    >
                       <img
-                        src={PdfVector}
-                        alt='Pdf File'
-                        style={{ height: '75px', width: 'fit-content' }}
+                        src={UploadFile}
+                        alt='Upload File'
+                        style={{ height: '54px' }}
                       />
-                      <Typography
-                        fontSize='12px'
-                        sx={{
-                          maxWidth: '100px',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {file.name}
-                      </Typography>
-                      <Stack
-                        direction='row'
-                        justifyContent='center'
-                        columnGap='16px'
-                      >
-                        <Typography fontSize='8px'>
-                          {bytesConvert(file.size)}
+                      <Stack direction='row' columnGap='4px'>
+                        <Typography fontSize='18px'>
+                          Tarik File atau{' '}
                         </Typography>
-                        <Typography fontSize='8px'>Edit</Typography>
+                        <Typography
+                          fontSize='18px'
+                          fontWeight='700'
+                          color='#E42313'
+                          component='label'
+                          sx={{ cursor: 'pointer' }}
+                        >
+                          Cari
+                          <VisuallyHiddenInput
+                            type='file'
+                            multiple
+                            onChange={handleFileSelected}
+                          />
+                        </Typography>
                       </Stack>
                     </Stack>
-                  </Grid>
-                ))}
-              </Grid>
-            </AppScrollbar>
+                  </>
+                )}
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 3 }}
+                  columns={{ xs: 4, sm: 8, md: 12 }}
+                >
+                  {file.map((file, index) => (
+                    <Grid
+                      item
+                      xs={2}
+                      sm={4}
+                      md={4}
+                      key={index}
+                      sx={{
+                        transition: 'background-color 0.3s ease',
+                        '&:hover': {
+                          backgroundColor: (theme) => theme.palette.gray[300],
+                        },
+                      }}
+                    >
+                      <Stack margin='16px' alignItems='center' rowGap='8px'>
+                        <img
+                          src={PdfVector}
+                          alt='Pdf File'
+                          style={{ height: '75px', width: 'fit-content' }}
+                        />
+                        <Typography
+                          fontSize='12px'
+                          sx={{
+                            maxWidth: '100px',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                          }}
+                        >
+                          {file.name}
+                        </Typography>
+                        <Stack
+                          direction='row'
+                          justifyContent='center'
+                          columnGap='16px'
+                        >
+                          <Typography fontSize='8px'>
+                            {bytesConvert(file.size)}
+                          </Typography>
+                          <Typography
+                            fontSize='8px'
+                            onClick={() => handleDeleteFile(index)}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            Delete
+                          </Typography>
+                        </Stack>
+                      </Stack>
+                    </Grid>
+                  ))}
+                </Grid>
+              </AppScrollbar>
               {!upload && (
                 <Box
-                position='absolute'
-                bottom='0'
-                width='100%'
-                zIndex='1'
-                justifyContent='end'
-                display='flex'
+                  position='absolute'
+                  bottom='0'
+                  width='100%'
+                  zIndex='1'
+                  justifyContent='end'
+                  display='flex'
                 >
                   <Buttons
                     variant='contained'
@@ -269,12 +381,13 @@ const BuatScanSurat = () => {
               border='1px solid #D8D8D8'
               borderRadius='10px'
             >
-              <LabelInput name='Keterangan' important />
-              <TextField
-                multiline
-                fullWidth
-                minRows={6}
-                sx={{ marginTop: '8px' }}
+              <LabelInput
+                type='textfield'
+                name='keterangan'
+                label='keterangan'
+                important
+                value={formData.keterangan}
+                onChange={handleInputChange}
               />
             </Box>
           </Grid>
@@ -310,11 +423,14 @@ const BuatScanSurat = () => {
   };
 
   return (
-    <Box backgroundColor={(theme)=>theme.palette.coofis.tertiary.bg} minHeight='100vh'>
+    <Box
+      backgroundColor={(theme) => theme.palette.coofis.tertiary.bg}
+      minHeight='100vh'
+    >
       <HeaderDetail nama='Buat Scan Surat' send save />
       <Box sx={{ padding: 8 }}>
         <Box
-          backgroundColor={(theme)=>theme.palette.background.paper}
+          backgroundColor={(theme) => theme.palette.background.paper}
           sx={{ padding: 8, borderRadius: '10px' }}
         >
           <MiniTab

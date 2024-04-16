@@ -7,6 +7,7 @@ import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
 import Disposisi from 'modules/disposisi';
 import ScanSurat from 'modules/scanSurat/ScanSurat';
+import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -52,6 +53,8 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Draft Scan Surat'
             ? scanIcon
+            : type === 'Buka Surat'
+            ? scanIcon
             : '',
         content:
           type === 'Folder' ? (
@@ -76,6 +79,8 @@ export const addTab = (id, state, type) => {
             <BuatScanSurat />
           ) : type === 'Draft Scan Surat' ? (
             <ScanSurat />
+          ) : type === 'Buka Surat' ? (
+            <PDFReader />
           ) : (
             ''
           ),
