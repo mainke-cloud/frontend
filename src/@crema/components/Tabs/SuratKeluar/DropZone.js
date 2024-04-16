@@ -6,10 +6,14 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 const DropZone = () => {
-  const [files, setFiles] = useState([]);
+  const [
+    // files, 
+    setFiles] = useState([]);
   const [error, setError] = useState('');
   const [isInputActive, setIsInputActive] = useState(true);
-  const [selectedFileIndex, setSelectedFileIndex] = useState(null);
+  const [selectedFileIndex, 
+    // setSelectedFileIndex
+  ] = useState(null);
   const filesdummy = [
     { name: 'file1file3.pdf', size: 87654 },
     { name: 'file2file2.pdf', size: 87654 },

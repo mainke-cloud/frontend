@@ -10,7 +10,6 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
 import TableCellWrapper from '../../../../modules/suratKeluar/TableCellWrapper';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 const TabContentInfo = () => {
   const info = [
     {

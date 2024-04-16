@@ -1,14 +1,12 @@
 import React from 'react';
-import { Box, Typography, Divider, Stack } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 const PdfCardEdit = ({
   jabatan,
   nama,
-  divisi,
+
   nik,
-  kodeDepartemen,
-  departemen,
-  kantorKota,
+
 }) => {
   return (
     <Box

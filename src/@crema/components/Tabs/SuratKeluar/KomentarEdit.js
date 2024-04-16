@@ -1,34 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
-  Tab,
   Box,
-  Grid,
   Button,
   Divider,
-  IconButton,
   InputBase,
-  Chip,
 } from '@mui/material';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import TextField from '@mui/material/TextField';
 import { MessageSquare, Paperclip } from 'feather-icons-react';
 import { styled } from '@mui/material/styles';
-import Badge from '@mui/material/Badge';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import ListKomentar from './ListKomentar';
 const KomentarEdit = () => {
-  const StyledBadge = styled(Badge)(() => ({
-    '& .MuiBadge-badge': {
-      backgroundColor: '#0F6EB5',
-      color: 'white',
-    },
-    '&.angka': {
-      backgroundColor: '#000000',
-    },
-  }));
   const BalasButton = styled(Button)({
     borderRadius: '25px',
     backgroundColor: '#4B4747',

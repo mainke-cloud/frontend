@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography, Divider, Button } from '@mui/material';
+import { Stack, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import AProfile from '../../../../assets/vector/Avatar.png';

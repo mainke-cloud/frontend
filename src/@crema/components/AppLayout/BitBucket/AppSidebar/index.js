@@ -18,7 +18,6 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import { useSelector } from 'react-redux';
-import PerluTindakLanjutSuratKeluar from './PerluTindakLanjutSuratKeluar';
 import LacakProsesSuratKeluar from './Surat/LacakProsesSuratKeluar';
 import Draft from './Surat/Draft';
 import Komposer from './Surat/Komposer';

@@ -8,7 +8,6 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { Check } from 'feather-icons-react';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 const TabContentPenerima = () => {
   const Judul = styled(Typography)({
     fontSize: '14px',

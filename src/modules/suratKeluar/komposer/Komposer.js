@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import {
@@ -36,7 +36,7 @@ import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import AlertDialog from '@crema/components/Tabs/SuratKeluar/ModalAlert';
 import TabContentMailAgenda from '@crema/components/Tabs/SuratKeluar/TabContentMailAgenda';
-const Komposer = ({ props }) => {
+const Komposer = () => {
   const [value, setValue] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',

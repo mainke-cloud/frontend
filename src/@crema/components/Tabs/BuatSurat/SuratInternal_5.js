@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { IconButton, Modal, Stack, TextField, Typography } from '@mui/material';
-import AppScrollbar from '../../AppScrollbar';
+import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Box, Button, Grid, Icon } from '@mui/material';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { CiFileOn } from 'react-icons/ci';
 import PreviewSurat from '@crema/components/PreviewSurat';
@@ -10,7 +8,6 @@ import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 5.png';
 import AddFileImage from '../../../../assets/BuatSurat/addfile.png';
-import { StackedLineChart } from '@mui/icons-material';
 
 const style = {
   position: 'absolute',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import React from 'react';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
-const TableCellWrapper = ({ children, sx, ...props }) => {
+const TableCellWrapper = ({ children, ...props }) => {
   const StyledTableCell = styled(TableCell)(() => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',

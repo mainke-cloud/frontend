@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import AppCard from '@crema/components/AppCard';
@@ -8,7 +8,6 @@ const Mail_Button = ({ bgColor, bgHover, textColor, text, image }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
-  const [Link, setLink] = useState();
 
   const handleClick = () => {
     dispatch(addTab(id, tabs, text));

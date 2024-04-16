@@ -8,7 +8,7 @@ const initialState = {
   kantorKota: '',
 };
 
-const suratReducer = (state = initialState, action) => {
+const suratReducer = (state = initialState) => {
   return state;
 };
 

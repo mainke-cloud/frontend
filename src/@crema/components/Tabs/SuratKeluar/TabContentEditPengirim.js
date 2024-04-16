@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Stack, Typography, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
-import { useDispatch, useSelector } from 'react-redux';
-import { inputFormData } from '../../../../redux/actions/suratAction';
+import { useSelector } from 'react-redux';
+
 const TabContentEditPengirim = () => {
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
@@ -11,7 +11,6 @@ const TabContentEditPengirim = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    
   };
 
   const Judul = styled(Typography)({

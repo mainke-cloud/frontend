@@ -1,14 +1,11 @@
 import React from 'react';
-import { Stack, Typography, Grid, Button } from '@mui/material';
+import { Stack, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
-import AProfile from '../../../../assets/vector/Avatar.png';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import { Check } from 'feather-icons-react';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
+
 const TabContentEditPenerima = () => {
   const Judul = styled(Typography)({
     fontSize: '18px',

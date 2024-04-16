@@ -8,7 +8,6 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { styled } from '@mui/material/styles';
 import DropZone from './DropZone';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 const TabContentLainnya = () => {
   const Judul = styled(Typography)({
     fontSize: '14px',

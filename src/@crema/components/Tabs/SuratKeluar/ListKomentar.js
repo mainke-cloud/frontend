@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Stack,
   Typography,
-  Tab,
   Box,
   Grid,
   Button,
@@ -16,7 +15,6 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import AProfile from '../../../../assets/vector/Avatar.png';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { MessageSquare, File, X } from 'feather-icons-react';

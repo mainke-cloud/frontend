@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
-  Tab,
   Box,
-  Grid,
   Button,
   Divider,
-  IconButton,
   InputBase,
-  Chip,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Badge from '@mui/material/Badge';
-import Avatar from '@mui/material/Avatar';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import { MessageSquare, File, X } from 'feather-icons-react';
 import ListKomentar from './ListKomentar';
 const Komentar = () => {
-  const StyledBadge = styled(Badge)(() => ({
-    '& .MuiBadge-badge': {
-      backgroundColor: '#0F6EB5',
-      color: 'white',
-    },
-    '&.angka': {
-      backgroundColor: '#000000',
-    },
-  }));
+
 
   const BalasButton = styled(Button)({
     borderRadius: '25px',
@@ -47,22 +32,7 @@ const Komentar = () => {
     },
   });
 
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'Tinggi':
-        return ['#E42313', '#FFBDAD'];
-      case 'Sedang':
-        return ['#FFB020', '#FFEFD2'];
-      case 'Dikirimkan':
-        return ['#3366FF', '#D6E0FF'];
-      case 'Disetujui':
-        return ['#52BD94', '#EEF8F4'];
-      default:
-        return ['#C8CCD2', '#C8CCD2'];
-    }
-  };
-  const [showReplyInput, setShowReplyInput] = useState(null);
-  const [showReply, setShowReply] = useState(null);
+
   return (
     <Box
       sx={{
