@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Typography, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
+import TinyMce from './TinyMce';
 const PdfCardEdit = ({
   jabatan,
   nama,
 
   nik,
-
 }) => {
   return (
     <Box
@@ -42,9 +42,10 @@ const PdfCardEdit = ({
       </Typography>
       <br />
       <br />
-      <Stack direction='row' spacing={2}>
+      <Stack spacing={2}>
         <Typography variant='body2'>Isi Surat:</Typography>
-        <Typography variant='body2'>[Konten Surat]</Typography>
+        {/* <Typography variant='body2'>[Konten Surat]</Typography> */}
+        <TinyMce />
       </Stack>
       <br />
       <Typography
