@@ -221,9 +221,11 @@ export const childTab = (id, state, type, data) => {
       };
       if (type === 'Surat Masuk') {
         dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
+      } else if (type === 'Log Scan Surat') {
+        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      }
+      } 
       // if (type === 'Todo') {
       //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
       // } else if (type === 'Disposisi') {

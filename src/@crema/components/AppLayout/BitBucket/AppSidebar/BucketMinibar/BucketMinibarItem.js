@@ -92,6 +92,8 @@ const BucketMinibarItem = (props) => {
       dispatch(addTab(id, tabs, name));
     } else if (name === 'Template') {
       dispatch(addTab(id, tabs, name));
+    } else {
+      dispatch(addTab(id, tabs, name));
     }
   };
 

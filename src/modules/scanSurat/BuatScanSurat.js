@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Stack, Grid, Typography, Button } from '@mui/material';
+import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import HeaderDetail from '@crema/components/HeaderDetail';
@@ -111,9 +111,17 @@ const BuatScanSurat = () => {
   const handleTanggal = (date) => {
     setFormData({
       ...formData,
-      tanggalSurat:date
-    })
-  }
+      tanggalSurat: date,
+    });
+  };
+
+  const [value, setValue] = useState(0);
+
+  const handleTabs = (index) => {
+    console.log('a');
+    setValue(index);
+  };
+
   const ScanSurat = () => {
     return (
       <>
@@ -228,7 +236,9 @@ const BuatScanSurat = () => {
           <Buttons disabled variant='contained'>
             Kembali
           </Buttons>
-          <Buttons variant='contained'>Selanjutnya (Lainnya)</Buttons>
+          <Buttons variant='contained' onClick={() => handleTabs(1)}>
+            Selanjutnya (Lainnya)
+          </Buttons>
         </Stack>
       </>
     );
@@ -415,7 +425,9 @@ const BuatScanSurat = () => {
           justifyContent='center'
           columnGap='16px'
         >
-          <Buttons variant='contained'>Kembali</Buttons>
+          <Buttons variant='contained' onClick={() => handleTabs(0)}>
+            Kembali
+          </Buttons>
           <Buttons variant='contained'>Kirim</Buttons>
         </Stack>
       </>
@@ -438,6 +450,7 @@ const BuatScanSurat = () => {
               { name: 'Scan Surat', content: ScanSurat() },
               { name: 'Lainnya', content: Lainnya() },
             ]}
+            changeValue={value}
           />
         </Box>
       </Box>
