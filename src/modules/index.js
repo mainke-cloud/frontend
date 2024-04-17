@@ -36,7 +36,7 @@ const Page = () => {
           onTabActive={handleTabActive}
           tabs={tabs}
         />
-        <Box>{tabs.find((tab) => tab.active)?.content}</Box>
+        <Box sx={{ paddingTop: '42px' }}>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>
   );
