@@ -35,6 +35,7 @@ import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/T
 import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import AlertDialog from '@crema/components/Tabs/SuratKeluar/ModalAlert';
+import CardtoPdf from '@crema/components/Tabs/SuratKeluar/CobaExportPdf';
 const PerluTindakLanjut = () => {
   const [value, setValue] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -147,6 +148,7 @@ const PerluTindakLanjut = () => {
                       <StyledTab label='Pengirim' value='3' />
                       <StyledTab label='Penyetuju' value='4' />
                       <StyledTab label='Lainnya' value='5' />
+                      <StyledTab label='Cobain' value='6' />
                     </TabList>
                   </Box>
                   <TabPanel
@@ -190,6 +192,12 @@ const PerluTindakLanjut = () => {
                     sx={{ paddingTop: '13px', paddingLeft: '0px' }}
                   >
                     {isEdit ? <TabContentEditLainnya /> : <TabContentLainnya />}
+                  </TabPanel>
+                  <TabPanel
+                    value='6'
+                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
+                  >
+                    <CardtoPdf/>
                   </TabPanel>
                 </TabContext>
               </Box>
