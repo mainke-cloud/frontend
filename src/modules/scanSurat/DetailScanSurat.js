@@ -221,6 +221,7 @@ const DetailScanSurat = ({ props }) => {
                     transition: 'background-color 0.3s ease',
                     '&:hover': {
                       backgroundColor: (theme) => theme.palette.gray[300],
+                      cursor: 'pointer'
                     },
                   }}
                   onClick={()=>handleOpenFile()}
@@ -266,6 +267,7 @@ const DetailScanSurat = ({ props }) => {
                     transition: 'background-color 0.3s ease',
                     '&:hover': {
                       backgroundColor: (theme) => theme.palette.gray[300],
+                      cursor: 'pointer'
                     },
                   }}
                 >

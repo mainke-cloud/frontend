@@ -29,12 +29,16 @@ import TabList from '@mui/lab/TabList';
     },
   }));
 
-const MiniTab = ({tabs}) => {
+const MiniTab = ({tabs, changeValue}) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
+  if (changeValue !== value && changeValue !== undefined) {
+    setValue(changeValue);
+  }
 
   return (
     <TabContext value={value}>
@@ -66,6 +70,7 @@ const MiniTab = ({tabs}) => {
 
 MiniTab.propTypes = {
     tabs:PropTypes.array,
+    changeValue:PropTypes.number,
 };
 
 export default MiniTab;
