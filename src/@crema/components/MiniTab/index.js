@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Tab } from '@mui/material';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
@@ -8,8 +8,8 @@ import TabList from '@mui/lab/TabList';
 
   const StyledTab = styled(Tab)(({ theme }) => ({
     borderRadius: '100px',
-    backgroundColor: '#ffffff',
-    color: '#5C5E61',
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.coofis.tertiary[70],
     indicatorColor: 'none',
     fontSize: '12px',
     textTransform: 'none',
@@ -20,8 +20,8 @@ import TabList from '@mui/lab/TabList';
       display: 'none',
     },
     '&.Mui-selected': {
-      backgroundColor: '#E42313',
-      color: '#ffffff',
+      backgroundColor: theme.palette.coofis.primary.main,
+      color: theme.palette.background.paper,
       fontWeight: theme.typography.fontWeightMedium,
     },
     '&.Mui-focusVisible': {
@@ -29,12 +29,16 @@ import TabList from '@mui/lab/TabList';
     },
   }));
 
-const MiniTab = ({tabs}) => {
-  const [value, setValue] = React.useState(0);
+const MiniTab = ({tabs, changeValue}) => {
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
+  if (changeValue !== value && changeValue !== undefined) {
+    setValue(changeValue);
+  }
 
   return (
     <TabContext value={value}>
@@ -66,6 +70,7 @@ const MiniTab = ({tabs}) => {
 
 MiniTab.propTypes = {
     tabs:PropTypes.array,
+    changeValue:PropTypes.number,
 };
 
 export default MiniTab;

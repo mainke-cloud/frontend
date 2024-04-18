@@ -71,6 +71,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:2,
@@ -80,6 +81,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:3,
@@ -89,6 +91,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:4,
@@ -98,6 +101,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:5,
@@ -107,6 +111,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:6,
@@ -116,6 +121,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:7,
@@ -125,6 +131,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:8,
@@ -134,6 +141,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:9,
@@ -143,6 +151,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
   ];
   const listData2 = [
@@ -154,6 +163,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:11,
@@ -163,6 +173,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:12,
@@ -172,6 +183,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:13,
@@ -181,6 +193,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:14,
@@ -190,6 +203,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:15,
@@ -199,6 +213,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
   ];
   const listData3 = [
@@ -210,6 +225,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '10:30, 22 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:17,
@@ -219,6 +235,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 2,
       date: '09:00, 23 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
     {
       id:18,
@@ -228,6 +245,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
         "Ali Connors — I'll be in your neighborhood doing errands this…",
       messageCount: 14,
       date: '15:45, 24 Sep',
+      file: [{name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}, {name: 'Preview Surat.pdf', size: 12345691}]
     },
   ];
 
@@ -350,7 +368,7 @@ export default function ScannerLogScanDisposisi({ isCollapsed }) {
                                         color='text.primary'
                                       >
                                         {item.date}
-                                      </Typography>
+                                    </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                       <Typography

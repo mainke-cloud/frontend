@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import BitBucketSidebarWrapper from './BitBucketSidebarWrapper';
 import AppSidebarContainer from './AppSidebarContainer';
 import BucketMinibar from './BucketMinibar';
-import DisposisiSidebar from './DisposisiSidebar';
-import MyDisposisiSidebar from './MyDisposisiSidebar';
-import TodoDisposisi from './TodoDisposisi';
-import LetterInDisposisi from './LetterInDisposisi';
-import LetterOutDisposisi from './LetterOutDisposisi';
-import ScannerDrafDisposisi from './ScannerDrafDisposisi';
-import ScannerLogScanDisposisi from './ScannerLogScanDisposisi';
+import DisposisiSidebar from './Disposisi/Respon';
+import MyDisposisiSidebar from './Disposisi/DisposisiSaya';
+import TodoDisposisi from './Disposisi/Todo';
+import LetterInDisposisi from './Surat/LetterInDisposisi';
+import LetterOutDisposisi from './Surat/LetterOutDisposisi';
+import ScannerDrafDisposisi from './ScanSurat/ScannerDrafDisposisi';
+import ScannerLogScanDisposisi from './ScanSurat/ScannerLogScanDisposisi';
 
 import { Typography, Drawer, Hidden, Box } from '@mui/material';
 
@@ -18,6 +18,10 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import { useSelector } from 'react-redux';
+import LacakProsesSuratKeluar from './Surat/LacakProsesSuratKeluar';
+import Draft from './Surat/Draft';
+import Komposer from './Surat/Komposer';
+import Template from './Surat/Template';
 
 const AppSidebar = (props) => {
   const {
@@ -35,21 +39,29 @@ const AppSidebar = (props) => {
   const sideBarDisposisi = () => {
     switch (sidebar) {
       case 'Surat Masuk':
-        return <LetterInDisposisi isCollapsed={props.isCollapsed} />;
+        return <LetterInDisposisi isCollapsed={isCollapsed} />;
       case 'Disposisi':
-        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <DisposisiSidebar isCollapsed={isCollapsed} />;
       case 'Disposisi Saya':
-        return <MyDisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <MyDisposisiSidebar isCollapsed={isCollapsed} />;
       case 'Todo':
-        return <TodoDisposisi isCollapsed={props.isCollapsed} />;
-      case 'Surat Keluar':
-        return <LetterOutDisposisi isCollapsed={props.isCollapsed} />;
+        return <TodoDisposisi isCollapsed={isCollapsed} />;
       case 'Log Scan Surat':
-        return <ScannerLogScanDisposisi isCollapsed={props.isCollapsed} />;
+        return <ScannerLogScanDisposisi isCollapsed={isCollapsed} />;
       case 'Draft Scan Surat':
-        return <ScannerDrafDisposisi isCollapsed={props.isCollapsed} />;
+        return <ScannerDrafDisposisi isCollapsed={isCollapsed} />;
+      case 'Perlu Tindak Lanjut':
+        return <LetterOutDisposisi isCollapsed={isCollapsed} />;
+      case 'Lacak Proses':
+        return <LacakProsesSuratKeluar isCollapsed={isCollapsed} />;
+      case 'Draft':
+        return <Draft isCollapsed={isCollapsed} />;
+      case 'Komposer':
+        return <Komposer isCollapsed={isCollapsed} />;
+      case 'Template':
+        return <Template isCollapsed={isCollapsed} />;
       default:
-        return <DisposisiSidebar isCollapsed={props.isCollapsed} />;
+        return <DisposisiSidebar isCollapsed={isCollapsed} />;
     }
   };
 
