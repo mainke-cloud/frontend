@@ -3,10 +3,6 @@ import { Tab, Box } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { Send, X } from 'feather-icons-react';
-
-import HeaderBar from '../../../@crema/components/Tabs/Disposisi/HeaderBar';
-import HeaderIconButton from '../../../@crema/components/Tabs/Disposisi/HeaderIconButton';
 import CustomDivider from '../../../@crema/components/Tabs/Disposisi/CustomDivider';
 import DisposisiWrapper from './DisposisiWrapper';
 import TabBuatAlamat from './TabPanel/TabBuatAlamat';
@@ -25,17 +21,7 @@ const BuatDisposisi = () => {
   return (
     <DisposisiWrapper>
       <HeaderDetail nama='Buat Disposisi' send />
-      {/* <HeaderBar title='Buat Disposisi'>
-            <HeaderIconButton>
-                <Send />
-            </HeaderIconButton>
-            <HeaderIconButton>
-                <X />
-            </HeaderIconButton>
-        </HeaderBar> */}
-
       <CustomDivider />
-
       <Box sx={{ padding: 8 }}>
         <Box className='disposisi-content-body'>
           <TabContext value={value}>

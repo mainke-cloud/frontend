@@ -1,11 +1,8 @@
 import React from 'react';
-import Folder from 'modules/folder';
 import Keamanan from 'modules/keamanan';
 import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
-import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import ScanSurat from 'modules/scanSurat/ScanSurat';
 import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
@@ -23,7 +20,6 @@ import Surat_Internal from 'modules/buatSurat/SuratInternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
 import iconSurat from '../../assets/icon/mail.svg';
-import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import BelumPilih from 'modules/suratKeluar/BelumPilih';
@@ -34,7 +30,6 @@ import Komposer from 'modules/suratKeluar/komposer/Komposer';
 import Template from 'modules/suratKeluar/template/Template';
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
-import SuratKosong from 'modules/suratMasuk/content/suratKosong';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {

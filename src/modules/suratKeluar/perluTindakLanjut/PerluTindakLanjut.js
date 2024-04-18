@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Box, Grid, Divider } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, Grid, Divider } from '@mui/material';
 import { pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -20,43 +19,17 @@ import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const PerluTindakLanjut = () => {
-  const [value, setValue] = React.useState('1');
+  const [value,
+    //  setValue
+    ] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
   ).toString();
-
-  const StyledTab = styled(Tab)(({ theme }) => ({
-    borderRadius: '100px',
-    backgroundColor: '#ffffff',
-    color: '#5C5E61',
-    indicatorColor: 'none',
-    fontSize: '12px',
-    textTransform: 'none',
-    minHeight: 0,
-    minWidth: 0,
-    padding: '10px 26px',
-    '&.MuiTabs-indicator': {
-      display: 'none',
-    },
-    '&.Mui-selected': {
-      backgroundColor: '#E42313',
-      color: '#ffffff',
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    '&.Mui-focusVisible': {
-      backgroundColor: '#d1eaff',
-    },
-  }));
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const isEdit = useSelector((state) => state.header.isEdit);
-
   return (
     <Box backgroundColor='#F7F8F9'>
       <HeaderDetail nama='Detail Surat Perlu Tindak Lanjut' printer edit />

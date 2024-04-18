@@ -9,10 +9,7 @@ import {
   TableBody,
   Table,
   TableContainer,
-  Button,
   Divider,
-  IconButton,
-  InputBase,
 } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -23,8 +20,7 @@ import AProfile from '../../../assets/vector/Avatar.png';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-
-import { MessageSquare, File, X, Clock } from 'feather-icons-react';
+import { Clock } from 'feather-icons-react';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
 import Komentar from '@crema/components/Tabs/SuratKeluar/Komentar';
@@ -71,16 +67,6 @@ const DetailTodo = ({ props }) => {
     borderRadius: '5px',
   }));
 
-  const StyledKomentar = styled(Typography)(({ theme }) => ({
-    fontSize: '10px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    paddingTop: '2px',
-    paddingBottom: '2px',
-    backgroundColor: theme.palette.success.main,
-    color: 'white',
-    borderRadius: '5px',
-  }));
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',
@@ -100,23 +86,6 @@ const DetailTodo = ({ props }) => {
     '&.medium': {
       fontWeight: 'bold',
       fontSize: 16,
-    },
-  }));
-
-  const KirimButton = styled(Button)(({ theme }) => ({
-    borderRadius: '25px',
-    backgroundColor: theme.palette.coofis.tertiary[30],
-    color: 'white',
-    fontSize: '12px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    padding: '6px 12px',
-    border: '1px solid',
-    lineHeight: 1.5,
-    '&:hover': {
-      backgroundColor: theme.palette.coofis.primary.main,
-      borderColor: theme.palette.coofis.primary.main,
-      boxShadow: 'none',
     },
   }));
 
@@ -179,8 +148,6 @@ const DetailTodo = ({ props }) => {
   };
 
   const [isChecked, setIsChecked] = useState(false);
-  const [showReplyInput, setShowReplyInput] = useState(null);
-  const [showReply, setShowReply] = useState(null);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -406,277 +373,6 @@ const DetailTodo = ({ props }) => {
             </Grid>
             <Grid item xs={4}>
               <Komentar />
-              {/* <Box
-                sx={{
-                  marginTop: '50px',
-                  backgroundColor: (theme) => theme.palette.background.paper,
-                  border: '1px solid #d8d8d8',
-                  borderRadius: '10px',
-                  paddingY: '16px',
-                }}
-              >
-                <Stack rowGap='10px'>
-                  <Typography fontSize='16px' fontWeight='700' paddingX='18px'>
-                    Komentar <span style={{ color: (theme) => theme.palette.coofis.primary.main }}>*</span>
-                  </Typography>
-                  <Divider
-                    sx={{ borderColor: (theme) => theme.palette.coofis.tertiary[50], borderBottomWidth: '2px' }}
-                  />
-              
-                  <AppScrollbar
-                    sx={{
-                      height: '455px',
-                      overflowY: 'auto',
-                      paddingBottom: '10px',
-                    }}
-                    scrollToTop={false}
-                  >
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Stack
-                        key={index}
-                        sx={{ paddingY: '16px', paddingX: '12px' }}
-                      >
-                        <Grid
-                          container
-                          columnSpacing='16px'
-                          alignItems='center'
-                        >
-                          <Grid item xs={2}>
-                            <Stack
-                              justifyContent='space-between'
-                              alignItems='center'
-                            >
-                              <Avatar
-                                sx={{
-                                  marginBottom: '30px',
-                                  marginTop: '-10px',
-                                }}
-                                alt='Profile'
-                                src={AProfile}
-                              />
-                              <StyledBadge
-                                overlap='circular'
-                                anchorOrigin={{
-                                  vertical: 'bottom',
-                                  horizontal: 'right',
-                                }}
-                                badgeContent='1'
-                                classname='angka'
-                              />
-                            </Stack>
-                          </Grid>
-                          <Grid item xs={10}>
-                            <Stack
-                              direction='row'
-                              alignItems='baseline'
-                              justifyContent='space-between'
-                              columnGap='4px'
-                            >
-                              <Typography fontSize='16px' fontWeight='700'>
-                                Yani Dama Putera
-                              </Typography>
-                              <Typography fontSize='12px' color='#8C8F93'>
-                                7200004
-                              </Typography>
-                            </Stack>
-                            <Typography fontSize='12px' color='#8C8F93'>
-                              6 Oktober 2021 - 10:09
-                            </Typography>
-                            <Typography>Mohon Dicek</Typography>
-                            <Stack
-                              direction='row'
-                              justifyContent='space-between'
-                            >
-                              <Stack
-                                direction='row'
-                                columnGap='18px'
-                                alignItems='center'
-                              >
-                                <IconButton
-                                  onClick={() =>
-                                    setShowReply(
-                                      showReply === index ? null : index,
-                                    )
-                                  }
-                                  sx={{ padding: '0px' }}
-                                >
-                                  <Stack
-                                    direction='row'
-                                    columnGap='6px'
-                                    alignItems='center'
-                                  >
-                                    <MessageSquare style={{ width: '16px' }} />
-                                    <Typography>1</Typography>
-                                  </Stack>
-                                </IconButton>
-                                <IconButton
-                                  onClick={() =>
-                                    setShowReplyInput(
-                                      showReplyInput === index ? null : index,
-                                    )
-                                  }
-                                  sx={{ padding: '0px' }}
-                                >
-                                  <Typography>Balas</Typography>
-                                </IconButton>
-                                <IconButton sx={{ padding: '0px' }}>
-                                  <Stack
-                                    direction='row'
-                                    columnGap='6px'
-                                    alignItems='center'
-                                  >
-                                    <File style={{ width: '16px' }} />
-                                    <Typography>2</Typography>
-                                  </Stack>
-                                </IconButton>
-                              </Stack>
-                              <StyledKomentar>Disetujui</StyledKomentar>
-                            </Stack>
-                          </Grid>
-                        </Grid>
-                        {showReply === index && (
-                          <Box
-                            paddingX='8px'
-                            marginTop='8px'
-                            paddingY='12px'
-                            backgroundColor={(theme)=>theme.palette.coofis.tertiary.bg}
-                            border='1px solid #B1B5BA'
-                            borderRadius='4px'
-                          >
-                            <Stack
-                              direction='row'
-                              justifyContent='space-between'
-                              alignItems='center'
-                              paddingBottom='8px'
-                            >
-                              <Typography>Balasan Komentar</Typography>
-                              <IconButton sx={{ padding: '0px' }}>
-                                <X
-                                  onClick={() => setShowReply(null)}
-                                  style={{ width: '16px', height: '16px' }}
-                                />
-                              </IconButton>
-                            </Stack>
-                            <Grid
-                              container
-                              columnSpacing='16px'
-                              alignItems='flex-start'
-                              paddingLeft='16px'
-                            >
-                              <Grid item xs={2}>
-                                <Avatar alt='Profile' src={AProfile} />
-                              </Grid>
-                              <Grid item xs={10}>
-                                <Stack
-                                  direction='row'
-                                  alignItems='baseline'
-                                  justifyContent='space-between'
-                                  columnGap='4px'
-                                >
-                                  <Typography fontSize='14px' fontWeight='700'>
-                                    Yani Dama Putera
-                                  </Typography>
-                                  <Typography fontSize='12px' color='#8C8F93'>
-                                    7200004
-                                  </Typography>
-                                </Stack>
-                                <Typography fontSize='10px' color='#8C8F93'>
-                                  6 Oktober 2021 - 10:09
-                                </Typography>
-                                <Typography fontSize='13px'>
-                                  Mohon Dicek
-                                </Typography>
-                                <Stack
-                                  direction='row'
-                                  columnGap='18px'
-                                  alignItems='center'
-                                >
-                                  <IconButton
-                                    onClick={() =>
-                                      setShowReply(
-                                        showReplyInput === index ? null : index,
-                                      )
-                                    }
-                                    sx={{ padding: '0px' }}
-                                  >
-                                    <Stack
-                                      direction='row'
-                                      columnGap='6px'
-                                      alignItems='center'
-                                    >
-                                      <MessageSquare
-                                        style={{ width: '16px' }}
-                                      />
-                                      <Typography>1</Typography>
-                                    </Stack>
-                                  </IconButton>
-                                  <IconButton
-                                    onClick={() =>
-                                      setShowReplyInput(
-                                        showReplyInput === index ? null : index,
-                                      )
-                                    }
-                                    sx={{ padding: '0px' }}
-                                  >
-                                    <Typography>balas</Typography>
-                                  </IconButton>
-                                </Stack>
-                              </Grid>
-                            </Grid>
-                            <Divider />
-                          </Box>
-                        )}
-                        {showReplyInput === index && (
-                          <Stack
-                            paddingY='8px'
-                            direction='row'
-                            columnGap='16px'
-                            sx={{
-                              marginTop: '8px',
-                              justifyContent: 'space-between',
-                            }}
-                          >
-                            <InputBase
-                              placeholder='Balas Komentar...'
-                              sx={{
-                                width: '100%',
-                                border: '0.5px solid #8C8F93',
-                                borderRadius: '8px',
-                                paddingX: '8px',
-                              }}
-                            />
-                            <KirimButton
-                              onClick={() => setShowReplyInput(null)}
-                            >
-                              Balas
-                            </KirimButton>
-                          </Stack>
-                        )}
-                      </Stack>
-                    ))}
-                  </AppScrollbar>
-                </Stack>
-                <Divider
-                  sx={{ borderColor: (theme) => theme.palette.coofis.tertiary[50], borderBottomWidth: '2px' }}
-                />
-                <Stack
-                  direction='row'
-                  columnGap='16px'
-                  paddingX='16px'
-                  sx={{ marginTop: '8px', justifyContent: 'space-between' }}
-                >
-                  <InputBase
-                    placeholder='Tambahkan Komentar...'
-                    sx={{
-                      width: '100%',
-                      border: '0.5px solid #8C8F93',
-                      borderRadius: '8px',
-                      paddingX: '8px',
-                    }}
-                  />
-                  <KirimButton>Kirim</KirimButton>
-                </Stack>
-              </Box> */}
             </Grid>
             <Grid
               item
