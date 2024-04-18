@@ -44,7 +44,6 @@ export const addTab = (id, state, type) => {
       }
       let tabs = {
         id: type.toLowerCase(),
-        id: type.toLowerCase(),
         title: type,
         favicon:
           type === 'Folder'
@@ -164,7 +163,6 @@ export const childTab = (id, state, type, data) => {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
         content:
-          type === 'Todo' ? (
           type === 'Todo' ? (
             <DetailTodo props={data} />
           ) : type === 'Disposisi' ? (
