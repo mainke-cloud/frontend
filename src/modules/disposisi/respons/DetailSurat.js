@@ -20,7 +20,7 @@ import HeaderDetail from '@crema/components/HeaderDetail';
 const DetailSurat = () => {
   const [value, setValue] = useState('1');
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
