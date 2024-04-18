@@ -94,25 +94,14 @@ export const addTab = (id, state, type) => {
             : '',
 
         content:
-          type === 'Folder' ? (
-            <Folder />
-          ) : type === 'Keamanan' ? (
+          type === 'Keamanan' ? (
             <Keamanan />
           ) : type === 'FAQ' ? (
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
-          ) : type === 'Disposisi' ? (
-            <NoDisposisi />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-          ) : // <Disposisi />
-          type === 'Surat Masuk' ? (
-            <SuratKosong />
-          ) : type === 'BuatDisposisi' ? (
-            <BuatSurat />
-          ) : type === 'Todo' ? (
-            <Todo />
           ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
@@ -123,32 +112,14 @@ export const addTab = (id, state, type) => {
             <Surat_Undangan />
           ) : type === 'Buat Surat Delegasi' ? (
             <Surat_Delegasi />
-          ) : type === 'Add_Sekretaris' ? (
-            <Add_Sekretaris />
-          ) : type === 'Add_Delegasi' ? (
-            <Add_Delegasi />
-          ) : type === 'Log Scan Surat' ? (
-            <ScanSurat />
           ) : type === 'Buat Scan Surat' ? (
             <BuatScanSurat />
-          ) : type === 'Draft Scan Surat' ? (
-            <ScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
-          ) : type === 'Perlu Tindak Lanjut' ? (
-            <BelumPilih />
-          ) : type === 'Lacak Proses' ? (
-            <BelumPilih />
-          ) : type === 'Draft' ? (
-            <BelumPilih />
-          ) : type === 'Komposer' ? (
-            <BelumPilih />
-          ) : type === 'Template' ? (
-            <BelumPilih />
           ) : (
-            ''
+            <BelumPilih />
           ),
         active: true,
       };
@@ -225,7 +196,7 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      } 
+      }
       // if (type === 'Todo') {
       //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
       // } else if (type === 'Disposisi') {

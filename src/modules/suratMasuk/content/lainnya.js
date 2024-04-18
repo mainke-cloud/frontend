@@ -5,98 +5,28 @@ import pdf from '../../../assets/icon/pdf.svg';
 import CustomMoreMenu from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreMenu';
 import CustomMoreItem from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreItem';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import ListFile from '@crema/components/Tabs/ListFile';
+import PropTypes from 'prop-types';
 
-const Lainnya = () => {
+const Lainnya = ({files}) => {
+  console.log(files)
+
   return (
     <Box className='content-styled-box'>
       <Stack rowGap='16px'>
-        <CustomMoreMenu name='Lampiran'>
-          <Box className='content-styled-box' sx={{ height: '182px' }}>
-            <AppScrollbar>
-              <Grid container columnSpacing={'16px'} rowSpacing={'16px'}>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='0.16 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='2.32 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='4.64 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='9.28 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='18.56 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='37.12 MB'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                    size='74.24 MB'
-                  />
-                </Grid>
-              </Grid>
-            </AppScrollbar>
-          </Box>
-        </CustomMoreMenu>
-
-        <CustomMoreMenu name='Referensi'>
-          <Box className='content-styled-box'>
-            <AppScrollbar>
-              <Grid container columnSpacing={'16px'} rowSpacing={'16px'}>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <CustomMoreItem
-                    image={pdf}
-                    name='Penunjukan Satgas Project Enhancem'
-                  />
-                </Grid>
-              </Grid>
-            </AppScrollbar>
-          </Box>
-        </CustomMoreMenu>
+        <ListFile files={files} label='Lampiran'/>
+        <ListFile files={files} label='Refrensi'/>
       </Stack>
     </Box>
   );
 };
-
+Lainnya.propTypes = {
+  props: PropTypes.shape({}),
+  files: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
 export default Lainnya;

@@ -77,24 +77,7 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
-
-    if (name === 'Todo') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Disposisi') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Perlu Tindak Lanjut') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Lacak Proses') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Draft') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Komposer') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Template') {
-      dispatch(addTab(id, tabs, name));
-    } else {
-      dispatch(addTab(id, tabs, name));
-    }
+    dispatch(addTab(id, tabs, name));
   };
 
   return (

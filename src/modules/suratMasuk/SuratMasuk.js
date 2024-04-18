@@ -7,15 +7,16 @@ import TabList from '@mui/lab/TabList';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-
 import AgendaSurat from './content/agendaSurat';
 import { sMasuk } from '../../@crema/services/dummy/content/dataSm';
 import Info from './content/info';
 import { diteruskan } from '@crema/services/dummy/content/dataTerusan';
 import SuratMasukWrapper from './SuratMasukWrapper';
 import Lainnya from './content/lainnya';
+import PropTypes from 'prop-types';
 
-const SuratMasuk = () => {
+const SuratMasuk = ({props}) => {
+  const files = props.file
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -55,7 +56,6 @@ const SuratMasuk = () => {
                 />
                 <Tab className='content-styled-tab' label='Info' value='2' />
                 <Tab className='content-styled-tab' label='Lainnya' value='3' />
-                <Tab className='content-styled-tab' label='Lainnya' value='4' />
               </TabList>
             </Box>
             <TabPanel className='content-styled-panel' value='1'>
@@ -65,10 +65,7 @@ const SuratMasuk = () => {
               <Info data={diteruskan} />
             </TabPanel>
             <TabPanel className='content-styled-panel' value='3'>
-              <Lainnya />
-            </TabPanel>
-            <TabPanel className='content-styled-panel' value='4'>
-              {/* <TabLainnya /> */}
+              <Lainnya files={files}/>
             </TabPanel>
           </TabContext>
 
@@ -87,5 +84,13 @@ const SuratMasuk = () => {
     </SuratMasukWrapper>
   );
 };
-
+SuratMasuk.propTypes = {
+  props: PropTypes.shape({}),
+  file: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
 export default SuratMasuk;

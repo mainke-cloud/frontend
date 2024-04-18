@@ -8,6 +8,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { Check } from 'feather-icons-react';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
+import ListStaff from '../ListStaff';
 const TabContentPenerima = () => {
   const Judul = styled(Typography)({
     fontSize: '14px',
@@ -31,7 +32,14 @@ const TabContentPenerima = () => {
                 padding: '0px',
               }}
             />
-            <AppScrollbar
+            <ListStaff
+              sx={{
+                height: '210px',
+                overflowY: 'auto',
+                padding: '0px 16px 0px 16px',
+              }}
+            />
+            {/* <AppScrollbar
               sx={{
                 height: '200px',
                 overflowY: 'auto',
@@ -73,7 +81,7 @@ const TabContentPenerima = () => {
                   </Stack>
                 </TabWrapper>
               ))}
-            </AppScrollbar>
+            </AppScrollbar> */}
           </Stack>
         </TabWrapper>
         <TabWrapper sx={{ height: '282px' }} onClick={handleClick}>
@@ -86,7 +94,14 @@ const TabContentPenerima = () => {
                 padding: '0px',
               }}
             />
-            <AppScrollbar
+            <ListStaff
+              sx={{
+                height: '210px',
+                overflowY: 'auto',
+                padding: '0px 16px 0px 16px',
+              }}
+            />
+            {/* <AppScrollbar
               sx={{
                 height: '200px',
                 overflowY: 'auto',
@@ -128,7 +143,7 @@ const TabContentPenerima = () => {
                   </Stack>
                 </TabWrapper>
               ))}
-            </AppScrollbar>
+            </AppScrollbar> */}
           </Stack>
         </TabWrapper>
       </Stack>

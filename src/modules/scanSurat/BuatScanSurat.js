@@ -9,6 +9,7 @@ import UploadFile from '../../assets/icon/uploadfile.svg';
 import PdfVector from '../../assets/vector/PdfVector.svg';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import MiniTab from '@crema/components/MiniTab';
+import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -250,7 +251,8 @@ const BuatScanSurat = () => {
         <Grid container columnSpacing={4}>
           <Grid item xs={8}>
             <LabelInput label='Lampiran' important />
-            <Box position='relative'>
+            <DropZoneFile />
+            {/* <Box position='relative'>
               <AppScrollbar
                 sx={{
                   height: '330px',
@@ -382,7 +384,7 @@ const BuatScanSurat = () => {
                   </Buttons>
                 </Box>
               )}
-            </Box>
+            </Box> */}
           </Grid>
           <Grid item xs={4}>
             <Box

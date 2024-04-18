@@ -5,6 +5,7 @@ import sidebarReducer from './sidebarReducer';
 import todoListReducer from './todoListReducer';
 import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
+import headerReducer from './headerReducer';
 export default combineReducers({
   user: userReducer,
   auth: loginReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   sidebar: sidebarReducer,
   todolist: todoListReducer,
   surat: suratReducer,
+  header: headerReducer,
 });

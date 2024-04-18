@@ -8,6 +8,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { Check } from 'feather-icons-react';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
+import ListStaff from '../ListStaff';
 const TabContentPenyetuju = () => {
   const Judul = styled(Typography)({
     fontSize: '14px',
@@ -31,7 +32,13 @@ const TabContentPenyetuju = () => {
                 padding: '0px',
               }}
             />
-            <AppScrollbar
+            <ListStaff
+              sx={{
+                height: '510px',
+                padding: '0px 16px 0px 16px',
+              }}
+            />
+            {/* <AppScrollbar
               sx={{
                 height: '510px',
                 overflowY: 'auto',
@@ -51,6 +58,7 @@ const TabContentPenyetuju = () => {
                     },
                   }}
                 >
+                  
                   <Stack
                     direction='row'
                     alignItems='center'
@@ -73,7 +81,7 @@ const TabContentPenyetuju = () => {
                   </Stack>
                 </TabWrapper>
               ))}
-            </AppScrollbar>
+            </AppScrollbar> */}
           </Stack>
         </TabWrapper>
       </Stack>

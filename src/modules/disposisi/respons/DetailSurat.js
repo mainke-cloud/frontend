@@ -26,6 +26,7 @@ import { addTab } from '../../../redux/actions/tabActon';
 import { diteruskan } from '../../../@crema/services/dummy/content/dataTerusan';
 import { pekerjaan } from '../../../@crema/services/dummy/content/dataPekerjaan';
 import { log } from '../../../@crema/services/dummy/content/dataLog';
+import HeaderDetail from '@crema/components/HeaderDetail';
 
 const DetailSurat = () => {
   const [value, setValue] = useState('1');
@@ -50,7 +51,8 @@ const DetailSurat = () => {
   return (
     <>
       <DisposisiWrapper>
-        <HeaderBar title='Detail Surat'>
+        <HeaderDetail nama='Detail Surat' save send clipboard globe />
+        {/* <HeaderBar title='Detail Surat'>
           <HeaderIconButton>
             <Save />
           </HeaderIconButton>
@@ -66,7 +68,7 @@ const DetailSurat = () => {
           <HeaderIconButton>
             <X />
           </HeaderIconButton>
-        </HeaderBar>
+        </HeaderBar> */}
 
         <CustomDivider />
 

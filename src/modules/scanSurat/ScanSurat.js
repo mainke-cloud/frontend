@@ -13,8 +13,8 @@ const ScanSurat = () => {
       }}
       rowGap={'12px'}
     >
-      <img src={kosong} alt='belum memilih' />
-      <Typography fontSize={'16px'} fontWeight={'600'} >Tidak ada yang dipilih</Typography>
+      {/* <img src={kosong} alt='belum memilih' />
+      <Typography fontSize={'16px'} fontWeight={'600'} >Tidak ada yang dipilih</Typography> */}
     </Stack>
   );
 };

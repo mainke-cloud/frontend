@@ -27,6 +27,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { MessageSquare, File, X, Clock } from 'feather-icons-react';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
+import Komentar from '@crema/components/Tabs/SuratKeluar/Komentar';
 
 const DetailTodo = ({ props }) => {
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -34,7 +35,7 @@ const DetailTodo = ({ props }) => {
     import.meta.url,
   ).toString();
 
-  const StyledBox = styled(Box)(({theme})=>({
+  const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #d8d8d8',
     borderRadius: '10px',
@@ -47,7 +48,7 @@ const DetailTodo = ({ props }) => {
     lineHeight: '20px',
   });
 
-  const StyledBadge = styled(Badge)(({theme}) => ({
+  const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: theme.palette.coofis.secondary.border,
       color: 'white',
@@ -57,18 +58,20 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const StyledStatus = styled(Typography)(({theme}) => ({
+  const StyledStatus = styled(Typography)(({ theme }) => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
     paddingTop: '2px',
     paddingBottom: '2px',
-    backgroundColor: isChecked ? theme.palette.success.main : theme.palette.coofis.tertiary[40],
+    backgroundColor: isChecked
+      ? theme.palette.success.main
+      : theme.palette.coofis.tertiary[40],
     color: 'white',
     borderRadius: '5px',
   }));
 
-  const StyledKomentar = styled(Typography)(({theme}) => ({
+  const StyledKomentar = styled(Typography)(({ theme }) => ({
     fontSize: '10px',
     paddingLeft: '5px',
     paddingRight: '5px',
@@ -78,7 +81,7 @@ const DetailTodo = ({ props }) => {
     color: 'white',
     borderRadius: '5px',
   }));
-  const StyledTableCell = styled(TableCell)(({theme}) => ({
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#EEF0F7',
       color: theme.palette.coofis.tertiary[90],
@@ -100,7 +103,7 @@ const DetailTodo = ({ props }) => {
     },
   }));
 
-  const KirimButton = styled(Button)(({theme})=>({
+  const KirimButton = styled(Button)(({ theme }) => ({
     borderRadius: '25px',
     backgroundColor: theme.palette.coofis.tertiary[30],
     color: 'white',
@@ -153,13 +156,25 @@ const DetailTodo = ({ props }) => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'Tinggi':
-        return [(theme) => theme.palette.coofis.primary.main, (theme) => theme.palette.coofis.primary.bg3];
+        return [
+          (theme) => theme.palette.coofis.primary.main,
+          (theme) => theme.palette.coofis.primary.bg3,
+        ];
       case 'Sedang':
-        return [(theme) => theme.palette.coofis.warning.main, (theme) => theme.palette.coofis.warning.bg1];
+        return [
+          (theme) => theme.palette.coofis.warning.main,
+          (theme) => theme.palette.coofis.warning.bg1,
+        ];
       case 'Rendah':
-        return [(theme) => theme.palette.coofis.secondary.main, (theme) => theme.palette.coofis.success.bg2];
+        return [
+          (theme) => theme.palette.coofis.secondary.main,
+          (theme) => theme.palette.coofis.success.bg2,
+        ];
       default:
-        return [(theme) => theme.palette.coofis.tertiary[40], (theme) => theme.palette.coofis.tertiary[40]];
+        return [
+          (theme) => theme.palette.coofis.tertiary[40],
+          (theme) => theme.palette.coofis.tertiary[40],
+        ];
     }
   };
 
@@ -193,7 +208,8 @@ const DetailTodo = ({ props }) => {
                 <Avatar
                   sx={{
                     border: 2,
-                    borderColor: (theme) => theme.palette.coofis.secondary.border,
+                    borderColor: (theme) =>
+                      theme.palette.coofis.secondary.border,
                     width: 46,
                     height: 46,
                   }}
@@ -374,7 +390,7 @@ const DetailTodo = ({ props }) => {
       <HeaderDetail nama='Detail Todo' send />
       <Box sx={{ padding: 8 }}>
         <Box
-          backgroundColor={(theme)=> theme.palette.background.paper}
+          backgroundColor={(theme) => theme.palette.background.paper}
           sx={{ padding: 8, borderRadius: '10px' }}
         >
           <Grid container>
@@ -389,7 +405,8 @@ const DetailTodo = ({ props }) => {
               </Box>
             </Grid>
             <Grid item xs={4}>
-              <Box
+              <Komentar />
+              {/* <Box
                 sx={{
                   marginTop: '50px',
                   backgroundColor: (theme) => theme.palette.background.paper,
@@ -405,6 +422,7 @@ const DetailTodo = ({ props }) => {
                   <Divider
                     sx={{ borderColor: (theme) => theme.palette.coofis.tertiary[50], borderBottomWidth: '2px' }}
                   />
+              
                   <AppScrollbar
                     sx={{
                       height: '455px',
@@ -658,7 +676,7 @@ const DetailTodo = ({ props }) => {
                   />
                   <KirimButton>Kirim</KirimButton>
                 </Stack>
-              </Box>
+              </Box> */}
             </Grid>
             <Grid
               item
