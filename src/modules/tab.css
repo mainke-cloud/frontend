@@ -9,8 +9,8 @@
   background: #2e3032;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
-  z-index:1;
-  width:-webkit-fill-available;
+  z-index: 1;
+  width: -webkit-fill-available;
 }
 .chrome-tabs * {
   box-sizing: inherit;

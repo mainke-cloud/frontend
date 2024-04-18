@@ -16,21 +16,21 @@ const ControlPanel = (props) => {
   const isFirstPage = pageNumber === 1;
   const isLastPage = pageNumber === numPages;
 
-  const firstPageClass = isFirstPage ? 'disabled' : 'clickable';
-  const lastPageClass = isLastPage ? 'disabled' : 'clickable';
+  // const firstPageClass = isFirstPage ? 'disabled' : 'clickable';
+  // const lastPageClass = isLastPage ? 'disabled' : 'clickable';
 
-  const goToFirstPage = () => {
-    if (!isFirstPage) setPageNumber(1);
-  };
+  // const goToFirstPage = () => {
+  //   if (!isFirstPage) setPageNumber(1);
+  // };
   const goToPreviousPage = () => {
     if (!isFirstPage) setPageNumber(pageNumber - 1);
   };
   const goToNextPage = () => {
     if (!isLastPage) setPageNumber(pageNumber + 1);
   };
-  const goToLastPage = () => {
-    if (!isLastPage) setPageNumber(numPages);
-  };
+  // const goToLastPage = () => {
+  //   if (!isLastPage) setPageNumber(numPages);
+  // };
 
   const onPageChange = (e) => {
     const { value } = e.target;
@@ -40,8 +40,8 @@ const ControlPanel = (props) => {
   const isMinZoom = scale < 0.6;
   const isMaxZoom = scale >= 2.0;
 
-  const zoomOutClass = isMinZoom ? 'disabled' : 'clickable';
-  const zoomInClass = isMaxZoom ? 'disabled' : 'clickable';
+  // const zoomOutClass = isMinZoom ? 'disabled' : 'clickable';
+  // const zoomInClass = isMaxZoom ? 'disabled' : 'clickable';
 
   const zoomOut = () => {
     if (!isMinZoom) setScale(scale - 0.1);

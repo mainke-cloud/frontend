@@ -97,11 +97,7 @@ const BucketMinibarItem = (props) => {
       >
         <Box className='icon-btn'>
           <Box className='icon-img'>
-            <Badge
-              color='primary'
-              badgeContent={badge}
-              max={999}
-            >
+            <Badge color='primary' badgeContent={badge} max={999}>
               <img src={iconMap[icon]} alt={icon} />
             </Badge>
           </Box>
@@ -125,7 +121,7 @@ const BucketMinibarItem = (props) => {
                   <img
                     src={dot}
                     alt='dot'
-                    style={{ width: '10px', height: '10px'}}
+                    style={{ width: '10px', height: '10px' }}
                   />
                   <Typography className='submenu-text'>{item.name}</Typography>
                 </IconButton>

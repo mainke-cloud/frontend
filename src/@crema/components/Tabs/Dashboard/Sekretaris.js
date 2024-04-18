@@ -33,7 +33,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                     <Typography variant='h3'>{JobDesk}</Typography>
                         <Box
                             sx={{
-                              backgroundColor: isActive ? '#A3E6CD' : '#D8DAE5',
+                              backgroundColor: isActive ? '#A3E6CD' : '#BF2600',
                               height: '22px',
                               width: isActive ? '48px' : '77px',
                               borderRadius: 2,
@@ -59,7 +59,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         color: 'black', 
                         padding: 2, 
                         width: '100%', 
-                        maxWidth: 335, 
+                        maxWidth: 600, 
                         borderRadius: 2,
                         cursor: 'pointer',
                         '@media (min-width: 600px)': { 

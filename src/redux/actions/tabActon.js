@@ -1,11 +1,8 @@
 import React from 'react';
-import Folder from 'modules/folder';
 import Keamanan from 'modules/keamanan';
 import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
-import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import ScanSurat from 'modules/scanSurat/ScanSurat';
 import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
@@ -13,14 +10,26 @@ import folderIcon from '../../assets/icon/folder.svg';
 import securityIcon from '../../assets/icon/shield.svg';
 import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
+import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
-import NoDisposisi from 'modules/disposisi/respons/Default';
+import Surat_Internal from 'modules/buatSurat/SuratInternal';
+import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
+import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
+import iconSurat from '../../assets/icon/mail.svg';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
+import BelumPilih from 'modules/suratKeluar/BelumPilih';
+import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
+import Draft from 'modules/suratKeluar/draft/Draft';
+import LacakProses from 'modules/suratKeluar/lacakProses/LacakProses';
+import Komposer from 'modules/suratKeluar/komposer/Komposer';
+import Template from 'modules/suratKeluar/template/Template';
+import SearchTab from 'modules/search/index';
+import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -52,41 +61,60 @@ export const addTab = (id, state, type) => {
             : type === 'Log Scan Surat'
             ? scanIcon
             : type === 'Buat Scan Surat'
-            ? scanIcon
+            ? inboxIcon
+            : type === 'Surat Masuk'
+            ? inboxIcon
             : type === 'Draft Scan Surat'
             ? scanIcon
+            : type === 'Buat Surat Internal'
+            ? iconSurat
+            : type === 'Buat Surat Undangan'
+            ? iconSurat
+            : type === 'Buat Surat Delegasi'
+            ? iconSurat
             : type === 'Buka Surat'
             ? scanIcon
+            : type === 'Search'
+            ? searchIcon
+            : type === 'Perlu Tindak Lanjut'
+            ? inboxIcon
+            : type === 'Lacak Proses'
+            ? inboxIcon
+            : type === 'Draft'
+            ? inboxIcon
+            : type === 'Komposer'
+            ? inboxIcon
+            : type === 'Template'
+            ? inboxIcon
             : '',
+
         content:
-          type === 'Folder' ? (
-            <Folder />
-          ) : type === 'Keamanan' ? (
+          type === 'Keamanan' ? (
             <Keamanan />
           ) : type === 'FAQ' ? (
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
-          ) : type === 'Disposisi' ? (
-            <NoDisposisi />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-          ) : type === 'Todo' ? (
-            <Todo />
           ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
             <Add_Delegasi />
-          ) : type === 'Log Scan Surat' ? (
-            <ScanSurat />
+          ) : type === 'Buat Surat Internal' ? (
+            <Surat_Internal />
+          ) : type === 'Buat Surat Undangan' ? (
+            <Surat_Undangan />
+          ) : type === 'Buat Surat Delegasi' ? (
+            <Surat_Delegasi />
           ) : type === 'Buat Scan Surat' ? (
             <BuatScanSurat />
-          ) : type === 'Draft Scan Surat' ? (
-            <ScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
+          ) : type === 'Search' ? (
+            <SearchTab />
           ) : (
-            ''
+            <BelumPilih />
           ),
         active: true,
       };
@@ -106,12 +134,30 @@ export const addTab = (id, state, type) => {
 
 export const childTab = (id, state, type, data) => {
   return (dispatch) => {
-    const isExistingTab = state.find(
-      (tab) =>
-        (tab.id === 'todo' && type === 'Todo') ||
-        (tab.id === 'disposisi' && type === 'Disposisi') ||
-        (tab.id === 'log scan surat' && type === 'Log Scan Surat'),
-    );
+    const isExistingTab = state.find((tab) => {
+      switch (type) {
+        case 'Todo':
+          return tab.id === 'todo';
+        case 'Disposisi':
+          return tab.id === 'disposisi';
+        case 'Perlu Tindak Lanjut':
+          return tab.id === 'perlu tindak lanjut';
+        case 'Lacak Proses':
+          return tab.id === 'lacak proses';
+        case 'Draft':
+          return tab.id === 'draft';
+        case 'Komposer':
+          return tab.id === 'komposer';
+        case 'Template':
+          return tab.id === 'template';
+        case 'Surat Masuk':
+          return tab.id === 'surat masuk';
+        case 'Log Scan Surat':
+          return tab.id === 'log scan surat';
+        default:
+          return false;
+      }
+    });
     if (isExistingTab) {
       const updateTab = {
         ...isExistingTab,
@@ -119,21 +165,39 @@ export const childTab = (id, state, type, data) => {
         content:
           type === 'Todo' ? (
             <DetailTodo props={data} />
-          ) : type === 'Log Scan Surat' ? (
-            <DetailScanSurat props={data} />
           ) : type === 'Disposisi' ? (
             <Disposisi props={data} />
+          ) : type === 'Perlu Tindak Lanjut' ? (
+            <PerluTindakLanjut props={data} />
+          ) : type === 'Draft' ? (
+            <Draft props={data} />
+          ) : type === 'Lacak Proses' ? (
+            <LacakProses props={data} />
+          ) : type === 'Komposer' ? (
+            <Komposer props={data} />
+          ) : type === 'Template' ? (
+            <Template props={data} />
+          ) : type === 'Surat Masuk' ? (
+            <SuratMasuk props={data} />
+          ) : type === 'Log Scan Surat' ? (
+            <DetailScanSurat props={data} />
           ) : (
             ''
           ),
       };
-      if (type === 'Todo') {
-        dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      } else if (type === 'Disposisi') {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      if (type === 'Surat Masuk') {
+        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
       } else if (type === 'Log Scan Surat') {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      } else {
+        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
+      // if (type === 'Todo') {
+      //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
+      // } else if (type === 'Disposisi') {
+      // } else if (type === 'Log Scan Surat') {
+      //   dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      // } else
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -151,13 +215,27 @@ export const childTab = (id, state, type, data) => {
           title: type,
           favicon: inboxIcon,
           content:
-            type === 'Todo' ?
-            <DetailTodo props={data} />
-            : type === 'Disposisi' ?
-            <Disposisi props={data} />
-            : type === 'Log Scan Surat' ? 
-            <DetailScanSurat props={data} />
-            : <div>{id}</div>,
+            type === 'Todo' ? (
+              <DetailTodo props={data} />
+            ) : type === 'Disposisi' ? (
+              <Disposisi props={data} />
+            ) : type === 'Perlu Tindak Lanjut' ? (
+              <PerluTindakLanjut props={data} />
+            ) : type === 'Draft' ? (
+              <Draft props={data} />
+            ) : type === 'Lacak Proses' ? (
+              <LacakProses props={data} />
+            ) : type === 'Komposer' ? (
+              <Komposer props={data} />
+            ) : type === 'Template' ? (
+              <Template props={data} />
+            ) : type === 'Surat Masuk' ? (
+              <SuratMasuk props={data} />
+            ) : type === 'Log Scan Surat' ? (
+              <DetailScanSurat props={data} />
+            ) : (
+              ''
+            ),
           active: true,
         };
         dispatch({ type: 'ADD_TAB', payload: tabs });

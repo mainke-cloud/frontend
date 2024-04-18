@@ -21,7 +21,7 @@ import FilterPopover from './IconButton/FilterPopover';
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab, childTab } from '../../../../../redux/actions/tabActon';
+import { addTab} from '../../../../../redux/actions/tabActon';
 
 const AppSidebarHeader = (props) => {
   const { tab, subTab, isAdd } = props;
@@ -36,6 +36,7 @@ const AppSidebarHeader = (props) => {
   const idtab = useSelector((state) => state.tab.idCounter);
 
   const handleAddTab = (name) => {
+    console.log(name)
     dispatch(addTab(idtab, tabs, name));
   };
   

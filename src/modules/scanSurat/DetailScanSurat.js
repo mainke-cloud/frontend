@@ -11,9 +11,9 @@ import PdfVector from '../../assets/vector/PdfVector.svg';
 import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabActon';
+import ListFile from '@crema/components/Tabs/ListFile';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
@@ -97,7 +97,7 @@ const DetailScanSurat = ({ props }) => {
 
   const handleOpenFile = () => {
     dispatch(addTab(id, tabs, 'Buka Surat'));
-  }
+  };
 
   const DetailScan = () => {
     return (
@@ -177,121 +177,7 @@ const DetailScanSurat = ({ props }) => {
         borderRadius='10px'
         border='1px solid #E0E0E0'
       >
-        <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          paddingBottom='16px'
-        >
-          <Typography fontSize='16px' fontWeight='700'>
-            Lampiran
-          </Typography>
-          <Stack direction='row' columnGap='24px' alignItems='center'>
-            <Typography color='#0F6EB5'>see more</Typography>
-            <IconButton onClick={handleDetailList}>
-              <Menu />
-            </IconButton>
-            <IconButton onClick={handleImageList}>
-              <IconGrid />
-            </IconButton>
-          </Stack>
-        </Stack>
-        <AppScrollbar
-          sx={{
-            height: '224px',
-            overflowY: 'auto',
-            border: '1px solid #E0E0E0',
-          }}
-          scrollToTop={false}
-        >
-          {listType == 0 ? (
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
-            >
-              {files.map((file, index) => (
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  key={index}
-                  sx={{
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: (theme) => theme.palette.gray[300],
-                      cursor: 'pointer'
-                    },
-                  }}
-                  onClick={()=>handleOpenFile()}
-                >
-                  <Stack margin='16px' alignItems='center' rowGap='8px'>
-                    <img
-                      src={PdfVector}
-                      alt='Pdf File'
-                      style={{ height: '75px', width: 'fit-content' }}
-                    />
-                    <Typography
-                      fontSize='12px'
-                      sx={{
-                        maxWidth: '100px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {file.name}
-                    </Typography>
-                    <Stack
-                      direction='row'
-                      justifyContent='center'
-                      columnGap='16px'
-                    >
-                      <Typography fontSize='8px'>
-                        {bytesConvert(file.size)}
-                      </Typography>
-                      <Typography fontSize='8px'>Edit</Typography>
-                    </Stack>
-                  </Stack>
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            <Stack>
-              {files.map((file, index) => (
-                <StyledBox
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: (theme) => theme.palette.gray[300],
-                      cursor: 'pointer'
-                    },
-                  }}
-                >
-                  <Stack direction='row' columnGap='12px' alignItems='center' onClick={()=>handleOpenFile()}>
-                    <img
-                      src={PdfVector}
-                      alt='Pdf File'
-                      style={{ height: '30px', width: 'fit-content' }}
-                    />
-                    <Stack>
-                      <Typography fontSize='14px'>{file.name}</Typography>
-                      <Stack direction='row' columnGap='16px'>
-                        <Typography fontSize='10px'>
-                          {bytesConvert(file.size)}
-                        </Typography>
-                        <Typography fontSize='10px'>Edit</Typography>
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </StyledBox>
-              ))}
-            </Stack>
-          )}
-        </AppScrollbar>
+        <ListFile files={files} />
       </Box>
     );
   };
