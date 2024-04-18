@@ -75,7 +75,7 @@ const Add_Sekretaris = () => {
 
     return (
         <> {isActive ? 
-            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}} >
+            (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}} >
                 <Stack spacing={5}>
                     <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
                         <Grid container sx={{padding: 5}}>
@@ -113,8 +113,8 @@ const Add_Sekretaris = () => {
                                                         </IconButton>
                                                     </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
-                                                    <Typography variant="h3">Komisaris</Typography>
-                                                    <Typography>Salies Apriliyanto</Typography>
+                                                    <Typography variant="h5">Salies Apriliyanto</Typography>
+                                                    <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
@@ -128,8 +128,8 @@ const Add_Sekretaris = () => {
                                                         </IconButton>
                                                     </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
-                                                    <Typography variant="h3">Komisaris</Typography>
-                                                    <Typography>Salies Apriliyanto</Typography>
+                                                    <Typography variant="h5">Salies Apriliyanto</Typography>
+                                                    <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
@@ -143,8 +143,8 @@ const Add_Sekretaris = () => {
                                                         </IconButton>
                                                     </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
-                                                    <Typography variant="h3">Komisaris</Typography>
-                                                    <Typography>Salies Apriliyanto</Typography>
+                                                    <Typography variant="h5">Salies Apriliyanto</Typography>
+                                                    <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', padding: 1}}>
@@ -250,7 +250,7 @@ const Add_Sekretaris = () => {
                     </Box>
                 </Stack>
             </Box>) : 
-            (<Box sx={{backgroundColor: '#D9DDE3', padding: 5, height: '100vh'}}>
+            (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}}>
                 <Stack spacing={5}>
                     <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
                         <Grid container  sx={{padding: 5}}>
