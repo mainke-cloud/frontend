@@ -286,6 +286,7 @@ const Verifikasi3 = () => {
                       bgcolor: '#656565',
                     },
                   }}
+                  onClick={handleClose}
                 >
                   Jangan Percaya
                 </Button>

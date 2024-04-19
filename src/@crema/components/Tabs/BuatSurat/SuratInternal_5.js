@@ -157,6 +157,7 @@ const SuratInternal_5 = () => {
                           bgcolor: '#5C5E61',
                         },
                       }}
+                      onClick={handleClose}
                     >
                       Tidak
                     </Button>
