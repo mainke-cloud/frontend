@@ -9,7 +9,6 @@ import {
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ArrowBackButton from '@crema/components/ArrowBackButton/ArrowBackButton';
-import { useLocation } from 'react-router-dom';
 import FooterAuth from './FooterAuth';
 
 const style = {
@@ -53,12 +52,10 @@ const Verifikasi3 = () => {
       }
     }
   };
-  const location = useLocation();
-  const valuess = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi4', { state: { valuess } });
+    navigate('/signin/verifikasi4');
   };
 
   const allValuesFilled = values.every((value) => value.length === 1);

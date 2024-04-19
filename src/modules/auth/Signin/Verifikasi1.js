@@ -1,16 +1,14 @@
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FooterAuth from './FooterAuth';
 
 const Verifikasi1 = () => {
-  const location = useLocation();
-  const values = location.state && location.state.values;
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/signin/verifikasi2', { state: { values } });
+    navigate('/signin/verifikasi2');
   };
 
   return (
