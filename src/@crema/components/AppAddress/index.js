@@ -67,19 +67,34 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
   `;
 
   const [selectedRow, setSelectedRow] = useState([]);
+  const [isGridVisible, setIsGridVisible] = useState(false);
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
     const updatedSelectedRow = checked ? data.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
+    setIsGridVisible(checked && updatedSelectedRow.length > 0);
+
+    const selectedItems = checked ? data : [];
+
+    setSelectedData(selectedItems);
   };
 
+  const [selectedData, setSelectedData] = useState([]);
+
   const handleRadioChange = (index) => {
+    let updatedSelectedRow;
     if (selectedRow.includes(index)) {
-      setSelectedRow(selectedRow.filter((item) => item !== index));
+      updatedSelectedRow = selectedRow.filter((item) => item !== index);
     } else {
-      setSelectedRow([...selectedRow, index]);
+      updatedSelectedRow = [...selectedRow, index];
     }
+    setSelectedRow(updatedSelectedRow);
+    setIsGridVisible(updatedSelectedRow.length > 0);
+
+    const selectedItem = data[index];
+
+    setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
   };
 
   const data = [
@@ -184,7 +199,11 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               </TableContainer>
               <Divider />
               <Box
-                sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2 }}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  padding: 2,
+                }}
               >
                 <Button variant='contained' color='primary'>
                   Action 1
@@ -200,38 +219,39 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs={3}>
-          <Box
-            style={{
-              padding: 20,
-              border: '2px solid #000',
-              borderRadius: 8,
-              outline: 'none',
-            }}
-          >
-            <Stack
-              direction='row'
-              justifyContent='space-between'
-              alignItems='center'
+        {isGridVisible && (
+          <Grid item xs={3}>
+            <Box
+              style={{
+                padding: 20,
+                border: '2px solid #000',
+                borderRadius: 8,
+                outline: 'none',
+              }}
             >
-              <Typography variant='h2' id='compose-mail-modal'>
-                Compose Mail
-              </Typography>
-              <Button onClick={onCloseComposeMail}>Close</Button>
-            </Stack>
-            <List>
-              <ListItem>
-                <ListItemText primary='Item 1' />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary='Item 2' />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary='Item 3' />
-              </ListItem>
-            </List>
-          </Box>
-        </Grid>
+              <Stack
+                direction='row'
+                justifyContent='space-between'
+                alignItems='center'
+              >
+                <Typography variant='h2' id='compose-mail-modal'>
+                  Compose Mail
+                </Typography>
+                <Button onClick={onCloseComposeMail}>Close</Button>
+              </Stack>
+              <List>
+                {selectedData.map((item, index) => (
+                  <ListItem key={index}>
+                    <ListItemText
+                      primary={item.column1}
+                      secondary={item.column2}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </Modal>
   );
