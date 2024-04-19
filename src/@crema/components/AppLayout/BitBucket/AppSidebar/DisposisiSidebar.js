@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../../../AppScrollbar';
 import MainSidebar from '../../components/MainSidebar';
-import ComposeMail from '../../../AppAddress'
 import {
   styled,
   Accordion,
@@ -38,12 +37,6 @@ import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
 import { Fonts } from '@crema/constants/AppEnums';
 
-import {
-  Plus,
-  Filter,
-  Search,
-  AlertCircle,
-} from 'feather-icons-react';
 import { Plus, Filter, Search, AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../../../redux/actions/tabActon';
@@ -317,15 +310,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
   const [searchInput, setSearchInput] = React.useState('');
   const [openAdd, setOpenAdd] = React.useState(null);
   const [openFilter, setOpenFilter] = React.useState(null);
-  const [isComposeMail, setComposeMail] = React.useState(false);
-
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
 
   const handleSearchClick = () => {
     setsearchForm(true);
@@ -366,7 +350,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Disposisi', item));
   };
   return (
@@ -446,7 +430,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
                   <Box>
                     <ButtonGroup orientation='vertical'>
                       <Button
-                        onClick={onOpenComposeMail}
+                        // onClick={}
                         startIcon={<img src={SuratIn} />}
                         sx={{
                           border: 'none',
@@ -531,7 +515,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
                             )}`,
                             borderRadius: 0,
                           }}
-                          onClick={() => handleTodo(item)}
                           onClick={() => handleTab(item)}
                         >
                           <Button
@@ -656,10 +639,6 @@ export default function DisposisiSidebar({ isCollapsed }) {
           </div>
         )}
       </AppScrollbar>
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
     </MainSidebar>
   );
 }

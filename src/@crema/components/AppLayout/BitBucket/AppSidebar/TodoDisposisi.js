@@ -312,7 +312,7 @@ export default function TodoDisposisi({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Todo', item));
   };
 
@@ -443,7 +443,6 @@ export default function TodoDisposisi({ isCollapsed }) {
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
-                            onClick={() => handleTodo(item)}
                             onClick={() => handleTab(item)}
                           >
                             <CardContent>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Stack,
   Typography,
-  Tab,
   Box,
   Grid,
   TableRow,
@@ -14,9 +13,6 @@ import {
 } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
@@ -30,8 +26,6 @@ import MiniTab from '@crema/components/MiniTab';
 import Komentar from '@crema/components/Tabs/SuratKeluar/Komentar';
 
 const DetailTodo = ({ props }) => {
-  const [value, setValue] = React.useState('1');
-
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -127,7 +121,7 @@ const DetailTodo = ({ props }) => {
       name: 'Tembusan',
     },
   ];
- 
+
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'Tinggi':
@@ -151,10 +145,6 @@ const DetailTodo = ({ props }) => {
           (theme) => theme.palette.coofis.tertiary[40],
         ];
     }
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -418,4 +408,5 @@ DetailTodo.propTypes = {
   priority: PropTypes.string,
   primary: PropTypes.string,
 };
+
 export default DetailTodo;
