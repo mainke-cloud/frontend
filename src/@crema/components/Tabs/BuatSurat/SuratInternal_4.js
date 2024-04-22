@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import AppScrollbar from '../../AppScrollbar';
 import { Box, Button, Grid, Icon } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -9,6 +9,7 @@ import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 4.png';
+import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 
 const SuratInternal_4 = () => {
   const [showPreview, setShowPreview] = useState(false);
@@ -47,9 +48,22 @@ const SuratInternal_4 = () => {
             }}
           >
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Pemeriksa
-              </Typography>
+              </Link>
+
               <Typography variant='h4' color='red'>
                 *
               </Typography>
@@ -61,19 +75,27 @@ const SuratInternal_4 = () => {
                 rows={4}
                 fullWidth
                 InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+                  endAdornment: <ButtonBuatSurat />,
                 }}
               />
             </AppScrollbar>
 
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Pemohon
-              </Typography>
+              </Link>
               <Typography variant='h4' color='red'>
                 *
               </Typography>
@@ -83,11 +105,7 @@ const SuratInternal_4 = () => {
               id='outlined-multiline-static'
               fullWidth
               InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
+                endAdornment: <ButtonBuatSurat />,
               }}
             />
 

@@ -18,10 +18,22 @@ import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 
-const klarifikasi = [
+const perihal = [
   {
     value: '1',
-    label: 'LB 000 PENELITIAN DAN PENGEMBANGAN',
+    label: '',
+  },
+  {
+    value: '2',
+    label: '',
+  },
+  {
+    value: '3',
+    label: '',
+  },
+  {
+    value: '4',
+    label: '',
   },
 ];
 
@@ -30,12 +42,24 @@ const prioritas = [
     value: '1',
     label: 'Normal',
   },
+  {
+    value: '2',
+    label: 'Segera',
+  },
 ];
 
 const jenisSurat = [
   {
     value: '1',
     label: 'Biasa',
+  },
+  {
+    value: '2',
+    label: 'Rhs',
+  },
+  {
+    value: '3',
+    label: 'Rhs-Prib',
   },
 ];
 
@@ -86,19 +110,20 @@ const SuratInternal_1 = () => {
             >
               Perihal
             </Typography>
+
             <TextField
-              sx={{ marginTop: '8px' }}
-              placeholder={'Perihal Surat'}
-              variant='outlined'
+              id='outlined-select-currency'
+              select
               fullWidth
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
-              }}
-            />
+              defaultValue='1'
+            >
+              {perihal.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+
             <Typography
               variant='h4'
               sx={{
@@ -111,17 +136,21 @@ const SuratInternal_1 = () => {
               Klarifikasi Masalah
             </Typography>
             <TextField
-              id='outlined-select-currency'
-              select
+              sx={{ marginTop: '8px' }}
+              placeholder={'Klarifikasi Masalah'}
+              variant='outlined'
               fullWidth
-              defaultValue='1'
-            >
-              {klarifikasi.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+              InputProps={{
+                readOnly: true,
+
+                endAdornment: (
+                  <IconButton>
+                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
+                  </IconButton>
+                ),
+              }}
+            />
+
             <Typography
               variant='body1'
               sx={{
@@ -158,18 +187,16 @@ const SuratInternal_1 = () => {
                 </MenuItem>
               ))}
             </TextField>
+
             <Typography variant='h4'>Lampiran</Typography>
             <TextField
               sx={{ marginTop: '8px' }}
-              placeholder={'Perihal Surat'}
+              placeholder={'Masukkan jumlah'}
               variant='outlined'
               fullWidth
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
+              type='number'
+              InputLabelProps={{
+                shrink: true,
               }}
             />
             <Stack direction='row' justifyContent='flex-end' spacing={4}>
