@@ -12,7 +12,10 @@ const SuratInternal = () => {
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
       <HeaderDetail nama='Buat Surat' save copy translate />
-      <SuratInternal_4 />
+      {/* <SuratInternal_1 /> */}
+      {/* <SuratInternal_2 /> */}
+      {/* <SuratInternal_3 /> */}
+      {/* <SuratInternal_4 /> */}
       {/* <SuratInternal_5 /> */}
     </Box>
   );
