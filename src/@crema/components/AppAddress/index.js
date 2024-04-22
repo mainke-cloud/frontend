@@ -22,11 +22,15 @@ import {
   TableRow,
   TableBody,
   Checkbox,
-  TableFooter,
+  InputBase,
   Divider,
+  Select,
+  MenuItem,
 } from '@mui/material';
 
-import { X } from 'feather-icons-react';
+import SearchIcon from '@mui/icons-material/Search';
+
+import { X, Trash2, Filter } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
 
@@ -91,11 +95,23 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     }
     setSelectedRow(updatedSelectedRow);
     setIsGridVisible(updatedSelectedRow.length > 0);
-
-    const selectedItem = data[index];
-
-    setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
   };
+
+  // radio di tekan langsung pindah
+  // const handleRadioChange = (index) => {
+  //   let updatedSelectedRow;
+  //   if (selectedRow.includes(index)) {
+  //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
+  //   } else {
+  //     updatedSelectedRow = [...selectedRow, index];
+  //   }
+  //   setSelectedRow(updatedSelectedRow);
+  //   setIsGridVisible(updatedSelectedRow.length > 0);
+
+  //   const selectedItem = data[index];
+
+  //   setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
+  // };
 
   const data = [
     { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
@@ -111,6 +127,24 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
     { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
   ];
+
+  const [movedData, setMovedData] = useState([]);
+
+  const handleMoveData = () => {
+    const selectedData = data.filter((_, index) => selectedRow.includes(index));
+    setMovedData(selectedData);
+  };
+
+  const [selectedOption1, setSelectedOption1] = useState('');
+  const [selectedOption2, setSelectedOption2] = useState('');
+
+  const handleOption1Change = (event) => {
+    setSelectedOption1(event.target.value);
+  };
+
+  const handleOption2Change = (event) => {
+    setSelectedOption2(event.target.value);
+  };
 
   return (
     <Modal
@@ -155,6 +189,63 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               <IconButton onClick={onCloseComposeMail}>
                 <X />
               </IconButton>
+            </Stack>
+            <Stack
+              direction='row'
+              spacing={2}
+              alignItems='center'
+              justifyContent='space-between'
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  border: '0.5px solid grey',
+                  borderRadius: 1,
+                }}
+              >
+                <InputBase
+                  placeholder='Cari Jabatan'
+                  sx={{ flexGrow: 1, padding: '10px' }} 
+                />
+                <IconButton aria-label='search'>
+                  <SearchIcon fontSize='small' />
+                </IconButton>
+              </Box>
+              <Select
+                value={selectedOption1}
+                onChange={handleOption1Change}
+                displayEmpty
+                sx={{
+                  flexGrow: 1,
+                  border: '0.5px solid grey',
+                  borderRadius: 1,
+                }}
+              >
+                <MenuItem value='' disabled>
+                  Pilih opsi 1
+                </MenuItem>
+                <MenuItem value={1}>Opsi 1</MenuItem>
+                <MenuItem value={2}>Opsi 2</MenuItem>
+                <MenuItem value={3}>Opsi 3</MenuItem>
+              </Select>
+              <Select
+                value={selectedOption2}
+                onChange={handleOption2Change}
+                displayEmpty
+                sx={{
+                  flexGrow: 1,
+                  border: '0.5px solid grey',
+                  borderRadius: 1,
+                }}
+              >
+                <MenuItem value='' disabled>
+                  Pilih opsi 2
+                </MenuItem>
+                <MenuItem value={1}>Opsi A</MenuItem>
+                <MenuItem value={2}>Opsi B</MenuItem>
+                <MenuItem value={3}>Opsi C</MenuItem>
+              </Select>
             </Stack>
             <Tabs defaultValue={0}>
               <StyledTabsList>
@@ -212,6 +303,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                   variant='contained'
                   color='secondary'
                   style={{ marginLeft: '10px' }}
+                  onClick={handleMoveData}
                 >
                   Action 2
                 </Button>
@@ -219,7 +311,8 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
             </Paper>
           </Box>
         </Grid>
-        {isGridVisible && (
+        {/* {isGridVisible && ( */}
+        {movedData.length > 0 && (
           <Grid item xs={3}>
             <Box
               style={{
@@ -234,20 +327,30 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                 justifyContent='space-between'
                 alignItems='center'
               >
-                <Typography variant='h2' id='compose-mail-modal'>
-                  Compose Mail
+                <Typography variant='h4' id='compose-mail-modal'>
+                  Pilihan
                 </Typography>
-                <Button onClick={onCloseComposeMail}>Close</Button>
+                <Button onClick={() => setMovedData([])} endIcon={<Trash2 />}>
+                  Hapus Semua
+                </Button>
               </Stack>
               <List>
-                {selectedData.map((item, index) => (
+                {movedData.map((item, index) => (
+                  <ListItem key={index}>
+                    <ListItemText
+                      primary={`${item.column1} - ${item.column2}`}
+                    />
+                  </ListItem>
+                ))}
+                {/* data select dari radio */}
+                {/* {selectedData.map((item, index) => (
                   <ListItem key={index}>
                     <ListItemText
                       primary={item.column1}
                       secondary={item.column2}
                     />
                   </ListItem>
-                ))}
+                ))} */}
               </List>
             </Box>
           </Grid>
