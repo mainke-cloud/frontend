@@ -1,8 +1,20 @@
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import React from 'react';
+import PropTypes from 'prop-types';
+import ComposeMail from '@crema/components/AppAddress';
 
-const ButtonBuatSurat = () => {
+const ButtonBuatSurat = ({ pemeriksa }) => {
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
+
   return (
     <Box
       sx={{
@@ -13,11 +25,24 @@ const ButtonBuatSurat = () => {
         bottom: '6%',
       }}
     >
-      <IconButton>
-        <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-      </IconButton>
+      {pemeriksa && (
+        <IconButton>
+          <AddCircleOutlineRoundedIcon
+            onClick={onOpenComposeMail}
+            sx={{ color: 'black' }}
+          />
+        </IconButton>
+      )}
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
     </Box>
   );
+};
+
+ButtonBuatSurat.propTypes = {
+  pemeriksa: PropTypes.bool,
 };
 
 export default ButtonBuatSurat;
