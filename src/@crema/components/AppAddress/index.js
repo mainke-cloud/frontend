@@ -324,10 +324,13 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               >
                 <Button
                   variant='contained'
-                  color='primary'
+                  // color='primary'
                   sx={{
                     borderRadius: '50px',
                     minWidth: '150px',
+                    border: '2px solid #8F95B2', 
+                    bgcolor: 'transparent',
+                    color: '#8F95B2'
                   }}
                   endIcon={<UserPlus />}
                 >
@@ -341,6 +344,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                   sx={{
                     borderRadius: '50px',
                     minWidth: '150px',
+                    bgcolor: '#52BD94', 
                   }}
                 >
                   Tambahkan
@@ -425,6 +429,18 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                   </ListItem>
                 ))} */}
               </List>
+              <Box sx={{ textAlign: 'center', padding: '20px' }}>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  sx={{
+                    borderRadius: '50px',
+                    minWidth: '200px',
+                  }}
+                >
+                  Konfirmasi
+                </Button>
+              </Box>
             </Box>
           </Grid>
         )}
