@@ -70,22 +70,22 @@ const HeaderDetail = ({
                 <Save style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#A3E6CD'}}
               >
                 <Check style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FFD079' }}
               >
                 <CornerDownLeft style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FFD079'}}
               >
                 <RotateCcw style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FF7452' }}
                 onClick={handleClosed}
               >
                 <X style={{ width: '28px', height: '28px' }} />

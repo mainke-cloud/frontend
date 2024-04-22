@@ -39,49 +39,6 @@ const TabContentPenerima = () => {
                 padding: '0px 16px 0px 16px',
               }}
             />
-            {/* <AppScrollbar
-              sx={{
-                height: '200px',
-                overflowY: 'auto',
-                padding: '0px 16px 0px 16px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 5 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack
-                    direction='row'
-                    alignItems='center'
-                    justifyContent='space-between'
-                  >
-                    <Stack direction='row' columnGap='12px'>
-                      <Avatar alt='Profile' src={AProfile} />
-                      <Stack>
-                        <Typography fontSize='16px' fontWeight='700'>
-                          MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                        </Typography>
-                        <Typography fontSize='12px'>
-                          DODDY HADI RUKMANA, ST/720277
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                    <Stack direction={'row'}>
-                      <Check />
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar> */}
           </Stack>
         </TabWrapper>
         <TabWrapper sx={{ height: '282px' }} onClick={handleClick}>
@@ -101,49 +58,6 @@ const TabContentPenerima = () => {
                 padding: '0px 16px 0px 16px',
               }}
             />
-            {/* <AppScrollbar
-              sx={{
-                height: '200px',
-                overflowY: 'auto',
-                padding: '0px 16px 0px 16px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 5 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease', // Efek transisi untuk perubahan warna
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0', // Warna abu saat dihover
-                    },
-                  }}
-                >
-                  <Stack
-                    direction='row'
-                    alignItems='center'
-                    justifyContent='space-between'
-                  >
-                    <Stack direction='row' columnGap='12px'>
-                      <Avatar alt='Profile' src={AProfile} />
-                      <Stack>
-                        <Typography fontSize='16px' fontWeight='700'>
-                          MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                        </Typography>
-                        <Typography fontSize='12px'>
-                          DODDY HADI RUKMANA, ST/720277
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                    <Stack direction={'row'}>
-                      <Check />
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar> */}
           </Stack>
         </TabWrapper>
       </Stack>

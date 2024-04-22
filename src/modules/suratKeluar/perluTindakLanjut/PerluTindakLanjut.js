@@ -16,20 +16,17 @@ import KomentarEdit from '../../../@crema/components/Tabs/SuratKeluar/KomentarEd
 import TabContentEditPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenyetuju';
 import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditLainnya';
 import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
-import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
 import { useSelector } from 'react-redux';
 
 const PerluTindakLanjut = () => {
-  const [value,
-    //  setValue
-    ] = React.useState('1');
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
   ).toString();
   const isEdit = useSelector((state) => state.header.isEdit);
+  const value = useSelector((state) => state.header.value);
   return (
     <Box backgroundColor='#F7F8F9'>
       <HeaderDetail nama='Detail Surat Perlu Tindak Lanjut' printer edit />
@@ -98,28 +95,16 @@ const PerluTindakLanjut = () => {
               </Box>
             </Grid>
             <Grid item xs={4}>
-              {isEdit && value === '1' ? (
+              {isEdit && value === 0 ? (
                 ''
-              ) : isEdit && (value === '3' || value === '5') ? (
+              ) : isEdit && (value === 2 || value === 4) ? (
                 <KomentarEdit />
               ) : (
                 <Komentar />
               )}
             </Grid>
           </Grid>
-          {isEdit && value !== '1' ? (
-            <PdfCardEdit
-            // jabatan={formData.jabatan}
-            // nama={formData.nama}
-            // divisi={formData.divisi}
-            // nik={formData.nik}
-            // kodeDepartemen={formData.kodeDepartemen}
-            // departemen={formData.departemen}
-            // kantorKota={formData.kantorKota}
-            />
-          ) : (
-            <PdfCard />
-          )}
+          <PdfCard />
         </Box>
       </Box>
     </Box>
@@ -134,3 +119,5 @@ PerluTindakLanjut.propTypes = {
   primary: PropTypes.string,
 };
 export default PerluTindakLanjut;
+
+// import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
