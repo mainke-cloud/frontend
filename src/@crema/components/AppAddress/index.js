@@ -10,6 +10,9 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemAvatar,
+  Avatar,
+  ListItemSecondaryAction,
   Typography,
   Stack,
   IconButton,
@@ -30,9 +33,11 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 
-import { X, Trash2, Filter } from 'feather-icons-react';
+import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
+
+import { data } from '../../services/dummy/content/dataAddress';
 
 const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
   const StyledTabsList = styled(TabsList)(
@@ -44,6 +49,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     align-items: center;
     justify-content: center;
     align-content: space-between;
+    margin-bottom: 30px;
     `,
   );
 
@@ -113,21 +119,6 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
   //   setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
   // };
 
-  const data = [
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-    { column1: 'Data 1 Column 1', column2: 'Data 1 Column 2' },
-    { column1: 'Data 2 Column 1', column2: 'Data 2 Column 2' },
-  ];
-
   const [movedData, setMovedData] = useState([]);
 
   const handleMoveData = () => {
@@ -146,6 +137,13 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     setSelectedOption2(event.target.value);
   };
 
+  const handleRemoveItem = (indexToRemove) => {
+    const updatedMovedData = movedData.filter(
+      (_, index) => index !== indexToRemove,
+    );
+    setMovedData(updatedMovedData);
+  };
+
   return (
     <Modal
       open={isComposeMail}
@@ -161,7 +159,6 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
       <Grid
         container
         sx={{
-          backgroundColor: 'white',
           maxWidth: 1200,
           maxHeight: 800,
           overflow: 'auto',
@@ -173,8 +170,8 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
           <Box
             style={{
               padding: 20,
-              border: '2px solid #000',
-              borderRadius: 8,
+              // border: '2px solid #000',
+              // borderRadius: 8,
               outline: 'none',
             }}
           >
@@ -182,19 +179,29 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               direction='row'
               justifyContent='space-between'
               alignItems='center'
+              marginBottom={5}
             >
-              <Typography variant='h2' id='compose-mail-modal'>
-                Compose Mail
+              <Typography variant='h1' id='compose-mail-modal'>
+                Address Book
               </Typography>
               <IconButton onClick={onCloseComposeMail}>
                 <X />
               </IconButton>
             </Stack>
+            <Tabs defaultValue={0}>
+              <StyledTabsList>
+                <StyledTab value={0}>Jabatan</StyledTab>
+                <StyledTab value={1}>Karyawan</StyledTab>
+                <StyledTab value={2}>Bawahan</StyledTab>
+                <StyledTab value={3}>Personal</StyledTab>
+              </StyledTabsList>
+            </Tabs>
             <Stack
               direction='row'
               spacing={2}
               alignItems='center'
               justifyContent='space-between'
+              marginBottom={5}
             >
               <Box
                 sx={{
@@ -206,7 +213,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               >
                 <InputBase
                   placeholder='Cari Jabatan'
-                  sx={{ flexGrow: 1, padding: '10px' }} 
+                  sx={{ flexGrow: 1, padding: '10px' }}
                 />
                 <IconButton aria-label='search'>
                   <SearchIcon fontSize='small' />
@@ -247,27 +254,30 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                 <MenuItem value={3}>Opsi C</MenuItem>
               </Select>
             </Stack>
-            <Tabs defaultValue={0}>
-              <StyledTabsList>
-                <StyledTab value={0}>Jabatan</StyledTab>
-                <StyledTab value={1}>Karyawan</StyledTab>
-                <StyledTab value={2}>Bawahan</StyledTab>
-                <StyledTab value={3}>Personal</StyledTab>
-              </StyledTabsList>
-            </Tabs>
-            <Box sx={{ marginTop: 2 }}>
-              <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
-            </Box>
+            <Stack
+              direction='row'
+              alignItems='center'
+              justifyContent='space-between'
+              sx={{ marginY: 5 }}
+            >
+              <Box sx={{ marginTop: 2 }}>
+                <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
+              </Box>
+              <Typography variant='body2'>
+                ({data.length} Hasil) Address Book
+              </Typography>
+            </Stack>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
               <TableContainer style={{ maxHeight: 400 }}>
                 <Table stickyHeader aria-label='sticky table'>
                   <TableHead>
                     <TableRow>
                       <TableCell></TableCell>
-                      <TableCell>Column 1</TableCell>
-                      <TableCell>Column 2</TableCell>
-                      <TableCell>Column 1</TableCell>
-                      <TableCell>Column 2</TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>Jabatan</TableCell>
+                      <TableCell>PGS</TableCell>
+                      <TableCell>NIK</TableCell>
+                      <TableCell>Departemen</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -279,10 +289,26 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                             onClick={() => handleRadioChange(index)}
                           />
                         </TableCell>
-                        <TableCell>{row.column1}</TableCell>
-                        <TableCell>{row.column2}</TableCell>
-                        <TableCell>{row.column1}</TableCell>
-                        <TableCell>{row.column2}</TableCell>
+                        <TableCell>
+                          <img
+                            src={row.profil}
+                            alt='Profil'
+                            style={{ width: 50, height: 50 }}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Stack direction='column'>
+                            <Typography variant='subtitle1'>
+                              {row.jabatan}
+                            </Typography>
+                            <Typography variant='caption'>
+                              {row.nama}
+                            </Typography>
+                          </Stack>
+                        </TableCell>
+                        <TableCell>{row.pgs}</TableCell>
+                        <TableCell>{row.nik}</TableCell>
+                        <TableCell>{row.departemen}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -293,19 +319,31 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                 sx={{
                   display: 'flex',
                   justifyContent: 'flex-end',
-                  padding: 2,
+                  padding: 5,
                 }}
               >
-                <Button variant='contained' color='primary'>
-                  Action 1
+                <Button
+                  variant='contained'
+                  color='primary'
+                  sx={{
+                    borderRadius: '50px',
+                    minWidth: '150px',
+                  }}
+                  endIcon={<UserPlus />}
+                >
+                  Tambah Ke Personal
                 </Button>
                 <Button
                   variant='contained'
                   color='secondary'
                   style={{ marginLeft: '10px' }}
                   onClick={handleMoveData}
+                  sx={{
+                    borderRadius: '50px',
+                    minWidth: '150px',
+                  }}
                 >
-                  Action 2
+                  Tambahkan
                 </Button>
               </Box>
             </Paper>
@@ -316,31 +354,66 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
           <Grid item xs={3}>
             <Box
               style={{
-                padding: 20,
-                border: '2px solid #000',
-                borderRadius: 8,
+                // padding: 20,
+                // border: '2px solid #000',
+                // borderRadius: 8,
                 outline: 'none',
+                maxHeight: 800,
+                overflowY: 'auto',
               }}
             >
-              <Stack
-                direction='row'
-                justifyContent='space-between'
-                alignItems='center'
+              <Box
+                sx={{
+                  padding: '20px',
+                  position: 'sticky',
+                  top: 0,
+                  zIndex: 1,
+                  backgroundColor: 'white',
+                }}
               >
-                <Typography variant='h4' id='compose-mail-modal'>
-                  Pilihan
-                </Typography>
-                <Button onClick={() => setMovedData([])} endIcon={<Trash2 />}>
-                  Hapus Semua
-                </Button>
-              </Stack>
+                <Stack
+                  direction='row'
+                  justifyContent='space-between'
+                  alignItems='center'
+                >
+                  <Typography variant='h4' id='compose-mail-modal'>
+                    Pilihan
+                  </Typography>
+                  <Button onClick={() => setMovedData([])} endIcon={<Trash2 />}>
+                    Hapus Semua
+                  </Button>
+                </Stack>
+              </Box>
               <List>
                 {movedData.map((item, index) => (
-                  <ListItem key={index}>
-                    <ListItemText
-                      primary={`${item.column1} - ${item.column2}`}
-                    />
-                  </ListItem>
+                  <div key={index}>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar alt={item.nama} src={item.profil} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <Stack direction='column'>
+                            <Typography variant='subtitle1'>
+                              {item.jabatan}
+                            </Typography>
+                            <Typography variant='caption'>
+                              {item.nama}
+                            </Typography>
+                          </Stack>
+                        }
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge='end'
+                          onClick={() => handleRemoveItem(index)}
+                        >
+                          <XCircle />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    {index !== movedData.length - 1 && <Divider />}
+                  </div>
                 ))}
                 {/* data select dari radio */}
                 {/* {selectedData.map((item, index) => (
