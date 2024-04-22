@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeTab } from '../../../redux/actions/tabActon';
@@ -14,6 +21,9 @@ import {
   Check,
 } from 'feather-icons-react';
 import { Clipboard, Globe } from 'feather-icons-react';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import ShortcutTwoToneIcon from '@mui/icons-material/ShortcutTwoTone';
+import DriveFolderUploadRoundedIcon from '@mui/icons-material/DriveFolderUploadRounded';
 import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
@@ -23,6 +33,7 @@ const HeaderDetail = ({
   send,
   save,
   copy,
+  copy2,
   translate,
   edit,
   printer,
@@ -32,7 +43,11 @@ const HeaderDetail = ({
   check,
   globe,
   clipboard,
+  forward,
   IsEditing,
+  disposisi,
+  batas,
+  folderup,
 }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
@@ -161,11 +176,55 @@ const HeaderDetail = ({
                   <Edit style={{ width: '28px', height: '28px' }} />
                 </IconButton>
               )}
+              {disposisi && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <AutorenewRoundedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
+              {forward && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <ShortcutTwoToneIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
               {printer && (
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Printer style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              )}
+              {batas && (
+                <Box
+                  style={{
+                    height: '48px',
+                    borderLeft: '3px solid #B1B5BA',
+                  }}
+                />
+              )}
+              {copy2 && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <AssignmentOutlinedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
+              {folderup && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <DriveFolderUploadRoundedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
                 </IconButton>
               )}
               <IconButton
@@ -188,6 +247,7 @@ HeaderDetail.propTypes = {
   save: PropTypes.bool,
   send: PropTypes.bool,
   copy: PropTypes.bool,
+  copy2: PropTypes.bool,
   translate: PropTypes.bool,
   edit: PropTypes.bool,
   printer: PropTypes.bool,
@@ -196,7 +256,11 @@ HeaderDetail.propTypes = {
   rotateccw: PropTypes.bool,
   check: PropTypes.bool,
   globe: PropTypes.bool,
+  disposisi: PropTypes.bool,
   clipboard: PropTypes.bool,
+  forward: PropTypes.bool,
+  batas: PropTypes.bool,
+  folderup: PropTypes.bool,
   IsEditing: PropTypes.bool,
 };
 
