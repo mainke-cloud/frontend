@@ -98,50 +98,38 @@ const Add_Sekretaris = () => {
                                     </Stack>
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} sx={{margin: 5}}>
+                        </Grid>
+                    </Box>
+                    <Box>
+
                                 <AppScrollbar>
                                     <Box sx={{overflowY: 'hidden'}}>
                                         <Stack direction='row'>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#D9DDE3', border: '1px solid #B1B5BA'}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Aktif</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Aktif</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Aktif</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Aktif</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Nonaktif</Typography>
-                                                        </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
+                                                    <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Nonaktif</Typography>
+                                                    </Box>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
@@ -159,8 +147,7 @@ const Add_Sekretaris = () => {
                                         </Stack>
                                     </Box>
                                 </AppScrollbar>
-                            </Grid>
-                        </Grid>
+
                     </Box>
                     <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 1, padding: 7}}>
                         <Box sx={{backgroundColor: '#FFEFD2', border: '1px solid #FFB020', height: 40, width: 264,  display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, marginBottom: 5}} >

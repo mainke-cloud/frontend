@@ -170,7 +170,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={3} height={'100%'}>
             <Stack direction='column' spacing={5}>
-              <AppCard2 sx={{ height: '339px', pb: 17 }}>
+              <AppCard2 sx={{ height: '500px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#DFE4F7',
@@ -240,26 +240,27 @@ const Dashboard = () => {
                     backgroundColor: '#DFE4F7',
                     borderTopLeftRadius: 2,
                     borderTopRightRadius: 2,
+                    Height: 300
                   }}
                 >
-                  <Grid item xs={11} sx={{marginTop: 2}}>
+                  <Grid item xs={12} sx={{marginTop: 2}}>
                       <Box 
                           alignItems="center" 
                           justifyContent="center"
                           sx={{ 
-                              backgroundColor: '#FFEFD2', 
+                              backgroundColor: '#2952CC', 
                               color: 'black', 
                               padding: 2, 
-                              width: '100%', 
-                              maxWidth: 600, 
+                              //width: '100%', 
+                              maxWidth: 300, 
                               borderRadius: 2,
                               cursor: 'pointer',
                               '@media (min-width: 600px)': { 
                                   width: 'auto',
                               },
-                              '&:hover': {
-                                  backgroundColor: '#FFDFA6',
-                                }
+                              // '&:hover': {
+                              //     backgroundColor: '#FFDFA6',
+                              //   }
                           }}
                           onClick={() => handleAddTab('Add_Sekretaris')} 
                       >
@@ -336,6 +337,39 @@ const Dashboard = () => {
                     />
                   </Box>
                 </AppScrollbar>
+                <Box sx={{
+                    backgroundColor: '#F9E5CF',
+                    borderTopLeftRadius: 2,
+                    borderTopRightRadius: 2,
+                    Height: 300
+                  }}
+                >
+                  <Grid item xs={12} sx={{marginTop: 2}}>
+                      <Box 
+                          alignItems="center" 
+                          justifyContent="center"
+                          sx={{ 
+                              backgroundColor: '#C45900', 
+                              color: 'black', 
+                              padding: 2, 
+                              // width: '100%', 
+                              maxWidth: 300,
+                              // maxHeight: 100, 
+                              borderRadius: 2,
+                              cursor: 'pointer',
+                              '@media (min-width: 600px)': { 
+                                  width: 'auto',
+                              },
+                              // '&:hover': {
+                              //     backgroundColor: '#FFDFA6',
+                              //   }
+                          }}
+                          onClick={() => handleAddTab('Add_Delegasi')} 
+                      >
+                          <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
+                      </Box>
+                  </Grid>
+                </Box>
               </AppCard2>
             </Stack>
           </Grid>

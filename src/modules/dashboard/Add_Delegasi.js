@@ -6,6 +6,7 @@ import AppScrollbar from '@crema/components/AppScrollbar';
 import { useState } from "react";
 
 import Add from '../../assets/Dashboard/Plus_icon.png'
+import Filter from '../../assets/Dashboard/Filter_icon.png'
 import Warning from '../../assets/Dashboard/Warning_icon_blue.png'
 import Profile from '../../assets/Dashboard/Profile_icon.png'
 import Trash from '../../assets/Dashboard/Trash_icon.png'
@@ -34,28 +35,34 @@ const Add_Delegasi = () => {
                             <Grid item xs={12} sx={{margin: 5, paddingX: 2, marginBottom: 10}}>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <Typography variant="h2">Delegasi Saya</Typography>
-                                    <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
-                                        <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
-                                            <Typography sx={{color: '#FFFFFF'}}>Tambah Delegasi Baru</Typography>
-                                            <img src={Add} style={{width: 20, height: 20}}/>
-                                        </Stack>
-                                    </Box>
+                                    <Stack direction="row" alignItems="center" spacing={3}>
+                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}> 
+                                            <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                                <Typography sx={{color: '#E42313'}}>Urutkan</Typography>
+                                                <img src={Filter} style={{height: 20, width: 20}}/>
+                                            </Stack>
+                                        </Box>
+                                        <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
+                                            <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                                <Typography sx={{color: '#FFFFFF'}}>Tambah Delegasi Baru</Typography>
+                                                <img src={Add} style={{width: 20, height: 20}}/>
+                                            </Stack>
+                                        </Box>
+                                    </Stack>
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} sx={{margin: 5}}>
+                        </Grid>
+                    </Box>
+                    <Box>
+
                                 <AppScrollbar>
                                     <Box sx={{overflowY: 'hidden'}}>
                                         <Stack direction='row'>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#D9DDE3', border: '1px solid #B1B5BA'}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>17 Des</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>17 Des</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h3">Komisaris</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
@@ -63,14 +70,9 @@ const Add_Delegasi = () => {
                                             </Box>
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>15 Des</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>15 Des</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h3">Komisaris</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
@@ -78,14 +80,9 @@ const Add_Delegasi = () => {
                                             </Box>
                                             <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Habis</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Habis</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h3">Komisaris</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
@@ -103,8 +100,7 @@ const Add_Delegasi = () => {
                                         </Stack>
                                     </Box>
                                 </AppScrollbar>                                    
-                            </Grid>
-                        </Grid>
+
                     </Box>
                     <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 1, padding: 7}}>
                         <Box sx={{backgroundColor: '#FFEFD2', border: '1px solid #FFB020', height: 40, width: 264,  display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, marginBottom: 5}} >
