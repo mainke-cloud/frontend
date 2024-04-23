@@ -17,7 +17,7 @@ export default function Filter_delegasi({ open, onClose }) {
                 // anchorEl={openFilter}
                 onClose={onClose}
                 anchorOrigin={{
-                    vertical: 'bottom',
+                    vertical: 'top',
                     horizontal: 'right',
                 }}
                 transformOrigin={{
