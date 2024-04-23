@@ -28,144 +28,119 @@ const SuratInternal_5 = ({ handleNext, handlePrev }) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box
-      sx={{
-        margin: '26px',
-        bgcolor: '#FFFFFF',
-        borderRadius: '12px',
-        boxShadow: '0px 1px 4px 1px #42424233',
-        padding: '20px',
-      }}
-    >
-      <img
-        src={StepImage}
-        alt='gambar step'
-        style={{
-          maxHeight: '120px',
+    <>
+      <Stack
+        spacing={4}
+        sx={{
+          border: '1px solid #D8D8D8',
+          minHeight: '300px',
+          borderRadius: '12px',
+          padding: '15px',
         }}
-      />
+      >
+        <Typography variant='h4'>Penerima Delegasi</Typography>
 
-      <Grid container spacing={5}>
-        <Grid item xs={8}>
-          <Stack
-            spacing={4}
+        <DropZoneFile />
+
+        <Stack spacing={2}>
+          <Typography variant='h5'>Perhatian :</Typography>
+          <Typography variant='body1' color='#5C5E61'>
+            Total Ukuran Surat & Lampiran yang dapat diproses maksimal 25 MB.
+          </Typography>
+        </Stack>
+
+        <Typography variant='h4'>Referensi</Typography>
+
+        <TextField
+          id='outlined-multiline-static'
+          fullWidth
+          multiline
+          rows={4}
+        />
+
+        <Stack direction='row' justifyContent='flex-end' spacing={4}>
+          <Button
+            variant='contained'
             sx={{
-              border: '1px solid #D8D8D8',
-              minHeight: '300px',
               borderRadius: '12px',
-              padding: '15px',
+              bgcolor: '#D9DDE3',
+              color: '#5C5E61',
+              minWidth: '84px',
             }}
+            onClick={handlePrev}
           >
-            <Typography variant='h4'>Penerima Delegasi</Typography>
+            Kembali
+          </Button>
 
-            <DropZoneFile />
+          <Button
+            variant='contained'
+            sx={{
+              borderRadius: '12px',
+              bgcolor: '#E42313',
+              minWidth: '66px',
+              minHeight: '50px',
+            }}
+            onClick={handleOpen}
+          >
+            Kirim
+          </Button>
 
-            <Stack spacing={2}>
-              <Typography variant='h5'>Perhatian :</Typography>
-              <Typography variant='body1' color='#5C5E61'>
-                Total Ukuran Surat & Lampiran yang dapat diproses maksimal 25
-                MB.
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Stack sx={style} spacing={5}>
+              <Typography variant='h1'>Konfirmasi</Typography>
+              <Typography variant='h3'>
+                Apakah Anda Yakin Dengan Data Yang Diisi?
               </Typography>
+
+              <Stack direction='row' spacing={5}>
+                <Button
+                  variant='contained'
+                  sx={{
+                    borderRadius: '25px',
+                    bgcolor: '#5C5E61',
+                    minHeight: '32px',
+                    minWidth: '100px',
+                    '&:hover': {
+                      bgcolor: '#5C5E61',
+                    },
+                  }}
+                  onClick={handleClose}
+                >
+                  Tidak
+                </Button>
+
+                <Button
+                  variant='contained'
+                  // onClick={handleSubmit}
+                  sx={{
+                    bgcolor: '#52BD94',
+                    borderRadius: '25px',
+                    minHeight: '32px',
+                    minWidth: '100px',
+                    '&:hover': {
+                      bgcolor: '#52BD94',
+                    },
+                  }}
+                >
+                  Ya
+                </Button>
+              </Stack>
             </Stack>
-
-            <Typography variant='h4'>Referensi</Typography>
-
-            <TextField
-              id='outlined-multiline-static'
-              fullWidth
-              multiline
-              rows={4}
-            />
-
-            <Stack direction='row' justifyContent='flex-end' spacing={4}>
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#D9DDE3',
-                  color: '#5C5E61',
-                  minWidth: '84px',
-                }}
-                onClick={handlePrev}
-              >
-                Kembali
-              </Button>
-
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#E42313',
-                  minWidth: '66px',
-                  minHeight: '50px',
-                }}
-                onClick={handleOpen}
-              >
-                Kirim
-              </Button>
-
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby='modal-modal-title'
-                aria-describedby='modal-modal-description'
-              >
-                <Stack sx={style} spacing={5}>
-                  <Typography variant='h1'>Konfirmasi</Typography>
-                  <Typography variant='h3'>
-                    Apakah Anda Yakin Dengan Data Yang Diisi?
-                  </Typography>
-
-                  <Stack direction='row' spacing={5}>
-                    <Button
-                      variant='contained'
-                      sx={{
-                        borderRadius: '25px',
-                        bgcolor: '#5C5E61',
-                        minHeight: '32px',
-                        minWidth: '100px',
-                        '&:hover': {
-                          bgcolor: '#5C5E61',
-                        },
-                      }}
-                      onClick={handleClose}
-                    >
-                      Tidak
-                    </Button>
-
-                    <Button
-                      variant='contained'
-                      // onClick={handleSubmit}
-                      sx={{
-                        bgcolor: '#52BD94',
-                        borderRadius: '25px',
-                        minHeight: '32px',
-                        minWidth: '100px',
-                        '&:hover': {
-                          bgcolor: '#52BD94',
-                        },
-                      }}
-                    >
-                      Ya
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Modal>
-            </Stack>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={4}>
-          <KomentarSection />
-        </Grid>
-      </Grid>
+          </Modal>
+        </Stack>
+      </Stack>
 
       <img
         src={PreviewSuratImage}
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
       />
-    </Box>
+    </>
   );
 };
 

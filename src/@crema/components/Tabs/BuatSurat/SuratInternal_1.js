@@ -16,7 +16,6 @@ import { CiFileOn } from 'react-icons/ci';
 import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import KomentarSection from './KomentarSection/KomentarSection';
@@ -77,164 +76,139 @@ const SuratInternal_1 = ({ handleNext }) => {
   };
 
   return (
-    <Box
-      sx={{
-        margin: '26px',
-        bgcolor: '#FFFFFF',
-        borderRadius: '12px',
-        boxShadow: '0px 1px 4px 1px #42424233',
-        padding: '20px',
-      }}
-    >
-      <img
-        src={StepImage}
-        alt='gambar step'
-        style={{
-          maxHeight: '120px',
+    <>
+      <Stack
+        spacing={4}
+        sx={{
+          border: '1px solid #D8D8D8',
+          minHeight: '570px',
+          borderRadius: '12px',
+          padding: '15px',
         }}
-      />
+      >
+        <Typography
+          variant='h4'
+          sx={{
+            '&::after': {
+              content: '"*"',
+              color: 'red',
+            },
+          }}
+        >
+          Perihal
+        </Typography>
 
-      <Grid container spacing={5} sx={{}}>
-        <Grid item xs={8}>
-          <Stack
-            spacing={4}
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        >
+          {perihal.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <Typography
+          variant='h4'
+          sx={{
+            '&::after': {
+              content: '"*"',
+              color: 'red',
+            },
+          }}
+        >
+          Klarifikasi Masalah
+        </Typography>
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
             sx={{
-              border: '1px solid #D8D8D8',
-              minHeight: '570px',
-              borderRadius: '12px',
-              padding: '15px',
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
             }}
+          ></AppScrollbar>
+          <ButtonBuatSurat pemeriksa />
+        </Box>
+
+        <Typography
+          variant='body1'
+          sx={{
+            color: '#5C5E61',
+            // width: '370px',
+          }}
+        >
+          Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
+        </Typography>
+        <Typography variant='h4'>Prioritas Surat</Typography>
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        >
+          {prioritas.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Typography variant='h4'>Jenis Surat</Typography>
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        >
+          {jenisSurat.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <Typography variant='h4'>Lampiran</Typography>
+        <TextField
+          sx={{ marginTop: '8px' }}
+          placeholder={'Masukkan jumlah'}
+          variant='outlined'
+          fullWidth
+          type='number'
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <Stack direction='row' justifyContent='flex-end' spacing={4}>
+          <Button
+            variant='contained'
+            sx={{
+              borderRadius: '12px',
+              bgcolor: '#E42313',
+              minWidth: '220px',
+              minHeight: '50px',
+            }}
+            onClick={handleNext}
           >
-            <Typography
-              variant='h4'
-              sx={{
-                '&::after': {
-                  content: '"*"',
-                  color: 'red',
-                },
-              }}
-            >
-              Perihal
-            </Typography>
-
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {perihal.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <Typography
-              variant='h4'
-              sx={{
-                '&::after': {
-                  content: '"*"',
-                  color: 'red',
-                },
-              }}
-            >
-              Klarifikasi Masalah
-            </Typography>
-
-            <Box
-              position={'relative'}
-              sx={{
-                border: '1px solid #B1B5BA',
-                borderRadius: '10px',
-              }}
-            >
-              <AppScrollbar
-                sx={{
-                  minHeight: '145px',
-                  maxHeight: '145px',
-                  overflow: 'auto',
-                }}
-              ></AppScrollbar>
-              <ButtonBuatSurat pemeriksa />
-            </Box>
-
-            <Typography
-              variant='body1'
-              sx={{
-                color: '#5C5E61',
-                // width: '370px',
-              }}
-            >
-              Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi
-              masalah
-            </Typography>
-            <Typography variant='h4'>Prioritas Surat</Typography>
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {prioritas.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Typography variant='h4'>Jenis Surat</Typography>
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {jenisSurat.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <Typography variant='h4'>Lampiran</Typography>
-            <TextField
-              sx={{ marginTop: '8px' }}
-              placeholder={'Masukkan jumlah'}
-              variant='outlined'
-              fullWidth
-              type='number'
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <Stack direction='row' justifyContent='flex-end' spacing={4}>
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#E42313',
-                  minWidth: '220px',
-                  minHeight: '50px',
-                }}
-                onClick={handleNext}
-              >
-                Selanjutnya (Pengirim)
-              </Button>
-            </Stack>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={4}>
-          <KomentarSection />
-        </Grid>
-      </Grid>
+            Selanjutnya (Pengirim)
+          </Button>
+        </Stack>
+      </Stack>
 
       <img
         src={PreviewSuratImage}
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
       />
-    </Box>
+    </>
   );
 };
 

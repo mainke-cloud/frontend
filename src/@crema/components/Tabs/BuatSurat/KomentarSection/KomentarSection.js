@@ -6,6 +6,7 @@ import { GrAttachment } from 'react-icons/gr';
 import { styled } from '@mui/material/styles';
 import PdfVector from '../../../../../assets/vector/PdfVector.svg';
 import { X } from 'feather-icons-react';
+import { CiFileOn } from 'react-icons/ci';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -67,6 +68,7 @@ const KomentarSection = () => {
             Komentar
           </Typography>
         </Stack>
+
         <TextField
           id='outlined-multiline-static'
           placeholder='Tambahkan komentar...'
@@ -74,6 +76,23 @@ const KomentarSection = () => {
           fullWidth
           rows={4}
         />
+
+        {!upload && (
+          <Stack direction='row' padding='10px' paddingLeft='17px'>
+            <Icon>
+              <CiFileOn />
+            </Icon>
+
+            <Typography
+              variant='h4'
+              sx={{
+                paddingLeft: '8px',
+              }}
+            >
+              Lampiran
+            </Typography>
+          </Stack>
+        )}
 
         {file.map((file, index) => (
           <Stack spacing={3} key={index}>

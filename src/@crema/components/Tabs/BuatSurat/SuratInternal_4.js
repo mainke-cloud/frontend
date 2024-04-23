@@ -31,138 +31,114 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   };
 
   return (
-    <Box
-      sx={{
-        margin: '26px',
-        bgcolor: '#FFFFFF',
-        borderRadius: '12px',
-        boxShadow: '0px 1px 4px 1px #42424233',
-        padding: '20px',
-      }}
-    >
-      <img
-        src={StepImage}
-        alt='gambar step'
-        style={{
-          maxHeight: '120px',
+    <>
+      <Stack
+        spacing={4}
+        sx={{
+          border: '1px solid #D8D8D8',
+          minHeight: '300px',
+          borderRadius: '12px',
+          padding: '15px',
         }}
-      />
-
-      <Grid container spacing={5}>
-        <Grid item xs={8}>
-          <Stack
-            spacing={4}
+      >
+        <Stack direction='row'>
+          <Link
+            component='button'
+            underline='always'
             sx={{
-              border: '1px solid #D8D8D8',
-              minHeight: '300px',
-              borderRadius: '12px',
-              padding: '15px',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: 'black',
+              textDecorationColor: 'black',
             }}
+            onClick={() => onOpenComposeMail()}
           >
-            <Stack direction='row'>
-              <Link
-                component='button'
-                underline='always'
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: 600,
-                  color: 'black',
-                  textDecorationColor: 'black',
-                }}
-                onClick={() => onOpenComposeMail()}
-              >
-                Pemeriksa
-              </Link>
+            Pemeriksa
+          </Link>
 
-              <Typography variant='h4' color='red'>
-                *
-              </Typography>
-            </Stack>
+          <Typography variant='h4' color='red'>
+            *
+          </Typography>
+        </Stack>
 
-            <Box
-              position={'relative'}
-              sx={{
-                border: '1px solid #B1B5BA',
-                borderRadius: '10px',
-              }}
-            >
-              <AppScrollbar
-                sx={{
-                  minHeight: '145px',
-                  maxHeight: '145px',
-                  overflow: 'auto',
-                }}
-              ></AppScrollbar>
-              <ButtonBuatSurat pemeriksa />
-            </Box>
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          ></AppScrollbar>
+          <ButtonBuatSurat pemeriksa />
+        </Box>
 
-            <Stack direction='row'>
-              <Link
-                component='button'
-                underline='always'
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: 600,
-                  color: 'black',
-                  textDecorationColor: 'black',
-                }}
-                onClick={() => onOpenComposeMail()}
-              >
-                Pemohon
-              </Link>
-            </Stack>
+        <Stack direction='row'>
+          <Link
+            component='button'
+            underline='always'
+            sx={{
+              fontSize: '16px',
+              fontWeight: 600,
+              color: 'black',
+              textDecorationColor: 'black',
+            }}
+            onClick={() => onOpenComposeMail()}
+          >
+            Pemohon
+          </Link>
+        </Stack>
 
-            <Box
-              position={'relative'}
-              sx={{
-                border: '1px solid #B1B5BA',
-                borderRadius: '10px',
-              }}
-            >
-              <AppScrollbar
-                sx={{
-                  minHeight: '145px',
-                  maxHeight: '145px',
-                  overflow: 'auto',
-                }}
-              ></AppScrollbar>
-              <ButtonBuatSurat pemeriksa />
-            </Box>
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          ></AppScrollbar>
+          <ButtonBuatSurat pemeriksa />
+        </Box>
 
-            <Stack direction='row' justifyContent='flex-end' spacing={4}>
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#D9DDE3',
-                  color: '#5C5E61',
-                  minWidth: '84px',
-                }}
-                onClick={handlePrev}
-              >
-                Kembali
-              </Button>
+        <Stack direction='row' justifyContent='flex-end' spacing={4}>
+          <Button
+            variant='contained'
+            sx={{
+              borderRadius: '12px',
+              bgcolor: '#D9DDE3',
+              color: '#5C5E61',
+              minWidth: '84px',
+            }}
+            onClick={handlePrev}
+          >
+            Kembali
+          </Button>
 
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#E42313',
-                  minWidth: '220px',
-                  minHeight: '50px',
-                }}
-                onClick={handleNext}
-              >
-                Selanjutnya (lainnya)
-              </Button>
-            </Stack>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={4}>
-          <KomentarSection />
-        </Grid>
-      </Grid>
+          <Button
+            variant='contained'
+            sx={{
+              borderRadius: '12px',
+              bgcolor: '#E42313',
+              minWidth: '220px',
+              minHeight: '50px',
+            }}
+            onClick={handleNext}
+          >
+            Selanjutnya (lainnya)
+          </Button>
+        </Stack>
+      </Stack>
 
       <img
         src={PreviewSuratImage}
@@ -174,7 +150,7 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
       />
-    </Box>
+    </>
   );
 };
 
