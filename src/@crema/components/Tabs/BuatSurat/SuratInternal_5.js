@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
-import { Box, Button, Grid } from '@mui/material';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 5.png';
+import { Button } from '@mui/material';
 import DropZoneFile from '../DropZoneFile';
 import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import KomentarSection from './KomentarSection/KomentarSection';
 
 const style = {
   position: 'absolute',

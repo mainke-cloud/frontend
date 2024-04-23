@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
-import { Link, Stack, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { Link, Stack, Typography } from '@mui/material';
 import AppScrollbar from '../../AppScrollbar';
-import { Box, Button, Grid, Icon } from '@mui/material';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 4.png';
+import { Box, Button } from '@mui/material';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 import ComposeMail from '@crema/components/AppAddress';
-import ListKomentar from '../SuratKeluar/ListKomentar';
 import PropTypes from 'prop-types';
-import KomentarSection from './KomentarSection/KomentarSection';
 
 const SuratInternal_4 = ({ handleNext, handlePrev }) => {
-  const [showPreview, setShowPreview] = useState(false);
   const [isComposeMail, setComposeMail] = React.useState(false);
 
   const onOpenComposeMail = () => {
@@ -24,10 +15,6 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
 
   const onCloseComposeMail = () => {
     setComposeMail(false);
-  };
-
-  const handleShow = () => {
-    setShowPreview(!showPreview);
   };
 
   return (
