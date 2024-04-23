@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Stack, Typography, Button, ButtonBase } from '@mui/material';
+import { Stack, Typography, Button, ButtonBase, Box, Link } from '@mui/material';
+import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
@@ -40,55 +41,55 @@ const TabContentEditPenerima = () => {
   return (
     <>
       <Stack
+        spacing={4}
         sx={{
-          marginTop: '3px',
-          bgcolor: '#FFFFFF',
+          border: '1px solid #D8D8D8',
+          minHeight: '570px',
           borderRadius: '12px',
-          boxShadow: '0px 1px 4px 1px #42424233',
-          padding: '20px',
+          padding: '15px',
         }}
       >
-        {/* <ButtonBase onClick={onOpenComposeMail}> */}
-        <Stack
-          direction='row'
-          spacing={1}
-          onClick={onOpenComposeMail}
-          sx={{ pb: 4, cursor: 'pointer' }}
-        >
-          <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+        <Stack direction='row'>
+          <Link
+            component='button'
+            underline='always'
+            sx={{
+              fontSize: '16px',
+              fontWeight: 600,
+              color: 'black',
+              textDecorationColor: 'black',
+            }}
+            onClick={() => onOpenComposeMail()}
+          >
             Kepada
-          </Typography>
-          <Typography variant='h4' color='error'>
+          </Link>
+
+          <Typography variant='h4' color='red'>
             *
           </Typography>
         </Stack>
-        {/* </ButtonBase> */}
-        <AppScrollbar>
-          <TextField
-            id='outlined-multiline-static'
-            multiline
-            rows={4}
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <IconButton>
-                  <AddCircleOutlineRoundedIcon
-                    onClick={onOpenComposeMail}
-                    sx={{ color: 'black' }}
-                  />
-                </IconButton>
-              ),
-            }}
-          />
-        </AppScrollbar>
-        <Stack
-          direction='row'
-          spacing={4}
-          alignItems={'center'}
-          sx={{ padding: '10px 0px 10px 0px' }}
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
         >
-          <Typography>tampilkan Kepada</Typography>
-          <ButtonCustom
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          ></AppScrollbar>
+          <ButtonBuatSurat pemeriksa />
+        </Box>
+
+        <Stack direction='row' spacing={4} alignItems={'center'}>
+          <Typography>Tampilkan Kepada</Typography>
+          <Button
+            variant='contained'
             sx={{
               bgcolor: '#229BD8',
               padding: '5px',
@@ -97,63 +98,61 @@ const TabContentEditPenerima = () => {
             }}
           >
             Update
-          </ButtonCustom>
+          </Button>
         </Stack>
-        <AppScrollbar>
-          <TextField
-            id='outlined-multiline-static'
-            multiline
-            rows={4}
-            fullWidth
-            disabled
-            // InputProps={{
-            //   endAdornment: (
-            //     <IconButton>
-            //       <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-            //     </IconButton>
-            //   ),
-            // }}
-          />
-        </AppScrollbar>
-        <Stack
-          direction='row'
-          spacing={1}
-          onClick={onOpenComposeMail}
-          sx={{ pb: 4, pt: 4, cursor: 'pointer' }}
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
         >
-          <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
-            Tembusan
-          </Typography>
-          <Typography variant='h4' color='error'>
-            *
-          </Typography>
-        </Stack>
-        <AppScrollbar>
-          <TextField
-            id='outlined-multiline-static'
-            multiline
-            rows={4}
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <IconButton>
-                  <AddCircleOutlineRoundedIcon
-                    sx={{ color: 'black' }}
-                    onClick={onOpenComposeMail}
-                  />
-                </IconButton>
-              ),
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
             }}
-          />
-        </AppScrollbar>
-        <Stack
-          direction='row'
-          spacing={4}
-          alignItems={'center'}
-          sx={{ padding: '10px 0px 10px 0px' }}
+          ></AppScrollbar>
+        </Box>
+
+        <Link
+          component='button'
+          underline='always'
+          sx={{
+            fontSize: '16px',
+            fontWeight: 600,
+            color: 'black',
+            textDecorationColor: 'black',
+            textAlign: 'start',
+          }}
+          onClick={() => onOpenComposeMail()}
         >
-          <Typography>tampilkan Kepada</Typography>
-          <ButtonCustom
+          Tembusan
+        </Link>
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          ></AppScrollbar>
+          <ButtonBuatSurat pemeriksa />
+        </Box>
+
+        <Stack direction='row' spacing={4} alignItems={'center'}>
+          <Typography>Tampilkan Kepada</Typography>
+          <Button
+            variant='contained'
             sx={{
               bgcolor: '#229BD8',
               padding: '5px',
@@ -162,200 +161,24 @@ const TabContentEditPenerima = () => {
             }}
           >
             Update
-          </ButtonCustom>
+          </Button>
         </Stack>
-        <AppScrollbar>
-          <TextField
-            id='outlined-multiline-static'
-            multiline
-            rows={4}
-            fullWidth
-            disabled
-            // InputProps={{
-            //   endAdornment: (
-            //     <IconButton>
-            //       <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-            //     </IconButton>
-            //   ),
-            // }}
-          />
-        </AppScrollbar>
-        {/* <Judul>Kepada</Judul>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 2 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper> */}
-        {/* <Stack direction={'row'} alignItems={'center'}>
-          <Judul sx={{ fontSize: '12px', paddingTop: '0px' }}>
-            Tampilkan kepada
-          </Judul>
-          <ButtonCustom>Update</ButtonCustom>
-        </Stack> */}
-        {/* <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper>
-        <Judul>Tembusan</Judul> */}
-        {/* <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography fontSize='14px' color={'#5C5E61'}>
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        DODDY HADI RUKMANA, ST/720277
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper> */}
-        {/* <Stack direction={'row'} alignItems={'center'}>
-          <Judul sx={{ fontSize: '12px', paddingTop: '0px' }}>
-            Tampilkan kepada
-          </Judul>
-          <ButtonCustom>Update</ButtonCustom>
-        </Stack>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography fontSize='14px' color={'#5C5E61'}>
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        DODDY HADI RUKMANA, ST/720277
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper> */}
-        <ComposeMail
-          isComposeMail={isComposeMail}
-          onCloseComposeMail={onCloseComposeMail}
-        />
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          ></AppScrollbar>
+        </Box>
       </Stack>
     </>
   );
