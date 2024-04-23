@@ -57,7 +57,6 @@ const PdfCardEdit = ({ jabatan, nama, nik }) => {
         <br />
         <Stack spacing={2}>
           <Typography variant='body2'>Isi Surat:</Typography>
-          {/* <Typography variant='body2'>[Konten Surat]</Typography> */}
           <TinyMce />
         </Stack>
         <br />

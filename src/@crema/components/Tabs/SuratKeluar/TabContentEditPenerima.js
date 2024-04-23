@@ -56,7 +56,7 @@ const TabContentEditPenerima = () => {
           sx={{ pb: 4, cursor: 'pointer' }}
         >
           <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
-            Pemeriksa
+            Kepada
           </Typography>
           <Typography variant='h4' color='error'>
             *
