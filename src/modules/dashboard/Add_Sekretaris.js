@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Stack, Typography, Switch, FormControlLabel, Checkbox, IconButton } from "@mui/material";
+import { Box, Grid, Stack, Typography, Switch, FormControlLabel, Checkbox, IconButton, Button } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useState } from "react";
@@ -13,6 +13,7 @@ import Avatar from '../../assets/Dashboard/avatar_placeholder.png'
 import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
+import ComposeMail from "@crema/components/AppAddress";
 
 
 const IOSSwitch = styled((props) => (
@@ -68,6 +69,16 @@ const IOSSwitch = styled((props) => (
 
 const Add_Sekretaris = () => {
     const [isActive, setIsActive] = useState(true);
+    const [openFilter, setOpenFilter] = React.useState(false);
+    const [isComposeMail, setComposeMail] = React.useState(false);
+
+    const onOpenComposeMail = () => {
+        setComposeMail(true);
+    };
+
+    const onCloseComposeMail = () => {
+        setComposeMail(false);
+    };
 
     const handleClick = () => {
         setIsActive(!isActive);
@@ -212,6 +223,15 @@ const Add_Sekretaris = () => {
                                     </Stack>
                                 </Stack>
                             </Grid>
+                            <Grid item xs={4}>
+                                <Stack direction='row' alignItems='flex-end' justifyContent='flex-end' sx={{height: 250}}>
+                                    <Box sx={{height: 40, width: 153, backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }}>
+                                        <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                            <Typography sx={{color: '#FFFFFF', textAlign: 'center'}}>Simpan Perubahan</Typography>
+                                        </Stack>
+                                    </Box>
+                                </Stack>
+                            </Grid>
                         </Grid>
                     </Box>
                     <Box sx={{backgroundColor: '#EBF0FF', borderRadius: 1, padding: 4, paddingY: 7, border: '2px solid #9DB5FF'}}>
@@ -257,7 +277,12 @@ const Add_Sekretaris = () => {
                             <Grid item xs={3}>
                                 <Stack>
                                     <Typography variant="h2">Nama :</Typography>
-                                    <Typography sx={{marginBottom: 7, fontSize: '16px'}}>Salies Apriliyanto</Typography>
+                                    <Box sx={{height: 40, width: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
+                                        <Stack direction="row" >
+                                            <Typography>Pilih Karyawan</Typography>
+
+                                        </Stack>
+                                    </Box>
                                     <Typography variant="h2">Jabatan :</Typography>
                                     <Typography sx={{marginBottom: 7, fontSize: '16px'}}>xxxxxxxxxxxxxxxxxxxx</Typography>
                                     <Typography variant="h2">No :</Typography>
@@ -336,7 +361,11 @@ const Add_Sekretaris = () => {
                         </Stack>
                     </Box>
                 </Stack>
-            </Box>)}            
+            </Box>)}  
+            <ComposeMail
+                isComposeMail={isComposeMail}
+                onCloseComposeMail={onCloseComposeMail}
+            />          
         </>
     )
 }

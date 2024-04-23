@@ -14,11 +14,21 @@ import Avatar from '../../assets/Dashboard/avatar_placeholder.png'
 import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
+import ComposeMail from "@crema/components/AppAddress";
 
 
 const Add_Delegasi = () => {
     const [dateFrom, setDateFrom] = React.useState(null);
     const [dateTo, setDateTo] = React.useState(null);
+    const [isComposeMail, setComposeMail] = React.useState(false);
+
+    const onOpenComposeMail = () => {
+        setComposeMail(true);
+    };
+
+    const onCloseComposeMail = () => {
+        setComposeMail(false);
+    };
 
     const [isActive, setIsActive] = useState(true);
 
@@ -154,6 +164,15 @@ const Add_Delegasi = () => {
                                     </LocalizationProvider>
                                 </Stack>
                             </Grid>
+                            <Grid item xs={4}>
+                                <Stack direction='row' alignItems='flex-end' justifyContent='flex-end' sx={{height: 250}}>
+                                    <Box sx={{height: 40, width: 153, backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }}>
+                                        <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                            <Typography sx={{color: '#FFFFFF', textAlign: 'center'}}>Simpan Perubahan</Typography>
+                                        </Stack>
+                                    </Box>
+                                </Stack>
+                            </Grid>
                         </Grid>
                     </Box>
                     <Box sx={{backgroundColor: '#EBF0FF', borderRadius: 1, padding: 4, paddingY: 7, border: '2px solid #9DB5FF'}}>
@@ -195,10 +214,15 @@ const Add_Delegasi = () => {
                                 <img src={Profile} style={{width: 187, height: 187, marginLeft: 'auto', marginRight: 'auto'}}/>
                             </Box>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={3} >
                             <Stack>
                                 <Typography variant="h2">Nama :</Typography>
-                                <Typography sx={{marginBottom: 7, fontSize: '16px'}}>Salies Apriliyanto</Typography>
+                                <Box sx={{height: 40, width: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
+                                        <Stack direction="row" >
+                                            <Typography>Pilih Karyawan</Typography>
+
+                                        </Stack>
+                                    </Box>
                                 <Typography variant="h2">Jabatan :</Typography>
                                 <Typography sx={{marginBottom: 7, fontSize: '16px'}}>xxxxxxxxxxxxxxxxxxxx</Typography>
                                 <Typography variant="h2">No :</Typography>
@@ -251,6 +275,10 @@ const Add_Delegasi = () => {
                     </Grid>
                 </Box>
             </Box>)}
+            <ComposeMail
+                isComposeMail={isComposeMail}
+                onCloseComposeMail={onCloseComposeMail}
+            />
         </>
     )
 }
