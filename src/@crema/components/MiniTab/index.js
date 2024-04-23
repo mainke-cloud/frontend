@@ -32,7 +32,9 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const MiniTab = ({ tabs, changeValue }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(changeValue !== undefined ? changeValue : 0);
+  const [value, setValue] = React.useState(
+    changeValue !== undefined ? changeValue : 0,
+  );
 
   React.useEffect(() => {
     setValue(changeValue !== undefined ? changeValue : 0);
@@ -42,6 +44,10 @@ const MiniTab = ({ tabs, changeValue }) => {
     setValue(newValue);
     dispatch(updateValue(newValue));
   };
+
+  if (changeValue !== value && changeValue !== undefined) {
+    setValue(changeValue);
+  }
 
   return (
     <TabContext value={value}>
@@ -74,7 +80,6 @@ const MiniTab = ({ tabs, changeValue }) => {
     </TabContext>
   );
 };
-
 
 MiniTab.propTypes = {
   tabs: PropTypes.array,

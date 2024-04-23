@@ -342,6 +342,8 @@ export default function DisposisiSidebar({ isCollapsed }) {
 
   const open_add = Boolean(openAdd);
   const open_filter = Boolean(openFilter);
+  const open_add = Boolean(openAdd);
+  const open_filter = Boolean(openFilter);
   // const open_add = Boolean(openAdd);
   // const open_filter = Boolean(openFilter);
   const id = open ? 'simple-popover' : undefined;
@@ -359,6 +361,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
         {searchForm ? (
           <TextField
             variant='outlined'
+            size='small'
             size='small'
             // size='small'
             placeholder='Search'

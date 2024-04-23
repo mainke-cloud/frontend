@@ -12,7 +12,7 @@ export const handleClose = () => {
   };
 };
 export const updateValue = (index) => {
-  return(dispatch) => {
-    dispatch({type: 'UPDATE_VALUE', payload: index})
-  }
-}
+  return (dispatch) => {
+    dispatch({ type: 'UPDATE_VALUE', payload: index });
+  };
+};
