@@ -9,10 +9,19 @@ import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 4.png';
+import ComposeMail from '@crema/components/AppAddress';
 
 const SuratInternal_4 = () => {
   const [showPreview, setShowPreview] = useState(false);
+  const [isComposeMail, setComposeMail] = React.useState(false);
 
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
   const handleShow = () => {
     setShowPreview(!showPreview);
   };
@@ -63,7 +72,7 @@ const SuratInternal_4 = () => {
                 InputProps={{
                   endAdornment: (
                     <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
+                      <AddCircleOutlineRoundedIcon onClick={onOpenComposeMail} sx={{ color: 'black' }} />
                     </IconButton>
                   ),
                 }}
@@ -219,6 +228,10 @@ const SuratInternal_4 = () => {
         src={PreviewSuratImage}
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
+      />
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
       />
     </Box>
   );
