@@ -11,8 +11,9 @@ import Divider from '@mui/material/Divider';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 2.png';
 import PPImage from '../../../../assets/BuatSurat/PP.png';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
+import PropTypes from 'prop-types';
 
-const SuratInternal_2 = () => {
+const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
 
   const handleShow = () => {
@@ -175,7 +176,7 @@ const SuratInternal_2 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -188,7 +189,7 @@ const SuratInternal_2 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (Penerima)
               </Button>
@@ -343,6 +344,11 @@ const SuratInternal_2 = () => {
       />
     </Box>
   );
+};
+
+SuratInternal_2.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_2;

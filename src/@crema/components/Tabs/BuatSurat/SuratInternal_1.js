@@ -17,6 +17,8 @@ import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
+import { Navigate, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const perihal = [
   {
@@ -63,7 +65,7 @@ const jenisSurat = [
   },
 ];
 
-const SuratInternal_1 = () => {
+const SuratInternal_1 = ({ handleNext }) => {
   const [showPreview, setShowPreview] = useState(false);
 
   const handleShow = () => {
@@ -208,7 +210,7 @@ const SuratInternal_1 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (Pengirim)
               </Button>
@@ -317,6 +319,10 @@ const SuratInternal_1 = () => {
       />
     </Box>
   );
+};
+
+SuratInternal_1.propTypes = {
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_1;

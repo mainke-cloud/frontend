@@ -19,20 +19,20 @@ const ButtonBuatSurat = ({ pemeriksa }) => {
     <Box
       sx={{
         position: 'absolute',
-        //   top: 0,
-        // left: '50%',
+        zIndex: 1,
+        bottom: 0,
         right: '1%',
-        bottom: '6%',
       }}
     >
       {pemeriksa && (
         <IconButton>
           <AddCircleOutlineRoundedIcon
             onClick={onOpenComposeMail}
-            sx={{ color: 'black' }}
+            sx={{ color: 'black', fontSize: '40px' }}
           />
         </IconButton>
       )}
+
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}

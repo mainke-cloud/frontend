@@ -9,9 +9,21 @@ import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 4.png';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
+import ComposeMail from '@crema/components/AppAddress';
+import ListKomentar from '../SuratKeluar/ListKomentar';
+import PropTypes from 'prop-types';
 
-const SuratInternal_4 = () => {
+const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
 
   const handleShow = () => {
     setShowPreview(!showPreview);
@@ -56,9 +68,7 @@ const SuratInternal_4 = () => {
                   color: 'black',
                   textDecorationColor: 'black',
                 }}
-                onClick={() => {
-                  console.log('pop up address book');
-                }}
+                onClick={() => onOpenComposeMail()}
               >
                 Pemeriksa
               </Link>
@@ -67,17 +77,24 @@ const SuratInternal_4 = () => {
                 *
               </Typography>
             </Stack>
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  endAdornment: <ButtonBuatSurat pemeriksa />,
+
+            <Box
+              position={'relative'}
+              sx={{
+                border: '2px solid gray',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  maxHeight: '200px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              >
+                <ListKomentar label={'Disetujui'} />
+              </AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
 
             <Stack direction='row'>
               <Link
@@ -117,7 +134,7 @@ const SuratInternal_4 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -130,7 +147,7 @@ const SuratInternal_4 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (lainnya)
               </Button>
@@ -237,8 +254,18 @@ const SuratInternal_4 = () => {
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
       />
+
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
     </Box>
   );
+};
+
+SuratInternal_4.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_4;
