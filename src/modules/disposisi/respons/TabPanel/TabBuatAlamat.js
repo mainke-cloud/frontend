@@ -5,6 +5,7 @@ import { PlusCircle } from 'feather-icons-react';
 
 import exchange from '../../../../assets/icon/exchange.svg';
 import ButtonBuatDisposisi from '@crema/components/Tabs/Disposisi/ButtonBuatDisposisi';
+import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
 
 const TabBuatAlamat = () => {
     const RenderItem = styled(Stack)(() => ({
@@ -152,7 +153,6 @@ const TabBuatAlamat = () => {
                         labelId={`select-label-nota-${i}`}
                         id={`select-nota-${i}`}
                         value={nota[i]}
-                        label="Nota"
                         onChange={(event) => handleChangeNota(event, i)}
                         sx={{ width: '60%' }}
                     >
@@ -235,7 +235,7 @@ const TabBuatAlamat = () => {
                                 Lampiran
                                 <CustomSpan>*</CustomSpan>
                             </Typography>
-                            <Box className='content-styled-box' sx={{height:'250px'}} />
+                            <DropZoneFile />
                         </Box>
 
                         <Box sx={{
