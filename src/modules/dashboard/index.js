@@ -236,6 +236,37 @@ const Dashboard = () => {
                     />
                   </Box>
                 </AppScrollbar>
+                <Box sx={{
+                    backgroundColor: '#DFE4F7',
+                    borderTopLeftRadius: 2,
+                    borderTopRightRadius: 2,
+                  }}
+                >
+                  <Grid item xs={11} sx={{marginTop: 2}}>
+                      <Box 
+                          alignItems="center" 
+                          justifyContent="center"
+                          sx={{ 
+                              backgroundColor: '#FFEFD2', 
+                              color: 'black', 
+                              padding: 2, 
+                              width: '100%', 
+                              maxWidth: 600, 
+                              borderRadius: 2,
+                              cursor: 'pointer',
+                              '@media (min-width: 600px)': { 
+                                  width: 'auto',
+                              },
+                              '&:hover': {
+                                  backgroundColor: '#FFDFA6',
+                                }
+                          }}
+                          onClick={() => handleAddTab('Add_Sekretaris')} 
+                      >
+                          <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
+                      </Box>
+                  </Grid>
+                </Box>
               </AppCard2>
               <AppCard2 sx={{ height: '339px', pb: 17 }}>
                 <Box
