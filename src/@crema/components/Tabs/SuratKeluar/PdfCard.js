@@ -8,7 +8,7 @@ const PdfCard = () => {
     import.meta.url,
   ).toString();
   return (
-    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'start' }}>
       <Box
         sx={{
           border: '1px solid #D8D8D8',

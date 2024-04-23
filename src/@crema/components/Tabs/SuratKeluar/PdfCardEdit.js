@@ -11,12 +11,12 @@ const PdfCardEdit = ({ jabatan, nama, nik }) => {
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: [cardElement.offsetWidth, cardElement.offsetHeight]
+      format: [cardElement.offsetWidth, cardElement.offsetHeight],
     });
     pdf.html(cardElement, {
       callback: () => {
         pdf.save('card.pdf');
-      }
+      },
     });
   };
   return (
