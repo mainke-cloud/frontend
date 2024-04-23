@@ -84,24 +84,24 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     const updatedSelectedRow = checked ? data.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
     setIsGridVisible(checked && updatedSelectedRow.length > 0);
-
+  
     const selectedItems = checked ? data : [];
-
-    setSelectedData(selectedItems);
+  
+    setMovedData(selectedItems);
   };
 
   const [selectedData, setSelectedData] = useState([]);
 
-  const handleRadioChange = (index) => {
-    let updatedSelectedRow;
-    if (selectedRow.includes(index)) {
-      updatedSelectedRow = selectedRow.filter((item) => item !== index);
-    } else {
-      updatedSelectedRow = [...selectedRow, index];
-    }
-    setSelectedRow(updatedSelectedRow);
-    setIsGridVisible(updatedSelectedRow.length > 0);
-  };
+  // const handleRadioChange = (index) => {
+  //   let updatedSelectedRow;
+  //   if (selectedRow.includes(index)) {
+  //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
+  //   } else {
+  //     updatedSelectedRow = [...selectedRow, index];
+  //   }
+  //   setSelectedRow(updatedSelectedRow);
+  //   setIsGridVisible(updatedSelectedRow.length > 0);
+  // };
 
   // radio di tekan langsung pindah
   // const handleRadioChange = (index) => {
@@ -118,6 +118,20 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
 
   //   setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
   // };
+
+  const handleRadioChange = (index) => {
+    let updatedSelectedRow;
+    if (selectedRow.includes(index)) {
+      updatedSelectedRow = selectedRow.filter((item) => item !== index);
+    } else {
+      updatedSelectedRow = [...selectedRow, index];
+    }
+    setSelectedRow(updatedSelectedRow);
+    setIsGridVisible(updatedSelectedRow.length > 0);
+
+    const selectedItems = data.filter((_, i) => updatedSelectedRow.includes(i));
+    setMovedData(selectedItems);
+  };
 
   const [movedData, setMovedData] = useState([]);
 
@@ -137,11 +151,19 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     setSelectedOption2(event.target.value);
   };
 
+  const handleRemoveAll = () => {
+    setSelectedRow([]);
+    setMovedData([]);
+  };
+
   const handleRemoveItem = (indexToRemove) => {
     const updatedMovedData = movedData.filter(
       (_, index) => index !== indexToRemove,
     );
     setMovedData(updatedMovedData);
+
+    const updatedSelectedRow = selectedRow.filter((item) => item !== indexToRemove);
+    setSelectedRow(updatedSelectedRow);
   };
 
   return (
@@ -166,7 +188,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
           borderRadius: 8,
         }}
       >
-        <Grid item xs={9}>
+        <Grid item xs={selectedRow.length > 0 ? 9 : 12}>
           <Box
             style={{
               padding: 20,
@@ -336,7 +358,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                 >
                   Tambah Ke Personal
                 </Button>
-                <Button
+                {/* <Button
                   variant='contained'
                   color='secondary'
                   style={{ marginLeft: '10px' }}
@@ -348,7 +370,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                   }}
                 >
                   Tambahkan
-                </Button>
+                </Button> */}
               </Box>
             </Paper>
           </Box>
@@ -383,7 +405,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                   <Typography variant='h4' id='compose-mail-modal'>
                     Pilihan
                   </Typography>
-                  <Button onClick={() => setMovedData([])} endIcon={<Trash2 />}>
+                  <Button onClick={() => handleRemoveAll([])} endIcon={<Trash2 />}>
                     Hapus Semua
                   </Button>
                 </Stack>
