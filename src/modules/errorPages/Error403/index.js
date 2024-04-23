@@ -8,8 +8,24 @@ import { Fonts } from '@crema/constants/AppEnums';
 import { initialUrl } from '@crema/constants/AppConst';
 import AppAnimate from '@crema/components/AppAnimate';
 import IntlMessages from '@crema/helpers/IntlMessages';
-import { ReactComponent as Logo } from '../../../assets/icon/403.svg';
+import { ReactComponent as Logo } from '../../../assets/Error/Error 403.svg';
 import { useTheme } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const Buttons = styled(Button)(({ theme }) => ({
+  borderRadius: '8px',
+  backgroundColor: theme.palette.coofis.primary.main,
+  fontSize: '14px',
+  boxShadow: 'none',
+  padding: '16px 124px',
+  minWidth: '90px',
+  lineHeight: 1.5,
+  '&:hover': {
+    backgroundColor: theme.palette.coofis.primary.main,
+    borderColor: theme.palette.coofis.primary.main,
+    boxShadow: 'none',
+  },
+}));
 
 const Error401 = () => {
   const theme = useTheme();
@@ -64,9 +80,9 @@ const Error401 = () => {
               fontWeight: Fonts.MEDIUM,
             }}
           >
-            <Typography>You are not authorized for this page</Typography>
+            <Typography>Anda tidak berwenang untuk halaman ini</Typography>
           </Box>
-          <Button
+          <Buttons
             variant='contained'
             color='primary'
             sx={{
@@ -76,8 +92,8 @@ const Error401 = () => {
             }}
             onClick={onGoBackToHome}
           >
-            <IntlMessages id='error.goBackToHome' />
-          </Button>
+            <IntlMessages id='Kembali Ke Dashboard' />
+          </Buttons>
         </Box>
       </Box>
     </AppAnimate>

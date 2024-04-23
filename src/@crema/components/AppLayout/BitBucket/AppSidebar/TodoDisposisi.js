@@ -16,18 +16,26 @@ import {
   Divider,
   Grid,
   Button,
+  Button,
   Box,
   ButtonGroup,
   IconButton,
   Stack,
   TextField,
+  Stack,
+  TextField,
   Tooltip,
 } from '@mui/material';
+
 
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { Filter, Search, AlertCircle } from 'feather-icons-react';
+import { Filter, Search, AlertCircle } from 'feather-icons-react';
 
+import { ArrowForwardIosSharp, Close } from '@mui/icons-material';
+
+import FilterPopover from './IconButton/FilterPopover';
 import { ArrowForwardIosSharp, Close } from '@mui/icons-material';
 
 import FilterPopover from './IconButton/FilterPopover';
@@ -304,7 +312,7 @@ export default function TodoDisposisi({ isCollapsed }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
 
-  const handleTodo = (item) => {
+  const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Todo', item));
   };
 
@@ -435,7 +443,7 @@ export default function TodoDisposisi({ isCollapsed }) {
                         >
                           <Button
                             sx={{ padding: 0, margin: 0, textAlign: 'left' }}
-                            onClick={() => handleTodo(item)}
+                            onClick={() => handleTab(item)}
                           >
                             <CardContent>
                               <Grid container spacing={2}>
