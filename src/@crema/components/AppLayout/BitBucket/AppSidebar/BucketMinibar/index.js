@@ -125,10 +125,12 @@ const BucketMinibar = (props) => {
             subMenu={[
               { name: 'Perlu Tindak Lanjut' },
               { name: 'Lacak Proses' },
-              { name: 'Pemohon' },
               { name: 'Komposer' },
               { name: 'Draft' },
               { name: 'Template' },
+              { name: 'Surat Diminta' },
+              { name: 'Surat Terkirim' },
+              { name: 'Surat Dibatalkan' },
             ]}
           />
           <BucketMinibarItem
