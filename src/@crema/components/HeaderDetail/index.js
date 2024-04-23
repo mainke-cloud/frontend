@@ -148,7 +148,6 @@ const HeaderDetail = ({
               )}
               {send && (
                 <IconButton
-                  onClick={onOpenComposeMail}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Send style={{ width: '28px', height: '28px' }} />
@@ -210,10 +209,6 @@ const HeaderDetail = ({
         </Stack>
       </Stack>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
     </>
   );
 };
