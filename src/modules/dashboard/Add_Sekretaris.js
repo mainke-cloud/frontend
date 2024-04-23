@@ -14,6 +14,7 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
 import ComposeMail from "@crema/components/AppAddress";
+import Filter_sekretaris from "./FilterPopUp/Filter_sekretaris";
 
 
 const IOSSwitch = styled((props) => (
@@ -80,6 +81,14 @@ const Add_Sekretaris = () => {
         setComposeMail(false);
     };
 
+    const handleFilterClick = () => {
+        setOpenFilter(!openFilter); // Toggle nilai openFilter
+      };
+    
+      const handleCloseFilter = () => {
+        setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
+      };
+
     const handleClick = () => {
         setIsActive(!isActive);
     };
@@ -94,11 +103,12 @@ const Add_Sekretaris = () => {
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <Typography variant="h2">Sekretaris Saya</Typography>
                                     <Stack direction="row" alignItems="center" spacing={3}>
-                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}> 
+                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }} onClick={handleFilterClick}> 
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
                                                 <Typography sx={{color: '#E42313'}}>Urutkan</Typography>
                                                 <img src={Filter} style={{height: 20, width: 20}}/>
                                             </Stack>
+                                            <Filter_sekretaris open={openFilter} onClose={handleCloseFilter} />
                                         </Box>
                                         <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>

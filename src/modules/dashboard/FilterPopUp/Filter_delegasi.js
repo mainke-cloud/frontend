@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Button, Card, CardContent, Divider, Grid, IconButton, Popover, Stack, Typography } from '@mui/material';
 import { X } from 'feather-icons-react';
 
-export default function Filter_sekretaris({ open, onClose }) {
+export default function Filter_delegasi({ open, onClose }) {
 
-    const [statusFilter, setStatusFilter] = React.useState(null);
+    const [dateFilter, setDateFilter] = React.useState(null);
 
-    const handleStatusFilter = (value) => {
-      setStatusFilter(value);
+    const handleDateFilter = (value) => {
+      setDateFilter(value);
     };
     return(
         <>
@@ -44,28 +44,28 @@ export default function Filter_sekretaris({ open, onClose }) {
                             </Grid>
                             <Divider />
                             <Stack alignItems='start' gap={4}>
-                                <Typography>Keaktifan</Typography>
+                                <Typography>Tanggal Habis</Typography>
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                         <Button
-                                        variant={statusFilter === 'Aktif' ? 'contained' : 'outlined'}
-                                        onClick={() => handleStatusFilter('Aktif')}
+                                        variant={dateFilter === 'Terdekat' ? 'contained' : 'outlined'}
+                                        onClick={() => handleDateFilter('Terdekat')}
                                         fullWidth
                                         >
-                                        Aktif
+                                        Terdekat
                                         </Button>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Button
-                                        variant={statusFilter === 'Nonaktif' ? 'contained' : 'outlined'}
-                                        onClick={() => handleStatusFilter('Nonaktif')}
+                                        variant={dateFilter === 'Terjauh' ? 'contained' : 'outlined'}
+                                        onClick={() => handleDateFilter('Terjauh')}
                                         fullWidth
                                         >
-                                        Nonaktif
+                                        Terjauh
                                         </Button>
                                     </Grid>
                                 </Grid>
-                                <Button variant="contained" fullWidth>Cari Sekretaris</Button>
+                                <Button variant="contained" fullWidth>Cari Delegasi</Button>
                             </Stack>
                         </CardContent>
                     </Card>
@@ -74,7 +74,7 @@ export default function Filter_sekretaris({ open, onClose }) {
     )
 }
 
-Filter_sekretaris.propTypes = {
+Filter_delegasi.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
   };

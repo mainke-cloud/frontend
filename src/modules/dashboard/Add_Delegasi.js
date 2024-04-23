@@ -15,12 +15,14 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
 import ComposeMail from "@crema/components/AppAddress";
+import Filter_delegasi from "./FilterPopUp/Filter_delegasi";
 
 
 const Add_Delegasi = () => {
     const [dateFrom, setDateFrom] = React.useState(null);
     const [dateTo, setDateTo] = React.useState(null);
     const [isComposeMail, setComposeMail] = React.useState(false);
+    const [openFilter, setOpenFilter] = React.useState(false);
 
     const onOpenComposeMail = () => {
         setComposeMail(true);
@@ -29,6 +31,14 @@ const Add_Delegasi = () => {
     const onCloseComposeMail = () => {
         setComposeMail(false);
     };
+    
+    const handleFilterClick = () => {
+        setOpenFilter(!openFilter); // Toggle nilai openFilter
+      };
+    
+      const handleCloseFilter = () => {
+        setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
+      };
 
     const [isActive, setIsActive] = useState(true);
 
@@ -46,11 +56,12 @@ const Add_Delegasi = () => {
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <Typography variant="h2">Delegasi Saya</Typography>
                                     <Stack direction="row" alignItems="center" spacing={3}>
-                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}> 
+                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }} onClick={handleFilterClick}> 
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
                                                 <Typography sx={{color: '#E42313'}}>Urutkan</Typography>
                                                 <img src={Filter} style={{height: 20, width: 20}}/>
                                             </Stack>
+                                            <Filter_delegasi open={openFilter} onClose={handleCloseFilter} />
                                         </Box>
                                         <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
