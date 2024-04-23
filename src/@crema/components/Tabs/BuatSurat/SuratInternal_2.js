@@ -13,12 +13,23 @@ import PPImage from '../../../../assets/BuatSurat/PP.png';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
 import KomentarSection from './KomentarSection/KomentarSection';
+import ComposeMail from '@crema/components/AppAddress';
+import ListKomentar from '../SuratKeluar/ListKomentar';
 
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [isComposeMail, setComposeMail] = React.useState(false);
 
   const handleShow = () => {
     setShowPreview(!showPreview);
+  };
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
   };
 
   return (
@@ -60,9 +71,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
                   color: 'black',
                   textDecorationColor: 'black',
                 }}
-                onClick={() => {
-                  console.log('pop up address book');
-                }}
+                onClick={() => onOpenComposeMail()}
               >
                 Kepada
               </Link>
@@ -72,19 +81,22 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               </Typography>
             </Stack>
 
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-
-                  endAdornment: <ButtonBuatSurat />,
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              ></AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
 
             <Stack direction='row' spacing={4} alignItems={'center'}>
               <Typography>Tampilkan Kepada</Typography>
@@ -100,17 +112,22 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
                 Update
               </Button>
             </Stack>
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
+
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              ></AppScrollbar>
+            </Box>
 
             <Link
               component='button'
@@ -122,26 +139,28 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
                 textDecorationColor: 'black',
                 textAlign: 'start',
               }}
-              onClick={() => {
-                console.log('pop up address book');
-              }}
+              onClick={() => onOpenComposeMail()}
             >
               Tembusan
             </Link>
 
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-
-                  endAdornment: <ButtonBuatSurat />,
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              ></AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
+
             <Stack direction='row' spacing={4} alignItems={'center'}>
               <Typography>Tampilkan Kepada</Typography>
               <Button
@@ -156,17 +175,22 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
                 Update
               </Button>
             </Stack>
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
+
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              ></AppScrollbar>
+            </Box>
 
             <Stack direction='row' justifyContent='flex-end' spacing={4}>
               <Button
@@ -207,6 +231,11 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
         src={PreviewSuratImage}
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
+      />
+
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
       />
     </Box>
   );

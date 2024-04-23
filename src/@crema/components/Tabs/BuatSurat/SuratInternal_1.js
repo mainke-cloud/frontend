@@ -20,6 +20,9 @@ import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.pn
 import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import KomentarSection from './KomentarSection/KomentarSection';
+import AppScrollbar from '@crema/components/AppScrollbar';
+import ListKomentar from '../SuratKeluar/ListKomentar';
+import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 
 const perihal = [
   {
@@ -138,21 +141,23 @@ const SuratInternal_1 = ({ handleNext }) => {
             >
               Klarifikasi Masalah
             </Typography>
-            <TextField
-              sx={{ marginTop: '8px' }}
-              placeholder={'Klarifikasi Masalah'}
-              variant='outlined'
-              fullWidth
-              InputProps={{
-                readOnly: true,
 
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
               }}
-            />
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
+                }}
+              ></AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
 
             <Typography
               variant='body1'

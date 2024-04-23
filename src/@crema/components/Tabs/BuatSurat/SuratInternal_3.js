@@ -10,12 +10,22 @@ import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 3.png';
 import PropTypes from 'prop-types';
 import KomentarSection from './KomentarSection/KomentarSection';
+import ComposeMail from '@crema/components/AppAddress';
 
 const SuratInternal_3 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [isComposeMail, setComposeMail] = React.useState(false);
 
   const handleShow = () => {
     setShowPreview(!showPreview);
+  };
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
   };
 
   return (
@@ -57,9 +67,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
                   color: 'black',
                   textDecorationColor: 'black',
                 }}
-                onClick={() => {
-                  console.log('pop up address book');
-                }}
+                onClick={() => onOpenComposeMail()}
               >
                 Jabatan
               </Link>
@@ -69,12 +77,15 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
             </Stack>
 
             <TextField
+              disabled
               fullWidth
               defaultValue='Kepala Research and Development'
               InputProps={{
                 endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
+                  <IconButton onClick={() => onOpenComposeMail()}>
+                    <AddCircleOutlineRoundedIcon
+                      sx={{ color: 'black', fontSize: '40px' }}
+                    />
                   </IconButton>
                 ),
               }}
@@ -90,9 +101,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
                   color: 'black',
                   textDecorationColor: 'black',
                 }}
-                onClick={() => {
-                  console.log('pop up address book');
-                }}
+                onClick={() => onOpenComposeMail()}
               >
                 Nama
               </Link>
@@ -102,12 +111,15 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
             </Stack>
 
             <TextField
+              disabled
               fullWidth
               defaultValue='Taufik Sulaeman'
               InputProps={{
                 endAdornment: (
                   <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
+                    <AddCircleOutlineRoundedIcon
+                      sx={{ color: 'black', fontSize: '40px' }}
+                    />
                   </IconButton>
                 ),
               }}
@@ -115,26 +127,26 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
             <Typography variant='h4'>Divisi</Typography>
 
-            <TextField fullWidth defaultValue='Divisi Informasi' />
+            <TextField disabled fullWidth defaultValue='Divisi Informasi' />
 
             <Stack direction='row' spacing={5}>
               <Stack flex={1} spacing={5}>
                 <Typography variant='h4'>NIK</Typography>
-                <TextField defaultValue='8900002' />
+                <TextField disabled defaultValue='8900002' />
               </Stack>
               <Stack flex={1} spacing={5}>
                 <Typography variant='h4'>Kode Departemen</Typography>
-                <TextField defaultValue='DIT-11 B 10000' />
+                <TextField disabled defaultValue='DIT-11 B 10000' />
               </Stack>
             </Stack>
 
             <Typography variant='h4'>Departemen</Typography>
 
-            <TextField fullWidth defaultValue='Decision Support' />
+            <TextField disabled fullWidth defaultValue='Decision Support' />
 
             <Typography variant='h4'>Kota Kantor</Typography>
 
-            <TextField fullWidth defaultValue='Bandung' />
+            <TextField disabled fullWidth defaultValue='Bandung' />
 
             <Stack direction='row' justifyContent='flex-end' spacing={4}>
               <Button
@@ -175,6 +187,11 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         src={PreviewSuratImage}
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
+      />
+
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
       />
     </Box>
   );

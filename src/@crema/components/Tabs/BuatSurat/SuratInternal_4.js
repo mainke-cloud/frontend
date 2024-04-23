@@ -82,18 +82,17 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
             <Box
               position={'relative'}
               sx={{
-                border: '2px solid gray',
+                border: '1px solid #B1B5BA',
                 borderRadius: '10px',
               }}
             >
               <AppScrollbar
                 sx={{
-                  maxHeight: '200px',
+                  minHeight: '145px',
+                  maxHeight: '145px',
                   overflow: 'auto',
                 }}
-              >
-                <ListKomentar label={'Disetujui'} />
-              </AppScrollbar>
+              ></AppScrollbar>
               <ButtonBuatSurat pemeriksa />
             </Box>
 
@@ -107,24 +106,28 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
                   color: 'black',
                   textDecorationColor: 'black',
                 }}
-                onClick={() => {
-                  console.log('pop up address book');
-                }}
+                onClick={() => onOpenComposeMail()}
               >
                 Pemohon
               </Link>
-              <Typography variant='h4' color='red'>
-                *
-              </Typography>
             </Stack>
 
-            <TextField
-              id='outlined-multiline-static'
-              fullWidth
-              InputProps={{
-                endAdornment: <ButtonBuatSurat />,
+            <Box
+              position={'relative'}
+              sx={{
+                border: '1px solid #B1B5BA',
+                borderRadius: '10px',
               }}
-            />
+            >
+              <AppScrollbar
+                sx={{
+                  minHeight: '145px',
+                  maxHeight: '145px',
+                  overflow: 'auto',
+                }}
+              ></AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
 
             <Stack direction='row' justifyContent='flex-end' spacing={4}>
               <Button
