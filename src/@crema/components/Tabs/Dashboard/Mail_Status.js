@@ -13,12 +13,12 @@ const Mail_Status = ({ image, text, boxColor, counter }) => {
   return (
     <>
       <AppCard  
-      sx={{  
-        cursor: 'pointer', 
-        '&:hover': {
-          backgroundColor: '#D9DDE3',
-        } 
-      }} 
+      // sx={{  
+      //   cursor: 'pointer', 
+      //   // '&:hover': {
+      //   //   backgroundColor: '#D9DDE3',
+      //   // } 
+      // }} 
       onClick={handleClick} >
         <Grid container alignItems="center" justifyContent="center">
           <Grid item xs={3}>

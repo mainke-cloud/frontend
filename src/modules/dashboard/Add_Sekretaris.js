@@ -175,7 +175,7 @@ const Add_Sekretaris = () => {
                                 </Box>
                                 <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 1, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }} flex={1}>
                                     <Stack direction='row' alignItems="center" justifyContent="center" spacing={2}>
-                                        <Typography  sx={{color: '#E42313'}}>Hapus Delegasi</Typography>
+                                        <Typography  sx={{color: '#E42313'}}>Hapus Sekretaris</Typography>
                                         <img src={Trash} style={{height: 24, width: 24}}/>
                                     </Stack>
                                 </Box>
