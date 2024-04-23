@@ -30,9 +30,11 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-const MiniTab = ({ tabs, changeValue }) => {
+const MiniTab = ({ tabs, changeValue, disable }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(changeValue !== undefined ? changeValue : 0);
+  const [value, setValue] = React.useState(
+    changeValue !== undefined ? changeValue : 0,
+  );
 
   React.useEffect(() => {
     setValue(changeValue !== undefined ? changeValue : 0);
@@ -57,9 +59,13 @@ const MiniTab = ({ tabs, changeValue }) => {
           indicatorColor='none'
           sx={{ minHeight: 0 }}
         >
-          {tabs.map((tab, index) => (
-            <StyledTab key={index} label={tab.name} value={index} />
-          ))}
+          {tabs.map((tab, index) =>
+            disable ? (
+              <StyledTab key={index} label={tab.name} value={index} disabled />
+            ) : (
+              <StyledTab key={index} label={tab.name} value={index} />
+            ),
+          )}
         </TabList>
       </Box>
       {tabs.map((tab, index) => (
@@ -75,10 +81,10 @@ const MiniTab = ({ tabs, changeValue }) => {
   );
 };
 
-
 MiniTab.propTypes = {
   tabs: PropTypes.array,
   changeValue: PropTypes.number,
+  disable: PropTypes.bool
 };
 
 export default MiniTab;

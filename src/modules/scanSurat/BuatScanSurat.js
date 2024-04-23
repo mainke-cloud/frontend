@@ -1,27 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
+import { Box, Stack, Grid, Typography, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import HeaderDetail from '@crema/components/HeaderDetail';
 import LabelInput from '@crema/components/LabelInput';
-
-import UploadFile from '../../assets/icon/uploadfile.svg';
-import PdfVector from '../../assets/vector/PdfVector.svg';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import MiniTab from '@crema/components/MiniTab';
 import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+import ComposeMail from '@crema/components/AppAddress';
 
 const Buttons = styled(Button)(({ theme }) => ({
   borderRadius: '8px',
@@ -39,52 +24,14 @@ const Buttons = styled(Button)(({ theme }) => ({
 }));
 
 const BuatScanSurat = () => {
-  const [file, setFile] = useState([]);
-  const [upload, setUpload] = useState(true);
+  const [isComposeMail, setComposeMail] = React.useState(false);
 
-  const getTotalSize = (files) => {
-    let totalSize = 0;
-    files.forEach((file) => {
-      totalSize += file.size;
-    });
-    return (totalSize / (1024 * 1024)).toFixed(2);
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
   };
 
-  const TotalSize = getTotalSize(file);
-
-  const bytesConvert = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    if (mb < 1) {
-      return (bytes / 1024).toFixed(2) + ' Kb';
-    } else {
-      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
-    }
-  };
-
-  const handleFileSelected = (event) => {
-    const files = event.target.files;
-    setFile([...file, ...files]);
-    setUpload(false);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    setFile([...file, ...files]);
-    setUpload(false);
-  };
-
-  const handleDeleteFile = (index) => {
-    const newFiles = [...file];
-    newFiles.splice(index, 1);
-    setFile(newFiles);
-    if (newFiles.length == 0) {
-      setUpload(true);
-    }
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
   };
 
   const [formData, setFormData] = useState({
@@ -178,16 +125,20 @@ const BuatScanSurat = () => {
                 label='Kepada'
                 important
                 under
+                addressBook
                 value={formData.kepada}
                 onChange={handleInputChange}
+                onClick={onOpenComposeMail}
               />
               <LabelInput
                 type='textfield'
                 name='tembusan'
                 label='Tembusan'
                 under
+                addressBook
                 value={formData.tembusan}
                 onChange={handleInputChange}
+                onClick={onOpenComposeMail}
               />
               <LabelInput
                 type='input'
@@ -214,8 +165,10 @@ const BuatScanSurat = () => {
                 label='Klasifikasi Masalah'
                 important
                 under
+                addressBook
                 value={formData.klasifikasiMasalah}
                 onChange={handleInputChange}
+                onClick={onOpenComposeMail}
               />
               <LabelInput
                 type='input'
@@ -241,6 +194,10 @@ const BuatScanSurat = () => {
             Selanjutnya (Lainnya)
           </Buttons>
         </Stack>
+        <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
       </>
     );
   };
@@ -411,14 +368,6 @@ const BuatScanSurat = () => {
                 MB.
               </Typography>
             </Stack>
-            {TotalSize > 25 && (
-              <Stack paddingTop='16px'>
-                <Typography fontWeight='700'>Perhatian :</Typography>
-                <Typography fontSize='12px'>
-                  Besar Ukuran Surat & Lampiran yang dipilih melebihi batas
-                </Typography>
-              </Stack>
-            )}
           </Grid>
         </Grid>
         <Stack
@@ -453,6 +402,7 @@ const BuatScanSurat = () => {
               { name: 'Lainnya', content: Lainnya() },
             ]}
             changeValue={value}
+            disable
           />
         </Box>
       </Box>
