@@ -21,7 +21,7 @@ const SuratInternal = () => {
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
-      <HeaderDetail nama='Buat Surat' save copy translate />
+      <HeaderDetail nama='Buat Surat Internal' save copy translate />
       {showNext === 0 ? (
         <SuratInternal_1 handleNext={handleNext} />
       ) : showNext === 1 ? (
