@@ -73,250 +73,83 @@ const SuratDelegasi_1 = ({ handleNext }) => {
   };
 
   return (
-    <Box
-      sx={{
-        margin: '26px',
-        bgcolor: '#FFFFFF',
-        borderRadius: '12px',
-        boxShadow: '0px 1px 4px 1px #42424233',
-        padding: '20px',
-      }}
-    >
-      <img
-        src={StepImage}
-        alt='gambar step'
-        style={{
-          maxHeight: '120px',
+    <Box>
+      <Stack
+        spacing={4}
+        sx={{
+          border: '1px solid #D8D8D8',
+          minHeight: '420px',
+          borderRadius: '12px',
+          padding: '15px',
         }}
-      />
+      >
+        <Typography
+          variant='h4'
+          sx={{
+            '&::after': {
+              content: '"*"',
+              color: 'red',
+            },
+          }}
+        >
+          Perihal
+        </Typography>
 
-      <Grid container spacing={5} sx={{}}>
-        <Grid item xs={8}>
-          <Stack
-            spacing={4}
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        ></TextField>
+
+        <Stack direction='row' spacing={5}>
+          <Stack flex={1} spacing={5}>
+            <Typography variant='h4'>Tanggal Mulai</Typography>
+            <TextField />
+          </Stack>
+          <Stack flex={1} spacing={5}>
+            <Typography variant='h4'>Tanggal Selesai</Typography>
+            <TextField />
+          </Stack>
+        </Stack>
+        <Typography variant='h4'>Lampiran</Typography>
+        <TextField
+          sx={{ marginTop: '8px' }}
+          placeholder={'Masukkan jumlah'}
+          variant='outlined'
+          fullWidth
+          type='number'
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <Stack direction='row' justifyContent='flex-end' spacing={4}>
+          <Button
+            variant='contained'
             sx={{
-              border: '1px solid #D8D8D8',
-              minHeight: '570px',
               borderRadius: '12px',
-              padding: '15px',
+              bgcolor: '#D9DDE3',
+              color: '#5C5E61',
+              minWidth: '84px',
             }}
           >
-            <Typography
-              variant='h4'
-              sx={{
-                '&::after': {
-                  content: '"*"',
-                  color: 'red',
-                },
-              }}
-            >
-              Perihal
-            </Typography>
+            Kembali
+          </Button>
 
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {perihal.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <Typography
-              variant='h4'
-              sx={{
-                '&::after': {
-                  content: '"*"',
-                  color: 'red',
-                },
-              }}
-            >
-              Klarifikasi Masalah
-            </Typography>
-            <TextField
-              sx={{ marginTop: '8px' }}
-              placeholder={'Klarifikasi Masalah'}
-              variant='outlined'
-              fullWidth
-              InputProps={{
-                readOnly: true,
-
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
-              }}
-            />
-
-            <Typography
-              variant='body1'
-              sx={{
-                color: '#5C5E61',
-                // width: '370px',
-              }}
-            >
-              Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi
-              masalah
-            </Typography>
-            <Typography variant='h4'>Prioritas Surat</Typography>
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {prioritas.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Typography variant='h4'>Jenis Surat</Typography>
-            <TextField
-              id='outlined-select-currency'
-              select
-              fullWidth
-              defaultValue='1'
-            >
-              {jenisSurat.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <Typography variant='h4'>Lampiran</Typography>
-            <TextField
-              sx={{ marginTop: '8px' }}
-              placeholder={'Masukkan jumlah'}
-              variant='outlined'
-              fullWidth
-              type='number'
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <Stack direction='row' justifyContent='flex-end' spacing={4}>
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '12px',
-                  bgcolor: '#E42313',
-                  minWidth: '220px',
-                  minHeight: '50px',
-                }}
-                onClick={handleNext}
-              >
-                Selanjutnya (Pengirim)
-              </Button>
-            </Stack>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Stack spacing={7}>
-            <Stack
-              spacing={3}
-              sx={{
-                border: '1px solid #D8D8D8',
-                minHeight: '208px',
-                borderRadius: '12px',
-                padding: '15px',
-              }}
-            >
-              <Stack direction='row' padding='10px' paddingLeft='17px'>
-                <Icon>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </Icon>
-
-                <Typography
-                  variant='h4'
-                  sx={{
-                    '&::after': {
-                      content: '"*"',
-                      color: 'red',
-                    },
-                    paddingLeft: '8px',
-                  }}
-                >
-                  Komentar
-                </Typography>
-              </Stack>
-              <TextField
-                id='outlined-multiline-static'
-                placeholder='Tambahkan komentar...'
-                multiline
-                fullWidth
-                rows={4}
-              />
-              {showPreview && (
-                <Stack spacing={3}>
-                  <Stack direction='row' padding='10px' paddingLeft='17px'>
-                    <Icon>
-                      <CiFileOn />
-                    </Icon>
-
-                    <Typography
-                      variant='h4'
-                      sx={{
-                        paddingLeft: '8px',
-                      }}
-                    >
-                      Lampiran
-                    </Typography>
-                  </Stack>
-
-                  <PreviewSurat />
-                </Stack>
-              )}
-              <Stack direction='row' spacing={4} justifyContent='flex-end'>
-                <Button
-                  variant='outlined'
-                  sx={{
-                    borderRadius: '24px',
-                    borderColor: '#7C8B9D',
-                    color: '#000000',
-                  }}
-                  onClick={handleShow}
-                >
-                  <Icon
-                    sx={{
-                      marginRight: '8px',
-                    }}
-                  >
-                    <GrAttachment
-                      style={{
-                        fontSize: 18,
-                      }}
-                    />
-                  </Icon>
-                  Masukkan file
-                </Button>
-                <Button
-                  variant='contained'
-                  sx={{
-                    borderRadius: '24px',
-                    bgcolor: '#4B4747',
-                  }}
-                >
-                  Kirim
-                </Button>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Grid>
-      </Grid>
-
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
+          <Button
+            variant='contained'
+            sx={{
+              borderRadius: '12px',
+              bgcolor: '#E42313',
+              minWidth: '220px',
+              minHeight: '50px',
+            }}
+            onClick={handleNext}
+          >
+            Selanjutnya (Pengirim)
+          </Button>
+        </Stack>
+      </Stack>
     </Box>
   );
 };
