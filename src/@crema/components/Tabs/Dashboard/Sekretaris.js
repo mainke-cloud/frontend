@@ -50,7 +50,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         <Typography>{ID}</Typography>
                 </Stack>
             </Grid>
-            <Grid item xs={11} sx={{marginTop: 2}}>
+            {/* <Grid item xs={11} sx={{marginTop: 2}}>
                 <Box 
                     alignItems="center" 
                     justifyContent="center"
@@ -73,7 +73,7 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                 >
                      <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
                 </Box>
-            </Grid>
+            </Grid> */}
             <Divider variant="middle" sx={{ mb: 4 }} />
         </Grid>
     )
