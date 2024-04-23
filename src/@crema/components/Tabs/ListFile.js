@@ -59,7 +59,7 @@ const ListFile = ({ files, label }) => {
           {label}
         </Typography>
         <Stack direction='row' columnGap='24px' alignItems='center'>
-          <Typography color='#0F6EB5'>see more</Typography>
+          <Typography color='#0F6EB5'>See more</Typography>
           <IconButton onClick={handleDetailList}>
             <Menu />
           </IconButton>
@@ -71,6 +71,7 @@ const ListFile = ({ files, label }) => {
       <AppScrollbar
         sx={{
           minHeight: '100px',
+          maxHeight: '180px',
           overflowY: 'auto',
           border: '1px solid #E0E0E0',
         }}
@@ -189,8 +190,8 @@ ListFile.propTypes = {
   label: PropTypes.string.isRequired,
   files: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      size: PropTypes.number.isRequired,
+      Lampiran: PropTypes.any.isRequired,
+      Refrensi: PropTypes.any.isRequired,
     }),
   ).isRequired,
 };

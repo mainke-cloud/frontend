@@ -342,13 +342,13 @@ export default function DisposisiSidebar({ isCollapsed }) {
 
   const open_add = Boolean(openAdd);
   const open_filter = Boolean(openFilter);
-  const open_add = Boolean(openAdd);
-  const open_filter = Boolean(openFilter);
+  // const open_add = Boolean(openAdd);
+  // const open_filter = Boolean(openFilter);
   const id = open ? 'simple-popover' : undefined;
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
-  const dispatch = useDispatch();
-  const tabs = useSelector((state) => state.tab.tabs);
+  // const dispatch = useDispatch();
+  // const tabs = useSelector((state) => state.tab.tabs);
 
   const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Disposisi', item));
@@ -360,7 +360,7 @@ export default function DisposisiSidebar({ isCollapsed }) {
           <TextField
             variant='outlined'
             size='small'
-            size='small'
+            // size='small'
             placeholder='Search'
             value={searchInput}
             onChange={handleSearchInput}

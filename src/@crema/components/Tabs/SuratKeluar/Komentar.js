@@ -13,8 +13,6 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import ListKomentar from './ListKomentar';
 const Komentar = () => {
-
-
   const BalasButton = styled(Button)({
     borderRadius: '25px',
     backgroundColor: '#4B4747',
@@ -31,7 +29,6 @@ const Komentar = () => {
       boxShadow: 'none',
     },
   });
-
 
   return (
     <Box
