@@ -9,6 +9,7 @@ import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 3.png';
 import PropTypes from 'prop-types';
+import KomentarSection from './KomentarSection/KomentarSection';
 
 const SuratInternal_3 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
@@ -166,96 +167,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         </Grid>
 
         <Grid item xs={4}>
-          <Stack spacing={7}>
-            <Stack
-              spacing={3}
-              sx={{
-                border: '1px solid #D8D8D8',
-                minHeight: '208px',
-                borderRadius: '12px',
-                padding: '15px',
-              }}
-            >
-              <Stack direction='row' padding='10px' paddingLeft='17px'>
-                <Icon>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </Icon>
-
-                <Typography
-                  variant='h4'
-                  sx={{
-                    '&::after': {
-                      content: '"*"',
-                      color: 'red',
-                    },
-                    paddingLeft: '8px',
-                  }}
-                >
-                  Komentar
-                </Typography>
-              </Stack>
-              <TextField
-                id='outlined-multiline-static'
-                placeholder='Tambahkan komentar...'
-                multiline
-                fullWidth
-                rows={4}
-              />
-              {showPreview && (
-                <Stack spacing={3}>
-                  <Stack direction='row' padding='10px' paddingLeft='17px'>
-                    <Icon>
-                      <CiFileOn />
-                    </Icon>
-
-                    <Typography
-                      variant='h4'
-                      sx={{
-                        paddingLeft: '8px',
-                      }}
-                    >
-                      Lampiran
-                    </Typography>
-                  </Stack>
-
-                  <PreviewSurat />
-                </Stack>
-              )}
-              <Stack direction='row' spacing={4} justifyContent='flex-end'>
-                <Button
-                  variant='outlined'
-                  sx={{
-                    borderRadius: '24px',
-                    borderColor: '#7C8B9D',
-                    color: '#000000',
-                  }}
-                  onClick={handleShow}
-                >
-                  <Icon
-                    sx={{
-                      marginRight: '8px',
-                    }}
-                  >
-                    <GrAttachment
-                      style={{
-                        fontSize: 18,
-                      }}
-                    />
-                  </Icon>
-                  Masukkan file
-                </Button>
-                <Button
-                  variant='contained'
-                  sx={{
-                    borderRadius: '24px',
-                    bgcolor: '#4B4747',
-                  }}
-                >
-                  Kirim
-                </Button>
-              </Stack>
-            </Stack>
-          </Stack>
+          <KomentarSection />
         </Grid>
       </Grid>
 

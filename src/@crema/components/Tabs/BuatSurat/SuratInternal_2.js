@@ -12,6 +12,7 @@ import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 2.pn
 import PPImage from '../../../../assets/BuatSurat/PP.png';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
+import KomentarSection from './KomentarSection/KomentarSection';
 
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
@@ -198,142 +199,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
         </Grid>
 
         <Grid item xs={4}>
-          <Stack spacing={7}>
-            <Stack
-              spacing={3}
-              sx={{
-                border: '1px solid #D8D8D8',
-                minHeight: '208px',
-                borderRadius: '12px',
-                padding: '15px',
-              }}
-            >
-              <Stack direction='row' padding='10px' paddingLeft='17px'>
-                <Icon>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </Icon>
-
-                <Typography
-                  variant='h4'
-                  sx={{
-                    '&::after': {
-                      content: '"*"',
-                      color: 'red',
-                    },
-                    paddingLeft: '8px',
-                  }}
-                >
-                  Komentar
-                </Typography>
-              </Stack>
-              <TextField
-                id='outlined-multiline-static'
-                placeholder='Tambahkan komentar...'
-                multiline
-                fullWidth
-                rows={4}
-              />
-              {showPreview && (
-                <Stack spacing={3}>
-                  <Stack direction='row' padding='10px' paddingLeft='17px'>
-                    <Icon>
-                      <CiFileOn />
-                    </Icon>
-
-                    <Typography
-                      variant='h4'
-                      sx={{
-                        paddingLeft: '8px',
-                      }}
-                    >
-                      Lampiran
-                    </Typography>
-                  </Stack>
-
-                  <PreviewSurat />
-                </Stack>
-              )}
-              <Stack direction='row' spacing={4} justifyContent='flex-end'>
-                <Button
-                  variant='outlined'
-                  sx={{
-                    borderRadius: '24px',
-                    borderColor: '#7C8B9D',
-                    color: '#000000',
-                  }}
-                  onClick={handleShow}
-                >
-                  <Icon
-                    sx={{
-                      marginRight: '8px',
-                    }}
-                  >
-                    <GrAttachment
-                      style={{
-                        fontSize: 18,
-                      }}
-                    />
-                  </Icon>
-                  Masukkan file
-                </Button>
-                <Button
-                  variant='contained'
-                  sx={{
-                    borderRadius: '24px',
-                    bgcolor: '#4B4747',
-                  }}
-                >
-                  Kirim
-                </Button>
-              </Stack>
-            </Stack>
-
-            <Stack
-              sx={{
-                border: '1px solid #D8D8D8',
-                minHeight: '116px',
-                borderRadius: '12px',
-              }}
-            >
-              <Typography
-                variant='h4'
-                sx={{
-                  '&::after': {
-                    content: '"*"',
-                    color: 'red',
-                  },
-                  padding: '15px',
-                }}
-              >
-                Komentar
-              </Typography>
-              <Divider />
-              <Grid container padding='15px' spacing={5}>
-                <Grid item xs={3} textAlign='center'>
-                  <img src={PPImage} alt='pp' style={{ maxHeight: '40px' }} />
-                </Grid>
-                <Grid item xs={5}>
-                  <Typography>Yani Dama Putera</Typography>
-                  <Typography>6 Oktober 2021 - 10:09</Typography>
-                  <Typography>Mohon Dicek</Typography>
-                </Grid>
-                <Grid item xs={4} textAlign={'center'}>
-                  <Typography>7200004</Typography>
-                </Grid>
-              </Grid>
-              <Stack direction='row' spacing={5} px='30px' pb='15px'>
-                <Stack direction='row'>
-                  <ChatBubbleOutlineOutlinedIcon />
-                  <Typography>2</Typography>
-                </Stack>
-                <Typography>Balas</Typography>
-                <Stack direction='row'>
-                  <CiFileOn style={{ fontSize: '25px' }} />
-                  <Typography>3</Typography>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
+          <KomentarSection />
         </Grid>
       </Grid>
 
