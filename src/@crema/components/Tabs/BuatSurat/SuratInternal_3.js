@@ -1,4 +1,4 @@
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Box, Button, Grid, Icon } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -8,8 +8,9 @@ import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 3.png';
+import PropTypes from 'prop-types';
 
-const SuratInternal_3 = () => {
+const SuratInternal_3 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
 
   const handleShow = () => {
@@ -46,9 +47,21 @@ const SuratInternal_3 = () => {
             }}
           >
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Jabatan
-              </Typography>
+              </Link>
               <Typography variant='h4' color='red'>
                 *
               </Typography>
@@ -67,9 +80,21 @@ const SuratInternal_3 = () => {
             />
 
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Nama
-              </Typography>
+              </Link>
               <Typography variant='h4' color='red'>
                 *
               </Typography>
@@ -89,17 +114,7 @@ const SuratInternal_3 = () => {
 
             <Typography variant='h4'>Divisi</Typography>
 
-            <TextField
-              fullWidth
-              defaultValue='Divisi Informasi'
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
-              }}
-            />
+            <TextField fullWidth defaultValue='Divisi Informasi' />
 
             <Stack direction='row' spacing={5}>
               <Stack flex={1} spacing={5}>
@@ -114,31 +129,11 @@ const SuratInternal_3 = () => {
 
             <Typography variant='h4'>Departemen</Typography>
 
-            <TextField
-              fullWidth
-              defaultValue='Decision Support'
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
-              }}
-            />
+            <TextField fullWidth defaultValue='Decision Support' />
 
             <Typography variant='h4'>Kota Kantor</Typography>
 
-            <TextField
-              fullWidth
-              defaultValue='Bandung'
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
-              }}
-            />
+            <TextField fullWidth defaultValue='Bandung' />
 
             <Stack direction='row' justifyContent='flex-end' spacing={4}>
               <Button
@@ -149,7 +144,7 @@ const SuratInternal_3 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -162,7 +157,7 @@ const SuratInternal_3 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (Penerima)
               </Button>
@@ -271,6 +266,11 @@ const SuratInternal_3 = () => {
       />
     </Box>
   );
+};
+
+SuratInternal_3.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_3;

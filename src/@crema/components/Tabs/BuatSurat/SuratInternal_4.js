@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { Link, Stack, TextField, Typography } from '@mui/material';
 import AppScrollbar from '../../AppScrollbar';
 import { Box, Button, Grid, Icon } from '@mui/material';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { CiFileOn } from 'react-icons/ci';
 import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 4.png';
+import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
+import ComposeMail from '@crema/components/AppAddress';
+import ListKomentar from '../SuratKeluar/ListKomentar';
+import PropTypes from 'prop-types';
 
-const SuratInternal_4 = () => {
+const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
 
   const handleShow = () => {
     setShowPreview(!showPreview);
@@ -47,33 +59,59 @@ const SuratInternal_4 = () => {
             }}
           >
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => onOpenComposeMail()}
+              >
                 Pemeriksa
-              </Typography>
+              </Link>
+
               <Typography variant='h4' color='red'>
                 *
               </Typography>
             </Stack>
-            <AppScrollbar>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+
+            <Box
+              position={'relative'}
+              sx={{
+                border: '2px solid gray',
+                borderRadius: '10px',
+              }}
+            >
+              <AppScrollbar
+                sx={{
+                  maxHeight: '200px',
+                  overflow: 'auto',
                 }}
-              />
-            </AppScrollbar>
+              >
+                <ListKomentar label={'Disetujui'} />
+              </AppScrollbar>
+              <ButtonBuatSurat pemeriksa />
+            </Box>
 
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Pemohon
-              </Typography>
+              </Link>
               <Typography variant='h4' color='red'>
                 *
               </Typography>
@@ -83,11 +121,7 @@ const SuratInternal_4 = () => {
               id='outlined-multiline-static'
               fullWidth
               InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                  </IconButton>
-                ),
+                endAdornment: <ButtonBuatSurat />,
               }}
             />
 
@@ -100,7 +134,7 @@ const SuratInternal_4 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -113,7 +147,7 @@ const SuratInternal_4 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (lainnya)
               </Button>
@@ -220,8 +254,18 @@ const SuratInternal_4 = () => {
         alt='surat'
         style={{ paddingTop: '20px', maxWidth: '1305px' }}
       />
+
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
     </Box>
   );
+};
+
+SuratInternal_4.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_4;

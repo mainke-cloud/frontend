@@ -12,7 +12,7 @@ import {
   listData1,
   listData2,
   listData3,
-} from '../../../../@crema/services/dummy/sidebar/listDataDisposisi';
+} from '../../../../@crema/services/dummy/sidebar/listDataSuratKeluar';
 import ListFile from '../ListFile';
 const TabContentLainnya = () => {
   const files = [listData1, listData2, listData3];
@@ -22,14 +22,16 @@ const TabContentLainnya = () => {
     lineHeight: '20px',
     padding: '16px 16px 0px 16px',
   });
+  const lampiran = files[0][0].Lampiran;
+  const refrensi = files[0][0].Refrensi;
   return (
     <>
       <TabWrapper sx={{ height: '575px' }}>
-        <Stack rowGap='10px' sx={{ p:5 }}>
-          <ListFile files={files} label='Lampiran' />
+        <Stack rowGap='10px' sx={{ p: 5 }}>
+          <ListFile files={lampiran} label='Lampiran' />
         </Stack>
-        <Stack rowGap='10px' sx={{ p:5 }}>
-          <ListFile files={files} label='Refrensi' />
+        <Stack rowGap='10px' sx={{ p: 5 }}>
+          <ListFile files={refrensi} label='Refrensi' />
         </Stack>
       </TabWrapper>
     </>

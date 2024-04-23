@@ -8,6 +8,8 @@ import { GrAttachment } from 'react-icons/gr';
 import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 5.png';
 import AddFileImage from '../../../../assets/BuatSurat/addfile.png';
+import DropZoneFile from '../DropZoneFile';
+import PropTypes from 'prop-types';
 
 const style = {
   position: 'absolute',
@@ -22,7 +24,7 @@ const style = {
   alignItems: 'center',
 };
 
-const SuratInternal_5 = () => {
+const SuratInternal_5 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -64,30 +66,7 @@ const SuratInternal_5 = () => {
           >
             <Typography variant='h4'>Penerima Delegasi</Typography>
 
-            <Stack
-              spacing={2}
-              sx={{
-                border: '2px dashed #B1B5BA',
-                height: '180px',
-                borderRadius: '8px',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <img
-                src={AddFileImage}
-                alt='addfileimage'
-                style={{
-                  maxHeight: '50px',
-                }}
-              />
-              <Stack direction='row' spacing={1}>
-                <Typography variant='h4'>Tarik File atau</Typography>
-                <Typography variant='h4' color='#E42313'>
-                  Cari
-                </Typography>
-              </Stack>
-            </Stack>
+            <DropZoneFile />
 
             <Stack spacing={2}>
               <Typography variant='h5'>Perhatian :</Typography>
@@ -115,7 +94,7 @@ const SuratInternal_5 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -157,6 +136,7 @@ const SuratInternal_5 = () => {
                           bgcolor: '#5C5E61',
                         },
                       }}
+                      onClick={handleClose}
                     >
                       Tidak
                     </Button>
@@ -284,6 +264,11 @@ const SuratInternal_5 = () => {
       />
     </Box>
   );
+};
+
+SuratInternal_5.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_5;

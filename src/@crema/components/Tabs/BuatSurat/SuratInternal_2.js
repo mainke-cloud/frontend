@@ -1,8 +1,7 @@
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { Link, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import AppScrollbar from '../../AppScrollbar';
 import { Box, Button, Grid, Icon } from '@mui/material';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { CiFileOn } from 'react-icons/ci';
 import PreviewSurat from '@crema/components/PreviewSurat';
@@ -11,8 +10,10 @@ import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import Divider from '@mui/material/Divider';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 2.png';
 import PPImage from '../../../../assets/BuatSurat/PP.png';
+import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
+import PropTypes from 'prop-types';
 
-const SuratInternal_2 = () => {
+const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const [showPreview, setShowPreview] = useState(false);
 
   const handleShow = () => {
@@ -49,13 +50,27 @@ const SuratInternal_2 = () => {
             }}
           >
             <Stack direction='row'>
-              <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+              <Link
+                component='button'
+                underline='always'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: 'black',
+                  textDecorationColor: 'black',
+                }}
+                onClick={() => {
+                  console.log('pop up address book');
+                }}
+              >
                 Kepada
-              </Typography>
+              </Link>
+
               <Typography variant='h4' color='red'>
                 *
               </Typography>
             </Stack>
+
             <AppScrollbar>
               <TextField
                 id='outlined-multiline-static'
@@ -63,17 +78,17 @@ const SuratInternal_2 = () => {
                 rows={4}
                 fullWidth
                 InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+                  readOnly: true,
+
+                  endAdornment: <ButtonBuatSurat />,
                 }}
               />
             </AppScrollbar>
+
             <Stack direction='row' spacing={4} alignItems={'center'}>
-              <Typography>tampilkan Kepada</Typography>
-              <Typography
+              <Typography>Tampilkan Kepada</Typography>
+              <Button
+                variant='contained'
                 sx={{
                   bgcolor: '#229BD8',
                   padding: '5px',
@@ -82,7 +97,7 @@ const SuratInternal_2 = () => {
                 }}
               >
                 Update
-              </Typography>
+              </Button>
             </Stack>
             <AppScrollbar>
               <TextField
@@ -91,17 +106,28 @@ const SuratInternal_2 = () => {
                 rows={4}
                 fullWidth
                 InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+                  readOnly: true,
                 }}
               />
             </AppScrollbar>
-            <Typography variant='h4' sx={{ textDecoration: 'underline' }}>
+
+            <Link
+              component='button'
+              underline='always'
+              sx={{
+                fontSize: '16px',
+                fontWeight: 600,
+                color: 'black',
+                textDecorationColor: 'black',
+                textAlign: 'start',
+              }}
+              onClick={() => {
+                console.log('pop up address book');
+              }}
+            >
               Tembusan
-            </Typography>
+            </Link>
+
             <AppScrollbar>
               <TextField
                 id='outlined-multiline-static'
@@ -109,17 +135,16 @@ const SuratInternal_2 = () => {
                 rows={4}
                 fullWidth
                 InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+                  readOnly: true,
+
+                  endAdornment: <ButtonBuatSurat />,
                 }}
               />
             </AppScrollbar>
             <Stack direction='row' spacing={4} alignItems={'center'}>
-              <Typography>tampilkan Kepada</Typography>
-              <Typography
+              <Typography>Tampilkan Kepada</Typography>
+              <Button
+                variant='contained'
                 sx={{
                   bgcolor: '#229BD8',
                   padding: '5px',
@@ -128,7 +153,7 @@ const SuratInternal_2 = () => {
                 }}
               >
                 Update
-              </Typography>
+              </Button>
             </Stack>
             <AppScrollbar>
               <TextField
@@ -137,11 +162,7 @@ const SuratInternal_2 = () => {
                 rows={4}
                 fullWidth
                 InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <AddCircleOutlineRoundedIcon sx={{ color: 'black' }} />
-                    </IconButton>
-                  ),
+                  readOnly: true,
                 }}
               />
             </AppScrollbar>
@@ -155,7 +176,7 @@ const SuratInternal_2 = () => {
                   color: '#5C5E61',
                   minWidth: '84px',
                 }}
-                // onClick={handleNext}
+                onClick={handlePrev}
               >
                 Kembali
               </Button>
@@ -168,7 +189,7 @@ const SuratInternal_2 = () => {
                   minWidth: '220px',
                   minHeight: '50px',
                 }}
-                // onClick={handleNext}
+                onClick={handleNext}
               >
                 Selanjutnya (Penerima)
               </Button>
@@ -323,6 +344,11 @@ const SuratInternal_2 = () => {
       />
     </Box>
   );
+};
+
+SuratInternal_2.propTypes = {
+  handleNext: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
 };
 
 export default SuratInternal_2;
