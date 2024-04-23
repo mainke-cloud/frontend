@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
+import { data } from '../../services/dummy/content/dataAddress';
+import AppScrollbar from '../AppScrollbar';
 
 import {
   Button,
@@ -36,8 +38,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
-
-import { data } from '../../services/dummy/content/dataAddress';
 
 const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
   const StyledTabsList = styled(TabsList)(
@@ -76,70 +76,8 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     }
   `;
 
-  const [selectedRow, setSelectedRow] = useState([]);
-  const [isGridVisible, setIsGridVisible] = useState(false);
-
-  const handleCheckboxChange = (event) => {
-    const checked = event.target.checked;
-    const updatedSelectedRow = checked ? data.map((_, index) => index) : [];
-    setSelectedRow(updatedSelectedRow);
-    setIsGridVisible(checked && updatedSelectedRow.length > 0);
-  
-    const selectedItems = checked ? data : [];
-  
-    setMovedData(selectedItems);
-  };
-
-  const [selectedData, setSelectedData] = useState([]);
-
-  // const handleRadioChange = (index) => {
-  //   let updatedSelectedRow;
-  //   if (selectedRow.includes(index)) {
-  //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
-  //   } else {
-  //     updatedSelectedRow = [...selectedRow, index];
-  //   }
-  //   setSelectedRow(updatedSelectedRow);
-  //   setIsGridVisible(updatedSelectedRow.length > 0);
-  // };
-
-  // radio di tekan langsung pindah
-  // const handleRadioChange = (index) => {
-  //   let updatedSelectedRow;
-  //   if (selectedRow.includes(index)) {
-  //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
-  //   } else {
-  //     updatedSelectedRow = [...selectedRow, index];
-  //   }
-  //   setSelectedRow(updatedSelectedRow);
-  //   setIsGridVisible(updatedSelectedRow.length > 0);
-
-  //   const selectedItem = data[index];
-
-  //   setSelectedData((prevSelectedData) => [...prevSelectedData, selectedItem]);
-  // };
-
-  const handleRadioChange = (index) => {
-    let updatedSelectedRow;
-    if (selectedRow.includes(index)) {
-      updatedSelectedRow = selectedRow.filter((item) => item !== index);
-    } else {
-      updatedSelectedRow = [...selectedRow, index];
-    }
-    setSelectedRow(updatedSelectedRow);
-    setIsGridVisible(updatedSelectedRow.length > 0);
-
-    const selectedItems = data.filter((_, i) => updatedSelectedRow.includes(i));
-    setMovedData(selectedItems);
-  };
-
   const [movedData, setMovedData] = useState([]);
-
-  const handleMoveData = () => {
-    const selectedData = data.filter((_, index) => selectedRow.includes(index));
-    setMovedData(selectedData);
-  };
-
+  const [selectedRow, setSelectedRow] = useState([]);
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
 
@@ -149,6 +87,29 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
 
   const handleOption2Change = (event) => {
     setSelectedOption2(event.target.value);
+  };
+
+  const handleCheckboxChange = (event) => {
+    const checked = event.target.checked;
+    const updatedSelectedRow = checked ? data.map((_, index) => index) : [];
+    setSelectedRow(updatedSelectedRow);
+
+    const selectedItems = checked ? data : [];
+
+    setMovedData(selectedItems);
+  };
+
+  const handleRadioChange = (index) => {
+    let updatedSelectedRow;
+    if (selectedRow.includes(index)) {
+      updatedSelectedRow = selectedRow.filter((item) => item !== index);
+    } else {
+      updatedSelectedRow = [...selectedRow, index];
+    }
+    setSelectedRow(updatedSelectedRow);
+
+    const selectedItems = data.filter((_, i) => updatedSelectedRow.includes(i));
+    setMovedData(selectedItems);
   };
 
   const handleRemoveAll = () => {
@@ -162,7 +123,9 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     );
     setMovedData(updatedMovedData);
 
-    const updatedSelectedRow = selectedRow.filter((item) => item !== indexToRemove);
+    const updatedSelectedRow = selectedRow.filter(
+      (item) => item !== indexToRemove,
+    );
     setSelectedRow(updatedSelectedRow);
   };
 
@@ -192,8 +155,6 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
           <Box
             style={{
               padding: 20,
-              // border: '2px solid #000',
-              // borderRadius: 8,
               outline: 'none',
             }}
           >
@@ -346,123 +307,113 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
               >
                 <Button
                   variant='contained'
-                  // color='primary'
                   sx={{
                     borderRadius: '50px',
                     minWidth: '150px',
-                    border: '2px solid #8F95B2', 
+                    border: '2px solid #8F95B2',
                     bgcolor: 'transparent',
-                    color: '#8F95B2'
+                    color: '#8F95B2',
                   }}
                   endIcon={<UserPlus />}
                 >
                   Tambah Ke Personal
                 </Button>
-                {/* <Button
-                  variant='contained'
-                  color='secondary'
-                  style={{ marginLeft: '10px' }}
-                  onClick={handleMoveData}
-                  sx={{
-                    borderRadius: '50px',
-                    minWidth: '150px',
-                    bgcolor: '#52BD94', 
-                  }}
-                >
-                  Tambahkan
-                </Button> */}
               </Box>
             </Paper>
           </Box>
         </Grid>
-        {/* {isGridVisible && ( */}
         {movedData.length > 0 && (
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={3}
+            sx={{
+              borderLeft: '1px solid #000',
+              outline: 'none',
+              maxHeight: 800,
+              overflowY: 'auto',
+            }}
+          >
             <Box
-              style={{
-                // padding: 20,
-                // border: '2px solid #000',
-                // borderRadius: 8,
-                outline: 'none',
-                maxHeight: 800,
-                overflowY: 'auto',
+              sx={{
+                padding: '20px',
+                position: 'sticky',
+                top: 0,
+                zIndex: 1,
+                backgroundColor: 'white',
               }}
             >
-              <Box
+              <Stack
+                direction='row'
+                justifyContent='space-between'
+                alignItems='center'
+              >
+                <Typography variant='h4' id='compose-mail-modal'>
+                  Pilihan
+                </Typography>
+                <Button
+                  onClick={() => handleRemoveAll([])}
+                  endIcon={<Trash2 />}
+                >
+                  Hapus Semua
+                </Button>
+              </Stack>
+            </Box>
+            <Box sx={{ height: 800 }}>
+              <AppScrollbar scrollToTop={true}>
+                <List>
+                  {movedData.map((item, index) => (
+                    <div key={index}>
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar alt={item.nama} src={item.profil} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={
+                            <Stack direction='column'>
+                              <Typography variant='subtitle1'>
+                                {item.jabatan}
+                              </Typography>
+                              <Typography variant='caption'>
+                                {item.nama}
+                              </Typography>
+                            </Stack>
+                          }
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge='end'
+                            onClick={() => handleRemoveItem(index)}
+                          >
+                            <XCircle />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                      {index !== movedData.length - 1 && <Divider />}
+                    </div>
+                  ))}
+                </List>
+              </AppScrollbar>
+            </Box>
+            <Box
+              sx={{
+                textAlign: 'center',
+                padding: '20px',
+                position: 'sticky',
+                bottom: 0,
+                zIndex: 1,
+                backgroundColor: 'white',
+              }}
+            >
+              <Button
+                variant='contained'
+                color='primary'
                 sx={{
-                  padding: '20px',
-                  position: 'sticky',
-                  top: 0,
-                  zIndex: 1,
-                  backgroundColor: 'white',
+                  borderRadius: '50px',
+                  minWidth: '200px',
                 }}
               >
-                <Stack
-                  direction='row'
-                  justifyContent='space-between'
-                  alignItems='center'
-                >
-                  <Typography variant='h4' id='compose-mail-modal'>
-                    Pilihan
-                  </Typography>
-                  <Button onClick={() => handleRemoveAll([])} endIcon={<Trash2 />}>
-                    Hapus Semua
-                  </Button>
-                </Stack>
-              </Box>
-              <List>
-                {movedData.map((item, index) => (
-                  <div key={index}>
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar alt={item.nama} src={item.profil} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Stack direction='column'>
-                            <Typography variant='subtitle1'>
-                              {item.jabatan}
-                            </Typography>
-                            <Typography variant='caption'>
-                              {item.nama}
-                            </Typography>
-                          </Stack>
-                        }
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge='end'
-                          onClick={() => handleRemoveItem(index)}
-                        >
-                          <XCircle />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    {index !== movedData.length - 1 && <Divider />}
-                  </div>
-                ))}
-                {/* data select dari radio */}
-                {/* {selectedData.map((item, index) => (
-                  <ListItem key={index}>
-                    <ListItemText
-                      primary={item.column1}
-                      secondary={item.column2}
-                    />
-                  </ListItem>
-                ))} */}
-              </List>
-              <Box sx={{ textAlign: 'center', padding: '20px' }}>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  sx={{
-                    borderRadius: '50px',
-                    minWidth: '200px',
-                  }}
-                >
-                  Konfirmasi
-                </Button>
-              </Box>
+                Konfirmasi
+              </Button>
             </Box>
           </Grid>
         )}
