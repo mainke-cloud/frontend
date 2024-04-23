@@ -134,12 +134,6 @@ const SuratInternal_5 = ({ handleNext, handlePrev }) => {
           </Modal>
         </Stack>
       </Stack>
-
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
     </>
   );
 };

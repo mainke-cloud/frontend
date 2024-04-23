@@ -159,12 +159,6 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         </Stack>
       </Stack>
 
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
-
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}

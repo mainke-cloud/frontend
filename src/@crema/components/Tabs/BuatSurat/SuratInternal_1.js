@@ -15,7 +15,6 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import { CiFileOn } from 'react-icons/ci';
 import PreviewSurat from '@crema/components/PreviewSurat';
 import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import KomentarSection from './KomentarSection/KomentarSection';
@@ -202,12 +201,6 @@ const SuratInternal_1 = ({ handleNext }) => {
           </Button>
         </Stack>
       </Stack>
-
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
     </>
   );
 };
