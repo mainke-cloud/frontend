@@ -12,11 +12,11 @@ import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
-
+import { users } from '../../../services/dummy/user/user';
 const TabContentEditPengirim = () => {
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-
+  const datas = users;
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -148,6 +148,7 @@ const TabContentEditPengirim = () => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
+        datas={datas}
       />
     </>
   );

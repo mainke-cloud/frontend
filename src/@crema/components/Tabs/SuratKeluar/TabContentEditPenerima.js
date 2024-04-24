@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Stack, Typography, Button, ButtonBase, Box, Link } from '@mui/material';
+import {
+  Stack,
+  Typography,
+  Button,
+  ButtonBase,
+  Box,
+  Link,
+} from '@mui/material';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
@@ -9,10 +16,16 @@ import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
 import { IconButton, TextField } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
-
+import { users } from '@crema/services/dummy/user/user';
+import { useSelector } from 'react-redux';
 const TabContentEditPenerima = () => {
   const [isComposeMail, setComposeMail] = React.useState(false);
-
+  const datas = users;
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -20,24 +33,7 @@ const TabContentEditPenerima = () => {
   const onCloseComposeMail = () => {
     setComposeMail(false);
   };
-  const ButtonCustom = styled(Button)({
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    backgroundColor: '#9DB5FF',
-    color: '#474D66',
-    fontSize: '12px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    padding: '6px 12px',
-    border: '1px solid #d8d8d8',
-    lineHeight: 1.5,
-    gap: '5px',
-    '&:hover': {
-      backgroundColor: '#8C8F93',
-      borderColor: '#8C8F93',
-      boxShadow: 'none',
-    },
-  });
+
   return (
     <>
       <Stack
@@ -82,7 +78,15 @@ const TabContentEditPenerima = () => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+            {datass.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
           <ButtonBuatSurat pemeriksa />
         </Box>
 
@@ -114,7 +118,15 @@ const TabContentEditPenerima = () => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+             {datass.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
         </Box>
 
         <Link
@@ -180,6 +192,11 @@ const TabContentEditPenerima = () => {
           ></AppScrollbar>
         </Box>
       </Stack>
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+        datas={datas}
+      />
     </>
   );
 };

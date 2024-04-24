@@ -32,14 +32,15 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-
+import { useSelector, useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
+import { addKepada } from '../../../redux/actions/addressbookAction';
 
-const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
+const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
   const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
     min-width: 400px;
@@ -75,7 +76,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
       cursor: not-allowed;
     }
   `;
-
+  const dispatch = useDispatch();
   const [movedData, setMovedData] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
   const [selectedOption1, setSelectedOption1] = useState('');
@@ -91,10 +92,9 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
-    const updatedSelectedRow = checked ? data.map((_, index) => index) : [];
+    const updatedSelectedRow = checked ? datas.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
-
-    const selectedItems = checked ? data : [];
+    const selectedItems = checked ? datas : [];
 
     setMovedData(selectedItems);
   };
@@ -108,8 +108,11 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     }
     setSelectedRow(updatedSelectedRow);
 
-    const selectedItems = data.filter((_, i) => updatedSelectedRow.includes(i));
+    const selectedItems = datas.filter((_, i) =>
+      updatedSelectedRow.includes(i),
+    );
     setMovedData(selectedItems);
+    dispatch(addKepada(selectedItems));
   };
 
   const handleRemoveAll = () => {
@@ -128,7 +131,10 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
     );
     setSelectedRow(updatedSelectedRow);
   };
-
+  const handleSubmit = (movedData) => {
+    // dispatch(addKepada(movedData))
+    console.log('kocak');
+  };
   return (
     <Modal
       open={isComposeMail}
@@ -247,7 +253,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                 <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
               </Box>
               <Typography variant='body2'>
-                ({data.length} Hasil) Address Book
+                ({datas.length} Hasil) Address Book
               </Typography>
             </Stack>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -264,7 +270,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map((row, index) => (
+                    {datas.map((row, index) => (
                       <TableRow key={index}>
                         <TableCell>
                           <Radio
@@ -290,7 +296,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail }) => {
                           </Stack>
                         </TableCell>
                         <TableCell>{row.pgs}</TableCell>
-                        <TableCell>{row.nik}</TableCell>
+                        <TableCell>{row.nikg}</TableCell>
                         <TableCell>{row.departemen}</TableCell>
                       </TableRow>
                     ))}
@@ -431,4 +437,5 @@ ComposeMail.defaultProps = {
 ComposeMail.propTypes = {
   isComposeMail: PropTypes.bool.isRequired,
   onCloseComposeMail: PropTypes.func.isRequired,
+  datas: PropTypes.object,
 };
