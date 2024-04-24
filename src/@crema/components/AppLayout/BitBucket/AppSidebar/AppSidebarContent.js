@@ -24,7 +24,7 @@ import { ArrowForwardIosSharp } from '@mui/icons-material';
 import { AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { childTab } from '../../../../../redux/actions/tabAction';
 import { Fonts } from '@crema/constants/AppEnums';
 import AppSidebarHeader from './AppSidebarHeader';
 import AppSidebarFooter from './AppSidebarFooter';

@@ -38,9 +38,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
-import { addKepada } from '../../../redux/actions/addressbookAction';
+import { addKepada, addTembusan } from '../../../redux/actions/addressbookAction';
 
-const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
+const ComposeMail = (props) => {
+  const { isComposeMail, onCloseComposeMail, datas, type } = props;
+
   const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
     min-width: 400px;
@@ -112,7 +114,6 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
       updatedSelectedRow.includes(i),
     );
     setMovedData(selectedItems);
-    dispatch(addKepada(selectedItems));
   };
 
   const handleRemoveAll = () => {
@@ -131,10 +132,15 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
     );
     setSelectedRow(updatedSelectedRow);
   };
-  const handleSubmit = (movedData) => {
-    // dispatch(addKepada(movedData))
-    console.log('kocak');
+
+  const handleConfirmation = (movedData) => {
+    if (type === 'Kepada') {
+      dispatch(addKepada(movedData));
+    } else if (type === 'Tembusan') {
+      dispatch(addTembusan(movedData)); 
+    }
   };
+
   return (
     <Modal
       open={isComposeMail}
@@ -171,7 +177,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
               marginBottom={5}
             >
               <Typography variant='h1' id='compose-mail-modal'>
-                Address Book
+                Address Book {type}
               </Typography>
               <IconButton onClick={onCloseComposeMail}>
                 <X />
@@ -417,6 +423,7 @@ const ComposeMail = ({ isComposeMail, onCloseComposeMail, datas }) => {
                   borderRadius: '50px',
                   minWidth: '200px',
                 }}
+                onClick={() => handleConfirmation(movedData)}
               >
                 Konfirmasi
               </Button>
@@ -438,4 +445,5 @@ ComposeMail.propTypes = {
   isComposeMail: PropTypes.bool.isRequired,
   onCloseComposeMail: PropTypes.func.isRequired,
   datas: PropTypes.object,
+  type: PropTypes.string,
 };

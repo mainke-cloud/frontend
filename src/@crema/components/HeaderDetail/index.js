@@ -3,7 +3,7 @@ import { Divider, IconButton, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import ComposeMail from '../AppAddress';
-import { closeTab } from '../../../redux/actions/tabActon';
+import { closeTab } from '../../../redux/actions/tabAction';
 import { X, Send, Save } from 'feather-icons-react';
 import {
   Edit,
@@ -18,7 +18,7 @@ import { Clipboard, Globe } from 'feather-icons-react';
 import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
-import { addTab } from '../../../redux/actions/tabActon';
+import { addTab } from '../../../redux/actions/tabAction';
 
 const HeaderDetail = ({
   nama,

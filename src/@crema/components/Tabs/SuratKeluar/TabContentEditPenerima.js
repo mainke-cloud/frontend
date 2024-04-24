@@ -1,38 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
   Button,
-  ButtonBase,
   Box,
-  Link,
 } from '@mui/material';
-import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
-import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
-import { IconButton, TextField } from '@mui/material';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ComposeMail from '@crema/components/AppAddress';
-import { users } from '@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
+import FormAddressBook from '../FormAddressBook';
 const TabContentEditPenerima = () => {
-  const [isComposeMail, setComposeMail] = React.useState(false);
-  const datas = users;
   const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
   }
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
 
   return (
     <>
@@ -45,26 +33,22 @@ const TabContentEditPenerima = () => {
           padding: '15px',
         }}
       >
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
+        <FormAddressBook text='Kepada' data={datass} />
+
+        <Stack direction='row' spacing={4} alignItems={'center'}>
+          <Typography>Tampilkan Kepada</Typography>
+          <Button
+            variant='contained'
             sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
+              bgcolor: '#229BD8',
+              padding: '5px',
+              borderRadius: '5px',
+              color: 'white',
             }}
-            onClick={() => onOpenComposeMail()}
           >
-            Kepada
-          </Link>
-
-          <Typography variant='h4' color='red'>
-            *
-          </Typography>
+            Update
+          </Button>
         </Stack>
-
         <Box
           position={'relative'}
           sx={{
@@ -87,9 +71,8 @@ const TabContentEditPenerima = () => {
               </Stack>
             ))}
           </AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
         </Box>
-
+        <FormAddressBook text='Tembusan' data={datasss} />
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
           <Button
@@ -119,7 +102,7 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-             {datass.map((item) => (
+            {datasss.map((item) => (
               <Stack key={item.id}>
                 <Typography>
                   {item.jabatan} - {item.nama}
@@ -128,75 +111,7 @@ const TabContentEditPenerima = () => {
             ))}
           </AppScrollbar>
         </Box>
-
-        <Link
-          component='button'
-          underline='always'
-          sx={{
-            fontSize: '16px',
-            fontWeight: 600,
-            color: 'black',
-            textDecorationColor: 'black',
-            textAlign: 'start',
-          }}
-          onClick={() => onOpenComposeMail()}
-        >
-          Tembusan
-        </Link>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
-
-        <Stack direction='row' spacing={4} alignItems={'center'}>
-          <Typography>Tampilkan Kepada</Typography>
-          <Button
-            variant='contained'
-            sx={{
-              bgcolor: '#229BD8',
-              padding: '5px',
-              borderRadius: '5px',
-              color: 'white',
-            }}
-          >
-            Update
-          </Button>
-        </Stack>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-        </Box>
       </Stack>
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-        datas={datas}
-      />
     </>
   );
 };

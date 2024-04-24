@@ -1,66 +1,96 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import AppScrollbar from '../AppScrollbar'
+import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
+import { users } from '@crema/services/dummy/user/user';
+import { useSelector } from 'react-redux';
 
 const FormAddressBook = (props) => {
-    const { text } = props;
-    
-    const StyledStack = styled(Stack)(() => ({
-        width: '100%',
-        gap:'16px',
-    }))
-    const StyledTitle = styled(Typography)(() => ({
-        fontWeight: '600',
-        fontSize: '16px',
-        textDecoration: 'underline',
-    }))
-    const CustomSpan = styled('span')(() => ({
-        color: 'red',
-    }))
+  const { text, data } = props;
 
-    const [isComposeMail, setComposeMail] = React.useState(false);
+  const StyledStack = styled(Stack)(() => ({
+    width: '100%',
+    gap: '16px',
+  }));
+  const StyledTitle = styled(Typography)(() => ({
+    fontWeight: '600',
+    fontSize: '16px',
+    textDecoration: 'underline',
+  }));
+  const CustomSpan = styled('span')(() => ({
+    color: 'red',
+  }));
+  const StyledBox = styled(Box)(() => ({
+    position: 'absolute',
+    zIndex: 1,
+    bottom: 0,
+    right: '1%',
+  }));
 
-    const onOpenComposeMail = () => {
-        setComposeMail(true);
-    };
-    const onCloseComposeMail = () => {
-        setComposeMail(false);
-    };
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
 
   return (
     <StyledStack>
-        <StyledTitle>{text}<CustomSpan>*</CustomSpan></StyledTitle>
+      <StyledTitle>
+        {text}
+        <CustomSpan>*</CustomSpan>
+      </StyledTitle>
 
-        <AppScrollbar>
-            <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={4}
-                fullWidth
-                InputProps={{
-                    endAdornment: (
-                    <IconButton>
-                        <AddCircleOutlineRoundedIcon onClick={onOpenComposeMail} sx={{ color: 'black' }} />
-                    </IconButton>
-                    ),
-                }}
-            />
+      <Box
+        position={'relative'}
+        sx={{
+          border: '1px solid #B1B5BA',
+          borderRadius: '10px',
+        }}
+      >
+        <AppScrollbar
+          sx={{
+            minHeight: '145px',
+            maxHeight: '145px',
+            overflow: 'auto',
+          }}
+        >
+          {data.map((item) => (
+            <Stack key={item.id}>
+              <Typography>
+                {item.jabatan} - {item.nama}
+              </Typography>
+            </Stack>
+          ))}
         </AppScrollbar>
+        <StyledBox>
+          <IconButton>
+            <AddCircleOutlineRoundedIcon
+              onClick={onOpenComposeMail}
+              sx={{ color: 'black', fontSize: '40px' }}
+            />
+          </IconButton>
+        </StyledBox>
+      </Box>
 
-        <ComposeMail
-            isComposeMail={isComposeMail}
-            onCloseComposeMail={onCloseComposeMail}
-        />
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+        datas={users}
+        type={text}
+      />
     </StyledStack>
-  )
-}
+  );
+};
 
 export default FormAddressBook;
 
 FormAddressBook.propTypes = {
-    text: PropTypes.string,
-}
+  text: PropTypes.string.isRequired,
+  data: PropTypes.any,
+};

@@ -39,7 +39,7 @@ import { Fonts } from '@crema/constants/AppEnums';
 
 import { Plus, Filter, Search, AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { childTab } from '../../../../../redux/actions/tabAction';
 import {
   ArrowForwardIosSharp,
   Cached,

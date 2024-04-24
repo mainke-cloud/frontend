@@ -28,7 +28,7 @@ import { Filter, Search } from 'feather-icons-react';
 import { ArrowForwardIosSharp, Close } from '@mui/icons-material';
 import FilterPopover from './IconButton/FilterPopover';
 import { useDispatch, useSelector } from 'react-redux';
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { childTab } from '../../../../../redux/actions/tabAction';
 import avatarRed from '../../../../../assets/SuratKeluar/AvatarRed.svg';
 import mailIcon from '../../../../../assets/icon/Mail3.svg';
 import mailReadIcon from '../../../../../assets/icon/MailRead.svg';
