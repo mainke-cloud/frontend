@@ -1,15 +1,17 @@
+import React from 'react';
 import {
   Box,
   Button,
+  Link,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
+import ComposeMail from '@crema/components/AppAddress';
 
 const perihal = [
   {
@@ -57,6 +59,16 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext }) => {
+  const [isComposeMail, setComposeMail] = React.useState(false);
+
+  const onOpenComposeMail = () => {
+    setComposeMail(true);
+  };
+
+  const onCloseComposeMail = () => {
+    setComposeMail(false);
+  };
+
   return (
     <>
       <Stack
@@ -93,17 +105,25 @@ const SuratInternal_1 = ({ handleNext }) => {
           ))}
         </TextField>
 
-        <Typography
-          variant='h4'
-          sx={{
-            '&::after': {
-              content: '"*"',
-              color: 'red',
-            },
-          }}
-        >
-          Klarifikasi Masalah
-        </Typography>
+        <Stack direction='row'>
+          <Link
+            component='button'
+            underline='always'
+            sx={{
+              fontSize: '16px',
+              fontWeight: 600,
+              color: 'black',
+              textDecorationColor: 'black',
+            }}
+            onClick={() => onOpenComposeMail()}
+          >
+            Klasifikasi Masalah
+          </Link>
+
+          <Typography variant='h4' color='red'>
+            *
+          </Typography>
+        </Stack>
 
         <Box
           position={'relative'}
@@ -184,6 +204,11 @@ const SuratInternal_1 = ({ handleNext }) => {
           </Button>
         </Stack>
       </Stack>
+
+      <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      />
     </>
   );
 };

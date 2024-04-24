@@ -79,6 +79,10 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
           >
             Pemohon
           </Link>
+
+          <Typography variant='h4' color='red'>
+            *
+          </Typography>
         </Stack>
 
         <Box

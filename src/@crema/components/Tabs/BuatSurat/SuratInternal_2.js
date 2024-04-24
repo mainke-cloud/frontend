@@ -129,7 +129,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
         </Box>
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
-          <Typography>Tampilkan Kepada</Typography>
+          <Typography>Tampilkan Tembusan</Typography>
           <Button
             variant='contained'
             sx={{
@@ -183,7 +183,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
             }}
             onClick={handleNext}
           >
-            Selanjutnya (Penerima)
+            Selanjutnya (Pengirim)
           </Button>
         </Stack>
       </Stack>

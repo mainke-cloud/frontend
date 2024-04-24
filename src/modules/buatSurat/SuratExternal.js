@@ -10,9 +10,8 @@ import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
-import SuratUndangan_2 from '@crema/components/Tabs/BuatSurat/SuratUndangan_2';
 
-const SuratUndangan = () => {
+const SuratExternal = () => {
   const [showNext, setShowNext] = useState(0);
 
   const handleNext = () => {
@@ -25,7 +24,7 @@ const SuratUndangan = () => {
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
-      <HeaderDetail nama='Buat Surat Undangan' save copy translate />
+      <HeaderDetail nama='Buat Surat External' save copy translate />
       <Box
         sx={{
           margin: '26px',
@@ -48,7 +47,7 @@ const SuratUndangan = () => {
             {showNext === 0 ? (
               <SuratInternal_1 handleNext={handleNext} />
             ) : showNext === 1 ? (
-              <SuratUndangan_2
+              <SuratInternal_2
                 handleNext={handleNext}
                 handlePrev={handlePrev}
               />
@@ -85,4 +84,4 @@ const SuratUndangan = () => {
   );
 };
 
-export default SuratUndangan;
+export default SuratExternal;

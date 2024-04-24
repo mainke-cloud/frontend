@@ -112,7 +112,7 @@ const SuratInternal_5 = ({ handleNext, handlePrev }) => {
 
                 <Button
                   variant='contained'
-                  // onClick={handleSubmit}
+                  onClick={handleNext}
                   sx={{
                     bgcolor: '#52BD94',
                     borderRadius: '25px',

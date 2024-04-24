@@ -1,5 +1,5 @@
-import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
@@ -49,7 +49,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         <TextField
           disabled
           fullWidth
-          defaultValue='Kepala Research and Development'
+          defaultValue='...'
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -83,7 +83,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         <TextField
           disabled
           fullWidth
-          defaultValue='Taufik Sulaeman'
+          defaultValue='...'
           InputProps={{
             endAdornment: (
               <IconButton>
@@ -97,26 +97,26 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+        <TextField disabled fullWidth defaultValue='Divisi...' />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled defaultValue='8900002' />
+            <TextField disabled defaultValue='NIK...' />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled defaultValue='DIT-11 B 10000' />
+            <TextField disabled defaultValue='Kode Departemen...' />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth defaultValue='Decision Support' />
+        <TextField disabled fullWidth defaultValue='Departemen...' />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth defaultValue='Bandung' />
+        <TextField disabled fullWidth defaultValue='Kota...' />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
