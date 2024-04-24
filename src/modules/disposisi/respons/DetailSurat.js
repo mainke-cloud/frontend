@@ -22,7 +22,6 @@ const DetailSurat = () => {
     setValue(newValue);
   };
 
-
   return (
     <>
       <DisposisiWrapper>
