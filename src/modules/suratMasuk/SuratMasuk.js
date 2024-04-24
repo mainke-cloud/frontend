@@ -15,8 +15,8 @@ import SuratMasukWrapper from './SuratMasukWrapper';
 import Lainnya from './content/lainnya';
 import PropTypes from 'prop-types';
 
-const SuratMasuk = ({props}) => {
-  const files = props.file
+const SuratMasuk = ({ props }) => {
+  const files = props.file;
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -29,7 +29,15 @@ const SuratMasuk = ({props}) => {
 
   return (
     <SuratMasukWrapper>
-      <HeaderDetail nama='Detail Surat Masuk' send />
+      <HeaderDetail
+        nama='Detail Surat Masuk'
+        batas
+        forward
+        disposisi
+        printer
+        copy2
+        folderup
+      />
       <Box sx={{ padding: 8 }}>
         <Box
           backgroundColor='#FFFFFF'
@@ -65,7 +73,7 @@ const SuratMasuk = ({props}) => {
               <Info data={diteruskan} />
             </TabPanel>
             <TabPanel className='content-styled-panel' value='3'>
-              <Lainnya files={files}/>
+              <Lainnya files={files} />
             </TabPanel>
           </TabContext>
 

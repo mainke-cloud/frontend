@@ -1,28 +1,13 @@
-import { Link, Stack, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Link, Stack, Typography } from '@mui/material';
+import React from 'react';
 import AppScrollbar from '../../AppScrollbar';
-import { Box, Button, Grid, Icon } from '@mui/material';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import Divider from '@mui/material/Divider';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 2.png';
-import PPImage from '../../../../assets/BuatSurat/PP.png';
+import { Box, Button } from '@mui/material';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
-import KomentarSection from './KomentarSection/KomentarSection';
 import ComposeMail from '@crema/components/AppAddress';
-import ListKomentar from '../SuratKeluar/ListKomentar';
 
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
-  const [showPreview, setShowPreview] = useState(false);
   const [isComposeMail, setComposeMail] = React.useState(false);
-
-  const handleShow = () => {
-    setShowPreview(!showPreview);
-  };
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -202,12 +187,6 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           </Button>
         </Stack>
       </Stack>
-
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
 
       <ComposeMail
         isComposeMail={isComposeMail}
