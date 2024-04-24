@@ -3,9 +3,6 @@ import { Tab, Box } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { pdfjs } from 'react-pdf';
-import 'react-pdf/dist/Page/TextLayer.css';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
 import CustomDivider from '../../../@crema/components/Tabs/Disposisi/CustomDivider';
 import DisposisiWrapper from './DisposisiWrapper';
 import TabAlamatDisposisi from './TabPanel/TabAlamatDisposisi';
@@ -16,6 +13,7 @@ import { diteruskan } from '../../../@crema/services/dummy/content/dataTerusan';
 import { pekerjaan } from '../../../@crema/services/dummy/content/dataPekerjaan';
 import { log } from '../../../@crema/services/dummy/content/dataLog';
 import HeaderDetail from '@crema/components/HeaderDetail';
+import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 
 const DetailSurat = () => {
   const [value, setValue] = useState('1');
@@ -24,10 +22,6 @@ const DetailSurat = () => {
     setValue(newValue);
   };
 
-  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.js',
-    import.meta.url,
-  ).toString();
 
   return (
     <>
@@ -78,16 +72,7 @@ const DetailSurat = () => {
                 <TabLainnya />
               </TabPanel>
             </TabContext>
-            <Box
-              sx={{
-                minHeight: '100px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                border: '1px solid #D8D8D8',
-                marginRight: '12px',
-              }}
-            ></Box>
+            <PdfCard />
           </Box>
         </Box>
       </DisposisiWrapper>
