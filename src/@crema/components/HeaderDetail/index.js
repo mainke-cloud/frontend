@@ -18,6 +18,7 @@ import { Clipboard, Globe } from 'feather-icons-react';
 import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
+import { addTab } from '../../../redux/actions/tabActon';
 
 const HeaderDetail = ({
   nama,
@@ -38,6 +39,7 @@ const HeaderDetail = ({
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const tab = tabs.find((tab) => tab.active);
+  const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
   const [isComposeMail, setComposeMail] = React.useState(false);
 
@@ -59,6 +61,10 @@ const HeaderDetail = ({
   const handleClosed = () => {
     dispatch(handleClose());
   };
+
+  const handleBuatDisposisi = (name) => {
+    dispatch(addTab(tabId, tabs, name));
+  }
   return (
     <>
       <Stack
@@ -162,6 +168,7 @@ const HeaderDetail = ({
               )}
               {globe && (
                 <IconButton
+                onClick={() => handleBuatDisposisi('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Globe style={{ width: '28px', height: '28px' }} />
