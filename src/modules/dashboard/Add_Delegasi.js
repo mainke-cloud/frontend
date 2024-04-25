@@ -77,9 +77,9 @@ const Add_Delegasi = () => {
                     <Box>
 
                                 <AppScrollbar>
-                                    <Box sx={{overflowY: 'hidden'}}>
+                                    <Box sx={{overflowY: 'hidden', borderRadius: 2}}>
                                         <Stack direction='row'>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                         <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
                                                             <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>17 Des</Typography>
@@ -89,7 +89,7 @@ const Add_Delegasi = () => {
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                         <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
                                                             <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>15 Des</Typography>
@@ -99,7 +99,7 @@ const Add_Delegasi = () => {
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                         <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginY: 2}}>
                                                             <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Habis</Typography>
@@ -109,7 +109,7 @@ const Add_Delegasi = () => {
                                                     <Typography sx={{color: '#5C5E61'}}>Salies Apriliyanto</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', padding: 1}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', padding: 1}}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <img src={Avatar_Blank} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h4" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Delegasi Baru</Typography>

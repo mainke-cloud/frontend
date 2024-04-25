@@ -170,7 +170,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={3} height={'100%'}>
             <Stack direction='column' spacing={5}>
-              <AppCard2 sx={{ height: '500px', pb: 17 }}>
+              <AppCard2 sx={{ height: '344px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#DFE4F7',
@@ -238,9 +238,11 @@ const Dashboard = () => {
                 </AppScrollbar>
                 <Box sx={{
                     backgroundColor: '#DFE4F7',
-                    borderTopLeftRadius: 2,
-                    borderTopRightRadius: 2,
-                    Height: 300
+                    // borderTopLeftRadius: 2,
+                    // borderTopRightRadius: 2,
+                    height: 300,
+                    padding: 0.1,
+                    paddingX: 5
                   }}
                 >
                   <Grid item xs={12} sx={{marginTop: 2}}>
@@ -250,10 +252,11 @@ const Dashboard = () => {
                           sx={{ 
                               backgroundColor: '#2952CC', 
                               color: 'black', 
-                              padding: 2, 
+                              padding: 1, 
                               //width: '100%', 
-                              maxWidth: 300, 
-                              borderRadius: 2,
+                              maxWidth: 400,
+                              height: 30, 
+                              borderRadius: 3,
                               cursor: 'pointer',
                               '@media (min-width: 600px)': { 
                                   width: 'auto',
@@ -264,12 +267,12 @@ const Dashboard = () => {
                           }}
                           onClick={() => handleAddTab('Add_Sekretaris')} 
                       >
-                          <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
+                          <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Sekretaris</Typography>
                       </Box>
                   </Grid>
                 </Box>
               </AppCard2>
-              <AppCard2 sx={{ height: '339px', pb: 17 }}>
+              <AppCard2 sx={{ height: '344px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#F9E5CF',
@@ -339,9 +342,11 @@ const Dashboard = () => {
                 </AppScrollbar>
                 <Box sx={{
                     backgroundColor: '#F9E5CF',
-                    borderTopLeftRadius: 2,
-                    borderTopRightRadius: 2,
-                    Height: 300
+                    // borderTopLeftRadius: 2,
+                    // borderTopRightRadius: 2,
+                    height: 300,
+                    padding: 0.25,
+                    paddingX: 5
                   }}
                 >
                   <Grid item xs={12} sx={{marginTop: 2}}>
@@ -351,11 +356,12 @@ const Dashboard = () => {
                           sx={{ 
                               backgroundColor: '#C45900', 
                               color: 'black', 
-                              padding: 2, 
-                              // width: '100%', 
-                              maxWidth: 300,
+                              padding: 1, 
+                              // width: '100%',
+                              height: 30, 
+                              maxWidth: 400,
                               // maxHeight: 100, 
-                              borderRadius: 2,
+                              borderRadius: 3,
                               cursor: 'pointer',
                               '@media (min-width: 600px)': { 
                                   width: 'auto',
@@ -366,7 +372,7 @@ const Dashboard = () => {
                           }}
                           onClick={() => handleAddTab('Add_Delegasi')} 
                       >
-                          <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
+                          <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Delegasi</Typography>
                       </Box>
                   </Grid>
                 </Box>
