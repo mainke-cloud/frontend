@@ -50,7 +50,7 @@ const Add_Delegasi = () => {
         <> {isActive ? 
             (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}} >
                 <Stack spacing={5}>
-                    <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                    <Box sx={{borderRadius: 2, backgroundColor: '#FFFFFF'}}>
                         <Grid container sx={{padding: 5}} >
                             <Grid item xs={12} sx={{margin: 5, paddingX: 2, marginBottom: 10}}>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -123,7 +123,7 @@ const Add_Delegasi = () => {
                                 </AppScrollbar>                                    
 
                     </Box>
-                    <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 1, padding: 7}}>
+                    <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 2, padding: 7}}>
                         <Box sx={{backgroundColor: '#FFEFD2', border: '1px solid #FFB020', height: 40, width: 264,  display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, marginBottom: 5}} >
                             <Typography sx={{color: '#FFB020', fontSize: 13}}>
                                 Tanggal Pembuatan: 15 Agustus 2021
@@ -210,7 +210,7 @@ const Add_Delegasi = () => {
                 </Stack>
             </Box>) : 
             (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}}>
-                <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                <Box sx={{borderRadius: 2, backgroundColor: '#FFFFFF'}}>
                     <Grid container  sx={{padding: 5}}>
                         <Stack direction='row' justifyContent='center' alignItems='center' spacing={5} sx={{marginBottom: 5}}>
                             <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, width: 100, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
