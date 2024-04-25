@@ -3791,7 +3791,7 @@
 
 "@tinymce/tinymce-react@^5.0.1":
   version "5.0.1"
-  resolved "https://registry.npmjs.org/@tinymce/tinymce-react/-/tinymce-react-5.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-5.0.1.tgz#478bbdadf0f4bff9f82d596799e7306f8b530f38"
   integrity sha512-tw6yNRqrMGP1iJNeY14wvGsUayC9fc1QpJa7tAvdmeBrUlllyF9PpsrbfvYd+2k8t+w0r2Hq+foTzLZ1d27Fyw==
   dependencies:
     prop-types "^15.6.2"

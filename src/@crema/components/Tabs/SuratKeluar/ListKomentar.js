@@ -21,7 +21,7 @@ import { MessageSquare, File, X } from 'feather-icons-react';
 const ListKomentar = ({ label }) => {
   const StyledBadge = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
-      backgroundColor: getPriorityColor(label)[1], 
+      backgroundColor: getPriorityColor(label)[1],
       color: 'white',
     },
     '&.angka': {

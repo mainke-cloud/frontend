@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import ComposeMail from '../AppAddress';
-import { closeTab } from '../../../redux/actions/tabActon';
+import { closeTab } from '../../../redux/actions/tabAction';
 import { X, Send, Save } from 'feather-icons-react';
 import {
   Edit,
@@ -15,15 +22,20 @@ import {
   Check,
 } from 'feather-icons-react';
 import { Clipboard, Globe } from 'feather-icons-react';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import ShortcutTwoToneIcon from '@mui/icons-material/ShortcutTwoTone';
+import DriveFolderUploadRoundedIcon from '@mui/icons-material/DriveFolderUploadRounded';
 import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
+import { addTab } from '../../../redux/actions/tabAction';
 
 const HeaderDetail = ({
   nama,
   send,
   save,
   copy,
+  copy2,
   translate,
   edit,
   printer,
@@ -33,11 +45,16 @@ const HeaderDetail = ({
   check,
   globe,
   clipboard,
+  forward,
   IsEditing,
+  disposisi,
+  batas,
+  folderup,
 }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const tab = tabs.find((tab) => tab.active);
+  const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
   const [isComposeMail, setComposeMail] = React.useState(false);
 
@@ -59,6 +76,10 @@ const HeaderDetail = ({
   const handleClosed = () => {
     dispatch(handleClose());
   };
+
+  const handleBuatDisposisi = (name) => {
+    dispatch(addTab(tabId, tabs, name));
+  }
   return (
     <>
       <Stack
@@ -80,22 +101,42 @@ const HeaderDetail = ({
                 <Save style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#A3E6CD'}}
+                sx={{
+                  border: '1px solid #B1B5BA',
+                  borderRadius: '3px',
+                  color: 'white',
+                  background: '#A3E6CD',
+                }}
               >
                 <Check style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FFD079' }}
+                sx={{
+                  border: '1px solid #B1B5BA',
+                  borderRadius: '3px',
+                  color: 'white',
+                  background: '#FFD079',
+                }}
               >
                 <CornerDownLeft style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FFD079'}}
+                sx={{
+                  border: '1px solid #B1B5BA',
+                  borderRadius: '3px',
+                  color: 'white',
+                  background: '#FFD079',
+                }}
               >
                 <RotateCcw style={{ width: '28px', height: '28px' }} />
               </IconButton>
               <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px', color:'white', background:'#FF7452' }}
+                sx={{
+                  border: '1px solid #B1B5BA',
+                  borderRadius: '3px',
+                  color: 'white',
+                  background: '#FF7452',
+                }}
                 onClick={handleClosed}
               >
                 <X style={{ width: '28px', height: '28px' }} />
@@ -128,7 +169,6 @@ const HeaderDetail = ({
               )}
               {send && (
                 <IconButton
-                  onClick={onOpenComposeMail}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Send style={{ width: '28px', height: '28px' }} />
@@ -143,6 +183,7 @@ const HeaderDetail = ({
               )}
               {globe && (
                 <IconButton
+                onClick={() => handleBuatDisposisi('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Globe style={{ width: '28px', height: '28px' }} />
@@ -172,11 +213,55 @@ const HeaderDetail = ({
                   <Edit style={{ width: '28px', height: '28px' }} />
                 </IconButton>
               )}
+              {disposisi && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <AutorenewRoundedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
+              {forward && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <ShortcutTwoToneIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
               {printer && (
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Printer style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              )}
+              {batas && (
+                <Box
+                  style={{
+                    height: '48px',
+                    borderLeft: '3px solid #B1B5BA',
+                  }}
+                />
+              )}
+              {copy2 && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <AssignmentOutlinedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
+              )}
+              {folderup && (
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <DriveFolderUploadRoundedIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
                 </IconButton>
               )}
               <IconButton
@@ -190,10 +275,6 @@ const HeaderDetail = ({
         </Stack>
       </Stack>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
     </>
   );
 };
@@ -203,6 +284,7 @@ HeaderDetail.propTypes = {
   save: PropTypes.bool,
   send: PropTypes.bool,
   copy: PropTypes.bool,
+  copy2: PropTypes.bool,
   translate: PropTypes.bool,
   edit: PropTypes.bool,
   printer: PropTypes.bool,
@@ -211,7 +293,11 @@ HeaderDetail.propTypes = {
   rotateccw: PropTypes.bool,
   check: PropTypes.bool,
   globe: PropTypes.bool,
+  disposisi: PropTypes.bool,
   clipboard: PropTypes.bool,
+  forward: PropTypes.bool,
+  batas: PropTypes.bool,
+  folderup: PropTypes.bool,
   IsEditing: PropTypes.bool,
 };
 

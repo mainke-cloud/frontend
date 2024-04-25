@@ -6,6 +6,7 @@ import todoListReducer from './todoListReducer';
 import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 import headerReducer from './headerReducer';
+import addressbookReducer from './addressbookReducer';
 export default combineReducers({
   user: userReducer,
   auth: loginReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   todolist: todoListReducer,
   surat: suratReducer,
   header: headerReducer,
+  addressbook: addressbookReducer,
 });

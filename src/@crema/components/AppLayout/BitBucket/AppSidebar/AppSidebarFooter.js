@@ -15,6 +15,8 @@ const AppSidebarFooter = (props) => {
     switch (priority) {
       case 'Dibatalkan':
         return ['#E42313', '#FFBDAD'];
+      case 'Batal':
+        return ['#E42313', '#FFBDAD'];
       case 'Kembali Ke Komposer':
         return ['#E42313', '#FFBDAD'];
       case 'Diproses':
@@ -73,7 +75,7 @@ const AppSidebarFooter = (props) => {
             />
           </Box>
         </>
-      ) : isStatus === 'surat masuk' ? (
+      ) : isStatus === 'surat masuk' || isStatus === 'surat terkirim' ? (
         <>
           <Button
             sx={{
@@ -143,6 +145,8 @@ const AppSidebarFooter = (props) => {
         isStatus === 'draft' ||
         isStatus === 'komposer' ||
         isStatus === 'lacak proses' ||
+        isStatus === 'surat diminta' ||
+        isStatus === 'surat dibatalkan' ||
         isStatus === 'template' ? (
         <>
           <Stack

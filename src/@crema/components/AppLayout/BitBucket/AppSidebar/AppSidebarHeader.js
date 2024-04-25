@@ -21,7 +21,7 @@ import FilterPopover from './IconButton/FilterPopover';
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab} from '../../../../../redux/actions/tabActon';
+import { addTab} from '../../../../../redux/actions/tabAction';
 
 const AppSidebarHeader = (props) => {
   const { tab, subTab, isAdd } = props;
