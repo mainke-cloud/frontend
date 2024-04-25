@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Stack, Typography, Switch, FormControlLabel, Checkbox, IconButton } from "@mui/material";
+import { Box, Grid, Stack, Typography, Switch, FormControlLabel, Checkbox, IconButton, Button } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useState } from "react";
@@ -13,6 +13,8 @@ import Avatar from '../../assets/Dashboard/avatar_placeholder.png'
 import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
+import ComposeMail from "@crema/components/AppAddress";
+import Filter_sekretaris from "./FilterPopUp/Filter_sekretaris";
 
 
 const IOSSwitch = styled((props) => (
@@ -68,6 +70,24 @@ const IOSSwitch = styled((props) => (
 
 const Add_Sekretaris = () => {
     const [isActive, setIsActive] = useState(true);
+    const [openFilter, setOpenFilter] = React.useState(false);
+    const [isComposeMail, setComposeMail] = React.useState(false);
+
+    const onOpenComposeMail = () => {
+        setComposeMail(true);
+    };
+
+    const onCloseComposeMail = () => {
+        setComposeMail(false);
+    };
+
+    const handleFilterClick = () => {
+        setOpenFilter(!openFilter); // Toggle nilai openFilter
+      };
+    
+      const handleCloseFilter = () => {
+        setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
+      };
 
     const handleClick = () => {
         setIsActive(!isActive);
@@ -77,17 +97,18 @@ const Add_Sekretaris = () => {
         <> {isActive ? 
             (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}} >
                 <Stack spacing={5}>
-                    <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                    <Box sx={{borderRadius: 2, backgroundColor: '#FFFFFF'}}>
                         <Grid container sx={{padding: 5}}>
                             <Grid item xs={12} sx={{margin: 5, paddingX: 2, marginBottom: 10}}>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <Typography variant="h2">Sekretaris Saya</Typography>
                                     <Stack direction="row" alignItems="center" spacing={3}>
-                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}> 
+                                        <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 2, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }} onClick={handleFilterClick}> 
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
                                                 <Typography sx={{color: '#E42313'}}>Urutkan</Typography>
                                                 <img src={Filter} style={{height: 20, width: 20}}/>
                                             </Stack>
+                                            <Filter_sekretaris open={openFilter} onClose={handleCloseFilter} />
                                         </Box>
                                         <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
                                             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
@@ -98,56 +119,44 @@ const Add_Sekretaris = () => {
                                     </Stack>
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} sx={{margin: 5}}>
+                        </Grid>
+                    </Box>
+                    <Box>
+
                                 <AppScrollbar>
-                                    <Box sx={{overflowY: 'hidden'}}>
+                                    <Box sx={{overflowY: 'hidden', borderRadius: 2}}>
                                         <Stack direction='row'>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#D9DDE3', border: '1px solid #B1B5BA'}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Aktif</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Aktif</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Aktif</Typography>
+                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#429777', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Aktif</Typography>
                                                         </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', '&:hover': {backgroundColor: '#D9DDE3'} }}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }}>
                                                 <Stack alignItems='center' justifyContent='center'>
-                                                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                                                        <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginRight: 5}}>
-                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF'}}>Nonaktif</Typography>
-                                                        </Box>
-                                                        <IconButton >
-                                                            <img src={Red_X} style={{width: 20, height: 20}}/>
-                                                        </IconButton>
-                                                    </Stack>
+                                                    <Box sx={{width: 61, height: 18, backgroundColor: '#BF2600', borderRadius: 2, marginY: 2}}>
+                                                            <Typography sx={{textAlign: 'center', color: '#FFFFFF', fontSize: 12}}>Nonaktif</Typography>
+                                                    </Box>
                                                     <img src={Avatar} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h5">Salies Apriliyanto</Typography>
                                                     <Typography sx={{color: '#5C5E61'}}>8900001</Typography>
                                                 </Stack>
                                             </Box>
-                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', border: '1px solid #B1B5BA', padding: 1}}>
+                                            <Box sx={{width: 135, height: 142, backgroundColor: '#FFFFFF', borderRight: '1px solid #B1B5BA', padding: 1}}>
                                                 <Stack alignItems='center' justifyContent='center'>
                                                     <img src={Avatar_Blank} style={{width: 48, height: 48}}/>
                                                     <Typography variant="h4" sx={{textAlign: 'center', color: '#5C5E61'}}>Tambah Sekretaris Baru</Typography>
@@ -159,10 +168,9 @@ const Add_Sekretaris = () => {
                                         </Stack>
                                     </Box>
                                 </AppScrollbar>
-                            </Grid>
-                        </Grid>
+
                     </Box>
-                    <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 1, padding: 7}}>
+                    <Box sx={{backgroundColor: '#FFFFFF', borderRadius: 2, padding: 7}}>
                         <Box sx={{backgroundColor: '#FFEFD2', border: '1px solid #FFB020', height: 40, width: 264,  display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, marginBottom: 5}} >
                             <Typography sx={{color: '#FFB020', fontSize: 13}}>
                                 Tanggal Pembuatan: 15 Agustus 2021
@@ -175,7 +183,7 @@ const Add_Sekretaris = () => {
                                 </Box>
                                 <Box sx={{backgroundColor: '#FFFFFF', border: '1px solid #E42313' , borderRadius: 1, padding: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#D9DDE3'} }} flex={1}>
                                     <Stack direction='row' alignItems="center" justifyContent="center" spacing={2}>
-                                        <Typography  sx={{color: '#E42313'}}>Hapus Delegasi</Typography>
+                                        <Typography  sx={{color: '#E42313'}}>Hapus Sekretaris</Typography>
                                         <img src={Trash} style={{height: 24, width: 24}}/>
                                     </Stack>
                                 </Box>
@@ -225,6 +233,15 @@ const Add_Sekretaris = () => {
                                     </Stack>
                                 </Stack>
                             </Grid>
+                            <Grid item xs={4}>
+                                <Stack direction='row' alignItems='flex-end' justifyContent='flex-end' sx={{height: 250}}>
+                                    <Box sx={{height: 40, width: 153, backgroundColor: '#E42313', padding: 2, borderRadius: 2, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }}>
+                                        <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+                                            <Typography sx={{color: '#FFFFFF', textAlign: 'center'}}>Simpan Perubahan</Typography>
+                                        </Stack>
+                                    </Box>
+                                </Stack>
+                            </Grid>
                         </Grid>
                     </Box>
                     <Box sx={{backgroundColor: '#EBF0FF', borderRadius: 1, padding: 4, paddingY: 7, border: '2px solid #9DB5FF'}}>
@@ -252,7 +269,7 @@ const Add_Sekretaris = () => {
             </Box>) : 
             (<Box sx={{backgroundColor: '#F4F4F4', padding: 5, height: '100vh'}}>
                 <Stack spacing={5}>
-                    <Box sx={{borderRadius: 1, backgroundColor: '#FFFFFF'}}>
+                    <Box sx={{borderRadius: 2, backgroundColor: '#FFFFFF'}}>
                         <Grid container  sx={{padding: 5}}>
                             <Stack direction='row' justifyContent='center' alignItems='center' spacing={5} sx={{marginBottom: 5}}>
                                 <Box sx={{backgroundColor: '#E42313', padding: 2, borderRadius: 2, width: 100, cursor: 'pointer', '&:hover': {backgroundColor: '#F4CACA'} }} onClick={handleClick}>
@@ -270,7 +287,12 @@ const Add_Sekretaris = () => {
                             <Grid item xs={3}>
                                 <Stack>
                                     <Typography variant="h2">Nama :</Typography>
-                                    <Typography sx={{marginBottom: 7, fontSize: '16px'}}>Salies Apriliyanto</Typography>
+                                    <Box sx={{height: 40, maxWidth: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
+                                        <Stack direction="row" >
+                                            <Typography>Pilih Karyawan</Typography>
+
+                                        </Stack>
+                                    </Box>
                                     <Typography variant="h2">Jabatan :</Typography>
                                     <Typography sx={{marginBottom: 7, fontSize: '16px'}}>xxxxxxxxxxxxxxxxxxxx</Typography>
                                     <Typography variant="h2">No :</Typography>
@@ -349,7 +371,11 @@ const Add_Sekretaris = () => {
                         </Stack>
                     </Box>
                 </Stack>
-            </Box>)}            
+            </Box>)}  
+            <ComposeMail
+                isComposeMail={isComposeMail}
+                onCloseComposeMail={onCloseComposeMail}
+            />          
         </>
     )
 }
