@@ -38,7 +38,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
-import { addKepada, addTembusan } from '../../../redux/actions/addressbookAction';
+import {
+  addKepada,
+  addTembusan,
+  addKlasifikasi,
+  addPemeriksa,
+  addPemohon,
+} from '../../../redux/actions/addressbookAction';
 
 const ComposeMail = (props) => {
   const { isComposeMail, onCloseComposeMail, datas, type } = props;
@@ -137,7 +143,13 @@ const ComposeMail = (props) => {
     if (type === 'Kepada') {
       dispatch(addKepada(movedData));
     } else if (type === 'Tembusan') {
-      dispatch(addTembusan(movedData)); 
+      dispatch(addTembusan(movedData));
+    } else if (type === 'Klasifikasi Masalah') {
+      dispatch(addKlasifikasi(movedData));
+    } else if (type === 'Pemeriksa') {
+      dispatch(addPemeriksa(movedData));
+    } else if (type === 'Pemohon') {
+      dispatch(addPemohon(movedData));
     }
   };
 

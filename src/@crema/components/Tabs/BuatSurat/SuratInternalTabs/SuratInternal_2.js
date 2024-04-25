@@ -1,21 +1,24 @@
-import { Link, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import React from 'react';
-import AppScrollbar from '../../AppScrollbar';
+import AppScrollbar from '../../../AppScrollbar';
 import { Box, Button } from '@mui/material';
-import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
-import ComposeMail from '@crema/components/AppAddress';
+import FormAddressBook from '../../FormAddressBook';
+import { useSelector } from 'react-redux';
 
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
-  const [isComposeMail, setComposeMail] = React.useState(false);
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
 
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
 
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
 
   return (
     <>
@@ -28,42 +31,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
-            sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
-            }}
-            onClick={() => onOpenComposeMail()}
-          >
-            Kepada
-          </Link>
-
-          <Typography variant='h4' color='red'>
-            *
-          </Typography>
-        </Stack>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        <FormAddressBook text='Kepada' data={datass} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -93,40 +61,18 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+            {datass.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
         </Box>
 
-        <Link
-          component='button'
-          underline='always'
-          sx={{
-            fontSize: '16px',
-            fontWeight: 600,
-            color: 'black',
-            textDecorationColor: 'black',
-            textAlign: 'start',
-          }}
-          onClick={() => onOpenComposeMail()}
-        >
-          Tembusan
-        </Link>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        <FormAddressBook text='Tembusan' data={datasss} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Tembusan</Typography>
@@ -156,7 +102,15 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+            {datasss.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
         </Box>
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
@@ -187,11 +141,6 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           </Button>
         </Stack>
       </Stack>
-
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
     </>
   );
 };

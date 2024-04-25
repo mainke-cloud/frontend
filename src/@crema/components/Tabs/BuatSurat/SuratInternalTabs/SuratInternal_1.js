@@ -1,24 +1,8 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Icon,
-  IconButton,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
-import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import FormAddressBook from '../../FormAddressBook';
+import { useSelector } from 'react-redux';
 
 const perihal = [
   {
@@ -65,20 +49,21 @@ const jenisSurat = [
   },
 ];
 
-const SuratDelegasi_1 = ({ handleNext }) => {
-  const [showPreview, setShowPreview] = useState(false);
+const SuratInternal_1 = ({ handleNext }) => {
+  const klasifikasi = useSelector((state) => state.addressbook.klasifikasi);
 
-  const handleShow = () => {
-    setShowPreview(!showPreview);
-  };
+  let datass = klasifikasi[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
 
   return (
-    <Box>
+    <>
       <Stack
         spacing={4}
         sx={{
           border: '1px solid #D8D8D8',
-          minHeight: '420px',
+          minHeight: '570px',
           borderRadius: '12px',
           padding: '15px',
         }}
@@ -100,18 +85,51 @@ const SuratDelegasi_1 = ({ handleNext }) => {
           select
           fullWidth
           defaultValue='1'
-        ></TextField>
+        >
+          {perihal.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
 
-        <Stack direction='row' spacing={5}>
-          <Stack flex={1} spacing={5}>
-            <Typography variant='h4'>Tanggal Mulai</Typography>
-            <TextField />
-          </Stack>
-          <Stack flex={1} spacing={5}>
-            <Typography variant='h4'>Tanggal Selesai</Typography>
-            <TextField />
-          </Stack>
-        </Stack>
+        <FormAddressBook text='Klasifikasi Masalah' data={datass} />
+
+        <Typography
+          variant='body1'
+          sx={{
+            color: '#5C5E61',
+          }}
+        >
+          Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
+        </Typography>
+        <Typography variant='h4'>Prioritas Surat</Typography>
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        >
+          {prioritas.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Typography variant='h4'>Jenis Surat</Typography>
+        <TextField
+          id='outlined-select-currency'
+          select
+          fullWidth
+          defaultValue='1'
+        >
+          {jenisSurat.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
         <Typography variant='h4'>Lampiran</Typography>
         <TextField
           sx={{ marginTop: '8px' }}
@@ -128,18 +146,6 @@ const SuratDelegasi_1 = ({ handleNext }) => {
             variant='contained'
             sx={{
               borderRadius: '12px',
-              bgcolor: '#D9DDE3',
-              color: '#5C5E61',
-              minWidth: '84px',
-            }}
-          >
-            Kembali
-          </Button>
-
-          <Button
-            variant='contained'
-            sx={{
-              borderRadius: '12px',
               bgcolor: '#E42313',
               minWidth: '220px',
               minHeight: '50px',
@@ -150,12 +156,12 @@ const SuratDelegasi_1 = ({ handleNext }) => {
           </Button>
         </Stack>
       </Stack>
-    </Box>
+    </>
   );
 };
 
-SuratDelegasi_1.propTypes = {
+SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
 };
 
-export default SuratDelegasi_1;
+export default SuratInternal_1;

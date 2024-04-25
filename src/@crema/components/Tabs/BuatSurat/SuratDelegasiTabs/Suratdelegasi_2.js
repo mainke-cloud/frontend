@@ -1,6 +1,6 @@
 import { Link, Stack, Typography } from '@mui/material';
 import React from 'react';
-import AppScrollbar from '../../AppScrollbar';
+import AppScrollbar from '../../../AppScrollbar';
 import { Box, Button, TextField } from '@mui/material';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
@@ -44,6 +44,7 @@ const SuratDelegasi_2 = ({ handleNext, handlePrev }) => {
               color: '#5C5E61',
               minWidth: '84px',
             }}
+            onClick={handlePrev}
           >
             Kembali
           </Button>

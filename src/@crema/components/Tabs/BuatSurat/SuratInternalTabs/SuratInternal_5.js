@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import DropZoneFile from '../DropZoneFile';
+import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
 
 const style = {

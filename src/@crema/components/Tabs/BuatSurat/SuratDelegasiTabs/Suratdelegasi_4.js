@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import DropZoneFile from '../DropZoneFile';
+import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
 import SuratDelegasi_3 from './Suratdelegasi_3';
 
@@ -113,7 +113,7 @@ const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {
 
                 <Button
                   variant='contained'
-                  // onClick={handleSubmit}
+                  onClick={handleNext}
                   sx={{
                     bgcolor: '#52BD94',
                     borderRadius: '25px',

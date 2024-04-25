@@ -6,6 +6,7 @@ import ComposeMail from '@crema/components/AppAddress';
 import LabelInput from '@crema/components/LabelInput';
 import TextFieldTime from './TextFieldTime/TextFieldTime';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { users } from '@crema/services/dummy/user/user';
 
 const SuratUndangan_2 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
@@ -112,6 +113,7 @@ const SuratUndangan_2 = ({ handleNext, handlePrev }) => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
+        datas={users}
       />
     </>
   );
