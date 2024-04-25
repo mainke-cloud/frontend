@@ -45,6 +45,10 @@ const MiniTab = ({ tabs, changeValue, disable }) => {
     dispatch(updateValue(newValue));
   };
 
+  if (changeValue !== value && changeValue !== undefined) {
+    setValue(changeValue);
+  }
+
   return (
     <TabContext value={value}>
       <Box

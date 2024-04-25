@@ -12,7 +12,7 @@ import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../redux/actions/tabActon';
+import { addTab } from '../../redux/actions/tabAction';
 import ListFile from '@crema/components/Tabs/ListFile';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

@@ -52,7 +52,10 @@ const tabReducer = (state = initialState, action) => {
           (tab.id === 'draft' && tab.title === action.payload.title) ||
           (tab.id === 'lacak proses' && tab.title === action.payload.title) ||
           (tab.id === 'komposer' && tab.title === action.payload.title) ||
-          (tab.id === 'template' && tab.title === action.payload.title)
+          (tab.id === 'template' && tab.title === action.payload.title) ||
+          (tab.id === 'surat diminta' && tab.title === action.payload.title) ||
+          (tab.id === 'surat terkirim' && tab.title === action.payload.title) ||
+          (tab.id === 'surat dibatalkan' && tab.title === action.payload.title)  
         ) {
           return action.payload;
         } else {

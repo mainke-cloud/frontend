@@ -30,6 +30,9 @@ import Komposer from 'modules/suratKeluar/komposer/Komposer';
 import Template from 'modules/suratKeluar/template/Template';
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
+import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
+import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
+import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -133,6 +136,7 @@ export const addTab = (id, state, type) => {
 };
 
 export const childTab = (id, state, type, data) => {
+  console.log(type);
   return (dispatch) => {
     const isExistingTab = state.find((tab) => {
       switch (type) {
@@ -150,6 +154,12 @@ export const childTab = (id, state, type, data) => {
           return tab.id === 'komposer';
         case 'Template':
           return tab.id === 'template';
+        case 'Surat Diminta':
+          return tab.id === 'surat diminta';
+        case 'Surat Terkirim':
+          return tab.id === 'surat terkirim';
+        case 'Surat Dibatalkan':
+          return tab.id === 'surat dibatalkan';
         case 'Surat Masuk':
           return tab.id === 'surat masuk';
         case 'Log Scan Surat':
@@ -159,6 +169,7 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
+      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -181,6 +192,12 @@ export const childTab = (id, state, type, data) => {
             <SuratMasuk props={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
+          ) : type === 'Surat Diminta' ? (
+            <SuratDiminta props={data} />
+          ) : type === 'Surat Terkirim' ? (
+            <SuratTerkirim props={data} />
+          ) : type === 'Surat Dibatalkan' ? (
+            <SuratDibatalkan props={data} />
           ) : (
             ''
           ),
@@ -233,6 +250,12 @@ export const childTab = (id, state, type, data) => {
               <SuratMasuk props={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
+            ) : type === 'Surat Diminta' ? (
+              <SuratDiminta props={data} />
+            ) : type === 'Surat Terkirim' ? (
+              <SuratTerkirim props={data} />
+            ) : type === 'Surat Dibatalkan' ? (
+              <SuratDibatalkan props={data} />
             ) : (
               ''
             ),
