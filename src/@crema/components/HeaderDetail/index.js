@@ -10,7 +10,7 @@ import {
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import ComposeMail from '../AppAddress';
-import { closeTab } from '../../../redux/actions/tabActon';
+import { closeTab } from '../../../redux/actions/tabAction';
 import { X, Send, Save } from 'feather-icons-react';
 import {
   Edit,
@@ -28,6 +28,7 @@ import DriveFolderUploadRoundedIcon from '@mui/icons-material/DriveFolderUploadR
 import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
+import { addTab } from '../../../redux/actions/tabAction';
 
 const HeaderDetail = ({
   nama,
@@ -53,6 +54,7 @@ const HeaderDetail = ({
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const tab = tabs.find((tab) => tab.active);
+  const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
   const [isComposeMail, setComposeMail] = React.useState(false);
 
@@ -74,6 +76,10 @@ const HeaderDetail = ({
   const handleClosed = () => {
     dispatch(handleClose());
   };
+
+  const handleBuatDisposisi = (name) => {
+    dispatch(addTab(tabId, tabs, name));
+  }
   return (
     <>
       <Stack
@@ -163,7 +169,6 @@ const HeaderDetail = ({
               )}
               {send && (
                 <IconButton
-                  onClick={onOpenComposeMail}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Send style={{ width: '28px', height: '28px' }} />
@@ -178,6 +183,7 @@ const HeaderDetail = ({
               )}
               {globe && (
                 <IconButton
+                onClick={() => handleBuatDisposisi('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Globe style={{ width: '28px', height: '28px' }} />
@@ -269,10 +275,6 @@ const HeaderDetail = ({
         </Stack>
       </Stack>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
     </>
   );
 };

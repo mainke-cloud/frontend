@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, FormControl, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, Select, Stack, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { PlusCircle } from 'feather-icons-react';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { useSelector } from 'react-redux';
 
 import exchange from '../../../../assets/icon/exchange.svg';
 import ButtonBuatDisposisi from '@crema/components/Tabs/Disposisi/ButtonBuatDisposisi';
+import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
+import FormAddressBook from '@crema/components/Tabs/FormAddressBook';
 
 const TabBuatAlamat = () => {
     const RenderItem = styled(Stack)(() => ({
@@ -23,15 +27,17 @@ const TabBuatAlamat = () => {
             fontWeight: '400',
             fontSize: '14px',
         },
-        '& .render-item-to-text': {
-            fontWeight: '600',
-            fontSize: '16px',
-            textDecoration: 'underline',
+        '& .render-item-todo-note': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            gap: '20px',
         },
         '& .render-item-nota-box': {
             display: 'flex',
             padding: '4px 4px 4px 0px',
             gap: '8px',
+            height:'30px'
         },
         '& .render-item-nota-text': {
             fontWeight: '700',
@@ -42,6 +48,9 @@ const TabBuatAlamat = () => {
             backgroundColor:'#F9F9F9',
             borderRadius:'6px',
             padding:'4px',
+            width:'fit-content',
+            height:'fit-content',
+            gap:'10px',
         },
     }))
 
@@ -61,6 +70,14 @@ const TabBuatAlamat = () => {
     const [todos, setTodos] = useState(Array(itemCount).fill(false));
     const [valueLog, setValueLog] = useState('tidak');
     const [nota, setNota] = useState(Array(itemCount).fill(''));
+    const [prior, setPrior] = useState(Array(itemCount).fill(''));
+    const [dateFrom, setDateFrom] = useState(Array(itemCount).fill(null));
+
+    const handleChangePrior = (event, index) => {
+        const newPrior = [...prior];
+        newPrior[index] = event.target.value;
+        setPrior(newPrior);
+    };
 
     const handleChangeNota = (event, index) => {
         const newNotas = [...nota];
@@ -99,6 +116,11 @@ const TabBuatAlamat = () => {
                 newNota.pop();
                 return newNota;
             });
+            setPrior(prevPrior => {
+                const newPrior = [...prevPrior];
+                newPrior.pop();
+                return newPrior;
+            });
         }
     };
     
@@ -128,45 +150,82 @@ const TabBuatAlamat = () => {
                         </Typography>
                     </Box>
 
-                    <Typography className='render-item-to-text'>
-                        Kepada
-                        <CustomSpan>*</CustomSpan>
-                    </Typography>
-
-                    <Box className='content-styled-box' sx={{height:'90px',position: 'relative'}}>
-                        <Box sx={{ position: 'absolute', right: 0, bottom: 0 }}>
-                            <PlusCircle />
-                        </Box>
+                    <Box sx={{width:'60%'}}>
+                        <FormAddressBook text='Kepada' data={datass} />
                     </Box>
 
-                    <Box className='render-item-nota-box'>
-                        <Typography className='render-item-nota-text'>
-                            Nota Tindakan
-                            <CustomSpan>*</CustomSpan>
-                        </Typography>
-                        <Box className='render-item-nota-icon'>
-                            <img src={exchange} alt='exchange' />
+                    <Box className='render-item-todo-note'>
+                        <Box sx={{width:'50%'}}>
+                            <Box className='render-item-nota-box'>
+                                <Typography className='render-item-nota-text'>
+                                    Nota Tindakan
+                                    <CustomSpan>*</CustomSpan>
+                                </Typography>
+                                <Box className='render-item-nota-icon'>
+                                    <img src={exchange} alt='exchange' />
+                                </Box>
+                            </Box>
+                            <Select
+                                labelId={`select-label-nota-${i}`}
+                                id={`select-nota-${i}`}
+                                value={nota[i]}
+                                onChange={(event) => handleChangeNota(event, i)}
+                                sx={{width:'100%'}}
+                            >
+                                <MenuItem value={''}>None</MenuItem>
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </Box>
+
+                        <Box sx={{width:'20%'}}>
+                            <Box className='render-item-nota-box'>
+                                <Typography className='render-item-nota-text'>
+                                    Due Date
+                                </Typography>
+                            </Box>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                value={dateFrom}
+                                onChange={(dateFrom) => {
+                                setDateFrom(dateFrom);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+                        </Box>
+
+                        <Box sx={{width:'30%'}}>
+                            <Box className='render-item-nota-box'>
+                                <Typography className='render-item-nota-text'>
+                                    Prioritas
+                                </Typography>
+                            </Box>
+                            <Select
+                                labelId={`select-label-prior-${i}`}
+                                id={`select-prior-${i}`}
+                                value={prior[i]}
+                                onChange={(event) => handleChangePrior(event, i)}
+                                sx={{width:'100%'}}
+                            >
+                                <MenuItem value={''}>None</MenuItem>
+                                <MenuItem value={'Rendah'}>Rendah</MenuItem>
+                                <MenuItem value={'Sedang'}>Sedang</MenuItem>
+                                <MenuItem value={'Tinggi'}>Tinggi</MenuItem>
+                            </Select>
                         </Box>
                     </Box>
-                    <Select
-                        labelId={`select-label-nota-${i}`}
-                        id={`select-nota-${i}`}
-                        value={nota[i]}
-                        label="Nota"
-                        onChange={(event) => handleChangeNota(event, i)}
-                        sx={{ width: '60%' }}
-                    >
-                        <MenuItem value={''}>None</MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
                 </RenderItem>
             )
         }
         return items;
     }
-    
+    const kepada = useSelector((state) => state.addressbook.kepada);
+    let datass = kepada[0];
+    if (!datass || !Array.isArray(datass)) {
+      datass = [];
+    }
   return (
     <FormControl fullWidth>
         <Stack rowGap={'16px'}>  
@@ -235,7 +294,7 @@ const TabBuatAlamat = () => {
                                 Lampiran
                                 <CustomSpan>*</CustomSpan>
                             </Typography>
-                            <Box className='content-styled-box' sx={{height:'250px'}} />
+                            <DropZoneFile />
                         </Box>
 
                         <Box sx={{

@@ -23,7 +23,7 @@ import Sekretaris from '../../@crema/components/Tabs/Dashboard/Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../redux/actions/tabActon';
+import { addTab } from '../../redux/actions/tabAction';
 
 const Dashboard = () => {
   const dispatch = useDispatch();

@@ -1,214 +1,116 @@
 import React from 'react';
-import { Stack, Typography, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import {
+  Stack,
+  Typography,
+  Button,
+  Box,
+} from '@mui/material';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
-
+import { useSelector } from 'react-redux';
+import FormAddressBook from '../FormAddressBook';
 const TabContentEditPenerima = () => {
-  const Judul = styled(Typography)({
-    fontSize: '18px',
-    fontWeight: '700',
-    lineHeight: '20px',
-    padding: '16px 16px 0px 0px',
-  });
-  const handleClick = () => {
-    console.log('StyledBox clicked');
-  };
-  const ButtonCustom = styled(Button)({
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    backgroundColor: '#9DB5FF',
-    color: '#474D66',
-    fontSize: '12px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    padding: '6px 12px',
-    border: '1px solid #d8d8d8',
-    lineHeight: 1.5,
-    gap: '5px',
-    '&:hover': {
-      backgroundColor: '#8C8F93',
-      borderColor: '#8C8F93',
-      boxShadow: 'none',
-    },
-  });
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
+
   return (
     <>
-      <Stack rowGap='11px'>
-        <Judul>Kepada</Judul>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {/* {Array.from({ length: 2 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))} */}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper>
-        <Stack direction={'row'} alignItems={'center'}>
-          <Judul sx={{ fontSize: '12px', paddingTop: '0px' }}>
-            Tampilkan kepada
-          </Judul>
-          <ButtonCustom>Update</ButtonCustom>
+      <Stack
+        spacing={4}
+        sx={{
+          border: '1px solid #D8D8D8',
+          minHeight: '570px',
+          borderRadius: '12px',
+          padding: '15px',
+        }}
+      >
+        <FormAddressBook text='Kepada' data={datass} />
+
+        <Stack direction='row' spacing={4} alignItems={'center'}>
+          <Typography>Tampilkan Kepada</Typography>
+          <Button
+            variant='contained'
+            sx={{
+              bgcolor: '#229BD8',
+              padding: '5px',
+              borderRadius: '5px',
+              color: 'white',
+            }}
+          >
+            Update
+          </Button>
         </Stack>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper>
-        <Judul>Tembusan</Judul>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {/* {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography fontSize='14px' color={'#5C5E61'}>
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        DODDY HADI RUKMANA, ST/720277
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))} */}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper>
-        <Stack direction={'row'} alignItems={'center'}>
-          <Judul sx={{ fontSize: '12px', paddingTop: '0px' }}>
-            Tampilkan kepada
-          </Judul>
-          <ButtonCustom>Update</ButtonCustom>
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          >
+            {datass.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
+        </Box>
+        <FormAddressBook text='Tembusan' data={datasss} />
+        <Stack direction='row' spacing={4} alignItems={'center'}>
+          <Typography>Tampilkan Kepada</Typography>
+          <Button
+            variant='contained'
+            sx={{
+              bgcolor: '#229BD8',
+              padding: '5px',
+              borderRadius: '5px',
+              color: 'white',
+            }}
+          >
+            Update
+          </Button>
         </Stack>
-        <TabWrapper sx={{ height: '100px' }} onClick={handleClick}>
-          <Stack rowGap='10px'>
-            <AppScrollbar
-              sx={{
-                height: '90px',
-                overflowY: 'auto',
-                padding: '5px 0px 0px 15px',
-              }}
-              scrollToTop={false}
-            >
-              {Array.from({ length: 1 }).map((_, index) => (
-                <TabWrapper
-                  key={index}
-                  sx={{
-                    border: 'none',
-                    mb: 1,
-                    transition: 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#f0f0f0',
-                    },
-                  }}
-                >
-                  <Stack direction='row' alignItems='center'>
-                    <Stack columnGap='12px' padding={1}>
-                      <Typography fontSize='14px' color={'#5C5E61'}>
-                        MANAGER IT PLANNING & PORTFOLIO MANAGEMENT
-                      </Typography>
-                      <Typography
-                        fontSize='14px'
-                        color={'black'}
-                        fontWeight='700'
-                      >
-                        DODDY HADI RUKMANA, ST/720277
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </TabWrapper>
-              ))}
-            </AppScrollbar>
-          </Stack>
-        </TabWrapper>
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
+          <AppScrollbar
+            sx={{
+              minHeight: '145px',
+              maxHeight: '145px',
+              overflow: 'auto',
+            }}
+          >
+            {datasss.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
+          </AppScrollbar>
+        </Box>
       </Stack>
     </>
   );

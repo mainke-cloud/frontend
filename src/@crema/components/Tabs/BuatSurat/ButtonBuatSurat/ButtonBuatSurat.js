@@ -3,10 +3,10 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-
-const ButtonBuatSurat = ({ pemeriksa }) => {
+import { users } from '@crema/services/dummy/user/user';
+const ButtonBuatSurat = ({ pemeriksa, tittle }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
-
+  const datas = users;
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -36,6 +36,8 @@ const ButtonBuatSurat = ({ pemeriksa }) => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
+        datas={datas}
+        tittle = {tittle}
       />
     </Box>
   );
@@ -43,6 +45,7 @@ const ButtonBuatSurat = ({ pemeriksa }) => {
 
 ButtonBuatSurat.propTypes = {
   pemeriksa: PropTypes.bool,
+  tittle: PropTypes.string,
 };
 
 export default ButtonBuatSurat;

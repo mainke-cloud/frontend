@@ -14,7 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Filter } from 'feather-icons-react';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../../redux/actions/tabActon';
+import { addTab } from '../../../../redux/actions/tabAction';
 
 const TodoList_Dashboard = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, InputBase, Typography, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateTab, addTab } from '../../../../../../redux/actions/tabActon';
+import { activateTab, addTab } from '../../../../../../redux/actions/tabAction';
 import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import BucketMinibarWrapper from './BucketMinibarWrapper';
 import BucketMinibarMenu from './BucketMinibarMenu';
@@ -125,10 +125,12 @@ const BucketMinibar = (props) => {
             subMenu={[
               { name: 'Perlu Tindak Lanjut' },
               { name: 'Lacak Proses' },
-              { name: 'Pemohon' },
               { name: 'Komposer' },
               { name: 'Draft' },
               { name: 'Template' },
+              { name: 'Surat Diminta' },
+              { name: 'Surat Terkirim' },
+              { name: 'Surat Dibatalkan' },
             ]}
           />
           <BucketMinibarItem

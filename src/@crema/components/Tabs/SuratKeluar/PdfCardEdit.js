@@ -11,12 +11,12 @@ const PdfCardEdit = ({ jabatan, nama, nik }) => {
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: [cardElement.offsetWidth, cardElement.offsetHeight]
+      format: [cardElement.offsetWidth, cardElement.offsetHeight],
     });
     pdf.html(cardElement, {
       callback: () => {
         pdf.save('card.pdf');
-      }
+      },
     });
   };
   return (
@@ -57,7 +57,6 @@ const PdfCardEdit = ({ jabatan, nama, nik }) => {
         <br />
         <Stack spacing={2}>
           <Typography variant='body2'>Isi Surat:</Typography>
-          {/* <Typography variant='body2'>[Konten Surat]</Typography> */}
           <TinyMce />
         </Stack>
         <br />

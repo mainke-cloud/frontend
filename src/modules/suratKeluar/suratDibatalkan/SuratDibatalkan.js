@@ -20,7 +20,7 @@ import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
 import { useSelector } from 'react-redux';
 
-const Template = () => {
+const SuratDibatalkan = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -29,7 +29,7 @@ const Template = () => {
   const value = useSelector((state) => state.header.value);
   return (
     <Box backgroundColor='#F7F8F9'>
-      <HeaderDetail nama='Detail Template' />
+      <HeaderDetail nama='Detail Surat yang Dibatalkan' printer edit />
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
       <Box sx={{ padding: 8 }}>
         <Box backgroundColor='#FFFFFF' sx={{ padding: 8 }}>
@@ -111,13 +111,13 @@ const Template = () => {
   );
 };
 
-Template.propTypes = {
+SuratDibatalkan.propTypes = {
   props: PropTypes.shape({}),
   avatarSrc: PropTypes.string,
   date: PropTypes.string,
   priority: PropTypes.string,
   primary: PropTypes.string,
 };
-export default Template;
+export default SuratDibatalkan;
 
 // import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
