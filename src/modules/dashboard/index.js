@@ -272,7 +272,7 @@ const Dashboard = () => {
                   </Grid>
                 </Box>
               </AppCard2>
-              <AppCard2 sx={{ height: '344px', pb: 17 }}>
+              <AppCard2 sx={{ height: '345px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#F9E5CF',

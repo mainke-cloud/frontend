@@ -287,7 +287,7 @@ const Add_Sekretaris = () => {
                             <Grid item xs={3}>
                                 <Stack>
                                     <Typography variant="h2">Nama :</Typography>
-                                    <Box sx={{height: 40, width: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
+                                    <Box sx={{height: 40, maxWidth: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
                                         <Stack direction="row" >
                                             <Typography>Pilih Karyawan</Typography>
 
