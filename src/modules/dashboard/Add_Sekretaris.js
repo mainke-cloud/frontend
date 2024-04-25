@@ -13,7 +13,7 @@ import Avatar from '../../assets/Dashboard/avatar_placeholder.png'
 import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png'
 import Red_X from '../../assets/Dashboard/Red_x_icon.png'
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png'
-import ComposeMail from "@crema/components/AppAddress";
+// import ComposeMail from "@crema/components/AppAddress";
 import Filter_sekretaris from "./FilterPopUp/Filter_sekretaris";
 
 
@@ -71,15 +71,15 @@ const IOSSwitch = styled((props) => (
 const Add_Sekretaris = () => {
     const [isActive, setIsActive] = useState(true);
     const [openFilter, setOpenFilter] = React.useState(false);
-    const [isComposeMail, setComposeMail] = React.useState(false);
+    // const [isComposeMail, setComposeMail] = React.useState(false);
 
-    const onOpenComposeMail = () => {
-        setComposeMail(true);
-    };
+    // const onOpenComposeMail = () => {
+    //     setComposeMail(true);
+    // };
 
-    const onCloseComposeMail = () => {
-        setComposeMail(false);
-    };
+    // const onCloseComposeMail = () => {
+    //     setComposeMail(false);
+    // };
 
     const handleFilterClick = () => {
         setOpenFilter(!openFilter); // Toggle nilai openFilter
@@ -287,7 +287,7 @@ const Add_Sekretaris = () => {
                             <Grid item xs={3}>
                                 <Stack>
                                     <Typography variant="h2">Nama :</Typography>
-                                    <Box sx={{height: 40, maxWidth: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} onClick={onOpenComposeMail}>
+                                    <Box sx={{height: 40, maxWidth: 350, backgroundColor: "#FFFFFF", border: '1px solid #B1B5BA', borderRadius: 2, marginBottom: 7, marginTop: 2, cursor: 'pointer', paddingTop: 2, paddingX: 2}} >
                                         <Stack direction="row" >
                                             <Typography>Pilih Karyawan</Typography>
 
@@ -372,10 +372,10 @@ const Add_Sekretaris = () => {
                     </Box>
                 </Stack>
             </Box>)}  
-            <ComposeMail
+            {/* <ComposeMail
                 isComposeMail={isComposeMail}
                 onCloseComposeMail={onCloseComposeMail}
-            />          
+            />           */}
         </>
     )
 }
