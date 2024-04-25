@@ -33,6 +33,7 @@ import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
 import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
 import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
+import Forward from 'modules/forward';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -89,6 +90,8 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Template'
             ? inboxIcon
+            : type === 'Forward'
+            ? inboxIcon
             : '',
 
         content:
@@ -116,6 +119,8 @@ export const addTab = (id, state, type) => {
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
+          ) : type === 'Forward' ? (
+            <Forward />
           ) : (
             <BelumPilih />
           ),

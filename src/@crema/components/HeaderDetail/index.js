@@ -77,7 +77,7 @@ const HeaderDetail = ({
     dispatch(handleClose());
   };
 
-  const handleBuatDisposisi = (name) => {
+  const handleAddTab = (name) => {
     dispatch(addTab(tabId, tabs, name));
   }
   return (
@@ -183,7 +183,7 @@ const HeaderDetail = ({
               )}
               {globe && (
                 <IconButton
-                onClick={() => handleBuatDisposisi('BuatDisposisi')}
+                onClick={() => handleAddTab('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Globe style={{ width: '28px', height: '28px' }} />
@@ -225,6 +225,7 @@ const HeaderDetail = ({
               {forward && (
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  onClick={() => handleAddTab('Forward')}
                 >
                   <ShortcutTwoToneIcon
                     style={{ width: '28px', height: '28px' }}
