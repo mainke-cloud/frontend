@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
 import LabelInput from '@crema/components/LabelInput';
 import TextFieldTime from './TextFieldTime/TextFieldTime';
+import TextFieldDate from './TextFieldDate/TextFieldDate';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { users } from '@crema/services/dummy/user/user';
 
@@ -43,33 +44,23 @@ const SuratUndangan_2 = ({ handleNext, handlePrev }) => {
         <Typography variant='h4'>Hari/Tanggal</Typography>
 
         <Stack direction='row' spacing={5}>
-          <Stack flex={1}>
+          <Stack flex={1} spacing={2}>
             <Typography variant='body1'>Dari</Typography>
-            <LabelInput
-              type='tanggal'
-              name='tanggalSurat'
-              value={formData.tanggalSurat}
-              onChange={handleTanggal}
-            />
+            <TextFieldDate />
           </Stack>
-          <Stack flex={1}>
+          <Stack flex={1} spacing={2}>
             <Typography variant='body1'>Sampai</Typography>
-            <LabelInput
-              type='tanggal'
-              name='tanggalSurat'
-              value={formData.tanggalSurat}
-              onChange={handleTanggal}
-            />
+            <TextFieldDate />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Waktu</Typography>
         <Stack direction='row' spacing={5}>
-          <Stack flex={1}>
+          <Stack flex={1} spacing={2}>
             <Typography variant='body1'>Dari</Typography>
             <TextFieldTime />
           </Stack>
-          <Stack flex={1}>
+          <Stack flex={1} spacing={2}>
             <Typography variant='body1'>Sampai</Typography>
             <TextFieldTime />
           </Stack>

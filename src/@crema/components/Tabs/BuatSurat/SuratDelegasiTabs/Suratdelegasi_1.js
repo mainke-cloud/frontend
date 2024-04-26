@@ -17,6 +17,7 @@ import { GrAttachment } from 'react-icons/gr';
 import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LabelInput from '@crema/components/LabelInput';
+import TextFieldDate from '../TextFieldDate/TextFieldDate';
 
 const perihal = [
   {
@@ -117,21 +118,11 @@ const SuratDelegasi_1 = ({ handleNext }) => {
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Tanggal Mulai</Typography>
-            <LabelInput
-              type='tanggal'
-              name='tanggalSurat'
-              value={formData.tanggalSurat}
-              onChange={handleTanggal}
-            />
+            <TextFieldDate />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Tanggal Selesai</Typography>
-            <LabelInput
-              type='tanggal'
-              name='tanggalSurat'
-              value={formData.tanggalSurat}
-              onChange={handleTanggal}
-            />
+            <TextFieldDate />
           </Stack>
         </Stack>
         <Typography variant='h4'>Lampiran</Typography>
