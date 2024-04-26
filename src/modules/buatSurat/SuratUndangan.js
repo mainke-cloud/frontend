@@ -11,17 +11,33 @@ import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/Ko
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import SuratUndangan_2 from '@crema/components/Tabs/BuatSurat/SuratUndangan_2';
+import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
+import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 
 const SuratUndangan = () => {
   const [showNext, setShowNext] = useState(0);
+  const [showPage, setShowPage] = useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setShowNext(showNext + 1);
+    setActiveStep(activeStep + 1);
+
+    if (activeStep === 4) {
+      setShowPage(true);
+    }
   };
 
   const handlePrev = () => {
-    setShowNext(showNext - 1);
+    setActiveStep(activeStep - 1);
   };
+
+  const steps = [
+    <SuratInternal_1 key={1} handleNext={handleNext} />,
+    <SuratUndangan_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+  ];
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
@@ -35,51 +51,29 @@ const SuratUndangan = () => {
           padding: '20px',
         }}
       >
-        <img
-          src={StepImage}
-          alt='gambar step'
-          style={{
-            maxHeight: '120px',
-          }}
-        />
+        {showPage ? (
+          <BuatSuratLastPage />
+        ) : (
+          <>
+            <CustomizedSteppers activeStep={activeStep} />
 
-        <Grid container spacing={5}>
-          <Grid item xs={8}>
-            {showNext === 0 ? (
-              <SuratInternal_1 handleNext={handleNext} />
-            ) : showNext === 1 ? (
-              <SuratUndangan_2
-                handleNext={handleNext}
-                handlePrev={handlePrev}
-              />
-            ) : showNext === 2 ? (
-              <SuratInternal_3
-                handleNext={handleNext}
-                handlePrev={handlePrev}
-              />
-            ) : showNext === 3 ? (
-              <SuratInternal_4
-                handleNext={handleNext}
-                handlePrev={handlePrev}
-              />
-            ) : showNext === 4 ? (
-              <SuratInternal_5
-                handleNext={handleNext}
-                handlePrev={handlePrev}
-              />
-            ) : null}
-          </Grid>
+            <Grid container spacing={5} marginTop={'20px'}>
+              <Grid item xs={8}>
+                {steps[activeStep]}
+              </Grid>
 
-          <Grid item xs={4}>
-            <KomentarSection />
-          </Grid>
-        </Grid>
+              <Grid item xs={4}>
+                <KomentarSection />
+              </Grid>
+            </Grid>
 
-        <img
-          src={PreviewSuratImage}
-          alt='surat'
-          style={{ paddingTop: '20px', maxWidth: '1305px' }}
-        />
+            <img
+              src={PreviewSuratImage}
+              alt='surat'
+              style={{ paddingTop: '20px', maxWidth: '1305px' }}
+            />
+          </>
+        )}
       </Box>
     </Box>
   );

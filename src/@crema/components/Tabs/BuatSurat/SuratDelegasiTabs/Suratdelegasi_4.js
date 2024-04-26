@@ -16,6 +16,7 @@ const style = {
   borderRadius: '8px',
   justifyContent: 'center',
   alignItems: 'center',
+  height: '30vh',
 };
 
 const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {

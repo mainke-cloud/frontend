@@ -15,6 +15,7 @@ const style = {
   borderRadius: '8px',
   justifyContent: 'center',
   alignItems: 'center',
+  height: '30vh',
 };
 
 const SuratInternal_5 = ({ handleNext, handlePrev }) => {

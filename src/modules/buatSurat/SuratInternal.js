@@ -11,21 +11,33 @@ import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/Ko
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
+import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
+import { handleNextStep } from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 
 const SuratInternal = () => {
   const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setShowNext(showNext + 1);
-    if (showNext === 4) {
+    setActiveStep(activeStep + 1);
+
+    if (activeStep === 4) {
       setShowPage(true);
     }
   };
 
   const handlePrev = () => {
-    setShowNext(showNext - 1);
+    setActiveStep(activeStep - 1);
   };
+
+  const steps = [
+    <SuratInternal_1 key={1} handleNext={handleNext} />,
+    <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+  ];
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
@@ -43,39 +55,11 @@ const SuratInternal = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <img
-              src={StepImage}
-              alt='gambar step'
-              style={{
-                maxHeight: '120px',
-              }}
-            />
+            <CustomizedStepper activeStep={activeStep} />
 
-            <Grid container spacing={5}>
+            <Grid container spacing={5} marginTop={'20px'}>
               <Grid item xs={8}>
-                {showNext === 0 ? (
-                  <SuratInternal_1 handleNext={handleNext} />
-                ) : showNext === 1 ? (
-                  <SuratInternal_2
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : showNext === 2 ? (
-                  <SuratInternal_3
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : showNext === 3 ? (
-                  <SuratInternal_4
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : showNext === 4 ? (
-                  <SuratInternal_5
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : null}
+                {steps[activeStep]}
               </Grid>
 
               <Grid item xs={4}>

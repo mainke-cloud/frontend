@@ -10,21 +10,31 @@ import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import '../../styles/button.css';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
+import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 
 const SuratDelegasi = () => {
   const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setShowNext(showNext + 1);
-    if (showNext === 3) {
+    setActiveStep(activeStep + 1);
+
+    if (activeStep === 3) {
       setShowPage(true);
     }
   };
 
   const handlePrev = () => {
-    setShowNext(showNext - 1);
+    setActiveStep(activeStep - 1);
   };
+
+  const steps = [
+    <SuratDelegasi_1 key={1} handleNext={handleNext} />,
+    <SuratDelegasi_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratDelegasi_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratDelegasi_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
+  ];
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
@@ -42,34 +52,11 @@ const SuratDelegasi = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <img
-              src={StepImage}
-              alt='gambar step'
-              style={{
-                maxHeight: '120px',
-              }}
-            />
+            <CustomizedSteppers activeStep={activeStep} />
 
-            <Grid container spacing={5}>
+            <Grid container spacing={5} marginTop='20px'>
               <Grid item xs={8}>
-                {showNext === 0 ? (
-                  <SuratDelegasi_1 handleNext={handleNext} />
-                ) : showNext === 1 ? (
-                  <SuratDelegasi_2
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : showNext === 2 ? (
-                  <SuratDelegasi_3
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : showNext === 3 ? (
-                  <SuratDelegasi_4
-                    handleNext={handleNext}
-                    handlePrev={handlePrev}
-                  />
-                ) : null}
+                {steps[activeStep]}
               </Grid>
 
               <Grid item xs={4}>
