@@ -5,7 +5,7 @@ import { Box, Button } from '@mui/material';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-
+import { users } from '../../../services/dummy/user/user'
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
 
@@ -191,6 +191,8 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
+        datas={users}
+        type='Kepada'
       />
     </>
   );
