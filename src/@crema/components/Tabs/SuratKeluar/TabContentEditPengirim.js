@@ -6,17 +6,19 @@ import {
   IconButton,
   Button,
   Link,
+  Box,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../services/dummy/user/user';
+
 const TabContentEditPengirim = () => {
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-  const datas = users;
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -65,7 +67,7 @@ const TabContentEditPengirim = () => {
         <TextField
           disabled
           fullWidth
-          defaultValue='Kepala Research and Development'
+          value={`${pengirim.jabatan}`}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -99,40 +101,40 @@ const TabContentEditPengirim = () => {
         <TextField
           disabled
           fullWidth
-          defaultValue='Taufik Sulaeman'
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                <AddCircleOutlineRoundedIcon
-                  sx={{ color: 'black', fontSize: '40px' }}
-                />
-              </IconButton>
-            ),
-          }}
+          value={`${pengirim.nama}`}
+          // InputProps={{
+          //   endAdornment: (
+          //     <IconButton>
+          //       <AddCircleOutlineRoundedIcon
+          //         sx={{ color: 'black', fontSize: '40px' }}
+          //       />
+          //     </IconButton>
+          //   ),
+          // }}
         />
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+        <TextField disabled fullWidth value={`${pengirim.divisi}`} />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled defaultValue='8900002' />
+            <TextField disabled value={`${pengirim.nikl}`} />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled defaultValue='DIT-11 B 10000' />
+            <TextField disabled value={`${pengirim.kode_departemen}`}/>
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth defaultValue='Decision Support' />
+        <TextField disabled fullWidth value={`${pengirim.departemen}`} />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth defaultValue='Bandung' />
+        <TextField disabled fullWidth value={`${pengirim.kota}`} />
       </Stack>
       <br />
       <br />
@@ -148,7 +150,9 @@ const TabContentEditPengirim = () => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
-        datas={datas}
+        datas={users}
+        title='Pengirim'
+        type='single'
       />
     </>
   );

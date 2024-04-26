@@ -38,10 +38,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
-import { addKepada, addTembusan } from '../../../redux/actions/addressbookAction';
+import {
+  addDelegasi,
+  addKepada,
+  addPengirim,
+  addSekretaris,
+  addTembusan,
+} from '../../../redux/actions/addressbookAction';
 
 const ComposeMail = (props) => {
-  const { isComposeMail, onCloseComposeMail, datas, type } = props;
+  const { isComposeMail, onCloseComposeMail, datas, title, type } = props;
 
   const StyledTabsList = styled(TabsList)(
     ({ theme }) => `
@@ -52,7 +58,7 @@ const ComposeMail = (props) => {
     align-items: center;
     justify-content: center;
     align-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     `,
   );
 
@@ -79,8 +85,9 @@ const ComposeMail = (props) => {
     }
   `;
   const dispatch = useDispatch();
-  const [movedData, setMovedData] = useState([]);
+  const [singleData, setSingleData] = useState(null);
   const [selectedRow, setSelectedRow] = useState([]);
+  const [multipleData, setMultipleData] = useState([]);
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
 
@@ -98,34 +105,40 @@ const ComposeMail = (props) => {
     setSelectedRow(updatedSelectedRow);
     const selectedItems = checked ? datas : [];
 
-    setMovedData(selectedItems);
+    setMultipleData(selectedItems);
   };
 
   const handleRadioChange = (index) => {
-    let updatedSelectedRow;
-    if (selectedRow.includes(index)) {
-      updatedSelectedRow = selectedRow.filter((item) => item !== index);
+    if (type === 'single') {
+      setSingleData(datas[index]);
+      setSelectedRow(index);
     } else {
-      updatedSelectedRow = [...selectedRow, index];
-    }
-    setSelectedRow(updatedSelectedRow);
+      let updatedSelectedRow;
+      if (selectedRow.includes(index)) {
+        updatedSelectedRow = selectedRow.filter((item) => item !== index);
+      } else {
+        updatedSelectedRow = [...selectedRow, index];
+      }
+      setSelectedRow(updatedSelectedRow);
 
-    const selectedItems = datas.filter((_, i) =>
-      updatedSelectedRow.includes(i),
-    );
-    setMovedData(selectedItems);
+      const selectedItems = datas.filter((_, i) =>
+        updatedSelectedRow.includes(i),
+      );
+      setMultipleData(selectedItems);
+      setSingleData(null);
+    }
   };
 
   const handleRemoveAll = () => {
     setSelectedRow([]);
-    setMovedData([]);
+    setMultipleData([]);
   };
 
   const handleRemoveItem = (indexToRemove) => {
-    const updatedMovedData = movedData.filter(
+    const updatedmultipleData = multipleData.filter(
       (_, index) => index !== indexToRemove,
     );
-    setMovedData(updatedMovedData);
+    setMultipleData(updatedmultipleData);
 
     const updatedSelectedRow = selectedRow.filter(
       (item) => item !== indexToRemove,
@@ -133,12 +146,19 @@ const ComposeMail = (props) => {
     setSelectedRow(updatedSelectedRow);
   };
 
-  const handleConfirmation = (movedData) => {
-    if (type === 'Kepada') {
-      dispatch(addKepada(movedData));
-    } else if (type === 'Tembusan') {
-      dispatch(addTembusan(movedData)); 
+  const handleConfirmation = (Data) => {
+    if (title === 'Kepada') {
+      dispatch(addKepada(Data));
+    } else if (title === 'Tembusan') {
+      dispatch(addTembusan(Data));
+    } else if (title === 'Pengirim') {
+      dispatch(addPengirim(Data));
+    } else if (title === 'Delegasi') {
+      dispatch(addDelegasi(Data));
+    } else if (title === 'Sekretaris') {
+      dispatch(addSekretaris(Data));
     }
+    onCloseComposeMail();
   };
 
   return (
@@ -156,14 +176,17 @@ const ComposeMail = (props) => {
       <Grid
         container
         sx={{
-          maxWidth: 1200,
-          maxHeight: 800,
+          maxWidth: 1000,
+          maxHeight: 735,
           overflow: 'auto',
           bgcolor: 'background.paper',
           borderRadius: 8,
         }}
       >
-        <Grid item xs={selectedRow.length > 0 ? 9 : 12}>
+        <Grid
+          item
+          xs={type === 'single' ? 12 : selectedRow.length > 0 ? 9 : 12}
+        >
           <Box
             style={{
               padding: 20,
@@ -174,10 +197,10 @@ const ComposeMail = (props) => {
               direction='row'
               justifyContent='space-between'
               alignItems='center'
-              marginBottom={5}
+              marginBottom={2}
             >
               <Typography variant='h1' id='compose-mail-modal'>
-                Address Book {type}
+                Address Book {title}
               </Typography>
               <IconButton onClick={onCloseComposeMail}>
                 <X />
@@ -196,13 +219,14 @@ const ComposeMail = (props) => {
               spacing={2}
               alignItems='center'
               justifyContent='space-between'
-              marginBottom={5}
+              marginBottom={2}
             >
               <Box
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
                   border: '0.5px solid grey',
+                  width: '40%',
                   borderRadius: 1,
                 }}
               >
@@ -253,61 +277,72 @@ const ComposeMail = (props) => {
               direction='row'
               alignItems='center'
               justifyContent='space-between'
-              sx={{ marginY: 5 }}
+              sx={{ marginY: 2 }}
             >
-              <Box sx={{ marginTop: 2 }}>
-                <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
-              </Box>
+              {type !== 'single' && (
+                <Box sx={{ marginTop: 2 }}>
+                  <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
+                </Box>
+              )}
               <Typography variant='body2'>
                 ({datas.length} Hasil) Address Book
               </Typography>
             </Stack>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
               <TableContainer style={{ maxHeight: 400 }}>
-                <Table stickyHeader aria-label='sticky table'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell>Jabatan</TableCell>
-                      <TableCell>PGS</TableCell>
-                      <TableCell>NIK</TableCell>
-                      <TableCell>Departemen</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {datas.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <Radio
-                            checked={selectedRow.includes(index)}
-                            onClick={() => handleRadioChange(index)}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <img
-                            src={row.profil}
-                            alt='Profil'
-                            style={{ width: 50, height: 50 }}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Stack direction='column'>
-                            <Typography variant='subtitle1'>
-                              {row.jabatan}
-                            </Typography>
-                            <Typography variant='caption'>
-                              {row.nama}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell>{row.pgs}</TableCell>
-                        <TableCell>{row.nikg}</TableCell>
-                        <TableCell>{row.departemen}</TableCell>
+                <AppScrollbar>
+                  <Table stickyHeader aria-label='sticky table'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell>Jabatan</TableCell>
+                        <TableCell>PGS</TableCell>
+                        <TableCell>NIK</TableCell>
+                        <TableCell>Departemen</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHead>
+                    <TableBody>
+                      {datas.map((row, index) => (
+                        <TableRow key={index}>
+                          <TableCell>
+                            {type !== 'single' ? (
+                              <Radio
+                                checked={selectedRow.includes(index)}
+                                onClick={() => handleRadioChange(index)}
+                              />
+                            ) : (
+                              <Radio
+                                checked={selectedRow === index}
+                                onClick={() => handleRadioChange(index)}
+                              />
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <img
+                              src={row.profil}
+                              alt='Profil'
+                              style={{ width: '50px' }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Stack direction='column'>
+                              <Typography variant='subtitle1'>
+                                {row.jabatan}
+                              </Typography>
+                              <Typography variant='caption'>
+                                {row.nama}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
+                          <TableCell>{row.pgs}</TableCell>
+                          <TableCell>{row.nikg}</TableCell>
+                          <TableCell>{row.departemen}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </AppScrollbar>
               </TableContainer>
               <Divider />
               <Box
@@ -330,18 +365,33 @@ const ComposeMail = (props) => {
                 >
                   Tambah Ke Personal
                 </Button>
+                {type === 'single' && (
+                  <Button
+                    variant='contained'
+                    color='secondary'
+                    style={{ marginLeft: '10px' }}
+                    onClick={() => handleConfirmation(singleData)}
+                    sx={{
+                      borderRadius: '50px',
+                      minWidth: '150px',
+                      bgcolor: '#52BD94',
+                    }}
+                  >
+                    Tambahkan
+                  </Button>
+                )}
               </Box>
             </Paper>
           </Box>
         </Grid>
-        {movedData.length > 0 && (
+        {multipleData.length > 0 && type !== 'single' && (
           <Grid
             item
             xs={3}
             sx={{
               borderLeft: '1px solid #000',
               outline: 'none',
-              maxHeight: 800,
+              maxHeight: 735,
               overflowY: 'auto',
             }}
           >
@@ -370,10 +420,10 @@ const ComposeMail = (props) => {
                 </Button>
               </Stack>
             </Box>
-            <Box sx={{ height: 800 }}>
+            <Box sx={{ height: 735 }}>
               <AppScrollbar scrollToTop={true}>
                 <List>
-                  {movedData.map((item, index) => (
+                  {multipleData.map((item, index) => (
                     <div key={index}>
                       <ListItem>
                         <ListItemAvatar>
@@ -400,7 +450,7 @@ const ComposeMail = (props) => {
                           </IconButton>
                         </ListItemSecondaryAction>
                       </ListItem>
-                      {index !== movedData.length - 1 && <Divider />}
+                      {index !== multipleData.length - 1 && <Divider />}
                     </div>
                   ))}
                 </List>
@@ -423,7 +473,7 @@ const ComposeMail = (props) => {
                   borderRadius: '50px',
                   minWidth: '200px',
                 }}
-                onClick={() => handleConfirmation(movedData)}
+                onClick={() => handleConfirmation(multipleData)}
               >
                 Konfirmasi
               </Button>
@@ -445,5 +495,6 @@ ComposeMail.propTypes = {
   isComposeMail: PropTypes.bool.isRequired,
   onCloseComposeMail: PropTypes.func.isRequired,
   datas: PropTypes.object,
+  title: PropTypes.string,
   type: PropTypes.string,
 };

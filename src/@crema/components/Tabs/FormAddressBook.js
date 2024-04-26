@@ -82,7 +82,8 @@ const FormAddressBook = (props) => {
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
         datas={users}
-        type={text}
+        title={text}
+        type='multi'
       />
     </StyledStack>
   );
