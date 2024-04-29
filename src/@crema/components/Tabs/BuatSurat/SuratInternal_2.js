@@ -5,8 +5,20 @@ import { Box, Button } from '@mui/material';
 import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-
+import { useSelector } from 'react-redux';
+import FormAddressBook from '../FormAddressBook';
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.kepada);
+
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
   const [isComposeMail, setComposeMail] = React.useState(false);
 
   const onOpenComposeMail = () => {
@@ -28,42 +40,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
-            sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
-            }}
-            onClick={() => onOpenComposeMail()}
-          >
-            Kepada
-          </Link>
-
-          <Typography variant='h4' color='red'>
-            *
-          </Typography>
-        </Stack>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        <FormAddressBook text='Kepada' data={datass} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -96,37 +73,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           ></AppScrollbar>
         </Box>
 
-        <Link
-          component='button'
-          underline='always'
-          sx={{
-            fontSize: '16px',
-            fontWeight: 600,
-            color: 'black',
-            textDecorationColor: 'black',
-            textAlign: 'start',
-          }}
-          onClick={() => onOpenComposeMail()}
-        >
-          Tembusan
-        </Link>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        <FormAddressBook text='Tembusan' data={datasss} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -188,10 +135,10 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
         </Stack>
       </Stack>
 
-      <ComposeMail
+      {/* <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
-      />
+      /> */}
     </>
   );
 };

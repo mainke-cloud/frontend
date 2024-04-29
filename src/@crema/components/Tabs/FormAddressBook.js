@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -41,10 +41,16 @@ const FormAddressBook = (props) => {
 
   return (
     <StyledStack>
-      <StyledTitle>
-        {text}
-        <CustomSpan>*</CustomSpan>
-      </StyledTitle>
+      <Link
+        component='button'
+        onClick={onOpenComposeMail}
+        sx={{ color: 'black' }}
+      >
+        <StyledTitle sx={{ textAlign: 'left' }}>
+          {text}
+          <CustomSpan>*</CustomSpan>
+        </StyledTitle>
+      </Link>
 
       <Box
         position={'relative'}

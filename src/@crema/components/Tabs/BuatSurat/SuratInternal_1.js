@@ -10,6 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
+import { useSelector } from 'react-redux';
+import FormAddressBook from '../FormAddressBook';
 
 const perihal = [
   {
@@ -57,6 +59,11 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext }) => {
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
   return (
     <>
       <Stack
@@ -93,34 +100,8 @@ const SuratInternal_1 = ({ handleNext }) => {
           ))}
         </TextField>
 
-        <Typography
-          variant='h4'
-          sx={{
-            '&::after': {
-              content: '"*"',
-              color: 'red',
-            },
-          }}
-        >
-          Klarifikasi Masalah
-        </Typography>
+        <FormAddressBook text='Klasifikasi Masalah' data={datass} />
 
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
 
         <Typography
           variant='body1'

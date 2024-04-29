@@ -65,7 +65,6 @@ const TabContentEditPengirim = () => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
           value={`${pengirim.jabatan}`}
           InputProps={{
@@ -77,6 +76,7 @@ const TabContentEditPengirim = () => {
               </IconButton>
             ),
           }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
         />
 
         <Stack direction='row'>
@@ -99,54 +99,42 @@ const TabContentEditPengirim = () => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
           value={`${pengirim.nama}`}
-          // InputProps={{
-          //   endAdornment: (
-          //     <IconButton>
-          //       <AddCircleOutlineRoundedIcon
-          //         sx={{ color: 'black', fontSize: '40px' }}
-          //       />
-          //     </IconButton>
-          //   ),
-          // }}
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={() => onOpenComposeMail()}>
+                <AddCircleOutlineRoundedIcon
+                  sx={{ color: 'black', fontSize: '40px' }}
+                />
+              </IconButton>
+            ),
+          }}
         />
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth value={`${pengirim.divisi}`} />
+        <TextField fullWidth value={`${pengirim.divisi}`} />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled value={`${pengirim.nikl}`} />
+            <TextField value={`${pengirim.nikl}`} />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled value={`${pengirim.kode_departemen}`}/>
+            <TextField value={`${pengirim.kode_departemen}`} />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth value={`${pengirim.departemen}`} />
+        <TextField fullWidth value={`${pengirim.departemen}`} />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth value={`${pengirim.kota}`} />
+        <TextField fullWidth value={`${pengirim.kota}`} />
       </Stack>
-      <br />
-      <br />
-      <PdfCardEdit
-        jabatan={formData.jabatan}
-        nama={formData.nama}
-        divisi={formData.divisi}
-        nik={formData.nik}
-        kodeDepartemen={formData.kodeDepartemen}
-        departemen={formData.departemen}
-        kantorKota={formData.kantorKota}
-      />
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
