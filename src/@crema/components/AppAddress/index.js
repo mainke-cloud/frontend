@@ -31,6 +31,11 @@ import {
   Divider,
   Select,
   MenuItem,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Card,
+  CardContent,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
@@ -85,11 +90,13 @@ const ComposeMail = (props) => {
     }
   `;
   const dispatch = useDispatch();
+  const [previewData, setPreviewData] = useState(null);
   const [singleData, setSingleData] = useState(null);
   const [selectedRow, setSelectedRow] = useState([]);
   const [multipleData, setMultipleData] = useState([]);
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
+  const [selectedRowIndices, setSelectedRowIndices] = useState([]);
 
   const handleOption1Change = (event) => {
     setSelectedOption1(event.target.value);
@@ -103,8 +110,8 @@ const ComposeMail = (props) => {
     const checked = event.target.checked;
     const updatedSelectedRow = checked ? datas.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
+    setSelectedRowIndices(updatedSelectedRow);
     const selectedItems = checked ? datas : [];
-
     setMultipleData(selectedItems);
   };
 
@@ -112,12 +119,16 @@ const ComposeMail = (props) => {
     if (type === 'single') {
       setSingleData(datas[index]);
       setSelectedRow(index);
+      setSelectedRowIndices([index]);
+      setPreviewData(datas[index]);
     } else {
       let updatedSelectedRow;
       if (selectedRow.includes(index)) {
         updatedSelectedRow = selectedRow.filter((item) => item !== index);
+        setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
       } else {
         updatedSelectedRow = [...selectedRow, index];
+        setSelectedRowIndices([...selectedRowIndices, index]);
       }
       setSelectedRow(updatedSelectedRow);
 
@@ -126,11 +137,19 @@ const ComposeMail = (props) => {
       );
       setMultipleData(selectedItems);
       setSingleData(null);
+      if (updatedSelectedRow.length > 0) {
+        setPreviewData(
+          datas[updatedSelectedRow[updatedSelectedRow.length - 1]],
+        );
+      } else {
+        setPreviewData(null);
+      }
     }
   };
 
   const handleRemoveAll = () => {
     setSelectedRow([]);
+    setSelectedRowIndices([]);
     setMultipleData([]);
   };
 
@@ -144,6 +163,18 @@ const ComposeMail = (props) => {
       (item) => item !== indexToRemove,
     );
     setSelectedRow(updatedSelectedRow);
+
+    if (type !== 'single') {
+      setSelectedRowIndices(updatedSelectedRow);
+    } else {
+      setSingleData(null);
+    }
+
+    if (updatedSelectedRow.length > 0) {
+      setPreviewData(datas[updatedSelectedRow[updatedSelectedRow.length - 1]]);
+    } else {
+      setPreviewData(null);
+    }
   };
 
   const handleConfirmation = (Data) => {
@@ -177,7 +208,7 @@ const ComposeMail = (props) => {
         container
         sx={{
           maxWidth: 1000,
-          maxHeight: 735,
+          maxHeight: 800,
           overflow: 'auto',
           bgcolor: 'background.paper',
           borderRadius: 8,
@@ -273,6 +304,46 @@ const ComposeMail = (props) => {
                 <MenuItem value={3}>Opsi C</MenuItem>
               </Select>
             </Stack>
+            <Box sx={{ marginTop: 2 }}>
+              <Card sx={{ width: '100%' }}>
+                <CardContent>
+                  <Grid container>
+                    <Grid
+                      item
+                      xs={2}
+                      alignItems='center'
+                      justifyContent='center'
+                    >
+                      <Avatar
+                        alt={previewData ? previewData.nama : '--'}
+                        src={previewData ? previewData.profil : ''}
+                        sx={{ width: 90, height: 90 }}
+                      />
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography variant='subtitle1'>Nama :</Typography>
+                      <Typography variant='subtitle2'>
+                        {previewData ? previewData.nama : '--'}
+                      </Typography>
+                      <Typography variant='subtitle1'>Departemen :</Typography>
+                      <Typography variant='subtitle2'>
+                        {previewData ? previewData.departemen : '--'}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography variant='subtitle1'>Divisi :</Typography>
+                      <Typography variant='subtitle2'>
+                        {previewData ? previewData.divisi : '--'}
+                      </Typography>
+                      <Typography variant='subtitle1'>NIK :</Typography>
+                      <Typography variant='subtitle2'>
+                        {previewData ? previewData.nikg : '--'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Box>
             <Stack
               direction='row'
               alignItems='center'
@@ -288,8 +359,16 @@ const ComposeMail = (props) => {
                 ({datas.length} Hasil) Address Book
               </Typography>
             </Stack>
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-              <TableContainer style={{ maxHeight: 400 }}>
+            <Box
+              sx={{
+                width: '100%',
+                overflow: 'hidden',
+                border: '1px solid transparent',
+                borderRadius: '8px',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <TableContainer style={{ maxHeight: 300 }}>
                 <AppScrollbar>
                   <Table stickyHeader aria-label='sticky table'>
                     <TableHead>
@@ -304,7 +383,14 @@ const ComposeMail = (props) => {
                     </TableHead>
                     <TableBody>
                       {datas.map((row, index) => (
-                        <TableRow key={index}>
+                        <TableRow
+                          key={index}
+                          sx={{
+                            backgroundColor: selectedRowIndices.includes(index)
+                              ? '#52BD94'
+                              : 'transparent',
+                          }}
+                        >
                           <TableCell>
                             {type !== 'single' ? (
                               <Radio
@@ -381,7 +467,70 @@ const ComposeMail = (props) => {
                   </Button>
                 )}
               </Box>
-            </Paper>
+            </Box>
+            {/* jaga jaga kl berubah jd Accordion */}
+            {/* <Accordion>
+              {datas.map((row, index) => (
+                <><AccordionSummary
+                  key={index}
+                  expandIcon={<Radio />}
+                  aria-controls={`panel-${index}`}
+                  id={`panel-${index}`}
+                >
+                  <img
+                    src={row.profil}
+                    alt='Profil'
+                    style={{ width: '50px' }} />
+                  <Typography>{row.jabatan}</Typography>
+                </AccordionSummary><AccordionDetails>
+                    <Typography variant='caption'>
+                      Nama: {row.nama}
+                    </Typography>
+                    <Typography variant='caption'>PGS: {row.pgs}</Typography>
+                    <Typography variant='caption'>NIK: {row.nikg}</Typography>
+                    <Typography variant='caption'>
+                      Departemen: {row.departemen}
+                    </Typography>
+                  </AccordionDetails></>
+              ))}
+            </Accordion>
+            <Divider />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                padding: 5,
+              }}
+            >
+              <Button
+                variant='contained'
+                sx={{
+                  borderRadius: '50px',
+                  minWidth: '150px',
+                  border: '2px solid #8F95B2',
+                  bgcolor: 'transparent',
+                  color: '#8F95B2',
+                }}
+                endIcon={<UserPlus />}
+              >
+                Tambah Ke Personal
+              </Button>
+              {type === 'single' && (
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  style={{ marginLeft: '10px' }}
+                  onClick={() => handleConfirmation(singleData)}
+                  sx={{
+                    borderRadius: '50px',
+                    minWidth: '150px',
+                    bgcolor: '#52BD94',
+                  }}
+                >
+                  Tambahkan
+                </Button>
+              )}
+            </Box> */}
           </Box>
         </Grid>
         {multipleData.length > 0 && type !== 'single' && (
@@ -391,7 +540,7 @@ const ComposeMail = (props) => {
             sx={{
               borderLeft: '1px solid #000',
               outline: 'none',
-              maxHeight: 735,
+              maxHeight: 800,
               overflowY: 'auto',
             }}
           >
@@ -420,7 +569,7 @@ const ComposeMail = (props) => {
                 </Button>
               </Stack>
             </Box>
-            <Box sx={{ height: 735 }}>
+            <Box sx={{ height: 800 }}>
               <AppScrollbar scrollToTop={true}>
                 <List>
                   {multipleData.map((item, index) => (
