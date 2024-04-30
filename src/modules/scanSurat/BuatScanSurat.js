@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Stack, Grid, Typography, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 
 import HeaderDetail from '@crema/components/HeaderDetail';
 import LabelInput from '@crema/components/LabelInput';
 import MiniTab from '@crema/components/MiniTab';
+import FormAddressBook from '@crema/components/Tabs/FormAddressBook';
+
 import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
 import ComposeMail from '@crema/components/AppAddress';
 
@@ -71,6 +74,16 @@ const BuatScanSurat = () => {
   };
 
   const ScanSurat = () => {
+    const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
     return (
       <>
         <Grid container spacing={2}>
@@ -119,27 +132,8 @@ const BuatScanSurat = () => {
                 value={formData.dari}
                 onChange={handleInputChange}
               />
-              <LabelInput
-                type='textfield'
-                name='kepada'
-                label='Kepada'
-                important
-                under
-                addressBook
-                value={formData.kepada}
-                onChange={handleInputChange}
-                onClick={onOpenComposeMail}
-              />
-              <LabelInput
-                type='textfield'
-                name='tembusan'
-                label='Tembusan'
-                under
-                addressBook
-                value={formData.tembusan}
-                onChange={handleInputChange}
-                onClick={onOpenComposeMail}
-              />
+              <FormAddressBook text='Kepada' data={datass} />
+              <FormAddressBook text='Tembusan' data={datass} />
               <LabelInput
                 type='input'
                 name='noSurat'
@@ -158,18 +152,7 @@ const BuatScanSurat = () => {
                   onChange={handleInputChange}
                 />
               </Grid>
-
-              <LabelInput
-                type='input'
-                name='klasifikasiMasalah'
-                label='Klasifikasi Masalah'
-                important
-                under
-                addressBook
-                value={formData.klasifikasiMasalah}
-                onChange={handleInputChange}
-                onClick={onOpenComposeMail}
-              />
+              <FormAddressBook text='Klasifikasi Masalah' data={datass} />
               <LabelInput
                 type='input'
                 name='subjek'
@@ -194,10 +177,6 @@ const BuatScanSurat = () => {
             Selanjutnya (Lainnya)
           </Buttons>
         </Stack>
-        <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      />
       </>
     );
   };
@@ -209,139 +188,6 @@ const BuatScanSurat = () => {
           <Grid item xs={8}>
             <LabelInput label='Lampiran' important />
             <DropZoneFile />
-            {/* <Box position='relative'>
-              <AppScrollbar
-                sx={{
-                  height: '330px',
-                  width: '100%',
-                  position: 'relative',
-                  border: '1px dashed #B1B5BA',
-                  borderRadius: '10px',
-                  overflowY: 'auto',
-                }}
-                scrollToTop={false}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-              >
-                {upload && (
-                  <>
-                    <Stack
-                      rowGap='8px'
-                      justifyContent='center'
-                      alignItems='center'
-                      position='absolute'
-                      top='50%'
-                      left='50%'
-                      sx={{ transform: 'translate(-50%, -50%)' }}
-                    >
-                      <img
-                        src={UploadFile}
-                        alt='Upload File'
-                        style={{ height: '54px' }}
-                      />
-                      <Stack direction='row' columnGap='4px'>
-                        <Typography fontSize='18px'>
-                          Tarik File atau{' '}
-                        </Typography>
-                        <Typography
-                          fontSize='18px'
-                          fontWeight='700'
-                          color='#E42313'
-                          component='label'
-                          sx={{ cursor: 'pointer' }}
-                        >
-                          Cari
-                          <VisuallyHiddenInput
-                            type='file'
-                            multiple
-                            onChange={handleFileSelected}
-                          />
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                  </>
-                )}
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 3 }}
-                  columns={{ xs: 4, sm: 8, md: 12 }}
-                >
-                  {file.map((file, index) => (
-                    <Grid
-                      item
-                      xs={2}
-                      sm={4}
-                      md={4}
-                      key={index}
-                      sx={{
-                        transition: 'background-color 0.3s ease',
-                        '&:hover': {
-                          backgroundColor: (theme) => theme.palette.gray[300],
-                        },
-                      }}
-                    >
-                      <Stack margin='16px' alignItems='center' rowGap='8px'>
-                        <img
-                          src={PdfVector}
-                          alt='Pdf File'
-                          style={{ height: '75px', width: 'fit-content' }}
-                        />
-                        <Typography
-                          fontSize='12px'
-                          sx={{
-                            maxWidth: '100px',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >
-                          {file.name}
-                        </Typography>
-                        <Stack
-                          direction='row'
-                          justifyContent='center'
-                          columnGap='16px'
-                        >
-                          <Typography fontSize='8px'>
-                            {bytesConvert(file.size)}
-                          </Typography>
-                          <Typography
-                            fontSize='8px'
-                            onClick={() => handleDeleteFile(index)}
-                            style={{ cursor: 'pointer' }}
-                          >
-                            Delete
-                          </Typography>
-                        </Stack>
-                      </Stack>
-                    </Grid>
-                  ))}
-                </Grid>
-              </AppScrollbar>
-              {!upload && (
-                <Box
-                  position='absolute'
-                  bottom='0'
-                  width='100%'
-                  zIndex='1'
-                  justifyContent='end'
-                  display='flex'
-                >
-                  <Buttons
-                    variant='contained'
-                    component='label'
-                    sx={{ margin: '16px', borderRadius: '50px' }}
-                  >
-                    Tambah File Lagi
-                    <VisuallyHiddenInput
-                      type='file'
-                      multiple
-                      onChange={handleFileSelected}
-                    />
-                  </Buttons>
-                </Box>
-              )}
-            </Box> */}
           </Grid>
           <Grid item xs={4}>
             <Box
