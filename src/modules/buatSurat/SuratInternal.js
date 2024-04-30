@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import HeaderDetail from '@crema/components/HeaderDetail';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import '../../styles/button.css';
 import SuratInternal_5 from '@crema/components/Tabs/BuatSurat/SuratInternal_5';
 import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternal_4';
@@ -10,9 +10,13 @@ import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
-
+import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
+import { useSelector } from 'react-redux';
 const SuratInternal = () => {
   const [showNext, setShowNext] = useState(0);
+  const kepada = useSelector((state) => state.addressbook.kepada[0]);
+  const tembusan = useSelector((state) => state.addressbook.tembusan[0]);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
 
   const handleNext = () => {
     setShowNext(showNext + 1);
@@ -74,12 +78,25 @@ const SuratInternal = () => {
           </Grid>
         </Grid>
 
-        <img
-          src={PreviewSuratImage}
-          alt='surat'
-          style={{ paddingTop: '20px', maxWidth: '1305px' }}
-        />
       </Box>
+        <Stack
+          sx={{
+            backgroundColor: 'white',
+            minHeight: '1009px',
+            width: '921px',
+            mx: 'auto',
+            display: 'flex',
+            borderRadius: '10px', // Mengatur border radius
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+            mb: '30px',
+          }}
+        >
+          <PdfCardEdit
+            kepada={kepada}
+            tembusan={tembusan}
+            pengirim={pengirim}
+          />
+        </Stack>
     </Box>
   );
 };
