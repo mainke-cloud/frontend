@@ -183,7 +183,6 @@ const HeaderDetail = ({
               )}
               {globe && (
                 <IconButton
-                onClick={() => handleBuatDisposisi('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Globe style={{ width: '28px', height: '28px' }} />
@@ -215,6 +214,7 @@ const HeaderDetail = ({
               )}
               {disposisi && (
                 <IconButton
+                  onClick={() => handleBuatDisposisi('BuatDisposisi')}
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <AutorenewRoundedIcon
