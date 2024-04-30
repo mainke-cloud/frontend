@@ -81,44 +81,6 @@ const AlamatPenerusan = () => {
   );
 };
 
-const AgendaSuratMasuk = () => {
-  const kepada = useSelector((state) => state.addressbook.kepada);
-  const tembusan = useSelector((state) => state.addressbook.tembusan);
-  let datass = kepada[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
-  let datasss = tembusan[0];
-  if (!datasss || !Array.isArray(datasss)) {
-    datasss = [];
-  }
-  return (
-    <Box>
-      <Stack direction='row' columnGap='8px'>
-        <Judul>Nota Tindakan :</Judul>
-        <Judul color='#474D66'>Forward</Judul>
-      </Stack>
-      <StyledBox>
-        <Stack rowGap='10px'>
-          <Judul>Diteruskan Dari</Judul>
-          <Divider
-            sx={{
-              borderColor: (theme) => theme.palette.coofis.tertiary[50],
-              borderBottomWidth: '2px',
-            }}
-          />
-
-          <Typography>EVITA TUNJUNG SEKAR / 690013</Typography>
-        </Stack>
-      </StyledBox>
-      <FormAddressBook text='Kepada' data={datass} />
-      <StyledStack>
-        <StyledText>Tambah Teruskan</StyledText>
-      </StyledStack>
-    </Box>
-  );
-};
-
 const Forward = () => {
   return (
     <Box
