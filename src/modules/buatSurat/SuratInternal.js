@@ -14,9 +14,16 @@ import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 const SuratInternal = () => {
   const [showNext, setShowNext] = useState(0);
-  const kepada = useSelector((state) => state.addressbook.kepada[0]);
-  const tembusan = useSelector((state) => state.addressbook.tembusan[0]);
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
 
   const handleNext = () => {
     setShowNext(showNext + 1);
@@ -24,6 +31,10 @@ const SuratInternal = () => {
 
   const handlePrev = () => {
     setShowNext(showNext - 1);
+  };
+
+  const handleChangeForm = (formData) => {
+    setFormData(formData);
   };
 
   return (
@@ -49,7 +60,10 @@ const SuratInternal = () => {
         <Grid container spacing={5}>
           <Grid item xs={8}>
             {showNext === 0 ? (
-              <SuratInternal_1 handleNext={handleNext} />
+              <SuratInternal_1
+                handleNext={handleNext}
+                onStateChange={handleChangeForm}
+              />
             ) : showNext === 1 ? (
               <SuratInternal_2
                 handleNext={handleNext}
@@ -72,31 +86,30 @@ const SuratInternal = () => {
               />
             ) : null}
           </Grid>
-
           <Grid item xs={4}>
             <KomentarSection />
           </Grid>
         </Grid>
-
       </Box>
-        <Stack
-          sx={{
-            backgroundColor: 'white',
-            minHeight: '1009px',
-            width: '921px',
-            mx: 'auto',
-            display: 'flex',
-            borderRadius: '10px', // Mengatur border radius
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
-            mb: '30px',
-          }}
-        >
-          <PdfCardEdit
-            kepada={kepada}
-            tembusan={tembusan}
-            pengirim={pengirim}
-          />
-        </Stack>
+      <Stack
+        sx={{
+          backgroundColor: 'white',
+          minHeight: '1009px',
+          width: '921px',
+          mx: 'auto',
+          display: 'flex',
+          borderRadius: '10px', // Mengatur border radius
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+          mb: '30px',
+        }}
+      >
+        <PdfCardEdit
+          kepada={kepada}
+          tembusan={tembusan}
+          pengirim={pengirim}
+          info={formData}
+        />
+      </Stack>
     </Box>
   );
 };

@@ -9,16 +9,8 @@ import { useSelector } from 'react-redux';
 import FormAddressBook from '../FormAddressBook';
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const kepada = useSelector((state) => state.addressbook.kepada);
-  const tembusan = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
 
-  let datass = kepada[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
-  let datasss = tembusan[0];
-  if (!datasss || !Array.isArray(datasss)) {
-    datasss = [];
-  }
   const [isComposeMail, setComposeMail] = React.useState(false);
 
   const onOpenComposeMail = () => {
@@ -40,7 +32,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={datass} />
+        <FormAddressBook text='Kepada' data={kepada} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -70,10 +62,18 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+            {kepada?.map((item) => (
+            <Stack key={item.id}>
+              <Typography>
+                {item.jabatan} - {item.nama}
+              </Typography>
+            </Stack>
+          ))}
+          </AppScrollbar>
         </Box>
 
-        <FormAddressBook text='Tembusan' data={datasss} />
+        <FormAddressBook text='Tembusan' data={tembusan} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -103,7 +103,15 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               maxHeight: '145px',
               overflow: 'auto',
             }}
-          ></AppScrollbar>
+          >
+            {tembusan.map((item) => (
+            <Stack key={item.id}>
+              <Typography>
+                {item.jabatan} - {item.nama}
+              </Typography>
+            </Stack>
+          ))}
+          </AppScrollbar>
         </Box>
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>

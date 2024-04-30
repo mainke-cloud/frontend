@@ -1,6 +1,7 @@
-export const inputFormData = (formData) => {
-  console.log(formData);
-  // return (dispatch) {
-  //   dispatch({ type: 'LIST_USER', payload: listUser });
-  // };
+// addInfoAction.js
+export const addInfo = (formData) => {
+  return {
+    type: 'ADD_INFO',
+    payload: formData
+  };
 };

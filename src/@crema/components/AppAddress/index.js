@@ -41,6 +41,8 @@ import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
 import {
   addDelegasi,
   addKepada,
+  addPemeriksa,
+  addPemohon,
   addPengirim,
   addSekretaris,
   addTembusan,
@@ -157,6 +159,10 @@ const ComposeMail = (props) => {
       dispatch(addDelegasi(Data));
     } else if (title === 'Sekretaris') {
       dispatch(addSekretaris(Data));
+    } else if (title === 'Pemeriksa') {
+      dispatch(addPemeriksa(Data));
+    } else if (title === 'Pemohon') {
+      dispatch(addPemohon(Data));
     }
     onCloseComposeMail();
   };

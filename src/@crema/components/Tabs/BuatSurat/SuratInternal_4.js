@@ -5,10 +5,12 @@ import { Box, Button } from '@mui/material';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 import ComposeMail from '@crema/components/AppAddress';
 import PropTypes from 'prop-types';
-
+import FormAddressBook from '../FormAddressBook';
+import { useSelector } from 'react-redux';
 const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
-
+  const pemeriksa = useSelector((state) => state.addressbook.pemeriksa);
+  const pemohon = useSelector((state) => state.addressbook.pemohon);
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -28,76 +30,8 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
-            sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
-            }}
-            onClick={() => onOpenComposeMail()}
-          >
-            Pemeriksa
-          </Link>
-
-          <Typography variant='h4' color='red'>
-            *
-          </Typography>
-        </Stack>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
-
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
-            sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
-            }}
-            onClick={() => onOpenComposeMail()}
-          >
-            Pemohon
-          </Link>
-        </Stack>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
-
+        <FormAddressBook text='Pemeriksa' data={pemeriksa} />
+        <FormAddressBook text='Pemohon' data={pemohon}/>
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
             variant='contained'
@@ -127,10 +61,10 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
         </Stack>
       </Stack>
 
-      <ComposeMail
+      {/* <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
-      />
+      /> */}
     </>
   );
 };

@@ -8,6 +8,16 @@ export const addTembusan = (datas) => {
     dispatch({ type: 'ADD_TEMBUSAN', payload: datas });
   };
 };
+export const addPemeriksa = (datas) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_PEMERIKSA', payload: datas });
+  };
+};
+export const addPemohon = (datas) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_PEMOHON', payload: datas });
+  };
+};
 export const addPengirim = (datas) => {
   return (dispatch) => {
     dispatch({ type: 'ADD_PENGIRIM', payload: datas });

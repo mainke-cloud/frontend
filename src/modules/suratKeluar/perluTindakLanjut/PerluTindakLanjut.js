@@ -28,8 +28,8 @@ const PerluTindakLanjut = () => {
   ).toString();
   const isEdit = useSelector((state) => state.header.isEdit);
   const value = useSelector((state) => state.header.value);
-  const kepada = useSelector((state) => state.addressbook.kepada[0]);
-  const tembusan = useSelector((state) => state.addressbook.tembusan[0]);
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
  
   return (

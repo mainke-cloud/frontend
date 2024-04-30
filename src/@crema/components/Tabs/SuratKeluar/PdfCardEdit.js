@@ -3,9 +3,9 @@ import { Box, Typography, Stack, List, ListItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import TinyMce from './TinyMce';
 import jsPDF from 'jspdf';
-const PdfCardEdit = ({ kepada, tembusan, pengirim }) => {
+const PdfCardEdit = ({ kepada, tembusan, pengirim, info }) => {
   const cardRef = useRef(null);
-
+  console.log(kepada);
   const exportToPDF = () => {
     const cardElement = cardRef.current;
     const pdf = new jsPDF({
@@ -19,47 +19,47 @@ const PdfCardEdit = ({ kepada, tembusan, pengirim }) => {
       },
     });
   };
-  let kepadas = kepada;
-  if (!kepadas || !Array.isArray(kepadas)) {
-    kepadas = [];
-  }
-  let tembusans = tembusan;
-  if (!tembusans || !Array.isArray(tembusans)) {
-    tembusans = [];
-  }
-  let pengirims = pengirim;
-  if (!pengirim || !Array.isArray(pengirim)) {
-    pengirim = [];
-  }
+
+  const currentDate = new Date();
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  const formattedDate = currentDate.toLocaleDateString('id-ID', options);
   return (
     <Stack padding={'20px'}>
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
         Nomor:
       </Typography>
       <br />
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
         Jakarta, 29 Juli 2023
       </Typography>
       <br />
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
-        Kepada: 
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Kepada:
         <List>
-          {kepadas.map((item, index) => (
-            <ListItem key={index}>{index+1}. Sdr. {item.nama}</ListItem>
-          ))}
+          {kepada &&
+            kepada.map((item, index) => (
+              <ListItem key={index}>
+                {index + 1}. Sdr. {item.nama}
+              </ListItem>
+            ))}
         </List>
       </Typography>
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
         Dari:
       </Typography>
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
-        Lampiran:
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Lampiran: {info && info.lampiran}
       </Typography>
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
-        Hal:
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Hal: {info && info.perihal}
       </Typography>
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
-        Tanggal:
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Tanggal: {formattedDate}
       </Typography>
       <br />
       <br />
@@ -85,7 +85,7 @@ const PdfCardEdit = ({ kepada, tembusan, pengirim }) => {
           textDecoration: 'underline',
         }}
       >
-        {pengirims.nama}
+        {pengirim && pengirim.nama}
       </Typography>
       <Typography
         variant='subtitle1'
@@ -96,15 +96,18 @@ const PdfCardEdit = ({ kepada, tembusan, pengirim }) => {
           pr: 25,
         }}
       >
-        {pengirims.nikl}
+        {pengirim && pengirim.nikl}
       </Typography>
       <br />
-      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight:'bold' }}>
-        Tembusan: 
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Tembusan:
         <List>
-          {tembusans.map((item, index) => (
-            <ListItem key={index}>{index+1}. Sdr. {item.nama}</ListItem>
-          ))}
+          {tembusan &&
+            tembusan.map((item, index) => (
+              <ListItem key={index}>
+                {index + 1}. Sdr. {item.nama}
+              </ListItem>
+            ))}
         </List>
       </Typography>
       {/* <button onClick={exportToPDF}>Export to PDF</button> */}
@@ -115,5 +118,6 @@ PdfCardEdit.propTypes = {
   kepada: PropTypes.any,
   tembusan: PropTypes.any,
   pengirim: PropTypes.any,
+  info: PropTypes.any,
 };
 export default PdfCardEdit;

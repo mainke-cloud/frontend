@@ -12,26 +12,9 @@ import AppScrollbar from '@crema/components/AppScrollbar';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../FormAddressBook';
-
-const perihal = [
-  {
-    value: '1',
-    label: '',
-  },
-  {
-    value: '2',
-    label: '',
-  },
-  {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
-  },
-];
-
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addInfo } from '../../../../redux/actions/suratAction';
 const prioritas = [
   {
     value: '1',
@@ -58,12 +41,33 @@ const jenisSurat = [
   },
 ];
 
-const SuratInternal_1 = ({ handleNext }) => {
+const SuratInternal_1 = ({ handleNext, onStateChange }) => {
+  const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
   }
+
+  const handleTampilkanData = () => {
+    console.log(formData);
+    dispatch(addInfo(formData));
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+    onStateChange({ ...formData, [name]: value });
+  };
+
   return (
     <>
       <Stack
@@ -86,54 +90,45 @@ const SuratInternal_1 = ({ handleNext }) => {
         >
           Perihal
         </Typography>
-
         <TextField
           id='outlined-select-currency'
-          select
           fullWidth
-          defaultValue='1'
-        >
-          {perihal.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          name='perihal'
+          value={formData.perihal}
+          onChange={handleChange}
+        />
 
-        <FormAddressBook text='Klasifikasi Masalah' data={datass} />
+        {/* <FormAddressBook text='Klasifikasi Masalah' data={datass} /> */}
 
-
-        <Typography
-          variant='body1'
-          sx={{
-            color: '#5C5E61',
-            // width: '370px',
-          }}
-        >
-          Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
-        </Typography>
         <Typography variant='h4'>Prioritas Surat</Typography>
         <TextField
           id='outlined-select-currency'
           select
           fullWidth
           defaultValue='1'
+          name='prioritas'
+          value={formData.prioritas}
+          onChange={handleChange}
         >
           {prioritas.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.label}>
               {option.label}
             </MenuItem>
           ))}
         </TextField>
+
         <Typography variant='h4'>Jenis Surat</Typography>
         <TextField
           id='outlined-select-currency'
           select
           fullWidth
           defaultValue='1'
+          name='jenis'
+          value={formData.jenis}
+          onChange={handleChange}
         >
           {jenisSurat.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.label}>
               {option.label}
             </MenuItem>
           ))}
@@ -146,12 +141,15 @@ const SuratInternal_1 = ({ handleNext }) => {
           variant='outlined'
           fullWidth
           type='number'
+          name='lampiran'
+          value={formData.lampiran}
+          onChange={handleChange}
           InputLabelProps={{
             shrink: true,
           }}
         />
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
-          <Button
+           <Button
             variant='contained'
             sx={{
               borderRadius: '12px',
@@ -171,6 +169,7 @@ const SuratInternal_1 = ({ handleNext }) => {
 
 SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
 export default SuratInternal_1;

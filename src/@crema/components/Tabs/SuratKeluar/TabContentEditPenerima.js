@@ -8,14 +8,6 @@ import FormAddressBook from '../FormAddressBook';
 const TabContentEditPenerima = () => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
-  let datass = kepada[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
-  let datasss = tembusan[0];
-  if (!datasss || !Array.isArray(datasss)) {
-    datasss = [];
-  }
 
   return (
     <>
@@ -28,7 +20,7 @@ const TabContentEditPenerima = () => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={datass} />
+        <FormAddressBook text='Kepada' data={kepada} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -60,14 +52,14 @@ const TabContentEditPenerima = () => {
                 sx={{
                   border: 'none',
                 }}
-                defaultValue={datass
+                defaultValue={kepada
                   .map((item) => item.nama + '-' + item.jabatan)
                   .join('\n')}
               />
             </Stack>
           </AppScrollbar>
         </Box>
-        <FormAddressBook text='Tembusan' data={datasss} />
+        <FormAddressBook text='Tembusan' data={tembusan} />
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
           <Button
@@ -99,7 +91,7 @@ const TabContentEditPenerima = () => {
                 sx={{
                   border: 'none',
                 }}
-                defaultValue={datasss
+                defaultValue={tembusan
                   .map((item) => item.nama + '-' + item.jabatan)
                   .join('\n')}
               />

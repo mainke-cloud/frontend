@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const FormAddressBook = (props) => {
   const { text, data } = props;
-
+console.log(data)
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
     gap: '16px',
@@ -66,7 +66,7 @@ const FormAddressBook = (props) => {
             overflow: 'auto',
           }}
         >
-          {data.map((item) => (
+          {data?.map((item) => (
             <Stack key={item.id}>
               <Typography>
                 {item.jabatan} - {item.nama}
