@@ -8,9 +8,14 @@ export const addTembusan = (datas) => {
     dispatch({ type: 'ADD_TEMBUSAN', payload: datas });
   };
 };
-export const addPengirim = (datas) => {
+export const addJabatan = (datas) => {
   return (dispatch) => {
-    dispatch({ type: 'ADD_PENGIRIM', payload: datas });
+    dispatch({ type: 'ADD_JABATAN', payload: datas });
+  };
+};
+export const addNama = (datas) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_NAMA', payload: datas });
   };
 };
 export const addDelegasi = (datas) => {

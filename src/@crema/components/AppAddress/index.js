@@ -46,7 +46,8 @@ import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
 import {
   addDelegasi,
   addKepada,
-  addPengirim,
+  addJabatan,
+  addNama,
   addSekretaris,
   addTembusan,
 } from '../../../redux/actions/addressbookAction';
@@ -182,8 +183,10 @@ const ComposeMail = (props) => {
       dispatch(addKepada(Data));
     } else if (title === 'Tembusan') {
       dispatch(addTembusan(Data));
-    } else if (title === 'Pengirim') {
-      dispatch(addPengirim(Data));
+    } else if (title === 'Jabatan') {
+      dispatch(addJabatan(Data));
+    } else if (title === 'Nama') {
+      dispatch(addNama(Data));
     } else if (title === 'Delegasi') {
       dispatch(addDelegasi(Data));
     } else if (title === 'Sekretaris') {

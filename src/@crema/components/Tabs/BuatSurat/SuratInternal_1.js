@@ -11,7 +11,8 @@ import PropTypes from 'prop-types';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 import { useSelector } from 'react-redux';
-import FormAddressBook from '../FormAddressBook';
+import FormClassification from '../FormClassification';
+import ClassificationProblem from '@crema/components/AppClassificationProblem';
 
 const perihal = [
   {
@@ -100,8 +101,7 @@ const SuratInternal_1 = ({ handleNext }) => {
           ))}
         </TextField>
 
-        <FormAddressBook text='Klasifikasi Masalah' data={datass} />
-
+        <FormClassification text='Klasifikasi Masalah'/>
 
         <Typography
           variant='body1'

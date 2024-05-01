@@ -54,6 +54,39 @@ const initialState = {
     pgs: '',
     nohp: '',
   },
+  jabatann: {
+    profil: '',
+    id: '',
+    nama: '',
+    alamat: '',
+    nikg: '',
+    nikl: '',
+    kota: '',
+    organisasi: '',
+    divisi: '',
+    departemen: '',
+    kode_departemen: '',
+    jabatan: '',
+    email: '',
+    pgs: '',
+    nohp: '',
+  },
+  namaa: {
+    profil: '',
+    id: '',
+    nama: '',
+    alamat: '',
+    nikg: '',
+    nikl: '',
+    kota: '',
+    organisasi: '',
+    divisi: '',
+    departemen: '',
+    kode_departemen: '',
+    email: '',
+    pgs: '',
+    nohp: '',
+  },
   delegasi: {
     profil: '',
     id: '',
@@ -105,6 +138,16 @@ const addressbookReducer = (state = initialState, action) => {
       return {
         ...state,
         pengirim: action.payload,
+      };
+    case 'ADD_JABATAN':
+      return {
+        ...state,
+        jabatann: action.payload,
+      };
+    case 'ADD_NAMA':
+      return {
+        ...state,
+        namaa: action.payload,
       };
     case 'ADD_SEKRETARIS':
       return {
