@@ -132,11 +132,11 @@ export const addTab = (id, state, type) => {
         return;
       }
     }
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
 export const childTab = (id, state, type, data) => {
-  console.log(type);
   return (dispatch) => {
     const isExistingTab = state.find((tab) => {
       switch (type) {
@@ -209,12 +209,6 @@ export const childTab = (id, state, type, data) => {
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
-      // if (type === 'Todo') {
-      //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      // } else if (type === 'Disposisi') {
-      // } else if (type === 'Log Scan Surat') {
-      //   dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      // } else
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -264,6 +258,7 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -274,6 +269,7 @@ export const activateTab = (tabId, state) => {
       active: tab.id === tabId,
     }));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -303,6 +299,7 @@ export const closeTab = (tabId, state) => {
         ? tabs[newActiveTabIndex].id
         : 'dashboard';
     dispatch(activateTab(newActiveTabId, tabs));
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -310,6 +307,7 @@ export const closeAllTabs = () => {
   return (dispatch) => {
     const tabs = [];
     dispatch({ type: 'CLOSE_ALL_TABS', payload: tabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -319,5 +317,6 @@ export const reorderTab = (tabId, fromIndex, toIndex, state) => {
     let remainingTabs = state.filter((_, index) => index !== fromIndex);
     remainingTabs.splice(toIndex, 0, movedTab);
     dispatch({ type: 'REORDER_TAB', payload: remainingTabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };

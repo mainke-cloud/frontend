@@ -57,6 +57,7 @@ const HeaderDetail = ({
   const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const sidebar = useSelector((state) => state.sidebar.selectedSidebarName);
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -76,10 +77,10 @@ const HeaderDetail = ({
   const handleClosed = () => {
     dispatch(handleClose());
   };
-
+  
   const handleBuatDisposisi = (name) => {
     dispatch(addTab(tabId, tabs, name));
-  }
+  };
   return (
     <>
       <Stack
