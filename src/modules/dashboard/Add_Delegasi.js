@@ -19,7 +19,6 @@ import Profile from '../../assets/Dashboard/Profile_icon.png';
 import Trash from '../../assets/Dashboard/Trash_icon.png';
 import Avatar from '../../assets/Dashboard/avatar_placeholder.png';
 import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png';
-import Red_X from '../../assets/Dashboard/Red_x_icon.png';
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png';
 import ComposeMail from '@crema/components/AppAddress';
 import Filter_delegasi from './FilterPopUp/Filter_delegasi';
@@ -515,6 +514,7 @@ const Add_Delegasi = () => {
                       paddingTop: 2,
                       paddingX: 2,
                     }}
+                    onClick={() => onOpenComposeMail()}
                   >
                     <Stack direction='row'>
                       <Typography>{delegasidata.nama}</Typography>
@@ -577,7 +577,6 @@ const Add_Delegasi = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#F4CACA' },
                       }}
-                      onClick={() => onOpenComposeMail()}
                     >
                       <Stack
                         direction='row'
