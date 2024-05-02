@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Stack,
-  Typography,
-  Button,
-  Box,
-} from '@mui/material';
+import { Stack, Typography, Button, Box, TextField } from '@mui/material';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -49,13 +44,7 @@ const TabContentEditPenerima = () => {
             Update
           </Button>
         </Stack>
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
+        <Box position={'relative'}>
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -63,13 +52,19 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            {datass.map((item) => (
-              <Stack key={item.id}>
-                <Typography>
-                  {item.jabatan} - {item.nama}
-                </Typography>
-              </Stack>
-            ))}
+            <Stack>
+              <TextField
+                id='outlined-multiline-static'
+                multiline
+                rows={5}
+                sx={{
+                  border: 'none',
+                }}
+                defaultValue={datass
+                  .map((item) => item.nama + '-' + item.jabatan)
+                  .join('\n')}
+              />
+            </Stack>
           </AppScrollbar>
         </Box>
         <FormAddressBook text='Tembusan' data={datasss} />
@@ -88,13 +83,7 @@ const TabContentEditPenerima = () => {
           </Button>
         </Stack>
 
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
+        <Box position={'relative'}>
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -102,13 +91,19 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            {datasss.map((item) => (
-              <Stack key={item.id}>
-                <Typography>
-                  {item.jabatan} - {item.nama}
-                </Typography>
-              </Stack>
-            ))}
+            <Stack>
+              <TextField
+                id='outlined-multiline-static'
+                multiline
+                rows={5}
+                sx={{
+                  border: 'none',
+                }}
+                defaultValue={datasss
+                  .map((item) => item.nama + '-' + item.jabatan)
+                  .join('\n')}
+              />
+            </Stack>
           </AppScrollbar>
         </Box>
       </Stack>

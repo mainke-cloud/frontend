@@ -4,12 +4,12 @@ import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ComposeMail from '@crema/components/AppAddress';
+import ClassificationProblem from '@crema/components/AppClassificationProblem';
 import { users } from '@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
 
-const FormAddressBook = (props) => {
-  const { text, data } = props;
+const FormClassification = (props) => {
+  const { text } = props;
 
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
@@ -30,20 +30,21 @@ const FormAddressBook = (props) => {
     right: '1%',
   }));
 
-  const [isComposeMail, setComposeMail] = React.useState(false);
+  const [isClassificationProblem, setClassificationProblem] =
+    React.useState(false);
 
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
+  const onOpenClassificationProblem = () => {
+    setClassificationProblem(true);
   };
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
+  const onCloseClassificationProblem = () => {
+    setClassificationProblem(false);
   };
 
   return (
     <StyledStack>
       <Link
         component='button'
-        onClick={onOpenComposeMail}
+        onClick={onOpenClassificationProblem}
         sx={{ color: 'black' }}
       >
         <StyledTitle sx={{ textAlign: 'left' }}>
@@ -65,39 +66,28 @@ const FormAddressBook = (props) => {
             maxHeight: '145px',
             overflow: 'auto',
           }}
-        >
-          {data.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
-        </AppScrollbar>
+        ></AppScrollbar>
         <StyledBox>
           <IconButton>
             <AddCircleOutlineRoundedIcon
-              onClick={onOpenComposeMail}
+              onClick={onOpenClassificationProblem}
               sx={{ color: 'black', fontSize: '40px' }}
             />
           </IconButton>
         </StyledBox>
       </Box>
 
-      <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-        datas={users}
-        title={text}
-        type='multi'
+      <ClassificationProblem
+        isClassificationProblem={isClassificationProblem}
+        onCloseClassificationProblem={onCloseClassificationProblem}
+        text={text}
       />
     </StyledStack>
   );
 };
 
-export default FormAddressBook;
+export default FormClassification;
 
-FormAddressBook.propTypes = {
+FormClassification.propTypes = {
   text: PropTypes.string.isRequired,
-  data: PropTypes.any,
 };

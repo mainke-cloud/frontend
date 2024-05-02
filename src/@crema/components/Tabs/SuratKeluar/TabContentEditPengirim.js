@@ -6,29 +6,35 @@ import {
   IconButton,
   Button,
   Link,
+  Box,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../services/dummy/user/user';
+
 const TabContentEditPengirim = () => {
+  const jabatann = useSelector((state) => state.addressbook.jabatann);
+  const namaa = useSelector((state) => state.addressbook.namaa);
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-  const datas = users;
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  const [jabatanValue, setJabatanValue] = useState(jabatann.jabatan);
+
+  const handleJabatanChange = (event) => {
+    setJabatanValue(event.target.value);
   };
 
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const [composeMailTitle, setComposeMailTitle] = useState('');
 
-  const onOpenComposeMail = () => {
+  const onOpenComposeMail = (title) => {
+    setComposeMailTitle(title);
     setComposeMail(true);
   };
-
+  
   const onCloseComposeMail = () => {
+    setJabatanValue(jabatann.jabatan);
     setComposeMail(false);
   };
 
@@ -53,7 +59,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail()}
+            onClick={() => onOpenComposeMail('Jabatan')}
           >
             Jabatan
           </Link>
@@ -63,18 +69,19 @@ const TabContentEditPengirim = () => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Kepala Research and Development'
+          value={jabatanValue}
+          onChange={handleJabatanChange}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail()}>
+              <IconButton onClick={() => onOpenComposeMail('Jabatan')}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
               </IconButton>
             ),
           }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
         />
 
         <Stack direction='row'>
@@ -87,7 +94,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail()}
+            onClick={() => onOpenComposeMail('Nama')}
           >
             Nama
           </Link>
@@ -97,12 +104,13 @@ const TabContentEditPengirim = () => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Taufik Sulaeman'
+          value={
+            composeMailTitle === 'Nama' ? `${namaa.nama}` : `${jabatann.nama}`
+          }
           InputProps={{
             endAdornment: (
-              <IconButton>
+              <IconButton onClick={() => onOpenComposeMail('Nama')}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -113,42 +121,64 @@ const TabContentEditPengirim = () => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama'
+              ? `${namaa.divisi}`
+              : `${jabatann.divisi}`
+          }
+        />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled defaultValue='8900002' />
+            <TextField
+              value={
+                composeMailTitle === 'Nama'
+                  ? `${namaa.nikl}`
+                  : `${jabatann.nikl}`
+              }
+            />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled defaultValue='DIT-11 B 10000' />
+            <TextField
+              value={
+                composeMailTitle === 'Nama'
+                  ? `${namaa.kode_departemen}`
+                  : `${jabatann.kode_departemen}`
+              }
+            />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth defaultValue='Decision Support' />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama'
+              ? `${namaa.departemen}`
+              : `${jabatann.departemen}`
+          }
+        />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth defaultValue='Bandung' />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama' ? `${namaa.kota}` : `${jabatann.kota}`
+          }
+        />
       </Stack>
-      <br />
-      <br />
-      <PdfCardEdit
-        jabatan={formData.jabatan}
-        nama={formData.nama}
-        divisi={formData.divisi}
-        nik={formData.nik}
-        kodeDepartemen={formData.kodeDepartemen}
-        departemen={formData.departemen}
-        kantorKota={formData.kantorKota}
-      />
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
-        datas={datas}
+        datas={users}
+        title={composeMailTitle}
+        type='single'
       />
     </>
   );
