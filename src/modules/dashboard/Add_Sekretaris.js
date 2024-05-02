@@ -229,7 +229,7 @@ const Add_Sekretaris = () => {
                         height: 142,
                         backgroundColor: '#FFFFFF',
                         borderRight: '1px solid #B1B5BA',
-                        padding: 1,
+                        padding: 2,
                       }}
                     >
                       <Stack alignItems='center' justifyContent='center'>
