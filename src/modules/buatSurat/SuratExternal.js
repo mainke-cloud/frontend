@@ -30,6 +30,8 @@ const SuratExternal = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const step = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
+
   const steps = [
     <SuratInternal_1 key={1} handleNext={handleNext} />,
     <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
@@ -54,7 +56,7 @@ const SuratExternal = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <CustomizedSteppers activeStep={activeStep} />
+            <CustomizedSteppers activeStep={activeStep} step={step} />
 
             <Grid container spacing={5} marginTop={'20px'}>
               <Grid item xs={8}>

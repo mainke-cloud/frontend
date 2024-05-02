@@ -22,7 +22,7 @@ const SuratUndangan = () => {
   const handleNext = () => {
     setActiveStep(activeStep + 1);
 
-    if (activeStep === 4) {
+    if (activeStep === 5) {
       setShowPage(true);
     }
   };
@@ -31,12 +31,22 @@ const SuratUndangan = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const step = [
+    'Info',
+    'Jadwal',
+    'Penerima',
+    'Pengirim',
+    'Pemeriksa',
+    'Lainnya',
+  ];
+
   const steps = [
     <SuratInternal_1 key={1} handleNext={handleNext} />,
     <SuratUndangan_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_2 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_3 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_4 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_5 key={6} handleNext={handleNext} handlePrev={handlePrev} />,
   ];
 
   return (
@@ -55,7 +65,7 @@ const SuratUndangan = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <CustomizedSteppers activeStep={activeStep} />
+            <CustomizedSteppers activeStep={activeStep} step={step} />
 
             <Grid container spacing={5} marginTop={'20px'}>
               <Grid item xs={8}>

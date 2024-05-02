@@ -31,6 +31,8 @@ const SuratInternal = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const step = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
+
   const steps = [
     <SuratInternal_1 key={1} handleNext={handleNext} />,
     <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
@@ -41,7 +43,7 @@ const SuratInternal = () => {
 
   return (
     <Box backgroundColor='#F7F8F9' minHeight='100vh'>
-      <HeaderDetail nama='Buat Surat Internal' save copy translate />
+      <HeaderDetail nama='Buat Surat Internal' translate save copy send />
       <Box
         sx={{
           margin: '26px',
@@ -55,7 +57,7 @@ const SuratInternal = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <CustomizedStepper activeStep={activeStep} />
+            <CustomizedStepper activeStep={activeStep} step={step} />
 
             <Grid container spacing={5} marginTop={'20px'}>
               <Grid item xs={8}>

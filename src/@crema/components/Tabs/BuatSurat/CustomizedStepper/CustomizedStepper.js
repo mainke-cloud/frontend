@@ -15,32 +15,9 @@ import {
   RiNumber3,
   RiNumber4,
   RiNumber5,
+  RiNumber6,
 } from 'react-icons/ri';
 import '../../../../../styles/stepper.css';
-
-const QontoConnector = styled(StepConnector)(({ theme }) => ({
-  [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 10,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)',
-  },
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
-    },
-  },
-  [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
-    },
-  },
-  [`& .${stepConnectorClasses.line}`]: {
-    borderColor:
-      theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
-    borderTopWidth: 3,
-    borderRadius: 1,
-  },
-}));
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
@@ -143,6 +120,7 @@ function ColorlibStepIcon(props) {
     3: <RiNumber3 />,
     4: <RiNumber4 />,
     5: <RiNumber5 />,
+    6: <RiNumber6 />,
   };
 
   return (
@@ -173,9 +151,68 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
+//==========================
+const LabelRoot = styled('div')(({ theme, ownerState }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  fontSize: '13px',
+  color: '#fff',
+  minWidth: '90px',
+  marginTop: '10px',
+  padding: '8px',
+  display: 'flex',
+  borderRadius: '25px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  ...(ownerState.active && {
+    backgroundImage: 'linear-gradient( 136deg, #3366FF 0%, #3366FF 100%)',
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+  }),
+  ...(ownerState.completed && {
+    backgroundImage: 'linear-gradient( 136deg, #52BD94 0%, #52BD94 100%)',
+  }),
+}));
 
-export default function CustomizedSteppers({ activeStep }) {
+function RootStep(props) {
+  const { active, completed, className } = props;
+
+  const icons = {
+    1: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+    2: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+    3: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+    4: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+    5: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+    6: completed ? 'Selesai' : active ? 'Sedang Diisi' : 'Belum Diisi',
+  };
+
+  return (
+    <LabelRoot ownerState={{ completed, active }} className={className}>
+      {icons[String(props.icon)]}
+    </LabelRoot>
+  );
+}
+
+RootStep.propTypes = {
+  /**
+   * Whether this step is active.
+   * @default false
+   */
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  /**
+   * Mark the step as completed. Is passed to child components.
+   * @default false
+   */
+  completed: PropTypes.bool,
+  /**
+   * The label displayed in the step icon.
+   */
+  icon: PropTypes.node,
+};
+
+// const steps = ['Info', 'penerima', 'Pengirim', 'pemeriksa', 'Lainnya'];
+
+export default function CustomizedSteppers({ activeStep, step }) {
   return (
     <Stack sx={{ width: '60vw' }} spacing={4}>
       <Stepper
@@ -183,9 +220,10 @@ export default function CustomizedSteppers({ activeStep }) {
         activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
-        {steps.map((label) => (
+        {step.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel StepIconComponent={RootStep}></StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -196,4 +234,5 @@ export default function CustomizedSteppers({ activeStep }) {
 CustomizedSteppers.propTypes = {
   handleNext: PropTypes.func.isRequired,
   activeStep: PropTypes.func.isRequired,
+  step: PropTypes.func.isRequired,
 };

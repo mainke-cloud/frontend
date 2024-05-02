@@ -29,6 +29,8 @@ const SuratDelegasi = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const step = ['Info', 'Penerima', 'Pengirim', 'Lainnya'];
+
   const steps = [
     <SuratDelegasi_1 key={1} handleNext={handleNext} />,
     <SuratDelegasi_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
@@ -52,7 +54,7 @@ const SuratDelegasi = () => {
           <BuatSuratLastPage />
         ) : (
           <>
-            <CustomizedSteppers activeStep={activeStep} />
+            <CustomizedSteppers activeStep={activeStep} step={step} />
 
             <Grid container spacing={5} marginTop='20px'>
               <Grid item xs={8}>
