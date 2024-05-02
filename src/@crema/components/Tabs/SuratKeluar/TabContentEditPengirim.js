@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
   TextField,
   IconButton,
-  Button,
   Link,
-  Box,
 } from '@mui/material';
-import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
@@ -16,14 +13,6 @@ import { users } from '../../../services/dummy/user/user';
 
 const TabContentEditPengirim = () => {
   const pengirim = useSelector((state) => state.addressbook.pengirim);
-  const initialState = useSelector((state) => state.surat);
-  const [formData, setFormData] = useState(initialState);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const [isComposeMail, setComposeMail] = React.useState(false);
 
   const onOpenComposeMail = () => {

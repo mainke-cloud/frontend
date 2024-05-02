@@ -1,24 +1,9 @@
-import React, { useRef } from 'react';
-import { Box, Typography, Stack, List, ListItem } from '@mui/material';
+import React from 'react';
+import { Typography, Stack, List, ListItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import TinyMce from './TinyMce';
-import jsPDF from 'jspdf';
 const PdfCardEdit = ({ kepada, tembusan, pengirim, info }) => {
-  const cardRef = useRef(null);
   console.log(kepada);
-  const exportToPDF = () => {
-    const cardElement = cardRef.current;
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: [cardElement.offsetWidth, cardElement.offsetHeight],
-    });
-    pdf.html(cardElement, {
-      callback: () => {
-        pdf.save('card.pdf');
-      },
-    });
-  };
 
   const currentDate = new Date();
   const options = {

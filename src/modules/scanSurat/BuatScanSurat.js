@@ -1,27 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
+import { Box, Stack, Grid, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
 import HeaderDetail from '@crema/components/HeaderDetail';
 import LabelInput from '@crema/components/LabelInput';
-
-import UploadFile from '../../assets/icon/uploadfile.svg';
-import PdfVector from '../../assets/vector/PdfVector.svg';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import MiniTab from '@crema/components/MiniTab';
 import DropZoneFile from '@crema/components/Tabs/DropZoneFile';
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
 
 const Buttons = styled(Button)(({ theme }) => ({
   borderRadius: '8px',
@@ -39,8 +22,10 @@ const Buttons = styled(Button)(({ theme }) => ({
 }));
 
 const BuatScanSurat = () => {
-  const [file, setFile] = useState([]);
-  const [upload, setUpload] = useState(true);
+  const [
+    file,
+    // setFile
+  ] = useState([]);
 
   const getTotalSize = (files) => {
     let totalSize = 0;
@@ -49,44 +34,7 @@ const BuatScanSurat = () => {
     });
     return (totalSize / (1024 * 1024)).toFixed(2);
   };
-
   const TotalSize = getTotalSize(file);
-
-  const bytesConvert = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    if (mb < 1) {
-      return (bytes / 1024).toFixed(2) + ' Kb';
-    } else {
-      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
-    }
-  };
-
-  const handleFileSelected = (event) => {
-    const files = event.target.files;
-    setFile([...file, ...files]);
-    setUpload(false);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    setFile([...file, ...files]);
-    setUpload(false);
-  };
-
-  const handleDeleteFile = (index) => {
-    const newFiles = [...file];
-    newFiles.splice(index, 1);
-    setFile(newFiles);
-    if (newFiles.length == 0) {
-      setUpload(true);
-    }
-  };
-
   const [formData, setFormData] = useState({
     tanggalSurat: null,
     prioritasSurat: '',

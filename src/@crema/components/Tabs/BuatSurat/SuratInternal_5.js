@@ -16,8 +16,8 @@ const style = {
   justifyContent: 'center',
   alignItems: 'center',
 };
-import { useSelector, useDispatch } from 'react-redux';
-const SuratInternal_5 = ({ handleNext, handlePrev }) => {
+import { useSelector} from 'react-redux';
+const SuratInternal_5 = ({ handlePrev }) => {
   const [open, setOpen] = React.useState(false);
   const info = useSelector((state) => state.surat);
   const penerima = useSelector((state) => [

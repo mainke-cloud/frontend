@@ -1,21 +1,11 @@
-import { Link, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import React from 'react';
-import AppScrollbar from '../../AppScrollbar';
 import { Box, Button, TextField } from '@mui/material';
-import ButtonBuatSurat from '@crema/components/Tabs/BuatSurat/ButtonBuatSurat/ButtonBuatSurat';
 import PropTypes from 'prop-types';
-import ComposeMail from '@crema/components/AppAddress';
 
-const SuratDelegasi_2 = ({ handleNext, handlePrev }) => {
-  const [isComposeMail, setComposeMail] = React.useState(false);
 
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
+const SuratDelegasi_2 = ({ handleNext}) => {
 
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
 
   return (
     <>

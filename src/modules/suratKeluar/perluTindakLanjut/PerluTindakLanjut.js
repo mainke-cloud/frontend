@@ -15,7 +15,6 @@ import TabContentEditPengirim from '../../../@crema/components/Tabs/SuratKeluar/
 import KomentarEdit from '../../../@crema/components/Tabs/SuratKeluar/KomentarEdit';
 import TabContentEditPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenyetuju';
 import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditLainnya';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
 import { useSelector } from 'react-redux';

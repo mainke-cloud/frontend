@@ -1,15 +1,9 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
 import { Stack, Typography, Box } from '@mui/material';
-
-import AppScrollbar from '@crema/components/AppScrollbar';
-import ProfileUser from '../../../@crema/components/Tabs/Disposisi/ProfileUser';
 import ListStaff from '@crema/components/Tabs/ListStaff';
-import { mt } from 'date-fns/locale';
 
-const Info = (props) => {
-  const { data } = props;
-
+const Info = () => {
   return (
     <Stack
       rowGap={'16px'}

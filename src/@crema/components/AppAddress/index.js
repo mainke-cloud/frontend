@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
-import { data } from '../../services/dummy/content/dataAddress';
 import AppScrollbar from '../AppScrollbar';
 
 import {
@@ -32,7 +31,7 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
@@ -52,7 +51,7 @@ const ComposeMail = (props) => {
   const { isComposeMail, onCloseComposeMail, datas, title, type } = props;
 
   const StyledTabsList = styled(TabsList)(
-    ({ theme }) => `
+    () => `
     min-width: 400px;
     border-radius: 50px;
     border: 1px solid #D8D8D8;

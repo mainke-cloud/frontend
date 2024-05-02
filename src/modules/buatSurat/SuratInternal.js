@@ -9,7 +9,6 @@ import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
-import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';

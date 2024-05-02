@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   MenuItem,
   Stack,
@@ -8,13 +7,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppScrollbar from '@crema/components/AppScrollbar';
-import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 import { useSelector } from 'react-redux';
-import FormAddressBook from '../FormAddressBook';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addInfo } from '../../../../redux/actions/suratAction';
 const prioritas = [
   {
     value: '1',
@@ -42,7 +36,6 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext, onStateChange }) => {
-  const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
   const [formData, setFormData] = useState({
     perihal: '',
@@ -56,11 +49,6 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
   if (!datass || !Array.isArray(datass)) {
     datass = [];
   }
-
-  const handleTampilkanData = () => {
-    console.log(formData);
-    dispatch(addInfo(formData));
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;

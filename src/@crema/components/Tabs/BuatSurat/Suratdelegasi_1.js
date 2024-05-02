@@ -1,77 +1,14 @@
 import {
   Box,
   Button,
-  Grid,
-  Icon,
-  IconButton,
-  MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const perihal = [
-  {
-    value: '1',
-    label: '',
-  },
-  {
-    value: '2',
-    label: '',
-  },
-  {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
-  },
-];
-
-const prioritas = [
-  {
-    value: '1',
-    label: 'Normal',
-  },
-  {
-    value: '2',
-    label: 'Segera',
-  },
-];
-
-const jenisSurat = [
-  {
-    value: '1',
-    label: 'Biasa',
-  },
-  {
-    value: '2',
-    label: 'Rhs',
-  },
-  {
-    value: '3',
-    label: 'Rhs-Prib',
-  },
-];
-
 const SuratDelegasi_1 = ({ handleNext }) => {
-  const [showPreview, setShowPreview] = useState(false);
-
-  const handleShow = () => {
-    setShowPreview(!showPreview);
-  };
-
   return (
     <Box>
       <Stack

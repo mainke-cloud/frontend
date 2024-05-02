@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
-  Container,
   Divider,
   IconButton,
   Stack,
@@ -9,14 +8,13 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import ComposeMail from '../AppAddress';
 import { closeTab } from '../../../redux/actions/tabAction';
 import { X, Send, Save } from 'feather-icons-react';
 import {
   Edit,
   Printer,
   FileText,
-  Copy,
+  // Copy,
   CornerDownLeft,
   RotateCcw,
   Check,
@@ -40,14 +38,14 @@ const HeaderDetail = ({
   translate,
   edit,
   printer,
-  filetext,
-  cornerdownleft,
-  rotateccw,
-  check,
+  // filetext,
+  // cornerdownleft,
+  // rotateccw,
+  // check,
   globe,
   clipboard,
   forward,
-  IsEditing,
+  // IsEditing,
   disposisi,
   batas,
   folderup,
@@ -57,16 +55,6 @@ const HeaderDetail = ({
   const tab = tabs.find((tab) => tab.active);
   const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
-  const [isComposeMail, setComposeMail] = React.useState(false);
-  const sidebar = useSelector((state) => state.sidebar.selectedSidebarName);
-
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
 
   const handleTabClose = () => {
     dispatch(closeTab(tab.id, tabs));
