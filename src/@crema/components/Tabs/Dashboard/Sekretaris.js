@@ -1,8 +1,7 @@
 import React from "react";
 import { Grid, Stack, Typography, Box, Badge, Avatar, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types'; // Import PropTypes
-import { useState } from "react";
+import PropTypes from 'prop-types'; 
 
 const StyledBadgeSekretaris = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
@@ -12,11 +11,6 @@ const StyledBadgeSekretaris = styled(Badge)(() => ({
   }));
 
 const Sekretaris = ({ Profile, JobDesk, ID }) => {
-    const [isActive, setIsActive] = useState(true);
-
-    const handleClick = () => {
-        setIsActive(!isActive);
-    };
     return(
         <Grid container sx={{margin: 3}}>
             <Grid item xs={3} sx={{borderBottom: "1px solid #B1B5BA"}}>
@@ -50,30 +44,6 @@ const Sekretaris = ({ Profile, JobDesk, ID }) => {
                         <Typography>{ID}</Typography>
                 </Stack>
             </Grid>
-            {/* <Grid item xs={11} sx={{marginTop: 2}}>
-                <Box 
-                    alignItems="center" 
-                    justifyContent="center"
-                    sx={{ 
-                        backgroundColor: '#FFEFD2', 
-                        color: 'black', 
-                        padding: 2, 
-                        width: '100%', 
-                        maxWidth: 600, 
-                        borderRadius: 2,
-                        cursor: 'pointer',
-                        '@media (min-width: 600px)': { 
-                            width: 'auto',
-                        },
-                        '&:hover': {
-                            backgroundColor: '#FFDFA6',
-                          }
-                    }}
-                    onClick={handleClick} 
-                >
-                     <Typography sx={{ textAlign: 'center' }}>Atur Keaktifan</Typography>
-                </Box>
-            </Grid> */}
             <Divider variant="middle" sx={{ mb: 4 }} />
         </Grid>
     )

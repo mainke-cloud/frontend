@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   Checkbox,
   IconButton,
-  Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '@crema/components/AppScrollbar';

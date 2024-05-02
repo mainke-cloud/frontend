@@ -4,7 +4,6 @@ import { Button, Card, CardContent, Divider, Grid, IconButton, Popover, Stack, T
 import { X } from 'feather-icons-react';
 
 export default function Filter_sekretaris({ open, onClose }) {
-
     const [statusFilter, setStatusFilter] = React.useState(null);
 
     const handleStatusFilter = (value) => {
@@ -14,7 +13,6 @@ export default function Filter_sekretaris({ open, onClose }) {
         <>
              <Popover
                 open={open}
-                // anchorEl={openFilter}
                 onClose={onClose}
                 anchorOrigin={{
                     vertical: 'top',
