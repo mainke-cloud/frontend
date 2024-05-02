@@ -1,6 +1,5 @@
 const initialState = {
   perihal: '',
-  klasifikasi: '',
   prioritas: '',
   jenis: '',
   lampiran: '',
@@ -11,7 +10,7 @@ const suratReducer = (state = initialState, action) => {
     case 'ADD_INFO':
       return {
         ...state,
-        ...action.payload, // Menggabungkan payload dengan state yang ada
+        ...action.payload,
       };
 
     default:

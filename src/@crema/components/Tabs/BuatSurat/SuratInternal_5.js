@@ -16,12 +16,31 @@ const style = {
   justifyContent: 'center',
   alignItems: 'center',
 };
-
+import { useSelector, useDispatch } from 'react-redux';
 const SuratInternal_5 = ({ handleNext, handlePrev }) => {
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => setOpen(true);
+  const info = useSelector((state) => state.surat);
+  const penerima = useSelector((state) => [
+    state.addressbook.kepada,
+    state.addressbook.tembusan,
+  ]);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
+  const pemeriksa = useSelector((state) => [
+    state.addressbook.pemeriksa,
+    state.addressbook.pemohon,
+  ]);
+  const handleOpen = () => {
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
+  const combinedData = {
+    info: info,
+    penerima: penerima,
+    pengirim: pengirim,
+    pemeriksa: pemeriksa,
+  };
+
+  console.log(combinedData);
 
   return (
     <>

@@ -11,8 +11,10 @@ import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/Ko
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addInfo } from '../../redux/actions/suratAction';
 const SuratInternal = () => {
+  const dispatch = useDispatch()
   const [showNext, setShowNext] = useState(0);
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
@@ -27,6 +29,8 @@ const SuratInternal = () => {
 
   const handleNext = () => {
     setShowNext(showNext + 1);
+    dispatch(addInfo(formData));
+
   };
 
   const handlePrev = () => {

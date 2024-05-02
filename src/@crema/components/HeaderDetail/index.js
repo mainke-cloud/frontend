@@ -29,6 +29,7 @@ import { handleEdit, handleClose } from '../../../redux/actions/headerAction';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
 import { addTab } from '../../../redux/actions/tabAction';
+import AppTooltip from '../AppTooltip';
 
 const HeaderDetail = ({
   nama,
@@ -77,7 +78,7 @@ const HeaderDetail = ({
   const handleClosed = () => {
     dispatch(handleClose());
   };
-  
+
   const handleBuatDisposisi = (name) => {
     dispatch(addTab(tabId, tabs, name));
   };
@@ -96,148 +97,190 @@ const HeaderDetail = ({
         <Stack direction='row' columnGap='24px'>
           {isEdit ? (
             <>
-              <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-              >
-                <Save style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  border: '1px solid #B1B5BA',
-                  borderRadius: '3px',
-                  color: 'white',
-                  background: '#A3E6CD',
-                }}
-              >
-                <Check style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  border: '1px solid #B1B5BA',
-                  borderRadius: '3px',
-                  color: 'white',
-                  background: '#FFD079',
-                }}
-              >
-                <CornerDownLeft style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  border: '1px solid #B1B5BA',
-                  borderRadius: '3px',
-                  color: 'white',
-                  background: '#FFD079',
-                }}
-              >
-                <RotateCcw style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  border: '1px solid #B1B5BA',
-                  borderRadius: '3px',
-                  color: 'white',
-                  background: '#FF7452',
-                }}
-                onClick={handleClosed}
-              >
-                <X style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-              >
-                <FileText style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-              >
-                <Copy style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-              <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                onClick={() => handleTabClose()}
-              >
-                <X style={{ width: '28px', height: '28px' }} />
-              </IconButton>
-            </>
-          ) : (
-            <>
-              {save && (
+              <AppTooltip title='Save' placement='bottom'>
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <Save style={{ width: '28px', height: '28px' }} />
                 </IconButton>
-              )}
-              {send && (
+              </AppTooltip>
+
+              <AppTooltip title='Check' placement='bottom'>
+                <IconButton
+                  sx={{
+                    border: '1px solid #B1B5BA',
+                    borderRadius: '3px',
+                    color: 'white',
+                    background: '#A3E6CD',
+                  }}
+                >
+                  <Check style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+              <AppTooltip title='Kembalikan' placement='bottom'>
+                <IconButton
+                  sx={{
+                    border: '1px solid #B1B5BA',
+                    borderRadius: '3px',
+                    color: 'white',
+                    background: '#FFD079',
+                  }}
+                >
+                  <CornerDownLeft style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+
+              <AppTooltip title='Kembalikan ke Komposer' placement='bottom'>
+                <IconButton
+                  sx={{
+                    border: '1px solid #B1B5BA',
+                    borderRadius: '3px',
+                    color: 'white',
+                    background: '#FFD079',
+                  }}
+                >
+                  <RotateCcw style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+
+              <AppTooltip title='Batal' placement='bottom'>
+                <IconButton
+                  sx={{
+                    border: '1px solid #B1B5BA',
+                    borderRadius: '3px',
+                    color: 'white',
+                    background: '#FF7452',
+                  }}
+                  onClick={handleClosed}
+                >
+                  <X style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+
+              <AppTooltip title='Copy Ref' placement='bottom'>
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
-                  <Send style={{ width: '28px', height: '28px' }} />
+                  <FileText style={{ width: '28px', height: '28px' }} />
                 </IconButton>
-              )}
-              {clipboard && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <Clipboard style={{ width: '28px', height: '28px' }} />
-                </IconButton>
-              )}
-              {globe && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <Globe style={{ width: '28px', height: '28px' }} />
-                </IconButton>
-              )}
-              {copy && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <AssignmentOutlinedIcon
-                    style={{ width: '28px', height: '28px' }}
-                  />
-                </IconButton>
-              )}
-              {translate && (
+              </AppTooltip>
+
+              <AppTooltip title='Translate' placement='bottom'>
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
                   <BsTranslate style={{ width: '28px', height: '28px' }} />
                 </IconButton>
+              </AppTooltip>
+
+              <AppTooltip title='Tutup Tab' placement='bottom'>
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  onClick={() => handleTabClose()}
+                >
+                  <X style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+            </>
+          ) : (
+            <>
+              {save && (
+                <AppTooltip title='Save' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Save style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {send && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Send style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {clipboard && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Clipboard style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {globe && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Globe style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {copy && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <AssignmentOutlinedIcon
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {translate && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <BsTranslate style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
               )}
               {edit && (
-                <IconButton
-                  onClick={handleEdits}
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <Edit style={{ width: '28px', height: '28px' }} />
-                </IconButton>
+                <AppTooltip title='Edit Surat' placement='bottom'>
+                  <IconButton
+                    onClick={handleEdits}
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Edit style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
               )}
               {disposisi && (
-                <IconButton
-                  onClick={() => handleBuatDisposisi('BuatDisposisi')}
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <AutorenewRoundedIcon
-                    style={{ width: '28px', height: '28px' }}
-                  />
-                </IconButton>
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    onClick={() => handleBuatDisposisi('BuatDisposisi')}
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <AutorenewRoundedIcon
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
               )}
               {forward && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <ShortcutTwoToneIcon
-                    style={{ width: '28px', height: '28px' }}
-                  />
-                </IconButton>
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <ShortcutTwoToneIcon
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
               )}
               {printer && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <Printer style={{ width: '28px', height: '28px' }} />
-                </IconButton>
+                <AppTooltip title='Print Surat' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Printer style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
               )}
               {batas && (
                 <Box
@@ -248,29 +291,35 @@ const HeaderDetail = ({
                 />
               )}
               {copy2 && (
-                <IconButton
-                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                >
-                  <AssignmentOutlinedIcon
-                    style={{ width: '28px', height: '28px' }}
-                  />
-                </IconButton>
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <AssignmentOutlinedIcon
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
               )}
               {folderup && (
+                <AppTooltip title='Kirim' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <DriveFolderUploadRoundedIcon
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              <AppTooltip title='Tutup Tab' placement='bottom'>
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  onClick={() => handleTabClose()}
                 >
-                  <DriveFolderUploadRoundedIcon
-                    style={{ width: '28px', height: '28px' }}
-                  />
+                  <X style={{ width: '28px', height: '28px' }} />
                 </IconButton>
-              )}
-              <IconButton
-                sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                onClick={() => handleTabClose()}
-              >
-                <X style={{ width: '28px', height: '28px' }} />
-              </IconButton>
+              </AppTooltip>
             </>
           )}
         </Stack>

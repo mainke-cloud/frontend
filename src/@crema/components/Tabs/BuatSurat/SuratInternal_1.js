@@ -46,7 +46,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const [formData, setFormData] = useState({
     perihal: '',
-    klasifikasi: '',
+    // klasifikasi: '',
     prioritas: '1',
     jenis: '1',
     lampiran: 1,
