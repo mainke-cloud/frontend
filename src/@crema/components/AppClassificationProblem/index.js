@@ -28,7 +28,6 @@ const ClassificationProblem = (props) => {
   const StyledAccordion = styled((props) => (
     <Accordion disableGutters elevation={0} square {...props} />
   ))(({ theme }) => ({
-    // border: `1px solid ${theme.palette.divider}`,
     '&:not(:last-child)': {
       borderBottom: 0,
     },
@@ -127,16 +126,9 @@ const ClassificationProblem = (props) => {
               }}
               scrollToTop={false}
             >
-              {classification.map((item, index) => (
-                <StyledAccordion
-                  key={item.id}
-                  expanded={expanded[`panel${index}`]}
-                  onChange={handleChangeAccordion(`panel${index}`)}
-                >
-                  <AccordionSummarys
-                    onClick={() => handleSelectItem(item.id)}
-                    selected={selectedItem === item.id}
-                  >
+              {classification.map((item) => (
+                <StyledAccordion key={item.id}>
+                  <AccordionSummarys>
                     <Stack direction='row' alignItems='center'>
                       <Typography>{item.name}</Typography>
                       <Typography
@@ -148,18 +140,9 @@ const ClassificationProblem = (props) => {
                     </Stack>
                   </AccordionSummarys>
                   <AccordionDetail sx={{ paddingLeft: 4 }}>
-                    {item.code.map((codeItem, codeIndex) => (
-                      <StyledAccordion
-                        key={`${item.id}-${codeItem.id}`}
-                        expanded={expanded[`panel${index}-code${codeIndex}`]}
-                        onChange={handleChangeAccordion(
-                          `panel${index}-code${codeIndex}`,
-                        )}
-                      >
-                        <AccordionSummarys
-                          onClick={() => handleSelectItem(codeItem.id)}
-                          selected={selectedItem === codeItem.id}
-                        >
+                    {item.code.map((codeItem) => (
+                      <StyledAccordion key={`${item.id}-${codeItem.id}`}>
+                        <AccordionSummarys>
                           <Stack direction='row' alignItems='center'>
                             <Typography>{codeItem.name1}</Typography>
                             <Typography
@@ -171,22 +154,11 @@ const ClassificationProblem = (props) => {
                           </Stack>
                         </AccordionSummarys>
                         <AccordionDetail sx={{ paddingLeft: 8 }}>
-                          {codeItem.code1.map((code1Item, code1Index) => (
+                          {codeItem.code1.map((code1Item) => (
                             <StyledAccordion
                               key={`${item.id}-${codeItem.id}-${code1Item.id}`}
-                              expanded={
-                                expanded[
-                                  `panel${index}-code${codeIndex}-code1${code1Index}`
-                                ]
-                              }
-                              onChange={handleChangeAccordion(
-                                `panel${index}-code${codeIndex}-code1${code1Index}`,
-                              )}
                             >
-                              <AccordionSummarys
-                                onClick={() => handleSelectItem(code1Item.id)}
-                                selected={selectedItem === code1Item.id}
-                              >
+                              <AccordionSummarys>
                                 <Stack direction='row' alignItems='center'>
                                   <Typography>{code1Item.name2}</Typography>
                                   <Typography
@@ -198,46 +170,31 @@ const ClassificationProblem = (props) => {
                                 </Stack>
                               </AccordionSummarys>
                               <AccordionDetail sx={{ paddingLeft: 12 }}>
-                                {code1Item.code2.map(
-                                  (code2Item, code2Index) => (
-                                    <StyledAccordion
-                                      key={`${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`}
-                                      expanded={
-                                        expanded[
-                                          `panel${index}-code${codeIndex}-code1${code1Index}-code2${code2Index}`
-                                        ]
-                                      }
-                                      onChange={handleChangeAccordion(
-                                        `panel${index}-code${codeIndex}-code1${code1Index}-code2${code2Index}`,
-                                      )}
-                                    >
-                                      <AccordionSummarys
-                                        onClick={() =>
-                                          handleSelectItem(code2Item.id)
-                                        }
-                                        selected={selectedItem === code2Item.id}
+                                {code1Item.code2.map((code2Item) => (
+                                  <StyledAccordion
+                                    key={`${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`}
+                                  >
+                                    <AccordionSummarys>
+                                      <Stack
+                                        direction='row'
+                                        alignItems='center'
                                       >
-                                        <Stack
-                                          direction='row'
-                                          alignItems='center'
+                                        <Typography>
+                                          {code2Item.name3}
+                                        </Typography>
+                                        <Typography
+                                          variant='body2'
+                                          sx={{
+                                            ml: 2,
+                                            color: 'text.secondary',
+                                          }}
                                         >
-                                          <Typography>
-                                            {code2Item.name3}
-                                          </Typography>
-                                          <Typography
-                                            variant='body2'
-                                            sx={{
-                                              ml: 2,
-                                              color: 'text.secondary',
-                                            }}
-                                          >
-                                            {code2Item.desc3}
-                                          </Typography>
-                                        </Stack>
-                                      </AccordionSummarys>
-                                    </StyledAccordion>
-                                  ),
-                                )}
+                                          {code2Item.desc3}
+                                        </Typography>
+                                      </Stack>
+                                    </AccordionSummarys>
+                                  </StyledAccordion>
+                                ))}
                               </AccordionDetail>
                             </StyledAccordion>
                           ))}
