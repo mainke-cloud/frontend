@@ -5,12 +5,26 @@ import {
   TableBody,
   Table,
   TableContainer,
+  TextField,
+  Link,
+  Typography,
 } from '@mui/material';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
 import TableCellWrapper from '../../../../modules/suratKeluar/TableCellWrapper';
-const TabContentInfo = () => {
+import ClassificationProblem from '@crema/components/AppClassificationProblem';
+
+const TabContentEditInfo = () => {
+  const [isClassificationProblem, setClassificationProblem] =
+    React.useState(false);
+
+  const onOpenClassificationProblem = () => {
+    setClassificationProblem(true);
+  };
+  const onCloseClassificationProblem = () => {
+    setClassificationProblem(false);
+  };
   const info = [
     {
       desc: 'Surat penunjukan pelaksana pengadaan aplikasi si',
@@ -44,36 +58,121 @@ const TabContentInfo = () => {
           <TableContainer>
             <Table aria-label='customized table'>
               <TableBody>
-                {info.map((row) => (
-                  <TableRow key={row.name}>
-                    <TableCellWrapper
-                      className='medium'
-                      style={{ width: '40%' }}
-                    >
-                      {row.name}
-                    </TableCellWrapper>
-                    <TableCellWrapper
-                      className='medium'
-                      style={{ width: '2%', paddingRight: '0px' }}
-                    >
-                      :
-                    </TableCellWrapper>
-                    <TableCellWrapper
-                      className='medium'
-                      style={{ paddingLeft: '8px' }}
-                    >
-                      {row.desc}
-                    </TableCellWrapper>
-                  </TableRow>
-                ))}
+                <TableRow>
+                  <TableCellWrapper className='medium' style={{ width: '40%' }}>
+                    Perihal
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ width: '2%', paddingRight: '0px' }}
+                  >
+                    :
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ paddingLeft: '8px' }}
+                  >
+                    <TextField fullWidth />
+                  </TableCellWrapper>
+                </TableRow>
+                <TableRow>
+                  <TableCellWrapper className='medium' style={{ width: '40%' }}>
+                    <Stack direction='row'>
+                      <Link
+                        component='button'
+                        underline='always'
+                        sx={{
+                          fontSize: '16px',
+                          fontWeight: 600,
+                          color: 'black',
+                          textDecorationColor: 'black',
+                        }}
+                        onClick={() => onOpenClassificationProblem()}
+                      >
+                        Klasifikasi Masalah
+                      </Link>
+                      <Typography variant='h4' color='red'>
+                        *
+                      </Typography>
+                    </Stack>
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ width: '2%', paddingRight: '0px' }}
+                  >
+                    :
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ paddingLeft: '8px' }}
+                  >
+                    <TextField fullWidth />
+                  </TableCellWrapper>
+                </TableRow>
+                <TableRow>
+                  <TableCellWrapper className='medium' style={{ width: '40%' }}>
+                    Prioritas Surat
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ width: '2%', paddingRight: '0px' }}
+                  >
+                    :
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ paddingLeft: '8px' }}
+                  >
+                    <TextField fullWidth />
+                  </TableCellWrapper>
+                </TableRow>
+                <TableRow>
+                  <TableCellWrapper className='medium' style={{ width: '40%' }}>
+                    Jenis Surat
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ width: '2%', paddingRight: '0px' }}
+                  >
+                    :
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ paddingLeft: '8px' }}
+                  >
+                    <TextField fullWidth />
+                  </TableCellWrapper>
+                </TableRow>
+                <TableRow>
+                  <TableCellWrapper className='medium' style={{ width: '40%' }}>
+                    Lampiran
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ width: '2%', paddingRight: '0px' }}
+                  >
+                    :
+                  </TableCellWrapper>
+                  <TableCellWrapper
+                    className='medium'
+                    style={{ paddingLeft: '8px' }}
+                  >
+                    <TextField fullWidth />
+                  </TableCellWrapper>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
         </Stack>
       </TabWrapper>
+      <ClassificationProblem
+        isClassificationProblem={isClassificationProblem}
+        onCloseClassificationProblem={onCloseClassificationProblem}
+        text='Klasifikasi Masalah'
+      />
       {/* <PdfCard /> */}
     </>
   );
 };
 
-export default TabContentInfo;
+export default TabContentEditInfo;

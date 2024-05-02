@@ -10,6 +10,7 @@ import TabContentPengirim from '../../../@crema/components/Tabs/SuratKeluar/TabC
 import TabContentPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentPenyetuju';
 import TabContentLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentLainnya';
 import Komentar from '../../../@crema/components/Tabs/SuratKeluar/Komentar';
+import TabContentEditInfo from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditInfo';
 import TabContentEditPenerima from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenerima';
 import TabContentEditPengirim from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPengirim';
 import KomentarEdit from '../../../@crema/components/Tabs/SuratKeluar/KomentarEdit';
@@ -31,7 +32,7 @@ const PerluTindakLanjut = () => {
   const kepada = useSelector((state) => state.addressbook.kepada[0]);
   const tembusan = useSelector((state) => state.addressbook.tembusan[0]);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
- 
+
   return (
     <>
       <Box backgroundColor='#F7F8F9'>
@@ -46,7 +47,15 @@ const PerluTindakLanjut = () => {
                     tabs={[
                       {
                         name: 'Info',
-                        content: <>{isEdit ? '' : <TabContentInfo />}</>,
+                        content: (
+                          <>
+                            {isEdit ? (
+                              <TabContentEditInfo />
+                            ) : (
+                              <TabContentInfo />
+                            )}
+                          </>
+                        ),
                       },
                       {
                         name: 'Penerima',
@@ -124,7 +133,11 @@ const PerluTindakLanjut = () => {
             mb: '30px',
           }}
         >
-          <PdfCardEdit kepada={kepada} tembusan={tembusan} pengirim={pengirim}/>
+          <PdfCardEdit
+            kepada={kepada}
+            tembusan={tembusan}
+            pengirim={pengirim}
+          />
         </Stack>
       </Box>
     </>

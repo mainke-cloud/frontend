@@ -134,11 +134,6 @@ const addressbookReducer = (state = initialState, action) => {
         ...state,
         tembusan: [action.payload],
       };
-    case 'ADD_PENGIRIM':
-      return {
-        ...state,
-        pengirim: action.payload,
-      };
     case 'ADD_JABATAN':
       return {
         ...state,
