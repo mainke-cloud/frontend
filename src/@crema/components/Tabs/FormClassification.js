@@ -69,7 +69,7 @@ const FormClassification = (props) => {
             overflow: 'auto',
           }}
         >
-          <Typography>{klasifikasi.desc}</Typography>
+          <Typography>{klasifikasi.name} {klasifikasi.desc}</Typography>
         </AppScrollbar>
         <StyledBox>
           <IconButton>

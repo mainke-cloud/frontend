@@ -67,6 +67,7 @@ const ClassificationProblem = (props) => {
     } else {
       console.log('No item selected.');
     }
+    onCloseClassificationProblem();
   };
 
   const handleSelectItem = (item) => {
@@ -132,10 +133,10 @@ const ClassificationProblem = (props) => {
               <SearchIcon fontSize='small' />
             </IconButton>
           </Box>
-          <Box sx={{ maxHeight: 410, overflowY: 'auto', marginTop: 5 }}>
+          <Box sx={{ height: 380, overflowY: 'auto', marginTop: 5 }}>
             <AppScrollbar
               sx={{
-                height: 410,
+                height: 350,
               }}
               scrollToTop={false}
             >
@@ -145,10 +146,10 @@ const ClassificationProblem = (props) => {
                   disabled={item.code.length === 0}
                 >
                   <AccordionSummarys>
-                    <Stack direction='row' alignItems='center'>
+                    <Stack alignItems='start'>
                       <Typography>{item.name}</Typography>
                       <Typography
-                        variant='body2'
+                        variant='caption'
                         sx={{ ml: 2, color: 'text.secondary' }}
                       >
                         {item.desc}
@@ -165,10 +166,10 @@ const ClassificationProblem = (props) => {
                               : null
                           }
                         >
-                          <Stack direction='row' alignItems='center'>
+                          <Stack alignItems='start'>
                             <Typography>{codeItem.name}</Typography>
                             <Typography
-                              variant='body2'
+                              variant='caption'
                               sx={{ ml: 2, color: 'text.secondary' }}
                             >
                               {codeItem.desc}
@@ -187,10 +188,10 @@ const ClassificationProblem = (props) => {
                                     : null
                                 }
                               >
-                                <Stack direction='row' alignItems='center'>
+                                <Stack alignItems='start'>
                                   <Typography>{code1Item.name}</Typography>
                                   <Typography
-                                    variant='body2'
+                                    variant='caption'
                                     sx={{ ml: 2, color: 'text.secondary' }}
                                   >
                                     {code1Item.desc}
@@ -209,15 +210,12 @@ const ClassificationProblem = (props) => {
                                           : null
                                       }
                                     >
-                                      <Stack
-                                        direction='row'
-                                        alignItems='center'
-                                      >
+                                      <Stack alignItems='start'>
                                         <Typography>
                                           {code2Item.name}
                                         </Typography>
                                         <Typography
-                                          variant='body2'
+                                          variant='caption'
                                           sx={{
                                             ml: 2,
                                             color: 'text.secondary',
@@ -240,9 +238,25 @@ const ClassificationProblem = (props) => {
               ))}
             </AppScrollbar>
           </Box>
-          <Button onClick={handleSave} variant='contained' color='primary'>
-            Save
-          </Button>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              padding: 5,
+            }}
+          >
+            <Button
+              variant='contained'
+              color='secondary'
+              onClick={handleSave}
+              sx={{
+                borderRadius: '50px',
+                minWidth: '150px',
+              }}
+            >
+              Simpan
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Modal>
