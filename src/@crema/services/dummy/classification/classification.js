@@ -6,38 +6,38 @@ export const classification = [
     code: [
       {
         id: 101,
-        name1: 'Marketing Manager',
-        desc1: '',
-        code1: [
+        name: 'Marketing Manager',
+        desc: '',
+        code: [
           {
             id: 1011,
-            name2: 'Digital Marketing Specialist',
-            desc2: '',
-            code2: [
+            name: 'Digital Marketing Specialist',
+            desc: '',
+            code: [
               {
                 id: 10111,
-                name3: 'Social Media Manager',
-                desc3: 'Manages social media accounts and engagement',
-                code3: [],
+                name: 'Social Media Manager',
+                desc: 'Manages social media accounts and engagement',
+                code: [],
               },
               {
                 id: 10112,
-                name3: 'Content Creator',
-                desc3: 'Creates engaging content for marketing purposes',
-                code3: [],
+                name: 'Content Creator',
+                desc: 'Creates engaging content for marketing purposes',
+                code: [],
               },
             ],
           },
           {
             id: 1012,
-            name2: 'Marketing Analyst',
-            desc2: '',
-            code2: [
+            name: 'Marketing Analyst',
+            desc: '',
+            code: [
               {
                 id: 10121,
-                name3: 'Market Researcher',
-                desc3: 'Conducts market research and gathers consumer insights',
-                code3: [],
+                name: 'Market Researcher',
+                desc: 'Conducts market research and gathers consumer insights',
+                code: [],
               },
             ],
           },
@@ -45,22 +45,22 @@ export const classification = [
       },
       {
         id: 102,
-        name1: 'Public Relations',
-        desc1: '',
-        code1: [
+        name: 'Public Relations',
+        desc: '',
+        code: [
           {
             id: 1021,
-            name2: 'PR Manager',
-            desc2: 'Conducts public relations',
-            code2: [],
+            name: 'PR Manager',
+            desc: 'Conducts public relations',
+            code: [],
           },
         ],
       },
       {
         id: 103,
-        name1: 'Public Relations',
-        desc1: 'Maintains relationships with media outlets and',
-        code1: [],
+        name: 'Public Relations',
+        desc: 'Maintains relationships with media outlets and',
+        code: [],
       },
     ],
   },
@@ -71,33 +71,33 @@ export const classification = [
     code: [
       {
         id: 201,
-        name1: 'Sales Manager',
-        desc1: '',
-        code1: [
+        name: 'Sales Manager',
+        desc: '',
+        code: [
           {
             id: 2011,
-            name2: 'Sales Representative',
-            desc2: '',
-            code2: [
+            name: 'Sales Representative',
+            desc: '',
+            code: [
               {
                 id: 20111,
-                name3: 'Account Executive',
-                desc3: 'Manages client accounts and fosters relationships',
-                code3: [],
+                name: 'Account Executive',
+                desc: 'Manages client accounts and fosters relationships',
+                code: [],
               },
               {
                 id: 20112,
-                name3: 'Sales Associate',
-                desc3: 'Assists in sales activities and customer interactions',
-                code3: [],
+                name: 'Sales Associate',
+                desc: 'Assists in sales activities and customer interactions',
+                code: [],
               },
             ],
           },
           {
             id: 2012,
-            name2: 'Sales Representative',
-            desc2: 'Assists in sales activities and customer interactions',
-            code2: [],
+            name: 'Sales Representative',
+            desc: 'Assists in sales activities and customer interactions',
+            code: [],
           },
         ],
       },

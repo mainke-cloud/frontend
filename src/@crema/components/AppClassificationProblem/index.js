@@ -54,9 +54,6 @@ const ClassificationProblem = (props) => {
       marginLeft: theme.spacing(1),
       backgroundColor: selected ? theme.palette.action.selected : 'transparent',
     },
-    // pointerEvents: disabled ? 'none' : 'auto',
-    // opacity: disabled ? 0.5 : 1,
-    // cursor: disabled ? 'not-allowed' : 'pointer',
   }));
 
   const AccordionDetail = styled(AccordionDetails)(() => ({
@@ -66,7 +63,6 @@ const ClassificationProblem = (props) => {
   const handleSave = () => {
     if (selectedItem) {
       console.log('Selected Item (to be saved):', selectedItem);
-      // Additional logic to save the selected item to Redux state or elsewhere
       dispatch(addKlasifikasi(selectedItem));
     } else {
       console.log('No item selected.');
@@ -163,55 +159,52 @@ const ClassificationProblem = (props) => {
                     {item.code.map((codeItem) => (
                       <StyledAccordion key={`${item.id}-${codeItem.id}`}>
                         <AccordionSummarys
-                          // disabled={codeItem.code1.length === 0}
                           onClick={
-                            codeItem.code1.length === 0
+                            codeItem.code.length === 0
                               ? () => handleSelectItem(codeItem)
                               : null
                           }
                         >
                           <Stack direction='row' alignItems='center'>
-                            <Typography>{codeItem.name1}</Typography>
+                            <Typography>{codeItem.name}</Typography>
                             <Typography
                               variant='body2'
                               sx={{ ml: 2, color: 'text.secondary' }}
                             >
-                              {codeItem.desc1}
+                              {codeItem.desc}
                             </Typography>
                           </Stack>
                         </AccordionSummarys>
                         <AccordionDetail sx={{ paddingLeft: 8 }}>
-                          {codeItem.code1.map((code1Item) => (
+                          {codeItem.code.map((code1Item) => (
                             <StyledAccordion
                               key={`${item.id}-${codeItem.id}-${code1Item.id}`}
                             >
                               <AccordionSummarys
-                                // disabled={code1Item.code2.length === 0}
                                 onClick={
-                                  code1Item.code2.length === 0
+                                  code1Item.code.length === 0
                                     ? () => handleSelectItem(code1Item)
                                     : null
                                 }
                               >
                                 <Stack direction='row' alignItems='center'>
-                                  <Typography>{code1Item.name2}</Typography>
+                                  <Typography>{code1Item.name}</Typography>
                                   <Typography
                                     variant='body2'
                                     sx={{ ml: 2, color: 'text.secondary' }}
                                   >
-                                    {code1Item.desc2}
+                                    {code1Item.desc}
                                   </Typography>
                                 </Stack>
                               </AccordionSummarys>
                               <AccordionDetail sx={{ paddingLeft: 12 }}>
-                                {code1Item.code2.map((code2Item) => (
+                                {code1Item.code.map((code2Item) => (
                                   <StyledAccordion
                                     key={`${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`}
                                   >
                                     <AccordionSummarys
-                                      // disabled={code2Item.code3.length === 0}
                                       onClick={
-                                        code2Item.code3.length === 0
+                                        code2Item.code.length === 0
                                           ? () => handleSelectItem(code2Item)
                                           : null
                                       }
@@ -221,7 +214,7 @@ const ClassificationProblem = (props) => {
                                         alignItems='center'
                                       >
                                         <Typography>
-                                          {code2Item.name3}
+                                          {code2Item.name}
                                         </Typography>
                                         <Typography
                                           variant='body2'
@@ -230,7 +223,7 @@ const ClassificationProblem = (props) => {
                                             color: 'text.secondary',
                                           }}
                                         >
-                                          {code2Item.desc3}
+                                          {code2Item.desc}
                                         </Typography>
                                       </Stack>
                                     </AccordionSummarys>
