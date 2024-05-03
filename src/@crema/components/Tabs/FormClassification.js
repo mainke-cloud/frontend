@@ -40,6 +40,8 @@ const FormClassification = (props) => {
     setClassificationProblem(false);
   };
 
+  const klasifikasi = useSelector((state) => state.classification.klasifikasi)
+
   return (
     <StyledStack>
       <Link
@@ -66,7 +68,7 @@ const FormClassification = (props) => {
             maxHeight: '145px',
             overflow: 'auto',
           }}
-        ></AppScrollbar>
+        ><Typography>{klasifikasi.desc}</Typography></AppScrollbar>
         <StyledBox>
           <IconButton>
             <AddCircleOutlineRoundedIcon
