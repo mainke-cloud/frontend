@@ -19,14 +19,8 @@ export const addPemohon = (datas) => {
   };
 };
 export const addPengirim = (datas) => {
-export const addJabatan = (datas) => {
   return (dispatch) => {
-    dispatch({ type: 'ADD_JABATAN', payload: datas });
-  };
-};
-export const addNama = (datas) => {
-  return (dispatch) => {
-    dispatch({ type: 'ADD_NAMA', payload: datas });
+    dispatch({ type: 'ADD_PENGIRIM', payload: datas });
   };
 };
 export const addDelegasi = (datas) => {
@@ -37,5 +31,15 @@ export const addDelegasi = (datas) => {
 export const addSekretaris = (datas) => {
   return (dispatch) => {
     dispatch({ type: 'ADD_SEKRETARIS', payload: datas });
+  };
+};
+export const addJabatan = (datas) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_JABATAN', payload: datas });
+  };
+};
+export const addNama = (datas) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_NAMA', payload: datas });
   };
 };

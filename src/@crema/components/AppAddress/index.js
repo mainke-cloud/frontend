@@ -50,6 +50,8 @@ import {
   addPengirim,
   addSekretaris,
   addTembusan,
+  addJabatan,
+  addNama
 } from '../../../redux/actions/addressbookAction';
 
 const ComposeMail = (props) => {
@@ -195,6 +197,8 @@ const ComposeMail = (props) => {
       dispatch(addPemeriksa(Data));
     } else if (title === 'Pemohon') {
       dispatch(addPemohon(Data));
+    }else if (title === 'Pengirim') {
+      dispatch(addPengirim(Data));
     }
     onCloseComposeMail();
   };
