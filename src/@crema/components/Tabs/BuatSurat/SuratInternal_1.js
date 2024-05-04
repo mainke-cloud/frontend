@@ -9,6 +9,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import FormClassification from '../FormClassification';
+import ClassificationProblem from '@crema/components/AppClassificationProblem';
+
+const perihal = [
+  {
+    value: '1',
+    label: '',
+  },
+  {
+    value: '2',
+    label: '',
+  },
+  {
+    value: '3',
+    label: '',
+  },
+  {
+    value: '4',
+    label: '',
+  },
+];
+
 const prioritas = [
   {
     value: '1',
@@ -86,8 +108,17 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
           onChange={handleChange}
         />
 
-        {/* <FormAddressBook text='Klasifikasi Masalah' data={datass} /> */}
+        <FormClassification text='Klasifikasi Masalah'/>
 
+        <Typography
+          variant='body1'
+          sx={{
+            color: '#5C5E61',
+            // width: '370px',
+          }}
+        >
+          Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
+        </Typography>
         <Typography variant='h4'>Prioritas Surat</Typography>
         <TextField
           id='outlined-select-currency'

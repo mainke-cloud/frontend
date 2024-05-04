@@ -14,12 +14,15 @@ import { users } from '../../../services/dummy/user/user';
 const TabContentEditPengirim = () => {
   const pengirim = useSelector((state) => state.addressbook.pengirim);
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const [composeMailTitle, setComposeMailTitle] = useState('');
 
-  const onOpenComposeMail = () => {
+  const onOpenComposeMail = (title) => {
+    setComposeMailTitle(title);
     setComposeMail(true);
   };
-
+  
   const onCloseComposeMail = () => {
+    setJabatanValue(jabatann.jabatan);
     setComposeMail(false);
   };
 
@@ -44,7 +47,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail()}
+            onClick={() => onOpenComposeMail('Jabatan')}
           >
             Jabatan
           </Link>
@@ -55,10 +58,11 @@ const TabContentEditPengirim = () => {
 
         <TextField
           fullWidth
-          value={`${pengirim.jabatan}`}
+          value={jabatanValue}
+          onChange={handleJabatanChange}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail()}>
+              <IconButton onClick={() => onOpenComposeMail('Jabatan')}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -78,7 +82,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail()}
+            onClick={() => onOpenComposeMail('Nama')}
           >
             Nama
           </Link>
@@ -89,10 +93,12 @@ const TabContentEditPengirim = () => {
 
         <TextField
           fullWidth
-          value={`${pengirim.nama}`}
+          value={
+            composeMailTitle === 'Nama' ? `${namaa.nama}` : `${jabatann.nama}`
+          }
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail()}>
+              <IconButton onClick={() => onOpenComposeMail('Nama')}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -103,32 +109,63 @@ const TabContentEditPengirim = () => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField fullWidth value={`${pengirim.divisi}`} />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama'
+              ? `${namaa.divisi}`
+              : `${jabatann.divisi}`
+          }
+        />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField value={`${pengirim.nikl}`} />
+            <TextField
+              value={
+                composeMailTitle === 'Nama'
+                  ? `${namaa.nikl}`
+                  : `${jabatann.nikl}`
+              }
+            />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField value={`${pengirim.kode_departemen}`} />
+            <TextField
+              value={
+                composeMailTitle === 'Nama'
+                  ? `${namaa.kode_departemen}`
+                  : `${jabatann.kode_departemen}`
+              }
+            />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField fullWidth value={`${pengirim.departemen}`} />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama'
+              ? `${namaa.departemen}`
+              : `${jabatann.departemen}`
+          }
+        />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField fullWidth value={`${pengirim.kota}`} />
+        <TextField
+          fullWidth
+          value={
+            composeMailTitle === 'Nama' ? `${namaa.kota}` : `${jabatann.kota}`
+          }
+        />
       </Stack>
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
         datas={users}
-        title='Pengirim'
+        title={composeMailTitle}
         type='single'
       />
     </>
