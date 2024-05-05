@@ -5,7 +5,7 @@ import {
   closeTab,
   reorderTab,
 
-} from '../redux/actions/tabActon';
+} from '../redux/actions/tabAction';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
 import './tab.css';
@@ -36,7 +36,7 @@ const Page = () => {
           onTabActive={handleTabActive}
           tabs={tabs}
         />
-        <Box>{tabs.find((tab) => tab.active)?.content}</Box>
+        <Box sx={{ paddingTop:'42px' }}>{tabs.find((tab) => tab.active)?.content}</Box>
       </Box>
     </>
   );

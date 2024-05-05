@@ -21,7 +21,7 @@ import { MessageSquare, File, X } from 'feather-icons-react';
 const ListKomentar = ({ label }) => {
   const StyledBadge = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
-      backgroundColor: '#0F6EB5',
+      backgroundColor: getPriorityColor(label)[1],
       color: 'white',
     },
     '&.angka': {
@@ -53,9 +53,9 @@ const ListKomentar = ({ label }) => {
       case 'Sedang':
         return ['#FFB020', '#FFEFD2'];
       case 'Dikirimkan':
-        return ['#3366FF', '#D6E0FF'];
+        return ['#FFFFFF', '#229BD8'];
       case 'Disetujui':
-        return ['#52BD94', '#EEF8F4'];
+        return ['#FFFFFF', '#34C759'];
       default:
         return ['#C8CCD2', '#C8CCD2'];
     }

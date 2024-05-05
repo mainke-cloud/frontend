@@ -28,7 +28,7 @@ import { Fonts } from '@crema/constants/AppEnums';
 import { ArrowForwardIosSharp } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab, childTab } from '../../../../../redux/actions/tabActon';
+import { addTab, childTab } from '../../../../../redux/actions/tabAction';
 
 const Accordions = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />

@@ -4,6 +4,8 @@ import { Stack, Typography, Box } from '@mui/material';
 
 import AppScrollbar from '@crema/components/AppScrollbar';
 import ProfileUser from '../../../@crema/components/Tabs/Disposisi/ProfileUser';
+import ListStaff from '@crema/components/Tabs/ListStaff';
+import { mt } from 'date-fns/locale';
 
 const Info = (props) => {
   const { data } = props;
@@ -15,44 +17,12 @@ const Info = (props) => {
     >
       <Box className='content-styled-box'>
         <Typography className='content-styled-judul'> To </Typography>
-        <Box
-          className='content-styled-box'
-          sx={{ height: '275px', mt: '20px' }}
-        >
-          <AppScrollbar>
-            {data &&
-              data.map((item, index) => (
-                <Box key={index} sx={{ paddingY: '6px' }}>
-                  <ProfileUser
-                    avatar={item.avatar}
-                    position={item.position.toUpperCase()}
-                    name={item.name.toUpperCase()}
-                  />
-                </Box>
-              ))}
-          </AppScrollbar>
-        </Box>
+        <ListStaff sx={{ mt: 2 }} />
         <Typography className='content-styled-judul' pt='20px'>
           {' '}
-          CC{' '}
+          Cc{' '}
         </Typography>
-        <Box
-          className='content-styled-box'
-          sx={{ height: '275px', mt: '20px' }}
-        >
-          <AppScrollbar>
-            {data &&
-              data.map((item, index) => (
-                <Box key={index} sx={{ paddingY: '6px' }}>
-                  <ProfileUser
-                    avatar={item.avatar2}
-                    position={item.position.toUpperCase()}
-                    name={item.name.toUpperCase()}
-                  />
-                </Box>
-              ))}
-          </AppScrollbar>
-        </Box>
+        <ListStaff sx={{ mt: 2 }} />
       </Box>
     </Stack>
   );

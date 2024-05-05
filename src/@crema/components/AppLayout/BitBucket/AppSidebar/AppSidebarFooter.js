@@ -6,7 +6,6 @@ import { Cached } from '@mui/icons-material';
 import { Fonts } from '@crema/constants/AppEnums';
 import mailIcon from '../../../../../assets/icon/mail-unread.svg';
 import mailReadIcon from '../../../../../assets/icon/mail-read.svg';
-import { Mail } from 'feather-icons-react';
 
 import { Shortcut } from '@mui/icons-material';
 const AppSidebarFooter = (props) => {
@@ -15,6 +14,8 @@ const AppSidebarFooter = (props) => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'Dibatalkan':
+        return ['#E42313', '#FFBDAD'];
+      case 'Batal':
         return ['#E42313', '#FFBDAD'];
       case 'Kembali Ke Komposer':
         return ['#E42313', '#FFBDAD'];
@@ -31,7 +32,7 @@ const AppSidebarFooter = (props) => {
       case 'Sedang':
         return ['#FFB020', '#FFEFD2'];
       case 'Rendah':
-        return ['#3366FF', '#D6E0FF'];
+        return ['#52BD94', '#EEF8F4'];
       default:
         return 'lightgrey';
     }
@@ -74,7 +75,7 @@ const AppSidebarFooter = (props) => {
             />
           </Box>
         </>
-      ) : isStatus === 'surat masuk' ? (
+      ) : isStatus === 'surat masuk' || isStatus === 'surat terkirim' ? (
         <>
           <Button
             sx={{
@@ -116,7 +117,10 @@ const AppSidebarFooter = (props) => {
               paddingTop: 2.4,
             }}
           >
-            <Mail />
+            <img
+              src={item.status === 'Read' ? mailReadIcon : mailIcon}
+              alt='Mail Icon'
+            />
           </Box>
         </>
       ) : isStatus === 'todo' ? (
@@ -141,6 +145,8 @@ const AppSidebarFooter = (props) => {
         isStatus === 'draft' ||
         isStatus === 'komposer' ||
         isStatus === 'lacak proses' ||
+        isStatus === 'surat diminta' ||
+        isStatus === 'surat dibatalkan' ||
         isStatus === 'template' ? (
         <>
           <Stack

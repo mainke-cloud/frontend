@@ -1,11 +1,8 @@
 import React from 'react';
-import Folder from 'modules/folder';
 import Keamanan from 'modules/keamanan';
 import Bantuan from 'modules/bantuan';
 import Profile from 'modules/profile';
-import Todo from 'modules/disposisi/todo/Todo';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import ScanSurat from 'modules/scanSurat/ScanSurat';
 import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
@@ -23,7 +20,6 @@ import Surat_Internal from 'modules/buatSurat/SuratInternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
 import iconSurat from '../../assets/icon/mail.svg';
-import NoDisposisi from 'modules/disposisi/respons/Default';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import BelumPilih from 'modules/suratKeluar/BelumPilih';
@@ -34,7 +30,9 @@ import Komposer from 'modules/suratKeluar/komposer/Komposer';
 import Template from 'modules/suratKeluar/template/Template';
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
-import SuratKosong from 'modules/suratMasuk/content/suratKosong';
+import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
+import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
+import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -94,25 +92,14 @@ export const addTab = (id, state, type) => {
             : '',
 
         content:
-          type === 'Folder' ? (
-            <Folder />
-          ) : type === 'Keamanan' ? (
+          type === 'Keamanan' ? (
             <Keamanan />
           ) : type === 'FAQ' ? (
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
-          ) : type === 'Disposisi' ? (
-            <NoDisposisi />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-          ) : // <Disposisi />
-          type === 'Surat Masuk' ? (
-            <SuratKosong />
-          ) : type === 'BuatDisposisi' ? (
-            <BuatSurat />
-          ) : type === 'Todo' ? (
-            <Todo />
           ) : type === 'Add_Sekretaris' ? (
             <Add_Sekretaris />
           ) : type === 'Add_Delegasi' ? (
@@ -123,32 +110,14 @@ export const addTab = (id, state, type) => {
             <Surat_Undangan />
           ) : type === 'Buat Surat Delegasi' ? (
             <Surat_Delegasi />
-          ) : type === 'Add_Sekretaris' ? (
-            <Add_Sekretaris />
-          ) : type === 'Add_Delegasi' ? (
-            <Add_Delegasi />
-          ) : type === 'Log Scan Surat' ? (
-            <ScanSurat />
           ) : type === 'Buat Scan Surat' ? (
             <BuatScanSurat />
-          ) : type === 'Draft Scan Surat' ? (
-            <ScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
-          ) : type === 'Perlu Tindak Lanjut' ? (
-            <BelumPilih />
-          ) : type === 'Lacak Proses' ? (
-            <BelumPilih />
-          ) : type === 'Draft' ? (
-            <BelumPilih />
-          ) : type === 'Komposer' ? (
-            <BelumPilih />
-          ) : type === 'Template' ? (
-            <BelumPilih />
           ) : (
-            ''
+            <BelumPilih />
           ),
         active: true,
       };
@@ -167,6 +136,7 @@ export const addTab = (id, state, type) => {
 };
 
 export const childTab = (id, state, type, data) => {
+  console.log(type);
   return (dispatch) => {
     const isExistingTab = state.find((tab) => {
       switch (type) {
@@ -184,6 +154,12 @@ export const childTab = (id, state, type, data) => {
           return tab.id === 'komposer';
         case 'Template':
           return tab.id === 'template';
+        case 'Surat Diminta':
+          return tab.id === 'surat diminta';
+        case 'Surat Terkirim':
+          return tab.id === 'surat terkirim';
+        case 'Surat Dibatalkan':
+          return tab.id === 'surat dibatalkan';
         case 'Surat Masuk':
           return tab.id === 'surat masuk';
         case 'Log Scan Surat':
@@ -193,6 +169,7 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
+      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -215,12 +192,20 @@ export const childTab = (id, state, type, data) => {
             <SuratMasuk props={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
+          ) : type === 'Surat Diminta' ? (
+            <SuratDiminta props={data} />
+          ) : type === 'Surat Terkirim' ? (
+            <SuratTerkirim props={data} />
+          ) : type === 'Surat Dibatalkan' ? (
+            <SuratDibatalkan props={data} />
           ) : (
             ''
           ),
       };
       if (type === 'Surat Masuk') {
         dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
+      } else if (type === 'Log Scan Surat') {
+        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
@@ -265,6 +250,12 @@ export const childTab = (id, state, type, data) => {
               <SuratMasuk props={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
+            ) : type === 'Surat Diminta' ? (
+              <SuratDiminta props={data} />
+            ) : type === 'Surat Terkirim' ? (
+              <SuratTerkirim props={data} />
+            ) : type === 'Surat Dibatalkan' ? (
+              <SuratDibatalkan props={data} />
             ) : (
               ''
             ),

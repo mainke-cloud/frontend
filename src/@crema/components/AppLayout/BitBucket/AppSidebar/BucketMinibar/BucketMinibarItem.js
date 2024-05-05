@@ -19,7 +19,7 @@ import helpIcon from '../../../../../../assets/icon/help-circle.svg';
 import profileIcon from '../../../../../../assets/icon/user.svg';
 import logoutIcon from '../../../../../../assets/icon/log-out.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../../../../redux/actions/tabActon';
+import { addTab } from '../../../../../../redux/actions/tabAction';
 
 const iconMap = {
   search: searchIcon,
@@ -77,24 +77,7 @@ const BucketMinibarItem = (props) => {
 
   const handleSidebar = (name) => {
     dispatch(setSidebarName(name));
-
-    if (name === 'Todo') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Disposisi') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Perlu Tindak Lanjut') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Lacak Proses') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Draft') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Komposer') {
-      dispatch(addTab(id, tabs, name));
-    } else if (name === 'Template') {
-      dispatch(addTab(id, tabs, name));
-    } else {
-      dispatch(addTab(id, tabs, name));
-    }
+    dispatch(addTab(id, tabs, name));
   };
 
   return (

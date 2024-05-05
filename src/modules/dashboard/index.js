@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Stack, Grid, Typography, IconButton, Paper } from '@mui/material';
+
 import person from '../../assets/Dashboard/Dashboard_girl.png';
 import Refresh from '../../assets/Dashboard/Refresh_icon.png';
 import Plus from '../../assets/Dashboard/Plus_icon.png';
@@ -13,6 +14,7 @@ import Surat_Internal from '../../assets/Dashboard/Surat_Internal_logo.png';
 import Surat_Undangan from '../../assets/Dashboard/Surat_Undangan_logo.png';
 import Surat_Eksternal from '../../assets/Dashboard/Surat_Eksternal_logo.png';
 import Surat_Delegasi from '../../assets/Dashboard/Surat_Delegasi_logo.png';
+
 import TodoList_Dashboard from '../../@crema/components/Tabs/Dashboard/TodoList_Dashboard';
 import Mail_Status from '../../@crema/components/Tabs/Dashboard/Mail_Status';
 import Mail_Button from '../../@crema/components/Tabs/Dashboard/Mail_Button';
@@ -21,7 +23,7 @@ import Sekretaris from '../../@crema/components/Tabs/Dashboard/Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../redux/actions/tabActon';
+import { addTab } from '../../redux/actions/tabAction';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      <Box sx={{ backgroundColor: '#D9DDE3' }}>
+      <Box sx={{ backgroundColor: '#F4F4F4' }}>
         <Paper elevation={0} sx={{ marginBottom: 5 }}>
           <Grid container spacing={4} sx={{ paddingX: 8 }}>
             <Grid item xs={11}>

@@ -30,11 +30,16 @@ import SuratEx from '../../../../../assets/icon/Surat_Eksternal.svg';
 import SuratUndang from '../../../../../assets/icon/Surat_Undangan.svg';
 import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
 
+import SuratIn from '../../../../../assets/icon/Surat_Internal.svg';
+import SuratEx from '../../../../../assets/icon/Surat_Eksternal.svg';
+import SuratUndang from '../../../../../assets/icon/Surat_Undangan.svg';
+import SuratDelegasi from '../../../../../assets/icon/Surat_Delegasi.svg';
+
 import { Fonts } from '@crema/constants/AppEnums';
 
 import { Plus, Filter, Search, AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { childTab } from '../../../../../redux/actions/tabAction';
 import {
   ArrowForwardIosSharp,
   Cached,
@@ -337,9 +342,15 @@ export default function DisposisiSidebar({ isCollapsed }) {
 
   const open_add = Boolean(openAdd);
   const open_filter = Boolean(openFilter);
+  const open_add = Boolean(openAdd);
+  const open_filter = Boolean(openFilter);
+  // const open_add = Boolean(openAdd);
+  // const open_filter = Boolean(openFilter);
   const id = open ? 'simple-popover' : undefined;
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
+  // const dispatch = useDispatch();
+  // const tabs = useSelector((state) => state.tab.tabs);
 
   const handleTab = (item) => {
     dispatch(childTab(item.id, tabs, 'Disposisi', item));
@@ -351,6 +362,8 @@ export default function DisposisiSidebar({ isCollapsed }) {
           <TextField
             variant='outlined'
             size='small'
+            size='small'
+            // size='small'
             placeholder='Search'
             value={searchInput}
             onChange={handleSearchInput}
