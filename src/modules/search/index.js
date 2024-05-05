@@ -83,7 +83,7 @@ function SearchPage() {
             borderBottom: '1px solid #B1B5BA',
           }}
         >
-          <Stack spacing={6} sx={{ width: '60%', marginTop: 20 }}>
+          <Stack spacing={6} sx={{ maxWidth: '60%', marginTop: 20 }}>
             <Box
               sx={{
                 height: '40px',
