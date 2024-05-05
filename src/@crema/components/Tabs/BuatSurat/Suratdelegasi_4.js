@@ -3,6 +3,7 @@ import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import DropZoneFile from '../DropZoneFile';
 import PropTypes from 'prop-types';
+import SuratDelegasi_3 from './Suratdelegasi_3';
 
 const style = {
   position: 'absolute',
@@ -17,7 +18,7 @@ const style = {
   alignItems: 'center',
 };
 
-const SuratInternal_5 = ({ handleNext, handlePrev }) => {
+const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -78,7 +79,7 @@ const SuratInternal_5 = ({ handleNext, handlePrev }) => {
             }}
             onClick={handleOpen}
           >
-            Kirim
+            Selesai
           </Button>
 
           <Modal
@@ -134,9 +135,9 @@ const SuratInternal_5 = ({ handleNext, handlePrev }) => {
   );
 };
 
-SuratInternal_5.propTypes = {
+SuratDelegasi_4.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
 };
 
-export default SuratInternal_5;
+export default SuratDelegasi_4;

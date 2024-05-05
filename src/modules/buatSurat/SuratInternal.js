@@ -9,6 +9,7 @@ import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
+import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 
 const SuratInternal = () => {
   const [showNext, setShowNext] = useState(0);
@@ -72,6 +73,12 @@ const SuratInternal = () => {
             <KomentarSection />
           </Grid>
         </Grid>
+
+        <img
+          src={PreviewSuratImage}
+          alt='surat'
+          style={{ paddingTop: '20px', maxWidth: '1305px' }}
+        />
       </Box>
     </Box>
   );

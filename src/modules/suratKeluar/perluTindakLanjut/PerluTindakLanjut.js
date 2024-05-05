@@ -93,7 +93,6 @@ const PerluTindakLanjut = () => {
                   ]}
                 />
               </Box>
-              <PdfCard />
             </Grid>
             <Grid item xs={4}>
               {isEdit && value === 0 ? (
@@ -105,6 +104,7 @@ const PerluTindakLanjut = () => {
               )}
             </Grid>
           </Grid>
+          <PdfCard />
         </Box>
       </Box>
     </Box>

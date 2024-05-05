@@ -1,26 +1,14 @@
 import {
   Box,
   Button,
-  Grid,
-  Icon,
-  IconButton,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
-import KomentarSection from './KomentarSection/KomentarSection';
 import AppScrollbar from '@crema/components/AppScrollbar';
-import ListKomentar from '../SuratKeluar/ListKomentar';
 import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
 
 const perihal = [
@@ -69,12 +57,6 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext }) => {
-  const [showPreview, setShowPreview] = useState(false);
-
-  const handleShow = () => {
-    setShowPreview(!showPreview);
-  };
-
   return (
     <>
       <Stack
@@ -202,12 +184,6 @@ const SuratInternal_1 = ({ handleNext }) => {
           </Button>
         </Stack>
       </Stack>
-
-      <img
-        src={PreviewSuratImage}
-        alt='surat'
-        style={{ paddingTop: '20px', maxWidth: '1305px' }}
-      />
     </>
   );
 };

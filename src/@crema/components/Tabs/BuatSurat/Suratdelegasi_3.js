@@ -1,12 +1,11 @@
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
-import { Link, Stack, Typography } from '@mui/material';
-import AppScrollbar from '../../AppScrollbar';
-import { Box, Button } from '@mui/material';
-import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
-import ComposeMail from '@crema/components/AppAddress';
+import { Button } from '@mui/material';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
+import ComposeMail from '@crema/components/AppAddress';
 
-const SuratInternal_4 = ({ handleNext, handlePrev }) => {
+const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
 
   const onOpenComposeMail = () => {
@@ -23,7 +22,7 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
         spacing={4}
         sx={{
           border: '1px solid #D8D8D8',
-          minHeight: '300px',
+          minHeight: '570px',
           borderRadius: '12px',
           padding: '15px',
         }}
@@ -40,30 +39,27 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
             }}
             onClick={() => onOpenComposeMail()}
           >
-            Pemeriksa
+            Jabatan
           </Link>
-
           <Typography variant='h4' color='red'>
             *
           </Typography>
         </Stack>
 
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
+        <TextField
+          disabled
+          fullWidth
+          defaultValue='Kepala Research and Development'
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={() => onOpenComposeMail()}>
+                <AddCircleOutlineRoundedIcon
+                  sx={{ color: 'black', fontSize: '40px' }}
+                />
+              </IconButton>
+            ),
           }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        />
 
         <Stack direction='row'>
           <Link
@@ -77,26 +73,50 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
             }}
             onClick={() => onOpenComposeMail()}
           >
-            Pemohon
+            Nama
           </Link>
+          <Typography variant='h4' color='red'>
+            *
+          </Typography>
         </Stack>
 
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
+        <TextField
+          disabled
+          fullWidth
+          defaultValue='Taufik Sulaeman'
+          InputProps={{
+            endAdornment: (
+              <IconButton>
+                <AddCircleOutlineRoundedIcon
+                  sx={{ color: 'black', fontSize: '40px' }}
+                />
+              </IconButton>
+            ),
           }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        />
+
+        <Typography variant='h4'>Divisi</Typography>
+
+        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+
+        <Stack direction='row' spacing={5}>
+          <Stack flex={1} spacing={5}>
+            <Typography variant='h4'>NIK</Typography>
+            <TextField disabled defaultValue='8900002' />
+          </Stack>
+          <Stack flex={1} spacing={5}>
+            <Typography variant='h4'>Kode Departemen</Typography>
+            <TextField disabled defaultValue='DIT-11 B 10000' />
+          </Stack>
+        </Stack>
+
+        <Typography variant='h4'>Departemen</Typography>
+
+        <TextField disabled fullWidth defaultValue='Decision Support' />
+
+        <Typography variant='h4'>Kota Kantor</Typography>
+
+        <TextField disabled fullWidth defaultValue='Bandung' />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
@@ -122,7 +142,7 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
             }}
             onClick={handleNext}
           >
-            Selanjutnya (lainnya)
+            Selanjutnya (Penerima)
           </Button>
         </Stack>
       </Stack>
@@ -135,9 +155,9 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   );
 };
 
-SuratInternal_4.propTypes = {
+SuratDelegasi_3.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
 };
 
-export default SuratInternal_4;
+export default SuratDelegasi_3;

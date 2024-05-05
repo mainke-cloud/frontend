@@ -3,6 +3,7 @@ import { Box, Checkbox, FormControl, FormControlLabel, Grid, MenuItem, Radio, Ra
 import { styled } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { useSelector } from 'react-redux';
 
 import exchange from '../../../../assets/icon/exchange.svg';
 import ButtonBuatDisposisi from '@crema/components/Tabs/Disposisi/ButtonBuatDisposisi';
@@ -150,9 +151,7 @@ const TabBuatAlamat = () => {
                     </Box>
 
                     <Box sx={{width:'60%'}}>
-                        <FormAddressBook
-                            text="Kepada"
-                        />
+                        <FormAddressBook text='Kepada' data={datass} />
                     </Box>
 
                     <Box className='render-item-todo-note'>
@@ -222,7 +221,11 @@ const TabBuatAlamat = () => {
         }
         return items;
     }
-    
+    const kepada = useSelector((state) => state.addressbook.kepada);
+    let datass = kepada[0];
+    if (!datass || !Array.isArray(datass)) {
+      datass = [];
+    }
   return (
     <FormControl fullWidth>
         <Stack rowGap={'16px'}>  

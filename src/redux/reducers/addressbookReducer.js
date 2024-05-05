@@ -37,6 +37,25 @@ const initialState = {
       nohp: '',
     },
   ],
+  pengirim: [
+    {
+      profil: '',
+      id: '',
+      nama: '',
+      alamat: '',
+      nikg: '',
+      nikl: '',
+      kota: '',
+      organisasi: '',
+      divisi: '',
+      departemen: '',
+      kode_departemen: '',
+      jabatan: '',
+      email: '',
+      pgs: '',
+      nohp: '',
+    },
+  ],
 };
 const addressbookReducer = (state = initialState, action) => {
   switch (action.type) {
