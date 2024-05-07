@@ -94,7 +94,6 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   backgroundColor:
     theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
-  //   zIndex: 1,
   color: '#fff',
   width: 50,
   height: 50,
@@ -151,7 +150,6 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-//==========================
 const LabelRoot = styled('div')(({ theme, ownerState }) => ({
   backgroundColor:
     theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
@@ -209,8 +207,6 @@ RootStep.propTypes = {
    */
   icon: PropTypes.node,
 };
-
-// const steps = ['Info', 'penerima', 'Pengirim', 'pemeriksa', 'Lainnya'];
 
 export default function CustomizedSteppers({ activeStep, step }) {
   return (
