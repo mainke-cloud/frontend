@@ -30,6 +30,8 @@ import Komposer from 'modules/suratKeluar/komposer/Komposer';
 import Template from 'modules/suratKeluar/template/Template';
 import SearchTab from 'modules/search/index';
 import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
+import Folder from 'modules/folder/index';
+import Listdata from 'modules/folder/content/ListData';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -74,6 +76,8 @@ export const addTab = (id, state, type) => {
             ? iconSurat
             : type === 'Buka Surat'
             ? scanIcon
+            : type === 'Buka Folder'
+            ? folderIcon
             : type === 'Search'
             ? searchIcon
             : type === 'Perlu Tindak Lanjut'
@@ -95,6 +99,8 @@ export const addTab = (id, state, type) => {
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
+          ) : type === 'Buka Folder' ? (
+            <Listdata />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
           ) : type === 'Add_Sekretaris' ? (
@@ -111,6 +117,8 @@ export const addTab = (id, state, type) => {
             <BuatScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
+          ) : type === 'Folder' ? (
+            <Folder />
           ) : type === 'Search' ? (
             <SearchTab />
           ) : (
@@ -152,6 +160,10 @@ export const childTab = (id, state, type, data) => {
           return tab.id === 'template';
         case 'Surat Masuk':
           return tab.id === 'surat masuk';
+        case 'Folder':
+          return tab.id === 'folder';
+        case 'Buka Folder':
+          return tab.id === 'buka folder';
         case 'Log Scan Surat':
           return tab.id === 'log scan surat';
         default:
@@ -179,6 +191,10 @@ export const childTab = (id, state, type, data) => {
             <Template props={data} />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk props={data} />
+          ) : type === 'Folder' ? (
+            <Folder props={data} />
+          ) : type === 'Buka Folder' ? (
+            <Listdata files={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
           ) : (
@@ -189,6 +205,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
       } else if (type === 'Log Scan Surat') {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      } else if (type === 'Folder') {
+        dispatch({ type: 'UPDATE_TAB_FOLDER', payload: updateTab });
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
@@ -231,6 +249,10 @@ export const childTab = (id, state, type, data) => {
               <Template props={data} />
             ) : type === 'Surat Masuk' ? (
               <SuratMasuk props={data} />
+            ) : type === 'Folder' ? (
+              <Folder props={data} />
+            ) : type === 'Buka Folder' ? (
+              <Listdata files={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
             ) : (

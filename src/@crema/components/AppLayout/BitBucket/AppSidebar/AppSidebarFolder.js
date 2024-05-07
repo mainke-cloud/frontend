@@ -23,11 +23,14 @@ import {
 import { ArrowForwardIosSharp } from '@mui/icons-material';
 import { AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
+import inboxIcon from '../../../../../assets/icon/inbox.svg';
 
 import { childTab } from '../../../../../redux/actions/tabActon';
 import { Fonts } from '@crema/constants/AppEnums';
 import AppSidebarHeader from './AppSidebarHeader';
 import AppSidebarFooter from './AppSidebarFooter';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import FolderIcon from '@mui/icons-material/Folder';
 
 const StyledAccordion = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />
@@ -47,7 +50,6 @@ const AccordionSummarys = styled((props) => (
     {...props}
   />
 ))(({ theme }) => ({
-  flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
   },
@@ -60,7 +62,7 @@ const AccordionDetail = styled(AccordionDetails)(() => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function AppSidebarContent(props) {
+export default function AppSidebarFolder(props) {
   const { isCollapsed, data, tab, subTab, isAdd, isStatus } = props;
   const getStatusColor = (status) => {
     switch (status) {
@@ -126,7 +128,10 @@ export default function AppSidebarContent(props) {
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Typography>
+                  <FolderIcon
+                    sx={{ color: '#FFC10A', width: 56, height: 50 }}
+                  />
+                  <Typography sx={{ pl: '9px', pt: '15px' }}>
                     Agustus-2021({getTotalCount(listData)})
                   </Typography>
                 </AccordionSummarys>
@@ -151,78 +156,64 @@ export default function AppSidebarContent(props) {
                               <Grid container spacing={2}>
                                 <Grid item xs={2}>
                                   <Stack alignItems='center'>
-                                    <Avatar
-                                      alt={`Avatar ${listIndex}`}
-                                      src={item.avatarSrc}
-                                      sx={{ width: 56, height: 56 }}
+                                    <InsertDriveFileIcon
+                                      sx={{
+                                        width: 40,
+                                        height: 46,
+                                        color: '#F4CACA',
+                                      }}
                                     />
-                                    {item.priority === 'Tinggi' && (
-                                      <Tooltip title='Tinggi'>
-                                        <IconButton color='error'>
-                                          <AlertCircle />
-                                        </IconButton>
-                                      </Tooltip>
-                                    )}
                                   </Stack>
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Grid container>
-                                    <Grid item xs={8}>
-                                      <Badge
-                                        badgeContent={item.messageCount}
-                                        color='primary'
-                                      >
-                                        <Typography
-                                          variant='body1'
-                                          color='text.primary'
-                                          sx={{
-                                            fontWeight:
-                                              item.status === 'Unread' ||
-                                              item.status === 'Disposisi'
-                                                ? Fonts.BOLD
-                                                : Fonts.LIGHT,
-                                          }}
-                                        >
-                                          {item.primary}
-                                        </Typography>
-                                      </Badge>
-                                    </Grid>
-                                    <Grid item xs={4} textAlign='right'>
-                                      <Typography
-                                        variant='body2'
-                                        color='text.primary'
-                                        sx={{
-                                          fontWeight:
-                                            item.status === 'Unread' ||
-                                            item.status === 'Disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
-                                      >
-                                        {item.date}
-                                      </Typography>
-                                    </Grid>
                                     <Grid item xs={12}>
                                       <Typography
-                                        sx={{
-                                          display: 'inline',
-                                          fontWeight:
-                                            item.status === 'Unread' ||
-                                            item.status === 'Disposisi'
-                                              ? Fonts.BOLD
-                                              : Fonts.LIGHT,
-                                        }}
-                                        component='span'
-                                        variant='body2'
+                                        variant='body1'
+                                        color='text.primary'
+                                      >
+                                        {item.primary}
+                                      </Typography>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        variant='body1'
                                         color='text.primary'
                                       >
                                         {item.secondary}
                                       </Typography>
                                     </Grid>
-                                    <AppSidebarFooter
-                                      isStatus={isStatus}
-                                      item={item}
-                                    />
+                                    <Stack direction='row' spacing={4} mt='4px'>
+                                      <Typography
+                                        fontSize='12px'
+                                        color='text.primary'
+                                        sx={{ fontWeight: Fonts.BOLD }}
+                                      >
+                                        Surat Masuk
+                                      </Typography>
+                                      <Stack
+                                        direction='row'
+                                        spacing={29}
+                                        xs={4}
+                                        alignItems='flex-end'
+                                        justifyContent='space-between'
+                                      >
+                                        <img
+                                          src={inboxIcon}
+                                          alt='Inbox Icon'
+                                          height='10px'
+                                          width='15px'
+                                        />
+
+                                        <Typography
+                                          fontSize='12px'
+                                          color='text.primary'
+                                        >
+                                          {item.date}
+                                        </Typography>
+                                      </Stack>
+                                    </Stack>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -243,7 +234,7 @@ export default function AppSidebarContent(props) {
   );
 }
 
-AppSidebarContent.propTypes = {
+AppSidebarFolder.propTypes = {
   isCollapsed: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.array),
   tab: PropTypes.string,

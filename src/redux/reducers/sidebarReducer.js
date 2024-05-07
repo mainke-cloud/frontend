@@ -12,6 +12,7 @@ const initialState = {
     'Draft',
     'Komposer',
     'Template',
+    'Folder',
   ],
   selectedSidebarName: '', // Menambahkan properti baru untuk menyimpan nama sidebar yang dipilih
 };

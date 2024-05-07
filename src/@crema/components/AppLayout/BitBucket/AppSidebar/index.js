@@ -9,6 +9,7 @@ import MyDisposisiSidebar from './Disposisi/DisposisiSaya';
 import TodoDisposisi from './Disposisi/Todo';
 import LetterInDisposisi from './Surat/LetterInDisposisi';
 import LetterOutDisposisi from './Surat/LetterOutDisposisi';
+import Folder from './Folder/Folder';
 import ScannerDrafDisposisi from './ScanSurat/ScannerDrafDisposisi';
 import ScannerLogScanDisposisi from './ScanSurat/ScannerLogScanDisposisi';
 
@@ -58,6 +59,8 @@ const AppSidebar = (props) => {
         return <Draft isCollapsed={isCollapsed} />;
       case 'Komposer':
         return <Komposer isCollapsed={isCollapsed} />;
+      case 'Folder':
+        return <Folder isCollapsed={isCollapsed} />;
       case 'Template':
         return <Template isCollapsed={isCollapsed} />;
       default:
