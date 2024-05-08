@@ -18,41 +18,53 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LabelInput from '@crema/components/LabelInput';
 import TextFieldDate from '../TextFieldDate/TextFieldDate';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 
 const perihal = [
   {
-    value: 'Pilihan 1',
-    label: 'Pilihan 1',
+    value: '1',
+    label: '',
   },
   {
-    value: 'Pilihan 2',
-    label: 'Pilihan 2',
+    value: '2',
+    label: '',
   },
   {
-    value: 'Pilihan 3',
-    label: 'Pilihan 3',
+    value: '3',
+    label: '',
+  },
+  {
+    value: '4',
+    label: '',
+  },
+];
+
+const prioritas = [
+  {
+    value: '1',
+    label: 'Normal',
+  },
+  {
+    value: '2',
+    label: 'Segera',
+  },
+];
+
+const jenisSurat = [
+  {
+    value: '1',
+    label: 'Biasa',
+  },
+  {
+    value: '2',
+    label: 'Rhs',
+  },
+  {
+    value: '3',
+    label: 'Rhs-Prib',
   },
 ];
 
 const SuratDelegasi_1 = ({ handleNext }) => {
-  const formik = useFormik({
-    initialValues: {
-      perihal: '',
-    },
-    onSubmit: handleNext,
-    validationSchema: yup.object().shape({
-      perihal: yup.string().required('Kolom ini wajib diisi'),
-    }),
-  });
-
-  const handleForm = (e) => {
-    const { target } = e;
-    formik.setFieldValue(target.name, target.value);
-    console.log(formik.values);
-  };
-
   const [isComposeMail, setComposeMail] = React.useState(false);
   const [formData, setFormData] = useState({
     tanggalSurat: null,
@@ -100,21 +112,8 @@ const SuratDelegasi_1 = ({ handleNext }) => {
           id='outlined-select-currency'
           select
           fullWidth
-          onChange={handleForm}
-          name='perihal'
-          error={formik.errors.perihal}
-        >
-          {perihal.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        {formik.touched.perihal && formik.errors.perihal && (
-          <Typography variant='body1' color='error'>
-            {formik.errors.perihal}
-          </Typography>
-        )}
+          defaultValue='1'
+        ></TextField>
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
@@ -146,7 +145,7 @@ const SuratDelegasi_1 = ({ handleNext }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={formik.handleSubmit}
+            onClick={handleNext}
           >
             Selanjutnya (Pengirim)
           </Button>
