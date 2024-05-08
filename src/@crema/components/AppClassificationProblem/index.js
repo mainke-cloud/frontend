@@ -78,6 +78,7 @@ const ClassificationProblem = (props) => {
   const handleChangeAccordion = (panel) => (event, isExpanded) => {
     setExpanded({ ...expanded, [panel]: isExpanded });
   };
+
   return (
     <Modal
       open={isClassificationProblem}
@@ -144,6 +145,8 @@ const ClassificationProblem = (props) => {
                 <StyledAccordion
                   key={item.id}
                   disabled={item.code.length === 0}
+                  expanded={expanded[item.id]}
+                  onChange={handleChangeAccordion(item.id)}
                 >
                   <AccordionSummarys>
                     <Stack alignItems='start'>
@@ -158,72 +161,129 @@ const ClassificationProblem = (props) => {
                   </AccordionSummarys>
                   <AccordionDetail sx={{ paddingLeft: 4 }}>
                     {item.code.map((codeItem) => (
-                      <StyledAccordion key={`${item.id}-${codeItem.id}`}>
-                        <AccordionSummarys
-                          onClick={
-                            codeItem.code.length === 0
-                              ? () => handleSelectItem(codeItem)
-                              : null
-                          }
-                        >
-                          <Stack alignItems='start'>
-                            <Typography>{codeItem.name}</Typography>
-                            <Typography
-                              variant='caption'
-                              sx={{ ml: 2, color: 'text.secondary' }}
-                            >
-                              {codeItem.desc}
-                            </Typography>
-                          </Stack>
+                      <StyledAccordion
+                        key={`${item.id}-${codeItem.id}`}
+                        expanded={expanded[`${item.id}-${codeItem.id}`]}
+                        onChange={handleChangeAccordion(
+                          `${item.id}-${codeItem.id}`,
+                        )}
+                      >
+                        <AccordionSummarys>
+                          {codeItem.code.length === 0 ? (
+                            <Button onClick={() => handleSelectItem(codeItem)}>
+                              <Stack alignItems='start'>
+                                <Typography>{codeItem.name}</Typography>
+                                <Typography
+                                  variant='caption'
+                                  sx={{ ml: 2, color: 'text.secondary' }}
+                                >
+                                  {codeItem.desc}
+                                </Typography>
+                              </Stack>
+                            </Button>
+                          ) : (
+                            <Stack alignItems='start'>
+                              <Typography>{codeItem.name}</Typography>
+                              <Typography
+                                variant='caption'
+                                sx={{ ml: 2, color: 'text.secondary' }}
+                              >
+                                {codeItem.desc}
+                              </Typography>
+                            </Stack>
+                          )}
                         </AccordionSummarys>
                         <AccordionDetail sx={{ paddingLeft: 8 }}>
                           {codeItem.code.map((code1Item) => (
                             <StyledAccordion
                               key={`${item.id}-${codeItem.id}-${code1Item.id}`}
+                              expanded={
+                                expanded[
+                                  `${item.id}-${codeItem.id}-${code1Item.id}`
+                                ]
+                              }
+                              onChange={handleChangeAccordion(
+                                `${item.id}-${codeItem.id}-${code1Item.id}`,
+                              )}
                             >
-                              <AccordionSummarys
-                                onClick={
-                                  code1Item.code.length === 0
-                                    ? () => handleSelectItem(code1Item)
-                                    : null
-                                }
-                              >
-                                <Stack alignItems='start'>
-                                  <Typography>{code1Item.name}</Typography>
-                                  <Typography
-                                    variant='caption'
-                                    sx={{ ml: 2, color: 'text.secondary' }}
+                              <AccordionSummarys>
+                                {code1Item.code.length === 0 ? (
+                                  <Button
+                                    onClick={() => handleSelectItem(code1Item)}
                                   >
-                                    {code1Item.desc}
-                                  </Typography>
-                                </Stack>
+                                    <Stack alignItems='start'>
+                                      <Typography>{code1Item.name}</Typography>
+                                      <Typography
+                                        variant='caption'
+                                        sx={{ ml: 2, color: 'text.secondary' }}
+                                      >
+                                        {code1Item.desc}
+                                      </Typography>
+                                    </Stack>
+                                  </Button>
+                                ) : (
+                                  <Stack alignItems='start'>
+                                    <Typography>{code1Item.name}</Typography>
+                                    <Typography
+                                      variant='caption'
+                                      sx={{ ml: 2, color: 'text.secondary' }}
+                                    >
+                                      {code1Item.desc}
+                                    </Typography>
+                                  </Stack>
+                                )}
                               </AccordionSummarys>
                               <AccordionDetail sx={{ paddingLeft: 12 }}>
                                 {code1Item.code.map((code2Item) => (
                                   <StyledAccordion
                                     key={`${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`}
+                                    expanded={
+                                      expanded[
+                                        `${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`
+                                      ]
+                                    }
+                                    onChange={handleChangeAccordion(
+                                      `${item.id}-${codeItem.id}-${code1Item.id}-${code2Item.id}`,
+                                    )}
                                   >
-                                    <AccordionSummarys
-                                      onClick={
-                                        code2Item.code.length === 0
-                                          ? () => handleSelectItem(code2Item)
-                                          : null
-                                      }
-                                    >
-                                      <Stack alignItems='start'>
-                                        <Typography>
-                                          {code2Item.name}
-                                        </Typography>
-                                        <Typography
-                                          variant='caption'
-                                          sx={{
-                                            ml: 2,
-                                            color: 'text.secondary',
-                                          }}
+                                    <AccordionSummarys>
+                                      {code2Item.code.length === 0 ? (
+                                        <Button
+                                          onClick={() =>
+                                            handleSelectItem(code2Item)
+                                          }
                                         >
-                                          {code2Item.desc}
-                                        </Typography>
-                                      </Stack>
+                                          <Stack alignItems='start'>
+                                            <Typography>
+                                              {code2Item.name}
+                                            </Typography>
+                                            <Typography
+                                              variant='caption'
+                                              sx={{
+                                                ml: 2,
+                                                color: 'text.secondary',
+                                              }}
+                                            >
+                                              {code2Item.desc}
+                                            </Typography>
+                                          </Stack>
+                                        </Button>
+                                      ) : (
+                                        <Stack alignItems='start'>
+                                          <Typography>
+                                            {code2Item.name}
+                                          </Typography>
+                                          <Typography
+                                            variant='caption'
+                                            sx={{
+                                              ml: 2,
+                                              color: 'text.secondary',
+                                            }}
+                                          >
+                                            {code2Item.desc}
+                                          </Typography>
+                                        </Stack>
+                                      )}
                                     </AccordionSummarys>
                                   </StyledAccordion>
                                 ))}
