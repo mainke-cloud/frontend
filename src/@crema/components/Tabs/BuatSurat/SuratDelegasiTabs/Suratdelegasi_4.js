@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import DropZoneFile from '../DropZoneFile';
+import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
 
 const style = {
@@ -15,32 +15,14 @@ const style = {
   borderRadius: '8px',
   justifyContent: 'center',
   alignItems: 'center',
+  height: '30vh',
 };
-import { useSelector} from 'react-redux';
-const SuratInternal_5 = ({ handlePrev }) => {
-  const [open, setOpen] = React.useState(false);
-  const info = useSelector((state) => state.surat);
-  const penerima = useSelector((state) => [
-    state.addressbook.kepada,
-    state.addressbook.tembusan,
-  ]);
-  const pengirim = useSelector((state) => state.addressbook.pengirim);
-  const pemeriksa = useSelector((state) => [
-    state.addressbook.pemeriksa,
-    state.addressbook.pemohon,
-  ]);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
-  const combinedData = {
-    info: info,
-    penerima: penerima,
-    pengirim: pengirim,
-    pemeriksa: pemeriksa,
-  };
 
-  console.log(combinedData);
+const SuratDelegasi_4 = ({ handlePrev }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -97,7 +79,7 @@ const SuratInternal_5 = ({ handlePrev }) => {
             }}
             onClick={handleOpen}
           >
-            Kirim
+            Selesai
           </Button>
 
           <Modal
@@ -131,7 +113,7 @@ const SuratInternal_5 = ({ handlePrev }) => {
 
                 <Button
                   variant='contained'
-                  // onClick={handleSubmit}
+                  onClick={handleNext}
                   sx={{
                     bgcolor: '#52BD94',
                     borderRadius: '25px',
@@ -153,9 +135,9 @@ const SuratInternal_5 = ({ handlePrev }) => {
   );
 };
 
-SuratInternal_5.propTypes = {
+SuratDelegasi_4.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
 };
 
-export default SuratInternal_5;
+export default SuratDelegasi_4;
