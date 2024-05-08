@@ -8,14 +8,12 @@ import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
-import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import SuratUndangan_2 from '@crema/components/Tabs/BuatSurat/SuratUndangan_2';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 
 const SuratUndangan = () => {
-  const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -31,6 +29,18 @@ const SuratUndangan = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
+  const handleChangeForm = (formData) => {
+    setFormData(formData);
+  };
+
   const step = [
     'Info',
     'Jadwal',
@@ -41,7 +51,11 @@ const SuratUndangan = () => {
   ];
 
   const steps = [
-    <SuratInternal_1 key={1} handleNext={handleNext} />,
+    <SuratInternal_1
+      key={1}
+      handleNext={handleNext}
+      onStateChange={handleChangeForm}
+    />,
     <SuratUndangan_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_2 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_3 key={4} handleNext={handleNext} handlePrev={handlePrev} />,

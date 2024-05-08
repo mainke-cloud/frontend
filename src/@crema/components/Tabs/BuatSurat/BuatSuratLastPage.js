@@ -5,7 +5,10 @@ import BuatSuratAlert from '@crema/components/Tabs/BuatSurat/BuatSuratAlert/Buat
 const BuatSuratLastPage = () => {
   return (
     <div>
-      <BuatSuratAlert />
+      <BuatSuratAlert
+        title={'Berhasil'}
+        desc={'Surat berhasil disubmit kepada pemeriksa 1 Adhi Prasetio/740049'}
+      />
       <img
         src={PreviewSuratImage}
         alt='surat'

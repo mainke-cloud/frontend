@@ -1,22 +1,13 @@
 import {
   Box,
   Button,
-  Grid,
-  Icon,
-  IconButton,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import { GrAttachment } from 'react-icons/gr';
-import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LabelInput from '@crema/components/LabelInput';
 import TextFieldDate from '../TextFieldDate/TextFieldDate';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -51,26 +42,6 @@ const SuratDelegasi_1 = ({ handleNext }) => {
     const { target } = e;
     formik.setFieldValue(target.name, target.value);
     console.log(formik.values);
-  };
-
-  const [isComposeMail, setComposeMail] = React.useState(false);
-  const [formData, setFormData] = useState({
-    tanggalSurat: null,
-  });
-
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
-
-  const handleTanggal = (date) => {
-    setFormData({
-      ...formData,
-      tanggalSurat: date,
-    });
   };
 
   return (

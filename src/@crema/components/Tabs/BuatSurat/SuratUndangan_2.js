@@ -1,33 +1,17 @@
-import React, { useState } from 'react';
-import { MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-import LabelInput from '@crema/components/LabelInput';
 import TextFieldTime from './TextFieldTime/TextFieldTime';
 import TextFieldDate from './TextFieldDate/TextFieldDate';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import { users } from '@crema/services/dummy/user/user';
 
 const SuratUndangan_2 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
-  const [formData, setFormData] = useState({
-    tanggalSurat: null,
-  });
-
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
 
   const onCloseComposeMail = () => {
     setComposeMail(false);
-  };
-
-  const handleTanggal = (date) => {
-    setFormData({
-      ...formData,
-      tanggalSurat: date,
-    });
   };
 
   return (

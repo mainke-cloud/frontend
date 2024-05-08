@@ -5,7 +5,6 @@ import SuratDelegasi_2 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/
 import SuratDelegasi_3 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_3';
 import SuratDelegasi_4 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_4';
 import { Box, Grid } from '@mui/material';
-import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
 import '../../styles/button.css';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
@@ -13,7 +12,6 @@ import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPag
 import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 
 const SuratDelegasi = () => {
-  const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -27,6 +25,18 @@ const SuratDelegasi = () => {
 
   const handlePrev = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
+  const handleChangeForm = (formData) => {
+    setFormData(formData);
   };
 
   const step = ['Info', 'Penerima', 'Pengirim', 'Lainnya'];
