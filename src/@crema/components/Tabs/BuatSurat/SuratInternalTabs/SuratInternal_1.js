@@ -3,8 +3,6 @@ import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 
 const perihal = [
   {
@@ -86,9 +84,7 @@ const SuratInternal_1 = ({ handleNext }) => {
           id='outlined-select-currency'
           select
           fullWidth
-          onChange={handleForm}
-          name='perihal'
-          error={formik.errors.perihal}
+          defaultValue='1'
         >
           {perihal.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -98,6 +94,7 @@ const SuratInternal_1 = ({ handleNext }) => {
         </TextField>
 
         <FormAddressBook text='Klasifikasi Masalah' data={datass} />
+
         <Typography
           variant='body1'
           sx={{
@@ -112,9 +109,6 @@ const SuratInternal_1 = ({ handleNext }) => {
           select
           fullWidth
           defaultValue='1'
-          onChange={handleForm}
-          name='prioritas'
-          {...formik.getFieldProps('prioritas')}
         >
           {prioritas.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -128,9 +122,6 @@ const SuratInternal_1 = ({ handleNext }) => {
           select
           fullWidth
           defaultValue='1'
-          onChange={handleForm}
-          name='jenis'
-          {...formik.getFieldProps('jenis')}
         >
           {jenisSurat.map((option) => (
             <MenuItem key={option.value} value={option.value}>
