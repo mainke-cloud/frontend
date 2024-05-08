@@ -72,9 +72,10 @@ const BuatScanSurat = () => {
     console.log('a');
     setValue(index);
   };
+  console.log(formData);
 
   const ScanSurat = () => {
-    const kepada = useSelector((state) => state.addressbook.kepada);
+  const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {

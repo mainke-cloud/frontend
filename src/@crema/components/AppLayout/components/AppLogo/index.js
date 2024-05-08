@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useThemeContext } from '@crema/context/AppContextProvider/ThemeContextProvider';
 import { alpha } from '@mui/material/styles';
-import { ReactComponent as Logo } from '../../../../../assets/icon/logo.svg';
+import { ReactComponent as Logo } from '../../../../../assets/icon/Logo Coofis.svg';
 import { ReactComponent as LogoText } from '../../../../../assets/icon/logo_text.svg';
 
 const AppLogo = () => {

@@ -38,7 +38,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^5.0.1",
     "apexcharts": "^3.41.0",
-    "axios": "^1.4.0",
+    "axios": "^1.6.8",
     "axios-mock-adapter": "^1.21.5",
     "clsx": "^2.0.0",
     "connected-react-router": "^6.9.3",
