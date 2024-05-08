@@ -3,11 +3,21 @@ import React from 'react';
 import AppScrollbar from '../../../AppScrollbar';
 import { Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import FormAddressBook from '../../FormAddressBook';
 const SuratInternal_2 = ({ handleNext, handlePrev }) => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
+
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
+
+  let datasss = tembusan[0];
+  if (!datasss || !Array.isArray(datasss)) {
+    datasss = [];
+  }
+
   return (
     <>
       <Stack
@@ -19,7 +29,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={kepada} />
+        <FormAddressBook text='Kepada' data={datass} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -50,17 +60,17 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               overflow: 'auto',
             }}
           >
-            {kepada?.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
+            {datass.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
           </AppScrollbar>
         </Box>
 
-        <FormAddressBook text='Tembusan' data={tembusan} />
+        <FormAddressBook text='Tembusan' data={datasss} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -91,13 +101,13 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               overflow: 'auto',
             }}
           >
-            {tembusan.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
+            {datasss.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))}
           </AppScrollbar>
         </Box>
 
@@ -129,11 +139,6 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           </Button>
         </Stack>
       </Stack>
-
-      {/* <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      /> */}
     </>
   );
 };
