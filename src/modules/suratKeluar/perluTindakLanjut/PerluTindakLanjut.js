@@ -10,12 +10,12 @@ import TabContentPengirim from '../../../@crema/components/Tabs/SuratKeluar/TabC
 import TabContentPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentPenyetuju';
 import TabContentLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentLainnya';
 import Komentar from '../../../@crema/components/Tabs/SuratKeluar/Komentar';
+import TabContentEditInfo from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditInfo';
 import TabContentEditPenerima from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenerima';
 import TabContentEditPengirim from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPengirim';
 import KomentarEdit from '../../../@crema/components/Tabs/SuratKeluar/KomentarEdit';
 import TabContentEditPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenyetuju';
 import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditLainnya';
-import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import MiniTab from '@crema/components/MiniTab';
 import { useSelector } from 'react-redux';
@@ -31,6 +31,7 @@ const PerluTindakLanjut = () => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
+
  
   return (
     <>
@@ -46,7 +47,15 @@ const PerluTindakLanjut = () => {
                     tabs={[
                       {
                         name: 'Info',
-                        content: <>{isEdit ? '' : <TabContentInfo />}</>,
+                        content: (
+                          <>
+                            {isEdit ? (
+                              <TabContentEditInfo />
+                            ) : (
+                              <TabContentInfo />
+                            )}
+                          </>
+                        ),
                       },
                       {
                         name: 'Penerima',
@@ -124,7 +133,11 @@ const PerluTindakLanjut = () => {
             mb: '30px',
           }}
         >
-          <PdfCardEdit kepada={kepada} tembusan={tembusan} pengirim={pengirim}/>
+          <PdfCardEdit
+            kepada={kepada}
+            tembusan={tembusan}
+            pengirim={pengirim}
+          />
         </Stack>
       </Box>
     </>

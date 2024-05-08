@@ -1,10 +1,5 @@
 import React from 'react';
-import { Box, Grid, Stack } from '@mui/material';
-
-import pdf from '../../../assets/icon/pdf.svg';
-import CustomMoreMenu from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreMenu';
-import CustomMoreItem from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreItem';
-import AppScrollbar from '@crema/components/AppScrollbar';
+import { Box, Stack } from '@mui/material';
 import ListFile from '@crema/components/Tabs/ListFile';
 import PropTypes from 'prop-types';
 

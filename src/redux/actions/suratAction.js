@@ -5,3 +5,10 @@ export const addInfo = (formData) => {
     payload: formData
   };
 };
+
+export const addLainnya = (props) => {
+return{
+  type:'ADD_LAINNYA',
+  payload: props,
+}
+}

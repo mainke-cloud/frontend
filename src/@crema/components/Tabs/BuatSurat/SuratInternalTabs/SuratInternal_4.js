@@ -1,23 +1,11 @@
 import React from 'react';
-import { Link, Stack, Typography } from '@mui/material';
-import AppScrollbar from '../../AppScrollbar';
-import { Box, Button } from '@mui/material';
-import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
-import ComposeMail from '@crema/components/AppAddress';
+import { Stack, Button} from '@mui/material';
 import PropTypes from 'prop-types';
-import FormAddressBook from '../FormAddressBook';
+import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
 const SuratInternal_4 = ({ handleNext, handlePrev }) => {
-  const [isComposeMail, setComposeMail] = React.useState(false);
   const pemeriksa = useSelector((state) => state.addressbook.pemeriksa);
   const pemohon = useSelector((state) => state.addressbook.pemohon);
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
 
   return (
     <>

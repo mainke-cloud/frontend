@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Grid, Stack, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import HeaderDetail from '@crema/components/HeaderDetail';
-import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import PdfVector from '../../../assets/vector/PdfVector.svg';
 import { Menu, Grid as IconGrid } from 'feather-icons-react';
-import MiniTab from '@crema/components/MiniTab';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../../redux/actions/tabAction';
 

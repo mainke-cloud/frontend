@@ -6,7 +6,6 @@ import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
-import { useSelector } from 'react-redux';
 
 const FormAddressBook = (props) => {
   const { text, data } = props;

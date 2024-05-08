@@ -93,6 +93,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "^5.0.1",
     "react-share": "^4.4.1",
+    "react-signature-canvas": "^1.0.6",
     "react-simple-maps": "^3.0.0",
     "react-slick": "^0.29.0",
     "react-style-proptype": "^3.2.2",

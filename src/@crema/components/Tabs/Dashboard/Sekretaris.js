@@ -1,8 +1,7 @@
 import React from "react";
 import { Grid, Stack, Typography, Box, Badge, Avatar, Divider } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types'; // Import PropTypes
-import { useState } from "react";
+import PropTypes from 'prop-types';
 
 const StyledBadgeSekretaris = styled(Badge)(() => ({
     '& .MuiBadge-badge': {
@@ -12,11 +11,6 @@ const StyledBadgeSekretaris = styled(Badge)(() => ({
   }));
 
 const Sekretaris = ({ Profile, JobDesk, ID }) => {
-    const [isActive, setIsActive] = useState(true);
-
-    const handleClick = () => {
-        setIsActive(!isActive);
-    };
     return(
         <Grid container sx={{margin: 3}}>
             <Grid item xs={3}>

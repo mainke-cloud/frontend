@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-import { users } from '../../../services/dummy/user/user';
+import { users } from '../../../../services/dummy/user/user';
 import { useSelector } from 'react-redux';
 const SuratInternal_3 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
