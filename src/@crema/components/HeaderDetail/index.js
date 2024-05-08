@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Divider,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeTab } from '../../../redux/actions/tabAction';
@@ -28,7 +22,13 @@ import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { BsTranslate } from 'react-icons/bs';
 import { addTab } from '../../../redux/actions/tabAction';
 import AppTooltip from '../AppTooltip';
-
+import MasukanFolder from '../../../assets/icon/MasukanFolder.svg';
+import TemplateSurat from '../../../assets/icon/TemplateSurat.svg';
+import Copy2Paper from '../../../assets/icon/copy.svg';
+import SignIcon from '../../../assets/icon/TandaTangan.svg';
+import FormDialog from '../Tabs/FormDialog';
+import FormDialogOtp from '../Tabs/FormDialogOtp';
+import NotifDialogSign from '../Tabs/NotifDialogSign';
 const HeaderDetail = ({
   nama,
   send,
@@ -49,6 +49,10 @@ const HeaderDetail = ({
   disposisi,
   batas,
   folderup,
+  masukan_folder,
+  template_surat,
+  copy3,
+  sign,
 }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
@@ -70,6 +74,41 @@ const HeaderDetail = ({
   const handleBuatDisposisi = (name) => {
     dispatch(addTab(tabId, tabs, name));
   };
+
+  const [openformsign, setOpenFormSign] = React.useState(false);
+  const [openformotp, setOpenFormOtp] = React.useState(false);
+  const [opennotif, setOpenNotif] = React.useState(false);
+  const handleGetEmail = (email) => {
+    console.log(email);
+    if (email) {
+      handleOpenOtp();
+    }
+  };
+  const handleGetOtp = (otp) => {
+    console.log(otp);
+    if (otp) {
+      handleOpenNotif();
+    }
+  };
+  const handleOpenSign = () => {
+    setOpenFormSign(true);
+  };
+  const handleCloseSign = () => {
+    setOpenFormSign(false);
+  };
+  const handleOpenOtp = () => {
+    setOpenFormOtp(true);
+  };
+  const handleCloseOtp = () => {
+    setOpenFormOtp(false);
+  };
+  const handleOpenNotif = () => {
+    setOpenNotif(true);
+  };
+  const handleCloseNotif = () => {
+    setOpenNotif(false);
+  };
+
   return (
     <>
       <Stack
@@ -239,7 +278,7 @@ const HeaderDetail = ({
                 </AppTooltip>
               )}
               {disposisi && (
-                <AppTooltip title='Kirim' placement='bottom'>
+                <AppTooltip title='Disposisi' placement='bottom'>
                   <IconButton
                     onClick={() => handleBuatDisposisi('BuatDisposisi')}
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
@@ -251,7 +290,7 @@ const HeaderDetail = ({
                 </AppTooltip>
               )}
               {forward && (
-                <AppTooltip title='Kirim' placement='bottom'>
+                <AppTooltip title='Teruskan' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                   >
@@ -260,6 +299,22 @@ const HeaderDetail = ({
                     />
                   </IconButton>
                 </AppTooltip>
+              )}
+              {sign && (
+                <>
+                  <AppTooltip title='Tanda Tangan' placement='bottom'>
+                    <IconButton
+                      sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                      onClick={handleOpenSign}
+                    >
+                      <img
+                        src={SignIcon}
+                        alt='SignIcon'
+                        style={{ width: '28px', height: '28px' }}
+                      />
+                    </IconButton>
+                  </AppTooltip>
+                </>
               )}
               {printer && (
                 <AppTooltip title='Print Surat' placement='bottom'>
@@ -300,6 +355,45 @@ const HeaderDetail = ({
                   </IconButton>
                 </AppTooltip>
               )}
+              {copy3 && (
+                <AppTooltip title='Salin' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <img
+                      src={Copy2Paper}
+                      alt='Copy2Paper'
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {template_surat && (
+                <AppTooltip title='Template Surat' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <img
+                      src={TemplateSurat}
+                      alt='TemplateSurat'
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {masukan_folder && (
+                <AppTooltip title='Masukan ke Folder' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <img
+                      src={MasukanFolder}
+                      alt='MasukanFolder'
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
               <AppTooltip title='Tutup Tab' placement='bottom'>
                 <IconButton
                   sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
@@ -313,6 +407,29 @@ const HeaderDetail = ({
         </Stack>
       </Stack>
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
+      {openformsign && (
+        <>
+          <FormDialog
+            open={openformsign}
+            handleCloseSign={handleCloseSign}
+            handleSendEmail={handleGetEmail}
+          />
+        </>
+      )}
+      {openformotp && (
+        <>
+          <FormDialogOtp
+            open={openformotp}
+            handleClose={handleCloseOtp}
+            handleSendOtp={handleGetOtp}
+          />
+        </>
+      )}
+      {opennotif && (
+        <>
+          <NotifDialogSign open={opennotif} handleClose={handleCloseNotif} />
+        </>
+      )}
     </>
   );
 };
@@ -335,6 +452,10 @@ HeaderDetail.propTypes = {
   clipboard: PropTypes.bool,
   forward: PropTypes.bool,
   batas: PropTypes.bool,
+  copy3: PropTypes.bool,
+  sign: PropTypes.bool,
+  masukan_folder: PropTypes.bool,
+  template_surat: PropTypes.bool,
   folderup: PropTypes.bool,
   IsEditing: PropTypes.bool,
 };

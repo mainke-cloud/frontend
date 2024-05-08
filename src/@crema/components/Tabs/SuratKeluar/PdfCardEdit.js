@@ -59,9 +59,9 @@ const PdfCardEdit = ({ kepada, tembusan, pengirim, info }) => {
       >
         {}
       </Typography>
-      <br />
-      <br />
-      <br />
+     <Stack>
+      
+     </Stack>
       <Typography
         variant='subtitle1'
         sx={{
