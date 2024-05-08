@@ -1,14 +1,13 @@
-import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
-import { users } from '../../../services/dummy/user/user';
-import { useSelector } from 'react-redux';
+import { users } from '@crema/services/dummy/user/user';
+
 const SuratInternal_3 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
-  const pengirim = useSelector((state) => state.addressbook.pengirim);
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -49,8 +48,9 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
+          disabled
           fullWidth
-          value={`${pengirim.jabatan}`}
+          defaultValue='...'
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -82,11 +82,12 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
+          disabled
           fullWidth
-          value={`${pengirim.nama}`}
+          defaultValue='...'
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail()}>
+              <IconButton>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -97,26 +98,26 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField fullWidth value={`${pengirim.divisi}`} />
+        <TextField disabled fullWidth defaultValue='Divisi...' />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField value={`${pengirim.nikl}`} />
+            <TextField disabled defaultValue='NIK...' />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField value={`${pengirim.kode_departemen}`} />
+            <TextField disabled defaultValue='Kode Departemen...' />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField fullWidth value={`${pengirim.departemen}`} />
+        <TextField disabled fullWidth defaultValue='Departemen...' />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField fullWidth value={`${pengirim.kota}`} />
+        <TextField disabled fullWidth defaultValue='Kota...' />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
@@ -151,8 +152,6 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
         datas={users}
-        title='Pengirim'
-        type='single'
       />
     </>
   );

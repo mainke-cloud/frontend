@@ -43,13 +43,11 @@ import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
 import {
-  addDelegasi,
   addKepada,
+  addTembusan,
+  addKlasifikasi,
   addPemeriksa,
   addPemohon,
-  addPengirim,
-  addSekretaris,
-  addTembusan,
 } from '../../../redux/actions/addressbookAction';
 
 const ComposeMail = (props) => {
@@ -164,39 +162,20 @@ const ComposeMail = (props) => {
       (item) => item !== indexToRemove,
     );
     setSelectedRow(updatedSelectedRow);
-
-    if (type !== 'single') {
-      setSelectedRowIndices(updatedSelectedRow);
-    } else {
-      setSingleData(null);
-    }
-
-    if (updatedSelectedRow.length > 0) {
-      setPreviewData(datas[updatedSelectedRow[updatedSelectedRow.length - 1]]);
-    } else {
-      setPreviewData(null);
-    }
   };
 
-  const handleConfirmation = (Data) => {
-    if (title === 'Kepada') {
-      dispatch(addKepada(Data));
-    } else if (title === 'Tembusan') {
-      dispatch(addTembusan(Data));
-    } else if (title === 'Jabatan') {
-      dispatch(addJabatan(Data));
-    } else if (title === 'Nama') {
-      dispatch(addNama(Data));
-    } else if (title === 'Delegasi') {
-      dispatch(addDelegasi(Data));
-    } else if (title === 'Sekretaris') {
-      dispatch(addSekretaris(Data));
-    } else if (title === 'Pemeriksa') {
-      dispatch(addPemeriksa(Data));
-    } else if (title === 'Pemohon') {
-      dispatch(addPemohon(Data));
+  const handleConfirmation = (movedData) => {
+    if (type === 'Kepada') {
+      dispatch(addKepada(movedData));
+    } else if (type === 'Tembusan') {
+      dispatch(addTembusan(movedData));
+    } else if (type === 'Klasifikasi Masalah') {
+      dispatch(addKlasifikasi(movedData));
+    } else if (type === 'Pemeriksa') {
+      dispatch(addPemeriksa(movedData));
+    } else if (type === 'Pemohon') {
+      dispatch(addPemohon(movedData));
     }
-    onCloseComposeMail();
   };
 
   return (

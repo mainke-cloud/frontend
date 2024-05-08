@@ -17,6 +17,7 @@ import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import Surat_Internal from 'modules/buatSurat/SuratInternal';
+import Surat_External from 'modules/buatSurat/SuratExternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
 import iconSurat from '../../assets/icon/mail.svg';
@@ -71,6 +72,8 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Buat Surat Internal'
             ? iconSurat
+            : type === 'Buat Surat External'
+            ? iconSurat
             : type === 'Buat Surat Undangan'
             ? iconSurat
             : type === 'Buat Surat Delegasi'
@@ -106,6 +109,8 @@ export const addTab = (id, state, type) => {
             <Add_Delegasi />
           ) : type === 'Buat Surat Internal' ? (
             <Surat_Internal />
+          ) : type === 'Buat Surat External' ? (
+            <Surat_External />
           ) : type === 'Buat Surat Undangan' ? (
             <Surat_Undangan />
           ) : type === 'Buat Surat Delegasi' ? (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import DropZoneFile from '../DropZoneFile';
+import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
 
 const style = {
@@ -15,13 +15,33 @@ const style = {
   borderRadius: '8px',
   justifyContent: 'center',
   alignItems: 'center',
+  height: '30vh',
 };
-
-const SuratDelegasi_4 = ({ handlePrev }) => {
+import { useSelector} from 'react-redux';
+const SuratInternal_5 = ({ handlePrev }) => {
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => setOpen(true);
+  const info = useSelector((state) => state.surat);
+  const penerima = useSelector((state) => [
+    state.addressbook.kepada,
+    state.addressbook.tembusan,
+  ]);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
+  const pemeriksa = useSelector((state) => [
+    state.addressbook.pemeriksa,
+    state.addressbook.pemohon,
+  ]);
+  const handleOpen = () => {
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
+  const combinedData = {
+    info: info,
+    penerima: penerima,
+    pengirim: pengirim,
+    pemeriksa: pemeriksa,
+  };
+
+  console.log(combinedData);
 
   return (
     <>
@@ -78,7 +98,7 @@ const SuratDelegasi_4 = ({ handlePrev }) => {
             }}
             onClick={handleOpen}
           >
-            Selesai
+            Kirim
           </Button>
 
           <Modal
@@ -112,7 +132,7 @@ const SuratDelegasi_4 = ({ handlePrev }) => {
 
                 <Button
                   variant='contained'
-                  // onClick={handleSubmit}
+                  onClick={handleNext}
                   sx={{
                     bgcolor: '#52BD94',
                     borderRadius: '25px',
@@ -134,9 +154,9 @@ const SuratDelegasi_4 = ({ handlePrev }) => {
   );
 };
 
-SuratDelegasi_4.propTypes = {
+SuratInternal_5.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
 };
 
-export default SuratDelegasi_4;
+export default SuratInternal_5;

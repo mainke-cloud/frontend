@@ -56,7 +56,64 @@ const initialState = {
       nohp: '',
     },
   ],
-  tembusan: [
+  klasifikasi: [
+    {
+      profil: '',
+      id: '',
+      nama: '',
+      alamat: '',
+      nikg: '',
+      nikl: '',
+      kota: '',
+      organisasi: '',
+      divisi: '',
+      departemen: '',
+      kode_departemen: '',
+      jabatan: '',
+      email: '',
+      pgs: '',
+      nohp: '',
+    },
+  ],
+  pemeriksa: [
+    {
+      profil: '',
+      id: '',
+      nama: '',
+      alamat: '',
+      nikg: '',
+      nikl: '',
+      kota: '',
+      organisasi: '',
+      divisi: '',
+      departemen: '',
+      kode_departemen: '',
+      jabatan: '',
+      email: '',
+      pgs: '',
+      nohp: '',
+    },
+  ],
+  pemohon: [
+    {
+      profil: '',
+      id: '',
+      nama: '',
+      alamat: '',
+      nikg: '',
+      nikl: '',
+      kota: '',
+      organisasi: '',
+      divisi: '',
+      departemen: '',
+      kode_departemen: '',
+      jabatan: '',
+      email: '',
+      pgs: '',
+      nohp: '',
+    },
+  ],
+  pengirim: [
     {
       profil: '',
       id: '',
@@ -170,37 +227,22 @@ const addressbookReducer = (state = initialState, action) => {
     case 'ADD_TEMBUSAN':
       return {
         ...state,
-        tembusan: action.payload,
+        tembusan: [action.payload],
       };
-    case 'ADD_JABATAN':
+    case 'ADD_KLASIFIKASI':
       return {
         ...state,
-        jabatann: action.payload,
-      };
-    case 'ADD_NAMA':
-      return {
-        ...state,
-        namaa: action.payload,
+        klasifikasi: [action.payload],
       };
     case 'ADD_PEMERIKSA':
       return {
         ...state,
-        pemeriksa: action.payload,
+        pemeriksa: [action.payload],
       };
     case 'ADD_PEMOHON':
       return {
         ...state,
-        pemohon: action.payload,
-      };
-    case 'ADD_SEKRETARIS':
-      return {
-        ...state,
-        sekretaris: action.payload,
-      };
-    case 'ADD_DELEGASI':
-      return {
-        ...state,
-        delegasi: action.payload,
+        pemohon: [action.payload],
       };
     default:
       return state;

@@ -1,82 +1,83 @@
-import {
-  Button,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import PropTypes, { string } from 'prop-types';
+import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import FormClassification from '../FormClassification';
-import ClassificationProblem from '@crema/components/AppClassificationProblem';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const perihal = [
   {
-    value: '1',
-    label: '',
+    value: 'Pilihan 1',
+    label: 'Pilihan 1',
   },
   {
-    value: '2',
-    label: '',
+    value: 'Pilihan 2',
+    label: 'Pilihan 2',
   },
   {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
+    value: 'Pilihan 3',
+    label: 'Pilihan 3',
   },
 ];
 
 const prioritas = [
   {
-    value: '1',
+    value: 'Normal',
     label: 'Normal',
   },
   {
-    value: '2',
+    value: 'Segera',
     label: 'Segera',
   },
 ];
 
 const jenisSurat = [
   {
-    value: '1',
+    value: 'Biasa',
     label: 'Biasa',
   },
   {
-    value: '2',
+    value: 'Rhs',
     label: 'Rhs',
   },
   {
-    value: '3',
+    value: 'Rhs-Prib',
     label: 'Rhs-Prib',
   },
 ];
 
-const SuratInternal_1 = ({ handleNext, onStateChange }) => {
-  const kepada = useSelector((state) => state.addressbook.kepada);
-  const [formData, setFormData] = useState({
-    perihal: '',
-    // klasifikasi: '',
-    prioritas: '1',
-    jenis: '1',
-    lampiran: 1,
+const SuratInternal_1 = ({ handleNext }) => {
+  const formik = useFormik({
+    initialValues: {
+      perihal: '',
+      // klasifikasi: '',
+      prioritas: 'Normal',
+      jenis: 'Biasa',
+      lampiran: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      perihal: yup.string().required('Kolom ini wajib diisi'),
+      // klasifikasi: yup.string().required(),
+      // prioritas: yup.string().required('Kolom ini wajib diisi'),
+      // jenis: yup.string().required('Kolom ini wajib diisi'),
+      // lampiran: yup.number().required('Kolom ini wajib diisi'),
+    }),
   });
 
-  let datass = kepada[0];
+  const handleForm = (e) => {
+    const { target } = e;
+    formik.setFieldValue(target.name, target.value);
+    console.log(formik.values);
+  };
+
+  const klasifikasi = useSelector((state) => state.addressbook.klasifikasi);
+
+  let datass = klasifikasi[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
   }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    onStateChange({ ...formData, [name]: value });
-  };
 
   return (
     <>
@@ -100,37 +101,49 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
         >
           Perihal
         </Typography>
+
         <TextField
           id='outlined-select-currency'
+          select
           fullWidth
+          onChange={handleForm}
           name='perihal'
-          value={formData.perihal}
-          onChange={handleChange}
-        />
+          error={formik.errors.perihal}
+        >
+          {perihal.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        {formik.touched.perihal && formik.errors.perihal && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.perihal}
+          </Typography>
+        )}
 
-        <FormClassification text='Klasifikasi Masalah'/>
-
+        <FormAddressBook text='Klasifikasi Masalah' data={datass} />
         <Typography
           variant='body1'
           sx={{
             color: '#5C5E61',
-            // width: '370px',
           }}
         >
           Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
         </Typography>
+
         <Typography variant='h4'>Prioritas Surat</Typography>
         <TextField
           id='outlined-select-currency'
           select
           fullWidth
           defaultValue='1'
+          onChange={handleForm}
           name='prioritas'
-          value={formData.prioritas}
-          onChange={handleChange}
+          {...formik.getFieldProps('prioritas')}
         >
           {prioritas.map((option) => (
-            <MenuItem key={option.value} value={option.label}>
+            <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
@@ -142,12 +155,12 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
           select
           fullWidth
           defaultValue='1'
+          onChange={handleForm}
           name='jenis'
-          value={formData.jenis}
-          onChange={handleChange}
+          {...formik.getFieldProps('jenis')}
         >
           {jenisSurat.map((option) => (
-            <MenuItem key={option.value} value={option.label}>
+            <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
@@ -160,15 +173,15 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
           variant='outlined'
           fullWidth
           type='number'
-          name='lampiran'
-          value={formData.lampiran}
-          onChange={handleChange}
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={handleForm}
+          name='lampiran'
         />
+
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
-           <Button
+          <Button
             variant='contained'
             sx={{
               borderRadius: '12px',
@@ -176,7 +189,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Pengirim)
           </Button>
@@ -188,7 +201,6 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
 
 SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
-  onStateChange: PropTypes.func,
 };
 
 export default SuratInternal_1;
