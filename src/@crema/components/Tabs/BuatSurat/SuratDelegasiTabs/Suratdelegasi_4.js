@@ -18,7 +18,7 @@ const style = {
   height: '30vh',
 };
 
-const SuratDelegasi_4 = ({ handlePrev }) => {
+const SuratDelegasi_4 = ({ handlePrev, handleNext }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);

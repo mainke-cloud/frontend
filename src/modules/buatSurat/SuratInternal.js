@@ -16,7 +16,7 @@ import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPag
 import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 import { handleNextStep } from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 const SuratInternal = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
@@ -38,7 +38,6 @@ const SuratInternal = () => {
       setShowPage(true);
     }
     dispatch(addInfo(formData));
-
   };
   const handleChangeForm = (formData) => {
     setFormData(formData);
@@ -50,7 +49,11 @@ const SuratInternal = () => {
   const step = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
 
   const steps = [
-    <SuratInternal_1 key={1} handleNext={handleNext} onStateChange={handleChangeForm} />,
+    <SuratInternal_1
+      key={1}
+      handleNext={handleNext}
+      onStateChange={handleChangeForm}
+    />,
     <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
@@ -84,12 +87,6 @@ const SuratInternal = () => {
                 <KomentarSection />
               </Grid>
             </Grid>
-
-            <img
-              src={PreviewSuratImage}
-              alt='surat'
-              style={{ paddingTop: '20px', maxWidth: '1305px' }}
-            />
           </>
         )}
       </Box>

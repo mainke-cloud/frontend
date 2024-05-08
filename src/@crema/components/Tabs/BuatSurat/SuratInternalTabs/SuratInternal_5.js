@@ -15,7 +15,6 @@ const style = {
   borderRadius: '8px',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '30vh',
 };
 import { useSelector} from 'react-redux';
 const SuratInternal_5 = ({ handlePrev }) => {
@@ -132,7 +131,7 @@ const SuratInternal_5 = ({ handlePrev }) => {
 
                 <Button
                   variant='contained'
-                  onClick={handleNext}
+                  // onClick={handleSubmit}
                   sx={{
                     bgcolor: '#52BD94',
                     borderRadius: '25px',

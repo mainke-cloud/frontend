@@ -1,23 +1,11 @@
 import React from 'react';
-import { Stack } from '@mui/material';
-import { Button } from '@mui/material';
+import { Stack, Button} from '@mui/material';
 import PropTypes from 'prop-types';
 import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
-
 const SuratInternal_4 = ({ handleNext, handlePrev }) => {
   const pemeriksa = useSelector((state) => state.addressbook.pemeriksa);
   const pemohon = useSelector((state) => state.addressbook.pemohon);
-
-  let datass = pemeriksa[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
-
-  let datasss = pemohon[0];
-  if (!datasss || !Array.isArray(datasss)) {
-    datasss = [];
-  }
 
   return (
     <>
@@ -30,10 +18,8 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Pemeriksa' data={datass} />
-
-        <FormAddressBook text='Pemohon' data={datasss} />
-
+        <FormAddressBook text='Pemeriksa' data={pemeriksa} />
+        <FormAddressBook text='Pemohon' data={pemohon}/>
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
             variant='contained'
@@ -62,6 +48,11 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
           </Button>
         </Stack>
       </Stack>
+
+      {/* <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      /> */}
     </>
   );
 };
