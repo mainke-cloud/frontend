@@ -20,7 +20,7 @@ const DisposisiWrapper = ({ children }) => {
                 width:'fit-content',
                 border: '1px solid #D8D8D8',
                 borderRadius: '100px',
-                marginBottom: '30px',
+                marginBottom: '16px',
             },
             '& .content-styled-tab': {
                 borderRadius: '100px',

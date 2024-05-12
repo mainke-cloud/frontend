@@ -88,7 +88,7 @@ const AppCard2 = ({
           px: 0,
           pt: 0,
           '&:last-of-type': {
-            pb: 0,
+            pb: 9,
           },
           ...contentStyle,
         }}

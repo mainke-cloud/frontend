@@ -16,6 +16,7 @@ const Verifikasi4 = () => {
     // const { email, password } = userData;
     // const valuessss = userData();
     // console.log(valuessss);
+    console.log(userData)
     logInWithEmailAndPassword(userData);
   };
 

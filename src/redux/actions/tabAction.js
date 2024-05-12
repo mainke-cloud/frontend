@@ -17,6 +17,7 @@ import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
 import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
 import Surat_Internal from 'modules/buatSurat/SuratInternal';
+import Surat_External from 'modules/buatSurat/SuratExternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
 import iconSurat from '../../assets/icon/mail.svg';
@@ -72,6 +73,8 @@ export const addTab = (id, state, type) => {
             ? scanIcon
             : type === 'Buat Surat Internal'
             ? iconSurat
+            : type === 'Buat Surat External'
+            ? iconSurat
             : type === 'Buat Surat Undangan'
             ? iconSurat
             : type === 'Buat Surat Delegasi'
@@ -109,6 +112,8 @@ export const addTab = (id, state, type) => {
             <Add_Delegasi />
           ) : type === 'Buat Surat Internal' ? (
             <Surat_Internal />
+          ) : type === 'Buat Surat External' ? (
+            <Surat_External />
           ) : type === 'Buat Surat Undangan' ? (
             <Surat_Undangan />
           ) : type === 'Buat Surat Delegasi' ? (
@@ -139,11 +144,11 @@ export const addTab = (id, state, type) => {
         return;
       }
     }
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
 export const childTab = (id, state, type, data) => {
-  console.log(type);
   return (dispatch) => {
     const isExistingTab = state.find((tab) => {
       switch (type) {
@@ -216,12 +221,6 @@ export const childTab = (id, state, type, data) => {
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
-      // if (type === 'Todo') {
-      //   dispatch({ type: 'UPDATE_TAB_TODO', payload: updateTab });
-      // } else if (type === 'Disposisi') {
-      // } else if (type === 'Log Scan Surat') {
-      //   dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      // } else
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -271,6 +270,7 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -281,6 +281,7 @@ export const activateTab = (tabId, state) => {
       active: tab.id === tabId,
     }));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -310,6 +311,7 @@ export const closeTab = (tabId, state) => {
         ? tabs[newActiveTabIndex].id
         : 'dashboard';
     dispatch(activateTab(newActiveTabId, tabs));
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -317,6 +319,7 @@ export const closeAllTabs = () => {
   return (dispatch) => {
     const tabs = [];
     dispatch({ type: 'CLOSE_ALL_TABS', payload: tabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };
 
@@ -326,5 +329,6 @@ export const reorderTab = (tabId, fromIndex, toIndex, state) => {
     let remainingTabs = state.filter((_, index) => index !== fromIndex);
     remainingTabs.splice(toIndex, 0, movedTab);
     dispatch({ type: 'REORDER_TAB', payload: remainingTabs });
+    dispatch({ type: 'CLOSE_EDIT' });
   };
 };

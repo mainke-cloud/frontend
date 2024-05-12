@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
+import { Box, Stack, Grid, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-import HeaderDetail from '@crema/components/HeaderDetail';
-import LabelInput from '@crema/components/LabelInput';
-
 import UploadFile from '../../../assets/icon/uploadfile.svg';
 import PdfVector from '../../../assets/vector/PdfVector.svg';
 import AppScrollbar from '@crema/components/AppScrollbar';
-import MiniTab from '@crema/components/MiniTab';
 const DropZoneFile = () => {
   const [file, setFile] = useState([]);
   const [upload, setUpload] = useState(true);
@@ -39,24 +34,6 @@ const DropZoneFile = () => {
       boxShadow: 'none',
     },
   }));
-  const getTotalSize = (files) => {
-    let totalSize = 0;
-    files.forEach((file) => {
-      totalSize += file.size;
-    });
-    return (totalSize / (1024 * 1024)).toFixed(2);
-  };
-
-  const TotalSize = getTotalSize(file);
-
-  const bytesConvert = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    if (mb < 1) {
-      return (bytes / 1024).toFixed(2) + ' Kb';
-    } else {
-      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
-    }
-  };
 
   const handleFileSelected = (event) => {
     const files = event.target.files;

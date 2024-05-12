@@ -1,9 +1,8 @@
 import React from 'react';
 import { Modal, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import DropZoneFile from '../DropZoneFile';
+import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
-import SuratDelegasi_3 from './Suratdelegasi_3';
 
 const style = {
   position: 'absolute',
@@ -17,12 +16,31 @@ const style = {
   justifyContent: 'center',
   alignItems: 'center',
 };
-
-const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {
+import { useSelector} from 'react-redux';
+const SuratInternal_5 = ({ handlePrev }) => {
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => setOpen(true);
+  const info = useSelector((state) => state.surat);
+  const penerima = useSelector((state) => [
+    state.addressbook.kepada,
+    state.addressbook.tembusan,
+  ]);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
+  const pemeriksa = useSelector((state) => [
+    state.addressbook.pemeriksa,
+    state.addressbook.pemohon,
+  ]);
+  const handleOpen = () => {
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
+  const combinedData = {
+    info: info,
+    penerima: penerima,
+    pengirim: pengirim,
+    pemeriksa: pemeriksa,
+  };
+
+  console.log(combinedData);
 
   return (
     <>
@@ -79,7 +97,7 @@ const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {
             }}
             onClick={handleOpen}
           >
-            Selesai
+            Kirim
           </Button>
 
           <Modal
@@ -135,9 +153,9 @@ const SuratDelegasi_4 = ({ handleNext, handlePrev }) => {
   );
 };
 
-SuratDelegasi_4.propTypes = {
+SuratInternal_5.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
 };
 
-export default SuratDelegasi_4;
+export default SuratInternal_5;

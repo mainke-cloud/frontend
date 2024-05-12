@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Stack,
-  Typography,
-  Button,
-  Box,
-} from '@mui/material';
+import { Stack, Typography, Button, Box, TextField } from '@mui/material';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -13,14 +8,6 @@ import FormAddressBook from '../FormAddressBook';
 const TabContentEditPenerima = () => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
-  let datass = kepada[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
-  let datasss = tembusan[0];
-  if (!datasss || !Array.isArray(datasss)) {
-    datasss = [];
-  }
 
   return (
     <>
@@ -33,7 +20,7 @@ const TabContentEditPenerima = () => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={datass} />
+        <FormAddressBook text='Kepada' data={kepada} />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -49,13 +36,7 @@ const TabContentEditPenerima = () => {
             Update
           </Button>
         </Stack>
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
+        <Box position={'relative'}>
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -63,16 +44,22 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            {datass.map((item) => (
-              <Stack key={item.id}>
-                <Typography>
-                  {item.jabatan} - {item.nama}
-                </Typography>
-              </Stack>
-            ))}
+            <Stack>
+              <TextField
+                id='outlined-multiline-static'
+                multiline
+                rows={5}
+                sx={{
+                  border: 'none',
+                }}
+                defaultValue={kepada
+                  .map((item) => item.nama + '-' + item.jabatan)
+                  .join('\n')}
+              />
+            </Stack>
           </AppScrollbar>
         </Box>
-        <FormAddressBook text='Tembusan' data={datasss} />
+        <FormAddressBook text='Tembusan' data={tembusan} />
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
           <Button
@@ -88,13 +75,7 @@ const TabContentEditPenerima = () => {
           </Button>
         </Stack>
 
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
+        <Box position={'relative'}>
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -102,13 +83,19 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            {datasss.map((item) => (
-              <Stack key={item.id}>
-                <Typography>
-                  {item.jabatan} - {item.nama}
-                </Typography>
-              </Stack>
-            ))}
+            <Stack>
+              <TextField
+                id='outlined-multiline-static'
+                multiline
+                rows={5}
+                sx={{
+                  border: 'none',
+                }}
+                defaultValue={tembusan
+                  .map((item) => item.nama + '-' + item.jabatan)
+                  .join('\n')}
+              />
+            </Stack>
           </AppScrollbar>
         </Box>
       </Stack>
