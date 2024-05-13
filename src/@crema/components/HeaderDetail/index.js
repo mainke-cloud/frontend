@@ -84,6 +84,10 @@ const HeaderDetail = ({
     dispatch(addTab(tabId, tabs, name));
   };
 
+  const handleCreateTemplate = (name) => {
+    dispatch(addTab(tabId, tabs, name));
+  }
+
   const [openformsign, setOpenFormSign] = React.useState(false);
   const [openformotp, setOpenFormOtp] = React.useState(false);
   const [opennotif, setOpenNotif] = React.useState(false);
@@ -268,7 +272,7 @@ const HeaderDetail = ({
                 </AppTooltip>
               )}
               {translate && (
-                <AppTooltip title='Kirim' placement='bottom'>
+                <AppTooltip title='Terjemahkan' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                   >
@@ -387,6 +391,7 @@ const HeaderDetail = ({
               {template_surat && (
                 <AppTooltip title='Template Surat' placement='bottom'>
                   <IconButton
+                  onClick={() => handleCreateTemplate('Buat Template')}
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                   >
                     <img

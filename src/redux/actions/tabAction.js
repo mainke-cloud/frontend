@@ -95,6 +95,8 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Buat Surat'
             ? inboxIcon
+            : type === 'Buat Template'
+            ? inboxIcon
             : '',
 
         content:
@@ -126,7 +128,7 @@ export const addTab = (id, state, type) => {
             <SearchTab />
           ) : type === 'Detail Template' ? (
             <Template />
-          ) : type === 'Buat Surat' ? (
+          ) : type === 'Buat Template' ? (
           <BuatTemplateSurat />
           ) : (
             <BelumPilih />
