@@ -144,7 +144,7 @@ const Dashboard = () => {
                     image={Disposisi}
                     text='Disposisi'
                     boxColor='#429777'
-                    counter='14'
+                    counter= {14}
                   />
                 </Stack>
 
@@ -153,7 +153,7 @@ const Dashboard = () => {
                     image={Surat_Masuk}
                     text='Surat masuk'
                     boxColor='#3366FF'
-                    counter='45'
+                    counter={45}
                   />
                 </Stack>
 
@@ -162,7 +162,7 @@ const Dashboard = () => {
                     image={Perlu_Tindak_Lanjut}
                     text='Perlu tindak lanjut'
                     boxColor='#FF7452'
-                    counter='34'
+                    counter={34}
                   />
                 </Stack>
               </Stack>

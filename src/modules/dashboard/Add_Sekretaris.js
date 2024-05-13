@@ -84,7 +84,11 @@ const Add_Sekretaris = () => {
   const [isActive, setIsActive] = useState(true);
   const [openFilter, setOpenFilter] = React.useState(false);
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const [isSelected, setSelected] = React.useState(1)
 
+  const filtered = dataSekre.find(secretary => secretary.id === isSelected);
+  // console.log(filtered)
+  
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -104,6 +108,10 @@ const Add_Sekretaris = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  const handleSelected = (id) => {
+    setSelected(id)
+  }
 
   return (
     <>
@@ -194,6 +202,7 @@ const Add_Sekretaris = () => {
                         '&:hover': { backgroundColor: '#D9DDE3' },
                       }}
                       key={sekre.id}
+                      onClick={() => handleSelected(sekre.id)}
                     >
                       <Stack alignItems='center' justifyContent='center'>
                         <Box
@@ -277,6 +286,8 @@ const Add_Sekretaris = () => {
               </Box>
               <Grid container spacing={4}>
                 <Grid item xs={2}>
+
+
                   <Box
                     sx={{
                       display: 'flex',
@@ -323,50 +334,51 @@ const Add_Sekretaris = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Salies Apriliyanto
+                      {filtered.nama}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Kepala Research and Development
+                      {filtered.jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>8900001</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
                   <Stack spacing={2}>
                     <Typography variant='h4'>Status :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Aktif'
+                      checked={filtered.status}
                     />
                     <Typography variant='h4'>Sifat :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Personal Assistant'
+                      checked={filtered.personalAssistant}
                     />
                     <Typography variant='h4'>Hak Sekretaris :</Typography>
                     <Stack direction='row'>
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Biasa'
-                        labelPlacement='End'
+                        checked={filtered.hak.biasa}
                       />
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Rhs'
-                        labelPlacement='End'
+                        checked={filtered.hak.Rhs}
                       />
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Rhs Prib'
-                        labelPlacement='End'
+                        checked={filtered.hak.RhsPrib}
                       />
                     </Stack>
                   </Stack>
+
+
                 </Grid>
                 <Grid item xs={4}>
                   <Stack
@@ -524,12 +536,12 @@ const Add_Sekretaris = () => {
                   <Stack spacing={2}>
                     <Typography variant='h4'>Status :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Aktif'
                     />
                     <Typography variant='h4'>Sifat :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Personal Assistant'
                     />
                     <Typography variant='h4'>Hak Sekretaris :</Typography>

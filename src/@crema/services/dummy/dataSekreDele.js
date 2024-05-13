@@ -9,13 +9,13 @@ export const dataSekre = [
         nohp: '081234567890',
         status: true,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: false,
                 Rhs: true,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 2,
@@ -26,13 +26,13 @@ export const dataSekre = [
         nohp: '087654321098',
         status: true,
         personalAssistant: true,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: true,
                 RhsPrib: true,
             }
-        ]
+        
       },
       {
         id: 3,
@@ -43,13 +43,13 @@ export const dataSekre = [
         nohp: '081357924680',
         status: true,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: false,
                 Rhs: true,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 4,
@@ -60,13 +60,13 @@ export const dataSekre = [
         nohp: '089876543210',
         status: false,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: false,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 5,
@@ -77,13 +77,13 @@ export const dataSekre = [
         nohp: '086789054321',
         status: true,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: false,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 6,
@@ -94,13 +94,13 @@ export const dataSekre = [
         nohp: '087890543216',
         status: true,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: false,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 7,
@@ -111,13 +111,13 @@ export const dataSekre = [
         nohp: '085678901234',
         status: true,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: false,
                 RhsPrib: false,
             }
-        ]
+        
       },
       {
         id: 8,
@@ -128,13 +128,13 @@ export const dataSekre = [
         nohp: '083210987654',
         status: false,
         personalAssistant: false,
-        hak: [
+        hak: 
             {
                 biasa: true,
                 Rhs: false,
                 RhsPrib: false,
             }
-        ]
+        
       },
 ]
 

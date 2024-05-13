@@ -32,6 +32,10 @@ const Add_Delegasi = () => {
   const [dateTo, setDateTo] = React.useState(null);
   const [isComposeMail, setComposeMail] = React.useState(false);
   const [openFilter, setOpenFilter] = React.useState(false);
+  const [isSelected, setSelected] = React.useState(1)
+
+  const filtered = dataDele.find(Delegasi => Delegasi.id === isSelected);
+  // console.log(filtered)
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -54,6 +58,10 @@ const Add_Delegasi = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  const handleSelected = (id) => {
+    setSelected(id)
+  }
 
   return (
     <>
@@ -144,6 +152,7 @@ const Add_Delegasi = () => {
                         '&:hover': { backgroundColor: '#D9DDE3' },
                       }}
                       key={dele.id}
+                      onClick={() => handleSelected(dele.id)}
                     >
                       <Stack alignItems='center' justifyContent='center'>
                         <Box
@@ -273,14 +282,14 @@ const Add_Delegasi = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Salies Apriliyanto
+                      {filtered.nama}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Kepala Research and Development
+                      {filtered.jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>8900001</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
