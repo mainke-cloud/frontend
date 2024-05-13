@@ -1,72 +1,19 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import { styled } from '@mui/system';
-import { data } from '../../services/dummy/content/dataAddress';
 import AppScrollbar from '../AppScrollbar';
 
-import {
-  Button,
-  Modal,
-  Box,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  ListItemSecondaryAction,
-  Typography,
-  Stack,
-  IconButton,
-  Table,
-  TableHead,
-  TableContainer,
-  Paper,
-  TableCell,
-  Radio,
-  TableRow,
-  TableBody,
-  Checkbox,
-  InputBase,
-  Divider,
-  Select,
-  MenuItem,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Card,
-  CardContent,
-} from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import SearchIcon from '@mui/icons-material/Search';
-import ArrowForwardIosSharp from '@mui/icons-material/ArrowForwardIosSharp';
+import { Button, Box, Typography, Stack, Divider } from '@mui/material';
 
-import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
-
-import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
-import {
-  addDelegasi,
-  addKepada,
-  addJabatan,
-  addNama,
-  addSekretaris,
-  addTembusan,
-} from '../../../redux/actions/addressbookAction';
+import { UserPlus } from 'feather-icons-react';
 
 const JabatanTab = ({
   datas,
-  multipleData,
   singleData,
-  selectedRow,
   type,
-  handleSelectItem,
-  handleRadioChange,
   handleConfirmation,
   divisiCount,
   handleAccordionClick,
   uniqueDivisions,
-  StyledTabsList,
-  StyledTab,
   StyledAccordion,
   AccordionSummarys,
   AccordionDetail,
@@ -192,19 +139,12 @@ const JabatanTab = ({
 
 JabatanTab.propTypes = {
   datas: PropTypes.array.isRequired,
-  multipleData: PropTypes.array.isRequired,
   singleData: PropTypes.object.isRequired,
-  selectedRow: PropTypes.oneOfType([PropTypes.number, PropTypes.array])
-    .isRequired,
   type: PropTypes.string.isRequired,
-  handleSelectItem: PropTypes.func.isRequired,
-  handleRadioChange: PropTypes.func.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
   divisiCount: PropTypes.object.isRequired,
   handleAccordionClick: PropTypes.func.isRequired,
   uniqueDivisions: PropTypes.array.isRequired,
-  StyledTabsList: PropTypes.elementType.isRequired,
-  StyledTab: PropTypes.elementType.isRequired,
   StyledAccordion: PropTypes.elementType.isRequired,
   AccordionSummarys: PropTypes.elementType.isRequired,
   AccordionDetail: PropTypes.elementType.isRequired,
