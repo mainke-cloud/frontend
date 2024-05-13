@@ -60,7 +60,7 @@ export const users = [
     nikl: '0123456789',
     kota: 'Bali',
     organisasi: 'Perusahaan XYZ',
-    divisi: 'IT',
+    divisi: 'Pemasaran',
     departemen: 'Marketing',
     kode_departemen: 'MK-001',
     jabatan: 'Marketing Manager',
