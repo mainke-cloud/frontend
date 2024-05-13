@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../../services/dummy/user/user';
 import { useSelector } from 'react-redux';
-const SuratInternal_3 = ({ handleNext, handlePrev }) => {
+const SuratInternal_3 = ({ handleNext, handlePrev, templateData }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
 
@@ -20,6 +20,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
   return (
     <>
+    
       <Stack
         spacing={4}
         sx={{
@@ -50,7 +51,9 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <TextField
           fullWidth
-          value={`${pengirim.jabatan}`}
+          value={
+            templateData ? templateData.dari : `${pengirim.jabatan}`
+          }          
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -83,7 +86,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <TextField
           fullWidth
-          value={`${pengirim.nama}`}
+          value={ templateData ? templateData.nama : `${pengirim.nama}`}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -97,26 +100,26 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField fullWidth value={`${pengirim.divisi}`} />
+        <TextField fullWidth value={templateData ? templateData.primary :`${pengirim.divisi}`} />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField value={`${pengirim.nikl}`} />
+            <TextField value={templateData ? templateData.nik :`${pengirim.nikl}`} />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField value={`${pengirim.kode_departemen}`} />
+            <TextField value={templateData ? templateData.kodeDepart :`${pengirim.kode_departemen}`} />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField fullWidth value={`${pengirim.departemen}`} />
+        <TextField fullWidth value={templateData ? templateData.departemen :`${pengirim.departemen}`} />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField fullWidth value={`${pengirim.kota}`} />
+        <TextField fullWidth value={templateData ? templateData.kotaKantor :`${pengirim.kota}`} />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
@@ -161,6 +164,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 SuratInternal_3.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  templateData: PropTypes.object,
 };
 
 export default SuratInternal_3;

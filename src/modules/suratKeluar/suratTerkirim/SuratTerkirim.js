@@ -22,8 +22,9 @@ import {
 import DigitalSignature from '../digitalSignature.js/DigitalSignature';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 
-const SuratTerkirim = () => {
-  const files = [listData1, listData2, listData3];
+const SuratTerkirim = ({props}) => {
+  console.log(props.Lampiran);
+  const files = props.Lampiran;
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -45,6 +46,7 @@ const SuratTerkirim = () => {
         copy3
         template_surat
         masukan_folder
+        templateData={props}
       />
       <Box sx={{ padding: 8 }}>
         <Box
@@ -75,7 +77,7 @@ const SuratTerkirim = () => {
               </TabList>
             </Box>
             <TabPanel className='content-styled-panel' value='1'>
-              <AgendaSurat data={sMasuk} />
+              <AgendaSurat data={props} />
             </TabPanel>
             <TabPanel className='content-styled-panel' value='2'>
               <Info data={diteruskan} />
@@ -114,7 +116,7 @@ const SuratTerkirim = () => {
 };
 SuratTerkirim.propTypes = {
   props: PropTypes.shape({}),
-  file: PropTypes.arrayOf(
+  Lampiran: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       size: PropTypes.number.isRequired,

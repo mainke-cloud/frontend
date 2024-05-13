@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeTab } from '../../../redux/actions/tabAction';
+import { childTab, closeTab } from '../../../redux/actions/tabAction';
 import { X, Send, Save } from 'feather-icons-react';
 import {
   Edit,
@@ -26,8 +26,10 @@ import { addTab } from '../../../redux/actions/tabAction';
 import AppTooltip from '../AppTooltip';
 import MasukanFolder from '../../../assets/icon/MasukanFolder.svg';
 import TemplateSurat from '../../../assets/icon/TemplateSurat.svg';
+import BuatSuratdariTemplate from '../../../assets/icon/BuatSuratdariTemplate.svg';
 import Copy2Paper from '../../../assets/icon/copy.svg';
 import SignIcon from '../../../assets/icon/TandaTangan.svg';
+import Hapus from '../../../assets/icon/Trash.svg';
 import FormDialog from '../Tabs/FormDialog';
 import FormDialogOtp from '../Tabs/FormDialogOtp';
 import NotifDialogSign from '../Tabs/NotifDialogSign';
@@ -40,8 +42,9 @@ const HeaderDetail = ({
   copyFile,
   translate,
   edit,
+  editTemplate,
   edit2,
-  addFile,
+  buatSuratdariTemplate,
   printer,
   // filetext,
   // cornerdownleft,
@@ -58,12 +61,15 @@ const HeaderDetail = ({
   template_surat,
   copy3,
   sign,
+  hapus,
+  templateData,
 }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const tab = tabs.find((tab) => tab.active);
   const tabId = useSelector((state) => state.tab.idCounter);
   const isEdit = useSelector((state) => state.header.isEdit);
+  const isTemplate = useSelector((state) => state.header.isTemplate);
 
   const handleTabClose = () => {
     dispatch(closeTab(tab.id, tabs));
@@ -85,7 +91,7 @@ const HeaderDetail = ({
   };
 
   const handleCreateTemplate = (name) => {
-    dispatch(addTab(tabId, tabs, name));
+    dispatch(childTab(templateData.id, tabs, name, templateData));
   }
 
   const [openformsign, setOpenFormSign] = React.useState(false);
@@ -224,6 +230,33 @@ const HeaderDetail = ({
             </>
           ) : (
             <>
+            {isTemplate ? (<>
+              <AppTooltip title='Save' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <Save style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+                <AppTooltip title='Terjemahkan' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <BsTranslate style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+                <AppTooltip title='Tutup Tab' placement='bottom'>
+                <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  onClick={() => handleTabClose()}
+                >
+                  <X style={{ width: '28px', height: '28px' }} />
+                </IconButton>
+              </AppTooltip>
+
+              </>):(
+              <>
+
               {save && (
                 <AppTooltip title='Save' placement='bottom'>
                   <IconButton
@@ -280,19 +313,35 @@ const HeaderDetail = ({
                   </IconButton>
                 </AppTooltip>
               )}
-              {addFile &&(
+              {buatSuratdariTemplate &&(
+                <AppTooltip title='Buat Dokumen dari Template ini' placement='bottom'>
                 <IconButton
                 sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                 >
-                <FilePlus style={{ width: '28px', height: '28px' }} />
+                <img
+                      src={BuatSuratdariTemplate}
+                      alt='BuatSuratdariTemplate'
+                      style={{ width: '28px', height: '28px' }}
+                    />
               </IconButton>
+              </AppTooltip>
               )}
               {edit && (
                 <AppTooltip title='Edit Surat' placement='bottom'>
                   <IconButton
                     onClick={handleEdits}
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
+                    >
+                    <Edit style={{ width: '28px', height: '28px' }} />
+                  </IconButton>
+                </AppTooltip>
+              )}
+              {editTemplate && (
+                <AppTooltip title='Edit Template Surat' placement='bottom'>
+                  <IconButton
+                    onClick={handleTemplates}
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                    >
                     <Edit style={{ width: '28px', height: '28px' }} />
                   </IconButton>
                 </AppTooltip>
@@ -313,7 +362,7 @@ const HeaderDetail = ({
                 <AppTooltip title='Teruskan' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
+                    >
                     <ShortcutTwoToneIcon
                       style={{ width: '28px', height: '28px' }}
                     />
@@ -331,7 +380,7 @@ const HeaderDetail = ({
                         src={SignIcon}
                         alt='SignIcon'
                         style={{ width: '28px', height: '28px' }}
-                      />
+                        />
                     </IconButton>
                   </AppTooltip>
                 </>
@@ -340,7 +389,7 @@ const HeaderDetail = ({
                 <AppTooltip title='Print Surat' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
+                    >
                     <Printer style={{ width: '28px', height: '28px' }} />
                   </IconButton>
                 </AppTooltip>
@@ -357,10 +406,10 @@ const HeaderDetail = ({
                 <AppTooltip title='Kirim' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
+                    >
                     <AssignmentOutlinedIcon
                       style={{ width: '28px', height: '28px' }}
-                    />
+                      />
                   </IconButton>
                 </AppTooltip>
               )}
@@ -368,10 +417,10 @@ const HeaderDetail = ({
                 <AppTooltip title='Kirim' placement='bottom'>
                   <IconButton
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
+                    >
                     <DriveFolderUploadRoundedIcon
                       style={{ width: '28px', height: '28px' }}
-                    />
+                      />
                   </IconButton>
                 </AppTooltip>
               )}
@@ -402,6 +451,19 @@ const HeaderDetail = ({
                   </IconButton>
                 </AppTooltip>
               )}
+              {hapus && (
+                <AppTooltip title='Hapus' placement='bottom'>
+                  <IconButton
+                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  >
+                    <img
+                      src={Hapus}
+                      alt='Hapus'
+                      style={{ width: '28px', height: '28px' }}
+                    />
+                  </IconButton>
+                </AppTooltip>
+              )}
               {masukan_folder && (
                 <AppTooltip title='Masukan ke Folder' placement='bottom'>
                   <IconButton
@@ -423,6 +485,8 @@ const HeaderDetail = ({
                   <X style={{ width: '28px', height: '28px' }} />
                 </IconButton>
               </AppTooltip>
+              </>
+            )}
             </>
           )}
         </Stack>
@@ -464,6 +528,7 @@ HeaderDetail.propTypes = {
   copyFile: PropTypes.bool,
   translate: PropTypes.bool,
   edit: PropTypes.bool,
+  editTemplate: PropTypes.bool,
   edit2: PropTypes.bool,
   printer: PropTypes.bool,
   filetext: PropTypes.bool,
@@ -481,8 +546,9 @@ HeaderDetail.propTypes = {
   template_surat: PropTypes.bool,
   folderup: PropTypes.bool,
   IsEditing: PropTypes.bool,
-  addFile: PropTypes.bool,
+  buatSuratdariTemplate: PropTypes.bool,
   hapus: PropTypes.bool,
+  templateData: PropTypes.object,
 };
 
 export default HeaderDetail;

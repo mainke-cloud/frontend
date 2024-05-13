@@ -126,7 +126,7 @@ export const addTab = (id, state, type) => {
             <PDFReader />
           ) : type === 'Search' ? (
             <SearchTab />
-          ) : type === 'Detail Template' ? (
+          ) : type === 'Template' ? (
             <Template />
           ) : type === 'Buat Template' ? (
           <BuatTemplateSurat />
@@ -212,7 +212,9 @@ export const childTab = (id, state, type, data) => {
             <SuratTerkirim props={data} />
           ) : type === 'Surat Dibatalkan' ? (
             <SuratDibatalkan props={data} />
-          ) : (
+          ) : type === 'Buat Template' ? (
+            <SuratDibatalkan props={data} />
+          ): (
             ''
           ),
       };
@@ -262,8 +264,8 @@ export const childTab = (id, state, type, data) => {
               <SuratDiminta props={data} />
             ) : type === 'Surat Terkirim' ? (
               <SuratTerkirim props={data} />
-            ) : type === 'Surat Dibatalkan' ? (
-              <SuratDibatalkan props={data} />
+            ) : type === 'Buat Template' ? (
+              <BuatTemplateSurat props={data} />
             ) : (
               ''
             ),
