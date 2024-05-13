@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Stack,
   Typography,
@@ -19,7 +19,11 @@ const TabContentEditPengirim = () => {
   const namaa = useSelector((state) => state.addressbook.namaa);
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-  const [jabatanValue, setJabatanValue] = useState(jabatann.jabatan);
+  const [jabatanValue, setJabatanValue] = useState('');
+
+  useEffect(() => {
+    setJabatanValue(jabatann.jabatan);
+  }, [jabatann.jabatan]);
 
   const handleJabatanChange = (event) => {
     setJabatanValue(event.target.value);
@@ -32,7 +36,7 @@ const TabContentEditPengirim = () => {
     setComposeMailTitle(title);
     setComposeMail(true);
   };
-  
+
   const onCloseComposeMail = () => {
     setJabatanValue(jabatann.jabatan);
     setComposeMail(false);

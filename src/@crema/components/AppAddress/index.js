@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import AppScrollbar from '../AppScrollbar';
@@ -119,8 +119,10 @@ const ComposeMail = (props) => {
     borderTop: '1px solid rgba(0, 0, 0, .125)',
   }));
 
+  let check = title === 'Nama' ? 'Karyawan' : 'Jabatan';
+
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState('Jabatan');
+  const [activeTab, setActiveTab] = useState('');
   const [previewData, setPreviewData] = useState(null);
   const [singleData, setSingleData] = useState(null);
   const [selectedAccordionItem, setSelectedAccordionItem] = useState(null);
@@ -129,6 +131,10 @@ const ComposeMail = (props) => {
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
   const [selectedRowIndices, setSelectedRowIndices] = useState([]);
+
+  useEffect(() => {
+    setActiveTab(check);
+  }, [isComposeMail]);
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -337,6 +343,13 @@ const ComposeMail = (props) => {
     }
   };
 
+  let tabsToDisplay = ['Jabatan', 'Karyawan', 'Bawahan', 'Personal']; // Tab yang akan ditampilkan secara default
+  if (title === 'Nama') {
+    tabsToDisplay = ['Karyawan']; // Jika title adalah 'Nama', hanya tampilkan tab 'Karyawan'
+  } else if (title === 'Jabatan') {
+    tabsToDisplay = ['Jabatan']; // Jika title adalah 'Jabatan', hanya tampilkan tab 'Jabatan'
+  }
+
   return (
     <Modal
       open={isComposeMail}
@@ -382,7 +395,7 @@ const ComposeMail = (props) => {
                 <X />
               </IconButton>
             </Stack>
-            <Tabs value={activeTab} onChange={handleTabChange}>
+            {/* <Tabs value={activeTab} onChange={handleTabChange}>
               <StyledTabsList>
                 <StyledTab
                   value='Jabatan'
@@ -412,6 +425,20 @@ const ComposeMail = (props) => {
                 >
                   Personal
                 </StyledTab>
+              </StyledTabsList>
+            </Tabs> */}
+            <Tabs value={activeTab} onChange={handleTabChange}>
+              <StyledTabsList>
+                {/* Menampilkan tab sesuai dengan kondisi */}
+                {tabsToDisplay.map((tab) => (
+                  <StyledTab
+                    key={tab}
+                    value={tab}
+                    className={activeTab === tab ? tabClasses.selected : ''}
+                  >
+                    {tab}
+                  </StyledTab>
+                ))}
               </StyledTabsList>
             </Tabs>
             <Stack
