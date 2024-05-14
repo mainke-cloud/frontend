@@ -49,11 +49,12 @@ const KaryawanTab = ({
                 <TableRow
                   key={index}
                   sx={{
-                    backgroundColor: multipleData.some(
-                      (data) => data.id === datas[index].id,
-                    )
-                      ? '#52BD94'
-                      : 'transparent',
+                    backgroundColor:
+                      multipleData.some(
+                        (data) => data.id === datas[index].id,
+                      ) || selectedRow === index
+                        ? '#52BD94'
+                        : 'transparent',
                   }}
                 >
                   <TableCell>

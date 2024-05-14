@@ -159,18 +159,41 @@ const ComposeMail = (props) => {
 
   const handleRadioChange = (index) => {
     if (type === 'single') {
-      setSingleData(datas[index]);
-      setSelectedRow(index);
-      setSelectedRowIndices([index]);
-      setPreviewData(datas[index]);
+      if (selectedRow === index) {
+        setSingleData(null);
+        setSelectedRow(null);
+        setSelectedRowIndices([]);
+        setPreviewData(null);
+      } else {
+        setSingleData(datas[index]);
+        setSelectedRow(index);
+        setSelectedRowIndices([index]);
+        setPreviewData(datas[index]);
+      }
     } else {
       let updatedSelectedRow;
       if (selectedRow.includes(index)) {
         updatedSelectedRow = selectedRow.filter((item) => item !== index);
         setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+        setMultipleData(
+          multipleData.filter((data) => data.id !== datas[index].id),
+        );
       } else {
-        updatedSelectedRow = [...selectedRow, index];
-        setSelectedRowIndices([...selectedRowIndices, index]);
+        const isAlreadySelectedInAccordion = multipleData.some(
+          (data) => data.id === datas[index].id,
+        );
+        if (isAlreadySelectedInAccordion) {
+          // If already selected via accordion, deselect it
+          updatedSelectedRow = selectedRow.filter((item) => item !== index);
+          setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+          setMultipleData(
+            multipleData.filter((data) => data.id !== datas[index].id),
+          );
+        } else {
+          updatedSelectedRow = [...selectedRow, index];
+          setSelectedRowIndices([...selectedRowIndices, index]);
+          setMultipleData([...multipleData, datas[index]]);
+        }
       }
       setSelectedRow(updatedSelectedRow);
 
@@ -307,30 +330,43 @@ const ComposeMail = (props) => {
     const selectedItem = datas[index];
 
     if (type === 'single') {
-      setSingleData(selectedItem);
-      setSelectedRow(index);
-      setSelectedRowIndices([index]);
-      setPreviewData(selectedItem);
+      if (selectedRow === index) {
+        setSingleData(null);
+        setSelectedRow(null);
+        setSelectedRowIndices([]);
+        setPreviewData(null);
+      } else {
+        setSingleData(selectedItem);
+        setSelectedRow(index);
+        setSelectedRowIndices([index]);
+        setPreviewData(selectedItem);
+      }
     } else {
       let updatedSelectedRow;
       if (selectedRow.includes(index)) {
         updatedSelectedRow = selectedRow.filter((item) => item !== index);
         setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+        setMultipleData(
+          multipleData.filter((data) => data.id !== selectedItem.id),
+        );
       } else {
-        updatedSelectedRow = [...selectedRow, index];
-        setSelectedRowIndices([...selectedRowIndices, index]);
+        const isAlreadySelectedInAccordion = multipleData.some(
+          (data) => data.id === selectedItem.id,
+        );
+        if (isAlreadySelectedInAccordion) {
+          // If already selected via accordion, deselect it
+          updatedSelectedRow = selectedRow.filter((item) => item !== index);
+          setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+          setMultipleData(
+            multipleData.filter((data) => data.id !== selectedItem.id),
+          );
+        } else {
+          updatedSelectedRow = [...selectedRow, index];
+          setSelectedRowIndices([...selectedRowIndices, index]);
+          setMultipleData([...multipleData, selectedItem]);
+        }
       }
       setSelectedRow(updatedSelectedRow);
-
-      // Cek apakah data sudah ada dalam multipleData berdasarkan ID
-      const isDataExist = multipleData.some(
-        (data) => data.id === selectedItem.id,
-      );
-
-      // Jika data belum ada, tambahkan ke multipleData
-      if (!isDataExist) {
-        setMultipleData([...multipleData, selectedItem]);
-      }
 
       setSingleData(null);
       if (updatedSelectedRow.length > 0) {
@@ -341,6 +377,35 @@ const ComposeMail = (props) => {
         setPreviewData(null);
       }
     }
+    //   let updatedSelectedRow;
+    //   if (selectedRow.includes(index)) {
+    //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
+    //     setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+    //   } else {
+    //     updatedSelectedRow = [...selectedRow, index];
+    //     setSelectedRowIndices([...selectedRowIndices, index]);
+    //   }
+    //   setSelectedRow(updatedSelectedRow);
+
+    //   // Cek apakah data sudah ada dalam multipleData berdasarkan ID
+    //   const isDataExist = multipleData.some(
+    //     (data) => data.id === selectedItem.id,
+    //   );
+
+    //   // Jika data belum ada, tambahkan ke multipleData
+    //   if (!isDataExist) {
+    //     setMultipleData([...multipleData, selectedItem]);
+    //   }
+
+    //   setSingleData(null);
+    //   if (updatedSelectedRow.length > 0) {
+    //     setPreviewData(
+    //       datas[updatedSelectedRow[updatedSelectedRow.length - 1]],
+    //     );
+    //   } else {
+    //     setPreviewData(null);
+    //   }
+    // }
   };
 
   let tabsToDisplay = ['Jabatan', 'Karyawan', 'Bawahan', 'Personal']; // Tab yang akan ditampilkan secara default
