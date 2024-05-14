@@ -6,9 +6,30 @@ import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../../services/dummy/user/user';
 import { useSelector } from 'react-redux';
-const SuratInternal_3 = ({ handleNext, handlePrev }) => {
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useState } from 'react';
+
+const SuratInternal_3 = ({ handleNext, handlePrev, onStateChange }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
+
+  const formik = useFormik({
+    initialValues: {
+      jabatan: '',
+      nama: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      jabatan: yup.string().required('Kolom ini wajib diisi'),
+      nama: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
+  };
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -50,7 +71,10 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <TextField
           fullWidth
+          name='jabatan'
+          error={formik.errors.jabatan}
           value={`${pengirim.jabatan}`}
+          onChange={handleChange}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -61,6 +85,11 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
             ),
           }}
         />
+        {formik.touched.jabatan && formik.errors.jabatan && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.jabatan}
+          </Typography>
+        )}
 
         <Stack direction='row'>
           <Link
@@ -83,7 +112,10 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 
         <TextField
           fullWidth
+          name='nama'
+          error={formik.errors.nama}
           value={`${pengirim.nama}`}
+          onChange={handleChange}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -94,6 +126,11 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
             ),
           }}
         />
+        {formik.touched.nama && formik.errors.nama && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.nama}
+          </Typography>
+        )}
 
         <Typography variant='h4'>Divisi</Typography>
 
@@ -140,7 +177,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Penerima)
           </Button>
@@ -161,6 +198,7 @@ const SuratInternal_3 = ({ handleNext, handlePrev }) => {
 SuratInternal_3.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
 export default SuratInternal_3;

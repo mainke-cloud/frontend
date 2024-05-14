@@ -121,7 +121,16 @@ const KomentarSection = () => {
               </Grid>
               <Grid item xs={8} padding='10px'>
                 <Stack>
-                  <Typography variant='h4'>{file.name}</Typography>
+                  <Typography
+                    variant='h4'
+                    sx={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {file.name}
+                  </Typography>
                   <Typography variant='body1'>
                     {(file.size / (1024 * 1024)).toFixed(2)} MB
                   </Typography>

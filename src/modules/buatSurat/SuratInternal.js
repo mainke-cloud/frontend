@@ -8,21 +8,22 @@ import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
-import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
-import { handleNextStep } from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
+
 const SuratInternal = () => {
   const dispatch = useDispatch();
-  const [showNext, setShowNext] = useState(0);
+
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
+
   const [formData, setFormData] = useState({
     perihal: '',
     klasifikasi: '',
@@ -39,9 +40,11 @@ const SuratInternal = () => {
     }
     dispatch(addInfo(formData));
   };
+
   const handleChangeForm = (formData) => {
     setFormData(formData);
   };
+
   const handlePrev = () => {
     setActiveStep(activeStep - 1);
   };
@@ -90,6 +93,7 @@ const SuratInternal = () => {
           </>
         )}
       </Box>
+
       <Stack
         sx={{
           backgroundColor: 'white',
@@ -97,8 +101,8 @@ const SuratInternal = () => {
           width: '921px',
           mx: 'auto',
           display: 'flex',
-          borderRadius: '10px', // Mengatur border radius
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+          borderRadius: '10px',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
           mb: '30px',
         }}
       >

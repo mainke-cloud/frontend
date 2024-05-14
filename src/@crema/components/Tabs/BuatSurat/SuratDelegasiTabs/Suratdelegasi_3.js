@@ -5,9 +5,11 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
+import { useSelector } from 'react-redux';
 
 const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -48,9 +50,8 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Kepala Research and Development'
+          value={`${pengirim.jabatan}`}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -82,12 +83,11 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Taufik Sulaeman'
+          value={`${pengirim.nama}`}
           InputProps={{
             endAdornment: (
-              <IconButton>
+              <IconButton onClick={() => onOpenComposeMail()}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -98,26 +98,26 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+        <TextField fullWidth value={`${pengirim.divisi}`} />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled defaultValue='8900002' />
+            <TextField value={`${pengirim.nikl}`} />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled defaultValue='DIT-11 B 10000' />
+            <TextField value={`${pengirim.kode_departemen}`} />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth defaultValue='Decision Support' />
+        <TextField fullWidth value={`${pengirim.departemen}`} />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth defaultValue='Bandung' />
+        <TextField fullWidth value={`${pengirim.kota}`} />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
@@ -152,6 +152,8 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
         datas={users}
+        title='Pengirim'
+        type='single'
       />
     </>
   );

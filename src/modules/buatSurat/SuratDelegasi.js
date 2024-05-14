@@ -4,18 +4,22 @@ import SuratDelegasi_1 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/
 import SuratDelegasi_2 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_2';
 import SuratDelegasi_3 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_3';
 import SuratDelegasi_4 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_4';
-import { Box, Grid } from '@mui/material';
-import StepImage from '../../assets/BuatSurat/Prgoress bar buat surat 1.png';
-import PreviewSuratImage from '../../assets/BuatSurat/Preview Surat.png';
+import { Box, Grid, Stack } from '@mui/material';
 import '../../styles/button.css';
 import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
+import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
+import { useSelector, useDispatch } from 'react-redux';
+import { addInfo } from '../../redux/actions/suratAction';
 
 const SuratDelegasi = () => {
-  const [showNext, setShowNext] = useState(0);
+  const dispatch = useDispatch();
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -23,16 +27,34 @@ const SuratDelegasi = () => {
     if (activeStep === 3) {
       setShowPage(true);
     }
+
+    dispatch(addInfo(formData));
   };
 
   const handlePrev = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
+  const handleChangeForm = (formData) => {
+    setFormData(formData);
+  };
+
   const step = ['Info', 'Penerima', 'Pengirim', 'Lainnya'];
 
   const steps = [
-    <SuratDelegasi_1 key={1} handleNext={handleNext} />,
+    <SuratDelegasi_1
+      key={1}
+      handleNext={handleNext}
+      onStateChange={handleChangeForm}
+    />,
     <SuratDelegasi_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratDelegasi_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratDelegasi_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
@@ -65,15 +87,29 @@ const SuratDelegasi = () => {
                 <KomentarSection />
               </Grid>
             </Grid>
-
-            <img
-              src={PreviewSuratImage}
-              alt='surat'
-              style={{ paddingTop: '20px', maxWidth: '1305px' }}
-            />
           </>
         )}
       </Box>
+
+      <Stack
+        sx={{
+          backgroundColor: 'white',
+          minHeight: '1009px',
+          width: '921px',
+          mx: 'auto',
+          display: 'flex',
+          borderRadius: '10px',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
+          mb: '30px',
+        }}
+      >
+        <PdfCardEdit
+          kepada={kepada}
+          tembusan={tembusan}
+          pengirim={pengirim}
+          info={formData}
+        />
+      </Stack>
     </Box>
   );
 };

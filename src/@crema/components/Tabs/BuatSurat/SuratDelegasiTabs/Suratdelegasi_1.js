@@ -1,42 +1,18 @@
 import {
   Box,
   Button,
-  Grid,
-  Icon,
-  IconButton,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import { GrAttachment } from 'react-icons/gr';
-import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LabelInput from '@crema/components/LabelInput';
 import TextFieldDate from '../TextFieldDate/TextFieldDate';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-const perihal = [
-  {
-    value: 'Pilihan 1',
-    label: 'Pilihan 1',
-  },
-  {
-    value: 'Pilihan 2',
-    label: 'Pilihan 2',
-  },
-  {
-    value: 'Pilihan 3',
-    label: 'Pilihan 3',
-  },
-];
-
-const SuratDelegasi_1 = ({ handleNext }) => {
+const SuratDelegasi_1 = ({ handleNext, onStateChange }) => {
   const formik = useFormik({
     initialValues: {
       perihal: '',
@@ -47,31 +23,24 @@ const SuratDelegasi_1 = ({ handleNext }) => {
     }),
   });
 
-  const handleForm = (e) => {
-    const { target } = e;
-    formik.setFieldValue(target.name, target.value);
-    console.log(formik.values);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onStateChange({ ...formData, [name]: value });
+    formik.setFieldValue(name, value);
+
+    if (name === 'lampiran' && parseInt(value) < 0) {
+      setFormData({ ...formData, [name]: 0 });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const [isComposeMail, setComposeMail] = React.useState(false);
   const [formData, setFormData] = useState({
-    tanggalSurat: null,
+    perihal: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
   });
-
-  const onOpenComposeMail = () => {
-    setComposeMail(true);
-  };
-
-  const onCloseComposeMail = () => {
-    setComposeMail(false);
-  };
-
-  const handleTanggal = (date) => {
-    setFormData({
-      ...formData,
-      tanggalSurat: date,
-    });
-  };
 
   return (
     <Box>
@@ -98,18 +67,13 @@ const SuratDelegasi_1 = ({ handleNext }) => {
 
         <TextField
           id='outlined-select-currency'
-          select
           fullWidth
-          onChange={handleForm}
           name='perihal'
           error={formik.errors.perihal}
-        >
-          {perihal.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          value={formData.perihal}
+          onChange={handleChange}
+        />
+
         {formik.touched.perihal && formik.errors.perihal && (
           <Typography variant='body1' color='error'>
             {formik.errors.perihal}
@@ -133,6 +97,9 @@ const SuratDelegasi_1 = ({ handleNext }) => {
           variant='outlined'
           fullWidth
           type='number'
+          name='lampiran'
+          value={formData.lampiran}
+          onChange={handleChange}
           InputLabelProps={{
             shrink: true,
           }}
@@ -158,6 +125,7 @@ const SuratDelegasi_1 = ({ handleNext }) => {
 
 SuratDelegasi_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
 export default SuratDelegasi_1;

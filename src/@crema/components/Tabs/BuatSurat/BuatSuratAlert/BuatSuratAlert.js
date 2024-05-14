@@ -1,11 +1,13 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert, IconButton, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import PropTypes from 'prop-types';
 
-export default function PositionedSnackbar() {
+export default function PositionedSnackbar(props) {
+  const { title, desc } = props;
+
   const [state, setState] = React.useState({
     open: true,
     vertical: 'top',
@@ -13,10 +15,6 @@ export default function PositionedSnackbar() {
   });
 
   const { vertical, horizontal, open } = state;
-
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
 
   const handleClose = () => {
     setState({ ...state, open: false });
@@ -43,12 +41,15 @@ export default function PositionedSnackbar() {
             alignItems: 'center',
           }}
         >
-          <Typography variant='h1'>Berhasil</Typography>
-          <Typography variant='body1'>
-            Surat berhasil disubmit kepada pemeriksa 1 Adhi Prasetio/740049
-          </Typography>
+          <Typography variant='h1'>{title}</Typography>
+          <Typography variant='body1'>{desc}</Typography>
         </Alert>
       </Snackbar>
     </div>
   );
 }
+
+PositionedSnackbar.propTypes = {
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+};
