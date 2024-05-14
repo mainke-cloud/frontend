@@ -200,6 +200,19 @@ const AppSidebarHeader = (props) => {
                               >
                                 Surat Delegasi
                               </Button>
+                              <Button
+                                // onClick={}
+                                onClick={() => handleAddTab('Buat Surat')}
+                                startIcon={<img src={SuratDelegasi} />}
+                                sx={{
+                                  border: 'none',
+                                  '&:hover': {
+                                    border: 'none',
+                                  },
+                                }}
+                              >
+                                Buat Template Surat
+                              </Button>
                             </ButtonGroup>
                           </Box>
                         </Popover>

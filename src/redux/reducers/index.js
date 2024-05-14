@@ -7,6 +7,7 @@ import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 import headerReducer from './headerReducer';
 import addressbookReducer from './addressbookReducer';
+import classificationReducer from './classificationReducer';
 import { connectRouter } from 'connected-react-router';
 
 const reducers = (history) =>
@@ -20,6 +21,7 @@ const reducers = (history) =>
     surat: suratReducer,
     header: headerReducer,
     addressbook: addressbookReducer,
+    classification: classificationReducer,
   });
 
 export default reducers

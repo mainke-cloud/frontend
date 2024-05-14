@@ -138,7 +138,10 @@ const BucketMinibar = (props) => {
             badge={0}
             icon='folder'
             text='Folder'
-            onAddTab={() => handleAddTab('Folder')}
+            onAddTab={() => {
+              handleChangeSidebar('Folder');
+              handleAddTab('Folder');
+            }}
           />
           <BucketMinibarItem
             isHover={isHover}

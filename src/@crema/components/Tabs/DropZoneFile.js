@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Stack, Grid, TextField, Typography, Button } from '@mui/material';
+import { Box, Stack, Grid, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-import HeaderDetail from '@crema/components/HeaderDetail';
-import LabelInput from '@crema/components/LabelInput';
-
 import UploadFile from '../../../assets/icon/uploadfile.svg';
 import PdfVector from '../../../assets/vector/PdfVector.svg';
 import AppScrollbar from '@crema/components/AppScrollbar';
-import MiniTab from '@crema/components/MiniTab';
 const DropZoneFile = () => {
   const [file, setFile] = useState([]);
   const [upload, setUpload] = useState(true);
@@ -39,24 +34,6 @@ const DropZoneFile = () => {
       boxShadow: 'none',
     },
   }));
-  const getTotalSize = (files) => {
-    let totalSize = 0;
-    files.forEach((file) => {
-      totalSize += file.size;
-    });
-    return (totalSize / (1024 * 1024)).toFixed(2);
-  };
-
-  const TotalSize = getTotalSize(file);
-
-  const bytesConvert = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    if (mb < 1) {
-      return (bytes / 1024).toFixed(2) + ' Kb';
-    } else {
-      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
-    }
-  };
 
   const handleFileSelected = (event) => {
     const files = event.target.files;
@@ -134,7 +111,7 @@ const DropZoneFile = () => {
             </Stack>
           </>
         )}
-       <Grid container columns={12} spacing={5}>
+        <Grid container columns={12} spacing={5}>
           {file.map((file, index) => (
             <Grid item xs={6} sm={6} md={4} lg={3} key={index} sx={{}}>
               <Stack
@@ -211,6 +188,26 @@ const DropZoneFile = () => {
               onChange={handleFileSelected}
             />
           </Buttons>
+        </Box>
+      )}
+      {0 > 25 && (
+        <Box
+          position='absolute'
+          top='0'
+          width='100%'
+          zIndex='1'
+          justifyContent='start'
+          display='flex'
+          backgroundColor='#FFD2D2'
+          borderRadius='8px'
+          sx={{opacity:'0.8'}}
+        >
+          <Stack padding='8px'>
+            <Typography fontWeight='700'>Perhatian :</Typography>
+            <Typography fontSize='12px'>
+              Besar Ukuran Surat & Lampiran yang dipilih melebihi batas
+            </Typography>
+          </Stack>
         </Box>
       )}
     </Box>

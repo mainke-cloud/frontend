@@ -2,11 +2,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import React, {useRef} from "react";
 function TinyMce() {
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+
   return (
     <>
       <Editor

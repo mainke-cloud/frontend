@@ -48,7 +48,8 @@ const tabReducer = (state = initialState, action) => {
         if (
           (tab.id === 'todo' && tab.title === action.payload.title) ||
           (tab.id === 'disposisi' && tab.title === action.payload.title) ||
-          (tab.id === 'perlu tindak lanjut' && tab.title === action.payload.title) ||
+          (tab.id === 'perlu tindak lanjut' &&
+            tab.title === action.payload.title) ||
           (tab.id === 'draft' && tab.title === action.payload.title) ||
           (tab.id === 'lacak proses' && tab.title === action.payload.title) ||
           (tab.id === 'komposer' && tab.title === action.payload.title) ||
@@ -100,6 +101,19 @@ const tabReducer = (state = initialState, action) => {
     case 'UPDATE_TAB_SURATMASUK': {
       const updatedTabs = state.tabs.map((tab) => {
         if (tab.id === 'surat masuk') {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
+    case 'UPDATE_TAB_FOLDER': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'folder') {
           return action.payload;
         } else {
           return tab;

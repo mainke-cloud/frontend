@@ -22,6 +22,7 @@ import Delegasi from '../../@crema/components/Tabs/Dashboard/Delegasi';
 import Sekretaris from '../../@crema/components/Tabs/Dashboard/Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { dataDele, dataSekre } from '@crema/services/dummy/dataSekreDele';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabAction';
 
@@ -143,7 +144,7 @@ const Dashboard = () => {
                     image={Disposisi}
                     text='Disposisi'
                     boxColor='#429777'
-                    counter='14'
+                    counter= {14}
                   />
                 </Stack>
 
@@ -152,7 +153,7 @@ const Dashboard = () => {
                     image={Surat_Masuk}
                     text='Surat masuk'
                     boxColor='#3366FF'
-                    counter='45'
+                    counter={45}
                   />
                 </Stack>
 
@@ -161,7 +162,7 @@ const Dashboard = () => {
                     image={Perlu_Tindak_Lanjut}
                     text='Perlu tindak lanjut'
                     boxColor='#FF7452'
-                    counter='34'
+                    counter={34}
                   />
                 </Stack>
               </Stack>
@@ -170,7 +171,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={3} height={'100%'}>
             <Stack direction='column' spacing={5}>
-              <AppCard2 sx={{ height: '339px', pb: 17 }}>
+              <AppCard2 sx={{ height: '344px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#DFE4F7',
@@ -212,32 +213,55 @@ const Dashboard = () => {
                       overflowX: 'hidden',
                     }}
                   >
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
+                    {dataSekre.map((sekre) => (
+                      sekre.status && (
+                        <Sekretaris
+                        key={sekre.id}
+                        Profile={avatar}
+                        JobDesk={sekre.jabatan}
+                        ID={sekre.nama+"/"+sekre.nikg+"/ARMS"}
+                        />
+                      )
+                    ))}
                   </Box>
                 </AppScrollbar>
+                <Box sx={{
+                    backgroundColor: '#DFE4F7',
+                    // borderTopLeftRadius: 2,
+                    // borderTopRightRadius: 2,
+                    height: 300,
+                    padding: 0.1,
+                    paddingX: 5
+                  }}
+                >
+                  <Grid item xs={12} sx={{marginTop: 2}}>
+                      <Box 
+                          alignItems="center" 
+                          justifyContent="center"
+                          sx={{ 
+                              backgroundColor: '#2952CC', 
+                              color: 'black', 
+                              padding: 1, 
+                              //width: '100%', 
+                              maxWidth: 400,
+                              height: 30, 
+                              borderRadius: 3,
+                              cursor: 'pointer',
+                              '@media (min-width: 600px)': { 
+                                  width: 'auto',
+                              },
+                              // '&:hover': {
+                              //     backgroundColor: '#FFDFA6',
+                              //   }
+                          }}
+                          onClick={() => handleAddTab('Add_Sekretaris')} 
+                      >
+                          <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Sekretaris</Typography>
+                      </Box>
+                  </Grid>
+                </Box>
               </AppCard2>
-              <AppCard2 sx={{ height: '339px', pb: 17 }}>
+              <AppCard2 sx={{ height: '345px', pb: 17 }}>
                 <Box
                   sx={{
                     backgroundColor: '#F9E5CF',
@@ -281,6 +305,23 @@ const Dashboard = () => {
                       overflowX: 'hidden',
                     }}
                   >
+                    {dataDele.map((dele) => (
+                      dele.status && (
+                        <Delegasi
+                          key={dele.id}
+                          Profile={avatar}
+                          JobDesk={dele.jabatan}
+                          ID={dele.nama+"/"+dele.nikg+"/ARMS"}
+                          EndDate={dele.endDateSimplified}
+                        />
+                      )
+                    ))}
+{/* 
+                    <Delegasi
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
                     <Delegasi
                       Profile={avatar}
                       JobDesk='Manager development'
@@ -291,20 +332,45 @@ const Dashboard = () => {
                       Profile={avatar}
                       JobDesk='Manager development'
                       ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-                    <Delegasi
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Delegasi
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
+                    /> */}
                   </Box>
                 </AppScrollbar>
+                <Box sx={{
+                    backgroundColor: '#F9E5CF',
+                    // borderTopLeftRadius: 2,
+                    // borderTopRightRadius: 2,
+                    height: 300,
+                    padding: 0.25,
+                    paddingX: 5
+                  }}
+                >
+                  <Grid item xs={12} sx={{marginTop: 2}}>
+                      <Box 
+                          alignItems="center" 
+                          justifyContent="center"
+                          sx={{ 
+                              backgroundColor: '#C45900', 
+                              color: 'black', 
+                              padding: 1, 
+                              // width: '100%',
+                              height: 30, 
+                              maxWidth: 400,
+                              // maxHeight: 100, 
+                              borderRadius: 3,
+                              cursor: 'pointer',
+                              '@media (min-width: 600px)': { 
+                                  width: 'auto',
+                              },
+                              // '&:hover': {
+                              //     backgroundColor: '#FFDFA6',
+                              //   }
+                          }}
+                          onClick={() => handleAddTab('Add_Delegasi')} 
+                      >
+                          <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Delegasi</Typography>
+                      </Box>
+                  </Grid>
+                </Box>
               </AppCard2>
             </Stack>
           </Grid>
