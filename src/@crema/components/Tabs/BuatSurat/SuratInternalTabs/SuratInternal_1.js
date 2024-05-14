@@ -6,7 +6,7 @@ import { useState } from 'react';
 import FormClassification from '../../FormClassification';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
+import { useEffect } from 'react';
 const prioritas = [
   {
     value: '1',
@@ -198,6 +198,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
 
 SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  templateData: PropTypes.object,
   onStateChange: PropTypes.func,
 };
 
