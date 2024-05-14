@@ -11,7 +11,9 @@ import AppAuthProvider from '@crema/core/AppAuthProvider';
 import AuthRoutes from '@crema/components/AuthRoutes';
 import AppLayout from '@crema/core/AppLayout';
 import './styles/index.css';
-import store from './redux';
+import configureStore from './redux/store';
+
+const store = configureStore();
 
 const App = () => (
   <Provider store={store}>

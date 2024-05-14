@@ -7,13 +7,19 @@ import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 import headerReducer from './headerReducer';
 import addressbookReducer from './addressbookReducer';
-export default combineReducers({
-  user: userReducer,
-  auth: loginReducer,
-  tab: tabReducer,
-  sidebar: sidebarReducer,
-  todolist: todoListReducer,
-  surat: suratReducer,
-  header: headerReducer,
-  addressbook: addressbookReducer,
-});
+import { connectRouter } from 'connected-react-router';
+
+const reducers = (history) =>
+  combineReducers({
+    router: connectRouter(history),
+    user: userReducer,
+    auth: loginReducer,
+    tab: tabReducer,
+    sidebar: sidebarReducer,
+    todolist: todoListReducer,
+    surat: suratReducer,
+    header: headerReducer,
+    addressbook: addressbookReducer,
+  });
+
+export default reducers
