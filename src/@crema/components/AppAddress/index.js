@@ -377,35 +377,6 @@ const ComposeMail = (props) => {
         setPreviewData(null);
       }
     }
-    //   let updatedSelectedRow;
-    //   if (selectedRow.includes(index)) {
-    //     updatedSelectedRow = selectedRow.filter((item) => item !== index);
-    //     setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
-    //   } else {
-    //     updatedSelectedRow = [...selectedRow, index];
-    //     setSelectedRowIndices([...selectedRowIndices, index]);
-    //   }
-    //   setSelectedRow(updatedSelectedRow);
-
-    //   // Cek apakah data sudah ada dalam multipleData berdasarkan ID
-    //   const isDataExist = multipleData.some(
-    //     (data) => data.id === selectedItem.id,
-    //   );
-
-    //   // Jika data belum ada, tambahkan ke multipleData
-    //   if (!isDataExist) {
-    //     setMultipleData([...multipleData, selectedItem]);
-    //   }
-
-    //   setSingleData(null);
-    //   if (updatedSelectedRow.length > 0) {
-    //     setPreviewData(
-    //       datas[updatedSelectedRow[updatedSelectedRow.length - 1]],
-    //     );
-    //   } else {
-    //     setPreviewData(null);
-    //   }
-    // }
   };
 
   let tabsToDisplay = ['Jabatan', 'Karyawan', 'Bawahan', 'Personal']; // Tab yang akan ditampilkan secara default
@@ -460,38 +431,6 @@ const ComposeMail = (props) => {
                 <X />
               </IconButton>
             </Stack>
-            {/* <Tabs value={activeTab} onChange={handleTabChange}>
-              <StyledTabsList>
-                <StyledTab
-                  value='Jabatan'
-                  className={activeTab === 'Jabatan' ? tabClasses.selected : ''}
-                >
-                  Jabatan
-                </StyledTab>
-                <StyledTab
-                  value='Karyawan'
-                  className={
-                    activeTab === 'Karyawan' ? tabClasses.selected : ''
-                  }
-                >
-                  Karyawan
-                </StyledTab>
-                <StyledTab
-                  value='Bawahan'
-                  className={activeTab === 'Bawahan' ? tabClasses.selected : ''}
-                >
-                  Bawahan
-                </StyledTab>
-                <StyledTab
-                  value='Personal'
-                  className={
-                    activeTab === 'Personal' ? tabClasses.selected : ''
-                  }
-                >
-                  Personal
-                </StyledTab>
-              </StyledTabsList>
-            </Tabs> */}
             <Tabs value={activeTab} onChange={handleTabChange}>
               <StyledTabsList>
                 {/* Menampilkan tab sesuai dengan kondisi */}
