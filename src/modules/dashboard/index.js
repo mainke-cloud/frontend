@@ -22,6 +22,7 @@ import Delegasi from '../../@crema/components/Tabs/Dashboard/Delegasi';
 import Sekretaris from '../../@crema/components/Tabs/Dashboard/Sekretaris';
 import AppCard2 from '@crema/components/AppCard/AppCard2';
 import AppScrollbar from '@crema/components/AppScrollbar';
+import { dataDele, dataSekre } from '@crema/services/dummy/dataSekreDele';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabAction';
 
@@ -143,7 +144,7 @@ const Dashboard = () => {
                     image={Disposisi}
                     text='Disposisi'
                     boxColor='#429777'
-                    counter='14'
+                    counter= {14}
                   />
                 </Stack>
 
@@ -152,7 +153,7 @@ const Dashboard = () => {
                     image={Surat_Masuk}
                     text='Surat masuk'
                     boxColor='#3366FF'
-                    counter='45'
+                    counter={45}
                   />
                 </Stack>
 
@@ -161,7 +162,7 @@ const Dashboard = () => {
                     image={Perlu_Tindak_Lanjut}
                     text='Perlu tindak lanjut'
                     boxColor='#FF7452'
-                    counter='34'
+                    counter={34}
                   />
                 </Stack>
               </Stack>
@@ -212,28 +213,16 @@ const Dashboard = () => {
                       overflowX: 'hidden',
                     }}
                   >
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Sekretaris
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
+                    {dataSekre.map((sekre) => (
+                      sekre.status && (
+                        <Sekretaris
+                        key={sekre.id}
+                        Profile={avatar}
+                        JobDesk={sekre.jabatan}
+                        ID={sekre.nama+"/"+sekre.nikg+"/ARMS"}
+                        />
+                      )
+                    ))}
                   </Box>
                 </AppScrollbar>
                 <Box sx={{
@@ -316,6 +305,23 @@ const Dashboard = () => {
                       overflowX: 'hidden',
                     }}
                   >
+                    {dataDele.map((dele) => (
+                      dele.status && (
+                        <Delegasi
+                          key={dele.id}
+                          Profile={avatar}
+                          JobDesk={dele.jabatan}
+                          ID={dele.nama+"/"+dele.nikg+"/ARMS"}
+                          EndDate={dele.endDateSimplified}
+                        />
+                      )
+                    ))}
+{/* 
+                    <Delegasi
+                      Profile={avatar}
+                      JobDesk='Manager development'
+                      ID='Taufik Sulaeman/ 8900002/ ARMS'
+                    />
                     <Delegasi
                       Profile={avatar}
                       JobDesk='Manager development'
@@ -326,18 +332,7 @@ const Dashboard = () => {
                       Profile={avatar}
                       JobDesk='Manager development'
                       ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-                    <Delegasi
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
-
-                    <Delegasi
-                      Profile={avatar}
-                      JobDesk='Manager development'
-                      ID='Taufik Sulaeman/ 8900002/ ARMS'
-                    />
+                    /> */}
                   </Box>
                 </AppScrollbar>
                 <Box sx={{
