@@ -3,7 +3,7 @@ import { Stack, Button} from '@mui/material';
 import PropTypes from 'prop-types';
 import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
-const SuratInternal_4 = ({ handleNext, handlePrev }) => {
+const SuratInternal_4 = ({ handleNext, handlePrev, templateData }) => {
   const pemeriksa = useSelector((state) => state.addressbook.pemeriksa);
   const pemohon = useSelector((state) => state.addressbook.pemohon);
 
@@ -18,8 +18,8 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Pemeriksa' data={pemeriksa} />
-        <FormAddressBook text='Pemohon' data={pemohon}/>
+        <FormAddressBook text='Pemeriksa' data={pemeriksa} templateData={templateData}/>
+        <FormAddressBook text='Pemohon' data={pemohon} templateData={templateData}/>
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
             variant='contained'
@@ -60,6 +60,7 @@ const SuratInternal_4 = ({ handleNext, handlePrev }) => {
 SuratInternal_4.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  templateData: PropTypes.object,
 };
 
 export default SuratInternal_4;

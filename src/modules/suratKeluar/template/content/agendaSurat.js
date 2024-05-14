@@ -18,7 +18,7 @@ const AgendaSurat = (props) => {
                 <>
                   <CustomRow name='No Agenda' data={data.noAgenda} />
                   <CustomRow
-                  
+                   
                     name='tanggal Dikirim'
                     data={data.tanggalKirim}
                   />

@@ -35,7 +35,7 @@ const SuratMasuk = ({ props }) => {
         forward
         disposisi
         printer
-        copy2
+        copyFile
         folderup
       />
       <Box sx={{ padding: 8 }}>

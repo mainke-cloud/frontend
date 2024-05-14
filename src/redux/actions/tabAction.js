@@ -36,6 +36,7 @@ import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
 import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
 import Folder from 'modules/folder/index';
 import Listdata from 'modules/folder/content/ListData';
+import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -96,6 +97,10 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Template'
             ? inboxIcon
+            : type === 'Buat Surat'
+            ? inboxIcon
+            : type === 'Buat Template'
+            ? inboxIcon
             : '',
 
         content:
@@ -129,6 +134,10 @@ export const addTab = (id, state, type) => {
             <Folder />
           ) : type === 'Search' ? (
             <SearchTab />
+          ) : type === 'Template' ? (
+            <Template />
+          ) : type === 'Buat Template' ? (
+          <BuatTemplateSurat />
           ) : (
             <BelumPilih />
           ),
@@ -219,7 +228,9 @@ export const childTab = (id, state, type, data) => {
             <SuratTerkirim props={data} />
           ) : type === 'Surat Dibatalkan' ? (
             <SuratDibatalkan props={data} />
-          ) : (
+          ) : type === 'Buat Template' ? (
+            <SuratDibatalkan props={data} />
+          ): (
             ''
           ),
       };
@@ -275,8 +286,8 @@ export const childTab = (id, state, type, data) => {
               <SuratDiminta props={data} />
             ) : type === 'Surat Terkirim' ? (
               <SuratTerkirim props={data} />
-            ) : type === 'Surat Dibatalkan' ? (
-              <SuratDibatalkan props={data} />
+            ) : type === 'Buat Template' ? (
+              <BuatTemplateSurat props={data} />
             ) : (
               ''
             ),

@@ -8,8 +8,8 @@ import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
 
 const FormAddressBook = (props) => {
-  const { text, data } = props;
-console.log(data)
+  const { text, data, templateData } = props;
+  console.log(templateData);
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
     gap: '16px',
@@ -65,13 +65,27 @@ console.log(data)
             overflow: 'auto',
           }}
         >
-          {data?.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
+          {templateData && text=='Kepada' ? (
+           <Typography>
+           {templateData.kepada}
+         </Typography>
+          ) : templateData && text=='Pemeriksa' ? (
+            <Typography>
+           {templateData.pemeriksa}
+         </Typography>
+          ) : templateData && text=='Pemohon' ? (
+            <Typography>
+           {templateData.pemohon}
+         </Typography>
+          ) : (
+            data?.map((item) => (
+              <Stack key={item.id}>
+                <Typography>
+                  {item.jabatan} - {item.nama}
+                </Typography>
+              </Stack>
+            ))
+          )}
         </AppScrollbar>
         <StyledBox>
           <IconButton>
@@ -99,4 +113,5 @@ export default FormAddressBook;
 FormAddressBook.propTypes = {
   text: PropTypes.string.isRequired,
   data: PropTypes.any,
+  templateData: PropTypes.object,
 };

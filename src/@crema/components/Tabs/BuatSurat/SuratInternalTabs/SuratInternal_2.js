@@ -5,7 +5,7 @@ import { Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../../FormAddressBook';
-const SuratInternal_2 = ({ handleNext, handlePrev }) => {
+const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   return (
@@ -19,7 +19,11 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={kepada} />
+        <FormAddressBook
+          text='Kepada'
+          data={kepada}
+          templateData={templateData}
+        />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -50,17 +54,25 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               overflow: 'auto',
             }}
           >
-            {kepada?.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
+            {templateData ? (
+              <Typography>{templateData.kepada}</Typography>
+            ) : (
+              kepada?.map((item) => (
+                <Stack key={item.id}>
+                  <Typography>
+                    {item.jabatan} - {item.nama}
+                  </Typography>
+                </Stack>
+              ))
+            )}
           </AppScrollbar>
         </Box>
 
-        <FormAddressBook text='Tembusan' data={tembusan} />
+        <FormAddressBook
+          text='Tembusan'
+          data={tembusan}
+          templateData={templateData}
+        />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -91,13 +103,17 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
               overflow: 'auto',
             }}
           >
-            {tembusan.map((item) => (
-            <Stack key={item.id}>
-              <Typography>
-                {item.jabatan} - {item.nama}
-              </Typography>
-            </Stack>
-          ))}
+            {templateData ? (
+              <Typography>{templateData.tembusan}</Typography>
+            ) : (
+              tembusan?.map((item) => (
+                <Stack key={item.id}>
+                  <Typography>
+                    {item.jabatan} - {item.nama}
+                  </Typography>
+                </Stack>
+              ))
+            )}
           </AppScrollbar>
         </Box>
 
@@ -141,6 +157,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev }) => {
 SuratInternal_2.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  templateData: PropTypes.object,
 };
 
 export default SuratInternal_2;
