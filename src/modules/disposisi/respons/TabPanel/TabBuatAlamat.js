@@ -169,12 +169,12 @@ const TabBuatAlamat = () => {
           </Box>
           {(itemsLength > 1) && (
             <CustomCloseButton onClick={() => handleRemoveItem(index)}>
-              <X style={{ width: '14px', height: '14px' }} />
+              <X style={{ width: '20px', height: '20px' }} />
             </CustomCloseButton>
           )}
         </Box>
 
-        <Box sx={{ width: '60%' }}>
+        <Box>
           <FormAddressBook text='Kepada' data={dataAddressBook} />
         </Box>
 
@@ -198,7 +198,7 @@ const TabBuatAlamat = () => {
                 }
                 type='number'
                 sx={{ width: '85px' }}
-                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', min: 0 }}
               />
               <Typography className='render-item-todo-text'>
                 Hari Sebelum
@@ -279,7 +279,7 @@ const TabBuatAlamat = () => {
     <FormControl fullWidth>
       <Stack rowGap={'16px'}>
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Stack rowGap={'16px'}>
               <Box className='content-styled-box'>
                 <Stack gap={'10px'}>
@@ -332,7 +332,7 @@ const TabBuatAlamat = () => {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={11}>
+          <Grid item xs={12}>
             <Stack rowGap={'16px'}>
               <Box>
                 <Typography sx={{ fontWeight: '700', fontSize: '16px' }}>
