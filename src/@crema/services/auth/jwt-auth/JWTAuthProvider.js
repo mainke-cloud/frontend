@@ -33,38 +33,56 @@ const JWTAuthAuthProvider = ({ children }) => {
         return;
       }
       setAuthToken(token);
-      jwtAxios
-        .get('/auth')
-        .then(({ data }) => {
-          fetchSuccess();
-          setJWTAuthData({
-            user: data,
-            isLoading: false,
-            isAuthenticated: true,
-          });
-        })
-        .catch(() => {
-          setJWTAuthData({
-            user: undefined,
-            isLoading: false,
-            isAuthenticated: false,
-          });
-          fetchSuccess();
+      const userData = JSON.parse(sessionStorage.getItem('user'));
+      if (userData) {
+        setJWTAuthData({
+          user: userData,
+          isLoading: false,
+          isAuthenticated: true,
         });
+        fetchSuccess();
+      } else {
+        setJWTAuthData({
+          user: undefined,
+          isLoading: false,
+          isAuthenticated: false,
+        });
+        fetchSuccess();
+      }
+      // jwtAxios
+      //   .get('/auth')
+      //   .then(({ data }) => {
+      //     fetchSuccess();
+      //     setJWTAuthData({
+      //       user: data,
+      //       isLoading: false,
+      //       isAuthenticated: true,
+      //     });
+      //   })
+      //   .catch(() => {
+      //     setJWTAuthData({
+      //       user: undefined,
+      //       isLoading: false,
+      //       isAuthenticated: false,
+      //     });
+      //     fetchSuccess();
+      //   });
     };
 
     getAuthUser();
   }, []);
 
-  const signInUser = async ({ email, password }) => {
+  const signInUser = async ({ username, password }) => {
     fetchStart();
     try {
-      const { data } = await jwtAxios.post('auth', { email, password });
-      localStorage.setItem('token', data.token);
-      setAuthToken(data.token);
-      const res = await jwtAxios.get('/auth');
+      const { data } = await jwtAxios.post('/api/auth/login/', { username, password });
+      console.log(data);
+      sessionStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('token', data.jwt);
+      setAuthToken(data.jwt);
+      // const res = await jwtAxios.get('/api/auth/login/');
       setJWTAuthData({
-        user: res.data,
+        user: data,
         isAuthenticated: true,
         isLoading: false,
       });
@@ -79,10 +97,10 @@ const JWTAuthAuthProvider = ({ children }) => {
     }
   };
 
-  const signUpUser = async ({ name, email, password }) => {
+  const signUpUser = async ({ name, username, password }) => {
     fetchStart();
     try {
-      const { data } = await jwtAxios.post('users', { name, email, password });
+      const { data } = await jwtAxios.post('users', { name, username, password });
       localStorage.setItem('token', data.token);
       setAuthToken(data.token);
       const res = await jwtAxios.get('/auth');
@@ -105,6 +123,8 @@ const JWTAuthAuthProvider = ({ children }) => {
 
   const logout = async () => {
     localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    
     setAuthToken();
     setJWTAuthData({
       user: null,

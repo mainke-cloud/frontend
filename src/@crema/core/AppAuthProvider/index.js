@@ -2,20 +2,21 @@ import React from 'react';
 import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
 import FirebaseAuthProvider from '@crema/services/auth/firebase/FirebaseAuthProvider';
 import PropTypes from 'prop-types';
+import JWTAuthAuthProvider from '@crema/services/auth/jwt-auth/JWTAuthProvider';
 
-const AppAuthProvider = ({ children }) => {
-  const { fetchStart, fetchSuccess, fetchError, showMessage } =
+const AppAuthProvider = ({children}) => {
+  const {fetchStart, fetchSuccess, fetchError, showMessage} =
     useInfoViewActionsContext();
 
   return (
-    <FirebaseAuthProvider
+    <JWTAuthAuthProvider
       fetchStart={fetchStart}
       fetchError={fetchError}
       fetchSuccess={fetchSuccess}
       showMessage={showMessage}
     >
       {children}
-    </FirebaseAuthProvider>
+    </JWTAuthAuthProvider>
   );
 };
 

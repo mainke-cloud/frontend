@@ -37,6 +37,7 @@ import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan
 import Folder from 'modules/folder/index';
 import Listdata from 'modules/folder/content/ListData';
 import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
+import Forward from 'modules/forward';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -101,6 +102,8 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Buat Template'
             ? inboxIcon
+            : type === 'Forward'
+            ? inboxIcon
             : '',
 
         content:
@@ -138,6 +141,8 @@ export const addTab = (id, state, type) => {
             <Template />
           ) : type === 'Buat Template' ? (
           <BuatTemplateSurat />
+          ) : type === 'Forward' ? (
+            <Forward />
           ) : (
             <BelumPilih />
           ),

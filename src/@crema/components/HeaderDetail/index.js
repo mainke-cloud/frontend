@@ -86,7 +86,7 @@ const HeaderDetail = ({
     dispatch(handleClose());
   };
 
-  const handleBuatDisposisi = (name) => {
+  const handleAddTab = (name) => {
     dispatch(addTab(tabId, tabs, name));
   };
 
@@ -285,13 +285,12 @@ const HeaderDetail = ({
                 </AppTooltip>
               )}
               {globe && (
-                <AppTooltip title='Kirim' placement='bottom'>
-                  <IconButton
-                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                  >
-                    <Globe style={{ width: '28px', height: '28px' }} />
-                  </IconButton>
-                </AppTooltip>
+                <IconButton
+                onClick={() => handleAddTab('BuatDisposisi')}
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                >
+                  <Globe style={{ width: '28px', height: '28px' }} />
+                </IconButton>
               )}
               {copy && (
                 <AppTooltip title='Kirim' placement='bottom'>
@@ -360,13 +359,14 @@ const HeaderDetail = ({
               )}
               {forward && (
                 <AppTooltip title='Teruskan' placement='bottom'>
-                  <IconButton
-                    sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
-                    >
-                    <ShortcutTwoToneIcon
-                      style={{ width: '28px', height: '28px' }}
-                    />
-                  </IconButton>
+                 <IconButton
+                  sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
+                  onClick={() => handleAddTab('Forward')}
+                >
+                  <ShortcutTwoToneIcon
+                    style={{ width: '28px', height: '28px' }}
+                  />
+                </IconButton>
                 </AppTooltip>
               )}
               {sign && (

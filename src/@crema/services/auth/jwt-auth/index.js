@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const jwtAxios = axios?.create({
-  baseURL: 'https://cremaapi.pythonanywhere.com/api/', //YOUR_API_URL HERE
+  baseURL: 'http://127.0.0.1:8000/', //YOUR_API_URL HERE
   headers: {
     'Content-Type': 'application/json',
   },
