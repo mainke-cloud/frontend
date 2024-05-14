@@ -1,10 +1,5 @@
 import React from 'react';
-import { Box, Grid, Stack } from '@mui/material';
-
-import pdf from '../../../../assets/icon/pdf.svg';
-import CustomMoreMenu from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreMenu';
-import CustomMoreItem from '@crema/components/Tabs/Disposisi/TabPanel/CustomMoreItem';
-import AppScrollbar from '@crema/components/AppScrollbar';
+import { Box, Stack } from '@mui/material';
 import { listData1, listData2, listData3 } from '../../../../@crema/services/dummy/sidebar/listDataDisposisi';
 import ListFile from '@crema/components/Tabs/ListFile';
 const TabLainnya = () => {

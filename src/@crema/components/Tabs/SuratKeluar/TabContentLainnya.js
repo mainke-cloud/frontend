@@ -1,12 +1,7 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
-import gridIcon from '../../../../assets/icon/grid.svg';
-import menuIcon from '../../../../assets/icon/menu.svg';
-import AppScrollbar from '@crema/components/AppScrollbar';
+import { Stack } from '@mui/material';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import { styled } from '@mui/material/styles';
-import DropZone from './DropZone';
 import TabWrapper from '../../../../modules/suratKeluar/TabWrapper';
 import {
   listData1,
@@ -16,12 +11,6 @@ import {
 import ListFile from '../ListFile';
 const TabContentLainnya = () => {
   const files = [listData1, listData2, listData3];
-  const Judul = styled(Typography)({
-    fontSize: '14px',
-    fontWeight: '700',
-    lineHeight: '20px',
-    padding: '16px 16px 0px 16px',
-  });
   const lampiran = files[0][0].Lampiran;
   const refrensi = files[0][0].Refrensi;
   return (

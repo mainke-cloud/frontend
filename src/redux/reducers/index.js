@@ -7,6 +7,7 @@ import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 import headerReducer from './headerReducer';
 import addressbookReducer from './addressbookReducer';
+import classificationReducer from './classificationReducer';
 export default combineReducers({
   user: userReducer,
   auth: loginReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   surat: suratReducer,
   header: headerReducer,
   addressbook: addressbookReducer,
+  classification: classificationReducer,
 });

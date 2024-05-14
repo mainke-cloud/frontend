@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
-import { useSelector } from 'react-redux';
 
 const FormAddressBook = (props) => {
   const { text, data } = props;
-
+console.log(data)
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
     gap: '16px',
@@ -41,10 +40,16 @@ const FormAddressBook = (props) => {
 
   return (
     <StyledStack>
-      <StyledTitle>
-        {text}
-        <CustomSpan>*</CustomSpan>
-      </StyledTitle>
+      <Link
+        component='button'
+        onClick={onOpenComposeMail}
+        sx={{ color: 'black' }}
+      >
+        <StyledTitle sx={{ textAlign: 'left' }}>
+          {text}
+          <CustomSpan>*</CustomSpan>
+        </StyledTitle>
+      </Link>
 
       <Box
         position={'relative'}
@@ -60,7 +65,7 @@ const FormAddressBook = (props) => {
             overflow: 'auto',
           }}
         >
-          {data.map((item) => (
+          {data?.map((item) => (
             <Stack key={item.id}>
               <Typography>
                 {item.jabatan} - {item.nama}
@@ -82,7 +87,8 @@ const FormAddressBook = (props) => {
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
         datas={users}
-        type={text}
+        title={text}
+        type='multi'
       />
     </StyledStack>
   );

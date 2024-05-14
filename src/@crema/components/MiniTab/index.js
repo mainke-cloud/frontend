@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Tab } from '@mui/material';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateValue } from '../../../redux/actions/headerAction';
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: '100px',

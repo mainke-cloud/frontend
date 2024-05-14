@@ -144,6 +144,7 @@ const AppSidebarFooter = (props) => {
         isStatus === 'perlu tindak lanjut' ||
         isStatus === 'draft' ||
         isStatus === 'komposer' ||
+        isStatus === 'folder' ||
         isStatus === 'lacak proses' ||
         isStatus === 'surat diminta' ||
         isStatus === 'surat dibatalkan' ||

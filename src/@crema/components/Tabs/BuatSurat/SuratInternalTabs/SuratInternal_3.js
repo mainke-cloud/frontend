@@ -4,9 +4,32 @@ import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
+import { users } from '../../../../services/dummy/user/user';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useState } from 'react';
 
-const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
+const SuratInternal_3 = ({ handleNext, handlePrev, onStateChange }) => {
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
+
+  const formik = useFormik({
+    initialValues: {
+      jabatan: '',
+      nama: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      jabatan: yup.string().required('Kolom ini wajib diisi'),
+      nama: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
+  };
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -47,9 +70,11 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Kepala Research and Development'
+          name='jabatan'
+          error={formik.errors.jabatan}
+          value={`${pengirim.jabatan}`}
+          onChange={handleChange}
           InputProps={{
             endAdornment: (
               <IconButton onClick={() => onOpenComposeMail()}>
@@ -60,6 +85,11 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
             ),
           }}
         />
+        {formik.touched.jabatan && formik.errors.jabatan && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.jabatan}
+          </Typography>
+        )}
 
         <Stack direction='row'>
           <Link
@@ -81,12 +111,14 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
         </Stack>
 
         <TextField
-          disabled
           fullWidth
-          defaultValue='Taufik Sulaeman'
+          name='nama'
+          error={formik.errors.nama}
+          value={`${pengirim.nama}`}
+          onChange={handleChange}
           InputProps={{
             endAdornment: (
-              <IconButton>
+              <IconButton onClick={() => onOpenComposeMail()}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
@@ -94,29 +126,34 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
             ),
           }}
         />
+        {formik.touched.nama && formik.errors.nama && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.nama}
+          </Typography>
+        )}
 
         <Typography variant='h4'>Divisi</Typography>
 
-        <TextField disabled fullWidth defaultValue='Divisi Informasi' />
+        <TextField fullWidth value={`${pengirim.divisi}`} />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
-            <TextField disabled defaultValue='8900002' />
+            <TextField value={`${pengirim.nikl}`} />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
-            <TextField disabled defaultValue='DIT-11 B 10000' />
+            <TextField value={`${pengirim.kode_departemen}`} />
           </Stack>
         </Stack>
 
         <Typography variant='h4'>Departemen</Typography>
 
-        <TextField disabled fullWidth defaultValue='Decision Support' />
+        <TextField fullWidth value={`${pengirim.departemen}`} />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
-        <TextField disabled fullWidth defaultValue='Bandung' />
+        <TextField fullWidth value={`${pengirim.kota}`} />
 
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
@@ -140,7 +177,7 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Penerima)
           </Button>
@@ -150,14 +187,18 @@ const SuratDelegasi_3 = ({ handleNext, handlePrev }) => {
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
+        datas={users}
+        title='Pengirim'
+        type='single'
       />
     </>
   );
 };
 
-SuratDelegasi_3.propTypes = {
+SuratInternal_3.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
-export default SuratDelegasi_3;
+export default SuratInternal_3;

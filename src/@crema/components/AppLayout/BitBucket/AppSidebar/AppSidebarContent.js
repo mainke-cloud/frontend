@@ -109,6 +109,8 @@ export default function AppSidebarContent(props) {
         ? dispatch(childTab(item.id, tabs, 'Surat Terkirim', item))
         : isStatus === 'surat dibatalkan'
         ? dispatch(childTab(item.id, tabs, 'Surat Dibatalkan', item))
+        : isStatus === 'folder'
+        ? dispatch(childTab(item.id, tabs, 'Folder', item))
         : null;
     }
   };

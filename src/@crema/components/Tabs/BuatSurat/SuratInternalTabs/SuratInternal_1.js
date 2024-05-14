@@ -1,34 +1,11 @@
-import {
-  Box,
-  Button,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppScrollbar from '@crema/components/AppScrollbar';
-import ButtonBuatSurat from './ButtonBuatSurat/ButtonBuatSurat';
-
-const perihal = [
-  {
-    value: '1',
-    label: '',
-  },
-  {
-    value: '2',
-    label: '',
-  },
-  {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
-  },
-];
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import FormClassification from '../../FormClassification';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const prioritas = [
   {
@@ -56,7 +33,43 @@ const jenisSurat = [
   },
 ];
 
-const SuratInternal_1 = ({ handleNext }) => {
+const SuratInternal_1 = ({ handleNext, onStateChange }) => {
+  const formik = useFormik({
+    initialValues: {
+      perihal: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      perihal: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
+
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
+  let datass = kepada[0];
+  if (!datass || !Array.isArray(datass)) {
+    datass = [];
+  }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    onStateChange({ ...formData, [name]: value });
+    formik.setFieldValue(name, value);
+
+    if (name === 'lampiran' && parseInt(value) < 0) {
+      setFormData({ ...formData, [name]: 0 });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
   return (
     <>
       <Stack
@@ -82,51 +95,24 @@ const SuratInternal_1 = ({ handleNext }) => {
 
         <TextField
           id='outlined-select-currency'
-          select
           fullWidth
-          defaultValue='1'
-        >
-          {perihal.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          name='perihal'
+          error={formik.errors.perihal}
+          value={formData.perihal}
+          onChange={handleChange}
+        />
+        {formik.touched.perihal && formik.errors.perihal && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.perihal}
+          </Typography>
+        )}
 
-        <Typography
-          variant='h4'
-          sx={{
-            '&::after': {
-              content: '"*"',
-              color: 'red',
-            },
-          }}
-        >
-          Klarifikasi Masalah
-        </Typography>
-
-        <Box
-          position={'relative'}
-          sx={{
-            border: '1px solid #B1B5BA',
-            borderRadius: '10px',
-          }}
-        >
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          ></AppScrollbar>
-          <ButtonBuatSurat pemeriksa />
-        </Box>
+        <FormClassification text='Klasifikasi Masalah' />
 
         <Typography
           variant='body1'
           sx={{
             color: '#5C5E61',
-            // width: '370px',
           }}
         >
           Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
@@ -137,22 +123,29 @@ const SuratInternal_1 = ({ handleNext }) => {
           select
           fullWidth
           defaultValue='1'
+          name='prioritas'
+          value={formData.prioritas}
+          onChange={handleChange}
         >
           {prioritas.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.label}>
               {option.label}
             </MenuItem>
           ))}
         </TextField>
+
         <Typography variant='h4'>Jenis Surat</Typography>
         <TextField
           id='outlined-select-currency'
           select
           fullWidth
           defaultValue='1'
+          name='jenis'
+          value={formData.jenis}
+          onChange={handleChange}
         >
           {jenisSurat.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.label}>
               {option.label}
             </MenuItem>
           ))}
@@ -165,6 +158,9 @@ const SuratInternal_1 = ({ handleNext }) => {
           variant='outlined'
           fullWidth
           type='number'
+          name='lampiran'
+          value={formData.lampiran}
+          onChange={handleChange}
           InputLabelProps={{
             shrink: true,
           }}
@@ -178,7 +174,7 @@ const SuratInternal_1 = ({ handleNext }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Pengirim)
           </Button>
@@ -190,6 +186,7 @@ const SuratInternal_1 = ({ handleNext }) => {
 
 SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
 export default SuratInternal_1;

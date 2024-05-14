@@ -3,25 +3,26 @@ import PropTypes from 'prop-types';
 import Zoom from '@mui/material/Zoom';
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { lighten } from '@mui/material';
+// import { lighten } from '@mui/material';
 import styled from '@emotion/styled';
 
 const LightTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {
-    color: lighten(theme.palette.background.default, 0.25),
+    color: theme.palette.coofis.tertiary[90],
     '&:before': {
       boxShadow: theme.shadows[1],
     },
   },
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: lighten(theme.palette.background.default, 0.25),
-    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.coofis.tertiary[90], 
+    color: theme.palette.background.paper, 
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
 }));
+
 
 const AppTooltip = ({ title, children, placement = 'top' }) => {
   return (

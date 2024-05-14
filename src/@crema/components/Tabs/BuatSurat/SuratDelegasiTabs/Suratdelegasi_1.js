@@ -1,76 +1,46 @@
 import {
   Box,
   Button,
-  Grid,
-  Icon,
-  IconButton,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import { CiFileOn } from 'react-icons/ci';
-import PreviewSurat from '@crema/components/PreviewSurat';
-import { GrAttachment } from 'react-icons/gr';
-import PreviewSuratImage from '../../../../assets/BuatSurat/Preview Surat.png';
-import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
-import { Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import TextFieldDate from '../TextFieldDate/TextFieldDate';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
-const perihal = [
-  {
-    value: '1',
-    label: '',
-  },
-  {
-    value: '2',
-    label: '',
-  },
-  {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
-  },
-];
+const SuratDelegasi_1 = ({ handleNext, onStateChange }) => {
+  const formik = useFormik({
+    initialValues: {
+      perihal: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      perihal: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
 
-const prioritas = [
-  {
-    value: '1',
-    label: 'Normal',
-  },
-  {
-    value: '2',
-    label: 'Segera',
-  },
-];
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onStateChange({ ...formData, [name]: value });
+    formik.setFieldValue(name, value);
 
-const jenisSurat = [
-  {
-    value: '1',
-    label: 'Biasa',
-  },
-  {
-    value: '2',
-    label: 'Rhs',
-  },
-  {
-    value: '3',
-    label: 'Rhs-Prib',
-  },
-];
-
-const SuratDelegasi_1 = ({ handleNext }) => {
-  const [showPreview, setShowPreview] = useState(false);
-
-  const handleShow = () => {
-    setShowPreview(!showPreview);
+    if (name === 'lampiran' && parseInt(value) < 0) {
+      setFormData({ ...formData, [name]: 0 });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+
+  const [formData, setFormData] = useState({
+    perihal: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
 
   return (
     <Box>
@@ -97,19 +67,27 @@ const SuratDelegasi_1 = ({ handleNext }) => {
 
         <TextField
           id='outlined-select-currency'
-          select
           fullWidth
-          defaultValue='1'
-        ></TextField>
+          name='perihal'
+          error={formik.errors.perihal}
+          value={formData.perihal}
+          onChange={handleChange}
+        />
+
+        {formik.touched.perihal && formik.errors.perihal && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.perihal}
+          </Typography>
+        )}
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Tanggal Mulai</Typography>
-            <TextField />
+            <TextFieldDate />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Tanggal Selesai</Typography>
-            <TextField />
+            <TextFieldDate />
           </Stack>
         </Stack>
         <Typography variant='h4'>Lampiran</Typography>
@@ -119,6 +97,9 @@ const SuratDelegasi_1 = ({ handleNext }) => {
           variant='outlined'
           fullWidth
           type='number'
+          name='lampiran'
+          value={formData.lampiran}
+          onChange={handleChange}
           InputLabelProps={{
             shrink: true,
           }}
@@ -128,23 +109,11 @@ const SuratDelegasi_1 = ({ handleNext }) => {
             variant='contained'
             sx={{
               borderRadius: '12px',
-              bgcolor: '#D9DDE3',
-              color: '#5C5E61',
-              minWidth: '84px',
-            }}
-          >
-            Kembali
-          </Button>
-
-          <Button
-            variant='contained'
-            sx={{
-              borderRadius: '12px',
               bgcolor: '#E42313',
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Pengirim)
           </Button>
@@ -156,6 +125,7 @@ const SuratDelegasi_1 = ({ handleNext }) => {
 
 SuratDelegasi_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  onStateChange: PropTypes.func,
 };
 
 export default SuratDelegasi_1;
