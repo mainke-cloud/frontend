@@ -6,17 +6,29 @@ import SuratDelegasi_3 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/
 import SuratDelegasi_4 from '@crema/components/Tabs/BuatSurat/SuratDelegasiTabs/Suratdelegasi_4';
 import { Box, Grid, Stack } from '@mui/material';
 import '../../styles/button.css';
-import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarSection';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';
+import KomentarPopUp from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarPopUp';
 
 const SuratDelegasi = () => {
   const dispatch = useDispatch();
+
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+  const [komen, setKomen] = useState('');
+  const [showKomen, setShowKomen] = useState(false);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
@@ -35,16 +47,12 @@ const SuratDelegasi = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const [formData, setFormData] = useState({
-    perihal: '',
-    klasifikasi: '',
-    prioritas: '1',
-    jenis: '1',
-    lampiran: 1,
-  });
-
   const handleChangeForm = (formData) => {
     setFormData(formData);
+  };
+
+  const onCreate = (data) => {
+    setKomen(data.komen);
   };
 
   const step = ['Info', 'Penerima', 'Pengirim', 'Lainnya'];
@@ -84,7 +92,13 @@ const SuratDelegasi = () => {
               </Grid>
 
               <Grid item xs={4}>
-                <KomentarSection />
+                <Stack>
+                  <KomentarSection
+                    onCreate={onCreate}
+                    setShowKomen={setShowKomen}
+                  />
+                  {showKomen ? <KomentarPopUp komen={komen} /> : null}
+                </Stack>
               </Grid>
             </Grid>
           </>
