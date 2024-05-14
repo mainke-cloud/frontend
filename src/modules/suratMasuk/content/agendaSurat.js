@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Stack } from '@mui/material';
-import { Table, TableBody, TableContainer} from '@mui/material';
+import { Table, TableBody, TableContainer } from '@mui/material';
 import CustomRow from '@crema/components/Tabs/Disposisi/TabPanel/CustomRow';
 import PropsTypes from 'prop-types';
 
@@ -17,7 +17,7 @@ const AgendaSurat = (props) => {
             <TableBody>
               {data.map((row, index) => (
                 <>
-                  <CustomRow key={index} name='No Agenda' data={row.noAgenda} />
+                  <CustomRow name='No Agenda' data={row.noAgenda} />
                   <CustomRow
                     key={index}
                     name='tanggal Dikirim'
