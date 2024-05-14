@@ -25,9 +25,14 @@ const SuratDelegasi_1 = ({ handleNext, onStateChange }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
     onStateChange({ ...formData, [name]: value });
     formik.setFieldValue(name, value);
+
+    if (name === 'lampiran' && parseInt(value) < 0) {
+      setFormData({ ...formData, [name]: 0 });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const [formData, setFormData] = useState({

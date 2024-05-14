@@ -13,13 +13,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
+
 const SuratInternal = () => {
   const dispatch = useDispatch();
+
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
+
   const [formData, setFormData] = useState({
     perihal: '',
     klasifikasi: '',
@@ -36,9 +40,11 @@ const SuratInternal = () => {
     }
     dispatch(addInfo(formData));
   };
+
   const handleChangeForm = (formData) => {
     setFormData(formData);
   };
+
   const handlePrev = () => {
     setActiveStep(activeStep - 1);
   };
@@ -87,6 +93,7 @@ const SuratInternal = () => {
           </>
         )}
       </Box>
+
       <Stack
         sx={{
           backgroundColor: 'white',

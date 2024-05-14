@@ -59,9 +59,15 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+
     onStateChange({ ...formData, [name]: value });
     formik.setFieldValue(name, value);
+
+    if (name === 'lampiran' && parseInt(value) < 0) {
+      setFormData({ ...formData, [name]: 0 });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
