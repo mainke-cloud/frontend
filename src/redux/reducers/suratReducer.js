@@ -18,4 +18,17 @@ const suratReducer = (state = initialState, action) => {
   }
 };
 
+const getSuratAll = (state = initialState, action) => {
+  switch (action.type) {
+    case 'GET_SURAT_ALL':
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export default suratReducer;
