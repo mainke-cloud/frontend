@@ -4,25 +4,8 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import FormClassification from '../../FormClassification';
-
-const perihal = [
-  {
-    value: '1',
-    label: '',
-  },
-  {
-    value: '2',
-    label: '',
-  },
-  {
-    value: '3',
-    label: '',
-  },
-  {
-    value: '4',
-    label: '',
-  },
-];
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const prioritas = [
   {
@@ -51,6 +34,16 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext, onStateChange }) => {
+  const formik = useFormik({
+    initialValues: {
+      perihal: '',
+    },
+    onSubmit: handleNext,
+    validationSchema: yup.object().shape({
+      perihal: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
+
   const kepada = useSelector((state) => state.addressbook.kepada);
   const [formData, setFormData] = useState({
     perihal: '',
@@ -68,6 +61,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
     onStateChange({ ...formData, [name]: value });
+    formik.setFieldValue(name, value);
   };
 
   return (
@@ -92,13 +86,20 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
         >
           Perihal
         </Typography>
+
         <TextField
           id='outlined-select-currency'
           fullWidth
           name='perihal'
+          error={formik.errors.perihal}
           value={formData.perihal}
           onChange={handleChange}
         />
+        {formik.touched.perihal && formik.errors.perihal && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.perihal}
+          </Typography>
+        )}
 
         <FormClassification text='Klasifikasi Masalah' />
 
@@ -106,7 +107,6 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
           variant='body1'
           sx={{
             color: '#5C5E61',
-            // width: '370px',
           }}
         >
           Saat klasifikasi masalah dipilih, menampilkan nama klasifikasi masalah
@@ -168,7 +168,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={formik.handleSubmit}
           >
             Selanjutnya (Pengirim)
           </Button>

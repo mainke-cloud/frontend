@@ -94,8 +94,8 @@ const SuratInternal = () => {
           width: '921px',
           mx: 'auto',
           display: 'flex',
-          borderRadius: '10px', // Mengatur border radius
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+          borderRadius: '10px',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
           mb: '30px',
         }}
       >
