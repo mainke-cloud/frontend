@@ -190,7 +190,7 @@ const DropZoneFile = () => {
           </Buttons>
         </Box>
       )}
-      {TotalSize > 25 && (
+      {0 > 25 && (
         <Box
           position='absolute'
           top='0'

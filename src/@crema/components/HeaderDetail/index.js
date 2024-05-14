@@ -348,7 +348,7 @@ const HeaderDetail = ({
               {disposisi && (
                 <AppTooltip title='Disposisi' placement='bottom'>
                   <IconButton
-                    onClick={() => handleBuatDisposisi('BuatDisposisi')}
+                    onClick={() => handleAddTab('BuatDisposisi')}
                     sx={{ border: '1px solid #B1B5BA', borderRadius: '3px' }}
                   >
                     <AutorenewRoundedIcon
