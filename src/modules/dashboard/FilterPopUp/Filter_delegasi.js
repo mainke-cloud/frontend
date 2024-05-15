@@ -4,7 +4,6 @@ import { Button, Card, CardContent, Divider, Grid, IconButton, Popover, Stack, T
 import { X } from 'feather-icons-react';
 
 export default function Filter_delegasi({ open, onClose }) {
-
     const [dateFilter, setDateFilter] = React.useState(null);
 
     const handleDateFilter = (value) => {
@@ -14,7 +13,6 @@ export default function Filter_delegasi({ open, onClose }) {
         <>
              <Popover
                 open={open}
-                // anchorEl={openFilter}
                 onClose={onClose}
                 anchorOrigin={{
                     vertical: 'top',

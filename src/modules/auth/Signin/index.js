@@ -1,3 +1,3 @@
-import SigninFirebase from './SigninFirebase';
+import SigninJwtAuth from './SigninJwtAuth';
 
-export default SigninFirebase;
+export default SigninJwtAuth;

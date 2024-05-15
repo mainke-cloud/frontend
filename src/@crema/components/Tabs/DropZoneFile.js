@@ -111,7 +111,7 @@ const DropZoneFile = () => {
             </Stack>
           </>
         )}
-       <Grid container columns={12} spacing={5}>
+        <Grid container columns={12} spacing={5}>
           {file.map((file, index) => (
             <Grid item xs={6} sm={6} md={4} lg={3} key={index} sx={{}}>
               <Stack
@@ -188,6 +188,26 @@ const DropZoneFile = () => {
               onChange={handleFileSelected}
             />
           </Buttons>
+        </Box>
+      )}
+      {0 > 25 && (
+        <Box
+          position='absolute'
+          top='0'
+          width='100%'
+          zIndex='1'
+          justifyContent='start'
+          display='flex'
+          backgroundColor='#FFD2D2'
+          borderRadius='8px'
+          sx={{opacity:'0.8'}}
+        >
+          <Stack padding='8px'>
+            <Typography fontWeight='700'>Perhatian :</Typography>
+            <Typography fontSize='12px'>
+              Besar Ukuran Surat & Lampiran yang dipilih melebihi batas
+            </Typography>
+          </Stack>
         </Box>
       )}
     </Box>

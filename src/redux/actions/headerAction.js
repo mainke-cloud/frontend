@@ -16,3 +16,8 @@ export const updateValue = (index) => {
     dispatch({ type: 'UPDATE_VALUE', payload: index });
   };
 };
+export const handleTemplate = () => {
+  return (dispatch) => {
+    dispatch({ type: 'IS_TEMPLATE', payload: true }); // Mengirimkan aksi dengan payload true
+  };
+};

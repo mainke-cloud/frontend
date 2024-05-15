@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +11,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import AProfile from '../../assets/vector/Avatar.png';
+import axios from 'axios';
 
 import { User, Briefcase, Phone } from 'feather-icons-react';
 
@@ -41,55 +42,110 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     backgroundColor: '#52BD94',
     color: '#52BD94',
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    zIndex: '0',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({}));
 
-const diri = [
-  {
-    name: 'Nama Lengkap',
-  },
-  {
-    name: 'Alamat',
-  },
-  {
-    name: 'NIK Group',
-  },
-  {
-    name: 'NIK Local',
-  },
-];
-const pekerjaan = [
-  {
-    name: 'Kota',
-  },
-  {
-    name: 'Organisasi',
-  },
-  {
-    name: 'Division',
-  },
-  {
-    name: 'Departemen',
-  },
-  {
-    name: 'Kode Departemen',
-  },
-  {
-    name: 'Jabatan',
-  },
-];
-const kontak = [
-  {
-    name: 'Email',
-  },
-  {
-    name: 'Nomor Handphone',
-  },
-];
-
 const Profile = () => {
+  const [user, setUser] = useState({});
+  const [userId, setUserId] = useState(0);
+  const diri = [
+    {
+      name: 'Nama Lengkap',
+      content: `${user && user.length > 0 ? user[0].nama_lengkap : '...'}`,
+    },
+    {
+      name: 'Alamat',
+      content: `${user && user.length > 0 ? user[0].alamat : '...'}`,
+    },
+    {
+      name: 'NIK Group',
+      content: `${user && user.length > 0 ? user[0].nik_group : '...'}`,
+    },
+    {
+      name: 'NIK Local',
+      content: `${user && user.length > 0 ? user[0].nik_lokal : '...'}`,
+    },
+  ];
+
+  const pekerjaan = [
+    {
+      name: 'Kota',
+      content: `${user && user.length > 0 ? user[0].kota : '...'}`,
+    },
+    {
+      name: 'Organisasi',
+      content: `${user && user.length > 0 ? user[0].organisasi : '...'}`,
+    },
+    {
+      name: 'Division',
+      content: `${
+        user &&
+        user.length > 0 &&
+        user[0].departemen_detail &&
+        user[0].departemen_detail.divisi_detail
+          ? user[0].departemen_detail.divisi_detail.nama_divisi
+          : '...'
+      }`,
+    },
+    {
+      name: 'Departemen',
+      content: `${
+        user && user.length > 0 && user[0].departemen_detail
+          ? user[0].departemen_detail.nama_departemen
+          : '...'
+      }`,
+    },
+    {
+      name: 'Kode Departemen',
+      content: `${
+        user && user.length > 0 && user[0].departemen_detail
+          ? user[0].departemen_detail.kode_departemen
+          : '...'
+      }`,
+    },
+    {
+      name: 'Jabatan',
+      content: `${
+        user && user.length > 0 && user[0].jabatan_detail
+          ? user[0].jabatan_detail.nama_jabatan
+          : '...'
+      }`,
+    },
+  ];
+
+  const kontak = [
+    {
+      name: 'Email',
+      content: `${user && user.length > 0 ? user[0].email : '...'}`,
+    },
+    {
+      name: 'Nomor Handphone',
+      content: `${user && user.length > 0 ? user[0].phone_number : '...'}`,
+    },
+  ];
+
+  useEffect(() => {
+    const dataFromSession = sessionStorage.getItem('user');
+    const data = JSON.parse(dataFromSession);
+    if (data) {
+      setUserId(data.id);
+      getUser(data.id);
+    }
+  }, []);
+
+  const getUser = async (userId) => {
+    try {
+      const response = await axios.get(
+        `http://new.coofis.com/api/profile/?id_user=${userId}`,
+      );
+      setUser(response.data);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
   return (
     <>
       <Box
@@ -101,30 +157,11 @@ const Profile = () => {
           position: 'relative',
         }}
       >
-        {/* <svg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox='0 0 1440 320'
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            zIndex: 0,
-            marginTop: -60,
-          }}
-        >
-          <path
-            fill='#ffffff'
-            fillOpacity='10%'
-            d='M0,128L30,128C60,128,120,128,180,117.3C240,107,300,85,360,96C420,107,480,149,540,186.7C600,224,660,256,720,245.3C780,235,840,181,900,154.7C960,128,1020,128,1080,128C1140,128,1200,128,1260,133.3C1320,139,1380,149,1410,154.7L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z'
-          ></path>
-        </svg> */}
         <Box
           sx={{
             backgroundColor: '#ffffff',
             borderRadius: '12px',
             position: 'relative',
-            zIndex: 1,
           }}
         >
           <Grid
@@ -147,13 +184,20 @@ const Profile = () => {
                 color='text.primary'
                 sx={{ fontSize: 20, fontWeight: 700 }}
               >
-                Manager Dig Life & Collaboration Operation
+                {user && user.length > 0 && user[0].jabatan_detail
+                  ? user[0].jabatan_detail.nama_jabatan
+                  : '...'}
               </Typography>
               <Typography
                 color='text.third'
                 sx={{ fontSize: 14, fontWeight: 400 }}
               >
-                DIVISI INFORMATION TECHNOLOGY
+                {user &&
+                user.length > 0 &&
+                user[0].departemen_detail &&
+                user[0].departemen_detail.divisi_detail
+                  ? user[0].departemen_detail.divisi_detail.nama_divisi.toUpperCase()
+                  : '...'}
               </Typography>
             </Grid>
           </Grid>
@@ -170,7 +214,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <User/>
+                  <User />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -181,7 +225,7 @@ const Profile = () => {
                     </StyledTableCell>
                     <StyledTableCell className='medium'>:</StyledTableCell>
                     <StyledTableCell className='small'>
-                      {row.name}
+                      {row.content}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -197,7 +241,7 @@ const Profile = () => {
                   Informasi Kontak
                 </StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <Phone/>
+                  <Phone />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -205,7 +249,7 @@ const Profile = () => {
                   <StyledTableRow key={row.name}>
                     <StyledTableCell className='medium'>
                       {row.name} :
-                      <Typography className='small'>{row.name}</Typography>
+                      <Typography className='small'>{row.content}</Typography>
                     </StyledTableCell>
                     <StyledTableCell className='small'>
                       {/* {row.name} */}
@@ -225,7 +269,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <Briefcase/>
+                  <Briefcase />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -236,7 +280,7 @@ const Profile = () => {
                     </StyledTableCell>
                     <StyledTableCell className='medium'>:</StyledTableCell>
                     <StyledTableCell className='small'>
-                      {row.name}
+                      {row.content}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

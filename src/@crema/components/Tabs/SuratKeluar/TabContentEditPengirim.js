@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Stack,
   Typography,
@@ -10,14 +10,17 @@ import { useSelector } from 'react-redux';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../services/dummy/user/user';
-import { useState } from 'react';
 const TabContentEditPengirim = () => {
   const pengirim = useSelector((state) => state.addressbook.pengirim);
   const jabatann = useSelector((state) => state.addressbook.jabatann);
   const namaa = useSelector((state) => state.addressbook.namaa);
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-  const [jabatanValue, setJabatanValue] = useState(jabatann.jabatan);
+  const [jabatanValue, setJabatanValue] = useState('');
+
+  useEffect(() => {
+    setJabatanValue(jabatann.jabatan);
+  }, [jabatann.jabatan]);
 
   const handleJabatanChange = (event) => {
     setJabatanValue(event.target.value);
@@ -30,7 +33,7 @@ const TabContentEditPengirim = () => {
     setComposeMailTitle(title);
     setComposeMail(true);
   };
-  
+
   const onCloseComposeMail = () => {
     setJabatanValue(jabatann.jabatan);
     setComposeMail(false);

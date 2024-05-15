@@ -10,10 +10,10 @@ const StyledBadgeDelegasi = styled(Badge)(() => ({
     },
   }));
 
-const Delegasi = ({ Profile, JobDesk, ID }) => {
+const Delegasi = ({ Profile, JobDesk, ID, EndDate }) => {
     return(
         <Grid container sx={{margin: 3}}>
-            <Grid item xs={3}>
+            <Grid item xs={3} sx={{borderBottom: "1px solid #B1B5BA"}}>
                 <StyledBadgeDelegasi
                     overlap='circular'
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -22,7 +22,7 @@ const Delegasi = ({ Profile, JobDesk, ID }) => {
                     <Avatar src={Profile} sx={{border: 2, borderColor: '#FFB068', width: 46, height: 46}} />
                 </StyledBadgeDelegasi>
                 </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={7} sx={{borderBottom: "1px solid #B1B5BA"}}>
                 <Stack direction='column' spacing={2}>
                     <Typography variant='h3'>{JobDesk}</Typography>
                     <Box
@@ -34,7 +34,7 @@ const Delegasi = ({ Profile, JobDesk, ID }) => {
                         }}
                     >
                         <Typography sx={{ height: '18px', marginLeft: 2, color: '#317159' }}>
-                            Aktif Sampai 22 sep{' '}
+                            {"Aktif Sampai "+EndDate}
                         </Typography>
                     </Box>
                     <Typography>{ID}</Typography>
@@ -49,6 +49,7 @@ Delegasi.propTypes = {
     Profile: PropTypes.string.isRequired,
     JobDesk: PropTypes.string.isRequired,
     ID: PropTypes.string.isRequired,
+    EndDate: PropTypes.string.isRequired,
   };
 
 export default Delegasi;

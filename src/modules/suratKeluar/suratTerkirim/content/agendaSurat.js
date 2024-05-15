@@ -15,22 +15,20 @@ const AgendaSurat = (props) => {
         <TableContainer>
           <Table aria-label='customized table'>
             <TableBody>
-              {data.map((row, index) => (
                 <>
-                  <CustomRow key={index} name='No Agenda' data={row.noAgenda} />
+                  <CustomRow name='No Agenda' data={data.noAgenda} />
                   <CustomRow
-                    key={index}
+                  
                     name='tanggal Dikirim'
-                    data={row.tanggalKirim}
+                    data={data.tanggalKirim}
                   />
-                  <CustomRow key={index} name='No Surat' data={row.noSurat} />
-                  <CustomRow key={index} name='Dari' data={row.dari} />
-                  <CustomRow key={index} name='Kepada' data={row.kepada} />
-                  <CustomRow key={index} name='Perihal' data={row.perihal} />
-                  <CustomRow key={index} name='Tembusan' data={row.tembusan} />
-                  <CustomRow key={index} name='lampiran' data={row.lampiran} />
+                  <CustomRow name='No Surat' data={data.noSurat} />
+                  <CustomRow name='Dari' data={data.dari} />
+                  <CustomRow name='Kepada' data={data.kepada} />
+                  <CustomRow name='Perihal' data={data.perihal} />
+                  <CustomRow name='Tembusan' data={data.tembusan} />
+                  <CustomRow name='lampiran' data={data.lampiran} />
                 </>
-              ))}
             </TableBody>
           </Table>
         </TableContainer>

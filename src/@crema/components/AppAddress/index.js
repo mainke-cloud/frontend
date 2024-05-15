@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import AppScrollbar from '../AppScrollbar';
@@ -17,14 +17,6 @@ import {
   Typography,
   Stack,
   IconButton,
-  Table,
-  TableHead,
-  TableContainer,
-  Paper,
-  TableCell,
-  Radio,
-  TableRow,
-  TableBody,
   Checkbox,
   InputBase,
   Divider,
@@ -38,8 +30,9 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowForwardIosSharp from '@mui/icons-material/ArrowForwardIosSharp';
 
-import { X, Trash2, UserPlus, XCircle } from 'feather-icons-react';
+import { X, Trash2, XCircle } from 'feather-icons-react';
 
 import { buttonClasses, TabsList, Tabs, Tab, tabClasses } from '@mui/base';
 import {
@@ -53,6 +46,11 @@ import {
   addJabatan,
   addNama
 } from '../../../redux/actions/addressbookAction';
+
+import JabatanTab from './jabatantab';
+import KaryawanTab from './karyawantab';
+import BawahanTab from './bawahantab';
+import PersonalTab from './personaltab';
 
 const ComposeMail = (props) => {
   const { isComposeMail, onCloseComposeMail, datas, title, type } = props;
@@ -92,14 +90,58 @@ const ComposeMail = (props) => {
       cursor: not-allowed;
     }
   `;
+
+  const StyledAccordion = styled((props) => (
+    <Accordion disableGutters elevation={0} square {...props} />
+  ))(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    '&:not(:last-child)': {
+      borderBottom: 0,
+    },
+    '&:before': {
+      display: 'none',
+    },
+  }));
+
+  const AccordionSummarys = styled((props) => (
+    <AccordionSummary
+      expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    flexDirection: 'row-reverse',
+    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+      transform: 'rotate(90deg)',
+    },
+    '& .MuiAccordionSummary-content': {
+      marginLeft: theme.spacing(1),
+    },
+  }));
+
+  const AccordionDetail = styled(AccordionDetails)(() => ({
+    borderTop: '1px solid rgba(0, 0, 0, .125)',
+  }));
+
+  let check = title === 'Nama' ? 'Karyawan' : 'Jabatan';
+
   const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState('');
   const [previewData, setPreviewData] = useState(null);
   const [singleData, setSingleData] = useState(null);
+  const [selectedAccordionItem, setSelectedAccordionItem] = useState(null);
   const [selectedRow, setSelectedRow] = useState([]);
   const [multipleData, setMultipleData] = useState([]);
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
   const [selectedRowIndices, setSelectedRowIndices] = useState([]);
+
+  useEffect(() => {
+    setActiveTab(check);
+  }, [isComposeMail]);
+
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
 
   const handleOption1Change = (event) => {
     setSelectedOption1(event.target.value);
@@ -120,25 +162,62 @@ const ComposeMail = (props) => {
 
   const handleRadioChange = (index) => {
     if (type === 'single') {
-      setSingleData(datas[index]);
-      setSelectedRow(index);
-      setSelectedRowIndices([index]);
-      setPreviewData(datas[index]);
+      if (selectedRow === index) {
+        setSingleData(null);
+        setSelectedRow(null);
+        setSelectedRowIndices([]);
+        setPreviewData(null);
+      } else {
+        setSingleData(datas[index]);
+        setSelectedRow(index);
+        setSelectedRowIndices([index]);
+        setPreviewData(datas[index]);
+      }
     } else {
       let updatedSelectedRow;
       if (selectedRow.includes(index)) {
         updatedSelectedRow = selectedRow.filter((item) => item !== index);
         setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+        setMultipleData(
+          multipleData.filter((data) => data.id !== datas[index].id),
+        );
       } else {
-        updatedSelectedRow = [...selectedRow, index];
-        setSelectedRowIndices([...selectedRowIndices, index]);
+        const isAlreadySelectedInAccordion = multipleData.some(
+          (data) => data.id === datas[index].id,
+        );
+        if (isAlreadySelectedInAccordion) {
+          // If already selected via accordion, deselect it
+          updatedSelectedRow = selectedRow.filter((item) => item !== index);
+          setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+          setMultipleData(
+            multipleData.filter((data) => data.id !== datas[index].id),
+          );
+        } else {
+          updatedSelectedRow = [...selectedRow, index];
+          setSelectedRowIndices([...selectedRowIndices, index]);
+          setMultipleData([...multipleData, datas[index]]);
+        }
       }
       setSelectedRow(updatedSelectedRow);
 
-      const selectedItems = datas.filter((_, i) =>
-        updatedSelectedRow.includes(i),
-      );
-      setMultipleData(selectedItems);
+      // Cek apakah ada data yang sudah dipilih sebelumnya dalam multipleData
+      const existingDataIndices = multipleData.map((item, i) => i);
+
+      // Jika ada, tambahkan data baru yang dipilih ke dalam multipleData tanpa menghapus data yang sudah ada
+      const newMultipleData = [...multipleData];
+      if (existingDataIndices.length > 0) {
+        const selectedItems = datas.filter((_, i) =>
+          updatedSelectedRow.includes(i),
+        );
+        newMultipleData.push(...selectedItems);
+      } else {
+        const selectedItems = datas.filter((_, i) =>
+          updatedSelectedRow.includes(i),
+        );
+        newMultipleData.push(...selectedItems);
+      }
+      setMultipleData(newMultipleData);
+
       setSingleData(null);
       if (updatedSelectedRow.length > 0) {
         setPreviewData(
@@ -203,6 +282,119 @@ const ComposeMail = (props) => {
     onCloseComposeMail();
   };
 
+  const divisiCount = {};
+
+  // Menghitung jumlah jabatan untuk setiap divisi
+  datas.forEach((user) => {
+    const { divisi, jabatan } = user;
+    if (divisi in divisiCount) {
+      if (divisiCount[divisi][jabatan]) {
+        divisiCount[divisi][jabatan]++;
+      } else {
+        divisiCount[divisi][jabatan] = 1;
+      }
+    } else {
+      divisiCount[divisi] = { [jabatan]: 1 };
+    }
+  });
+
+  const handleAccordionClick = (divisi, jabatan) => {
+    const filteredData = datas.filter(
+      (user) => user.divisi === divisi && user.jabatan === jabatan,
+    );
+
+    if (filteredData.length > 0) {
+      // Filter data yang belum ada dalam multipleData
+      const newFilteredData = filteredData.filter(
+        (item) => !multipleData.some((data) => data.id === item.id),
+      );
+
+      // Tambahkan data baru ke multipleData
+      const newMultipleData = [...multipleData, ...newFilteredData];
+      setMultipleData(newMultipleData);
+    }
+
+    setSelectedAccordionItem(filteredData);
+
+    if (filteredData.length === 1) {
+      setSingleData(filteredData[0]);
+      setSelectedRow([datas.indexOf(filteredData[0])]);
+      setSelectedRowIndices([datas.indexOf(filteredData[0])]);
+      setPreviewData(filteredData[0]);
+    } else if (filteredData.length > 1) {
+      const newFilteredData = filteredData.filter(
+        (item) => !multipleData.some((data) => data.id === item.id),
+      );
+
+      // Tambahkan data baru ke multipleData
+      const newMultipleData = [...multipleData, ...newFilteredData];
+      setMultipleData(newMultipleData);
+    }
+  };
+
+  // Mendapatkan daftar divisi yang unik
+  const uniqueDivisions = Object.keys(divisiCount);
+
+  const handleSelectItem = (index) => {
+    const selectedItem = datas[index];
+
+    if (type === 'single') {
+      if (selectedRow === index) {
+        setSingleData(null);
+        setSelectedRow(null);
+        setSelectedRowIndices([]);
+        setPreviewData(null);
+      } else {
+        setSingleData(selectedItem);
+        setSelectedRow(index);
+        setSelectedRowIndices([index]);
+        setPreviewData(selectedItem);
+      }
+    } else {
+      let updatedSelectedRow;
+      if (selectedRow.includes(index)) {
+        updatedSelectedRow = selectedRow.filter((item) => item !== index);
+        setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+        setMultipleData(
+          multipleData.filter((data) => data.id !== selectedItem.id),
+        );
+      } else {
+        const isAlreadySelectedInAccordion = multipleData.some(
+          (data) => data.id === selectedItem.id,
+        );
+        if (isAlreadySelectedInAccordion) {
+          // If already selected via accordion, deselect it
+          updatedSelectedRow = selectedRow.filter((item) => item !== index);
+          setSelectedRowIndices(selectedRowIndices.filter((i) => i !== index));
+          setMultipleData(
+            multipleData.filter((data) => data.id !== selectedItem.id),
+          );
+        } else {
+          updatedSelectedRow = [...selectedRow, index];
+          setSelectedRowIndices([...selectedRowIndices, index]);
+          setMultipleData([...multipleData, selectedItem]);
+        }
+      }
+      setSelectedRow(updatedSelectedRow);
+
+      setSingleData(null);
+      if (updatedSelectedRow.length > 0) {
+        setPreviewData(
+          datas[updatedSelectedRow[updatedSelectedRow.length - 1]],
+        );
+      } else {
+        setPreviewData(null);
+      }
+    }
+  };
+
+  let tabsToDisplay = ['Jabatan', 'Karyawan', 'Bawahan', 'Personal']; // Tab yang akan ditampilkan secara default
+  if (title === 'Nama') {
+    tabsToDisplay = ['Karyawan']; // Jika title adalah 'Nama', hanya tampilkan tab 'Karyawan'
+  } else if (title === 'Jabatan') {
+    tabsToDisplay = ['Jabatan']; // Jika title adalah 'Jabatan', hanya tampilkan tab 'Jabatan'
+  }
+
   return (
     <Modal
       open={isComposeMail}
@@ -227,7 +419,7 @@ const ComposeMail = (props) => {
       >
         <Grid
           item
-          xs={type === 'single' ? 12 : selectedRow.length > 0 ? 9 : 12}
+          xs={type === 'single' ? 12 : multipleData.length > 0 ? 9 : 12}
         >
           <Box
             style={{
@@ -248,12 +440,18 @@ const ComposeMail = (props) => {
                 <X />
               </IconButton>
             </Stack>
-            <Tabs defaultValue={0}>
+            <Tabs value={activeTab} onChange={handleTabChange}>
               <StyledTabsList>
-                <StyledTab value={0}>Jabatan</StyledTab>
-                <StyledTab value={1}>Karyawan</StyledTab>
-                <StyledTab value={2}>Bawahan</StyledTab>
-                <StyledTab value={3}>Personal</StyledTab>
+                {/* Menampilkan tab sesuai dengan kondisi */}
+                {tabsToDisplay.map((tab) => (
+                  <StyledTab
+                    key={tab}
+                    value={tab}
+                    className={activeTab === tab ? tabClasses.selected : ''}
+                  >
+                    {tab}
+                  </StyledTab>
+                ))}
               </StyledTabsList>
             </Tabs>
             <Stack
@@ -379,169 +577,66 @@ const ComposeMail = (props) => {
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <TableContainer style={{ maxHeight: 300 }}>
-                <AppScrollbar>
-                  <Table stickyHeader aria-label='sticky table'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell>Jabatan</TableCell>
-                        <TableCell>PGS</TableCell>
-                        <TableCell>NIK</TableCell>
-                        <TableCell>Departemen</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {datas.map((row, index) => (
-                        <TableRow
-                          key={index}
-                          sx={{
-                            backgroundColor: selectedRowIndices.includes(index)
-                              ? '#52BD94'
-                              : 'transparent',
-                          }}
-                        >
-                          <TableCell>
-                            {type !== 'single' ? (
-                              <Radio
-                                checked={selectedRow.includes(index)}
-                                onClick={() => handleRadioChange(index)}
-                              />
-                            ) : (
-                              <Radio
-                                checked={selectedRow === index}
-                                onClick={() => handleRadioChange(index)}
-                              />
-                            )}
-                          </TableCell>
-                          <TableCell>
-                            <img
-                              src={row.profil}
-                              alt='Profil'
-                              style={{ width: '50px' }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Stack direction='column'>
-                              <Typography variant='subtitle1'>
-                                {row.jabatan}
-                              </Typography>
-                              <Typography variant='caption'>
-                                {row.nama}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell>{row.pgs}</TableCell>
-                          <TableCell>{row.nikg}</TableCell>
-                          <TableCell>{row.departemen}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </AppScrollbar>
-              </TableContainer>
-              <Divider />
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  padding: 5,
-                }}
-              >
-                <Button
-                  variant='contained'
-                  sx={{
-                    borderRadius: '50px',
-                    minWidth: '150px',
-                    border: '2px solid #8F95B2',
-                    bgcolor: 'transparent',
-                    color: '#8F95B2',
-                  }}
-                  endIcon={<UserPlus />}
-                >
-                  Tambah Ke Personal
-                </Button>
-                {type === 'single' && (
-                  <Button
-                    variant='contained'
-                    color='secondary'
-                    style={{ marginLeft: '10px' }}
-                    onClick={() => handleConfirmation(singleData)}
-                    sx={{
-                      borderRadius: '50px',
-                      minWidth: '150px',
-                      bgcolor: '#52BD94',
-                    }}
-                  >
-                    Tambahkan
-                  </Button>
-                )}
-              </Box>
-            </Box>
-            {/* jaga jaga kl berubah jd Accordion */}
-            {/* <Accordion>
-              {datas.map((row, index) => (
-                <><AccordionSummary
-                  key={index}
-                  expandIcon={<Radio />}
-                  aria-controls={`panel-${index}`}
-                  id={`panel-${index}`}
-                >
-                  <img
-                    src={row.profil}
-                    alt='Profil'
-                    style={{ width: '50px' }} />
-                  <Typography>{row.jabatan}</Typography>
-                </AccordionSummary><AccordionDetails>
-                    <Typography variant='caption'>
-                      Nama: {row.nama}
-                    </Typography>
-                    <Typography variant='caption'>PGS: {row.pgs}</Typography>
-                    <Typography variant='caption'>NIK: {row.nikg}</Typography>
-                    <Typography variant='caption'>
-                      Departemen: {row.departemen}
-                    </Typography>
-                  </AccordionDetails></>
-              ))}
-            </Accordion>
-            <Divider />
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                padding: 5,
-              }}
-            >
-              <Button
-                variant='contained'
-                sx={{
-                  borderRadius: '50px',
-                  minWidth: '150px',
-                  border: '2px solid #8F95B2',
-                  bgcolor: 'transparent',
-                  color: '#8F95B2',
-                }}
-                endIcon={<UserPlus />}
-              >
-                Tambah Ke Personal
-              </Button>
-              {type === 'single' && (
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  style={{ marginLeft: '10px' }}
-                  onClick={() => handleConfirmation(singleData)}
-                  sx={{
-                    borderRadius: '50px',
-                    minWidth: '150px',
-                    bgcolor: '#52BD94',
-                  }}
-                >
-                  Tambahkan
-                </Button>
+              {activeTab === 'Jabatan' && (
+                <JabatanTab
+                  datas={datas}
+                  multipleData={multipleData}
+                  singleData={singleData}
+                  selectedRow={selectedRow}
+                  type={type}
+                  handleSelectItem={handleSelectItem}
+                  handleRadioChange={handleRadioChange}
+                  handleConfirmation={handleConfirmation}
+                  divisiCount={divisiCount}
+                  handleAccordionClick={handleAccordionClick}
+                  uniqueDivisions={uniqueDivisions}
+                  StyledTabsList={StyledTabsList}
+                  StyledTab={StyledTab}
+                  StyledAccordion={StyledAccordion}
+                  AccordionSummarys={AccordionSummarys}
+                  AccordionDetail={AccordionDetail}
+                />
               )}
-            </Box> */}
+              {activeTab === 'Karyawan' && (
+                <KaryawanTab
+                  datas={datas}
+                  multipleData={multipleData}
+                  singleData={singleData}
+                  selectedRow={selectedRow}
+                  type={type}
+                  handleSelectItem={handleSelectItem}
+                  handleRadioChange={handleRadioChange}
+                  handleConfirmation={handleConfirmation}
+                />
+              )}
+              {activeTab === 'Bawahan' && (
+                <BawahanTab
+                  datas={datas}
+                  multipleData={multipleData}
+                  singleData={singleData}
+                  selectedRow={selectedRow}
+                  type={type}
+                  handleSelectItem={handleSelectItem}
+                  handleRadioChange={handleRadioChange}
+                  handleConfirmation={handleConfirmation}
+                  StyledAccordion={StyledAccordion}
+                  AccordionSummarys={AccordionSummarys}
+                  AccordionDetail={AccordionDetail}
+                />
+              )}
+              {activeTab === 'Personal' && (
+                <PersonalTab
+                  datas={datas}
+                  multipleData={multipleData}
+                  singleData={singleData}
+                  selectedRow={selectedRow}
+                  type={type}
+                  handleSelectItem={handleSelectItem}
+                  handleRadioChange={handleRadioChange}
+                  handleConfirmation={handleConfirmation}
+                />
+              )}
+            </Box>
           </Box>
         </Grid>
         {multipleData.length > 0 && type !== 'single' && (

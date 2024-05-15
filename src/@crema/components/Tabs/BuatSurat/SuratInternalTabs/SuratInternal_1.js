@@ -6,7 +6,7 @@ import { useState } from 'react';
 import FormClassification from '../../FormClassification';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
+import { useEffect } from 'react';
 const prioritas = [
   {
     value: '1',
@@ -33,7 +33,7 @@ const jenisSurat = [
   },
 ];
 
-const SuratInternal_1 = ({ handleNext, onStateChange }) => {
+const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
   const formik = useFormik({
     initialValues: {
       perihal: '',
@@ -52,6 +52,18 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
     lampiran: 1,
   });
 
+  useEffect(() => {
+    if (templateData) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        perihal: templateData.perihal,
+        prioritas: templateData.priority,
+        jenis: templateData.jenis,
+        lampiran: templateData.lampiran,
+      }));
+    }
+  }, [templateData]);
+  
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
@@ -186,6 +198,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange }) => {
 
 SuratInternal_1.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  templateData: PropTypes.object,
   onStateChange: PropTypes.func,
 };
 

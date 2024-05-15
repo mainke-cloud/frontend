@@ -22,6 +22,7 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png';
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png';
 import ComposeMail from '@crema/components/AppAddress';
 import Filter_sekretaris from './FilterPopUp/Filter_sekretaris';
+import { dataSekre } from '../../@crema/services/dummy/dataSekreDele'; 
 import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
 
@@ -78,10 +79,15 @@ const IOSSwitch = styled((props) => (
 
 const Add_Sekretaris = () => {
   const sekretaris = useSelector((state) => state.addressbook.sekretaris);
+  
   const [isActive, setIsActive] = useState(true);
   const [openFilter, setOpenFilter] = React.useState(false);
   const [isComposeMail, setComposeMail] = React.useState(false);
+  const [isSelected, setSelected] = React.useState(1)
 
+  const filtered = dataSekre.find(secretary => secretary.id === isSelected);
+  // console.log(filtered)
+  
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -91,16 +97,20 @@ const Add_Sekretaris = () => {
   };
 
   const handleFilterClick = () => {
-    setOpenFilter(!openFilter); // Toggle nilai openFilter
+    setOpenFilter(!openFilter); 
   };
 
   const handleCloseFilter = () => {
-    setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
+    setOpenFilter(false); 
   };
 
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  const handleSelected = (id) => {
+    setSelected(id)
+  }
 
   return (
     <>
@@ -180,7 +190,8 @@ const Add_Sekretaris = () => {
               <AppScrollbar>
                 <Box sx={{ overflowY: 'hidden', borderRadius: 2 }}>
                   <Stack direction='row'>
-                    <Box
+                    {dataSekre.map((sekre) => (
+                      <Box
                       sx={{
                         width: 135,
                         height: 142,
@@ -189,13 +200,15 @@ const Add_Sekretaris = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#D9DDE3' },
                       }}
+                      key={sekre.id}
+                      onClick={() => handleSelected(sekre.id)}
                     >
                       <Stack alignItems='center' justifyContent='center'>
                         <Box
                           sx={{
                             width: 61,
                             height: 18,
-                            backgroundColor: '#429777',
+                            backgroundColor: sekre.status ? '#429777' : '#BF2600',
                             borderRadius: 2,
                             marginY: 2,
                           }}
@@ -207,97 +220,24 @@ const Add_Sekretaris = () => {
                               fontSize: 12,
                             }}
                           >
-                            Aktif
+                            {sekre.status ? 'Aktif' : 'Nonaktif'}
                           </Typography>
                         </Box>
                         <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h5'>Salies Apriliyanto</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          8900001
+                        <Typography variant='h5' sx={{maxWidth: 120, textAlign: 'center'}}>{sekre.nama}</Typography>
+                        <Typography sx={{ color: '#5C5E61', fontSize: 11 }}>
+                          {sekre.nikg}
                         </Typography>
                       </Stack>
                     </Box>
+                    ))}
                     <Box
                       sx={{
                         width: 135,
                         height: 142,
                         backgroundColor: '#FFFFFF',
                         borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
-                        <Box
-                          sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: '#429777',
-                            borderRadius: 2,
-                            marginY: 2,
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
-                            }}
-                          >
-                            Aktif
-                          </Typography>
-                        </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h5'>Salies Apriliyanto</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          8900001
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
-                        <Box
-                          sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: '#BF2600',
-                            borderRadius: 2,
-                            marginY: 2,
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
-                            }}
-                          >
-                            Nonaktif
-                          </Typography>
-                        </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h5'>Salies Apriliyanto</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          8900001
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        padding: 1,
+                        padding: 2,
                       }}
                     >
                       <Stack alignItems='center' justifyContent='center'>
@@ -345,6 +285,8 @@ const Add_Sekretaris = () => {
               </Box>
               <Grid container spacing={4}>
                 <Grid item xs={2}>
+
+
                   <Box
                     sx={{
                       display: 'flex',
@@ -391,50 +333,51 @@ const Add_Sekretaris = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Salies Apriliyanto
+                      {filtered.nama}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Kepala Research and Development
+                      {filtered.jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>8900001</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
                   <Stack spacing={2}>
                     <Typography variant='h4'>Status :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Aktif'
+                      checked={filtered.status}
                     />
                     <Typography variant='h4'>Sifat :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Personal Assistant'
+                      checked={filtered.personalAssistant}
                     />
                     <Typography variant='h4'>Hak Sekretaris :</Typography>
                     <Stack direction='row'>
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Biasa'
-                        labelPlacement='End'
+                        checked={filtered.hak.biasa}
                       />
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Rhs'
-                        labelPlacement='End'
+                        checked={filtered.hak.Rhs}
                       />
                       <FormControlLabel
-                        value='end'
                         control={<Checkbox />}
                         label='Rhs Prib'
-                        labelPlacement='End'
+                        checked={filtered.hak.RhsPrib}
                       />
                     </Stack>
                   </Stack>
+
+
                 </Grid>
                 <Grid item xs={4}>
                   <Stack
@@ -558,7 +501,7 @@ const Add_Sekretaris = () => {
                 </Grid>
                 <Grid item xs={3}>
                   <Stack>
-                    <Typography variant='h2'>Nama :</Typography>
+                    <Typography variant='h2' sx={{cursor: 'pointer'}} onClick={() => onOpenComposeMail()}>Nama :</Typography>
                     <Box
                       sx={{
                         height: 40,
@@ -572,6 +515,7 @@ const Add_Sekretaris = () => {
                         paddingTop: 2,
                         paddingX: 2,
                       }}
+                      onClick={() => onOpenComposeMail()}
                     >
                       <Stack direction='row'>
                         <Typography>{sekretaris.nama}</Typography>
@@ -591,12 +535,12 @@ const Add_Sekretaris = () => {
                   <Stack spacing={2}>
                     <Typography variant='h4'>Status :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Aktif'
                     />
                     <Typography variant='h4'>Sifat :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      control={<IOSSwitch sx={{ m: 1 }} />}
                       label='Personal Assistant'
                     />
                     <Typography variant='h4'>Hak Sekretaris :</Typography>
@@ -635,7 +579,6 @@ const Add_Sekretaris = () => {
                       cursor: 'pointer',
                       '&:hover': { backgroundColor: '#F4CACA' },
                     }}
-                    onClick={() => onOpenComposeMail()}
                   >
                     <Stack
                       direction='row'

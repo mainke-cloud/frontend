@@ -34,6 +34,10 @@ import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
 import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
 import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
 import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
+import Folder from 'modules/folder/index';
+import Listdata from 'modules/folder/content/ListData';
+import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
+import Forward from 'modules/forward';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -80,6 +84,8 @@ export const addTab = (id, state, type) => {
             ? iconSurat
             : type === 'Buka Surat'
             ? scanIcon
+            : type === 'Buka Folder'
+            ? folderIcon
             : type === 'Search'
             ? searchIcon
             : type === 'Perlu Tindak Lanjut'
@@ -92,6 +98,12 @@ export const addTab = (id, state, type) => {
             ? inboxIcon
             : type === 'Template'
             ? inboxIcon
+            : type === 'Buat Surat'
+            ? inboxIcon
+            : type === 'Buat Template'
+            ? inboxIcon
+            : type === 'Forward'
+            ? inboxIcon
             : '',
 
         content:
@@ -101,6 +113,8 @@ export const addTab = (id, state, type) => {
             <Bantuan />
           ) : type === 'Profile' ? (
             <Profile />
+          ) : type === 'Buka Folder' ? (
+            <Listdata />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
           ) : type === 'Add_Sekretaris' ? (
@@ -119,8 +133,16 @@ export const addTab = (id, state, type) => {
             <BuatScanSurat />
           ) : type === 'Buka Surat' ? (
             <PDFReader />
+          ) : type === 'Folder' ? (
+            <Folder />
           ) : type === 'Search' ? (
             <SearchTab />
+          ) : type === 'Template' ? (
+            <Template />
+          ) : type === 'Buat Template' ? (
+          <BuatTemplateSurat />
+          ) : type === 'Forward' ? (
+            <Forward />
           ) : (
             <BelumPilih />
           ),
@@ -167,6 +189,10 @@ export const childTab = (id, state, type, data) => {
           return tab.id === 'surat dibatalkan';
         case 'Surat Masuk':
           return tab.id === 'surat masuk';
+        case 'Folder':
+          return tab.id === 'folder';
+        case 'Buka Folder':
+          return tab.id === 'buka folder';
         case 'Log Scan Surat':
           return tab.id === 'log scan surat';
         default:
@@ -195,6 +221,10 @@ export const childTab = (id, state, type, data) => {
             <Template props={data} />
           ) : type === 'Surat Masuk' ? (
             <SuratMasuk props={data} />
+          ) : type === 'Folder' ? (
+            <Folder props={data} />
+          ) : type === 'Buka Folder' ? (
+            <Listdata files={data} />
           ) : type === 'Log Scan Surat' ? (
             <DetailScanSurat props={data} />
           ) : type === 'Surat Diminta' ? (
@@ -203,7 +233,9 @@ export const childTab = (id, state, type, data) => {
             <SuratTerkirim props={data} />
           ) : type === 'Surat Dibatalkan' ? (
             <SuratDibatalkan props={data} />
-          ) : (
+          ) : type === 'Buat Template' ? (
+            <SuratDibatalkan props={data} />
+          ): (
             ''
           ),
       };
@@ -211,6 +243,8 @@ export const childTab = (id, state, type, data) => {
         dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
       } else if (type === 'Log Scan Surat') {
         dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
+      } else if (type === 'Folder') {
+        dispatch({ type: 'UPDATE_TAB_FOLDER', payload: updateTab });
       } else {
         dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
       }
@@ -247,14 +281,18 @@ export const childTab = (id, state, type, data) => {
               <Template props={data} />
             ) : type === 'Surat Masuk' ? (
               <SuratMasuk props={data} />
+            ) : type === 'Folder' ? (
+              <Folder props={data} />
+            ) : type === 'Buka Folder' ? (
+              <Listdata files={data} />
             ) : type === 'Log Scan Surat' ? (
               <DetailScanSurat props={data} />
             ) : type === 'Surat Diminta' ? (
               <SuratDiminta props={data} />
             ) : type === 'Surat Terkirim' ? (
               <SuratTerkirim props={data} />
-            ) : type === 'Surat Dibatalkan' ? (
-              <SuratDibatalkan props={data} />
+            ) : type === 'Buat Template' ? (
+              <BuatTemplateSurat props={data} />
             ) : (
               ''
             ),

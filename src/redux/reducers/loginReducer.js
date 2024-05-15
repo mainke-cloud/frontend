@@ -1,5 +1,5 @@
 const initialState = {
-  userData: { email: '', password: '' }, // Inisialisasi userData dengan nilai awal
+  userData: { username: '', password: '' }, // Inisialisasi userData dengan nilai awal
 };
 
 const loginReducer = (state = initialState, action) => {

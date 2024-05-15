@@ -21,6 +21,7 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png';
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png';
 import ComposeMail from '@crema/components/AppAddress';
 import Filter_delegasi from './FilterPopUp/Filter_delegasi';
+import { dataDele } from '@crema/services/dummy/dataSekreDele';
 import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
 
@@ -30,6 +31,10 @@ const Add_Delegasi = () => {
   const [dateTo, setDateTo] = React.useState(null);
   const [isComposeMail, setComposeMail] = React.useState(false);
   const [openFilter, setOpenFilter] = React.useState(false);
+  const [isSelected, setSelected] = React.useState(1)
+
+  const filtered = dataDele.find(Delegasi => Delegasi.id === isSelected);
+  // console.log(filtered)
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -52,6 +57,10 @@ const Add_Delegasi = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  const handleSelected = (id) => {
+    setSelected(id)
+  }
 
   return (
     <>
@@ -131,7 +140,8 @@ const Add_Delegasi = () => {
               <AppScrollbar>
                 <Box sx={{ overflowY: 'hidden', borderRadius: 2 }}>
                   <Stack direction='row'>
-                    <Box
+                    {dataDele.map((dele) => (
+                      <Box
                       sx={{
                         width: 135,
                         height: 142,
@@ -140,13 +150,15 @@ const Add_Delegasi = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#D9DDE3' },
                       }}
+                      key={dele.id}
+                      onClick={() => handleSelected(dele.id)}
                     >
                       <Stack alignItems='center' justifyContent='center'>
                         <Box
                           sx={{
                             width: 61,
                             height: 18,
-                            backgroundColor: '#429777',
+                            backgroundColor: dele.status ? '#429777' : '#BF2600',
                             borderRadius: 2,
                             marginY: 2,
                           }}
@@ -158,97 +170,24 @@ const Add_Delegasi = () => {
                               fontSize: 12,
                             }}
                           >
-                            17 Des
+                            {dele.status ? dele.endDateSimplified : 'Habis'}
                           </Typography>
                         </Box>
                         <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h3'>Komisaris</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          Salies Apriliyanto
+                        <Typography variant='h5' sx={{maxWidth: 120, textAlign: 'center'}}>{dele.jabatan}</Typography>
+                        <Typography sx={{ color: '#5C5E61', fontSize: 11 }}>
+                          {dele.nama}
                         </Typography>
                       </Stack>
                     </Box>
+                    ))}
                     <Box
                       sx={{
                         width: 135,
                         height: 142,
                         backgroundColor: '#FFFFFF',
                         borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
-                        <Box
-                          sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: '#429777',
-                            borderRadius: 2,
-                            marginY: 2,
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
-                            }}
-                          >
-                            15 Des
-                          </Typography>
-                        </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h3'>Komisaris</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          Salies Apriliyanto
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
-                        <Box
-                          sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: '#BF2600',
-                            borderRadius: 2,
-                            marginY: 2,
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
-                            }}
-                          >
-                            Habis
-                          </Typography>
-                        </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h3'>Komisaris</Typography>
-                        <Typography sx={{ color: '#5C5E61' }}>
-                          Salies Apriliyanto
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        padding: 1,
+                        padding: 2,
                       }}
                     >
                       <Stack alignItems='center' justifyContent='center'>
@@ -342,14 +281,14 @@ const Add_Delegasi = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Salies Apriliyanto
+                      {filtered.nama}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      Kepala Research and Development
+                      {filtered.jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>8900001</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
@@ -513,6 +452,7 @@ const Add_Delegasi = () => {
                       paddingTop: 2,
                       paddingX: 2,
                     }}
+                    onClick={() => onOpenComposeMail()}
                   >
                     <Stack direction='row'>
                       <Typography>{delegasidata.nama}</Typography>
@@ -575,7 +515,6 @@ const Add_Delegasi = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#F4CACA' },
                       }}
-                      onClick={() => onOpenComposeMail()}
                     >
                       <Stack
                         direction='row'
