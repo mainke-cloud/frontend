@@ -1,26 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Box, Grid, Divider } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
+import { Box, Grid, Divider, Stack, Tab } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-import {
-  X,
-  Edit,
-  Printer,
-  FileText,
-  Copy,
-  CornerDownLeft,
-  RotateCcw,
-  Check,
-  Save,
-} from 'feather-icons-react';
-import HeaderBar from '../../../@crema/components/Tabs/Disposisi/HeaderBar';
-import HeaderIconButton from '../../../@crema/components/Tabs/Disposisi/HeaderIconButton';
 import TabContentInfo from '../../../@crema/components/Tabs/SuratKeluar/TabContentInfo';
 import TabContentPenerima from '../../../@crema/components/Tabs/SuratKeluar/TabContentPenerima';
 import TabContentPengirim from '../../../@crema/components/Tabs/SuratKeluar/TabContentPengirim';
@@ -33,190 +17,333 @@ import KomentarEdit from '../../../@crema/components/Tabs/SuratKeluar/KomentarEd
 import TabContentEditPenyetuju from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditPenyetuju';
 import TabContentEditLainnya from '../../../@crema/components/Tabs/SuratKeluar/TabContentEditLainnya';
 import PdfCard from '@crema/components/Tabs/SuratKeluar/PdfCard';
+import HeaderDetail from '@crema/components/HeaderDetail';
+import MiniTab from '@crema/components/MiniTab';
+import { useSelector, useDispatch } from 'react-redux';
+import { addInfo } from '../../../redux/actions/suratAction';
+import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
+import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
+import BuatSurat from '../../buatSurat/SuratInternal';
+import '../../../styles/button.css';
+import SuratInternal_5 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_5';
+import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_4';
+import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_3';
+import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
+import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
+import StepImage from '../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
+import PreviewSuratImage from '../../../assets/BuatSurat/Preview Surat.png';
+
+import InfoTemplate from '@crema/components/Tabs/Template/InfoTemplate';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
-import AlertDialog from '@crema/components/Tabs/SuratKeluar/ModalAlert';
-const Template = () => {
-  const [value, setValue] = React.useState('1');
-  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.js',
-    import.meta.url,
-  ).toString();
 
-  const StyledTab = styled(Tab)(({ theme }) => ({
-    borderRadius: '100px',
-    backgroundColor: '#ffffff',
-    color: '#5C5E61',
-    indicatorColor: 'none',
-    fontSize: '12px',
-    textTransform: 'none',
-    minHeight: 0,
-    minWidth: 0,
-    padding: '10px 26px',
-    '&.MuiTabs-indicator': {
-      display: 'none',
-    },
-    '&.Mui-selected': {
-      backgroundColor: '#E42313',
-      color: '#ffffff',
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    '&.Mui-focusVisible': {
-      backgroundColor: '#d1eaff',
-    },
-  }));
+import {
+  listData1,
+  listData2,
+  listData3,
+} from '../../../@crema/services/dummy/sidebar/listDataSuratKeluar';
+import { sMasuk } from '../../../@crema/services/dummy/content/dataSm';
+import { diteruskan } from '@crema/services/dummy/content/dataTerusan';
+import Info from './content/info';
+import Lainnya from './content/lainnya';
+import AgendaSurat from './content/agendaSurat';
+import TemplateWrapper from './TemplateWrapper';
 
+const Template = ({props}) => {
+  const dispatch = useDispatch();
+  const [showNext, setShowNext] = useState(0);
+  const [showPage, setShowPage] = useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const kepada = useSelector((state) => state.addressbook.kepada);
+  const tembusan = useSelector((state) => state.addressbook.tembusan);
+  const pengirim = useSelector((state) => state.addressbook.pengirim);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
+
+  const isTemplate = useSelector((state) => state.header.isTemplate);
+  const values = useSelector((state) => state.header.value);
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+
+    if (activeStep === 4) {
+      setShowPage(true);
+    }
+    dispatch(addInfo(formData));
+  };
+  const handleChangeForm = (formData) => {
+    setFormData(formData);
+  };
+  const handlePrev = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  const files = [listData1, listData2, listData3];
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [isEdit, setIsEdit] = useState(false);
 
-  const handleEdit = () => {
-    setIsEdit(true);
-  };
+  const step = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
 
-  const handleClose = () => {
-    setIsEdit(false);
-  };
+  const steps = [
+    <SuratInternal_1
+      key={1}
+      handleNext={handleNext}
+      onStateChange={handleChangeForm}
+      templateData={props}
+    />,
+    <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} templateData={props} />,
+    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} templateData={props} />,
+    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} templateData={props}/>,
+    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+  ];
 
   return (
     <Box backgroundColor='#F7F8F9'>
-      <HeaderBar title='Detail Template'>
-        {isEdit ? (
-          <>
-            <HeaderIconButton>
-              <Save />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <Check />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <CornerDownLeft />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <RotateCcw />
-            </HeaderIconButton>
-            <HeaderIconButton method={handleClose}>
-              <X />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <FileText />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <Copy />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <X />
-            </HeaderIconButton>
-          </>
-        ) : (
-          <>
-            <HeaderIconButton method={handleEdit}>
-              <Edit />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <Printer />
-            </HeaderIconButton>
-            <HeaderIconButton>
-              <X />
-            </HeaderIconButton>
-            <AlertDialog title='Konfirmasi' description='Apakah Anda Yakin Untuk Menyimpan Dokumen Ini?' />
-          </>
-        )}
-      </HeaderBar>
+      <HeaderDetail
+        nama={isTemplate ? 'Edit Template' : 'Detail Template'}
+        buatSuratdariTemplate
+        editTemplate
+        hapus
+      />
       <Divider sx={{ borderColor: '#B1B5BA', borderBottomWidth: '2px' }} />
       <Box sx={{ padding: 8 }}>
         <Box backgroundColor='#FFFFFF' sx={{ padding: 8 }}>
-          <Grid container>
+          <>
+            {isTemplate ? (
+              <>
+                {showPage ? (
+                  <BuatSuratLastPage />
+                ) : (
+                  <>
+                    <CustomizedStepper activeStep={activeStep} step={step} />
+
+                    <Grid container spacing={5} marginTop={'20px'}>
+                      <Grid item xs={8}>
+                        {steps[activeStep]}
+                      </Grid>
+
+                      <Grid item xs={4}>
+                        <KomentarSection />
+                      </Grid>
+                    </Grid>
+                  </>
+                )}
+                <Stack
+                  sx={{
+                    backgroundColor: 'white',
+                    minHeight: '1009px',
+                    width: '921px',
+                    mx: 'auto',
+                    display: 'flex',
+                    borderRadius: '10px', // Mengatur border radius
+                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+                    mb: '30px',
+                  }}
+                >
+                  <PdfCardEdit
+                    kepada={kepada}
+                    tembusan={tembusan}
+                    pengirim={pengirim}
+                    info={formData}
+                  />
+                </Stack>
+              </>
+            ) : (
+              <>
+                {/* <Grid container> */}
+                {/* <Grid item xs={8}> */}
+                {/* <Box sx={{ width: '100%', typography: 'body1' }}>
+                      <MiniTab
+                        tabs={[
+                          {
+                            name: 'Info',
+                            content: <TabContentInfo />,
+                          },
+                          {
+                            name: 'Penerima',
+                            content: <TabContentPenerima />,
+                          },
+                          {
+                            name: 'Pengirim',
+                            content: <TabContentPengirim />,
+                          },
+                          {
+                            name: 'Penyetuju',
+                            content: <TabContentPenyetuju />,
+                          },
+                          {
+                            name: 'Lainnya',
+                            content: <TabContentLainnya />,
+                          },
+                        ]}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={4}>
+                    {values === 2 || values === 4 ? (
+                      <KomentarEdit />
+                    ) : (
+                      <Komentar />
+                    )} */}
+                <TemplateWrapper>
+                  <Box
+                    backgroundColor='#FFFFFF'
+                    sx={{ padding: 8, borderRadius: '10px' }}
+                  >
+                    <TabContext value={value}>
+                      <Box
+                        className='content-tabs'
+                        sx={{
+                          border: '1px solid #D8D8D8',
+                          width: 'fit-content',
+                          borderRadius: '100px',
+                        }}
+                      >
+                        <TabList
+                          onChange={handleChange}
+                          indicatorColor='none'
+                          sx={{ minHeight: 0 }}
+                        >
+                          <Tab
+                            className='content-styled-tab'
+                            label='Agenda Surat'
+                            value='1'
+                          />
+                          <Tab
+                            className='content-styled-tab'
+                            label='Info'
+                            value='2'
+                          />
+                          <Tab
+                            className='content-styled-tab'
+                            label='Lainnya'
+                            value='3'
+                          />
+                        </TabList>
+                      </Box>
+                      <TabPanel className='content-styled-panel' value='1'>
+                        <AgendaSurat data={props} />
+                      </TabPanel>
+                      <TabPanel className='content-styled-panel' value='2'>
+                        <Info data={diteruskan} />
+                      </TabPanel>
+                      <TabPanel className='content-styled-panel' value='3'>
+                        <Lainnya files={files} />
+                      </TabPanel>
+                    </TabContext>
+                  <PdfCard />
+                  </Box>
+                </TemplateWrapper>
+                {/* </Grid> */}
+                {/* </Grid> */}
+              </>
+            )}
+          </>
+          {/* <Grid container>
             <Grid item xs={8}>
               <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value} sx={{ border: '1px solid red' }}>
-                  <Box
-                    sx={{
-                      border: '1px solid #D8D8D8',
-                      width: 'fit-content',
-                      borderRadius: '100px',
-                    }}
-                  >
-                    <TabList
-                      onChange={handleChange}
-                      indicatorColor='none'
-                      sx={{ minHeight: 0 }}
-                    >
-                      <StyledTab label='Info' value='1' />
-                      <StyledTab label='Penerima' value='2' />
-                      <StyledTab label='Pengirim' value='3' />
-                      <StyledTab label='Penyetuju' value='4' />
-                      <StyledTab label='Lainnya' value='5' />
-                    </TabList>
-                  </Box>
-                  <TabPanel
-                    value='1'
-                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
-                  >
-                    {isEdit ? '' : <TabContentInfo />}
-                  </TabPanel>
-                  <TabPanel
-                    value='2'
-                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
-                  >
-                    {isEdit ? (
-                      <TabContentEditPenerima />
-                    ) : (
-                      <TabContentPenerima />
-                    )}
-                  </TabPanel>
-                  <TabPanel
-                    value='3'
-                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
-                  >
-                    {isEdit ? (
-                      <TabContentEditPengirim />
-                    ) : (
-                      <TabContentPengirim />
-                    )}
-                  </TabPanel>
-                  <TabPanel
-                    value='4'
-                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
-                  >
-                    {isEdit ? (
-                      <TabContentEditPenyetuju />
-                    ) : (
-                      <TabContentPenyetuju />
-                    )}
-                  </TabPanel>
-                  <TabPanel
-                    value='5'
-                    sx={{ paddingTop: '13px', paddingLeft: '0px' }}
-                  >
-                    {isEdit ? <TabContentEditLainnya /> : <TabContentLainnya />}
-                  </TabPanel>
-                </TabContext>
+                <MiniTab
+                  tabs={[
+                    {
+                      name: 'Info',
+                      content: (
+                        <>{isEdit ? <InfoTemplate /> : <TabContentInfo />}</>
+                      ),
+                    },
+                    {
+                      name: 'Penerima',
+                      content: (
+                        <>
+                          {isEdit ? (
+                            <TabContentEditPenerima />
+                          ) : (
+                            <TabContentPenerima />
+                          )}
+                        </>
+                      ),
+                    },
+                    {
+                      name: 'Pengirim',
+                      content: (
+                        <>
+                          {isEdit ? (
+                            <TabContentEditPengirim />
+                          ) : (
+                            <TabContentPengirim />
+                          )}
+                        </>
+                      ),
+                    },
+                    {
+                      name: 'Penyetuju',
+                      content: (
+                        <>
+                          {isEdit ? (
+                            <TabContentEditPenyetuju />
+                          ) : (
+                            <TabContentPenyetuju />
+                          )}
+                        </>
+                      ),
+                    },
+                    {
+                      name: 'Lainnya',
+                      content: (
+                        <>
+                          {isEdit ? (
+                            <TabContentEditLainnya />
+                          ) : (
+                            <TabContentLainnya />
+                          )}
+                        </>
+                      ),
+                    },
+                  ]}
+                />
               </Box>
             </Grid>
             <Grid item xs={4}>
-              {isEdit && value === '1' ? (
-                ''
-              ) : isEdit && (value === '3' || value === '5') ? (
-                <KomentarEdit />
+              {isEdit && value === 0 ? (
+                ''// <KomentarSection />
+              ) : isEdit && (value === 2 || value === 4) ? (
+                <KomentarEdit   />
               ) : (
                 <Komentar />
               )}
+                <Komentar />
+
             </Grid>
           </Grid>
-          {isEdit && value !== '1' ? (
-            <PdfCardEdit
-            // jabatan={formData.jabatan}
-            // nama={formData.nama}
-            // divisi={formData.divisi}
-            // nik={formData.nik}
-            // kodeDepartemen={formData.kodeDepartemen}
-            // departemen={formData.departemen}
-            // kantorKota={formData.kantorKota}
-            />
+          {isEdit ? (
+            <Stack
+              sx={{
+                backgroundColor: 'white',
+                minHeight: '1009px',
+                width: '921px',
+                mx: 'auto',
+                display: 'flex',
+                borderRadius: '10px', // Mengatur border radius
+                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Menambahkan efek bayangan
+                mb: '30px',
+              }}
+            >
+              <PdfCardEdit
+                kepada={kepada}
+                tembusan={tembusan}
+                pengirim={pengirim}
+                info={formData}
+              />
+            </Stack>
           ) : (
             <PdfCard />
-          )}
+          )} */}
         </Box>
       </Box>
     </Box>
@@ -231,3 +358,15 @@ Template.propTypes = {
   primary: PropTypes.string,
 };
 export default Template;
+
+Template.propTypes = {
+  props: PropTypes.shape({}),
+  file: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
+
+// import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';

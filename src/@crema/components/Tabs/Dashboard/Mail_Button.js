@@ -3,7 +3,8 @@ import { Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import AppCard from '@crema/components/AppCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../../redux/actions/tabActon';
+import { addTab } from '../../../../redux/actions/tabAction';
+
 const Mail_Button = ({ bgColor, bgHover, textColor, text, image }) => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);

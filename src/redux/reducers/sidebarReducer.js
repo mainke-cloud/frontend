@@ -12,6 +12,9 @@ const initialState = {
     'Draft',
     'Komposer',
     'Template',
+    'Surat Terkirim',
+    'Surat Diminta',
+    'Surat Dibatalkan',
     'Folder',
   ],
   selectedSidebarName: '', // Menambahkan properti baru untuk menyimpan nama sidebar yang dipilih

@@ -1,115 +1,108 @@
-import React, { useRef } from 'react';
-import { Box, Typography, Stack } from '@mui/material';
+import React from 'react';
+import { Typography, Stack, List, ListItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import TinyMce from './TinyMce';
-import jsPDF from 'jspdf';
-const PdfCardEdit = ({ jabatan, nama, nik }) => {
-  const cardRef = useRef(null);
+const PdfCardEdit = ({ kepada, tembusan, pengirim, info }) => {
+  console.log(kepada);
 
-  const exportToPDF = () => {
-    const cardElement = cardRef.current;
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: [cardElement.offsetWidth, cardElement.offsetHeight]
-    });
-    pdf.html(cardElement, {
-      callback: () => {
-        pdf.save('card.pdf');
-      }
-    });
+  const currentDate = new Date();
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   };
+  const formattedDate = currentDate.toLocaleDateString('id-ID', options);
   return (
-    <>
-      <Box
-        sx={{
-          border: '1px solid #D8D8D8',
-          maxHeight: '1509px',
-          maxWidth: '1121px',
-          padding: '20px',
-        }}
-        ref={cardRef}
+    <Stack padding={'20px'}>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Nomor:
+      </Typography>
+      <br />
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Jakarta, 29 Juli 2023
+      </Typography>
+      <br />
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Kepada:
+        <List>
+          {kepada &&
+            kepada.map((item, index) => (
+              <ListItem key={index}>
+                {index + 1}. Sdr. {item.nama}
+              </ListItem>
+            ))}
+        </List>
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Dari:
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Lampiran: {info && info.lampiran}
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Hal: {info && info.perihal}
+      </Typography>
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Tanggal: {formattedDate}
+      </Typography>
+      <br />
+      <br />
+      <Stack spacing={2}>
+        <Typography variant='body2'>Isi Surat:</Typography>
+        <TinyMce />
+      </Stack>
+      <br />
+      <Typography
+        variant='subtitle1'
+        sx={{ paddingLeft: '75%', mb: 2, pr: 15 }}
       >
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Nomor:
-        </Typography>
-        <br />
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Jakarta, 29 Juli 2023
-        </Typography>
-        <br />
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Kepada:
-        </Typography>
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Dari:
-        </Typography>
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Lampiran:
-        </Typography>
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Hal:
-        </Typography>
-        <Typography variant='subtitle1' sx={{ mb: 2 }}>
-          Tanggal:
-        </Typography>
-        <br />
-        <br />
-        <Stack spacing={2}>
-          <Typography variant='body2'>Isi Surat:</Typography>
-          {/* <Typography variant='body2'>[Konten Surat]</Typography> */}
-          <TinyMce />
-        </Stack>
-        <br />
-        <Typography
-          variant='subtitle1'
-          sx={{ paddingLeft: '75%', mb: 2, pr: 15 }}
-        >
-          {jabatan}
-        </Typography>
-        <br />
-        <br />
-        <br />
-        <Typography
-          variant='subtitle1'
-          sx={{
-            paddingLeft: '75%',
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-          }}
-        >
-          {nama}
-        </Typography>
-        <Typography
-          variant='subtitle1'
-          sx={{
-            paddingLeft: '75%',
-            mb: 2,
-            fontWeight: 'bold',
-            pr: 25,
-          }}
-        >
-          {nik}
-        </Typography>
-        <br />
-        <Typography
-          variant='subtitle1'
-          sx={{ mb: 2, fontWeight: 'bold', textDecoration: 'underline' }}
-        >
-          Tembusan
-        </Typography>
-      </Box>
-      <button onClick={exportToPDF}>Export to PDF</button>
-    </>
+        {}
+      </Typography>
+     <Stack>
+      
+     </Stack>
+      <Typography
+        variant='subtitle1'
+        sx={{
+          paddingLeft: '75%',
+          fontWeight: 'bold',
+          textDecoration: 'underline',
+        }}
+      >
+        {pengirim && pengirim.nama}
+      </Typography>
+      <Typography
+        variant='subtitle1'
+        sx={{
+          paddingLeft: '75%',
+          mb: 2,
+          fontWeight: 'bold',
+          pr: 25,
+        }}
+      >
+        {pengirim && pengirim.nikl}
+      </Typography>
+      <br />
+      <Typography variant='subtitle1' sx={{ mb: 2, fontWeight: 'bold' }}>
+        Tembusan:
+        <List>
+          {tembusan &&
+            tembusan.map((item, index) => (
+              <ListItem key={index}>
+                {index + 1}. Sdr. {item.nama}
+              </ListItem>
+            ))}
+        </List>
+      </Typography>
+      {/* <button onClick={exportToPDF}>Export to PDF</button> */}
+    </Stack>
   );
 };
 PdfCardEdit.propTypes = {
-  jabatan: PropTypes.string.isRequired,
-  nama: PropTypes.string.isRequired,
-  divisi: PropTypes.string.isRequired,
-  nik: PropTypes.string.isRequired,
-  kodeDepartemen: PropTypes.string.isRequired,
-  departemen: PropTypes.string.isRequired,
-  kantorKota: PropTypes.string.isRequired,
+  kepada: PropTypes.any,
+  tembusan: PropTypes.any,
+  pengirim: PropTypes.any,
+  info: PropTypes.any,
 };
 export default PdfCardEdit;

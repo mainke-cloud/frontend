@@ -12,17 +12,17 @@ import LetterOutDisposisi from './Surat/LetterOutDisposisi';
 import Folder from './Folder/Folder';
 import ScannerDrafDisposisi from './ScanSurat/ScannerDrafDisposisi';
 import ScannerLogScanDisposisi from './ScanSurat/ScannerLogScanDisposisi';
-
 import { Typography, Drawer, Hidden, Box } from '@mui/material';
-
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-
 import { useSelector } from 'react-redux';
 import LacakProsesSuratKeluar from './Surat/LacakProsesSuratKeluar';
 import Draft from './Surat/Draft';
 import Komposer from './Surat/Komposer';
 import Template from './Surat/Template';
+import SuratTerkirim from './Surat/SuratTerkirim';
+import SuratDiminta from './Surat/SuratDiminta';
+import SuratDibatalkan from './Surat/SuratDibatalkan';
 
 const AppSidebar = (props) => {
   const {
@@ -63,6 +63,12 @@ const AppSidebar = (props) => {
         return <Folder isCollapsed={isCollapsed} />;
       case 'Template':
         return <Template isCollapsed={isCollapsed} />;
+      case 'Surat Terkirim':
+        return <SuratTerkirim isCollapsed={isCollapsed}/>;
+      case 'Surat Diminta':
+        return <SuratDiminta isCollapsed={isCollapsed}/>;
+      case 'Surat Dibatalkan':
+        return <SuratDibatalkan isCollapsed={isCollapsed}/>;
       default:
         return <DisposisiSidebar isCollapsed={isCollapsed} />;
     }

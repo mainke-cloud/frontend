@@ -24,7 +24,7 @@ import { ArrowForwardIosSharp } from '@mui/icons-material';
 import { AlertCircle } from 'feather-icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { childTab } from '../../../../../redux/actions/tabActon';
+import { childTab } from '../../../../../redux/actions/tabAction';
 import { Fonts } from '@crema/constants/AppEnums';
 import AppSidebarHeader from './AppSidebarHeader';
 import AppSidebarFooter from './AppSidebarFooter';
@@ -103,6 +103,12 @@ export default function AppSidebarContent(props) {
         ? dispatch(childTab(item.id, tabs, 'Log Scan Surat', item))
         : isStatus === 'surat masuk'
         ? dispatch(childTab(item.id, tabs, 'Surat Masuk', item))
+        : isStatus === 'surat diminta'
+        ? dispatch(childTab(item.id, tabs, 'Surat Diminta', item))
+        : isStatus === 'surat terkirim'
+        ? dispatch(childTab(item.id, tabs, 'Surat Terkirim', item))
+        : isStatus === 'surat dibatalkan'
+        ? dispatch(childTab(item.id, tabs, 'Surat Dibatalkan', item))
         : isStatus === 'folder'
         ? dispatch(childTab(item.id, tabs, 'Folder', item))
         : null;

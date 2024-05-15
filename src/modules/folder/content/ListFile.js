@@ -2,34 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
-  Grid,
   Stack,
   Typography,
-  IconButton,
-  InputBase,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material';
 import { ArrowForwardIosSharp } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import HeaderDetail from '@crema/components/HeaderDetail';
 import { Avatar } from '@mui/material';
-import searchIcon from '../../../assets/icon/search.svg';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import Divider from '@mui/material/Divider';
-import { Menu, Grid as IconGrid } from 'feather-icons-react';
-import MiniTab from '@crema/components/MiniTab';
-import DriveFolderUploadRoundedIcon from '@mui/icons-material/DriveFolderUploadRounded';
-import FolderIcon from '@mui/icons-material/Folder';
 import { Fonts } from '@crema/constants/AppEnums';
-import MenuIcon from '@mui/icons-material/Menu';
-import ListIcon from '@mui/icons-material/List';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../../redux/actions/tabActon';
+import { addTab } from '../../../redux/actions/tabAction';
 
 const StyledAccordion = styled((props) => (
   <Accordion disableGutters elevation={0} square {...props} />

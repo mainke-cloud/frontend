@@ -3,13 +3,10 @@ import PropsTypes from 'prop-types';
 import { Stack, Typography, Box } from '@mui/material';
 
 import AProfile from '../../../../assets/vector/Avatar.png';
-import AppScrollbar from '@crema/components/AppScrollbar';
 import ProfileUser from '../../../../@crema/components/Tabs/Disposisi/ProfileUser';
 import ListStaff from '@crema/components/Tabs/ListStaff';
 
-const TabAlamatDisposisi = (props) => {
-  const { data } = props;
-
+const TabAlamatDisposisi = () => {
   return (
     <Stack rowGap={'16px'}>
       <Typography className='content-styled-judul'>Diteruskan Dari</Typography>

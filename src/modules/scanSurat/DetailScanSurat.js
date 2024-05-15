@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Grid, Stack, Typography, IconButton } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HeaderDetail from '@crema/components/HeaderDetail';
 import { Table, TableBody, TableContainer, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import AppScrollbar from '@crema/components/AppScrollbar';
-
-import PdfVector from '../../assets/vector/PdfVector.svg';
-import { Menu, Grid as IconGrid } from 'feather-icons-react';
 import MiniTab from '@crema/components/MiniTab';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { addTab } from '../../redux/actions/tabActon';
 import ListFile from '@crema/components/Tabs/ListFile';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -28,13 +21,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: 'bold',
     fontSize: 16,
   },
-}));
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  border: '1px solid #d8d8d8',
-  borderRadius: '10px',
-  padding: '16px',
 }));
 
 const pekerjaan = [
@@ -72,33 +58,6 @@ const pekerjaan2 = [
 
 const DetailScanSurat = ({ props }) => {
   const files = props.file;
-
-  const [listType, setListType] = useState(0);
-  const dispatch = useDispatch();
-  const tabs = useSelector((state) => state.tab.tabs);
-  const id = useSelector((state) => state.tab.idCounter);
-
-  const handleDetailList = () => {
-    setListType(1);
-  };
-
-  const handleImageList = () => {
-    setListType(0);
-  };
-
-  const bytesConvert = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    if (mb < 1) {
-      return (bytes / 1024).toFixed(2) + ' Kb';
-    } else {
-      return (bytes / (1024 * 1024)).toFixed(2) + ' Mb';
-    }
-  };
-
-  const handleOpenFile = () => {
-    dispatch(addTab(id, tabs, 'Buka Surat'));
-  };
-
   const DetailScan = () => {
     return (
       <Grid

@@ -6,12 +6,22 @@ import todoListReducer from './todoListReducer';
 import suratReducer from './suratReducer';
 import loginReducer from './loginReducer';
 import headerReducer from './headerReducer';
-export default combineReducers({
-  user: userReducer,
-  auth: loginReducer,
-  tab: tabReducer,
-  sidebar: sidebarReducer,
-  todolist: todoListReducer,
-  surat: suratReducer,
-  header: headerReducer,
-});
+import addressbookReducer from './addressbookReducer';
+import classificationReducer from './classificationReducer';
+import { connectRouter } from 'connected-react-router';
+
+const reducers = (history) =>
+  combineReducers({
+    router: connectRouter(history),
+    user: userReducer,
+    auth: loginReducer,
+    tab: tabReducer,
+    sidebar: sidebarReducer,
+    todolist: todoListReducer,
+    surat: suratReducer,
+    header: headerReducer,
+    addressbook: addressbookReducer,
+    classification: classificationReducer,
+  });
+
+export default reducers

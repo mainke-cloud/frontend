@@ -5,7 +5,7 @@ import {
   closeTab,
   reorderTab,
 
-} from '../redux/actions/tabActon';
+} from '../redux/actions/tabAction';
 import { Box } from '@mui/material';
 import { Tabs } from '@sinm/react-chrome-tabs';
 import './tab.css';

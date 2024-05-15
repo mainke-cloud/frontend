@@ -32,10 +32,6 @@ const BucketMinibarWrapper = ({ children, isHover, setHover }) => {
           width: '100%',
           height: '100%',
           backgroundColor: '#fff',
-          // backgroundColor: (theme) =>
-          //   mode === ThemeMode.LIGHT
-          //     ? alpha(theme.palette.common.white, 0.05)
-          //     : alpha(theme.palette.common.black, 0.05),
         },
         '& > *': {
           position: 'relative',

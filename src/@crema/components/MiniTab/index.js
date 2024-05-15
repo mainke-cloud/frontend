@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Tab } from '@mui/material';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateValue } from '../../../redux/actions/headerAction';
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: '100px',
@@ -30,7 +30,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-const MiniTab = ({ tabs, changeValue }) => {
+const MiniTab = ({ tabs, changeValue, disable }) => {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(
     changeValue !== undefined ? changeValue : 0,
@@ -63,9 +63,13 @@ const MiniTab = ({ tabs, changeValue }) => {
           indicatorColor='none'
           sx={{ minHeight: 0 }}
         >
-          {tabs.map((tab, index) => (
-            <StyledTab key={index} label={tab.name} value={index} />
-          ))}
+          {tabs.map((tab, index) =>
+            disable ? (
+              <StyledTab key={index} label={tab.name} value={index} disabled />
+            ) : (
+              <StyledTab key={index} label={tab.name} value={index} />
+            ),
+          )}
         </TabList>
       </Box>
       {tabs.map((tab, index) => (
@@ -84,6 +88,7 @@ const MiniTab = ({ tabs, changeValue }) => {
 MiniTab.propTypes = {
   tabs: PropTypes.array,
   changeValue: PropTypes.number,
+  disable: PropTypes.bool
 };
 
 export default MiniTab;

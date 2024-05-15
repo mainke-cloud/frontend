@@ -8,6 +8,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -16,6 +17,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -24,6 +26,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -32,6 +35,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -40,6 +44,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -48,6 +53,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -56,6 +62,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -64,6 +71,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -72,6 +80,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -80,6 +89,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -88,6 +98,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -96,6 +107,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -104,6 +116,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -112,6 +125,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -120,6 +134,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -128,6 +143,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -136,6 +152,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -144,6 +161,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -152,6 +170,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -160,6 +179,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -168,6 +188,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -176,6 +197,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
   {
     profil: user,
@@ -184,6 +206,7 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'personal'
   },
   {
     profil: user,
@@ -192,5 +215,6 @@ export const data = [
     pgs: 'pgs',
     nik: '2121212',
     departemen: 'Departemen',
+    status: 'umum'
   },
 ];
