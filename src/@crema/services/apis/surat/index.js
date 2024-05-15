@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getSurat = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:8000/api/surat/');
+        const response = await axios.get('https://new.coofis.com/api/surat/');
         return response.data;
     } catch (error) {
         // Handle error
