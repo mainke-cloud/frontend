@@ -170,7 +170,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <User/>
+                  <User />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -197,7 +197,7 @@ const Profile = () => {
                   Informasi Kontak
                 </StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <Phone/>
+                  <Phone />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
@@ -225,7 +225,7 @@ const Profile = () => {
                 </StyledTableCell>
                 <StyledTableCell style={{ width: '2%' }}></StyledTableCell>
                 <StyledTableCell sx={{ textAlign: 'end' }}>
-                  <Briefcase/>
+                  <Briefcase />
                 </StyledTableCell>
               </TableHead>
               <TableBody>
