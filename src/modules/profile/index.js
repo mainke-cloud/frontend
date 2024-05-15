@@ -139,7 +139,7 @@ const Profile = () => {
   const getUser = async (userId) => {
     try {
       const response = await axios.get(
-        `http://new.coofis.com/api/profile/?id_user=${userId}`,
+        `https://new.coofis.com/api/profile/?id_user=${userId}`,
       );
       setUser(response.data);
     } catch (error) {
