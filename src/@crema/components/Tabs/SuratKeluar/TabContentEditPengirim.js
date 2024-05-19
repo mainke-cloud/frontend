@@ -4,11 +4,9 @@ import {
   Typography,
   TextField,
   IconButton,
-  Button,
   Link,
   Box,
 } from '@mui/material';
-import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector } from 'react-redux';
 import AppScrollbar from '@crema/components/AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -24,7 +22,6 @@ const TabContentEditPengirim = () => {
   const namaa = useSelector((state) => state.addressbook.namaa);
   const initialState = useSelector((state) => state.surat);
   const [formData, setFormData] = useState(initialState);
-  // const [jabatanValue, setJabatanValue] = useState(datass[0]?.jabatan ?? '');
   const [jabatanValue, setJabatanValue] = useState('');
   const [namaValue, setNamaValue] = useState('');
 
@@ -133,11 +130,6 @@ const TabContentEditPengirim = () => {
                 sx={{
                   border: 'none',
                 }}
-                // defaultValue={
-                //   composeMailTitle === 'Nama'
-                //     ? `${namaa.nama}`
-                //     : datass.map((item) => item.nama).join('\n')
-                // }
                 value={
                   composeMailTitle === 'Nama' ? `${namaa.nama}` : namaValue
                 }
@@ -154,24 +146,6 @@ const TabContentEditPengirim = () => {
             </Stack>
           </AppScrollbar>
         </Box>
-
-        <TextField
-          fullWidth
-          value={
-            composeMailTitle === 'Nama'
-              ? `${namaa.nama}`
-              : datass[0]?.nama ?? ''
-          }
-          InputProps={{
-            endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail('Nama')}>
-                <AddCircleOutlineRoundedIcon
-                  sx={{ color: 'black', fontSize: '40px' }}
-                />
-              </IconButton>
-            ),
-          }}
-        />
 
         <Typography variant='h4'>Divisi</Typography>
 
