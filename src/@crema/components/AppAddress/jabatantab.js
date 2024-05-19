@@ -8,7 +8,7 @@ import { UserPlus } from 'feather-icons-react';
 
 const JabatanTab = ({
   datas,
-  singleData,
+  multipleData,
   type,
   handleConfirmation,
   divisiCount,
@@ -122,7 +122,7 @@ const JabatanTab = ({
             variant='contained'
             color='secondary'
             style={{ marginLeft: '10px' }}
-            onClick={() => handleConfirmation(singleData)}
+            onClick={() => handleConfirmation(multipleData)}
             sx={{
               borderRadius: '50px',
               minWidth: '150px',
@@ -139,7 +139,7 @@ const JabatanTab = ({
 
 JabatanTab.propTypes = {
   datas: PropTypes.array.isRequired,
-  singleData: PropTypes.object.isRequired,
+  multipleData: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
   divisiCount: PropTypes.object.isRequired,

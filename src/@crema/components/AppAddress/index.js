@@ -122,6 +122,7 @@ const ComposeMail = (props) => {
   let check = title === 'Nama' ? 'Karyawan' : 'Jabatan';
 
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState(false);
   const [activeTab, setActiveTab] = useState('');
   const [previewData, setPreviewData] = useState(null);
   const [singleData, setSingleData] = useState(null);
@@ -135,6 +136,12 @@ const ComposeMail = (props) => {
   useEffect(() => {
     setActiveTab(check);
   }, [isComposeMail]);
+
+  useEffect(() => {
+    if (multipleData.length === 0) {
+      setIsChecked(false);
+    }
+  }, [multipleData]);
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -150,6 +157,7 @@ const ComposeMail = (props) => {
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
+    setIsChecked(checked);
     const updatedSelectedRow = checked ? datas.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
     setSelectedRowIndices(updatedSelectedRow);
@@ -552,7 +560,11 @@ const ComposeMail = (props) => {
             >
               {type !== 'single' && (
                 <Box sx={{ marginTop: 2 }}>
-                  <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
+                  <Checkbox
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                  Pilih Semua
                 </Box>
               )}
               <Typography variant='body2'>
