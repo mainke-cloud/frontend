@@ -88,10 +88,40 @@ const ComposeMail = (props) => {
     }
   `;
 
+  // const StyledAccordion = styled((props) => (
+  //   <Accordion disableGutters elevation={0} square {...props} />
+  // ))(({ theme }) => ({
+  //   border: `1px solid ${theme.palette.divider}`,
+  //   '&:not(:last-child)': {
+  //     borderBottom: 0,
+  //   },
+  //   '&:before': {
+  //     display: 'none',
+  //   },
+  // }));
+
+  // const AccordionSummarys = styled((props) => (
+  //   <AccordionSummary
+  //     expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
+  //     {...props}
+  //   />
+  // ))(({ theme }) => ({
+  //   flexDirection: 'row-reverse',
+  //   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+  //     transform: 'rotate(90deg)',
+  //   },
+  //   '& .MuiAccordionSummary-content': {
+  //     marginLeft: theme.spacing(1),
+  //   },
+  // }));
+
+  // const AccordionDetail = styled(AccordionDetails)(() => ({
+  //   borderTop: '1px solid rgba(0, 0, 0, .125)',
+  // }));
+
   const StyledAccordion = styled((props) => (
     <Accordion disableGutters elevation={0} square {...props} />
   ))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
     '&:not(:last-child)': {
       borderBottom: 0,
     },
@@ -105,13 +135,14 @@ const ComposeMail = (props) => {
       expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
       {...props}
     />
-  ))(({ theme }) => ({
+  ))(({ theme, selected, disabled }) => ({
     flexDirection: 'row-reverse',
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
       transform: 'rotate(90deg)',
     },
     '& .MuiAccordionSummary-content': {
       marginLeft: theme.spacing(1),
+      backgroundColor: selected ? theme.palette.action.selected : 'transparent',
     },
   }));
 
