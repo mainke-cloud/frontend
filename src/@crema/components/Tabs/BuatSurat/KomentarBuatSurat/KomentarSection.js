@@ -48,7 +48,7 @@ const KomentarSection = ({ onCreate, setShowKomen }) => {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     onCreate(data);
     setData(initialState);
     setShowKomen(true);
@@ -66,9 +66,7 @@ const KomentarSection = ({ onCreate, setShowKomen }) => {
         }}
       >
         <Stack direction='row' padding='10px' paddingLeft='17px'>
-          <Icon>
-            <ChatBubbleOutlineOutlinedIcon />
-          </Icon>
+          <ChatBubbleOutlineOutlinedIcon />
 
           <Typography
             variant='h4'

@@ -67,7 +67,12 @@ const SuratInternal = () => {
     <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
+    <SuratInternal_5
+      key={5}
+      handleNext={handleNext}
+      handlePrev={handlePrev}
+      text='Kirim'
+    />,
   ];
 
   return (

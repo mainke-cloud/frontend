@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
 
-const SuratInternal_5 = ({ handlePrev, handleNext }) => {
+const SuratInternal_5 = ({ handlePrev, handleNext, text }) => {
   const [open, setOpen] = React.useState(false);
   const info = useSelector((state) => state.surat);
   const penerima = useSelector((state) => [
@@ -86,7 +86,7 @@ const SuratInternal_5 = ({ handlePrev, handleNext }) => {
             }}
             onClick={handleOpen}
           >
-            Kirim
+            {text}
           </Button>
 
           <ModalConfirmation
@@ -103,6 +103,7 @@ const SuratInternal_5 = ({ handlePrev, handleNext }) => {
 SuratInternal_5.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handlePrev: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default SuratInternal_5;
