@@ -9,7 +9,7 @@ import { users } from '@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
 
 const FormClassification = (props) => {
-  const { text } = props;
+  const { text, isValid, klasifikasi } = props;
 
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
@@ -40,8 +40,6 @@ const FormClassification = (props) => {
     setClassificationProblem(false);
   };
 
-  const klasifikasi = useSelector((state) => state.classification.klasifikasi);
-  console.log(klasifikasi);
   return (
     <StyledStack>
       <Link
@@ -69,7 +67,9 @@ const FormClassification = (props) => {
             overflow: 'auto',
           }}
         >
-          <Typography>{klasifikasi.name} {klasifikasi.desc}</Typography>
+          <Typography>
+            {klasifikasi.name} {klasifikasi.desc}
+          </Typography>
         </AppScrollbar>
         <StyledBox>
           <IconButton>
@@ -80,6 +80,12 @@ const FormClassification = (props) => {
           </IconButton>
         </StyledBox>
       </Box>
+
+      {!isValid && (
+        <Typography variant='body1' color='error'>
+          Kolom ini wajib diisi
+        </Typography>
+      )}
 
       <ClassificationProblem
         isClassificationProblem={isClassificationProblem}
@@ -94,4 +100,6 @@ export default FormClassification;
 
 FormClassification.propTypes = {
   text: PropTypes.string.isRequired,
+  isValid: PropTypes.bool.isRequired,
+  klasifikasi: PropTypes.func.isRequired,
 };
