@@ -201,7 +201,7 @@ const Dashboard = () => {
                         width: 28,
                         height: 28,
                       }}
-                      onClick={() => handleAddTab('Add_Sekretaris')}
+                      onClick={() => handleAddTab('Sekretaris')}
                     >
                       <img src={Plus} style={{ width: 'Auto', Height: 20 }} />
                     </IconButton>
@@ -254,7 +254,7 @@ const Dashboard = () => {
                               //     backgroundColor: '#FFDFA6',
                               //   }
                           }}
-                          onClick={() => handleAddTab('Add_Sekretaris')} 
+                          onClick={() => handleAddTab('Sekretaris')} 
                       >
                           <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Sekretaris</Typography>
                       </Box>
@@ -293,7 +293,7 @@ const Dashboard = () => {
                         height: 28,
                         marginRight: 150,
                       }}
-                      onClick={() => handleAddTab('Add_Delegasi')}
+                      onClick={() => handleAddTab('Delegasi')}
                     >
                       <img src={Plus} />
                     </IconButton>
@@ -365,7 +365,7 @@ const Dashboard = () => {
                               //     backgroundColor: '#FFDFA6',
                               //   }
                           }}
-                          onClick={() => handleAddTab('Add_Delegasi')} 
+                          onClick={() => handleAddTab('Delegasi')} 
                       >
                           <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Delegasi</Typography>
                       </Box>

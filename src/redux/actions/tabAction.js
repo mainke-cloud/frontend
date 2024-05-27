@@ -14,6 +14,8 @@ import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
 import iconSurat from '../../assets/icon/mail.svg';
 import homeIcon from '../../assets/icon/home.svg';
+import delegasiIcon from '../../assets/icon/DelegasiIcon.svg';
+import sekretarisIcon from '../../assets/icon/SekretarisIcon.svg';
 import inboxIconInActive from '../../assets/icon/iconInActive/inbox.svg';
 import disposisiIconInActive from '../../assets/icon/iconInActive/disposisi.svg';
 import folderIconInActive from '../../assets/icon/iconInActive/folder.svg';
@@ -24,6 +26,8 @@ import searchIconInActive from '../../assets/icon/iconInActive/search.svg';
 import scanIconInActive from '../../assets/icon/iconInActive/scan.svg';
 import iconSuratInActive from '../../assets/icon/iconInActive/mail.svg';
 import homeIconInActive from '../../assets/icon/iconInActive/home.svg';
+import delegasiIconInActive from '../../assets/icon/iconInActive/DelegasiIcon.svg';
+import sekretarisIconInActive from '../../assets/icon/iconInActive/SekretarisIcon.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
@@ -69,8 +73,11 @@ const getIcon = (type, active) => {
     case 'Log Scan Surat':
     case 'Buat Scan Surat':
     case 'Draft Scan Surat':
+    case 'Scan Surat Masuk':
       return active ? scanIcon : scanIconInActive;
     case 'Surat Masuk':
+    case 'Buka Surat':
+      return active ? inboxIcon : inboxIconInActive;
     case 'Perlu Tindak Lanjut':
     case 'Lacak Proses':
     case 'Draft':
@@ -79,8 +86,6 @@ const getIcon = (type, active) => {
     case 'Buat Surat':
     case 'Buat Template':
     case 'Forward':
-    case 'Buka Surat':
-      return active ? inboxIcon : inboxIconInActive;
     case 'Buat Surat Internal':
     case 'Buat Surat External':
     case 'Buat Surat Undangan':
@@ -88,6 +93,10 @@ const getIcon = (type, active) => {
       return active ? iconSurat : iconSuratInActive;
     case 'Search':
       return active ? searchIcon : searchIconInActive;
+    case 'Delegasi':
+      return active ? delegasiIcon : delegasiIconInActive;
+    case 'Sekretaris':
+      return active ? sekretarisIcon : sekretarisIconInActive;
     default:
       return active ? iconSurat : iconSuratInActive;
   }
@@ -120,9 +129,9 @@ export const addTab = (id, state, type) => {
             <Listdata />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-          ) : type === 'Add_Sekretaris' ? (
+          ) : type === 'Sekretaris' ? (
             <Add_Sekretaris />
-          ) : type === 'Add_Delegasi' ? (
+          ) : type === 'Delegasi' ? (
             <Add_Delegasi />
           ) : type === 'Buat Surat Internal' ? (
             <Surat_Internal />
@@ -242,15 +251,7 @@ export const childTab = (id, state, type, data) => {
             ''
           ),
       };
-      if (type === 'Surat Masuk') {
-        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
-      } else if (type === 'Log Scan Surat') {
-        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      } else if (type === 'Folder') {
-        dispatch({ type: 'UPDATE_TAB_FOLDER', payload: updateTab });
-      } else {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      }
+      dispatch({ type: 'UPDATE_TAB', payload: updateTab });
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
