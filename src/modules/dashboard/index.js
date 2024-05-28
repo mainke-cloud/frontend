@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Stack, Grid, Typography, IconButton, Paper } from '@mui/material';
 
 import person from '../../assets/Dashboard/Dashboard_girl.png';
@@ -26,10 +26,14 @@ import { dataDele, dataSekre } from '@crema/services/dummy/dataSekreDele';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabAction';
 
+import { AuthContext } from '@crema/context/AuthContext';
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
+  const {user} = useContext(AuthContext);
+  console.log('ini usernya:', user)
 
   const handleAddTab = (type) => {
     dispatch(addTab(id, tabs, type));
