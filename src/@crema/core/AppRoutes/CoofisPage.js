@@ -12,7 +12,7 @@ export const coofisPagesConfigs = [
   },
   {
     permittedRole: RoutePermittedRole.User,
-    path: '/Landingpage',
+    path: '/LandingPage',
     element: <Landing_page />,
   },
 ];
