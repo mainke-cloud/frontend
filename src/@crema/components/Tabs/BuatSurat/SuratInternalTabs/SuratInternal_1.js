@@ -97,6 +97,10 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
     return !klasifikasi.name && !klasifikasi.desc;
   };
 
+  const handleClassificationChange = () => {
+    setFormClassificationValid(true);
+  };
+
   return (
     <>
       <Stack
@@ -138,6 +142,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
           text='Klasifikasi Masalah'
           isValid={isFormClassificationValid}
           klasifikasi={klasifikasi}
+          onClassificationChange={handleClassificationChange}
         />
 
         <Typography

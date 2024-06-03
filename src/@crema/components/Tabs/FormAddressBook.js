@@ -8,7 +8,7 @@ import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
 
 const FormAddressBook = (props) => {
-  const { text, data, templateData } = props;
+  const { text, data, templateData, isValid, onAddressBookChange } = props;
   console.log(templateData);
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
@@ -36,6 +36,7 @@ const FormAddressBook = (props) => {
   };
   const onCloseComposeMail = () => {
     setComposeMail(false);
+    onAddressBookChange();
   };
 
   return (
@@ -65,18 +66,12 @@ const FormAddressBook = (props) => {
             overflow: 'auto',
           }}
         >
-          {templateData && text=='Kepada' ? (
-           <Typography>
-           {templateData.kepada}
-         </Typography>
-          ) : templateData && text=='Pemeriksa' ? (
-            <Typography>
-           {templateData.pemeriksa}
-         </Typography>
-          ) : templateData && text=='Pemohon' ? (
-            <Typography>
-           {templateData.pemohon}
-         </Typography>
+          {templateData && text == 'Kepada' ? (
+            <Typography>{templateData.kepada}</Typography>
+          ) : templateData && text == 'Pemeriksa' ? (
+            <Typography>{templateData.pemeriksa}</Typography>
+          ) : templateData && text == 'Pemohon' ? (
+            <Typography>{templateData.pemohon}</Typography>
           ) : (
             data?.map((item) => (
               <Stack key={item.id}>
@@ -97,6 +92,12 @@ const FormAddressBook = (props) => {
         </StyledBox>
       </Box>
 
+      {!isValid && (
+        <Typography variant='body1' color='error'>
+          Kolom ini wajib diisi
+        </Typography>
+      )}
+
       <ComposeMail
         isComposeMail={isComposeMail}
         onCloseComposeMail={onCloseComposeMail}
@@ -114,4 +115,6 @@ FormAddressBook.propTypes = {
   text: PropTypes.string.isRequired,
   data: PropTypes.any,
   templateData: PropTypes.object,
+  isValid: PropTypes.bool.isRequired,
+  onAddressBookChange: PropTypes.func.isRequired,
 };

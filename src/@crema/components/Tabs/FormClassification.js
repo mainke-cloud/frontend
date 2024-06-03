@@ -5,11 +5,9 @@ import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ClassificationProblem from '@crema/components/AppClassificationProblem';
-import { users } from '@crema/services/dummy/user/user';
-import { useSelector } from 'react-redux';
 
 const FormClassification = (props) => {
-  const { text, isValid, klasifikasi } = props;
+  const { text, isValid, klasifikasi, onClassificationChange } = props;
 
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
@@ -38,6 +36,7 @@ const FormClassification = (props) => {
   };
   const onCloseClassificationProblem = () => {
     setClassificationProblem(false);
+    onClassificationChange();
   };
 
   return (
@@ -96,10 +95,11 @@ const FormClassification = (props) => {
   );
 };
 
-export default FormClassification;
-
 FormClassification.propTypes = {
   text: PropTypes.string.isRequired,
   isValid: PropTypes.bool.isRequired,
-  klasifikasi: PropTypes.func.isRequired,
+  klasifikasi: PropTypes.object.isRequired,
+  onClassificationChange: PropTypes.func.isRequired,
 };
+
+export default FormClassification;

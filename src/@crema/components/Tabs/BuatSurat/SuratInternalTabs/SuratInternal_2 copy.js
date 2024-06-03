@@ -11,6 +11,12 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
   const tembusan = useSelector((state) => state.addressbook.tembusan);
 
   const handleSubmit = () => {
+    // if (KepadaIsEmpty()) {
+    //   setFormValid(false);
+    // } else {
+    //   handleNext();
+    // }
+
     const validKepada = !KepadaIsEmpty();
     const validTembusan = !TembusanIsEmpty();
 
@@ -22,30 +28,26 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
     }
   };
 
+  // const [isFormValid, setFormValid] = useState(true);
+  // const KepadaIsEmpty = () => {
+  //   return (
+  //     !kepada || (kepada.length === 1 && !tembusan) || tembusan.length === 1
+  //   );
+  // };
+
   const [isFormValidKepada, setFormValidKepada] = useState(true);
   const [isFormValidTembusan, setFormValidTembusan] = useState(true);
 
   const KepadaIsEmpty = () => {
-    return (
-      !kepada ||
-      !Array.isArray(kepada) ||
-      kepada.some((item) => !item.jabatan || !item.nama)
-    );
+    return !kepada || kepada.length === 1;
   };
 
   const TembusanIsEmpty = () => {
-    return (
-      !tembusan ||
-      !Array.isArray(tembusan) ||
-      tembusan.some((item) => !item.jabatan || !item.nama)
-    );
+    return !tembusan || tembusan.length === 1;
   };
 
-  const handleAddressBookChangeKepada = () => {
-    setFormValidKepada(true);
-  };
-  const handleAddressBookChangeTembusan = () => {
-    setFormValidTembusan(true);
+  const handleAddressBookChange = () => {
+    setFormValidKepada(true) && setFormValidTembusan(true);
   };
 
   return (
@@ -64,7 +66,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
           data={kepada}
           templateData={templateData}
           isValid={isFormValidKepada}
-          onAddressBookChange={handleAddressBookChangeKepada}
+          onAddressBookChange={handleAddressBookChange}
         />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
@@ -115,7 +117,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
           data={tembusan}
           templateData={templateData}
           isValid={isFormValidTembusan}
-          onAddressBookChange={handleAddressBookChangeTembusan}
+          onAddressBookChange={handleAddressBookChange}
         />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
