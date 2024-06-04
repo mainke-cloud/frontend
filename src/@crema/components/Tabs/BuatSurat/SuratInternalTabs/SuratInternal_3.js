@@ -1,5 +1,5 @@
 import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import PropTypes from 'prop-types';
@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState, useEffect } from 'react';
-import AppScrollbar from '@crema/components/AppScrollbar';
 
 const SuratInternal_3 = ({
   handleNext,
