@@ -141,7 +141,7 @@ const Profile = () => {
       const response = await axios.get(
         `https://new.coofis.com/api/profile/?id_user=${userId}`,
       );
-      setUser(response.data);
+      setUser(response.data.results);
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
