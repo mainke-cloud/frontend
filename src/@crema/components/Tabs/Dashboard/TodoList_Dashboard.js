@@ -32,7 +32,7 @@ const TodoList_Dashboard = () => {
           sx={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }}
         >
           <Grid container direction='row'>
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <Stack direction='row' spacing={2} alignItems='center'>
                 <Typography
                   style={{ fontWeight: Fonts.BOLD, fontSize: '16px' }}
@@ -56,8 +56,8 @@ const TodoList_Dashboard = () => {
               </Stack>
             </Grid>
 
-            <Grid item xs={4}>
-              <Stack direction='row' spacing={2} alignItems='center'>
+            <Grid item xs={2}>
+              <Stack direction='row' spacing={2}>
                 <Box
                   sx={{
                     borderRadius: 1,
@@ -73,14 +73,14 @@ const TodoList_Dashboard = () => {
                 </Box>
                 <Box
                   sx={{
-                    width: '75%',
+                    // width: '100%',
                     height: '25px',
                     display: 'flex',
                     border: '0.5px solid grey',
                     borderRadius: 1,
                   }}
                 >
-                  <InputBase placeholder='Search' sx={{ padding: '10px' }} />
+                  <InputBase placeholder='Search' />
                   <IconButton aria-label='search'>
                     <SearchIcon fontSize='small' />
                   </IconButton>
