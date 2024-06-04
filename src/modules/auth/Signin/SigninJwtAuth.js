@@ -30,14 +30,12 @@ const isCaptchaValid = (captchaValue, captcha) => {
 };
 
 const validationSchema = yup.object({
-  username: yup
-    .string()
-    .required(
-      <>
-        <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
-        <IntlMessages id='Isi username anda' style={{ marginTop: '25px' }} />
-      </>,
-    ),
+  username: yup.string().required(
+    <>
+      <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
+      <IntlMessages id='Isi username anda' style={{ marginTop: '25px' }} />
+    </>,
+  ),
   password: yup.string().required(
     <>
       <ErrorRoundedIcon style={{ marginRight: '8px', fontSize: 'medium' }} />{' '}
@@ -76,8 +74,8 @@ const SigninJwtAuth = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: 'crema.demo@gmail.com',
-      password: 'Pass@1!@all',
+      username: 'nadip',
+      password: 'nadip123',
     },
     validationSchema: validationSchema,
     onSubmit: async (
@@ -93,18 +91,14 @@ const SigninJwtAuth = () => {
       }
 
       try {
-        const response = await fetch(
-          'https://new.coofis.com/api/auth/login/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
+        const response = await fetch('https://new.coofis.com/api/auth/login/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
-        const datas = await response.json();
-        console.log(datas);
+          body: JSON.stringify(values),
+        });
+
         if (!response.ok) {
           throw new Error('Login failed');
         }
@@ -116,7 +110,6 @@ const SigninJwtAuth = () => {
           navigate('/signin/verifikasi1');
           dispatch(authLogin({ username, password,  }));
         }, 3000);
-
       } catch (error) {
         console.error('Terjadi kesalahan saat login:', error.message);
         alert('Username atau password salah. Silakan coba lagi.');
@@ -411,7 +404,6 @@ export default SigninJwtAuth;
 // import { Fonts } from '@crema/constants/AppEnums';
 // import AuthWrapper from '../AuthWrapper';
 // import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
-
 
 // const validationSchema = yup.object({
 //   username: yup

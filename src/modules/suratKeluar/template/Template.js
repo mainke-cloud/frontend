@@ -30,11 +30,11 @@ import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_3';
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
-import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarSection';
 import StepImage from '../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PreviewSuratImage from '../../../assets/BuatSurat/Preview Surat.png';
 
-import InfoTemplate from '@crema/components/Tabs/Template/InfoTemplate';
+// import InfoTemplate from '@crema/components/Tabs/Template/InfoTemplate';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 
 import {
@@ -49,7 +49,7 @@ import Lainnya from './content/lainnya';
 import AgendaSurat from './content/agendaSurat';
 import TemplateWrapper from './TemplateWrapper';
 
-const Template = ({props}) => {
+const Template = ({ props }) => {
   const dispatch = useDispatch();
   const [showNext, setShowNext] = useState(0);
   const [showPage, setShowPage] = useState(false);
@@ -98,9 +98,24 @@ const Template = ({props}) => {
       onStateChange={handleChangeForm}
       templateData={props}
     />,
-    <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} templateData={props} />,
-    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} templateData={props} />,
-    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} templateData={props}/>,
+    <SuratInternal_2
+      key={2}
+      handleNext={handleNext}
+      handlePrev={handlePrev}
+      templateData={props}
+    />,
+    <SuratInternal_3
+      key={3}
+      handleNext={handleNext}
+      handlePrev={handlePrev}
+      templateData={props}
+    />,
+    <SuratInternal_4
+      key={4}
+      handleNext={handleNext}
+      handlePrev={handlePrev}
+      templateData={props}
+    />,
     <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
   ];
 
@@ -238,7 +253,7 @@ const Template = ({props}) => {
                         <Lainnya files={files} />
                       </TabPanel>
                     </TabContext>
-                  <PdfCard />
+                    <PdfCard />
                   </Box>
                 </TemplateWrapper>
                 {/* </Grid> */}
