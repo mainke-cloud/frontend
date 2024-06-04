@@ -22,7 +22,7 @@ import {
 import DigitalSignature from '../digitalSignature.js/DigitalSignature';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 
-const SuratTerkirim = ({props}) => {
+const SuratTerkirim = ({ props }) => {
   console.log(props.Lampiran);
   const files = props.Lampiran;
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -39,7 +39,6 @@ const SuratTerkirim = ({props}) => {
     <SuratTerkirimWrapper>
       <HeaderDetail
         nama='Detail Surat yang Dikirimkan'
-        disposisi
         forward
         sign
         printer

@@ -25,6 +25,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ListIcon from '@mui/icons-material/List';
 import { useDispatch, useSelector } from 'react-redux';
 import { childTab } from '../../../redux/actions/tabAction';
+import ModalUp from './ModalUp';
 import { X } from 'feather-icons-react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -66,7 +67,7 @@ const ListFolder = ({ files }) => {
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #d8d8d8',
     borderRadius: '10px',
-    padding: '16px',
+    padding: '8px',
     justifyContent: 'space-around',
   }));
 
@@ -82,16 +83,12 @@ const ListFolder = ({ files }) => {
     alignItems: 'center',
   };
 
-  const parentFolder = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-  ];
-
   const [listType, setListType] = useState(0);
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
   const [open, setOpen] = React.useState(false);
+  const [openRe, setOpenRe] = React.useState(false);
 
   const handleDetailList = () => {
     setListType(1);
@@ -107,6 +104,13 @@ const ListFolder = ({ files }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // const handleContoh = () => {
+  //   setOpen(!open)
+  // }
+
+  const handleOpenRe = () => setOpenRe(true);
+  const handleCloseRe = () => setOpenRe(false);
 
   return (
     <>
@@ -168,7 +172,6 @@ const ListFolder = ({ files }) => {
                     md={4}
                     lg={3}
                     key={index}
-                    onClick={() => handleOpenFile(file)}
                     alignItems={'center'}
                   >
                     <Stack
@@ -176,7 +179,6 @@ const ListFolder = ({ files }) => {
                       spacing={3}
                       height='56px'
                       alignItems='center'
-                      justifyContent='space-between'
                       sx={{
                         border: '1px solid #E0E0E0',
                         borderRadius: 2,
@@ -188,21 +190,33 @@ const ListFolder = ({ files }) => {
                         },
                       }}
                     >
-                      <Stack direction='row' spacing={2}>
-                        <FolderIcon
-                          sx={{ color: '#FFC10A', width: 28, height: 25 }}
-                        />
-                        <Typography
-                          sx={{
-                            pr: '10 px',
-                            fontSize: '16px',
-                          }}
-                        >
-                          {file.name}
-                        </Typography>
-                      </Stack>
+                      <Box
+                        pt='5px'
+                        onClick={() => handleOpenFile(file)}
+                        sx={{
+                          height: '100%',
+                          width: '100%',
+                        }}
+                      >
+                        <Stack direction='row' spacing={2}>
+                          <FolderIcon
+                            sx={{ color: '#FFC10A', width: 28, height: 25 }}
+                          />
+                          <Typography
+                            sx={{
+                              pr: '10 px',
+                              fontSize: '16px',
+                            }}
+                          >
+                            {file.name}
+                          </Typography>
+                        </Stack>
+                      </Box>
+
                       <Stack>
-                        <MenuIcon sx={{ width: 20, height: 20 }} />
+                        <IconButton onClick={handleOpenRe}>
+                          <MenuIcon sx={{ width: 20, height: 20 }} />
+                        </IconButton>
                       </Stack>
                     </Stack>
                   </Grid>
@@ -224,7 +238,7 @@ const ListFolder = ({ files }) => {
                     Nama Folder
                   </Typography>
                   <Typography
-                    pr='39px'
+                    pr='60px'
                     fontSize='12px'
                     color='#262829'
                     sx={{ fontWeight: Fonts.BOLD }}
@@ -245,39 +259,42 @@ const ListFolder = ({ files }) => {
                             cursor: 'pointer',
                           },
                         }}
-                        onClick={() => handleOpenFile(file)}
                       >
-                        <Stack
-                          direction='row'
-                          alignItems='center'
-                          justifyContent='space-between'
-                          spacing={2}
-                        >
-                          <Stack
-                            direction='row'
-                            spacing={2}
-                            alignItems='center'
+                        <Stack direction='row' justifyContent='space-between'>
+                          <Box
+                            pt='12px'
+                            onClick={() => handleOpenFile(file)}
+                            sx={{
+                              height: '100%',
+                              width: '87%',
+                            }}
                           >
-                            <FolderIcon
-                              sx={{ color: '#FFC10A', width: 28, height: 25 }}
-                            />
-                            <Typography fontSize='16px' color='#5C5E61'>
-                              {file.name}
-                            </Typography>
-                          </Stack>
-                          <Stack
-                            direction='row'
-                            spacing={2}
-                            alignItems='center'
-                          >
+                            <Stack
+                              direction='row'
+                              spacing={2}
+                              alignItems='center'
+                            >
+                              <FolderIcon
+                                sx={{
+                                  color: '#FFC10A',
+                                  width: 28,
+                                  height: 25,
+                                }}
+                              />
+                              <Typography fontSize='16px' color='#5C5E61'>
+                                {file.name}
+                              </Typography>
+                            </Stack>
+                          </Box>
+                          <Stack direction='row' spacing={2} pb='20px'>
                             <Typography
                               fontSize='12px'
                               color='#5C5E61'
-                              pt='8px'
+                              pt='12px'
                             >
                               {file.tanggal}
                             </Typography>
-                            <IconButton>
+                            <IconButton onClick={handleOpenRe}>
                               <MenuIcon sx={{ width: 20, height: 20 }} />
                             </IconButton>
                           </Stack>
@@ -292,7 +309,21 @@ const ListFolder = ({ files }) => {
           </Box>
         </AccordionDetails>
       </StyledAccordion>
-      <Modal
+
+      <ModalUp
+        title='Create Folder'
+        openState={open}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+      />
+
+      <ModalUp
+        title='Rename Folder'
+        openState={openRe}
+        handleClose={handleCloseRe}
+        handleOpen={handleOpenRe}
+      />
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
@@ -325,20 +356,6 @@ const ListFolder = ({ files }) => {
           <Box alignItems='center'>
             <Box p='24px'>
               <Box>
-                <Typography fontSize='18px' sx={{ fontWeight: Fonts.BOLD }}>
-                  Parent
-                </Typography>
-                <Box pt='10px'>
-                  <Autocomplete
-                    disablePortal
-                    id='combo-box-demo'
-                    options={parentFolder}
-                    sx={{ width: 710 }}
-                    renderInput={(params) => (
-                      <TextField {...params} label='My Folder' />
-                    )}
-                  />
-                </Box>
                 <Typography
                   pt='20px'
                   fontSize='18px'
@@ -390,7 +407,93 @@ const ListFolder = ({ files }) => {
             </Box>
           </Stack>
         </Box>
-      </Modal>
+      </Modal> */}
+
+      {/* <Modal
+        open={openRe}
+        onClose={handleCloseRe}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={style}>
+          <Box
+            p='5px'
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+            sx={{
+              bgcolor: '#383838',
+              borderTopLeftRadius: '8px',
+              borderTopRightRadius: '8px',
+            }}
+          >
+            <Box pl='20px'>
+              <Typography
+                fontSize='16px'
+                sx={{ color: 'white', fontWeight: Fonts.BOLD }}
+              >
+                Rename Folder
+              </Typography>
+            </Box>
+            <IconButton pr='16px' onClick={handleCloseRe}>
+              <X style={{ width: '24px', height: '24px' }} />
+            </IconButton>
+          </Box>
+          <Box alignItems='center'>
+            <Box p='24px'>
+              <Box>
+                <Typography
+                  pt='20px'
+                  fontSize='18px'
+                  sx={{ fontWeight: Fonts.BOLD }}
+                >
+                  Nama Folder
+                </Typography>
+                <Box pt='10px'>
+                  <TextField sx={{ width: 710 }} />
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box pt='20px'>
+            <Divider />
+          </Box>
+          <Stack direction='row' justifyContent='space-between' p='10px'>
+            <Box></Box>
+            <Box display='flex'>
+              <Box pr='10px'>
+                <Button
+                  variant='contained'
+                  sx={{
+                    borderRadius: '10px',
+                    bgcolor: '#429777',
+                    minWidth: '55px',
+                    minHeight: '31px',
+                  }}
+                  onClick={handleOpenRe}
+                >
+                  Oke
+                </Button>
+              </Box>
+              <Box>
+                <Button
+                  variant='contained'
+                  sx={{
+                    borderRadius: '10px',
+                    bgcolor: '#BF2600',
+                    minWidth: '55px',
+                    minHeight: '31px',
+                  }}
+                  onClick={handleCloseRe}
+                >
+                  Close
+                </Button>
+              </Box>
+            </Box>
+          </Stack>
+        </Box>
+      </Modal> */}
     </>
   );
 };
