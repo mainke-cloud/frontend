@@ -161,6 +161,8 @@ export const addTab = (id, state, type) => {
         active: true,
       };
       dispatch({ type: 'ADD_TAB', payload: tabs });
+      let tabsData = [...state, tabs];
+      localStorage.setItem('tabsData', JSON.stringify(tabsData));
     } else {
       const isExistingTab = state.some(
         (tab) => tab.id.toLowerCase() === type.toLowerCase(),
@@ -317,6 +319,7 @@ export const activateTab = (tabId, state) => {
       active: tab.id === tabId,
       favicon: getIcon(tab.title, tab.id === tabId),
     }));
+    localStorage.setItem('tabsData', JSON.stringify(updatedTabs));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };
@@ -347,6 +350,7 @@ export const closeTab = (tabId, state) => {
       newActiveTabIndex !== 'dashboard'
         ? tabs[newActiveTabIndex].id
         : 'dashboard';
+    localStorage.setItem('tabsData', JSON.stringify(newActiveTabId));
     dispatch(activateTab(newActiveTabId, tabs));
     dispatch({ type: 'CLOSE_EDIT' });
   };
