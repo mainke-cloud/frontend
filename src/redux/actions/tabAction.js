@@ -36,8 +36,9 @@ import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
 import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
 import Folder from 'modules/folder/index';
 import Listdata from 'modules/folder/content/ListData';
-import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
+import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index';
 import Forward from 'modules/forward';
+import Dashboard from 'modules/dashboard';
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -53,6 +54,7 @@ export const addTab = (id, state, type) => {
       let tabs = {
         id: type.toLowerCase(),
         title: type,
+        active: true,
         favicon:
           type === 'Folder'
             ? folderIcon
@@ -140,15 +142,17 @@ export const addTab = (id, state, type) => {
           ) : type === 'Template' ? (
             <Template />
           ) : type === 'Buat Template' ? (
-          <BuatTemplateSurat />
+            <BuatTemplateSurat />
           ) : type === 'Forward' ? (
             <Forward />
           ) : (
             <BelumPilih />
           ),
-        active: true,
       };
       dispatch({ type: 'ADD_TAB', payload: tabs });
+
+      const updatedTabs = [...state, tabs];
+      localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     } else {
       const isExistingTab = state.some(
         (tab) => tab.id.toLowerCase() === type.toLowerCase(),
@@ -200,7 +204,6 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
-      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -235,7 +238,7 @@ export const childTab = (id, state, type, data) => {
             <SuratDibatalkan props={data} />
           ) : type === 'Buat Template' ? (
             <SuratDibatalkan props={data} />
-          ): (
+          ) : (
             ''
           ),
       };
@@ -260,9 +263,11 @@ export const childTab = (id, state, type, data) => {
         if (activeTab) {
           activeTab.active = false;
         }
+        
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
           title: type,
+          active: true,
           favicon: inboxIcon,
           content:
             type === 'Todo' ? (
@@ -296,8 +301,9 @@ export const childTab = (id, state, type, data) => {
             ) : (
               ''
             ),
-          active: true,
         };
+        const updatedTabs = [...state, tabs];
+        localStorage.setItem('tabs', JSON.stringify(updatedTabs));
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
@@ -308,9 +314,12 @@ export const childTab = (id, state, type, data) => {
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
     const updatedTabs = state.map((tab) => ({
-      ...tab,
+      id: tab.id,
+      title: tab.title,
       active: tab.id === tabId,
+      content: tab.content,
     }));
+    localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };

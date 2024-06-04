@@ -85,6 +85,9 @@ export default function AppSidebarContent(props) {
   const tabs = useSelector((state) => state.tab.tabs);
   const handleButton = (item) => {
     {
+      console.log('ini item id:', item.id);
+      console.log('ini tabs:', tabs);
+      console.log('ini item:', item);
       isStatus === 'disposisi'
         ? dispatch(childTab(item.id, tabs, 'Disposisi', item))
         : isStatus === 'todo'

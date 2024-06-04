@@ -5,15 +5,16 @@ const initialState = {
   tabs: [
     {
       id: 'dashboard',
-      favicon: homeIcon,
       title: 'Dashboard',
       active: true,
-      content: <Dashboard />,
+      favicon: homeIcon,
+        content: <Dashboard />,
     },
   ],
   idCounter: 1,
   cek: 0,
 };
+
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TAB':
@@ -56,7 +57,7 @@ const tabReducer = (state = initialState, action) => {
           (tab.id === 'template' && tab.title === action.payload.title) ||
           (tab.id === 'surat diminta' && tab.title === action.payload.title) ||
           (tab.id === 'surat terkirim' && tab.title === action.payload.title) ||
-          (tab.id === 'surat dibatalkan' && tab.title === action.payload.title)  
+          (tab.id === 'surat dibatalkan' && tab.title === action.payload.title)
         ) {
           return action.payload;
         } else {
@@ -124,6 +125,13 @@ const tabReducer = (state = initialState, action) => {
         tabs: updatedTabs,
       };
     }
+    case 'SET_TAB_LOCAL_STORAGE': {
+      return {
+        ...state,
+        tabs: [action.payload],
+      };
+    }
+
     default:
       return state;
   }

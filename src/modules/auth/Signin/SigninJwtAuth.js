@@ -103,7 +103,8 @@ const SigninJwtAuth = () => {
             body: JSON.stringify(values),
           },
         );
-
+        const datas = await response.json();
+        console.log(datas);
         if (!response.ok) {
           throw new Error('Login failed');
         }
@@ -113,7 +114,7 @@ const SigninJwtAuth = () => {
         setTimeout(() => {
           setOpen(false);
           navigate('/signin/verifikasi1');
-          dispatch(authLogin({ username, password }));
+          dispatch(authLogin({ username, password,  }));
         }, 3000);
 
       } catch (error) {
