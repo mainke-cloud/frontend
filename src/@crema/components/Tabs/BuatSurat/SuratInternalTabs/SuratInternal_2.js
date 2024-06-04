@@ -1,10 +1,11 @@
-import { Stack, Typography } from '@mui/material';
+import { Avatar, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import AppScrollbar from '../../../AppScrollbar';
 import { Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../../FormAddressBook';
+import AProfile from '../../../../../assets/vector/Avatar.png';
 
 const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
   const kepada = useSelector((state) => state.addressbook.kepada);
@@ -101,9 +102,33 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
             ) : (
               kepada?.map((item) => (
                 <Stack key={item.id}>
-                  <Typography>
-                    {item.jabatan} - {item.nama}
-                  </Typography>
+                  {item.id && (
+                    <Stack
+                      direction='row'
+                      spacing={5}
+                      pl='20px'
+                      pr='400px'
+                      pt='20px'
+                    >
+                      <Stack>
+                        <Avatar
+                          sx={{
+                            marginBottom: '30px',
+                            marginTop: '7px',
+                          }}
+                          alt='Profile'
+                          src={AProfile}
+                        />
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography>{item.jabatan}</Typography>
+                        <Typography>{item.nama}</Typography>
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography color='#8C8F93'>{item.nikg}</Typography>
+                      </Stack>
+                    </Stack>
+                  )}
                 </Stack>
               ))
             )}
@@ -152,9 +177,33 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
             ) : (
               tembusan?.map((item) => (
                 <Stack key={item.id}>
-                  <Typography>
-                    {item.jabatan} - {item.nama}
-                  </Typography>
+                  {item.id && (
+                    <Stack
+                      direction='row'
+                      spacing={5}
+                      pl='20px'
+                      pr='400px'
+                      pt='20px'
+                    >
+                      <Stack>
+                        <Avatar
+                          sx={{
+                            marginBottom: '30px',
+                            marginTop: '7px',
+                          }}
+                          alt='Profile'
+                          src={AProfile}
+                        />
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography>{item.jabatan}</Typography>
+                        <Typography>{item.nama}</Typography>
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography color='#8C8F93'>{item.nikg}</Typography>
+                      </Stack>
+                    </Stack>
+                  )}
                 </Stack>
               ))
             )}

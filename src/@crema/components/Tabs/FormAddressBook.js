@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
+import AProfile from '../../../assets/vector/Avatar.png';
+import { X } from 'feather-icons-react';
 
 const FormAddressBook = (props) => {
   const { text, data, templateData, isValid, onAddressBookChange } = props;
@@ -75,9 +84,44 @@ const FormAddressBook = (props) => {
           ) : (
             data?.map((item) => (
               <Stack key={item.id}>
-                <Typography>
-                  {item.jabatan} - {item.nama}
-                </Typography>
+                {item.id && (
+                  <Stack
+                    direction='row'
+                    spacing={5}
+                    pl='20px'
+                    pr='300px'
+                    pt='20px'
+                  >
+                    <Stack>
+                      <Avatar
+                        sx={{
+                          marginBottom: '30px',
+                          marginTop: '7px',
+                        }}
+                        alt='Profile'
+                        src={AProfile}
+                      />
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography>{item.jabatan}</Typography>
+                      <Typography>{item.nama}</Typography>
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography color='#8C8F93'>{item.nikg}</Typography>
+                    </Stack>
+                    <Stack flex={1}>
+                      <IconButton
+                        sx={{
+                          width: '48px',
+                          height: '48px',
+                        }}
+                        // onClick={() => handleDeleteFile(item.id)}
+                      >
+                        <X />
+                      </IconButton>
+                    </Stack>
+                  </Stack>
+                )}
               </Stack>
             ))
           )}
