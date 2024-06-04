@@ -27,6 +27,10 @@ const FormClassification = (props) => {
     bottom: 0,
     right: '1%',
   }));
+  const StyledText = styled(Typography)(() => ({
+    marginTop: '20px',
+    marginLeft: '10px',
+  }));
 
   const [isClassificationProblem, setClassificationProblem] =
     React.useState(false);
@@ -55,20 +59,22 @@ const FormClassification = (props) => {
       <Box
         position={'relative'}
         sx={{
-          border: '1px solid #B1B5BA',
+          border: !isValid ? '1px solid red' : '1px solid #B1B5BA',
           borderRadius: '10px',
         }}
       >
         <AppScrollbar
           sx={{
-            minHeight: '145px',
-            maxHeight: '145px',
+            minHeight: '60px',
+            maxHeight: '60px',
             overflow: 'auto',
           }}
         >
-          <Typography>
-            {klasifikasi.name} {klasifikasi.desc}
-          </Typography>
+          <StyledText>
+            <Typography>
+              {klasifikasi.name} {klasifikasi.desc}
+            </Typography>
+          </StyledText>
         </AppScrollbar>
         <StyledBox>
           <IconButton>

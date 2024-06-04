@@ -55,7 +55,7 @@ const FormAddressBook = (props) => {
       <Box
         position={'relative'}
         sx={{
-          border: '1px solid #B1B5BA',
+          border: !isValid ? '1px solid red' : '1px solid #B1B5BA',
           borderRadius: '10px',
         }}
       >
