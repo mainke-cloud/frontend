@@ -19,6 +19,9 @@ import searchIcon from '../../assets/icon/search.svg';
 import NosearchIcon from '../../assets/icon/NoSearch.svg';
 import NofoundIcon from '../../assets/icon/NotFound.svg';
 import FilterPopover from './IconButton/FilterPopover';
+import {
+  listData
+} from '../../@crema/services/dummy/sidebar/listDataSemuaSurat';
 
 function SearchPage() {
   const StyledTab = styled(Tab)(({ theme }) => ({
@@ -45,6 +48,7 @@ function SearchPage() {
   }));
 
   const [value, setValue] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [openFilter, setOpenFilter] = React.useState(false);
 
   const handleChange = (event, newValue) => {
@@ -54,22 +58,17 @@ function SearchPage() {
     setValue(event.target.value !== '' ? '1' : null);
   };
 
-  // const handleFilterClick = (event) => {
-  //   setOpenFilter(event.currentTarget);
-  // };
-
-  // const handleCloseFilter = () => {
-  //   setOpenFilter(null);
-  // };
-  // const open_filter = Boolean(openFilter);
-
-  const handleFilterClick = () => {
+  const handleFilterClick = (event) => {
+    setAnchorEl(event.currentTarget);
     setOpenFilter(!openFilter); // Toggle nilai openFilter
   };
 
   const handleCloseFilter = () => {
+    setAnchorEl(null);
     setOpenFilter(false); // Tutup FilterPopover dengan mengatur openFilter ke false
   };
+
+  const data = listData;
 
   return (
     <>
@@ -100,7 +99,6 @@ function SearchPage() {
                 onChange={handleInputChange}
               />
               <IconButton>
-                {/* <SearchIcon fontSize='medium' /> */}
                 <img src={searchIcon} alt='Search Icon' style={{padding:'10px'}}/>
               </IconButton>
             </Box>
@@ -160,10 +158,9 @@ function SearchPage() {
               >
                 Filter 
                 <Filter size={16} />
-                <FilterPopover open={openFilter} onClose={handleCloseFilter} />
               </Box>
             </Grid>
-            <TableList />
+            <TableList files={data}/>
           </Box>
         )}
         {value=== '2' &&(
@@ -194,9 +191,34 @@ function SearchPage() {
             <Typography sx={{fontSize:'20px', fontWeight: Fonts.BOLD}}>Mungkin Bisa Cari Keyword Lain</Typography>
           </Stack>
         )}
+         {value=== '4' &&(
+          <Box sx={{ padding: 10 }}>
+            <Grid container justifyContent='space-between' marginBottom={5}>
+              <Typography>Semua (200 Hasil)</Typography>
+              <Box
+                sx={{
+                  backgroundColor: '#E42313',
+                  color: '#FFFFFF',
+                  cursor: 'pointer',
+                  width: '90px',
+                  height: '30px',
+                  textAlign: 'center',
+                  borderRadius: '100px',
+                  lineHeight: '28px',
+                }}
+                onClick={handleFilterClick}
+              >
+                Filter 
+                <Filter size={16} />
+              </Box>
+            </Grid>
+            <TableList files={data}/>
+          </Box>
+        )}
         
         </TabPanel>
       </TabContext>
+      <FilterPopover open={openFilter} anchorEl={anchorEl} onClose={handleCloseFilter} />
     </>
   );
 }
