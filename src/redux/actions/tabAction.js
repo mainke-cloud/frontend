@@ -158,11 +158,9 @@ export const addTab = (id, state, type) => {
           ) : (
             <BelumPilih />
           ),
+        active: true,
       };
       dispatch({ type: 'ADD_TAB', payload: tabs });
-
-      const updatedTabs = [...state, tabs];
-      localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     } else {
       const isExistingTab = state.some(
         (tab) => tab.id.toLowerCase() === type.toLowerCase(),
@@ -214,6 +212,7 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
+      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -266,7 +265,6 @@ export const childTab = (id, state, type, data) => {
           activeTab.active = false;
           activeTab.favicon = getIcon(activeTab.title, false);
         }
-        
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
           title: type,
@@ -303,9 +301,8 @@ export const childTab = (id, state, type, data) => {
             ) : (
               ''
             ),
+          active: true,
         };
-        const updatedTabs = [...state, tabs];
-        localStorage.setItem('tabs', JSON.stringify(updatedTabs));
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
@@ -316,12 +313,10 @@ export const childTab = (id, state, type, data) => {
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
     const updatedTabs = state.map((tab) => ({
-      id: tab.id,
-      title: tab.title,
+      ...tab,
       active: tab.id === tabId,
       favicon: getIcon(tab.title, tab.id === tabId),
     }));
-    localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };
