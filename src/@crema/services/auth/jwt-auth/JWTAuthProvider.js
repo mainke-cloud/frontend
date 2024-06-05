@@ -23,6 +23,11 @@ const JWTAuthAuthProvider = ({ children }) => {
     const getAuthUser = () => {
       fetchStart();
       const token = localStorage.getItem('token');
+      const userData = JSON.parse(localStorage.getItem('user'));
+      console.log(userData.refresh_token_exp, new Date().toISOString().split('.')[0]);
+      if(userData.refresh_token_exp === new Date().getTime()){
+        logout();
+      }
       if (!token) {
         fetchSuccess();
         setJWTAuthData({
@@ -34,7 +39,6 @@ const JWTAuthAuthProvider = ({ children }) => {
       }
       // console.log(token);
       setAuthToken(token);
-      const userData = JSON.parse(localStorage.getItem('user'));
       if (userData) {
         setJWTAuthData({
           user: userData,
