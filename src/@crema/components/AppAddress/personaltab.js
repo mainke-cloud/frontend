@@ -29,6 +29,9 @@ const PersonalTab = ({
   handleRadioChange,
   handleConfirmation,
 }) => {
+  // Filter datas to only include rows where personal is true
+  const filteredData = datas.filter((row) => row.personal === true);
+
   return (
     <>
       <TableContainer style={{ maxHeight: 300 }}>
@@ -45,12 +48,12 @@ const PersonalTab = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {datas.map((row, index) => (
+              {filteredData.map((row, index) => (
                 <TableRow
                   key={index}
                   sx={{
                     backgroundColor: multipleData.some(
-                      (data) => data.id === datas[index].id,
+                      (data) => data.id === filteredData[index].id,
                     )
                       ? '#52BD94'
                       : 'transparent',
@@ -60,7 +63,7 @@ const PersonalTab = ({
                     {type !== 'single' ? (
                       <Radio
                         checked={multipleData.some(
-                          (data) => data.id === datas[index].id,
+                          (data) => data.id === filteredData[index].id,
                         )}
                         onClick={() => handleSelectItem(index)}
                       />

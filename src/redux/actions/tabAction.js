@@ -12,6 +12,22 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
+import iconSurat from '../../assets/icon/mail.svg';
+import homeIcon from '../../assets/icon/home.svg';
+import delegasiIcon from '../../assets/icon/DelegasiIcon.svg';
+import sekretarisIcon from '../../assets/icon/SekretarisIcon.svg';
+import inboxIconInActive from '../../assets/icon/iconInActive/inbox.svg';
+import disposisiIconInActive from '../../assets/icon/iconInActive/disposisi.svg';
+import folderIconInActive from '../../assets/icon/iconInActive/folder.svg';
+import securityIconInActive from '../../assets/icon/iconInActive/shield.svg';
+import helpIconInActive from '../../assets/icon/iconInActive/help-circle.svg';
+import profileIconInActive from '../../assets/icon/iconInActive/user.svg';
+import searchIconInActive from '../../assets/icon/iconInActive/search.svg';
+import scanIconInActive from '../../assets/icon/iconInActive/scan.svg';
+import iconSuratInActive from '../../assets/icon/iconInActive/mail.svg';
+import homeIconInActive from '../../assets/icon/iconInActive/home.svg';
+import delegasiIconInActive from '../../assets/icon/iconInActive/DelegasiIcon.svg';
+import sekretarisIconInActive from '../../assets/icon/iconInActive/SekretarisIcon.svg';
 import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
 import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
 import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
@@ -20,7 +36,6 @@ import Surat_Internal from 'modules/buatSurat/SuratInternal';
 import Surat_External from 'modules/buatSurat/SuratExternal';
 import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
 import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
-import iconSurat from '../../assets/icon/mail.svg';
 import Disposisi from 'modules/disposisi/respons/DetailSurat';
 import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
 import BelumPilih from 'modules/suratKeluar/BelumPilih';
@@ -36,8 +51,56 @@ import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
 import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
 import Folder from 'modules/folder/index';
 import Listdata from 'modules/folder/content/ListData';
-import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
+import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index';
 import Forward from 'modules/forward';
+
+const getIcon = (type, active) => {
+  switch (type) {
+    case 'Dashboard':
+      return active ? homeIcon : homeIconInActive;
+    case 'Folder':
+    case 'Buka Folder':
+      return active ? folderIcon : folderIconInActive;
+    case 'Keamanan':
+      return active ? securityIcon : securityIconInActive;
+    case 'FAQ':
+      return active ? helpIcon : helpIconInActive;
+    case 'Profile':
+      return active ? profileIcon : profileIconInActive;
+    case 'Disposisi':
+    case 'Todo':
+      return active ? disposisiIcon : disposisiIconInActive;
+    case 'Log Scan Surat':
+    case 'Buat Scan Surat':
+    case 'Draft Scan Surat':
+    case 'Scan Surat Masuk':
+      return active ? scanIcon : scanIconInActive;
+    case 'Surat Masuk':
+    case 'Buka Surat':
+      return active ? inboxIcon : inboxIconInActive;
+    case 'Perlu Tindak Lanjut':
+    case 'Lacak Proses':
+    case 'Draft':
+    case 'Komposer':
+    case 'Template':
+    case 'Buat Surat':
+    case 'Buat Template':
+    case 'Forward':
+    case 'Buat Surat Internal':
+    case 'Buat Surat External':
+    case 'Buat Surat Undangan':
+    case 'Buat Surat Delegasi':
+      return active ? iconSurat : iconSuratInActive;
+    case 'Search':
+      return active ? searchIcon : searchIconInActive;
+    case 'Delegasi':
+      return active ? delegasiIcon : delegasiIconInActive;
+    case 'Sekretaris':
+      return active ? sekretarisIcon : sekretarisIconInActive;
+    default:
+      return active ? iconSurat : iconSuratInActive;
+  }
+};
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -49,63 +112,12 @@ export const addTab = (id, state, type) => {
       const activeTab = state.find((tab) => tab.active);
       if (activeTab) {
         activeTab.active = false;
+        activeTab.favicon = getIcon(activeTab.title, false);
       }
       let tabs = {
         id: type.toLowerCase(),
         title: type,
-        favicon:
-          type === 'Folder'
-            ? folderIcon
-            : type === 'Keamanan'
-            ? securityIcon
-            : type === 'FAQ'
-            ? helpIcon
-            : type === 'Profile'
-            ? profileIcon
-            : type === 'Disposisi'
-            ? disposisiIcon
-            : type === 'Todo'
-            ? disposisiIcon
-            : type === 'Log Scan Surat'
-            ? scanIcon
-            : type === 'Buat Scan Surat'
-            ? inboxIcon
-            : type === 'Surat Masuk'
-            ? inboxIcon
-            : type === 'Draft Scan Surat'
-            ? scanIcon
-            : type === 'Buat Surat Internal'
-            ? iconSurat
-            : type === 'Buat Surat External'
-            ? iconSurat
-            : type === 'Buat Surat Undangan'
-            ? iconSurat
-            : type === 'Buat Surat Delegasi'
-            ? iconSurat
-            : type === 'Buka Surat'
-            ? scanIcon
-            : type === 'Buka Folder'
-            ? folderIcon
-            : type === 'Search'
-            ? searchIcon
-            : type === 'Perlu Tindak Lanjut'
-            ? inboxIcon
-            : type === 'Lacak Proses'
-            ? inboxIcon
-            : type === 'Draft'
-            ? inboxIcon
-            : type === 'Komposer'
-            ? inboxIcon
-            : type === 'Template'
-            ? inboxIcon
-            : type === 'Buat Surat'
-            ? inboxIcon
-            : type === 'Buat Template'
-            ? inboxIcon
-            : type === 'Forward'
-            ? inboxIcon
-            : '',
-
+        favicon: getIcon(type, true),
         content:
           type === 'Keamanan' ? (
             <Keamanan />
@@ -117,9 +129,9 @@ export const addTab = (id, state, type) => {
             <Listdata />
           ) : type === 'BuatDisposisi' ? (
             <BuatSurat />
-          ) : type === 'Add_Sekretaris' ? (
+          ) : type === 'Sekretaris' ? (
             <Add_Sekretaris />
-          ) : type === 'Add_Delegasi' ? (
+          ) : type === 'Delegasi' ? (
             <Add_Delegasi />
           ) : type === 'Buat Surat Internal' ? (
             <Surat_Internal />
@@ -140,7 +152,7 @@ export const addTab = (id, state, type) => {
           ) : type === 'Template' ? (
             <Template />
           ) : type === 'Buat Template' ? (
-          <BuatTemplateSurat />
+            <BuatTemplateSurat />
           ) : type === 'Forward' ? (
             <Forward />
           ) : (
@@ -148,6 +160,25 @@ export const addTab = (id, state, type) => {
           ),
         active: true,
       };
+      let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+      if (!localStorageTabs) {
+        localStorageTabs = [];
+      }
+
+      let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
+      if (!isDuplicate) {
+        // Menetapkan status aktif tab yang baru ditambahkan menjadi true
+        tabs.active = true;
+
+        // Menetapkan status aktif tab yang lainnya menjadi false
+        localStorageTabs.forEach((tab) => {
+          tab.active = false;
+        });
+
+        localStorageTabs.push(tabs);
+        localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+      }
+
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
       const isExistingTab = state.some(
@@ -200,7 +231,6 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
-      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -235,19 +265,11 @@ export const childTab = (id, state, type, data) => {
             <SuratDibatalkan props={data} />
           ) : type === 'Buat Template' ? (
             <SuratDibatalkan props={data} />
-          ): (
+          ) : (
             ''
           ),
       };
-      if (type === 'Surat Masuk') {
-        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
-      } else if (type === 'Log Scan Surat') {
-        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      } else if (type === 'Folder') {
-        dispatch({ type: 'UPDATE_TAB_FOLDER', payload: updateTab });
-      } else {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
-      }
+      dispatch({ type: 'UPDATE_TAB', payload: updateTab });
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -259,11 +281,12 @@ export const childTab = (id, state, type, data) => {
 
         if (activeTab) {
           activeTab.active = false;
+          activeTab.favicon = getIcon(activeTab.title, false);
         }
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
           title: type,
-          favicon: inboxIcon,
+          favicon: getIcon(activeTab.title, true),
           content:
             type === 'Todo' ? (
               <DetailTodo props={data} />
@@ -307,10 +330,16 @@ export const childTab = (id, state, type, data) => {
 
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
+    // Memperbarui status tab aktif di dalam state
     const updatedTabs = state.map((tab) => ({
       ...tab,
       active: tab.id === tabId,
+      favicon: getIcon(tab.title, tab.id === tabId),
     }));
+
+    // Memperbarui localStorage dengan tab yang sudah diaktifkan
+    localStorage.setItem('tabs', JSON.stringify(updatedTabs));
+
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };

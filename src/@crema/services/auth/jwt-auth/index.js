@@ -17,6 +17,7 @@ jwtAxios.interceptors.response.use(
   },
 );
 export const setAuthToken = (token) => {
+  // console.log(token)
   if (token) {
     jwtAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     localStorage.setItem('token', token);

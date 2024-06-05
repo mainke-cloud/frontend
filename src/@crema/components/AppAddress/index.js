@@ -91,10 +91,40 @@ const ComposeMail = (props) => {
     }
   `;
 
+  // const StyledAccordion = styled((props) => (
+  //   <Accordion disableGutters elevation={0} square {...props} />
+  // ))(({ theme }) => ({
+  //   border: `1px solid ${theme.palette.divider}`,
+  //   '&:not(:last-child)': {
+  //     borderBottom: 0,
+  //   },
+  //   '&:before': {
+  //     display: 'none',
+  //   },
+  // }));
+
+  // const AccordionSummarys = styled((props) => (
+  //   <AccordionSummary
+  //     expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
+  //     {...props}
+  //   />
+  // ))(({ theme }) => ({
+  //   flexDirection: 'row-reverse',
+  //   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+  //     transform: 'rotate(90deg)',
+  //   },
+  //   '& .MuiAccordionSummary-content': {
+  //     marginLeft: theme.spacing(1),
+  //   },
+  // }));
+
+  // const AccordionDetail = styled(AccordionDetails)(() => ({
+  //   borderTop: '1px solid rgba(0, 0, 0, .125)',
+  // }));
+
   const StyledAccordion = styled((props) => (
     <Accordion disableGutters elevation={0} square {...props} />
   ))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
     '&:not(:last-child)': {
       borderBottom: 0,
     },
@@ -108,13 +138,14 @@ const ComposeMail = (props) => {
       expandIcon={<ArrowForwardIosSharp sx={{ fontSize: '0.9rem' }} />}
       {...props}
     />
-  ))(({ theme }) => ({
+  ))(({ theme, selected, disabled }) => ({
     flexDirection: 'row-reverse',
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
       transform: 'rotate(90deg)',
     },
     '& .MuiAccordionSummary-content': {
       marginLeft: theme.spacing(1),
+      backgroundColor: selected ? theme.palette.action.selected : 'transparent',
     },
   }));
 
@@ -125,6 +156,7 @@ const ComposeMail = (props) => {
   let check = title === 'Nama' ? 'Karyawan' : 'Jabatan';
 
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState(false);
   const [activeTab, setActiveTab] = useState('');
   const [previewData, setPreviewData] = useState(null);
   const [singleData, setSingleData] = useState(null);
@@ -138,6 +170,12 @@ const ComposeMail = (props) => {
   useEffect(() => {
     setActiveTab(check);
   }, [isComposeMail]);
+
+  useEffect(() => {
+    if (multipleData.length === 0) {
+      setIsChecked(false);
+    }
+  }, [multipleData]);
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -153,6 +191,7 @@ const ComposeMail = (props) => {
 
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
+    setIsChecked(checked);
     const updatedSelectedRow = checked ? datas.map((_, index) => index) : [];
     setSelectedRow(updatedSelectedRow);
     setSelectedRowIndices(updatedSelectedRow);
@@ -561,7 +600,11 @@ const ComposeMail = (props) => {
             >
               {type !== 'single' && (
                 <Box sx={{ marginTop: 2 }}>
-                  <Checkbox onChange={handleCheckboxChange} /> Pilih Semua
+                  <Checkbox
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                  Pilih Semua
                 </Box>
               )}
               <Typography variant='body2'>
