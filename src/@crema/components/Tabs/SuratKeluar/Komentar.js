@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Stack,
   Typography,
@@ -12,6 +12,7 @@ import AppScrollbar from '@crema/components/AppScrollbar';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import ListKomentar from './ListKomentar';
+import ModalConfirmation3 from '../BuatSurat/ModalConfirmation/ModalConfirmation3';
 const Komentar = () => {
   const BalasButton = styled(Button)({
     borderRadius: '25px',
@@ -29,6 +30,25 @@ const Komentar = () => {
       boxShadow: 'none',
     },
   });
+  const [openModal, setOpenModal] = React.useState(false);
+
+  const handleCloseModal = () => setOpenModal(false);
+  const handleNextModal = () => {
+    setOpenModal(false);
+  };
+
+  const [value, SetValue] = useState('');
+  const handleOpen = () => {
+    if (value === '') {
+      // panggil modal
+      console.log('ini value', value);
+      setOpenModal(true);
+    }
+  };
+
+  const handleChangeValue = (value) => {
+    SetValue(value);
+  };
 
   return (
     <Box
@@ -65,6 +85,8 @@ const Komentar = () => {
         sx={{ marginTop: '8px', justifyContent: 'space-between' }}
       >
         <InputBase
+          value={value}
+          onChange={(e) => handleChangeValue(e.target.value)}
           placeholder='Tambahkan Komentar...'
           sx={{
             width: '100%',
@@ -73,8 +95,13 @@ const Komentar = () => {
             paddingX: '8px',
           }}
         />
-        <BalasButton>Balas</BalasButton>
+        <BalasButton onClick={handleOpen}>Balas</BalasButton>
       </Stack>
+      <ModalConfirmation3
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+        handleNextModal={handleNextModal}
+      />
     </Box>
   );
 };

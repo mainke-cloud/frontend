@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import PdfVector from '../../../../../assets/vector/PdfVector.svg';
 import { X } from 'feather-icons-react';
 import { CiFileOn } from 'react-icons/ci';
+import PropTypes from 'prop-types';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -20,7 +21,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const KomentarSection = () => {
+const KomentarSection = ({ onCreate, setShowKomen }) => {
   const [file, setFile] = useState([]);
   const [upload, setUpload] = useState(true);
 
@@ -39,6 +40,20 @@ const KomentarSection = () => {
     }
   };
 
+  const initialState = {
+    komen: '',
+  };
+  const [data, setData] = useState(initialState);
+  const { komen } = data;
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = () => {
+    onCreate(data);
+    setData(initialState);
+    setShowKomen(true);
+  };
+
   return (
     <Stack spacing={7}>
       <Stack
@@ -51,9 +66,7 @@ const KomentarSection = () => {
         }}
       >
         <Stack direction='row' padding='10px' paddingLeft='17px'>
-          <Icon>
-            <ChatBubbleOutlineOutlinedIcon />
-          </Icon>
+          <ChatBubbleOutlineOutlinedIcon />
 
           <Typography
             variant='h4'
@@ -75,6 +88,9 @@ const KomentarSection = () => {
           multiline
           fullWidth
           rows={4}
+          onChange={handleChange}
+          name='komen'
+          value={komen}
         />
 
         {!upload && (
@@ -144,6 +160,7 @@ const KomentarSection = () => {
             </Grid>
           </Stack>
         ))}
+
         <Stack direction='row' spacing={4} justifyContent='flex-end'>
           <Button
             variant='outlined'
@@ -178,6 +195,7 @@ const KomentarSection = () => {
               borderRadius: '24px',
               bgcolor: '#4B4747',
             }}
+            onClick={handleSubmit}
           >
             Kirim
           </Button>
@@ -185,6 +203,11 @@ const KomentarSection = () => {
       </Stack>
     </Stack>
   );
+};
+
+KomentarSection.propTypes = {
+  onCreate: PropTypes.func.isRequired,
+  setShowKomen: PropTypes.func.isRequired,
 };
 
 export default KomentarSection;

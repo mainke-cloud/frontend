@@ -5,11 +5,9 @@ import { styled } from '@mui/material/styles';
 import AppScrollbar from '../AppScrollbar';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import ClassificationProblem from '@crema/components/AppClassificationProblem';
-import { users } from '@crema/services/dummy/user/user';
-import { useSelector } from 'react-redux';
 
 const FormClassification = (props) => {
-  const { text } = props;
+  const { text, isValid, klasifikasi, onClassificationChange } = props;
 
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
@@ -29,6 +27,10 @@ const FormClassification = (props) => {
     bottom: 0,
     right: '1%',
   }));
+  const StyledText = styled(Typography)(() => ({
+    marginTop: '20px',
+    marginLeft: '10px',
+  }));
 
   const [isClassificationProblem, setClassificationProblem] =
     React.useState(false);
@@ -38,10 +40,9 @@ const FormClassification = (props) => {
   };
   const onCloseClassificationProblem = () => {
     setClassificationProblem(false);
+    onClassificationChange();
   };
 
-  const klasifikasi = useSelector((state) => state.classification.klasifikasi);
-  console.log(klasifikasi);
   return (
     <StyledStack>
       <Link
@@ -58,18 +59,22 @@ const FormClassification = (props) => {
       <Box
         position={'relative'}
         sx={{
-          border: '1px solid #B1B5BA',
+          border: !isValid ? '1px solid red' : '1px solid #B1B5BA',
           borderRadius: '10px',
         }}
       >
         <AppScrollbar
           sx={{
-            minHeight: '145px',
-            maxHeight: '145px',
+            minHeight: '60px',
+            maxHeight: '60px',
             overflow: 'auto',
           }}
         >
-          <Typography>{klasifikasi.name} {klasifikasi.desc}</Typography>
+          <StyledText>
+            <Typography>
+              {klasifikasi.name} {klasifikasi.desc}
+            </Typography>
+          </StyledText>
         </AppScrollbar>
         <StyledBox>
           <IconButton>
@@ -81,6 +86,12 @@ const FormClassification = (props) => {
         </StyledBox>
       </Box>
 
+      {!isValid && (
+        <Typography variant='body1' color='error'>
+          Kolom ini wajib diisi
+        </Typography>
+      )}
+
       <ClassificationProblem
         isClassificationProblem={isClassificationProblem}
         onCloseClassificationProblem={onCloseClassificationProblem}
@@ -90,8 +101,11 @@ const FormClassification = (props) => {
   );
 };
 
-export default FormClassification;
-
 FormClassification.propTypes = {
   text: PropTypes.string.isRequired,
+  isValid: PropTypes.bool.isRequired,
+  klasifikasi: PropTypes.object.isRequired,
+  onClassificationChange: PropTypes.func.isRequired,
 };
+
+export default FormClassification;

@@ -16,6 +16,7 @@ export const users = [
     email: 'john.doe@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '081234567890',
+    personal: true,
   },
   {
     profil: user,
@@ -33,6 +34,7 @@ export const users = [
     email: 'jane.smith@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '087654321098',
+    personal: false,
   },
   {
     profil: user,
@@ -50,6 +52,7 @@ export const users = [
     email: 'ahmad.ibrahim@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '081357924680',
+    personal: true,
   },
   {
     profil: user,
@@ -67,6 +70,7 @@ export const users = [
     email: 'maria.gonzalez@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '089876543210',
+    personal: true,
   },
   {
     profil: user,
@@ -84,6 +88,7 @@ export const users = [
     email: 'chen.wei@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '086789054321',
+    personal: true,
   },
   {
     profil: user,
@@ -101,6 +106,7 @@ export const users = [
     email: 'anna.kowalski@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '087890543216',
+    personal: false,
   },
   {
     profil: user,
@@ -118,6 +124,7 @@ export const users = [
     email: 'muhammad.almansur@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '085678901234',
+    personal: false,
   },
   {
     profil: user,
@@ -135,6 +142,7 @@ export const users = [
     email: 'sophie.dubois@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '083210987654',
+    personal: false,
   },
   {
     profil: user,
@@ -152,6 +160,7 @@ export const users = [
     email: 'david.johnson@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '082345678901',
+    personal: false,
   },
   {
     profil: user,
@@ -169,6 +178,7 @@ export const users = [
     email: 'john.doe@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '081234567890',
+    personal: true,
   },
   {
     profil: user,
@@ -186,6 +196,7 @@ export const users = [
     email: 'john.doe@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '081234567890',
+    personal: true,
   },
   {
     profil: user,
@@ -203,6 +214,7 @@ export const users = [
     email: 'john.doe@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '081234567890',
+    personal: true,
   },
   {
     profil: user,
@@ -220,5 +232,6 @@ export const users = [
     email: 'muhammad.almansur@example.com',
     pgs: 'ini pgs yagesya',
     nohp: '085678901234',
+    personal: true,
   },
 ];

@@ -160,6 +160,25 @@ export const addTab = (id, state, type) => {
           ),
         active: true,
       };
+      let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+      if (!localStorageTabs) {
+        localStorageTabs = [];
+      }
+
+      let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
+      if (!isDuplicate) {
+        // Menetapkan status aktif tab yang baru ditambahkan menjadi true
+        tabs.active = true;
+
+        // Menetapkan status aktif tab yang lainnya menjadi false
+        localStorageTabs.forEach((tab) => {
+          tab.active = false;
+        });
+
+        localStorageTabs.push(tabs);
+        localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+      }
+
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
       const isExistingTab = state.some(
@@ -212,7 +231,6 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
-      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -312,11 +330,16 @@ export const childTab = (id, state, type, data) => {
 
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
+    // Memperbarui status tab aktif di dalam state
     const updatedTabs = state.map((tab) => ({
       ...tab,
       active: tab.id === tabId,
       favicon: getIcon(tab.title, tab.id === tabId),
     }));
+
+    // Memperbarui localStorage dengan tab yang sudah diaktifkan
+    localStorage.setItem('tabs', JSON.stringify(updatedTabs));
+
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };
