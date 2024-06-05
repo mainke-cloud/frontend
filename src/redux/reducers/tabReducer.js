@@ -9,7 +9,7 @@ const initialState = {
       title: 'Dashboard',
       active: true,
       favicon: homeIcon,
-        content: <Dashboard />,
+      content: <Dashboard />,
     },
   ],
   idCounter: 1,
@@ -17,7 +17,9 @@ const initialState = {
 };
 
 const updateMultipleTabs = (tabs, ids, payload) => {
-  return tabs.map((tab) => (ids.includes(tab.id) && tab.title === payload.title ? payload : tab));
+  return tabs.map((tab) =>
+    ids.includes(tab.id) && tab.title === payload.title ? payload : tab,
+  );
 };
 
 const tabReducer = (state = initialState, action) => {
@@ -36,21 +38,25 @@ const tabReducer = (state = initialState, action) => {
     case 'UPDATE_TAB':
       return {
         ...state,
-        tabs: updateMultipleTabs(state.tabs, [
-          'todo',
-          'disposisi',
-          'surat masuk',
-          'perlu tindak lanjut',
-          'draft',
-          'lacak proses',
-          'komposer',
-          'template',
-          'surat diminta',
-          'surat terkirim',
-          'surat dibatalkan',
-          'log scan surat',
-          'folder',
-        ], action.payload),
+        tabs: updateMultipleTabs(
+          state.tabs,
+          [
+            'todo',
+            'disposisi',
+            'surat masuk',
+            'perlu tindak lanjut',
+            'draft',
+            'lacak proses',
+            'komposer',
+            'template',
+            'surat diminta',
+            'surat terkirim',
+            'surat dibatalkan',
+            'log scan surat',
+            'folder',
+          ],
+          action.payload,
+        ),
       };
     case 'CLOSE_TAB':
       return {

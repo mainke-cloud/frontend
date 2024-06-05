@@ -76,13 +76,13 @@ const JWTAuthAuthProvider = ({ children }) => {
   const signInUser = async ({ username, password }) => {
     fetchStart();
     try {
-      console.log('Signing in with credentials:', { username, password });
+      // console.log('Signing in with credentials:', { username, password });
 
       const { data } = await jwtAxios.post('/api/auth/login/', {
         username,
         password,
       });
-      console.log('Response data:', data);
+      // console.log('Response data:', data);
 
       sessionStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('token', data.jwt);
