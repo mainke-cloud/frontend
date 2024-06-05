@@ -33,7 +33,7 @@ const JWTAuthAuthProvider = ({ children }) => {
         return;
       }
       setAuthToken(token);
-      const userData = JSON.parse(sessionStorage.getItem('user'));
+      const userData = JSON.parse(localStorage.getItem('user'));
       if (userData) {
         setJWTAuthData({
           user: userData,
@@ -77,7 +77,7 @@ const JWTAuthAuthProvider = ({ children }) => {
     try {
       const { data } = await jwtAxios.post('/api/auth/login/', { username, password });
       console.log(data);
-      sessionStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('token', data.jwt);
       setAuthToken(data.jwt);
       // const res = await jwtAxios.get('/api/auth/login/');
@@ -123,7 +123,7 @@ const JWTAuthAuthProvider = ({ children }) => {
 
   const logout = async () => {
     localStorage.removeItem('token');
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
     
     setAuthToken();
     setJWTAuthData({

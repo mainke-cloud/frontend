@@ -128,8 +128,8 @@ const Profile = () => {
   ];
 
   useEffect(() => {
-    const dataFromSession = sessionStorage.getItem('user');
-    const data = JSON.parse(dataFromSession);
+    const dataFromlocal = localStorage.getItem('user');
+    const data = JSON.parse(dataFromlocal);
     if (data) {
       setUserId(data.id);
       getUser(data.id);
@@ -137,9 +137,15 @@ const Profile = () => {
   }, []);
 
   const getUser = async (userId) => {
+    const token = localStorage.getItem('token');
     try {
       const response = await axios.get(
         `https://new.coofis.com/api/profile/?id_user=${userId}`,
+        {
+          headers: {
+            'Authorization' : `Bearer ${token}`
+          }
+        }
       );
       setUser(response.data.results);
     } catch (error) {
