@@ -24,7 +24,6 @@ const JWTAuthAuthProvider = ({ children }) => {
       fetchStart();
       const token = localStorage.getItem('token');
       const userData = JSON.parse(localStorage.getItem('user'));
-      console.log(userData.refresh_token_exp, new Date().toISOString().split('.')[0]);
       if(userData.refresh_token_exp === new Date().getTime()){
         logout();
       }
