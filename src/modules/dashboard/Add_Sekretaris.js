@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Grid,
@@ -22,9 +22,10 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png';
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png';
 import ComposeMail from '@crema/components/AppAddress';
 import Filter_sekretaris from './FilterPopUp/Filter_sekretaris';
-import { dataSekre } from '../../@crema/services/dummy/dataSekreDele'; 
+import { dataSekre } from '../../@crema/services/dummy/dataSekreDele';
 import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
@@ -79,15 +80,39 @@ const IOSSwitch = styled((props) => (
 
 const Add_Sekretaris = () => {
   const sekretaris = useSelector((state) => state.addressbook.sekretaris);
-  
-  const [isActive, setIsActive] = useState(true);
-  const [openFilter, setOpenFilter] = React.useState(false);
-  const [isComposeMail, setComposeMail] = React.useState(false);
-  const [isSelected, setSelected] = React.useState(1)
 
-  const filtered = dataSekre.find(secretary => secretary.id === isSelected);
-  // console.log(filtered)
-  
+  const [isActive, setIsActive] = useState(true);
+  const [openFilter, setOpenFilter] = useState(false);
+  const [isComposeMail, setComposeMail] = useState(false);
+  const [isSelected, setSelected] = useState(1);
+
+  const [sekretarisList, setSekretarisList] = useState([]);
+  const [userId, setUserId] = useState(0);
+  const [sekres, setSekres] = useState([]);
+  const [status, setStatus] = useState(false);
+  const [sifat, setSifat] = useState(false);
+  const [hakBiasa, setHakBiasa] = useState(false);
+  const [hakRhs, setHakRhs] = useState(false);
+  const [hakRhsPrib, setHakRhsPrib] = useState(false);
+
+  const filter_sekreList = sekretarisList.find(
+    (secretary) => secretary.id === isSelected,
+  );
+  const filter_profile = sekres.find(
+    (secretary) =>
+      filter_sekreList && secretary.user_id === filter_sekreList.user_id,
+  );
+
+  useEffect(() => {
+    if (filter_sekreList) {
+      setStatus(filter_sekreList.status);
+      setSifat(filter_sekreList.sifat);
+      setHakBiasa(filter_sekreList.hak_sekretaris.includes('Biasa'));
+      setHakRhs(filter_sekreList.hak_sekretaris.includes('Rhs'));
+      setHakRhsPrib(filter_sekreList.hak_sekretaris.includes('Rhs Prib'));
+    }
+  }, [filter_sekreList]);
+
   const onOpenComposeMail = () => {
     setComposeMail(true);
   };
@@ -97,11 +122,11 @@ const Add_Sekretaris = () => {
   };
 
   const handleFilterClick = () => {
-    setOpenFilter(!openFilter); 
+    setOpenFilter(!openFilter);
   };
 
   const handleCloseFilter = () => {
-    setOpenFilter(false); 
+    setOpenFilter(false);
   };
 
   const handleClick = () => {
@@ -109,8 +134,121 @@ const Add_Sekretaris = () => {
   };
 
   const handleSelected = (id) => {
-    setSelected(id)
-  }
+    setSelected(id);
+  };
+
+  useEffect(() => {
+    const dataFromLocal = localStorage.getItem('user');
+    const data = JSON.parse(dataFromLocal);
+    if (data) {
+      setUserId(data.id);
+      getSekretaris(data.id);
+    }
+  }, []);
+
+  const getSekretaris = async (userId) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get(
+        `https://new.coofis.com/api/profile/sekretaris/?id_user=${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setSekretarisList(response.data.results);
+      if (response.data.results.length > 0) {
+        response.data.results.forEach((sekre) => {
+          getUser(sekre.user_id);
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  const getUser = async (userId) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get(
+        `https://new.coofis.com/api/profile/?id_user=${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setSekres((prevSekres) => [...prevSekres, ...response.data.results]);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  const delSekretaris = async (sekre_id) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.delete(
+        `https://new.coofis.com/api/profile/sekretaris/retrieve/${sekre_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      alert('Sekretaris berhasil dihapus');
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  const updateSekretaris = async (sekre_id, data) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.patch(
+        `https://new.coofis.com/api/profile/sekretaris/retrieve/${sekre_id}/`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      alert('Sekretaris berhasil diUpdate');
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  const handelUpdate = () => {
+    let hakSekretarisValue = '';
+  
+    if (hakBiasa && hakRhs && hakRhsPrib) {
+      hakSekretarisValue = 'Biasa, Rhs, Rhs Prib';
+    } else if (hakBiasa && hakRhsPrib) {
+      hakSekretarisValue = 'Biasa, Rhs Prib';
+    } else if (hakBiasa && hakRhs) {
+      hakSekretarisValue = 'Biasa, Rhs';
+    } else if (hakRhs && hakRhsPrib) {
+      hakSekretarisValue = 'Rhs, Rhs Prib';
+    } else if (hakRhs) {
+      hakSekretarisValue = 'Rhs';
+    } else if (hakRhsPrib) {
+      hakSekretarisValue = 'Rhs Prib';
+    } else if (hakBiasa) {
+      hakSekretarisValue = 'Biasa';
+    }
+  
+    const data = {
+      tgl_pembuatan: filter_sekreList.tgl_pembuatan,
+      status: status,
+      sifat: sifat,
+      hak_sekretaris: hakSekretarisValue,
+    };
+  
+    updateSekretaris(userId, data);
+  };
+  
 
   return (
     <>
@@ -190,47 +328,68 @@ const Add_Sekretaris = () => {
               <AppScrollbar>
                 <Box sx={{ overflowY: 'hidden', borderRadius: 2 }}>
                   <Stack direction='row'>
-                    {dataSekre.map((sekre) => (
-                      <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                      key={sekre.id}
-                      onClick={() => handleSelected(sekre.id)}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
+                    {sekretarisList.map((sekre) => {
+                      const sekreDetail = sekres.find(
+                        (detail) => detail.user_id === sekre.user_id,
+                      );
+                      return (
                         <Box
                           sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: sekre.status ? '#429777' : '#BF2600',
-                            borderRadius: 2,
-                            marginY: 2,
+                            width: 135,
+                            height: 142,
+                            backgroundColor: '#FFFFFF',
+                            borderRight: '1px solid #B1B5BA',
+                            cursor: 'pointer',
+                            '&:hover': { backgroundColor: '#D9DDE3' },
                           }}
+                          key={sekre.id}
+                          onClick={() => handleSelected(sekre.id)}
                         >
-                          <Typography
-                            sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
-                            }}
-                          >
-                            {sekre.status ? 'Aktif' : 'Nonaktif'}
-                          </Typography>
+                          {sekreDetail && (
+                            <Stack alignItems='center' justifyContent='center'>
+                              <Box
+                                sx={{
+                                  width: 61,
+                                  height: 18,
+                                  backgroundColor: sekre.status
+                                    ? '#429777'
+                                    : '#BF2600',
+                                  borderRadius: 2,
+                                  marginY: 2,
+                                }}
+                              >
+                                <Typography
+                                  sx={{
+                                    textAlign: 'center',
+                                    color: '#FFFFFF',
+                                    fontSize: 12,
+                                  }}
+                                >
+                                  {sekre.status ? 'Aktif' : 'Nonaktif'}
+                                </Typography>
+                              </Box>
+                              <img
+                                src={Avatar}
+                                style={{ width: 48, height: 48 }}
+                                alt='Avatar'
+                              />
+                              <Typography
+                                variant='h5'
+                                sx={{ maxWidth: 120, textAlign: 'center' }}
+                              >
+                                {sekreDetail.nama_lengkap}
+                              </Typography>
+                              <Typography
+                                sx={{ color: '#5C5E61', fontSize: 11 }}
+                              >
+                                {sekreDetail.nik_group}
+                              </Typography>
+                            </Stack>
+                          )}
                         </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h5' sx={{maxWidth: 120, textAlign: 'center'}}>{sekre.nama}</Typography>
-                        <Typography sx={{ color: '#5C5E61', fontSize: 11 }}>
-                          {sekre.nikg}
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    ))}
+                      );
+                    })}
+
                     <Box
                       sx={{
                         width: 135,
@@ -285,8 +444,6 @@ const Add_Sekretaris = () => {
               </Box>
               <Grid container spacing={4}>
                 <Grid item xs={2}>
-
-
                   <Box
                     sx={{
                       display: 'flex',
@@ -315,6 +472,7 @@ const Add_Sekretaris = () => {
                       '&:hover': { backgroundColor: '#D9DDE3' },
                     }}
                     flex={1}
+                    onClick={() => delSekretaris(filter_sekreList.id)}
                   >
                     <Stack
                       direction='row'
@@ -333,51 +491,74 @@ const Add_Sekretaris = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      {filtered.nama}
+                      {filter_profile && filter_profile.nama_lengkap}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      {filtered.jabatan}
+                      {filter_profile &&
+                        filter_profile.jabatan_detail.nama_jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>
+                      {filter_profile && filter_profile.nik_group}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
                   <Stack spacing={2}>
                     <Typography variant='h4'>Status :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} />}
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={status}
+                          onChange={(e) => setStatus(e.target.checked)}
+                        />
+                      }
                       label='Aktif'
-                      checked={filtered.status}
                     />
                     <Typography variant='h4'>Sifat :</Typography>
                     <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} />}
+                      control={
+                        <IOSSwitch
+                          sx={{ m: 1 }}
+                          checked={sifat}
+                          onChange={(e) => setSifat(e.target.checked)}
+                        />
+                      }
                       label='Personal Assistant'
-                      checked={filtered.personalAssistant}
                     />
                     <Typography variant='h4'>Hak Sekretaris :</Typography>
                     <Stack direction='row'>
                       <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox
+                            checked={hakBiasa}
+                            onChange={(e) => setHakBiasa(e.target.checked)}
+                          />
+                        }
                         label='Biasa'
-                        checked={filtered.hak.biasa}
                       />
                       <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox
+                            checked={hakRhs}
+                            onChange={(e) => setHakRhs(e.target.checked)}
+                          />
+                        }
                         label='Rhs'
-                        checked={filtered.hak.Rhs}
                       />
                       <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox
+                            checked={hakRhsPrib}
+                            onChange={(e) => setHakRhsPrib(e.target.checked)}
+                          />
+                        }
                         label='Rhs Prib'
-                        checked={filtered.hak.RhsPrib}
                       />
                     </Stack>
                   </Stack>
-
-
                 </Grid>
                 <Grid item xs={4}>
                   <Stack
@@ -396,6 +577,7 @@ const Add_Sekretaris = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#F4CACA' },
                       }}
+                      onClick={() => handelUpdate()}
                     >
                       <Stack
                         direction='row'
@@ -501,7 +683,13 @@ const Add_Sekretaris = () => {
                 </Grid>
                 <Grid item xs={3}>
                   <Stack>
-                    <Typography variant='h2' sx={{cursor: 'pointer'}} onClick={() => onOpenComposeMail()}>Nama :</Typography>
+                    <Typography
+                      variant='h2'
+                      sx={{ cursor: 'pointer' }}
+                      onClick={() => onOpenComposeMail()}
+                    >
+                      Nama :
+                    </Typography>
                     <Box
                       sx={{
                         height: 40,
