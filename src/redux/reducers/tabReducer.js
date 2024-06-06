@@ -9,7 +9,7 @@ const initialState = {
       title: 'Dashboard',
       active: true,
       favicon: homeIcon,
-      content: <Dashboard />,
+      // content: <Dashboard />,
     },
   ],
   idCounter: 1,
@@ -70,6 +70,11 @@ const tabReducer = (state = initialState, action) => {
         tabs: action.payload,
       };
     case 'CLOSE_ALL_TABS':
+      return {
+        ...state,
+        tabs: action.payload,
+      };
+    case 'SET_TABS':
       return {
         ...state,
         tabs: action.payload,
