@@ -1,9 +1,3 @@
-import React from 'react';
-import Keamanan from 'modules/keamanan';
-import Bantuan from 'modules/bantuan';
-import Profile from 'modules/profile';
-import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -28,31 +22,6 @@ import iconSuratInActive from '../../assets/icon/iconInActive/mail.svg';
 import homeIconInActive from '../../assets/icon/iconInActive/home.svg';
 import delegasiIconInActive from '../../assets/icon/iconInActive/DelegasiIcon.svg';
 import sekretarisIconInActive from '../../assets/icon/iconInActive/SekretarisIcon.svg';
-import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
-import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
-import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
-import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
-import Surat_Internal from 'modules/buatSurat/SuratInternal';
-import Surat_External from 'modules/buatSurat/SuratExternal';
-import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
-import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
-import Disposisi from 'modules/disposisi/respons/DetailSurat';
-import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
-import BelumPilih from 'modules/suratKeluar/BelumPilih';
-import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
-import Draft from 'modules/suratKeluar/draft/Draft';
-import LacakProses from 'modules/suratKeluar/lacakProses/LacakProses';
-import Komposer from 'modules/suratKeluar/komposer/Komposer';
-import Template from 'modules/suratKeluar/template/Template';
-import SearchTab from 'modules/search/index';
-import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
-import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
-import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
-import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
-import Folder from 'modules/folder/index';
-import Listdata from 'modules/folder/content/ListData';
-import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index';
-import Forward from 'modules/forward';
 
 const getIcon = (type, active) => {
   switch (type) {
@@ -118,46 +87,6 @@ export const addTab = (id, state, type) => {
         id: type.toLowerCase(),
         title: type,
         favicon: getIcon(type, true),
-        content:
-          type === 'Keamanan' ? (
-            <Keamanan />
-          ) : type === 'FAQ' ? (
-            <Bantuan />
-          ) : type === 'Profile' ? (
-            <Profile />
-          ) : type === 'Buka Folder' ? (
-            <Listdata />
-          ) : type === 'BuatDisposisi' ? (
-            <BuatSurat />
-          ) : type === 'Sekretaris' ? (
-            <Add_Sekretaris />
-          ) : type === 'Delegasi' ? (
-            <Add_Delegasi />
-          ) : type === 'Buat Surat Internal' ? (
-            <Surat_Internal />
-          ) : type === 'Buat Surat External' ? (
-            <Surat_External />
-          ) : type === 'Buat Surat Undangan' ? (
-            <Surat_Undangan />
-          ) : type === 'Buat Surat Delegasi' ? (
-            <Surat_Delegasi />
-          ) : type === 'Buat Scan Surat' ? (
-            <BuatScanSurat />
-          ) : type === 'Buka Surat' ? (
-            <PDFReader />
-          ) : type === 'Folder' ? (
-            <Folder />
-          ) : type === 'Search' ? (
-            <SearchTab />
-          ) : type === 'Template' ? (
-            <Template />
-          ) : type === 'Buat Template' ? (
-            <BuatTemplateSurat />
-          ) : type === 'Forward' ? (
-            <Forward />
-          ) : (
-            <BelumPilih />
-          ),
         active: true,
       };
       let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
@@ -167,14 +96,10 @@ export const addTab = (id, state, type) => {
 
       let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
       if (!isDuplicate) {
-        // Menetapkan status aktif tab yang baru ditambahkan menjadi true
         tabs.active = true;
-
-        // Menetapkan status aktif tab yang lainnya menjadi false
         localStorageTabs.forEach((tab) => {
           tab.active = false;
         });
-
         localStorageTabs.push(tabs);
         localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
       }
@@ -234,41 +159,24 @@ export const childTab = (id, state, type, data) => {
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
-        content:
-          type === 'Todo' ? (
-            <DetailTodo props={data} />
-          ) : type === 'Disposisi' ? (
-            <Disposisi props={data} />
-          ) : type === 'Perlu Tindak Lanjut' ? (
-            <PerluTindakLanjut props={data} />
-          ) : type === 'Draft' ? (
-            <Draft props={data} />
-          ) : type === 'Lacak Proses' ? (
-            <LacakProses props={data} />
-          ) : type === 'Komposer' ? (
-            <Komposer props={data} />
-          ) : type === 'Template' ? (
-            <Template props={data} />
-          ) : type === 'Surat Masuk' ? (
-            <SuratMasuk props={data} />
-          ) : type === 'Folder' ? (
-            <Folder props={data} />
-          ) : type === 'Buka Folder' ? (
-            <Listdata files={data} />
-          ) : type === 'Log Scan Surat' ? (
-            <DetailScanSurat props={data} />
-          ) : type === 'Surat Diminta' ? (
-            <SuratDiminta props={data} />
-          ) : type === 'Surat Terkirim' ? (
-            <SuratTerkirim props={data} />
-          ) : type === 'Surat Dibatalkan' ? (
-            <SuratDibatalkan props={data} />
-          ) : type === 'Buat Template' ? (
-            <SuratDibatalkan props={data} />
-          ) : (
-            ''
-          ),
       };
+      console.log('1');
+
+      let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+      if (!localStorageTabs) {
+        localStorageTabs = [];
+      }
+
+      let isDuplicate = localStorageTabs.some((tab) => tab.id === updateTab.id);
+      if (!isDuplicate) {
+        updateTab.active = true;
+        localStorageTabs.forEach((tab) => {
+          tab.active = false;
+        });
+        updateTab.ids = id;
+        localStorageTabs.push(updateTab);
+        localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+      }
       dispatch({ type: 'UPDATE_TAB', payload: updateTab });
     } else {
       const exChildTab = state.find(
@@ -287,40 +195,25 @@ export const childTab = (id, state, type, data) => {
           id: `${type.toLowerCase()}${id}`,
           title: type,
           favicon: getIcon(activeTab.title, true),
-          content:
-            type === 'Todo' ? (
-              <DetailTodo props={data} />
-            ) : type === 'Disposisi' ? (
-              <Disposisi props={data} />
-            ) : type === 'Perlu Tindak Lanjut' ? (
-              <PerluTindakLanjut props={data} />
-            ) : type === 'Draft' ? (
-              <Draft props={data} />
-            ) : type === 'Lacak Proses' ? (
-              <LacakProses props={data} />
-            ) : type === 'Komposer' ? (
-              <Komposer props={data} />
-            ) : type === 'Template' ? (
-              <Template props={data} />
-            ) : type === 'Surat Masuk' ? (
-              <SuratMasuk props={data} />
-            ) : type === 'Folder' ? (
-              <Folder props={data} />
-            ) : type === 'Buka Folder' ? (
-              <Listdata files={data} />
-            ) : type === 'Log Scan Surat' ? (
-              <DetailScanSurat props={data} />
-            ) : type === 'Surat Diminta' ? (
-              <SuratDiminta props={data} />
-            ) : type === 'Surat Terkirim' ? (
-              <SuratTerkirim props={data} />
-            ) : type === 'Buat Template' ? (
-              <BuatTemplateSurat props={data} />
-            ) : (
-              ''
-            ),
           active: true,
         };
+        console.log('2');
+
+        let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+        if (!localStorageTabs) {
+          localStorageTabs = [];
+        }
+
+        let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
+        if (!isDuplicate) {
+          tabs.active = true;
+          localStorageTabs.forEach((tab) => {
+            tab.active = false;
+          });
+          tabs.ids = id;
+          localStorageTabs.push(tabs);
+          localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+        }
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
@@ -330,16 +223,12 @@ export const childTab = (id, state, type, data) => {
 
 export const activateTab = (tabId, state) => {
   return (dispatch) => {
-    // Memperbarui status tab aktif di dalam state
     const updatedTabs = state.map((tab) => ({
       ...tab,
       active: tab.id === tabId,
       favicon: getIcon(tab.title, tab.id === tabId),
     }));
-
-    // Memperbarui localStorage dengan tab yang sudah diaktifkan
     localStorage.setItem('tabs', JSON.stringify(updatedTabs));
-
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };
@@ -390,5 +279,11 @@ export const reorderTab = (tabId, fromIndex, toIndex, state) => {
     remainingTabs.splice(toIndex, 0, movedTab);
     dispatch({ type: 'REORDER_TAB', payload: remainingTabs });
     dispatch({ type: 'CLOSE_EDIT' });
+  };
+};
+
+export const setTabs = (tabs) => {
+  return (dispatch) => {
+    dispatch({ type: 'SET_TABS', payload: tabs });
   };
 };
