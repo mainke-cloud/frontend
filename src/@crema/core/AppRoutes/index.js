@@ -6,6 +6,7 @@ import { errorPagesConfigs } from './ErrorPagesRoutes';
 import { accountPagesConfigs } from './AccountRoutes';
 // import { samplePagesConfigs } from './SamplePage';
 import { coofisPagesConfigs } from './CoofisPage';
+import Landing_page from 'modules/landing page';
 
 export const authorizedStructure = (loginUrl) => {
   return {
@@ -31,6 +32,10 @@ export const anonymousStructure = (initialUrl) => {
       {
         path: '*',
         element: <Navigate to='/error-pages/error-404' />,
+      },
+      {
+        path: '/LandingPage',
+        element: <Landing_page />,
       },
     ]),
   };
