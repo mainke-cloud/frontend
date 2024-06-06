@@ -26,7 +26,6 @@ import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
 import {
   delSekretaris,
-  getDetailSekretaris,
   getSekretaris,
   updateSekretaris,
 } from '@crema/services/apis/sekretaris';
@@ -145,8 +144,8 @@ const Add_Sekretaris = () => {
 
   const fetchSekretarisData = async (userId) => {
     const sekList = await getSekretaris(userId);
-    setSekretarisList(sekList.results);
-    setSekres(sekList.details);
+    setSekretarisList(sekList ? sekList.results : []);
+    setSekres(sekList ? sekList.details : []);
   };
 
   useEffect(() => {
@@ -157,7 +156,7 @@ const Add_Sekretaris = () => {
       fetchSekretarisData(data.id);
     }
   }, []);
-  
+
   const handelUpdate = async () => {
     let hakSekretarisValue = '';
 
@@ -411,7 +410,10 @@ const Add_Sekretaris = () => {
                       '&:hover': { backgroundColor: '#D9DDE3' },
                     }}
                     flex={1}
-                    onClick={() => delSekretaris(filter_sekreList.id)}
+                    onClick={async () => {
+                      await delSekretaris(filter_sekreList.id);
+                      fetchSekretarisData(userId);
+                    }}
                   >
                     <Stack
                       direction='row'
