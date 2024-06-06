@@ -250,44 +250,80 @@ const Landing_page = () => {
         </Grid>
       </Box>
       <Box
-        sx={{
-          height: 700,
-          //   backgroundColor: 'rgba(228, 35, 19, 0.5)', backgroundImage: `url(${backgroundImage})`,
-          background: 
-          `linear-gradient(to bottom, rgba(228, 35, 19, 0.7) 50%, rgba(126, 19, 11, 0.8) 100%),
-            url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'multiply',
-        }}
-      >
-        <Grid container column sx={{height:'100%'}}>
-            <Grid item xs={8} >
-                <Grid container sx={{height:'100%', 
-                // backgroundColor:'purple'
-                }}>
-                    {/* <Grid item xs={6} sx={{backgroundColor:'purple'}}> */}
-                        <Stack>
-                        <img src={grid1} style={{ width: 295, height: 202 }} />
-                        <img src={grid12} style={{ width: 407, height: 238 }} />
-                        </Stack>
-                    {/* </Grid> */}
-                    {/* <Grid item xs={6} sx={{backgroundColor:'white'}}> */}
-                    <Stack>
-                        <img src={grid1} style={{ width: 295, height: 202 }} />
-                        <img src={grid12} style={{ width: 407, height: 238 }} />
-                        </Stack>
-                    {/* </Grid> */}
-                </Grid>
-            </Grid>
-            <Grid item xs={4} sx={{
-                // backgroundColor:'blue', 
-                height:'100%', justifyItems:'center'}}>
-                {/* <Typography>halo</Typography> */}
-                <img src={grid3} style={{ width: 393, height: 314 }} />
-            </Grid>
-        </Grid>
+  sx={{
+    height: 700,
+    background: `linear-gradient(to bottom, rgba(228, 35, 19, 0.8) 30%, rgba(126, 19, 11, 0.8) 100%),
+      url(${backgroundImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundBlendMode: 'multiply',
+  }}
+>
+  <Grid container sx={{ height: '100%' }}>
+    <Grid item xs={8} container>
+      <Grid item xs={4}>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+        <img src={grid1} style={{ width: 295, height: 202 }} />
       </Box>
+      </Grid>
+      <Grid item xs={8}>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%" sx={{ paddingTop: 10 }}>
+        <Stack>
+        <Typography fontSize={36} sx={{ textAlign: 'center', color:"#FFFFFF" }}>
+          Gunakan Coofis Sekarang Juga
+          <br />
+          Dan Nikmati Fiturnya
+        </Typography>
+        <Stack direction='row' spacing={8} sx={{ paddingTop: 15 }}>
+                <Box
+                  sx={{
+                    backgroundColor: '#FFFFFF',
+                    width: 236,
+                    height: 49,
+                    paddingTop: 2,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Typography sx={{ color: '#E42313', textAlign: 'center', fontWeight:Fonts.MEDIUM, fontSize:20 }}>
+                    Trial 30 Hari
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    border: '1px solid #FFFFFF',
+                    width: 236,
+                    height: 49,
+                    paddingTop: 2,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Typography sx={{ color: '#FFFFFF', textAlign: 'center', fontWeight:Fonts.MEDIUM, fontSize:20}}>
+                    Coba Demo
+                  </Typography>
+                </Box>
+              </Stack>
+            </Stack>
+        </Box>
+      </Grid>
+      <Grid item xs={4}>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+        <img src={grid12} style={{ width: 407, height: 238 }} />
+      </Box>
+      </Grid>
+      <Grid item xs={8}>
+      <Box display="flex" justifyContent="center" alignItems="flex-end" height="100%">
+        <img src={grid2} style={{ width: 291, height: 330 }} />
+      </Box>
+      </Grid>
+    </Grid>
+    <Grid item xs={4} sx={{ height: '100%' }}>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+        <img src={grid3} style={{ width: 393, height: 314 }} />
+      </Box>
+    </Grid>
+  </Grid>
+</Box>
+
       <Box sx={{ height: 370}}>
         <Grid container columns p={10} sx={{height:'100%'}}>
             <Grid item xs={10}>
