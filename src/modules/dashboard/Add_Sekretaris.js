@@ -22,10 +22,14 @@ import Avatar_Blank from '../../assets/Dashboard/Avatar_icon.png';
 import Add_Grey from '../../assets/Dashboard/Add_grey_icon.png';
 import ComposeMail from '@crema/components/AppAddress';
 import Filter_sekretaris from './FilterPopUp/Filter_sekretaris';
-import { dataSekre } from '../../@crema/services/dummy/dataSekreDele';
 import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import {
+  delSekretaris,
+  getDetailSekretaris,
+  getSekretaris,
+  updateSekretaris,
+} from '@crema/services/apis/sekretaris';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
@@ -98,17 +102,19 @@ const Add_Sekretaris = () => {
   const filter_sekreList = sekretarisList.find(
     (secretary) => secretary.id === isSelected,
   );
-  const filter_profile = sekres.find(
-    (secretary) =>
-      filter_sekreList && secretary.user_id === filter_sekreList.user_id,
-  );
+  const filter_profile =
+    sekres &&
+    sekres.find(
+      (secretary) =>
+        filter_sekreList && secretary.user_id === filter_sekreList.user_id,
+    );
 
   useEffect(() => {
     if (filter_sekreList) {
       setStatus(filter_sekreList.status);
       setSifat(filter_sekreList.sifat);
       setHakBiasa(filter_sekreList.hak_sekretaris.includes('Biasa'));
-      setHakRhs(filter_sekreList.hak_sekretaris.includes('Rhs'));
+      setHakRhs(filter_sekreList.hak_sekretaris.includes('Rahasia'));
       setHakRhsPrib(filter_sekreList.hak_sekretaris.includes('Rhs Prib'));
     }
   }, [filter_sekreList]);
@@ -137,118 +143,50 @@ const Add_Sekretaris = () => {
     setSelected(id);
   };
 
+  const fetchSekretarisData = async (userId) => {
+    const sekList = await getSekretaris(userId);
+    setSekretarisList(sekList.results);
+    setSekres(sekList.details);
+  };
+
   useEffect(() => {
     const dataFromLocal = localStorage.getItem('user');
     const data = JSON.parse(dataFromLocal);
     if (data) {
       setUserId(data.id);
-      getSekretaris(data.id);
+      fetchSekretarisData(data.id);
     }
   }, []);
-
-  const getSekretaris = async (userId) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.get(
-        `https://new.coofis.com/api/profile/sekretaris/?id_user=${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      setSekretarisList(response.data.results);
-      if (response.data.results.length > 0) {
-        response.data.results.forEach((sekre) => {
-          getUser(sekre.user_id);
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
-
-  const getUser = async (userId) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.get(
-        `https://new.coofis.com/api/profile/?id_user=${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      setSekres((prevSekres) => [...prevSekres, ...response.data.results]);
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
-
-  const delSekretaris = async (sekre_id) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.delete(
-        `https://new.coofis.com/api/profile/sekretaris/retrieve/${sekre_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      alert('Sekretaris berhasil dihapus');
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
-
-  const updateSekretaris = async (sekre_id, data) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.patch(
-        `https://new.coofis.com/api/profile/sekretaris/retrieve/${sekre_id}/`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      alert('Sekretaris berhasil diUpdate');
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
-
-  const handelUpdate = () => {
-    let hakSekretarisValue = '';
   
+  const handelUpdate = async () => {
+    let hakSekretarisValue = '';
+
     if (hakBiasa && hakRhs && hakRhsPrib) {
-      hakSekretarisValue = 'Biasa, Rhs, Rhs Prib';
+      hakSekretarisValue = 'Biasa, Rahasia, Rhs Prib';
     } else if (hakBiasa && hakRhsPrib) {
       hakSekretarisValue = 'Biasa, Rhs Prib';
     } else if (hakBiasa && hakRhs) {
-      hakSekretarisValue = 'Biasa, Rhs';
+      hakSekretarisValue = 'Biasa, Rahasia';
     } else if (hakRhs && hakRhsPrib) {
-      hakSekretarisValue = 'Rhs, Rhs Prib';
+      hakSekretarisValue = 'Rahasia, Rhs Prib';
     } else if (hakRhs) {
-      hakSekretarisValue = 'Rhs';
+      hakSekretarisValue = 'Rahasia';
     } else if (hakRhsPrib) {
       hakSekretarisValue = 'Rhs Prib';
     } else if (hakBiasa) {
       hakSekretarisValue = 'Biasa';
     }
-  
+
     const data = {
       tgl_pembuatan: filter_sekreList.tgl_pembuatan,
       status: status,
       sifat: sifat,
       hak_sekretaris: hakSekretarisValue,
     };
-  
-    updateSekretaris(userId, data);
+
+    await updateSekretaris(isSelected, data);
+    fetchSekretarisData(userId);
   };
-  
 
   return (
     <>
@@ -439,7 +377,8 @@ const Add_Sekretaris = () => {
                 }}
               >
                 <Typography sx={{ color: '#FFB020', fontSize: 13 }}>
-                  Tanggal Pembuatan: 15 Agustus 2021
+                  Tanggal Pembuatan:{' '}
+                  {filter_sekreList && filter_sekreList.tgl_pembuatan}
                 </Typography>
               </Box>
               <Grid container spacing={4}>
