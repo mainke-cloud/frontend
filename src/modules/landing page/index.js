@@ -12,6 +12,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import React from 'react';
+
 import coofis from '../../assets/Landingpage/coofis 1.png';
 import aktivitas1 from '../../assets/Landingpage/Image.png';
 import aktivitas2 from '../../assets/Landingpage/Image1.png';
@@ -40,8 +41,13 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import CircleIcon from '@mui/icons-material/Circle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Art from "../../assets/Landingpage/Art 1.png"
-import bg1 from "../../assets/Landingpage/bg image 1.png"
+import backgroundImage2 from "../../assets/Landingpage/backgroundimage2.png"
 import dashimg from "../../assets/Landingpage/dash.png"
+import iconSuratDigital from "../../assets/Landingpage/icon_suratDigital.png"
+import iconDisposisi from "../../assets/Landingpage/icon_disposisi.png"
+import iconDelegasi from "../../assets/Landingpage/icon_delegasi.png"
+import iconDigitalSignature from "../../assets/Landingpage/icon_digitalSignature.png"
+import iconProsesCepat from "../../assets/Landingpage/icon_prosesCepat.png"
 
 const Landing_page = () => {
     return (
@@ -79,28 +85,18 @@ const Landing_page = () => {
                     </Grid>
                     <Grid item xs={12} sx={{paddingTop: 15}}>
                         <Stack alignItems="center" justifyContent="center" spacing={2}>
-                            <Typography variant="h1">
+                            <Typography variant="h1" fontSize={36} fontWeight={Fonts.MEDIUM} sx={{textAlign: "center"}}>
                                 Mengurus Persuratan menjadi
+                                <br/>
+                                Lebih {' '}
+                                <span style={{ color: '#BF2600' }}>Cepat</span>
+                                & {' '}
+                                <span style={{ color: '#BF2600' }}>Efisien</span>
                             </Typography>
-                            <Stack direction="row" spacing={1}>
-                                <Typography variant="h1">
-                                    Lebih
-                                </Typography>
-                                <Typography variant="h1"  sx={{color: "#E42313"}}>
-                                    Cepat
-                                </Typography>
-                                <Typography variant="h1">
-                                    &
-                                </Typography>
-                                <Typography variant="h1" sx={{color: "#E42313"}}>
-                                    Efisien
-                                </Typography>
-                            </Stack>
                             <Stack sx={{paddingTop: 2}}>
-                                <Typography>
+                                <Typography sx={{textAlign: "center"}}>
                                     Dengan Mengubah Cara Kerja Manual Menjadi Elektronis
-                                </Typography>
-                                <Typography>
+                                    <br/>
                                     Dapat Meningkatkan Derajat Kolaborasi Di Perusaan Anda
                                 </Typography>
                             </Stack>
@@ -116,12 +112,18 @@ const Landing_page = () => {
                                     </Typography>
                                 </Box>
                             </Stack>
-                            <img src={dashimg} style={{width: "750px", marginTop: 80}}/>
+                            <img src={dashimg} style={{width: "750px", marginTop: 60}}/>
                         </Stack>
                     </Grid>
                 </Grid>
             </Box>
-            <Box sx={{height: 437, backgroundColor: "#E42313", backgroundImage: {bg1}}}>
+            <Box sx={{height: 437, 
+              // backgroundColor: "#E42313"
+                background: `linear-gradient(to bottom, rgba(228, 35, 19, 0.8) 30%, rgba(126, 19, 11, 0.8) 100%), url(${backgroundImage2})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'multiply',
+              }}>
                 <Grid container sx={{paddingY: 15}}>
                     <Grid item xs={6} alignContent="center"  sx={{paddingX: 20}}>
                         <Stack spacing={8}>
@@ -143,55 +145,75 @@ const Landing_page = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <Box sx={{height: 750, paddingTop: 10, paddingX: 20}}>
+            <Box sx={{height: 780, paddingTop: 10, paddingX: 20}}>
                 <Stack  alignItems="center">
                     <img src={coofis} style={{width: 118, height: 80}}/>
-                    <Typography variant="h1">
+                    <Typography variant="h1" fontSize={36} fontWeight={Fonts.MEDIUM}>
                         Fitur Unggulan Coofis
                     </Typography>
                 </Stack>
                 <Grid container spacing={10} sx={{marginTop: 4}}>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222, padding: 5, borderRadius: 1}}>
                             <Stack  alignItems="center">
-                                <Typography>
+                              <img src={iconSuratDigital} style={{width: 100}}/>
+                                <Typography fontSize={20}  fontWeight={Fonts.BOLD}>
                                      Surat Digital
                                 </Typography>
+                                <Typography sx={{textAlign: "center"}}>
+                                  Lorem ipsum dolor sit amet consectetur. At id enim viverra nec varius mauris 
+                                </Typography>
                             </Stack>
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222, padding: 5, borderRadius: 1}}>
                             <Stack alignItems="center">
-                                <Typography>
+                              <img src={iconDisposisi} style={{width: 100}}/>
+                                <Typography fontSize={20}  fontWeight={Fonts.BOLD}>
                                     Disposisi   
                                 </Typography>
+                                <Typography sx={{textAlign: "center"}}>
+                                  Lorem ipsum dolor sit amet consectetur. At id enim viverra nec varius mauris 
+                                </Typography>
                             </Stack>
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222, padding: 5, borderRadius: 1}}>
                             <Stack alignItems="center">
-                                <Typography>
+                              <img src={iconDelegasi} style={{width: 100}}/>
+                                <Typography fontSize={20}  fontWeight={Fonts.BOLD}>
                                    Delegasi
                                 </Typography>
-                            </Stack>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
-                            <Stack alignItems="center">
-                                <Typography>
-                                    Digital Signature
+                                <Typography sx={{textAlign: "center"}}>
+                                  Lorem ipsum dolor sit amet consectetur. At id enim viverra nec varius mauris 
                                 </Typography>
                             </Stack>
                         </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222, padding: 5, borderRadius: 1}}>
                             <Stack alignItems="center">
-                                <Typography>
+                              <img src={iconDigitalSignature} style={{width: 100}}/>
+                                <Typography fontSize={20}  fontWeight={Fonts.BOLD}>
+                                    Digital Signature
+                                </Typography>
+                                <Typography sx={{textAlign: "center"}}>
+                                  Lorem ipsum dolor sit amet consectetur. At id enim viverra nec varius mauris 
+                                </Typography>
+                            </Stack>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222, padding: 5, borderRadius: 1}}>
+                            <Stack alignItems="center">
+                              <img src={iconProsesCepat} style={{width: 100}}/>
+                                <Typography fontSize={20} fontWeight={Fonts.BOLD}>
                                     Proses Cepat
+                                </Typography>
+                                <Typography sx={{textAlign: "center"}}>
+                                  Lorem ipsum dolor sit amet consectetur. At id enim viverra nec varius mauris 
                                 </Typography>
                             </Stack>
                         </Box>
