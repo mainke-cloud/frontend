@@ -7,6 +7,9 @@ import {
   CardContent,
   CardMedia,
   Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import React from 'react';
 import coofis from '../../assets/Landingpage/coofis 1.png';
@@ -29,7 +32,13 @@ import linkedin from '../../assets/Landingpage/linkedin.svg';
 import instagram from '../../assets/Landingpage/instagram.svg';
 import youtube from '../../assets/Landingpage/youtube.svg';
 import mail from '../../assets/Landingpage/mail.svg';
+import kertas from '../../assets/Landingpage/kertas.png';
+import digital from '../../assets/Landingpage/digital.png';
 import { Fonts } from '@crema/constants/AppEnums';
+import IconButton from '@mui/material/IconButton';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import CircleIcon from '@mui/icons-material/Circle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const Landing_page = () => {
   return (
@@ -128,7 +137,140 @@ const Landing_page = () => {
           <Typography variant='h1'>Fitur Unggulan Coofis</Typography>
         </Stack>
       </Box>
-      <Box sx={{ height: 700 }}></Box>
+      <Box sx={{ height: 700 }}>
+        <Stack alignItems='center'>
+          <Typography
+            fontSize={36}
+            fontWeight={Fonts.MEDIUM}
+            textAlign='center'
+          >
+            Perbedaan Menggunakan Surat <br />
+            <span style={{ color: '#BF2600' }}>Kertas</span> Dan{' '}
+            <span style={{ color: '#BF2600' }}>Digital</span>
+          </Typography>
+        </Stack>
+        {/* <Box> */}
+        <Grid container spacing={10} p={10}>
+          <Grid item xs={12} md={6}>
+            <Box p={8} bgcolor='#FFF4F4' borderRadius={5}>
+              <Box
+                sx={{
+                  bgcolor: '#E42013',
+                  height: 200,
+                  width: 200,
+                  borderRadius: 10,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingTop: 10,
+                }}
+              >
+                <img
+                  src={kertas}
+                  alt='Stack of Papers'
+                  style={{ width: 162, height: 77 }}
+                />
+              </Box>
+              <Typography
+                mt={2}
+                fontSize={36}
+                color='#E42313'
+                fontWeight={Fonts.BOLD}
+              >
+                Menggunakan Surat Kertas
+              </Typography>
+              <Stack mt={3}>
+                <ListItem>
+                  <ListItemIcon>
+                    <CircleIcon sx={{ color: '#E42313', fontSize:36 }}/>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Memerlukan biaya untuk cetakan'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <CircleIcon sx={{ color: '#E42313', fontSize:36 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Memerlukan ruang penyimpanan fisik'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <CircleIcon sx={{ color: '#E42313', fontSize:36 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Memerlukan waktu untuk pengiriman'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box p={8} bgcolor='#FFE2E2' borderRadius={5}>
+              <Box
+                sx={{
+                  bgcolor: '#E42013',
+                  height: 200,
+                  width: 200,
+                  borderRadius: 10,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={digital}
+                  alt='Stack of Papers'
+                  style={{ width: 130, height: 150 }}
+                />
+              </Box>
+              <Typography
+                mt={2}
+                fontSize={36}
+                color='#E42313'
+                fontWeight={Fonts.BOLD}
+              >
+                Menggunakan Coofis
+              </Typography>
+              <Stack mt={3}>
+                <ListItem>
+                  <ListItemIcon>
+                    <CheckCircleIcon sx={{ color: '#E42313', fontSize:36 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Hanya Membayar Biaya Platform'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <CheckCircleIcon sx={{ color: '#E42313', fontSize:36 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Disimpan secara elektronik dalam Database'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <CheckCircleIcon sx={{ color: '#E42313', fontSize:36 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary='Dapat diakses secara instan melalui website'
+                    primaryTypographyProps={{ fontSize: 24 }}
+                  />
+                </ListItem>
+              </Stack>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      {/* </Box> */}
       <Box sx={{ height: 700 }}>
         <Stack alignItems='center'>
           <Typography fontSize={36} fontWeight={Fonts.MEDIUM}>
@@ -152,9 +294,14 @@ const Landing_page = () => {
                 >
                   17 Juni 2024
                 </Typography>
-                <Typography variant='h1' sx={{ fontWeight: Fonts.BOLD }}>
-                  Implementasi Coofis pada PBNU
-                </Typography>
+                <Grid container justifyContent='space-between'>
+                  <Typography variant='h1' sx={{ fontWeight: Fonts.BOLD }}>
+                    Implementasi Coofis pada PBNU
+                  </Typography>
+                  <IconButton aria-label='arrow' size='small'>
+                    <ArrowOutwardIcon fontSize='small' />
+                  </IconButton>
+                </Grid>
                 <Typography
                   variant='body2'
                   sx={{ fontWeight: Fonts.LIGHT, paddingTop: 2 }}
@@ -250,108 +397,155 @@ const Landing_page = () => {
         </Grid>
       </Box>
       <Box
-  sx={{
-    height: 700,
-    background: `linear-gradient(to bottom, rgba(228, 35, 19, 0.8) 30%, rgba(126, 19, 11, 0.8) 100%),
+        sx={{
+          height: 700,
+          background: `linear-gradient(to bottom, rgba(228, 35, 19, 0.8) 30%, rgba(126, 19, 11, 0.8) 100%),
       url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundBlendMode: 'multiply',
-  }}
->
-  <Grid container sx={{ height: '100%' }}>
-    <Grid item xs={8} container>
-      <Grid item xs={4}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-        <img src={grid1} style={{ width: 295, height: 202 }} />
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'multiply',
+        }}
+      >
+        <Grid container sx={{ height: '100%' }}>
+          <Grid item xs={8} container>
+            <Grid item xs={5}>
+              <Box
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                height='100%'
+              >
+                <img src={grid1} style={{ width: 295, height: 202 }} />
+              </Box>
+            </Grid>
+            <Grid item xs={7}>
+              <Box
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                height='100%'
+                sx={{ paddingTop: 10 }}
+              >
+                <Stack>
+                  <Typography
+                    fontSize={36}
+                    sx={{ textAlign: 'center', color: '#FFFFFF' }}
+                  >
+                    Gunakan Coofis Sekarang Juga
+                    <br />
+                    Dan Nikmati Fiturnya
+                  </Typography>
+                  <Stack direction='row' spacing={8} sx={{ paddingTop: 15 }}>
+                    <Box
+                      sx={{
+                        backgroundColor: '#FFFFFF',
+                        width: 236,
+                        height: 49,
+                        paddingTop: 2,
+                        borderRadius: 5,
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: '#E42313',
+                          textAlign: 'center',
+                          fontWeight: Fonts.MEDIUM,
+                          fontSize: 20,
+                        }}
+                      >
+                        Trial 30 Hari
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        border: '1px solid #FFFFFF',
+                        width: 236,
+                        height: 49,
+                        paddingTop: 2,
+                        borderRadius: 5,
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: '#FFFFFF',
+                          textAlign: 'center',
+                          fontWeight: Fonts.MEDIUM,
+                          fontSize: 20,
+                        }}
+                      >
+                        Coba Demo
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Grid>
+            <Grid item xs={5}>
+              <Box
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                height='100%'
+              >
+                <img src={grid12} style={{ width: 350, height: 230 }} />
+              </Box>
+            </Grid>
+            <Grid item xs={7}>
+              <Box
+                display='flex'
+                justifyContent='center'
+                alignItems='flex-end'
+                height='100%'
+              >
+                <img src={grid2} style={{ width: 291, height: 330 }} />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid item xs={4} sx={{ height: '100%' }}>
+            <Box
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              height='100%'
+            >
+              <img src={grid3} style={{ width: 393, height: 314 }} />
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
-      </Grid>
-      <Grid item xs={8}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="100%" sx={{ paddingTop: 10 }}>
-        <Stack>
-        <Typography fontSize={36} sx={{ textAlign: 'center', color:"#FFFFFF" }}>
-          Gunakan Coofis Sekarang Juga
-          <br />
-          Dan Nikmati Fiturnya
-        </Typography>
-        <Stack direction='row' spacing={8} sx={{ paddingTop: 15 }}>
-                <Box
-                  sx={{
-                    backgroundColor: '#FFFFFF',
-                    width: 236,
-                    height: 49,
-                    paddingTop: 2,
-                    borderRadius: 5,
-                  }}
-                >
-                  <Typography sx={{ color: '#E42313', textAlign: 'center', fontWeight:Fonts.MEDIUM, fontSize:20 }}>
-                    Trial 30 Hari
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    border: '1px solid #FFFFFF',
-                    width: 236,
-                    height: 49,
-                    paddingTop: 2,
-                    borderRadius: 5,
-                  }}
-                >
-                  <Typography sx={{ color: '#FFFFFF', textAlign: 'center', fontWeight:Fonts.MEDIUM, fontSize:20}}>
-                    Coba Demo
-                  </Typography>
-                </Box>
+
+      <Box sx={{ height: 370 }}>
+        <Grid container columns p={10} sx={{ height: '100%' }}>
+          <Grid item xs={10}>
+            <Stack spacing={3}>
+              <img src={coofis} style={{ width: 118, height: 80 }} />
+              <Stack direction='row' spacing={7}>
+                <Typography>Coofis</Typography>
+                <Typography>Nota Dinas</Typography>
+                <Typography>Careers</Typography>
+                <Typography>News</Typography>
+                <Typography>Contact</Typography>
               </Stack>
             </Stack>
-        </Box>
-      </Grid>
-      <Grid item xs={4}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-        <img src={grid12} style={{ width: 407, height: 238 }} />
-      </Box>
-      </Grid>
-      <Grid item xs={8}>
-      <Box display="flex" justifyContent="center" alignItems="flex-end" height="100%">
-        <img src={grid2} style={{ width: 291, height: 330 }} />
-      </Box>
-      </Grid>
-    </Grid>
-    <Grid item xs={4} sx={{ height: '100%' }}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-        <img src={grid3} style={{ width: 393, height: 314 }} />
-      </Box>
-    </Grid>
-  </Grid>
-</Box>
-
-      <Box sx={{ height: 370}}>
-        <Grid container columns p={10} sx={{height:'100%'}}>
-            <Grid item xs={10}>
-                <Stack spacing={3}>
-                    <img src={coofis} style={{ width: 118, height: 80 }} />
-                    <Stack direction='row' spacing={7}>
-                        <Typography>Coofis</Typography>
-                        <Typography>Nota Dinas</Typography>
-                        <Typography>Careers</Typography>
-                        <Typography>News</Typography>
-                        <Typography>Contact</Typography>
-                    </Stack>
+          </Grid>
+          <Grid item xs={2}>
+            <Stack>
+              <Divider />
+              <Grid container justifyContent='space-between' paddingTop={5}>
+                <Typography>
+                  © Copyright 2024 | Powered By{' '}
+                  <span style={{ color: '#BF2600' }}>ARM Solusi</span> | Alright
+                  Reserved
+                </Typography>
+                <Stack direction='row' spacing={5}>
+                  <img src={linkedin} alt='LinkedIn' />
+                  <img src={instagram} alt='Instagram' />
+                  <img src={mail} alt='Mail' />
+                  <img src={youtube} alt='Youtube' />
                 </Stack>
-            </Grid>
-            <Grid item xs={2}>
-                <Stack>
-                    <Divider />
-                    <Grid container justifyContent='space-between' paddingTop={5}>
-                        <Typography>© Copyright 2024 | Powered By <span style={{ color: '#BF2600' }}>ARM Solusi</span> | Alright Reserved</Typography>
-                        <Stack direction='row' spacing={5}>
-                        <img src={linkedin} alt='LinkedIn' />
-                        <img src={instagram} alt='Instagram' />
-                        <img src={mail} alt='Mail' />
-                        <img src={youtube} alt='Youtube' />
-                    </Stack>
-                    </Grid>
-                </Stack>
-            </Grid>
+              </Grid>
+            </Stack>
+          </Grid>
         </Grid>
       </Box>
     </>

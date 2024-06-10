@@ -8,7 +8,7 @@ const initialState = {
       favicon: homeIcon,
       title: 'Dashboard',
       active: true,
-      favicon: homeIcon,
+      // favicon: homeIcon,
       // content: <Dashboard />,
     },
   ],

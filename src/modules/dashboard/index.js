@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Box, Stack, Grid, Typography, IconButton, Paper } from '@mui/material';
 
 import person from '../../assets/Dashboard/Dashboard_girl.png';
@@ -30,7 +30,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
-  const {user} = useContext(AuthContext);
+  // const {user} = useContext(AuthContext);
   // console.log('ini usernya:', user)
 
   const handleAddTab = (type) => {
