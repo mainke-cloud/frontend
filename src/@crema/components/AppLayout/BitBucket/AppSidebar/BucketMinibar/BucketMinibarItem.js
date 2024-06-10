@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Typography, Box, Collapse, Badge } from '@mui/material';
 import FeatherIcon from 'feather-icons-react';
@@ -53,10 +53,15 @@ const BucketMinibarItem = (props) => {
   const id = useSelector((state) => state.tab.idCounter);
   const { logout } = useAuthMethod();
   const [isSubMenu, setSubMenu] = useState(false);
-
   const handleClick = () => {
     setSubMenu(!isSubMenu);
   };
+
+  useEffect(() => {
+    if (!isHover) {
+      setSubMenu(false);
+    }
+  }, [isHover]);
 
   const handleAddTab = () => {
     if (onAddTab) {
@@ -105,7 +110,7 @@ const BucketMinibarItem = (props) => {
 
       <Collapse orientation='vertical' in={isSubMenu}>
         {isHover && (
-          <Box className='submenu-icon-btn'>
+          <Box className='submenu-icon-btn' onClick={handleClick}>
             {subMenu &&
               subMenu.map((item, index) => (
                 <IconButton

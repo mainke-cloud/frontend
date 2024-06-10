@@ -6,7 +6,7 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 const StyledSimpleBarReact = styled(SimpleBarReact)(() => ({
   height: '100%',
-  width: '99%',
+  width: '100%',
 }));
 
 const AppScrollbar = (props) => {

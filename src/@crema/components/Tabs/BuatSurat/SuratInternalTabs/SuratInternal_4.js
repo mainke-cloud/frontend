@@ -1,49 +1,11 @@
-import React, { useState } from 'react';
-import { Stack, Button } from '@mui/material';
+import React from 'react';
+import { Stack, Button} from '@mui/material';
 import PropTypes from 'prop-types';
 import FormAddressBook from '../../FormAddressBook';
 import { useSelector } from 'react-redux';
 const SuratInternal_4 = ({ handleNext, handlePrev, templateData }) => {
   const pemeriksa = useSelector((state) => state.addressbook.pemeriksa);
   const pemohon = useSelector((state) => state.addressbook.pemohon);
-
-  const [isFormValidPemeriksa, setFormValidPemeriksa] = useState(true);
-  const [isFormValidPemohon, setFormValidPemohon] = useState(true);
-
-  const handleSubmit = () => {
-    const validPemeriksa = !PemeriksaIsEmpty();
-    const validPemohon = !PemohonIsEmpty();
-
-    setFormValidPemeriksa(validPemeriksa);
-    setFormValidPemohon(validPemohon);
-
-    if (validPemeriksa && validPemohon) {
-      handleNext();
-    }
-  };
-
-  const PemeriksaIsEmpty = () => {
-    return (
-      !pemeriksa ||
-      !Array.isArray(pemeriksa) ||
-      pemeriksa.some((item) => !item.jabatan || !item.nama)
-    );
-  };
-
-  const PemohonIsEmpty = () => {
-    return (
-      !pemohon ||
-      !Array.isArray(pemohon) ||
-      pemohon.some((item) => !item.jabatan || !item.nama)
-    );
-  };
-
-  const handleAddressBookChangePemeriksa = () => {
-    setFormValidPemeriksa(true);
-  };
-  const handleAddressBookChangePemohon = () => {
-    setFormValidPemohon(true);
-  };
 
   return (
     <>
@@ -56,20 +18,8 @@ const SuratInternal_4 = ({ handleNext, handlePrev, templateData }) => {
           padding: '15px',
         }}
       >
-        <FormAddressBook
-          text='Pemeriksa'
-          data={pemeriksa}
-          templateData={templateData}
-          isValid={isFormValidPemeriksa}
-          onAddressBookChange={handleAddressBookChangePemeriksa}
-        />
-        <FormAddressBook
-          text='Pemohon'
-          data={pemohon}
-          templateData={templateData}
-          isValid={isFormValidPemohon}
-          onAddressBookChange={handleAddressBookChangePemohon}
-        />
+        <FormAddressBook text='Pemeriksa' data={pemeriksa} templateData={templateData}/>
+        <FormAddressBook text='Pemohon' data={pemohon} templateData={templateData}/>
         <Stack direction='row' justifyContent='flex-end' spacing={4}>
           <Button
             variant='contained'
@@ -92,12 +42,17 @@ const SuratInternal_4 = ({ handleNext, handlePrev, templateData }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleSubmit}
+            onClick={handleNext}
           >
             Selanjutnya (lainnya)
           </Button>
         </Stack>
       </Stack>
+
+      {/* <ComposeMail
+        isComposeMail={isComposeMail}
+        onCloseComposeMail={onCloseComposeMail}
+      /> */}
     </>
   );
 };

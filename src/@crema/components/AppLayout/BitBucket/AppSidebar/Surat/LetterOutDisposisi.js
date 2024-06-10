@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSuratAll } from '../../../../../../redux/actions/suratAction';
 const LetterInDisposisi = (props) => {
     const dispatch = useDispatch()
-    // dispatch(getSuratAll())
+    dispatch(getSuratAll())
     const {isCollapsed} = props;
     const listData = [listData1, listData2, listData3];
 

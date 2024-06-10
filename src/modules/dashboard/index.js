@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import { Box, Stack, Grid, Typography, IconButton, Paper } from '@mui/material';
 
 import person from '../../assets/Dashboard/Dashboard_girl.png';
@@ -26,13 +26,11 @@ import { dataDele, dataSekre } from '@crema/services/dummy/dataSekreDele';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabAction';
 
-import { AuthContext } from '@crema/context/AuthContext';
-
 const Dashboard = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
-  const {user} = useContext(AuthContext);
+  // const {user} = useContext(AuthContext);
   // console.log('ini usernya:', user)
 
   const handleAddTab = (type) => {
@@ -205,7 +203,7 @@ const Dashboard = () => {
                         width: 28,
                         height: 28,
                       }}
-                      onClick={() => handleAddTab('Sekretaris')}
+                      onClick={() => handleAddTab('Add_Sekretaris')}
                     >
                       <img src={Plus} style={{ width: 'Auto', Height: 20 }} />
                     </IconButton>
@@ -258,7 +256,7 @@ const Dashboard = () => {
                               //     backgroundColor: '#FFDFA6',
                               //   }
                           }}
-                          onClick={() => handleAddTab('Sekretaris')} 
+                          onClick={() => handleAddTab('Add_Sekretaris')} 
                       >
                           <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Sekretaris</Typography>
                       </Box>
@@ -297,7 +295,7 @@ const Dashboard = () => {
                         height: 28,
                         marginRight: 150,
                       }}
-                      onClick={() => handleAddTab('Delegasi')}
+                      onClick={() => handleAddTab('Add_Delegasi')}
                     >
                       <img src={Plus} />
                     </IconButton>
@@ -369,7 +367,7 @@ const Dashboard = () => {
                               //     backgroundColor: '#FFDFA6',
                               //   }
                           }}
-                          onClick={() => handleAddTab('Delegasi')} 
+                          onClick={() => handleAddTab('Add_Delegasi')} 
                       >
                           <Typography sx={{ textAlign: 'center', color: "#FFFFFF" }}>Edit Delegasi</Typography>
                       </Box>

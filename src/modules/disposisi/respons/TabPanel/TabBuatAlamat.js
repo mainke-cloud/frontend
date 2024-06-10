@@ -47,7 +47,6 @@ const RenderItemWrapper = styled(Stack)(() => ({
   },
   '& .render-item-nota-box': {
     display: 'flex',
-    alignItems: 'center',
     padding: '4px 4px 4px 0px',
     gap: '8px',
     height: '30px',
@@ -56,6 +55,14 @@ const RenderItemWrapper = styled(Stack)(() => ({
     fontWeight: '700',
     fontSize: '16px',
     lineHeight: '22px',
+  },
+  '& .render-item-nota-icon': {
+    backgroundColor: '#F9F9F9',
+    borderRadius: '6px',
+    padding: '4px',
+    width: 'fit-content',
+    height: 'fit-content',
+    gap: '10px',
   },
 }));
 
@@ -72,19 +79,6 @@ const CustomCloseButton = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
   '&:hover': {
     color: theme.palette.coofis.primary.main,
-  },
-}));
-
-const CustomNotaButton = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.coofis.tertiary.bg,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderRadius: '6px',
-  padding: '4px',
-  gap: '10px',
-  '&:hover': {
-    cursor: 'pointer',
   },
 }));
 
@@ -115,20 +109,12 @@ const TabBuatAlamat = () => {
       todo: false,
       reminder: false,
       reminderDay: null,
-      notaType: false,
       nota: '',
       dateFrom: null,
       prior: '',
     },
   ]);
   const itemsLength = items.length;
-  const notaOptions = [
-    '',
-    'Agar dijawab langsung oleh Sdr.',
-    'Agar diperiksa dan ditindak lanjuti.',
-    'Ajukan saran tindak lanjut.',
-    'Buatkan konsep jawabannya.',
-  ];
   const [valueLog, setValueLog] = useState('tidak');
 
   const handleChange = (index, key, value) => {
@@ -148,7 +134,6 @@ const TabBuatAlamat = () => {
         todo: false,
         reminder: false,
         reminderDay: null,
-        notaType: false,
         nota: '',
         dateFrom: null,
         prior: '',
@@ -161,13 +146,6 @@ const TabBuatAlamat = () => {
       const newItems = [...items];
       newItems.splice(index, 1);
       setItems(newItems);
-    }
-  };
-
-  const handleNotaType = (index, type, value) => {
-    handleChange(index, 'notaType', !type)
-    if (!notaOptions.includes(value)) {
-      handleChange(index, 'nota', '')
     }
   };
 
@@ -236,35 +214,24 @@ const TabBuatAlamat = () => {
                 Nota Tindakan
                 <CustomSpan>*</CustomSpan>
               </Typography>
-              <CustomNotaButton onClick={() => handleNotaType(index, item.notaType ,item.nota)}>
+              <Box className='render-item-nota-icon'>
                 <img src={exchange} alt='exchange' />
-              </CustomNotaButton>
+              </Box>
             </Box>
-            {item.notaType === false ? (
-              <Select
-                labelId={`select-label-nota-${index}`}
-                id={`select-nota-${index}`}
-                value={item.nota}
-                onChange={(event) =>
-                  handleChange(index, 'nota', event.target.value)
-                }
-                sx={{ width: '100%' }}
-              >
-                {notaOptions.map(option => (
-                  <MenuItem key={option} value={option}>
-                    {option || 'None'}
-                  </MenuItem>
-                ))}
-              </Select>
-            ) : (
-              <TextField
-                fullWidth
-                value={item.nota}
-                onChange={(event) =>
-                  handleChange(index, 'nota', event.target.value)
-                }
-              />
-            )}
+            <Select
+              labelId={`select-label-nota-${index}`}
+              id={`select-nota-${index}`}
+              value={item.nota}
+              onChange={(event) =>
+                handleChange(index, 'nota', event.target.value)
+              }
+              sx={{ width: '100%' }}
+            >
+              <MenuItem value={''}>None</MenuItem>
+              <MenuItem value={'10'}>Ten</MenuItem>
+              <MenuItem value={'20'}>Twenty</MenuItem>
+              <MenuItem value={'30'}>Thirty</MenuItem>
+            </Select>
           </Box>
 
           <Box sx={{ width: '20%' }}>

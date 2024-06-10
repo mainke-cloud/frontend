@@ -2,27 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppScrollbar from '../AppScrollbar';
 
-import {
-  Button,
-  Box,
-  Typography,
-  Stack,
-  Divider,
-  TableContainer,
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Avatar,
-} from '@mui/material';
+import { Button, Box, Typography, Stack, Divider } from '@mui/material';
 
 import { UserPlus } from 'feather-icons-react';
 
 const JabatanTab = ({
   datas,
-  multipleData,
+  singleData,
   type,
   handleConfirmation,
   divisiCount,
@@ -35,95 +21,79 @@ const JabatanTab = ({
   return (
     <>
       <Box sx={{ height: 300, overflowY: 'auto', marginTop: 5 }}>
-        <AppScrollbar sx={{ height: 300 }} scrollToTop={false}>
-          <TableContainer component={Paper}>
-            <Table aria-label='divisi table'>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Divisi</TableCell>
-                  <TableCell>Departemen</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <StyledAccordion>
+        <AppScrollbar
+          sx={{
+            height: 300,
+          }}
+          scrollToTop={false}
+        >
+          <StyledAccordion>
+            <AccordionSummarys>
+              <Typography>Divisi</Typography>
+            </AccordionSummarys>
+            <AccordionDetail>
+              {uniqueDivisions.map((divisi, index) => (
+                <StyledAccordion key={index}>
                   <AccordionSummarys>
-                    <Typography>Divisi</Typography>
+                    <Typography>{divisi}</Typography>
                   </AccordionSummarys>
                   <AccordionDetail>
-                    {uniqueDivisions.map((divisi, index) => (
-                      <StyledAccordion key={index}>
-                        <AccordionSummarys>
-                          <Typography>{divisi}</Typography>
-                        </AccordionSummarys>
-                        <AccordionDetail>
-                          {Object.entries(divisiCount[divisi]).map(
-                            ([jabatan, count]) => (
-                              <StyledAccordion
-                                key={jabatan}
-                                onClick={() =>
-                                  handleAccordionClick(divisi, jabatan)
-                                }
+                    {Object.entries(divisiCount[divisi]).map(
+                      ([jabatan, count]) => (
+                        <StyledAccordion
+                          key={jabatan}
+                          onClick={() => handleAccordionClick(divisi, jabatan)}
+                        >
+                          <AccordionSummarys>
+                            <Stack alignItems='start'>
+                              <Typography>{jabatan}</Typography>
+                              <Typography
+                                variant='caption'
+                                sx={{
+                                  ml: 2,
+                                  color: 'text.secondary',
+                                }}
                               >
-                                <AccordionSummarys>
-                                  <TableRow>
-                                    <TableCell>
-                                      <Stack
-                                        direction='row'
-                                        alignItems='center'
-                                        spacing={4}
-                                      >
-                                        {datas.filter(
-                                          (user) =>
-                                            user.divisi === divisi &&
-                                            user.jabatan === jabatan,
-                                        ).length === 1 && (
-                                          <Avatar>
-                                            {
-                                              datas.find(
-                                                (user) =>
-                                                  user.divisi === divisi &&
-                                                  user.jabatan === jabatan,
-                                              ).nama[0]
-                                            }
-                                          </Avatar>
-                                        )}
-                                        <Typography>{jabatan}</Typography>
-                                        <Typography
-                                          variant='caption'
-                                          sx={{
-                                            ml: 2,
-                                            color: 'text.secondary',
-                                          }}
-                                        >
-                                          Jumlah: {count}
-                                        </Typography>
-                                      </Stack>
-                                    </TableCell>
-                                    <TableCell>
-                                      {datas.filter(
-                                        (user) =>
-                                          user.divisi === divisi &&
-                                          user.jabatan === jabatan,
-                                      ).length === 1 &&
-                                        datas.find(
-                                          (user) =>
-                                            user.divisi === divisi &&
-                                            user.jabatan === jabatan,
-                                        ).departemen}
-                                    </TableCell>
-                                  </TableRow>
-                                </AccordionSummarys>
-                              </StyledAccordion>
-                            ),
-                          )}
-                        </AccordionDetail>
-                      </StyledAccordion>
-                    ))}
+                                Jumlah: {count}
+                              </Typography>
+                            </Stack>
+                          </AccordionSummarys>
+                          <AccordionDetail>
+                            {datas
+                              .filter(
+                                (user) =>
+                                  user.divisi === divisi &&
+                                  user.jabatan === jabatan,
+                              )
+                              .map((user) => (
+                                <StyledAccordion key={user.id}>
+                                  <AccordionSummarys>
+                                    <Stack alignItems='start'>
+                                      <Typography>{user.nama}</Typography>
+                                    </Stack>
+                                  </AccordionSummarys>
+                                  <AccordionDetail>
+                                    <Typography variant='body1'>
+                                      Alamat: {user.alamat}
+                                    </Typography>
+                                    <Typography variant='body1'>
+                                      NIK: {user.nikg}
+                                    </Typography>
+                                    <Typography variant='body1'>
+                                      Email: {user.email}
+                                    </Typography>
+                                  </AccordionDetail>
+                                </StyledAccordion>
+                              ))}
+                          </AccordionDetail>
+                        </StyledAccordion>
+                      ),
+                    )}
                   </AccordionDetail>
                 </StyledAccordion>
-              </TableBody>
-            </Table>
-          </TableContainer>
+              ))}
+            </AccordionDetail>
+          </StyledAccordion>
         </AppScrollbar>
       </Box>
       <Divider />
@@ -152,7 +122,7 @@ const JabatanTab = ({
             variant='contained'
             color='secondary'
             style={{ marginLeft: '10px' }}
-            onClick={() => handleConfirmation(multipleData)}
+            onClick={() => handleConfirmation(singleData)}
             sx={{
               borderRadius: '50px',
               minWidth: '150px',
@@ -169,7 +139,7 @@ const JabatanTab = ({
 
 JabatanTab.propTypes = {
   datas: PropTypes.array.isRequired,
-  multipleData: PropTypes.array.isRequired,
+  singleData: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
   divisiCount: PropTypes.object.isRequired,

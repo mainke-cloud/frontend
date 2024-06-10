@@ -8,8 +8,7 @@ import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_3';
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
-// import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
-import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarSection';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import StepImage from '../../../../assets/BuatSurat/Prgoress bar buat surat 1.png';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,8 +16,8 @@ import { addInfo } from '../../../../redux/actions/suratAction';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 import { handleNextStep } from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
-const BuatTemplateSurat = ({ props }) => {
-  console.log(props);
+const BuatTemplateSurat = ({props}) => {
+  console.log(props)
   // const { data } = props;
   const dispatch = useDispatch();
   const [showNext, setShowNext] = useState(0);
@@ -59,24 +58,9 @@ const BuatTemplateSurat = ({ props }) => {
       onStateChange={handleChangeForm}
       templateData={props}
     />,
-    <SuratInternal_2
-      key={2}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      templateData={props}
-    />,
-    <SuratInternal_3
-      key={3}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      templateData={props}
-    />,
-    <SuratInternal_4
-      key={4}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      templateData={props}
-    />,
+    <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} templateData={props}/>,
+    <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} templateData={props}/>,
+    <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} templateData={props}/>,
     <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
   ];
 

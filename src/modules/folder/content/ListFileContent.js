@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Avatar } from '@mui/material';
 import Divider from '@mui/material/Divider';
@@ -59,7 +63,7 @@ const ListFileContent = ({ files }) => {
               color='#262829'
               sx={{ fontWeight: Fonts.BOLD }}
             >
-              Nama File
+              Nama Folder
             </Typography>
             <Stack direction='row'>
               <Typography

@@ -2,11 +2,11 @@ import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import FormClassification from '../../FormClassification';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useState, useEffect } from 'react';
-
+import { useEffect } from 'react';
 const prioritas = [
   {
     value: '1',
@@ -38,13 +38,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
     initialValues: {
       perihal: '',
     },
-    onSubmit: () => {
-      if (klasifikasiIsEmpty()) {
-        setFormClassificationValid(false);
-      } else {
-        handleNext();
-      }
-    },
+    onSubmit: handleNext,
     validationSchema: yup.object().shape({
       perihal: yup.string().required('Kolom ini wajib diisi'),
     }),
@@ -69,7 +63,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
       }));
     }
   }, [templateData]);
-
+  
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
@@ -86,19 +80,6 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
-  };
-
-  const [isFormClassificationValid, setFormClassificationValid] =
-    useState(true);
-
-  const klasifikasi = useSelector((state) => state.classification.klasifikasi);
-
-  const klasifikasiIsEmpty = () => {
-    return !klasifikasi.name && !klasifikasi.desc;
-  };
-
-  const handleClassificationChange = () => {
-    setFormClassificationValid(true);
   };
 
   return (
@@ -138,12 +119,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
           </Typography>
         )}
 
-        <FormClassification
-          text='Klasifikasi Masalah'
-          isValid={isFormClassificationValid}
-          klasifikasi={klasifikasi}
-          onClassificationChange={handleClassificationChange}
-        />
+        <FormClassification text='Klasifikasi Masalah' />
 
         <Typography
           variant='body1'

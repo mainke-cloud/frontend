@@ -18,7 +18,6 @@ const BitBucketWrapper = ({ children, ...rest }) => {
           position: 'relative',
           width: { xs: '100%', lg: 'calc(100% - 320px)' },
           transition: 'all 0.5s ease',
-          marginLeft: 'auto',
         },
         '&.bitBucketCollapsed': {
           '& .mainContent': {

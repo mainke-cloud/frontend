@@ -7,29 +7,19 @@ import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_3';
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
-import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarSection';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import SuratUndangan_2 from '@crema/components/Tabs/BuatSurat/SuratUndangan_2';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedSteppers from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';
-import KomentarPopUp from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarPopUp';
 
 const SuratUndangan = () => {
   const dispatch = useDispatch();
 
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
-  const [komen, setKomen] = useState('');
-  const [showKomen, setShowKomen] = useState(false);
-  const [formData, setFormData] = useState({
-    perihal: '',
-    klasifikasi: '',
-    prioritas: '1',
-    jenis: '1',
-    lampiran: 1,
-  });
 
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
@@ -49,9 +39,13 @@ const SuratUndangan = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const onCreate = (data) => {
-    setKomen(data.komen);
-  };
+  const [formData, setFormData] = useState({
+    perihal: '',
+    klasifikasi: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
 
   const handleChangeForm = (formData) => {
     setFormData(formData);
@@ -76,12 +70,7 @@ const SuratUndangan = () => {
     <SuratInternal_2 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_3 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_4 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_5
-      key={6}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      text='Kirim'
-    />,
+    <SuratInternal_5 key={6} handleNext={handleNext} handlePrev={handlePrev} />,
   ];
 
   return (
@@ -108,13 +97,7 @@ const SuratUndangan = () => {
               </Grid>
 
               <Grid item xs={4}>
-                <Stack>
-                  <KomentarSection
-                    onCreate={onCreate}
-                    setShowKomen={setShowKomen}
-                  />
-                  {showKomen ? <KomentarPopUp komen={komen} /> : null}
-                </Stack>
+                <KomentarSection />
               </Grid>
             </Grid>
           </>

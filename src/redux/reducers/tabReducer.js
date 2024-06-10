@@ -1,27 +1,20 @@
 import React from 'react';
 import Dashboard from 'modules/dashboard';
 import homeIcon from '../../assets/icon/home.svg';
-
 const initialState = {
   tabs: [
     {
       id: 'dashboard',
+      favicon: homeIcon,
       title: 'Dashboard',
       active: true,
-      favicon: homeIcon,
+      // favicon: homeIcon,
       // content: <Dashboard />,
     },
   ],
   idCounter: 1,
   cek: 0,
 };
-
-const updateMultipleTabs = (tabs, ids, payload) => {
-  return tabs.map((tab) =>
-    ids.includes(tab.id) && tab.title === payload.title ? payload : tab,
-  );
-};
-
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TAB':
@@ -35,29 +28,60 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-    case 'UPDATE_TAB':
+    case 'UPDATE_TAB_TODO': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (
+          (tab.id === 'todo' && tab.title === action.payload.title) ||
+          (tab.id === 'disposisi' && tab.title === action.payload.title)
+        ) {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
       return {
         ...state,
-        tabs: updateMultipleTabs(
-          state.tabs,
-          [
-            'todo',
-            'disposisi',
-            'surat masuk',
-            'perlu tindak lanjut',
-            'draft',
-            'lacak proses',
-            'komposer',
-            'template',
-            'surat diminta',
-            'surat terkirim',
-            'surat dibatalkan',
-            'log scan surat',
-            'folder',
-          ],
-          action.payload,
-        ),
+        tabs: updatedTabs,
       };
+    }
+    case 'UPDATE_TAB_DISPOSISI': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (
+          (tab.id === 'todo' && tab.title === action.payload.title) ||
+          (tab.id === 'disposisi' && tab.title === action.payload.title) ||
+          (tab.id === 'perlu tindak lanjut' &&
+            tab.title === action.payload.title) ||
+          (tab.id === 'draft' && tab.title === action.payload.title) ||
+          (tab.id === 'lacak proses' && tab.title === action.payload.title) ||
+          (tab.id === 'komposer' && tab.title === action.payload.title) ||
+          (tab.id === 'template' && tab.title === action.payload.title) ||
+          (tab.id === 'surat diminta' && tab.title === action.payload.title) ||
+          (tab.id === 'surat terkirim' && tab.title === action.payload.title) ||
+          (tab.id === 'surat dibatalkan' && tab.title === action.payload.title)  
+        ) {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
+    case 'UPDATE_TAB_LOGSCANSURAT': {
+      const updatedTabs = state.tabs.map((tab) => {
+        if (tab.id === 'log scan surat') {
+          return action.payload;
+        } else {
+          return tab;
+        }
+      });
+      return {
+        ...state,
+        tabs: updatedTabs,
+      };
+    }
     case 'CLOSE_TAB':
       return {
         ...state,

@@ -81,7 +81,6 @@ export const addTab = (id, state, type) => {
       const activeTab = state.find((tab) => tab.active);
       if (activeTab) {
         activeTab.active = false;
-        activeTab.favicon = getIcon(activeTab.title, false);
       }
       let tabs = {
         id: type.toLowerCase(),
@@ -156,6 +155,7 @@ export const childTab = (id, state, type, data) => {
       }
     });
     if (isExistingTab) {
+      console.log(type);
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
@@ -189,7 +189,6 @@ export const childTab = (id, state, type, data) => {
 
         if (activeTab) {
           activeTab.active = false;
-          activeTab.favicon = getIcon(activeTab.title, false);
         }
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
@@ -226,7 +225,6 @@ export const activateTab = (tabId, state) => {
     const updatedTabs = state.map((tab) => ({
       ...tab,
       active: tab.id === tabId,
-      favicon: getIcon(tab.title, tab.id === tabId),
     }));
     localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });

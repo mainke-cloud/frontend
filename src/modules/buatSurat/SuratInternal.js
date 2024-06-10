@@ -7,21 +7,18 @@ import SuratInternal_4 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/
 import SuratInternal_3 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_3';
 import SuratInternal_2 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_2';
 import SuratInternal_1 from '@crema/components/Tabs/BuatSurat/SuratInternalTabs/SuratInternal_1';
-import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarSection';
+import KomentarSection from '@crema/components/Tabs/BuatSurat/KomentarSection/KomentarSection';
 import PdfCardEdit from '@crema/components/Tabs/SuratKeluar/PdfCardEdit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInfo } from '../../redux/actions/suratAction';
 import BuatSuratLastPage from '@crema/components/Tabs/BuatSurat/BuatSuratLastPage';
 import CustomizedStepper from '@crema/components/Tabs/BuatSurat/CustomizedStepper/CustomizedStepper';
-import KomentarPopUp from '@crema/components/Tabs/BuatSurat/KomentarBuatSurat/KomentarPopUp';
 
 const SuratInternal = () => {
   const dispatch = useDispatch();
 
   const [showPage, setShowPage] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
-  const [komen, setKomen] = useState('');
-  const [showKomen, setShowKomen] = useState(false);
 
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
@@ -52,10 +49,6 @@ const SuratInternal = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const onCreate = (data) => {
-    setKomen(data.komen);
-  };
-
   const step = ['Info', 'Penerima', 'Pengirim', 'Pemeriksa', 'Lainnya'];
 
   const steps = [
@@ -67,12 +60,7 @@ const SuratInternal = () => {
     <SuratInternal_2 key={2} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_3 key={3} handleNext={handleNext} handlePrev={handlePrev} />,
     <SuratInternal_4 key={4} handleNext={handleNext} handlePrev={handlePrev} />,
-    <SuratInternal_5
-      key={5}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      text='Kirim'
-    />,
+    <SuratInternal_5 key={5} handleNext={handleNext} handlePrev={handlePrev} />,
   ];
 
   return (
@@ -99,13 +87,7 @@ const SuratInternal = () => {
               </Grid>
 
               <Grid item xs={4}>
-                <Stack>
-                  <KomentarSection
-                    onCreate={onCreate}
-                    setShowKomen={setShowKomen}
-                  />
-                  {showKomen ? <KomentarPopUp komen={komen} /> : null}
-                </Stack>
+                <KomentarSection />
               </Grid>
             </Grid>
           </>
