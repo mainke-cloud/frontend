@@ -30,6 +30,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
+  const {user} = useContext(AuthContext);
+  // console.log('ini usernya:', user)
 
   const handleAddTab = (type) => {
     dispatch(addTab(id, tabs, type));

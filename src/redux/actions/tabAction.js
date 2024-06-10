@@ -1,9 +1,3 @@
-import React from 'react';
-import Keamanan from 'modules/keamanan';
-import Bantuan from 'modules/bantuan';
-import Profile from 'modules/profile';
-import DetailTodo from 'modules/disposisi/todo/DetailTodo';
-import PDFReader from '@crema/components/PDFReader/PDFReader';
 import inboxIcon from '../../assets/icon/inbox.svg';
 import disposisiIcon from '../../assets/icon/disposisi.svg';
 import folderIcon from '../../assets/icon/folder.svg';
@@ -12,32 +6,70 @@ import helpIcon from '../../assets/icon/help-circle.svg';
 import profileIcon from '../../assets/icon/user.svg';
 import searchIcon from '../../assets/icon/search.svg';
 import scanIcon from '../../assets/icon/scan.svg';
-import Add_Delegasi from 'modules/dashboard/Add_Delegasi';
-import Add_Sekretaris from 'modules/dashboard/Add_Sekretaris';
-import DetailScanSurat from 'modules/scanSurat/DetailScanSurat';
-import BuatScanSurat from 'modules/scanSurat/BuatScanSurat';
-import Surat_Internal from 'modules/buatSurat/SuratInternal';
-import Surat_External from 'modules/buatSurat/SuratExternal';
-import Surat_Undangan from 'modules/buatSurat/SuratUndangan';
-import Surat_Delegasi from 'modules/buatSurat/SuratDelegasi';
 import iconSurat from '../../assets/icon/mail.svg';
-import Disposisi from 'modules/disposisi/respons/DetailSurat';
-import BuatSurat from 'modules/disposisi/respons/BuatDisposisi';
-import BelumPilih from 'modules/suratKeluar/BelumPilih';
-import PerluTindakLanjut from 'modules/suratKeluar/perluTindakLanjut/PerluTindakLanjut';
-import Draft from 'modules/suratKeluar/draft/Draft';
-import LacakProses from 'modules/suratKeluar/lacakProses/LacakProses';
-import Komposer from 'modules/suratKeluar/komposer/Komposer';
-import Template from 'modules/suratKeluar/template/Template';
-import SearchTab from 'modules/search/index';
-import SuratMasuk from 'modules/suratMasuk/SuratMasuk';
-import SuratDiminta from 'modules/suratKeluar/suratDiminta/SuratDiminta';
-import SuratTerkirim from 'modules/suratKeluar/suratTerkirim/SuratTerkirim';
-import SuratDibatalkan from 'modules/suratKeluar/suratDibatalkan/SuratDibatalkan';
-import Folder from 'modules/folder/index';
-import Listdata from 'modules/folder/content/ListData';
-import BuatTemplateSurat from 'modules/suratKeluar/template/buatTemplateSurat/index'
-import Forward from 'modules/forward';
+import homeIcon from '../../assets/icon/home.svg';
+import delegasiIcon from '../../assets/icon/DelegasiIcon.svg';
+import sekretarisIcon from '../../assets/icon/SekretarisIcon.svg';
+import inboxIconInActive from '../../assets/icon/iconInActive/inbox.svg';
+import disposisiIconInActive from '../../assets/icon/iconInActive/disposisi.svg';
+import folderIconInActive from '../../assets/icon/iconInActive/folder.svg';
+import securityIconInActive from '../../assets/icon/iconInActive/shield.svg';
+import helpIconInActive from '../../assets/icon/iconInActive/help-circle.svg';
+import profileIconInActive from '../../assets/icon/iconInActive/user.svg';
+import searchIconInActive from '../../assets/icon/iconInActive/search.svg';
+import scanIconInActive from '../../assets/icon/iconInActive/scan.svg';
+import iconSuratInActive from '../../assets/icon/iconInActive/mail.svg';
+import homeIconInActive from '../../assets/icon/iconInActive/home.svg';
+import delegasiIconInActive from '../../assets/icon/iconInActive/DelegasiIcon.svg';
+import sekretarisIconInActive from '../../assets/icon/iconInActive/SekretarisIcon.svg';
+
+const getIcon = (type, active) => {
+  switch (type) {
+    case 'Dashboard':
+      return active ? homeIcon : homeIconInActive;
+    case 'Folder':
+    case 'Buka Folder':
+      return active ? folderIcon : folderIconInActive;
+    case 'Keamanan':
+      return active ? securityIcon : securityIconInActive;
+    case 'FAQ':
+      return active ? helpIcon : helpIconInActive;
+    case 'Profile':
+      return active ? profileIcon : profileIconInActive;
+    case 'Disposisi':
+    case 'Todo':
+      return active ? disposisiIcon : disposisiIconInActive;
+    case 'Log Scan Surat':
+    case 'Buat Scan Surat':
+    case 'Draft Scan Surat':
+    case 'Scan Surat Masuk':
+      return active ? scanIcon : scanIconInActive;
+    case 'Surat Masuk':
+    case 'Buka Surat':
+      return active ? inboxIcon : inboxIconInActive;
+    case 'Perlu Tindak Lanjut':
+    case 'Lacak Proses':
+    case 'Draft':
+    case 'Komposer':
+    case 'Template':
+    case 'Buat Surat':
+    case 'Buat Template':
+    case 'Forward':
+    case 'Buat Surat Internal':
+    case 'Buat Surat External':
+    case 'Buat Surat Undangan':
+    case 'Buat Surat Delegasi':
+      return active ? iconSurat : iconSuratInActive;
+    case 'Search':
+      return active ? searchIcon : searchIconInActive;
+    case 'Delegasi':
+      return active ? delegasiIcon : delegasiIconInActive;
+    case 'Sekretaris':
+      return active ? sekretarisIcon : sekretarisIconInActive;
+    default:
+      return active ? iconSurat : iconSuratInActive;
+  }
+};
 
 export const addTab = (id, state, type) => {
   return (dispatch) => {
@@ -53,101 +85,24 @@ export const addTab = (id, state, type) => {
       let tabs = {
         id: type.toLowerCase(),
         title: type,
-        favicon:
-          type === 'Folder'
-            ? folderIcon
-            : type === 'Keamanan'
-            ? securityIcon
-            : type === 'FAQ'
-            ? helpIcon
-            : type === 'Profile'
-            ? profileIcon
-            : type === 'Disposisi'
-            ? disposisiIcon
-            : type === 'Todo'
-            ? disposisiIcon
-            : type === 'Log Scan Surat'
-            ? scanIcon
-            : type === 'Buat Scan Surat'
-            ? inboxIcon
-            : type === 'Surat Masuk'
-            ? inboxIcon
-            : type === 'Draft Scan Surat'
-            ? scanIcon
-            : type === 'Buat Surat Internal'
-            ? iconSurat
-            : type === 'Buat Surat External'
-            ? iconSurat
-            : type === 'Buat Surat Undangan'
-            ? iconSurat
-            : type === 'Buat Surat Delegasi'
-            ? iconSurat
-            : type === 'Buka Surat'
-            ? scanIcon
-            : type === 'Buka Folder'
-            ? folderIcon
-            : type === 'Search'
-            ? searchIcon
-            : type === 'Perlu Tindak Lanjut'
-            ? inboxIcon
-            : type === 'Lacak Proses'
-            ? inboxIcon
-            : type === 'Draft'
-            ? inboxIcon
-            : type === 'Komposer'
-            ? inboxIcon
-            : type === 'Template'
-            ? inboxIcon
-            : type === 'Buat Surat'
-            ? inboxIcon
-            : type === 'Buat Template'
-            ? inboxIcon
-            : type === 'Forward'
-            ? inboxIcon
-            : '',
-
-        content:
-          type === 'Keamanan' ? (
-            <Keamanan />
-          ) : type === 'FAQ' ? (
-            <Bantuan />
-          ) : type === 'Profile' ? (
-            <Profile />
-          ) : type === 'Buka Folder' ? (
-            <Listdata />
-          ) : type === 'BuatDisposisi' ? (
-            <BuatSurat />
-          ) : type === 'Add_Sekretaris' ? (
-            <Add_Sekretaris />
-          ) : type === 'Add_Delegasi' ? (
-            <Add_Delegasi />
-          ) : type === 'Buat Surat Internal' ? (
-            <Surat_Internal />
-          ) : type === 'Buat Surat External' ? (
-            <Surat_External />
-          ) : type === 'Buat Surat Undangan' ? (
-            <Surat_Undangan />
-          ) : type === 'Buat Surat Delegasi' ? (
-            <Surat_Delegasi />
-          ) : type === 'Buat Scan Surat' ? (
-            <BuatScanSurat />
-          ) : type === 'Buka Surat' ? (
-            <PDFReader />
-          ) : type === 'Folder' ? (
-            <Folder />
-          ) : type === 'Search' ? (
-            <SearchTab />
-          ) : type === 'Template' ? (
-            <Template />
-          ) : type === 'Buat Template' ? (
-          <BuatTemplateSurat />
-          ) : type === 'Forward' ? (
-            <Forward />
-          ) : (
-            <BelumPilih />
-          ),
+        favicon: getIcon(type, true),
         active: true,
       };
+      let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+      if (!localStorageTabs) {
+        localStorageTabs = [];
+      }
+
+      let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
+      if (!isDuplicate) {
+        tabs.active = true;
+        localStorageTabs.forEach((tab) => {
+          tab.active = false;
+        });
+        localStorageTabs.push(tabs);
+        localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+      }
+
       dispatch({ type: 'ADD_TAB', payload: tabs });
     } else {
       const isExistingTab = state.some(
@@ -204,50 +159,25 @@ export const childTab = (id, state, type, data) => {
       const updateTab = {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
-        content:
-          type === 'Todo' ? (
-            <DetailTodo props={data} />
-          ) : type === 'Disposisi' ? (
-            <Disposisi props={data} />
-          ) : type === 'Perlu Tindak Lanjut' ? (
-            <PerluTindakLanjut props={data} />
-          ) : type === 'Draft' ? (
-            <Draft props={data} />
-          ) : type === 'Lacak Proses' ? (
-            <LacakProses props={data} />
-          ) : type === 'Komposer' ? (
-            <Komposer props={data} />
-          ) : type === 'Template' ? (
-            <Template props={data} />
-          ) : type === 'Surat Masuk' ? (
-            <SuratMasuk props={data} />
-          ) : type === 'Folder' ? (
-            <Folder props={data} />
-          ) : type === 'Buka Folder' ? (
-            <Listdata files={data} />
-          ) : type === 'Log Scan Surat' ? (
-            <DetailScanSurat props={data} />
-          ) : type === 'Surat Diminta' ? (
-            <SuratDiminta props={data} />
-          ) : type === 'Surat Terkirim' ? (
-            <SuratTerkirim props={data} />
-          ) : type === 'Surat Dibatalkan' ? (
-            <SuratDibatalkan props={data} />
-          ) : type === 'Buat Template' ? (
-            <SuratDibatalkan props={data} />
-          ): (
-            ''
-          ),
       };
-      if (type === 'Surat Masuk') {
-        dispatch({ type: 'UPDATE_TAB_SURATMASUK', payload: updateTab });
-      } else if (type === 'Log Scan Surat') {
-        dispatch({ type: 'UPDATE_TAB_LOGSCANSURAT', payload: updateTab });
-      } else if (type === 'Folder') {
-        dispatch({ type: 'UPDATE_TAB_FOLDER', payload: updateTab });
-      } else {
-        dispatch({ type: 'UPDATE_TAB_DISPOSISI', payload: updateTab });
+      console.log('1');
+
+      let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+      if (!localStorageTabs) {
+        localStorageTabs = [];
       }
+
+      let isDuplicate = localStorageTabs.some((tab) => tab.id === updateTab.id);
+      if (!isDuplicate) {
+        updateTab.active = true;
+        localStorageTabs.forEach((tab) => {
+          tab.active = false;
+        });
+        updateTab.ids = id;
+        localStorageTabs.push(updateTab);
+        localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+      }
+      dispatch({ type: 'UPDATE_TAB', payload: updateTab });
     } else {
       const exChildTab = state.find(
         (tab) => tab.id === `${type.toLowerCase()}${id}`,
@@ -263,41 +193,26 @@ export const childTab = (id, state, type, data) => {
         let tabs = {
           id: `${type.toLowerCase()}${id}`,
           title: type,
-          favicon: inboxIcon,
-          content:
-            type === 'Todo' ? (
-              <DetailTodo props={data} />
-            ) : type === 'Disposisi' ? (
-              <Disposisi props={data} />
-            ) : type === 'Perlu Tindak Lanjut' ? (
-              <PerluTindakLanjut props={data} />
-            ) : type === 'Draft' ? (
-              <Draft props={data} />
-            ) : type === 'Lacak Proses' ? (
-              <LacakProses props={data} />
-            ) : type === 'Komposer' ? (
-              <Komposer props={data} />
-            ) : type === 'Template' ? (
-              <Template props={data} />
-            ) : type === 'Surat Masuk' ? (
-              <SuratMasuk props={data} />
-            ) : type === 'Folder' ? (
-              <Folder props={data} />
-            ) : type === 'Buka Folder' ? (
-              <Listdata files={data} />
-            ) : type === 'Log Scan Surat' ? (
-              <DetailScanSurat props={data} />
-            ) : type === 'Surat Diminta' ? (
-              <SuratDiminta props={data} />
-            ) : type === 'Surat Terkirim' ? (
-              <SuratTerkirim props={data} />
-            ) : type === 'Buat Template' ? (
-              <BuatTemplateSurat props={data} />
-            ) : (
-              ''
-            ),
+          favicon: getIcon(activeTab.title, true),
           active: true,
         };
+        console.log('2');
+
+        let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
+        if (!localStorageTabs) {
+          localStorageTabs = [];
+        }
+
+        let isDuplicate = localStorageTabs.some((tab) => tab.id === tabs.id);
+        if (!isDuplicate) {
+          tabs.active = true;
+          localStorageTabs.forEach((tab) => {
+            tab.active = false;
+          });
+          tabs.ids = id;
+          localStorageTabs.push(tabs);
+          localStorage.setItem('tabs', JSON.stringify(localStorageTabs));
+        }
         dispatch({ type: 'ADD_TAB', payload: tabs });
       }
     }
@@ -311,6 +226,7 @@ export const activateTab = (tabId, state) => {
       ...tab,
       active: tab.id === tabId,
     }));
+    localStorage.setItem('tabs', JSON.stringify(updatedTabs));
     dispatch({ type: 'ACTIVE_TAB', payload: updatedTabs });
     dispatch({ type: 'CLOSE_EDIT' });
   };
@@ -361,5 +277,11 @@ export const reorderTab = (tabId, fromIndex, toIndex, state) => {
     remainingTabs.splice(toIndex, 0, movedTab);
     dispatch({ type: 'REORDER_TAB', payload: remainingTabs });
     dispatch({ type: 'CLOSE_EDIT' });
+  };
+};
+
+export const setTabs = (tabs) => {
+  return (dispatch) => {
+    dispatch({ type: 'SET_TABS', payload: tabs });
   };
 };

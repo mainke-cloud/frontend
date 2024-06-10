@@ -8,7 +8,8 @@ const initialState = {
       favicon: homeIcon,
       title: 'Dashboard',
       active: true,
-      content: <Dashboard />,
+      favicon: homeIcon,
+      // content: <Dashboard />,
     },
   ],
   idCounter: 1,
@@ -97,33 +98,11 @@ const tabReducer = (state = initialState, action) => {
         ...state,
         tabs: action.payload,
       };
-
-    case 'UPDATE_TAB_SURATMASUK': {
-      const updatedTabs = state.tabs.map((tab) => {
-        if (tab.id === 'surat masuk') {
-          return action.payload;
-        } else {
-          return tab;
-        }
-      });
+    case 'SET_TABS':
       return {
         ...state,
-        tabs: updatedTabs,
+        tabs: action.payload,
       };
-    }
-    case 'UPDATE_TAB_FOLDER': {
-      const updatedTabs = state.tabs.map((tab) => {
-        if (tab.id === 'folder') {
-          return action.payload;
-        } else {
-          return tab;
-        }
-      });
-      return {
-        ...state,
-        tabs: updatedTabs,
-      };
-    }
     default:
       return state;
   }
