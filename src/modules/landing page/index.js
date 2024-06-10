@@ -137,7 +137,7 @@ const Landing_page = () => {
           <Typography variant='h1'>Fitur Unggulan Coofis</Typography>
         </Stack>
       </Box>
-      <Box sx={{ height: 700 }}>
+      <Box sx={{ height: 770 }}>
         <Stack alignItems='center'>
           <Typography
             fontSize={36}
@@ -271,7 +271,7 @@ const Landing_page = () => {
         </Grid>
       </Box>
       {/* </Box> */}
-      <Box sx={{ height: 700 }}>
+      <Box sx={{ height: 630 }}>
         <Stack alignItems='center'>
           <Typography fontSize={36} fontWeight={Fonts.MEDIUM}>
             Aktivitas Terbaru
@@ -386,7 +386,7 @@ const Landing_page = () => {
             <br /> implementasi Coofis dari kami.
           </Typography>
         </Stack>
-        <Grid container justifyContent='space-around' paddingTop={5}>
+        <Grid container justifyContent='space-around' paddingTop={10}>
           <img src={klien1} style={{ width: 132, height: 123 }} />
           <img src={klien2} style={{ width: 132, height: 123 }} />
           <img src={klien3} style={{ width: 132, height: 123 }} />
