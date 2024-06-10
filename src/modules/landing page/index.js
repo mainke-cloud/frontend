@@ -112,19 +112,19 @@ const Landing_page = () => {
                         Fitur Unggulan Coofis
                     </Typography>
                 </Stack>
-                <Grid container>
+                <Grid container spacing={10} sx={{marginTop: 4}}>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", width: 400, height: 222}}>
-                            <Stack  justifyContent="center">
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                            <Stack  alignItems="center">
                                 <Typography>
-                                    Surat Digital
+                                     Surat Digital
                                 </Typography>
                             </Stack>
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", width: 400, height: 222}}>
-                            <Stack justifyContent="center">
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                            <Stack alignItems="center">
                                 <Typography>
                                     Disposisi   
                                 </Typography>
@@ -132,8 +132,8 @@ const Landing_page = () => {
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
-                        <Box sx={{backgroundColor: "#e0e0e0", width: 400, height: 222}}>
-                            <Stack justifyContent="center">
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                            <Stack alignItems="center">
                                 <Typography>
                                    Delegasi
                                 </Typography>
@@ -141,8 +141,8 @@ const Landing_page = () => {
                         </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box sx={{backgroundColor: "#e0e0e0", width: 612, height: 222}}>
-                            <Stack justifyContent="center">
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                            <Stack alignItems="center">
                                 <Typography>
                                     Digital Signature
                                 </Typography>
@@ -150,8 +150,8 @@ const Landing_page = () => {
                         </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box sx={{backgroundColor: "#e0e0e0", width: 612, height: 222}}>
-                            <Stack justifyContent="center">
+                        <Box sx={{backgroundColor: "#e0e0e0", height: 222}}>
+                            <Stack alignItems="center">
                                 <Typography>
                                     Proses Cepat
                                 </Typography>
