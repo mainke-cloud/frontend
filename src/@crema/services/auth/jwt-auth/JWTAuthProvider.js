@@ -24,9 +24,23 @@ const JWTAuthAuthProvider = ({ children }) => {
       fetchStart();
       const token = localStorage.getItem('token');
       const userData = JSON.parse(localStorage.getItem('user'));
-      if(userData && userData.refresh_token_exp === new Date().getTime()){
+
+      function toISODateWithoutMilliseconds(date) {
+        const pad = (n) => n < 10 ? '0' + n : n;
+        const year = date.getUTCFullYear();
+        const month = pad(date.getUTCMonth() + 1);
+        const day = pad(date.getUTCDate());
+        const hours = pad(date.getUTCHours());
+        const minutes = pad(date.getUTCMinutes());
+        const seconds = pad(date.getUTCSeconds());
+      
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+      }
+
+      if(userData && userData.refresh_token_exp <= toISODateWithoutMilliseconds(new Date())){
         logout();
       }
+      
       if (!token) {
         fetchSuccess();
         setJWTAuthData({
