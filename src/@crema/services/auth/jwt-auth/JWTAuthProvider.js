@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import jwtAxios, { setAuthToken } from './index';
 import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
+import { useAuthContext } from '@crema/context/AuthContext';
 // import { connectFirestoreEmulator } from 'firebase/firestore';
 
 const JWTAuthContext = createContext();
@@ -12,6 +13,7 @@ export const useJWTAuth = () => useContext(JWTAuthContext);
 export const useJWTAuthActions = () => useContext(JWTAuthActionsContext);
 
 const JWTAuthAuthProvider = ({ children }) => {
+  const {setToken, setUser} = useAuthContext();
   const { fetchStart, fetchSuccess, fetchError } = useInfoViewActionsContext();
   const [firebaseData, setJWTAuthData] = useState({
     user: null,
@@ -84,8 +86,8 @@ const JWTAuthAuthProvider = ({ children }) => {
       });
       // console.log('Response data:', data);
 
-      sessionStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('token', data.jwt);
+      sessionStorage.setItem('user', JSON.stringify(data));
       setAuthToken(data.jwt);
 
       setJWTAuthData({
@@ -93,6 +95,8 @@ const JWTAuthAuthProvider = ({ children }) => {
         isAuthenticated: true,
         isLoading: false,
       });
+      setToken(localStorage.getItem('token'));
+      setUser(JSON.parse(sessionStorage.getItem('user')));
       fetchSuccess();
     } catch (error) {
       console.error('Sign in error:', error.response?.data || error.message);
@@ -134,8 +138,10 @@ const JWTAuthAuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('user');
+    localStorage.clear();
+    sessionStorage.clear();
+    setToken(null);
+    setUser(null);
 
     setAuthToken();
     setJWTAuthData({
@@ -143,6 +149,8 @@ const JWTAuthAuthProvider = ({ children }) => {
       isLoading: false,
       isAuthenticated: false,
     });
+
+    location.reload();
   };
 
   return (

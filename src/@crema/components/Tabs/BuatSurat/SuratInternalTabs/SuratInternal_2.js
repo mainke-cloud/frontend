@@ -6,19 +6,31 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../../FormAddressBook';
 import AProfile from '../../../../../assets/vector/Avatar.png';
-
+import { useDispatch } from 'react-redux';
+import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
 const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
+  const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
-
+  const [penerima, setPenerima] = useState({
+    kepadaIds: [],
+    tembusanIds: [],
+  });
+ 
   const handleSubmit = () => {
-    const validKepada = !KepadaIsEmpty();
-    const validTembusan = !TembusanIsEmpty();
+    const validKepada = kepada.length > 0; // Misalnya validasi ini
+    const validTembusan = tembusan.length > 0; // Misalnya validasi ini
 
     setFormValidKepada(validKepada);
     setFormValidTembusan(validTembusan);
 
     if (validKepada && validTembusan) {
+      const kepadaIds = kepada.map((item) => item.id);
+      const tembusanIds = tembusan.map((item) => item.id);
+      const newPenerima = [...kepadaIds, ...tembusanIds];
+      setPenerima(newPenerima);
+      
+      dispatch(updateData({ penerima: newPenerima }));
       handleNext();
     }
   };

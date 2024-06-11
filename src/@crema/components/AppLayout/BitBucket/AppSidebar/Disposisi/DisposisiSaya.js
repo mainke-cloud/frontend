@@ -14,7 +14,7 @@ const DisposisiSaya = (props) => {
             tab='Disposisi'
             subTab='Disposisi Saya'
             isAdd={true}
-            isStatus='disposisi'
+            isStatus='disposisiSaya'
         />
   )
 }

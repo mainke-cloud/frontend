@@ -3,8 +3,6 @@ import { Typography, Stack, List, ListItem } from '@mui/material';
 import PropTypes from 'prop-types';
 import TinyMce from './TinyMce';
 const PdfCardEdit = ({ kepada, tembusan, pengirim, info }) => {
-  console.log(kepada);
-
   const currentDate = new Date();
   const options = {
     weekday: 'long',

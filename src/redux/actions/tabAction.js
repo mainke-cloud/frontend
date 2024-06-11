@@ -37,6 +37,9 @@ const getIcon = (type, active) => {
     case 'Profile':
       return active ? profileIcon : profileIconInActive;
     case 'Disposisi':
+      return active ? disposisiIcon : disposisiIconInActive;
+    case 'Disposisi Saya':
+      return active ? disposisiIcon : disposisiIconInActive;
     case 'Todo':
       return active ? disposisiIcon : disposisiIconInActive;
     case 'Log Scan Surat':
@@ -127,6 +130,8 @@ export const childTab = (id, state, type, data) => {
           return tab.id === 'todo';
         case 'Disposisi':
           return tab.id === 'disposisi';
+        case 'Disposisi Saya':
+          return tab.id === 'disposisi saya';
         case 'Perlu Tindak Lanjut':
           return tab.id === 'perlu tindak lanjut';
         case 'Lacak Proses':
@@ -160,7 +165,6 @@ export const childTab = (id, state, type, data) => {
         ...isExistingTab,
         id: `${isExistingTab.id}${id}`,
       };
-      console.log('1');
 
       let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
       if (!localStorageTabs) {
@@ -197,7 +201,6 @@ export const childTab = (id, state, type, data) => {
           favicon: getIcon(activeTab.title, true),
           active: true,
         };
-        console.log('2');
 
         let localStorageTabs = JSON.parse(localStorage.getItem('tabs'));
         if (!localStorageTabs) {

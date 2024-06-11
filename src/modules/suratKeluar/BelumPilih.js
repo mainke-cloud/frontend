@@ -22,7 +22,6 @@ import Komposer from 'modules/suratKeluar/komposer/Komposer';
 import DetailTodo from 'modules/disposisi/todo/DetailTodo';
 import ListData from 'modules/folder/content/ListData';
 const BelumPilih = ({ check, ids }) => {
-  console.log('ini blum pilih ok', check, ids);
   const datadisposisi = [listData1, listData2, listData3];
   let activeComponent = null;
   if (ids) {
@@ -31,6 +30,9 @@ const BelumPilih = ({ check, ids }) => {
         activeComponent = <DetailTodo props={datadisposisi} />;
         break;
       case `disposisi${ids}`:
+        activeComponent = <Disposisi props={datadisposisi} />;
+        break;
+      case `disposisi saya${ids}`:
         activeComponent = <Disposisi props={datadisposisi} />;
         break;
       case `perlu tindak lanjut${ids}`:

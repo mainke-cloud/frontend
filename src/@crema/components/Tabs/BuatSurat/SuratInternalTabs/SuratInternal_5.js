@@ -1,35 +1,51 @@
-import React from 'react';
-import { Stack, TextField, Typography } from '@mui/material';
-import { Button } from '@mui/material';
+import React, { useContext } from 'react';
+import { Stack, TextField, Typography, Button } from '@mui/material';
 import DropZoneFile from '../../DropZoneFile';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
+import { AuthContext } from '@crema/context/AuthContext';
+import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
+
 
 const SuratInternal_5 = ({ handlePrev, handleNext, text }) => {
   const [open, setOpen] = React.useState(false);
   const info = useSelector((state) => state.surat);
   const penerima = useSelector((state) => [
-    state.addressbook.kepada,
-    state.addressbook.tembusan,
+    ...state.addressbook.kepada,
+    ...state.addressbook.tembusan,
   ]);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
   const pemeriksa = useSelector((state) => [
     state.addressbook.pemeriksa,
     state.addressbook.pemohon,
   ]);
+  const { user } = useContext(AuthContext);
+  const pembuat = user[0].user_id;
+  const dispatch = useDispatch();
+
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
-  const combinedData = {
-    info: info,
-    penerima: penerima,
-    pengirim: pengirim,
-    pemeriksa: pemeriksa,
-  };
 
-  console.log(combinedData);
+  const handleClose = () => setOpen(false);
+
+  const handleConfirm = () => {
+    const randomChar = () => Math.random().toString(36).substring(2, 8).toUpperCase();
+    const now = new Date().toISOString();
+
+    dispatch(
+      updateData({
+        pembuat: pembuat,
+        no_agenda: randomChar(),
+        no_surat: randomChar(),
+        status: 'sedang dikirim',
+        tanggal_pengiriman: now,
+        file_surat: '-',
+      })
+    );
+    handleNext();
+  };
 
   return (
     <>
@@ -92,7 +108,7 @@ const SuratInternal_5 = ({ handlePrev, handleNext, text }) => {
           <ModalConfirmation
             open={open}
             handleClose={handleClose}
-            handleNext={handleNext}
+            handleNext={handleConfirm}
           />
         </Stack>
       </Stack>

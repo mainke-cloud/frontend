@@ -7,15 +7,10 @@ import { useSelector } from 'react-redux';
 
 const Verifikasi4 = () => {
   const userData = useSelector((state) => state.auth.userData);
-  //const tabs = useSelector((state) => state.tab.tabs);
-  console.log(userData);
   const { signInUser } = useAuthMethod();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const { email, password } = userData;
-    // const valuessss = userData();
-    // console.log(valuessss);
     signInUser(userData);
   };
 
