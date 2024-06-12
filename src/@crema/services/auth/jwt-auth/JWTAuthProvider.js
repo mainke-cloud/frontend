@@ -116,22 +116,27 @@ const JWTAuthAuthProvider = ({ children }) => {
     }
   };
 
-  const signUpUser = async ({ name, username, password }) => {
+  const signUpUser = async ({ nama_lengkap, username, password_confirm, password, email, phone_number, organisasi }) => {
     fetchStart();
     try {
-      const { data } = await jwtAxios.post('users', {
-        name,
-        username,
+      const { data } = await jwtAxios.post('/api/auth/register/admin/', {
+        email,
         password,
+        nama_lengkap,
+        username,
+        password_confirm,
+        phone_number,
+        organisasi,
       });
-      localStorage.setItem('token', data.token);
-      setAuthToken(data.token);
-      const res = await jwtAxios.get('/auth');
-      setJWTAuthData({
-        user: res.data,
-        isAuthenticated: true,
-        isLoading: false,
-      });
+      alert(`username ${data.username} berhasil dibuat`, data);
+      // localStorage.setItem('token', data.token);
+      // setAuthToken(data.token);
+      // const res = await jwtAxios.get('/api/auth');
+      // setJWTAuthData({
+      //   user: res.data,
+      //   isAuthenticated: true,
+      //   isLoading: false,
+      // });
       fetchSuccess();
     } catch (error) {
       setJWTAuthData({
@@ -139,7 +144,7 @@ const JWTAuthAuthProvider = ({ children }) => {
         isAuthenticated: false,
         isLoading: false,
       });
-      console.log('error:', error.response.data.error);
+      alert(`${error.response.data.detail}`, error.response.data.detail);
       fetchError(error?.response?.data?.error || 'Something went wrong');
     }
   };
