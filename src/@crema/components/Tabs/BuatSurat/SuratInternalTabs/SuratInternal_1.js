@@ -2,13 +2,11 @@ import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 import FormClassification from '../../FormClassification';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
+
 const prioritas = [
   {
     value: '1',
@@ -36,13 +34,6 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
-  const [formData, setFormData] = useState({
-    perihal: '',
-    prioritas: '1',
-    jenis: '1',
-    lampiran: 1,
-  });
-const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       perihal: '',
@@ -51,14 +42,6 @@ const dispatch = useDispatch();
       if (klasifikasiIsEmpty()) {
         setFormClassificationValid(false);
       } else {
-        // Update the state in the reducer with formData
-        dispatch(updateData({
-          kategori: formData.jenis,
-          urgensi: formData.prioritas,
-          lampiran: formData.lampiran,
-          perihal: formData.perihal,
-        }));
-        console.log(formData);
         handleNext();
       }
     },
@@ -68,6 +51,12 @@ const dispatch = useDispatch();
   });
 
   const kepada = useSelector((state) => state.addressbook.kepada);
+  const [formData, setFormData] = useState({
+    perihal: '',
+    prioritas: '1',
+    jenis: '1',
+    lampiran: 1,
+  });
 
   useEffect(() => {
     if (templateData) {
@@ -80,7 +69,7 @@ const dispatch = useDispatch();
       }));
     }
   }, [templateData]);
-  
+
   let datass = kepada[0];
   if (!datass || !Array.isArray(datass)) {
     datass = [];
@@ -97,6 +86,19 @@ const dispatch = useDispatch();
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const [isFormClassificationValid, setFormClassificationValid] =
+    useState(true);
+
+  const klasifikasi = useSelector((state) => state.classification.klasifikasi);
+
+  const klasifikasiIsEmpty = () => {
+    return !klasifikasi.name && !klasifikasi.desc;
+  };
+
+  const handleClassificationChange = () => {
+    setFormClassificationValid(true);
   };
 
   return (
@@ -126,7 +128,7 @@ const dispatch = useDispatch();
           id='outlined-select-currency'
           fullWidth
           name='perihal'
-          error={formik.touched.perihal && Boolean(formik.errors.perihal)}
+          error={formik.errors.perihal}
           value={formData.perihal}
           onChange={handleChange}
         />
@@ -136,7 +138,12 @@ const dispatch = useDispatch();
           </Typography>
         )}
 
-        <FormClassification text='Klasifikasi Masalah' />
+        <FormClassification
+          text='Klasifikasi Masalah'
+          isValid={isFormClassificationValid}
+          klasifikasi={klasifikasi}
+          onClassificationChange={handleClassificationChange}
+        />
 
         <Typography
           variant='body1'

@@ -103,7 +103,8 @@ const JWTAuthAuthProvider = ({ children }) => {
       // console.log('Response data:', data);
 
       localStorage.setItem('token', data.jwt);
-      sessionStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
+      // sessionStorage.setItem('user', JSON.stringify(data));
       setAuthToken(data.jwt);
       // const res = await jwtAxios.get('/api/auth/login/');
       setJWTAuthData({
@@ -112,7 +113,7 @@ const JWTAuthAuthProvider = ({ children }) => {
         isLoading: false,
       });
       setToken(localStorage.getItem('token'));
-      setUser(JSON.parse(sessionStorage.getItem('user')));
+      setUser(JSON.parse(localStorage.getItem('user')));
       fetchSuccess();
     } catch (error) {
       setJWTAuthData({

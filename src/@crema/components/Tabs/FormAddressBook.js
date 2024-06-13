@@ -113,4 +113,6 @@ FormAddressBook.propTypes = {
   text: PropTypes.string.isRequired,
   data: PropTypes.any,
   templateData: PropTypes.object,
+  isValid: PropTypes.any,
+  onAddressBookChange: PropTypes.any,
 };

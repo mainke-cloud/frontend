@@ -8,6 +8,7 @@ import FormAddressBook from '../../FormAddressBook';
 import AProfile from '../../../../../assets/vector/Avatar.png';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
+import { useState } from 'react';
 const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
   const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
