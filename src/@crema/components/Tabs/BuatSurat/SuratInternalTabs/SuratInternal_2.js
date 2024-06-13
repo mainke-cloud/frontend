@@ -16,7 +16,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
     kepadaIds: [],
     tembusanIds: [],
   });
- 
+
   const handleSubmit = () => {
     const validKepada = kepada.length > 0; // Misalnya validasi ini
     const validTembusan = tembusan.length > 0; // Misalnya validasi ini
@@ -29,7 +29,7 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
       const tembusanIds = tembusan.map((item) => item.id);
       const newPenerima = [...kepadaIds, ...tembusanIds];
       setPenerima(newPenerima);
-      
+
       dispatch(updateData({ penerima: newPenerima }));
       handleNext();
     }

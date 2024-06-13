@@ -42,7 +42,6 @@ const PersonalTab = ({
                 <TableCell></TableCell>
                 <TableCell></TableCell>
                 <TableCell>Jabatan</TableCell>
-                <TableCell>PGS</TableCell>
                 <TableCell>NIK</TableCell>
                 <TableCell>Departemen</TableCell>
               </TableRow>
@@ -87,7 +86,6 @@ const PersonalTab = ({
                       <Typography variant='caption'>{row.nama}</Typography>
                     </Stack>
                   </TableCell>
-                  <TableCell>{row.pgs}</TableCell>
                   <TableCell>{row.nikg}</TableCell>
                   <TableCell>{row.departemen}</TableCell>
                 </TableRow>

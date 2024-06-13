@@ -123,6 +123,7 @@ const initialState = {
     divisi: '',
     departemen: '',
     kode_departemen: '',
+    jabatan: '',
     email: '',
     pgs: '',
     nohp: '',
@@ -177,7 +178,7 @@ const addressbookReducer = (state = initialState, action) => {
     case 'ADD_JABATAN':
       return {
         ...state,
-        jabatann: [action.payload],
+        jabatann: action.payload,
       };
     case 'ADD_NAMA':
       return {
