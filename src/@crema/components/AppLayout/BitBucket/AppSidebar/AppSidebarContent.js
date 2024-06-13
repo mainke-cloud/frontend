@@ -87,6 +87,8 @@ export default function AppSidebarContent(props) {
     {
       isStatus === 'disposisi'
         ? dispatch(childTab(item.id, tabs, 'Disposisi', item))
+        : isStatus === 'disposisiSaya'
+        ? dispatch(childTab(item.id, tabs, 'Disposisi Saya', item))
         : isStatus === 'todo'
         ? dispatch(childTab(item.id, tabs, 'Todo', item))
         : isStatus === 'perlu tindak lanjut'
@@ -184,7 +186,8 @@ export default function AppSidebarContent(props) {
                                           sx={{
                                             fontWeight:
                                               item.status === 'Unread' ||
-                                              item.status === 'Disposisi'
+                                              item.status === 'Disposisi' ||
+                                              item.status === 'DisposisiSaya'
                                                 ? Fonts.BOLD
                                                 : Fonts.LIGHT,
                                           }}
@@ -200,7 +203,8 @@ export default function AppSidebarContent(props) {
                                         sx={{
                                           fontWeight:
                                             item.status === 'Unread' ||
-                                            item.status === 'Disposisi'
+                                            item.status === 'Disposisi' ||
+                                            item.status === 'DisposisiSaya'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
                                         }}
@@ -214,7 +218,8 @@ export default function AppSidebarContent(props) {
                                           display: 'inline',
                                           fontWeight:
                                             item.status === 'Unread' ||
-                                            item.status === 'Disposisi'
+                                            item.status === 'Disposisi' ||
+                                            item.status === 'DisposisiSaya'
                                               ? Fonts.BOLD
                                               : Fonts.LIGHT,
                                         }}

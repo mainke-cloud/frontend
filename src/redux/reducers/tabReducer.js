@@ -79,9 +79,27 @@ const tabReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        tabs: updatedTabs,
+        tabs: updateMultipleTabs(
+          state.tabs,
+          [
+            'todo',
+            'disposisi',
+            'disposisi saya',
+            'surat masuk',
+            'perlu tindak lanjut',
+            'draft',
+            'lacak proses',
+            'komposer',
+            'template',
+            'surat diminta',
+            'surat terkirim',
+            'surat dibatalkan',
+            'log scan surat',
+            'folder',
+          ],
+          action.payload,
+        ),
       };
-    }
     case 'CLOSE_TAB':
       return {
         ...state,

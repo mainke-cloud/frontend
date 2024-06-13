@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import jwtAxios, { setAuthToken } from './index';
 import { useInfoViewActionsContext } from '@crema/context/AppContextProvider/InfoViewContextProvider';
+import { useAuthContext } from '@crema/context/AuthContext';
+// import { connectFirestoreEmulator } from 'firebase/firestore';
 
 const JWTAuthContext = createContext();
 const JWTAuthActionsContext = createContext();
@@ -11,6 +13,7 @@ export const useJWTAuth = () => useContext(JWTAuthContext);
 export const useJWTAuthActions = () => useContext(JWTAuthActionsContext);
 
 const JWTAuthAuthProvider = ({ children }) => {
+  const {setToken, setUser} = useAuthContext();
   const { fetchStart, fetchSuccess, fetchError } = useInfoViewActionsContext();
   const [firebaseData, setJWTAuthData] = useState({
     user: null,
@@ -91,10 +94,16 @@ const JWTAuthAuthProvider = ({ children }) => {
   const signInUser = async ({ username, password }) => {
     fetchStart();
     try {
-      const { data } = await jwtAxios.post('/api/auth/login/', { username, password });
-      console.log(data);
-      localStorage.setItem('user', JSON.stringify(data));
+      // console.log('Signing in with credentials:', { username, password });
+
+      const { data } = await jwtAxios.post('/api/auth/login/', {
+        username,
+        password,
+      });
+      // console.log('Response data:', data);
+
       localStorage.setItem('token', data.jwt);
+      sessionStorage.setItem('user', JSON.stringify(data));
       setAuthToken(data.jwt);
       // const res = await jwtAxios.get('/api/auth/login/');
       setJWTAuthData({
@@ -102,6 +111,8 @@ const JWTAuthAuthProvider = ({ children }) => {
         isAuthenticated: true,
         isLoading: false,
       });
+      setToken(localStorage.getItem('token'));
+      setUser(JSON.parse(sessionStorage.getItem('user')));
       fetchSuccess();
     } catch (error) {
       setJWTAuthData({
@@ -147,15 +158,19 @@ const JWTAuthAuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    
+    localStorage.clear();
+    sessionStorage.clear();
+    setToken(null);
+    setUser(null);
+
     setAuthToken();
     setJWTAuthData({
       user: null,
       isLoading: false,
       isAuthenticated: false,
     });
+
+    location.reload();
   };
 
   return (

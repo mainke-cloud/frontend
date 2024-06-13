@@ -9,6 +9,7 @@ import headerReducer from './headerReducer';
 import addressbookReducer from './addressbookReducer';
 import classificationReducer from './classificationReducer';
 import { connectRouter } from 'connected-react-router';
+import buatsuratinternalReducer from './buatsuratinternalReducer';
 
 const reducers = (history) =>
   combineReducers({
@@ -22,6 +23,7 @@ const reducers = (history) =>
     header: headerReducer,
     addressbook: addressbookReducer,
     classification: classificationReducer,
+    buatsuratinternal: buatsuratinternalReducer,
   });
 
 export default reducers

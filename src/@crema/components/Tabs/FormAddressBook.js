@@ -8,8 +8,7 @@ import ComposeMail from '@crema/components/AppAddress';
 import { users } from '@crema/services/dummy/user/user';
 
 const FormAddressBook = (props) => {
-  const { text, data, templateData } = props;
-  console.log(templateData);
+  const { text, data, templateData, isValid, onAddressBookChange } = props;
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
     gap: '16px',

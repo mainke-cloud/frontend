@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal, Stack, Typography } from '@mui/material';
-import { Button } from '@mui/material';
+import { Modal, Stack, Typography, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 
 const style = {
@@ -74,7 +73,7 @@ const ModalConfirmation = ({ handleClose, open, handleNext }) => {
 ModalConfirmation.propTypes = {
   handleNext: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
-  open: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 export default ModalConfirmation;

@@ -5,9 +5,62 @@ import { Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../../FormAddressBook';
+import AProfile from '../../../../../assets/vector/Avatar.png';
+import { useDispatch } from 'react-redux';
+import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
 const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
+  const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
+  const [penerima, setPenerima] = useState({
+    kepadaIds: [],
+    tembusanIds: [],
+  });
+ 
+  const handleSubmit = () => {
+    const validKepada = kepada.length > 0; // Misalnya validasi ini
+    const validTembusan = tembusan.length > 0; // Misalnya validasi ini
+
+    setFormValidKepada(validKepada);
+    setFormValidTembusan(validTembusan);
+
+    if (validKepada && validTembusan) {
+      const kepadaIds = kepada.map((item) => item.id);
+      const tembusanIds = tembusan.map((item) => item.id);
+      const newPenerima = [...kepadaIds, ...tembusanIds];
+      setPenerima(newPenerima);
+      
+      dispatch(updateData({ penerima: newPenerima }));
+      handleNext();
+    }
+  };
+
+  const [isFormValidKepada, setFormValidKepada] = useState(true);
+  const [isFormValidTembusan, setFormValidTembusan] = useState(true);
+
+  const KepadaIsEmpty = () => {
+    return (
+      !kepada ||
+      !Array.isArray(kepada) ||
+      kepada.some((item) => !item.jabatan || !item.nama)
+    );
+  };
+
+  const TembusanIsEmpty = () => {
+    return (
+      !tembusan ||
+      !Array.isArray(tembusan) ||
+      tembusan.some((item) => !item.jabatan || !item.nama)
+    );
+  };
+
+  const handleAddressBookChangeKepada = () => {
+    setFormValidKepada(true);
+  };
+  const handleAddressBookChangeTembusan = () => {
+    setFormValidTembusan(true);
+  };
+
   return (
     <>
       <Stack

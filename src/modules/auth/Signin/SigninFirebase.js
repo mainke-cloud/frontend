@@ -113,7 +113,6 @@ const SigninFirebase = () => {
         }
 
         const responseData = await response.json();
-        console.log(responseData);
 
         if (responseData) {
           navigate('/signin/verifikasi1');

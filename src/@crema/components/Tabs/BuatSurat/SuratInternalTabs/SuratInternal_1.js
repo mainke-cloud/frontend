@@ -6,7 +6,9 @@ import { useState } from 'react';
 import FormClassification from '../../FormClassification';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
 const prioritas = [
   {
     value: '1',
@@ -34,23 +36,38 @@ const jenisSurat = [
 ];
 
 const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
-  const formik = useFormik({
-    initialValues: {
-      perihal: '',
-    },
-    onSubmit: handleNext,
-    validationSchema: yup.object().shape({
-      perihal: yup.string().required('Kolom ini wajib diisi'),
-    }),
-  });
-
-  const kepada = useSelector((state) => state.addressbook.kepada);
   const [formData, setFormData] = useState({
     perihal: '',
     prioritas: '1',
     jenis: '1',
     lampiran: 1,
   });
+const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      perihal: '',
+    },
+    onSubmit: () => {
+      if (klasifikasiIsEmpty()) {
+        setFormClassificationValid(false);
+      } else {
+        // Update the state in the reducer with formData
+        dispatch(updateData({
+          kategori: formData.jenis,
+          urgensi: formData.prioritas,
+          lampiran: formData.lampiran,
+          perihal: formData.perihal,
+        }));
+        console.log(formData);
+        handleNext();
+      }
+    },
+    validationSchema: yup.object().shape({
+      perihal: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
+
+  const kepada = useSelector((state) => state.addressbook.kepada);
 
   useEffect(() => {
     if (templateData) {
@@ -109,7 +126,7 @@ const SuratInternal_1 = ({ handleNext, onStateChange, templateData }) => {
           id='outlined-select-currency'
           fullWidth
           name='perihal'
-          error={formik.errors.perihal}
+          error={formik.touched.perihal && Boolean(formik.errors.perihal)}
           value={formData.perihal}
           onChange={handleChange}
         />
