@@ -7,16 +7,17 @@ import { setSidebarName } from '../../../../../../redux/actions/sidebarAction';
 import BucketMinibarWrapper from './BucketMinibarWrapper';
 import BucketMinibarMenu from './BucketMinibarMenu';
 import BucketMinibarItem from './BucketMinibarItem';
-import logo1 from '../../../../../../assets/icon/logo1.svg';
+import logo1 from '../../../../../../assets/icon/Logo Coofis.svg';
 import userProfile from '../../../../../../assets/icon/user-profile.svg';
 import search from '../../../../../../assets/icon/search.svg';
+import { useAuthContext } from '@crema/context/AuthContext';
 
 const BucketMinibar = (props) => {
   const { isHover, setHover } = props;
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
-
+  const { getProfile } = useAuthContext();
   const handleAddTab = (type) => {
     dispatch(addTab(id, tabs, type));
   };
@@ -47,7 +48,7 @@ const BucketMinibar = (props) => {
           }}
           aria-label='show 17 new notifications'
         >
-          <Box className='logo'>
+          <Box className='logo' alignItems='center'>
             <img src={logo1} alt='logo1' />
             {isHover && (
               <Typography
@@ -67,10 +68,10 @@ const BucketMinibar = (props) => {
               <img src={userProfile} alt='user-profile' />
               <Box sx={{ color: '#262829' }}>
                 <Typography sx={{ fontWeight: '700', fontSize: '16px' }}>
-                  Samsul
+                  {getProfile?.nama_lengkap}
                 </Typography>
                 <Typography sx={{ fontWeight: '600', fontSize: '10px' }}>
-                  7400493247092348932
+                  {getProfile?.nik_group}
                 </Typography>
               </Box>
             </Box>
