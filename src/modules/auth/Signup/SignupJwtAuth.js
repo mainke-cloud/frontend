@@ -113,13 +113,15 @@ const SignupJwtAuth = () => {
             onSubmit={(data, { setSubmitting }) => {
               setSubmitting(true);
               if (isCaptchaValid(data.captchaValue, captcha)) {
-                console.log(data);
+                const username = data.companyName.toLowerCase().replace(/\s+/g, '');
                 signUpUser({
                   email: data.email,
                   password: data.password,
-                  name: data.name,
-                  phoneNumber: data.phoneNumber,
-                  companyName: data.companyName,
+                  nama_lengkap: data.name,
+                  username: username,
+                  password_confirm: data.confirmPassword,
+                  phone_number: data.phoneNumber,
+                  organisasi: data.companyName,
                 });
               } else {
                 console.log('Captcha tidak valid');
