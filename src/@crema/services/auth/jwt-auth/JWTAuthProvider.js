@@ -107,7 +107,7 @@ const JWTAuthAuthProvider = ({ children }) => {
         isLoading: false,
       });
       setToken(localStorage.getItem('token'));
-      setUser(JSON.parse(sessionStorage.getItem('user')));
+      setUser(JSON.parse(localStorage.getItem('user')));
       fetchSuccess();
     } catch (error) {
       console.error('Sign in error:', error.response?.data || error.message);
@@ -155,7 +155,6 @@ const JWTAuthAuthProvider = ({ children }) => {
 
   const logout = async () => {
     localStorage.clear();
-    sessionStorage.clear();
     setToken(null);
     setUser(null);
 

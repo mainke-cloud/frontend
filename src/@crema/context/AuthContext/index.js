@@ -9,7 +9,7 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('user') || null)
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null)
   const [getProfile, setGetProfile] = useState('')
 
   const fetchUser = async () => {
