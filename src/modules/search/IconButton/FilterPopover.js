@@ -17,7 +17,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { Trash2, X } from 'feather-icons-react';
 
-export default function FilterPopover({ open, anchorEl, onClose }) {
+export default function FilterPopover({ open, onClose }) {
   const [dateFrom, setDateFrom] = React.useState(null);
   const [dateTo, setDateTo] = React.useState(null);
 
@@ -28,27 +28,16 @@ export default function FilterPopover({ open, anchorEl, onClose }) {
   const handleTypeFilter = (value) => {
     setTypeFilter(value);
   };
-
   const handlePriorityFilter = (value) => {
     setPriorityFilter(value);
   };
-
   const handleStatusFilter = (value) => {
     setStatusFilter(value);
   };
-
-  const handleClearFilters = () => {
-    setDateFrom(null);
-    setDateTo(null);
-    setTypeFilter(null);
-    setPriorityFilter(null);
-    setStatusFilter(null);
-  };
-
   return (
     <Popover
       open={open}
-      anchorEl={anchorEl}
+      // anchorEl={openFilter}
       onClose={onClose}
       anchorOrigin={{
         vertical: 'bottom',
@@ -83,7 +72,7 @@ export default function FilterPopover({ open, anchorEl, onClose }) {
             </Grid>
             <Grid item xs={6} textAlign='end'>
               <Button
-                onClick={handleClearFilters}
+                // onClick={}
                 endIcon={<Trash2 />}
                 sx={{
                   border: 'none',
@@ -103,7 +92,9 @@ export default function FilterPopover({ open, anchorEl, onClose }) {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     value={dateFrom}
-                    onChange={(newValue) => setDateFrom(newValue)}
+                    onChange={(dateFrom) => {
+                      setDateFrom(dateFrom);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
@@ -113,7 +104,9 @@ export default function FilterPopover({ open, anchorEl, onClose }) {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     value={dateTo}
-                    onChange={(newValue) => setDateTo(newValue)}
+                    onChange={(dateTo) => {
+                      setDateTo(dateTo);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
@@ -225,6 +218,5 @@ export default function FilterPopover({ open, anchorEl, onClose }) {
 
 FilterPopover.propTypes = {
   open: PropTypes.bool.isRequired,
-  anchorEl: PropTypes.object,
   onClose: PropTypes.func.isRequired,
 };

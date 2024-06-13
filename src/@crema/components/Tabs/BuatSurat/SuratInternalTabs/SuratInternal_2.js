@@ -1,5 +1,5 @@
-import { Stack, Typography } from '@mui/material';
-import React from 'react';
+import { Avatar, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import AppScrollbar from '../../../AppScrollbar';
 import { Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -8,7 +8,6 @@ import FormAddressBook from '../../FormAddressBook';
 import AProfile from '../../../../../assets/vector/Avatar.png';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
-import { useState } from 'react';
 const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
   const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
@@ -77,6 +76,8 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
           text='Kepada'
           data={kepada}
           templateData={templateData}
+          isValid={isFormValidKepada}
+          onAddressBookChange={handleAddressBookChangeKepada}
         />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
@@ -113,9 +114,33 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
             ) : (
               kepada?.map((item) => (
                 <Stack key={item.id}>
-                  <Typography>
-                    {item.jabatan} - {item.nama}
-                  </Typography>
+                  {item.id && (
+                    <Stack
+                      direction='row'
+                      spacing={5}
+                      pl='20px'
+                      pr='400px'
+                      pt='20px'
+                    >
+                      <Stack>
+                        <Avatar
+                          sx={{
+                            marginBottom: '30px',
+                            marginTop: '7px',
+                          }}
+                          alt='Profile'
+                          src={AProfile}
+                        />
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography>{item.jabatan}</Typography>
+                        <Typography>{item.nama}</Typography>
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography color='#8C8F93'>{item.nikg}</Typography>
+                      </Stack>
+                    </Stack>
+                  )}
                 </Stack>
               ))
             )}
@@ -126,6 +151,8 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
           text='Tembusan'
           data={tembusan}
           templateData={templateData}
+          isValid={isFormValidTembusan}
+          onAddressBookChange={handleAddressBookChangeTembusan}
         />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
@@ -162,9 +189,33 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
             ) : (
               tembusan?.map((item) => (
                 <Stack key={item.id}>
-                  <Typography>
-                    {item.jabatan} - {item.nama}
-                  </Typography>
+                  {item.id && (
+                    <Stack
+                      direction='row'
+                      spacing={5}
+                      pl='20px'
+                      pr='400px'
+                      pt='20px'
+                    >
+                      <Stack>
+                        <Avatar
+                          sx={{
+                            marginBottom: '30px',
+                            marginTop: '7px',
+                          }}
+                          alt='Profile'
+                          src={AProfile}
+                        />
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography>{item.jabatan}</Typography>
+                        <Typography>{item.nama}</Typography>
+                      </Stack>
+                      <Stack flex={1}>
+                        <Typography color='#8C8F93'>{item.nikg}</Typography>
+                      </Stack>
+                    </Stack>
+                  )}
                 </Stack>
               ))
             )}
@@ -193,17 +244,12 @@ const SuratInternal_2 = ({ handleNext, handlePrev, templateData }) => {
               minWidth: '220px',
               minHeight: '50px',
             }}
-            onClick={handleNext}
+            onClick={handleSubmit}
           >
             Selanjutnya (Penerima)
           </Button>
         </Stack>
       </Stack>
-
-      {/* <ComposeMail
-        isComposeMail={isComposeMail}
-        onCloseComposeMail={onCloseComposeMail}
-      /> */}
     </>
   );
 };

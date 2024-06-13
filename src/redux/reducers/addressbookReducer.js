@@ -92,23 +92,25 @@ const initialState = {
     pgs: '',
     nohp: '',
   },
-  jabatann: {
-    profil: '',
-    id: '',
-    nama: '',
-    alamat: '',
-    nikg: '',
-    nikl: '',
-    kota: '',
-    organisasi: '',
-    divisi: '',
-    departemen: '',
-    kode_departemen: '',
-    jabatan: '',
-    email: '',
-    pgs: '',
-    nohp: '',
-  },
+  jabatann: [
+    {
+      profil: '',
+      id: '',
+      nama: '',
+      alamat: '',
+      nikg: '',
+      nikl: '',
+      kota: '',
+      organisasi: '',
+      divisi: '',
+      departemen: '',
+      kode_departemen: '',
+      jabatan: '',
+      email: '',
+      pgs: '',
+      nohp: '',
+    },
+  ],
   namaa: {
     profil: '',
     id: '',
@@ -175,7 +177,7 @@ const addressbookReducer = (state = initialState, action) => {
     case 'ADD_JABATAN':
       return {
         ...state,
-        jabatann: action.payload,
+        jabatann: [action.payload],
       };
     case 'ADD_NAMA':
       return {

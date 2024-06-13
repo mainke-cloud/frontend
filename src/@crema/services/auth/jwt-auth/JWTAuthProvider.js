@@ -52,6 +52,7 @@ const JWTAuthAuthProvider = ({ children }) => {
         });
         return;
       }
+      // console.log(token);
       setAuthToken(token);
       if (userData) {
         setJWTAuthData({
@@ -86,8 +87,8 @@ const JWTAuthAuthProvider = ({ children }) => {
       //     });
       //     fetchSuccess();
       //   });
+      // console.log(token);
     };
-
     getAuthUser();
   }, []);
 
@@ -99,16 +100,17 @@ const JWTAuthAuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('token', data.jwt);
       setAuthToken(data.jwt);
-      // const res = await jwtAxios.get('/api/auth/login/');
+
       setJWTAuthData({
         user: data,
         isAuthenticated: true,
         isLoading: false,
       });
       setToken(localStorage.getItem('token'));
-      setUser(JSON.parse(localStorage.getItem('user')));
+      setUser(JSON.parse(sessionStorage.getItem('user')));
       fetchSuccess();
     } catch (error) {
+      console.error('Sign in error:', error.response?.data || error.message);
       setJWTAuthData({
         ...firebaseData,
         isAuthenticated: false,

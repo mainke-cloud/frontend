@@ -22,7 +22,64 @@ import disposisiIcon from '../../assets/icon/D_icon.svg';
 import terkirimIcon from '../../assets/icon/mail.svg';
 import undanganIcon from '../../assets/icon/Surat_Undangan.svg';
 // import disIcon from '../../assets/icon/shield.svg';
-export default function TableList({files}) {
+export default function TableList() {
+  const listData = [
+    {
+      avatarSrc: '/static/images/avatar/1.jpg',
+      primary: 'Komisaris',
+      name: 'Salies Apriliyanto',
+      secondary:
+        'Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center',
+      date: '20 September 2024',
+      priority: 'Sedang',
+      type: 'Surat Masuk',
+      status: 'Unread',
+    },
+    {
+      avatarSrc: '/static/images/avatar/1.jpg',
+      primary: 'Manager',
+      name: 'Salies Apriliyanto',
+      secondary:
+        'Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center',
+      date: '10 September 2024',
+      priority: 'Tinggi',
+      type: 'Perlu Tindak Lanjut',
+      status: 'Unread',
+    },
+    {
+      avatarSrc: '/static/images/avatar/1.jpg',
+      primary: 'Sekretaris',
+      name: 'Salies Apriliyanto',
+      secondary:
+        'Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center',
+      date: '13 Oktober 2024',
+      priority: 'Sedang',
+      type: 'Disposisi',
+      status: 'Read',
+    },
+    {
+      avatarSrc: '/static/images/avatar/1.jpg',
+      primary: 'Bisnis Development',
+      name: 'Salies Apriliyanto',
+      secondary:
+        'Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center',
+      date: '11 Januari 2024',
+      priority: 'Rendah',
+      type: 'Surat Terkirim',
+      status: 'Unread',
+    },
+    {
+      avatarSrc: '/static/images/avatar/1.jpg',
+      primary: 'Bisnis Development',
+      name: 'Salies Apriliyanto',
+      secondary:
+        'Undangan Workshop Pemahaman ISO90012015 Layanan Contact Center',
+      date: '11 Januari 2024',
+      priority: 'Rendah',
+      type: 'Disposisi',
+      status: 'Read',
+    },
+  ];
 
   const getStatusColor = (priority) => {
     switch (priority) {
@@ -92,7 +149,7 @@ export default function TableList({files}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {files.map((Data, index) => (
+            {listData.map((Data, index) => (
               <TableRow
                 key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -208,11 +265,4 @@ export default function TableList({files}) {
 
 TableList.propTypes = {
   isCollapsed: PropTypes.bool,
-  props: PropTypes.shape({}),
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      size: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
 };
