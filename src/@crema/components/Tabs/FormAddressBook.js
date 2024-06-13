@@ -18,7 +18,6 @@ import { X } from 'feather-icons-react';
 
 const FormAddressBook = (props) => {
   const { text, data, templateData, isValid, onAddressBookChange } = props;
-  console.log(templateData);
   const StyledStack = styled(Stack)(() => ({
     width: '100%',
     gap: '16px',

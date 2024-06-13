@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Grid,
@@ -24,17 +24,76 @@ import Filter_delegasi from './FilterPopUp/Filter_delegasi';
 import { dataDele } from '@crema/services/dummy/dataSekreDele';
 import { users } from '../../@crema/services/dummy/user/user';
 import { useSelector } from 'react-redux';
+import { delDelegasi, getDelegasi, updateDelegasi } from '@crema/services/apis/delegasi';
 
 const Add_Delegasi = () => {
-  const delegasidata = useSelector((state) => state.addressbook.delegasi); 
-  const [dateFrom, setDateFrom] = React.useState(null);
-  const [dateTo, setDateTo] = React.useState(null);
+  const delegasidata = useSelector((state) => state.addressbook.delegasi);
   const [isComposeMail, setComposeMail] = React.useState(false);
   const [openFilter, setOpenFilter] = React.useState(false);
-  const [isSelected, setSelected] = React.useState(1)
+  const [isSelected, setSelected] = React.useState(1);
 
-  const filtered = dataDele.find(Delegasi => Delegasi.id === isSelected);
-  // console.log(filtered)
+  const [userId, setUserId] = useState(0);
+  const [delegasiList, setDelegasiList] = useState([]);
+  const [deleg, setDeleg] = useState([]);
+  const [tglAktif, setTglAktif] = useState(new Date());
+  const [tglBerakhir, setTglBerakhir] = useState(new Date());
+
+  const filter_delegList = delegasiList.find(
+    (delegasi) => delegasi.id === isSelected,
+  );
+
+  const filter_profile =
+    deleg &&
+    deleg.find(
+      (delegsi) =>
+        filter_delegList && delegsi.user_id === filter_delegList.user_id,
+    );
+
+  useEffect(() => {
+    if (filter_delegList) {
+      setTglAktif(filter_delegList.tgl_aktif);
+      setTglBerakhir(filter_delegList.tgl_berakhir);
+    }
+  }, [filter_delegList]);
+  const filtered = dataDele.find((Delegasi) => Delegasi.id === isSelected);
+
+  //format Date
+  const getDate = (date) => {
+    const isValidDateFormat = (dateString) => {
+      return /^\d{4}-\d{2}-\d{2}$/.test(dateString);
+    };
+
+    if (isValidDateFormat(date)) {
+      return date;
+    }
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const getTanggal = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthNames = [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember',
+    ];
+    const month = monthNames[date.getMonth()];
+    return `${day} ${month}`;
+  };
 
   const onOpenComposeMail = () => {
     setComposeMail(true);
@@ -55,12 +114,40 @@ const Add_Delegasi = () => {
   const [isActive, setIsActive] = useState(true);
 
   const handleClick = () => {
+    setTglAktif(new Date());
+    setTglBerakhir(new Date());
     setIsActive(!isActive);
   };
 
   const handleSelected = (id) => {
-    setSelected(id)
-  }
+    setSelected(id);
+  };
+
+  const fetchDelegasiData = async (userId) => {
+    const delList = await getDelegasi(userId);
+    setDelegasiList(delList ? delList.results : []);
+    setDeleg(delList ? delList.details : []);
+  };
+
+  useEffect(() => {
+    const dataFromLocal = localStorage.getItem('user');
+    const data = JSON.parse(dataFromLocal);
+    if (data) {
+      setUserId(data.id);
+      fetchDelegasiData(data.id);
+    }
+  }, []);
+
+  const handleUpdate = async () => {
+    const data = {
+      alasan : filter_delegList.alasan,
+      tgl_aktif: getDate(tglAktif),
+      tgl_berakhir: getDate(tglBerakhir),
+    };
+
+    await updateDelegasi(isSelected, data);
+    fetchDelegasiData(userId);
+  };
 
   return (
     <>
@@ -140,46 +227,55 @@ const Add_Delegasi = () => {
               <AppScrollbar>
                 <Box sx={{ overflowY: 'hidden', borderRadius: 2 }}>
                   <Stack direction='row'>
-                    {dataDele.map((dele) => (
+                    {delegasiList.map((dele) => (
                       <Box
-                      sx={{
-                        width: 135,
-                        height: 142,
-                        backgroundColor: '#FFFFFF',
-                        borderRight: '1px solid #B1B5BA',
-                        cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#D9DDE3' },
-                      }}
-                      key={dele.id}
-                      onClick={() => handleSelected(dele.id)}
-                    >
-                      <Stack alignItems='center' justifyContent='center'>
-                        <Box
-                          sx={{
-                            width: 61,
-                            height: 18,
-                            backgroundColor: dele.status ? '#429777' : '#BF2600',
-                            borderRadius: 2,
-                            marginY: 2,
-                          }}
-                        >
-                          <Typography
+                        sx={{
+                          width: 135,
+                          height: 142,
+                          backgroundColor: '#FFFFFF',
+                          borderRight: '1px solid #B1B5BA',
+                          cursor: 'pointer',
+                          '&:hover': { backgroundColor: '#D9DDE3' },
+                        }}
+                        key={dele.id}
+                        onClick={() => handleSelected(dele.id)}
+                      >
+                        <Stack alignItems='center' justifyContent='center'>
+                          <Box
                             sx={{
-                              textAlign: 'center',
-                              color: '#FFFFFF',
-                              fontSize: 12,
+                              width: 61,
+                              height: 18,
+                              backgroundColor: dele.status
+                                ? '#429777'
+                                : '#BF2600',
+                              borderRadius: 2,
+                              marginY: 2,
                             }}
                           >
-                            {dele.status ? dele.endDateSimplified : 'Habis'}
+                            <Typography
+                              sx={{
+                                textAlign: 'center',
+                                color: '#FFFFFF',
+                                fontSize: 12,
+                              }}
+                            >
+                              {dele.status
+                                ? getTanggal(dele.tgl_berakhir)
+                                : 'Habis'}
+                            </Typography>
+                          </Box>
+                          <img src={Avatar} style={{ width: 48, height: 48 }} />
+                          <Typography
+                            variant='h5'
+                            sx={{ maxWidth: 120, textAlign: 'center' }}
+                          >
+                            {dele.nama_jabatan}
                           </Typography>
-                        </Box>
-                        <img src={Avatar} style={{ width: 48, height: 48 }} />
-                        <Typography variant='h5' sx={{maxWidth: 120, textAlign: 'center'}}>{dele.jabatan}</Typography>
-                        <Typography sx={{ color: '#5C5E61', fontSize: 11 }}>
-                          {dele.nama}
-                        </Typography>
-                      </Stack>
-                    </Box>
+                          <Typography sx={{ color: '#5C5E61', fontSize: 11 }}>
+                            {dele.nama_lengkap}
+                          </Typography>
+                        </Stack>
+                      </Box>
                     ))}
                     <Box
                       sx={{
@@ -230,7 +326,8 @@ const Add_Delegasi = () => {
                 }}
               >
                 <Typography sx={{ color: '#FFB020', fontSize: 13 }}>
-                  Tanggal Pembuatan: 15 Agustus 2021
+                  Tanggal Pembuatan:{' '}
+                  {filter_delegList && filter_delegList.tgl_aktif}
                 </Typography>
               </Box>
               <Grid container spacing={4}>
@@ -263,6 +360,10 @@ const Add_Delegasi = () => {
                       '&:hover': { backgroundColor: '#D9DDE3' },
                     }}
                     flex={1}
+                    onClick={async () => {
+                      await delDelegasi(filter_delegList.id);
+                      fetchDelegasiData(userId);
+                    }}
                   >
                     <Stack
                       direction='row'
@@ -281,14 +382,16 @@ const Add_Delegasi = () => {
                   <Stack>
                     <Typography variant='h2'>Nama :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      {filtered.nama}
+                      {filter_delegList && filter_delegList.nama_lengkap}
                     </Typography>
                     <Typography variant='h2'>Jabatan :</Typography>
                     <Typography sx={{ marginBottom: 7, fontSize: '16px' }}>
-                      {filtered.jabatan}
+                      {filter_delegList && filter_delegList.nama_jabatan}
                     </Typography>
                     <Typography variant='h2'>No :</Typography>
-                    <Typography sx={{ fontSize: '16px' }}>{filtered.nikg}</Typography>
+                    <Typography sx={{ fontSize: '16px' }}>
+                      {filter_profile && filter_profile.nik_group}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
@@ -296,9 +399,12 @@ const Add_Delegasi = () => {
                     <Typography variant='h4'>Tanggal Aktif</Typography>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
-                        value={dateFrom}
-                        onChange={(dateFrom) => {
-                          setDateFrom(dateFrom);
+                        value={
+                          filter_delegList &&
+                          new Date(filter_delegList.tgl_aktif)
+                        }
+                        onChange={(tglAktif) => {
+                          setTglAktif(tglAktif);
                         }}
                         renderInput={(params) => <TextField {...params} />}
                       />
@@ -308,9 +414,12 @@ const Add_Delegasi = () => {
                     </Typography>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
-                        value={dateTo}
-                        onChange={(dateTo) => {
-                          setDateTo(dateTo);
+                        value={
+                          filter_delegList &&
+                          new Date(filter_delegList.tgl_berakhir)
+                        }
+                        onChange={(tglBerakhir) => {
+                          setTglBerakhir(tglBerakhir);
                         }}
                         renderInput={(params) => <TextField {...params} />}
                       />
@@ -334,6 +443,7 @@ const Add_Delegasi = () => {
                         cursor: 'pointer',
                         '&:hover': { backgroundColor: '#F4CACA' },
                       }}
+                      onClick={() => handleUpdate()}
                     >
                       <Stack
                         direction='row'
@@ -463,7 +573,9 @@ const Add_Delegasi = () => {
                     {delegasidata.jabatan}
                   </Typography>
                   <Typography variant='h2'>No :</Typography>
-                  <Typography sx={{ fontSize: '16px' }}>{delegasidata.nohp}</Typography>
+                  <Typography sx={{ fontSize: '16px' }}>
+                    {delegasidata.nohp}
+                  </Typography>
                 </Stack>
               </Grid>
               <Grid item xs={3}>
@@ -471,9 +583,9 @@ const Add_Delegasi = () => {
                   <Typography variant='h4'>Tanggal Aktif</Typography>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
-                      value={dateFrom}
-                      onChange={(dateFrom) => {
-                        setDateFrom(dateFrom);
+                      value={tglAktif}
+                      onChange={(tglAktif) => {
+                        setTglAktif(tglAktif);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -483,9 +595,9 @@ const Add_Delegasi = () => {
                   </Typography>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
-                      value={dateTo}
-                      onChange={(dateTo) => {
-                        setDateTo(dateTo);
+                      value={tglBerakhir}
+                      onChange={(tglBerakhir) => {
+                        setTglBerakhir(tglBerakhir);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />

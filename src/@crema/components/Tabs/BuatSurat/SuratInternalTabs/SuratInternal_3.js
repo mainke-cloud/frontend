@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState, useEffect } from 'react';
-
+import { updateData } from '../../../../../redux/actions/buatsuratinternalAction';
+import { useDispatch } from 'react-redux';
 const SuratInternal_3 = ({
   handleNext,
   handlePrev,
@@ -18,7 +19,7 @@ const SuratInternal_3 = ({
 }) => {
   const [isComposeMail, setComposeMail] = useState(false);
   const pengirim = useSelector((state) => state.addressbook.pengirim);
-
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       jabatan: '',
@@ -29,11 +30,18 @@ const SuratInternal_3 = ({
       departemen: '',
       kotaKantor: '',
     },
-    onSubmit: handleNext,
     validationSchema: yup.object().shape({
       jabatan: yup.string().required('Kolom ini wajib diisi'),
       nama: yup.string().required('Kolom ini wajib diisi'),
     }),
+    onSubmit: (values) => {
+      if (pengirim && pengirim.id) {
+        dispatch(updateData({ penyetuju: [pengirim.id] }));
+        handleNext();
+      } else {
+        console.error('Pengirim ID tidak ditemukan.');
+      }
+    },
   });
 
   useEffect(() => {
@@ -254,7 +262,7 @@ const SuratInternal_3 = ({
   //     nama: yup.string().required('Kolom ini wajib diisi'),
   //   }),
   // });
-  
+
   // // const pengirim = useSelector((state) => state.addressbook.pengirim);
   // const jabatann = useSelector((state) => state.addressbook.jabatann);
   // let datass = jabatann[0];
@@ -472,7 +480,6 @@ const SuratInternal_3 = ({
   //         </Button>
   //       </Stack>
   //     </Stack>
-      
 
   //     <ComposeMail
   //       isComposeMail={isComposeMail}

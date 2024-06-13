@@ -43,6 +43,7 @@ const tabReducer = (state = initialState, action) => {
           [
             'todo',
             'disposisi',
+            'disposisi saya',
             'surat masuk',
             'perlu tindak lanjut',
             'draft',

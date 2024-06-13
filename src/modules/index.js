@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   activateTab,
@@ -30,6 +30,8 @@ import Profile from 'modules/profile';
 import BuatDisposisi from 'modules/disposisi/respons/BuatDisposisi';
 import PDFReader from '@crema/components/PDFReader/PDFReader';
 import homeIcon from '../assets/icon/home.svg';
+import { getSurat } from '@crema/services/apis/surat';
+import { useState } from 'react';
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -138,6 +140,25 @@ const Page = () => {
       setActiveComponent(component);
     }
   }, [reduxTabs]);
+
+  const [surat, setSurat] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSurat = async () => {
+      try {
+        const data = await getSurat();
+        setSurat(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSurat();
+  }, []);
 
   return (
     <>

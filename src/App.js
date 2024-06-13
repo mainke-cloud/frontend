@@ -12,29 +12,32 @@ import AuthRoutes from '@crema/components/AuthRoutes';
 import AppLayout from '@crema/core/AppLayout';
 import './styles/index.css';
 import configureStore from './redux/store';
+import { AuthContextProvider } from '@crema/context/AuthContext';
 
 const store = configureStore();
 
-const App = () => (
+const App = () => (  
   <Provider store={store}>
-    <AppContextProvider>
-      <AppThemeProvider>
-        <AppStyleProvider>
-          <AppLocaleProvider>
-            <BrowserRouter>
-              <InfoViewContextProvider>
-                <AppAuthProvider>
-                  <AuthRoutes>
-                    <CssBaseline />
-                    <AppLayout />
-                  </AuthRoutes>
-                </AppAuthProvider>
-              </InfoViewContextProvider>
-            </BrowserRouter>
-          </AppLocaleProvider>
-        </AppStyleProvider>
-      </AppThemeProvider>
-    </AppContextProvider>
+    <AuthContextProvider>
+      <AppContextProvider>
+        <AppThemeProvider>
+          <AppStyleProvider>
+            <AppLocaleProvider>
+              <BrowserRouter>
+                <InfoViewContextProvider>
+                  <AppAuthProvider>
+                    <AuthRoutes>
+                      <CssBaseline />
+                      <AppLayout />
+                    </AuthRoutes>
+                  </AppAuthProvider>
+                </InfoViewContextProvider>
+              </BrowserRouter>
+            </AppLocaleProvider>
+          </AppStyleProvider>
+        </AppThemeProvider>
+      </AppContextProvider>
+    </AuthContextProvider>
   </Provider>
 );
 

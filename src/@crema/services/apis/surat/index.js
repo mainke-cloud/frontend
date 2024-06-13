@@ -1,8 +1,21 @@
 import axios from 'axios';
+import { useAuthContext } from '@crema/context/AuthContext';
 
+// Function to fetch existing "surat"
 export const getSurat = async () => {
+  const { token } = useAuthContext();
+
+  if (!token) {
+    console.error('No token found');
+    return;
+  }
+
   try {
-    const response = await axios.get('https://new.coofis.com/api/surat/');
+    const response = await axios.get('https://new.coofis.com/api/surat/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     // Handle error
@@ -11,17 +24,29 @@ export const getSurat = async () => {
   }
 };
 
-export const getAllSurat = async () => {
+// Function to create a new "surat"
+export const BuatSurat = async (data) => {
+  const { token } = useAuthContext();
+
+  if (!token) {
+    console.error('No token found');
+    return;
+  }
+
   try {
-    const token = localStorage.getItem('token');
-    const response = await axios.get(`https://new.coofis.com/api/surat`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data.results;
+    const response = await axios.post(
+      'https://new.coofis.com/api/surat',
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
-    console.error('Error fetching surat:', error);
-    throw error;
+    // Handle error
+    console.error('Error creating surat:', error);
+    throw error; // Propagate the error to the caller
   }
 };

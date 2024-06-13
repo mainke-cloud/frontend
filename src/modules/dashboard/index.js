@@ -25,15 +25,19 @@ import AppScrollbar from '@crema/components/AppScrollbar';
 import { dataDele, dataSekre } from '@crema/services/dummy/dataSekreDele';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '../../redux/actions/tabAction';
+import { format, parseISO } from 'date-fns';
+import { id as localeID  } from 'date-fns/locale';
 
-import { AuthContext } from '@crema/context/AuthContext';
+import { useAuthContext } from '@crema/context/AuthContext';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tab.tabs);
   const id = useSelector((state) => state.tab.idCounter);
-  const {user} = useContext(AuthContext);
-  // console.log('ini usernya:', user)
+  const {getProfile} = useAuthContext();
+  const targetDate = new Date();
+
+  const formattedDate = format(targetDate, "hh.mm a EEEE, dd MMMM yyyy", { locale: localeID });
 
   const handleAddTab = (type) => {
     dispatch(addTab(id, tabs, type));
@@ -55,11 +59,11 @@ const Dashboard = () => {
                     <Typography variant='h1'>
                       Selamat Datang Kembali,
                     </Typography>
-                    <Typography variant='h1'>User T0001</Typography>
+                    <Typography variant='h1'>{getProfile.nama_lengkap}</Typography>
                   </Stack>
                   {/* input time and date here */}
                   <Typography variant='body1'>
-                    11.20 AM Senin, 26 Februari 2024
+                    {formattedDate}
                   </Typography>
                 </Stack>
                 <img
