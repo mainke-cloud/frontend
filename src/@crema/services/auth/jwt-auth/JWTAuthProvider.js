@@ -22,7 +22,24 @@ const JWTAuthAuthProvider = ({ children }) => {
     const getAuthUser = () => {
       fetchStart();
       const token = localStorage.getItem('token');
+      const userData = JSON.parse(localStorage.getItem('user'));
 
+      function toISODateWithoutMilliseconds(date) {
+        const pad = (n) => n < 10 ? '0' + n : n;
+        const year = date.getUTCFullYear();
+        const month = pad(date.getUTCMonth() + 1);
+        const day = pad(date.getUTCDate());
+        const hours = pad(date.getUTCHours());
+        const minutes = pad(date.getUTCMinutes());
+        const seconds = pad(date.getUTCSeconds());
+      
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+      }
+
+      if(userData && userData.refresh_token_exp <= toISODateWithoutMilliseconds(new Date())){
+        logout();
+      }
+      
       if (!token) {
         fetchSuccess();
         setJWTAuthData({
@@ -33,7 +50,6 @@ const JWTAuthAuthProvider = ({ children }) => {
         return;
       }
       setAuthToken(token);
-      const userData = JSON.parse(sessionStorage.getItem('user'));
       if (userData) {
         setJWTAuthData({
           user: userData,
@@ -77,7 +93,7 @@ const JWTAuthAuthProvider = ({ children }) => {
     try {
       const { data } = await jwtAxios.post('/api/auth/login/', { username, password });
       console.log(data);
-      sessionStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('token', data.jwt);
       setAuthToken(data.jwt);
       // const res = await jwtAxios.get('/api/auth/login/');
@@ -97,18 +113,27 @@ const JWTAuthAuthProvider = ({ children }) => {
     }
   };
 
-  const signUpUser = async ({ name, username, password }) => {
+  const signUpUser = async ({ nama_lengkap, username, password_confirm, password, email, phone_number, organisasi }) => {
     fetchStart();
     try {
-      const { data } = await jwtAxios.post('users', { name, username, password });
-      localStorage.setItem('token', data.token);
-      setAuthToken(data.token);
-      const res = await jwtAxios.get('/auth');
-      setJWTAuthData({
-        user: res.data,
-        isAuthenticated: true,
-        isLoading: false,
+      const { data } = await jwtAxios.post('/api/auth/register/admin/', {
+        email,
+        password,
+        nama_lengkap,
+        username,
+        password_confirm,
+        phone_number,
+        organisasi,
       });
+      alert(`username ${data.username} berhasil dibuat`, data);
+      // localStorage.setItem('token', data.token);
+      // setAuthToken(data.token);
+      // const res = await jwtAxios.get('/api/auth');
+      // setJWTAuthData({
+      //   user: res.data,
+      //   isAuthenticated: true,
+      //   isLoading: false,
+      // });
       fetchSuccess();
     } catch (error) {
       setJWTAuthData({
@@ -116,14 +141,14 @@ const JWTAuthAuthProvider = ({ children }) => {
         isAuthenticated: false,
         isLoading: false,
       });
-      console.log('error:', error.response.data.error);
+      alert(`${error.response.data.detail}`, error.response.data.detail);
       fetchError(error?.response?.data?.error || 'Something went wrong');
     }
   };
 
   const logout = async () => {
     localStorage.removeItem('token');
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
     
     setAuthToken();
     setJWTAuthData({
