@@ -360,7 +360,7 @@ const Landing_page = () => {
             Aktivitas Terbaru
           </Typography>
         </Stack>
-        <Grid container spacing={5} sx={{ p: 10 }}>
+        <Stack direction={'row'} justifyContent={'center'} sx={{ p:10, gap:30 }}>
           <Grid item xs={4}>
             <Card sx={{ maxWidth: 399 }}>
               <CardMedia
@@ -456,7 +456,7 @@ const Landing_page = () => {
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
+        </Stack>
       </Box>
       <Box sx={{ height: 350 }}>
         <Stack alignItems='center'>
