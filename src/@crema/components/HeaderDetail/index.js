@@ -144,7 +144,7 @@ const HeaderDetail = ({
   const handleOpenModal7 = () => {
     setOpenModal7(true);
   };
-  const handleCloseModal7 = () => setOpenModal6(false);
+  const handleCloseModal7 = () => setOpenModal7(false);
   const handleNextModal7 = () => {
     setOpenModal7(false);
     dispatch(closeTab(tab.id, tabs));

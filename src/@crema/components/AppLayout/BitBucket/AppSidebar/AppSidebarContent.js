@@ -114,7 +114,7 @@ export default function AppSidebarContent(props) {
         : null;
     }
   };
-
+  console.log(data);
   return (
     <MainSidebar>
       <AppSidebarHeader tab={tab} subTab={subTab} isAdd={isAdd} />
@@ -126,19 +126,133 @@ export default function AppSidebarContent(props) {
       >
         {!isCollapsed && (
           <>
-            {data.map((listData, index) => (
+            <StyledAccordion
+            //  key={index}
+            >
+              <AccordionSummarys
+              // aria-controls={`panel${index + 1}d-content`}
+              // id={`panel${index + 1}d-header`}
+              >
+                <Typography>Agustus-2021</Typography>
+              </AccordionSummarys>
+              <AccordionDetail sx={{ padding: 0 }}>
+                <List>
+                  {data?.map((item, listIndex) => (
+                    <React.Fragment key={listIndex}>
+                      <Card
+                        sx={{
+                          position: 'relative',
+                          borderLeft: `6px solid ${getStatusColor(
+                            item.status,
+                          )}`,
+                          borderRadius: 0,
+                        }}
+                      >
+                        <Button
+                          sx={{ padding: 0, margin: 0, textAlign: 'left' }}
+                          onClick={() => handleButton(item)}
+                        >
+                          <CardContent>
+                            <Grid container spacing={2}>
+                              <Grid item xs={2}>
+                                <Stack alignItems='center'>
+                                  <Avatar
+                                    alt={`Avatar ${listIndex}`}
+                                    src={item.avatarSrc}
+                                    sx={{ width: 56, height: 56 }}
+                                  />
+                                  {item.priority === 'Tinggi' && (
+                                    <Tooltip title='Tinggi'>
+                                      <IconButton color='error'>
+                                        <AlertCircle />
+                                      </IconButton>
+                                    </Tooltip>
+                                  )}
+                                </Stack>
+                              </Grid>
+                              <Grid item xs={10}>
+                                <Grid container>
+                                  <Grid item xs={8}>
+                                    <Badge
+                                      badgeContent={item.messageCount}
+                                      color='primary'
+                                    >
+                                      <Typography
+                                        variant='body1'
+                                        color='text.primary'
+                                        sx={{
+                                          fontWeight:
+                                            item.status === 'Unread' ||
+                                            item.status === 'Disposisi'
+                                              ? Fonts.BOLD
+                                              : Fonts.LIGHT,
+                                        }}
+                                      >
+                                        {item.lampiran_detail?.nama_lampiran}
+                                        {/* {item.lampiran_detail &&
+                                          item.lampiran_detail.nama_lampiran} */}
+                                      </Typography>
+                                    </Badge>
+                                  </Grid>
+                                  <Grid item xs={4} textAlign='right'>
+                                    <Typography
+                                      variant='body2'
+                                      color='text.primary'
+                                      sx={{
+                                        fontWeight:
+                                          item.status === 'Unread' ||
+                                          item.status === 'Disposisi'
+                                            ? Fonts.BOLD
+                                            : Fonts.LIGHT,
+                                      }}
+                                    >
+                                      {item.tanggal_pengiriman}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <Typography
+                                      sx={{
+                                        display: 'inline',
+                                        fontWeight:
+                                          item.status === 'Unread' ||
+                                          item.status === 'Disposisi'
+                                            ? Fonts.BOLD
+                                            : Fonts.LIGHT,
+                                      }}
+                                      component='span'
+                                      variant='body2'
+                                      color='text.primary'
+                                    >
+                                      {item.secondary}
+                                    </Typography>
+                                  </Grid>
+                                  <AppSidebarFooter
+                                    isStatus={isStatus}
+                                    item={item}
+                                  />
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </CardContent>
+                        </Button>
+                      </Card>
+                      {listIndex < data.length - 1 && <Divider />}
+                    </React.Fragment>
+                  ))}
+                </List>
+              </AccordionDetail>
+            </StyledAccordion>
+            {data?.map((item, index) => (
               <StyledAccordion key={index}>
                 <AccordionSummarys
                   aria-controls={`panel${index + 1}d-content`}
                   id={`panel${index + 1}d-header`}
                 >
-                  <Typography>
-                    Agustus-2021({getTotalCount(listData)})
-                  </Typography>
+                  <Typography>{item.tanggal_pengiriman}</Typography>
                 </AccordionSummarys>
                 <AccordionDetail sx={{ padding: 0 }}>
                   <List>
-                    {listData.map((item, listIndex) => (
+                    {data?.map((item, listIndex) => (
                       <React.Fragment key={listIndex}>
                         <Card
                           sx={{
@@ -235,7 +349,7 @@ export default function AppSidebarContent(props) {
                             </CardContent>
                           </Button>
                         </Card>
-                        {listIndex < listData.length - 1 && <Divider />}
+                        {listIndex < data?.length - 1 && <Divider />}
                       </React.Fragment>
                     ))}
                   </List>
