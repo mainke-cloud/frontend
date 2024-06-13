@@ -1,5 +1,6 @@
 import React from 'react';
 
+const Landing_page = React.lazy(() => import('modules/landing page'));
 const Signin = React.lazy(() => import('../../../modules/auth/Signin'));
 const Signup = React.lazy(() => import('../../../modules/auth/Signup'));
 const ForgotPassword = React.lazy(() =>
@@ -12,6 +13,10 @@ const ResetPasswordAwsCognito = React.lazy(() =>
   import('../../../modules/auth/ForgetPassword/ResetPasswordAwsCognito'),
 );
 export const authRouteConfig = [
+  {
+    path: '/landingpage',
+    element: <Landing_page />,
+  },
   {
     path: '/signin',
     element: <Signin />,
