@@ -153,8 +153,6 @@ const ComposeMail = (props) => {
     borderTop: '1px solid rgba(0, 0, 0, .125)',
   }));
 
-  let check = title === 'Nama' ? 'Karyawan' : 'Jabatan';
-
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   const [activeTab, setActiveTab] = useState('');
@@ -166,7 +164,9 @@ const ComposeMail = (props) => {
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
   const [selectedRowIndices, setSelectedRowIndices] = useState([]);
-
+  
+  let check = ['Nama', 'Delegasi', 'Sekretaris'].includes(title) ? 'Karyawan' : 'Jabatan';
+  
   useEffect(() => {
     setActiveTab(check);
   }, [isComposeMail]);
@@ -428,7 +428,7 @@ const ComposeMail = (props) => {
   };
 
   let tabsToDisplay = ['Jabatan', 'Karyawan', 'Bawahan', 'Personal']; // Tab yang akan ditampilkan secara default
-  if (title === 'Nama') {
+  if (title === 'Nama' || title === 'Delegasi' || title === 'Sekretaris') {
     tabsToDisplay = ['Karyawan']; // Jika title adalah 'Nama', hanya tampilkan tab 'Karyawan'
   } else if (title === 'Jabatan') {
     tabsToDisplay = ['Jabatan']; // Jika title adalah 'Jabatan', hanya tampilkan tab 'Jabatan'

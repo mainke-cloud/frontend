@@ -1,51 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Stack,
-  Typography,
-  TextField,
-  IconButton,
-  Link,
-  Box
-} from '@mui/material';
-import { useSelector } from 'react-redux';
-import AppScrollbar from '@crema/components/AppScrollbar';
+import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import PropTypes from 'prop-types';
 import ComposeMail from '@crema/components/AppAddress';
 import { users } from '../../../services/dummy/user/user';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 const TabContentEditPengirim = () => {
-  const pengirim = useSelector((state) => state.addressbook.pengirim);
-  const jabatann = useSelector((state) => state.addressbook.jabatann);
-  let datass = jabatann[0];
-  if (!datass || !Array.isArray(datass)) {
-    datass = [];
-  }
+  const [isComposeMail, setComposeMail] = useState(false);
+  const [composeMailTitle, setComposeMailTitle] = useState('');
+  const [composeMailType, setComposeMailType] = useState('');
   const namaa = useSelector((state) => state.addressbook.namaa);
-  const initialState = useSelector((state) => state.surat);
-  const [formData, setFormData] = useState(initialState);
-  const [jabatanValue, setJabatanValue] = useState('');
-  const [namaValue, setNamaValue] = useState('');
+  const jabatann = useSelector((state) => state.addressbook.jabatann);
+  const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      jabatan: '',
+      nama: '',
+      divisi: '',
+      nik: '',
+      kodeDepart: '',
+      departemen: '',
+      kotaKantor: '',
+    },
+    validationSchema: yup.object().shape({
+      jabatan: yup.string().required('Kolom ini wajib diisi'),
+      nama: yup.string().required('Kolom ini wajib diisi'),
+    }),
+  });
 
   useEffect(() => {
-    setJabatanValue(datass[0]?.jabatan ?? '');
-    setNamaValue(datass.map((item) => item.nama).join('\n'));
-  }, [datass]);
+    if (namaa) {
+      formik.setValues({
+        jabatan: namaa.jabatan || '',
+        nama: namaa.nama || '',
+        divisi: namaa.divisi || '',
+        nik: namaa.nikg || '',
+        kodeDepart: namaa.kode_departemen || '',
+        departemen: namaa.departemen || '',
+        kotaKantor: namaa.kota || '',
+      });
+    }
+  }, [namaa]);
 
-  const handleJabatanChange = (event) => {
-    setJabatanValue(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
   };
 
-  const [isComposeMail, setComposeMail] = React.useState(false);
-  const [composeMailTitle, setComposeMailTitle] = useState('');
-
-  const onOpenComposeMail = (title) => {
+  const onOpenComposeMail = (title, type) => {
     setComposeMailTitle(title);
-    setJabatanValue('');
-    setNamaValue('');
+    setComposeMailType(type);
     setComposeMail(true);
   };
 
   const onCloseComposeMail = () => {
-    setJabatanValue(datass[0]?.jabatan ?? '');
     setComposeMail(false);
   };
 
@@ -70,7 +84,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail('Jabatan')}
+            onClick={() => onOpenComposeMail('Jabatan', 'multi')}
           >
             Jabatan
           </Link>
@@ -81,19 +95,25 @@ const TabContentEditPengirim = () => {
 
         <TextField
           fullWidth
-          value={jabatanValue}
-          onChange={handleJabatanChange}
+          name='jabatan'
+          error={formik.touched.jabatan && formik.errors.jabatan}
+          value={formik.values.jabatan}
+          onChange={handleChange}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail('Jabatan')}>
+              <IconButton onClick={() => onOpenComposeMail('Jabatan', 'multi')}>
                 <AddCircleOutlineRoundedIcon
                   sx={{ color: 'black', fontSize: '40px' }}
                 />
               </IconButton>
             ),
           }}
-          sx={{ color: 'black', fontWeight: 'bold' }}
         />
+        {formik.touched.jabatan && formik.errors.jabatan && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.jabatan}
+          </Typography>
+        )}
 
         <Stack direction='row'>
           <Link
@@ -105,7 +125,7 @@ const TabContentEditPengirim = () => {
               color: 'black',
               textDecorationColor: 'black',
             }}
-            onClick={() => onOpenComposeMail('Nama')}
+            onClick={() => onOpenComposeMail('Nama', 'single')}
           >
             Nama
           </Link>
@@ -114,69 +134,52 @@ const TabContentEditPengirim = () => {
           </Typography>
         </Stack>
 
-        <Box position={'relative'}>
-          <AppScrollbar
-            sx={{
-              minHeight: '145px',
-              maxHeight: '145px',
-              overflow: 'auto',
-            }}
-          >
-            <Stack>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={5}
-                sx={{
-                  border: 'none',
-                }}
-                value={
-                  composeMailTitle === 'Nama' ? `${namaa.nama}` : namaValue
-                }
-                InputProps={{
-                  endAdornment: (
-                    <IconButton onClick={() => onOpenComposeMail('Nama')}>
-                      <AddCircleOutlineRoundedIcon
-                        sx={{ color: 'black', fontSize: '40px' }}
-                      />
-                    </IconButton>
-                  ),
-                }}
-              />
-            </Stack>
-          </AppScrollbar>
-        </Box>
+        <TextField
+          fullWidth
+          name='nama'
+          error={formik.touched.nama && formik.errors.nama}
+          value={formik.values.nama}
+          onChange={handleChange}
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={() => onOpenComposeMail('Nama', 'single')}>
+                <AddCircleOutlineRoundedIcon
+                  sx={{ color: 'black', fontSize: '40px' }}
+                />
+              </IconButton>
+            ),
+          }}
+        />
+        {formik.touched.nama && formik.errors.nama && (
+          <Typography variant='body1' color='error'>
+            {formik.errors.nama}
+          </Typography>
+        )}
 
         <Typography variant='h4'>Divisi</Typography>
 
         <TextField
           fullWidth
-          value={
-            composeMailTitle === 'Nama'
-              ? `${namaa.divisi}`
-              : datass[0]?.divisi ?? ''
-          }
+          name='divisi'
+          value={formik.values.divisi}
+          onChange={handleChange}
         />
 
         <Stack direction='row' spacing={5}>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>NIK</Typography>
             <TextField
-              value={
-                composeMailTitle === 'Nama'
-                  ? `${namaa.nikl}`
-                  : datass[0]?.nikl ?? ''
-              }
+              name='nik'
+              value={formik.values.nik}
+              onChange={handleChange}
             />
           </Stack>
           <Stack flex={1} spacing={5}>
             <Typography variant='h4'>Kode Departemen</Typography>
             <TextField
-              value={
-                composeMailTitle === 'Nama'
-                  ? `${namaa.kode_departemen}`
-                  : datass[0]?.kode_departemen ?? ''
-              }
+              name='kodeDepart'
+              value={formik.values.kodeDepart}
+              onChange={handleChange}
             />
           </Stack>
         </Stack>
@@ -185,22 +188,18 @@ const TabContentEditPengirim = () => {
 
         <TextField
           fullWidth
-          value={
-            composeMailTitle === 'Nama'
-              ? `${namaa.departemen}`
-              : datass[0]?.departemen ?? ''
-          }
+          name='departemen'
+          value={formik.values.departemen}
+          onChange={handleChange}
         />
 
         <Typography variant='h4'>Kota Kantor</Typography>
 
         <TextField
           fullWidth
-          value={
-            composeMailTitle === 'Nama'
-              ? `${namaa.kota}`
-              : datass[0]?.kota ?? ''
-          }
+          name='kotaKantor'
+          value={formik.values.kotaKantor}
+          onChange={handleChange}
         />
       </Stack>
       <ComposeMail

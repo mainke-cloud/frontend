@@ -42,9 +42,6 @@ const SuratInternal_3 = ({
       if (namaa && namaa.id) {
         dispatch(updateData({ penyetuju: [namaa.id] }));
         handleNext();
-      } else if (jabatann && jabatann.id) {
-        dispatch(updateData({ penyetuju: [jabatann.id] }));
-        handleNext();
       } else {
         console.error('ID tidak ditemukan.');
       }
