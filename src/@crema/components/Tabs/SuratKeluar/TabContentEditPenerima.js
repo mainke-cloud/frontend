@@ -1,13 +1,46 @@
-import React from 'react';
-import { Stack, Typography, Button, Box, TextField } from '@mui/material';
+import { Avatar, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import AppScrollbar from '@crema/components/AppScrollbar';
-import 'react-pdf/dist/Page/TextLayer.css';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
+import { Box, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import FormAddressBook from '../FormAddressBook';
+import AProfile from 'assets/vector/Avatar.png';
+import { useDispatch } from 'react-redux';
+
 const TabContentEditPenerima = () => {
+  const dispatch = useDispatch();
   const kepada = useSelector((state) => state.addressbook.kepada);
   const tembusan = useSelector((state) => state.addressbook.tembusan);
+  const [penerima, setPenerima] = useState({
+    kepadaIds: [],
+    tembusanIds: [],
+  });
+
+  const [isFormValidKepada, setFormValidKepada] = useState(true);
+  const [isFormValidTembusan, setFormValidTembusan] = useState(true);
+
+  const KepadaIsEmpty = () => {
+    return (
+      !kepada ||
+      !Array.isArray(kepada) ||
+      kepada.some((item) => !item.jabatan || !item.nama)
+    );
+  };
+
+  const TembusanIsEmpty = () => {
+    return (
+      !tembusan ||
+      !Array.isArray(tembusan) ||
+      tembusan.some((item) => !item.jabatan || !item.nama)
+    );
+  };
+
+  const handleAddressBookChangeKepada = () => {
+    setFormValidKepada(true);
+  };
+  const handleAddressBookChangeTembusan = () => {
+    setFormValidTembusan(true);
+  };
 
   return (
     <>
@@ -20,7 +53,13 @@ const TabContentEditPenerima = () => {
           padding: '15px',
         }}
       >
-        <FormAddressBook text='Kepada' data={kepada} />
+        <FormAddressBook
+          text='Kepada'
+          data={kepada}
+          templateData={kepada}
+          isValid={isFormValidKepada}
+          onAddressBookChange={handleAddressBookChangeKepada}
+        />
 
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
@@ -36,7 +75,14 @@ const TabContentEditPenerima = () => {
             Update
           </Button>
         </Stack>
-        <Box position={'relative'}>
+
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -44,22 +90,52 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            <Stack>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={5}
-                sx={{
-                  border: 'none',
-                }}
-                defaultValue={kepada
-                  .map((item) => item.nama + '-' + item.jabatan)
-                  .join('\n')}
-              />
-            </Stack>
+            {/* {templateData ? (
+              <Typography>{templateData.kepada}</Typography>
+            ) : ( */}
+            {kepada?.map((item) => (
+              <Stack key={item.id}>
+                {item.id && (
+                  <Stack
+                    direction='row'
+                    spacing={5}
+                    pl='20px'
+                    pr='400px'
+                    pt='20px'
+                  >
+                    <Stack>
+                      <Avatar
+                        sx={{
+                          marginBottom: '30px',
+                          marginTop: '7px',
+                        }}
+                        alt='Profile'
+                        src={AProfile}
+                      />
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography>{item.jabatan}</Typography>
+                      <Typography>{item.nama}</Typography>
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography color='#8C8F93'>{item.nikg}</Typography>
+                    </Stack>
+                  </Stack>
+                )}
+              </Stack>
+            ))}
+            {/* )} */}
           </AppScrollbar>
         </Box>
-        <FormAddressBook text='Tembusan' data={tembusan} />
+
+        <FormAddressBook
+          text='Tembusan'
+          data={tembusan}
+          templateData={tembusan}
+          isValid={isFormValidTembusan}
+          onAddressBookChange={handleAddressBookChangeTembusan}
+        />
+
         <Stack direction='row' spacing={4} alignItems={'center'}>
           <Typography>Tampilkan Kepada</Typography>
           <Button
@@ -75,7 +151,13 @@ const TabContentEditPenerima = () => {
           </Button>
         </Stack>
 
-        <Box position={'relative'}>
+        <Box
+          position={'relative'}
+          sx={{
+            border: '1px solid #B1B5BA',
+            borderRadius: '10px',
+          }}
+        >
           <AppScrollbar
             sx={{
               minHeight: '145px',
@@ -83,19 +165,41 @@ const TabContentEditPenerima = () => {
               overflow: 'auto',
             }}
           >
-            <Stack>
-              <TextField
-                id='outlined-multiline-static'
-                multiline
-                rows={5}
-                sx={{
-                  border: 'none',
-                }}
-                defaultValue={tembusan
-                  .map((item) => item.nama + '-' + item.jabatan)
-                  .join('\n')}
-              />
-            </Stack>
+            {/* {templateData ? (
+              <Typography>{templateData.tembusan}</Typography>
+            ) : ( */}
+            {tembusan?.map((item) => (
+              <Stack key={item.id}>
+                {item.id && (
+                  <Stack
+                    direction='row'
+                    spacing={5}
+                    pl='20px'
+                    pr='400px'
+                    pt='20px'
+                  >
+                    <Stack>
+                      <Avatar
+                        sx={{
+                          marginBottom: '30px',
+                          marginTop: '7px',
+                        }}
+                        alt='Profile'
+                        src={AProfile}
+                      />
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography>{item.jabatan}</Typography>
+                      <Typography>{item.nama}</Typography>
+                    </Stack>
+                    <Stack flex={1}>
+                      <Typography color='#8C8F93'>{item.nikg}</Typography>
+                    </Stack>
+                  </Stack>
+                )}
+              </Stack>
+            ))}
+            {/* )} */}
           </AppScrollbar>
         </Box>
       </Stack>

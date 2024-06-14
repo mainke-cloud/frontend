@@ -1,4 +1,11 @@
-import { IconButton, Link, Stack, TextField, Typography } from '@mui/material';
+import {
+  IconButton,
+  Link,
+  Stack,
+  TextField,
+  Typography,
+  Avatar,
+} from '@mui/material';
 import React from 'react';
 import { Button } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -67,6 +74,11 @@ const SuratInternal_3 = ({
     formik.setFieldValue(name, value);
   };
 
+  const [isFormValidJabatan, setFormValidJabatan] = useState(true);
+  const handleAddressBookChangeJabatan = () => {
+    setFormValidJabatan(true);
+  };
+
   const onOpenComposeMail = (title, type) => {
     setComposeMailTitle(title);
     setComposeMailType(type);
@@ -76,6 +88,8 @@ const SuratInternal_3 = ({
   const onCloseComposeMail = () => {
     setComposeMail(false);
   };
+
+  console.log(jabatann);
 
   return (
     <>
@@ -111,7 +125,13 @@ const SuratInternal_3 = ({
           fullWidth
           name='jabatan'
           error={formik.touched.jabatan && formik.errors.jabatan}
-          value={formik.values.jabatan}
+          value={
+            composeMailTitle === 'Nama'
+              ? formik.values.jabatan
+              : composeMailTitle === 'Jabatan'
+              ? `${jabatann[0].jabatan}`
+              : ''
+          }
           onChange={handleChange}
           InputProps={{
             endAdornment: (
@@ -129,53 +149,66 @@ const SuratInternal_3 = ({
           </Typography>
         )}
 
-        <Stack direction='row'>
-          <Link
-            component='button'
-            underline='always'
-            sx={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'black',
-              textDecorationColor: 'black',
+        <>
+          <Stack direction='row'>
+            <Link
+              component='button'
+              underline='always'
+              sx={{
+                fontSize: '16px',
+                fontWeight: 600,
+                color: 'black',
+                textDecorationColor: 'black',
+              }}
+              onClick={() => onOpenComposeMail('Nama', 'single')}
+            >
+              Nama
+            </Link>
+            <Typography variant='h4' color='red'>
+              *
+            </Typography>
+          </Stack>
+          <TextField
+            fullWidth
+            name='nama'
+            error={formik.touched.nama && formik.errors.nama}
+            value={
+              composeMailTitle === 'Nama'
+                ? formik.values.nama
+                : composeMailTitle === 'Jabatan'
+                ? `${jabatann[0].nama}, dll`
+                : ''
+            }
+            onChange={handleChange}
+            InputProps={{
+              endAdornment: (
+                <IconButton onClick={() => onOpenComposeMail('Nama', 'single')}>
+                  <AddCircleOutlineRoundedIcon
+                    sx={{ color: 'black', fontSize: '40px' }}
+                  />
+                </IconButton>
+              ),
             }}
-            onClick={() => onOpenComposeMail('Nama', 'single')}
-          >
-            Nama
-          </Link>
-          <Typography variant='h4' color='red'>
-            *
-          </Typography>
-        </Stack>
-
-        <TextField
-          fullWidth
-          name='nama'
-          error={formik.touched.nama && formik.errors.nama}
-          value={formik.values.nama}
-          onChange={handleChange}
-          InputProps={{
-            endAdornment: (
-              <IconButton onClick={() => onOpenComposeMail('Nama', 'single')}>
-                <AddCircleOutlineRoundedIcon
-                  sx={{ color: 'black', fontSize: '40px' }}
-                />
-              </IconButton>
-            ),
-          }}
-        />
-        {formik.touched.nama && formik.errors.nama && (
-          <Typography variant='body1' color='error'>
-            {formik.errors.nama}
-          </Typography>
-        )}
+          />
+          {formik.touched.nama && formik.errors.nama && (
+            <Typography variant='body1' color='error'>
+              {formik.errors.nama}
+            </Typography>
+          )}
+        </>
 
         <Typography variant='h4'>Divisi</Typography>
 
         <TextField
           fullWidth
           name='divisi'
-          value={formik.values.divisi}
+          value={
+            composeMailTitle === 'Nama'
+              ? formik.values.divisi
+              : composeMailTitle === 'Jabatan'
+              ? `${jabatann[0].divisi}`
+              : ''
+          }
           onChange={handleChange}
         />
 
@@ -184,7 +217,13 @@ const SuratInternal_3 = ({
             <Typography variant='h4'>NIK</Typography>
             <TextField
               name='nik'
-              value={formik.values.nik}
+              value={
+                composeMailTitle === 'Nama'
+                  ? formik.values.nik
+                  : composeMailTitle === 'Jabatan'
+                  ? `${jabatann[0].nikg}, dll`
+                  : ''
+              }
               onChange={handleChange}
             />
           </Stack>
@@ -192,7 +231,13 @@ const SuratInternal_3 = ({
             <Typography variant='h4'>Kode Departemen</Typography>
             <TextField
               name='kodeDepart'
-              value={formik.values.kodeDepart}
+              value={
+                composeMailTitle === 'Nama'
+                  ? formik.values.kodeDepart
+                  : composeMailTitle === 'Jabatan'
+                  ? `${jabatann[0].kode_departemen}`
+                  : ''
+              }
               onChange={handleChange}
             />
           </Stack>
@@ -203,7 +248,13 @@ const SuratInternal_3 = ({
         <TextField
           fullWidth
           name='departemen'
-          value={formik.values.departemen}
+          value={
+            composeMailTitle === 'Nama'
+              ? formik.values.departemen
+              : composeMailTitle === 'Jabatan'
+              ? `${jabatann[0].departemen}`
+              : ''
+          }
           onChange={handleChange}
         />
 
@@ -212,7 +263,13 @@ const SuratInternal_3 = ({
         <TextField
           fullWidth
           name='kotaKantor'
-          value={formik.values.kotaKantor}
+          value={
+            composeMailTitle === 'Nama'
+              ? formik.values.kotaKantor
+              : composeMailTitle === 'Jabatan'
+              ? `${jabatann[0].kota}`
+              : ''
+          }
           onChange={handleChange}
         />
 
